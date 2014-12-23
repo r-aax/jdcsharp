@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataStruct\ColoredObject.cs" />
+    <Compile Include="DataStruct\ColoresManager.cs" />
     <Compile Include="DataStruct\MPTTTree.cs" />
     <Compile Include="DataStruct\RecursiveTree.cs" />
     <Compile Include="DataStruct\StringsList.cs" />
