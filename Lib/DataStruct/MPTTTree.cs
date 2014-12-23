@@ -1,0 +1,503 @@
+﻿// Copyright Joy Developing.
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Diagnostics;
+using System.Windows.Forms;
+using System.Xml.Serialization;
+using System.IO;
+
+namespace Lib.DataStruct
+{
+    /// <summary>
+    /// Recursive tree, with nodes numeration according to <c>MPTT</c> - Modified Preorder Tree Traversal.
+    /// </summary>
+    public class MPTTTree
+    {
+        /// <summary>
+        /// Data.
+        /// </summary>
+        public Object Data { get; set; }
+
+        /// <summary>
+        /// Parent.
+        /// </summary>
+        [XmlIgnore]
+        public MPTTTree Parent { get; private set; }
+
+        /// <summary>
+        /// Children.
+        /// </summary>
+        public List<MPTTTree> Children { get; set; }
+
+        /// <summary>
+        /// Children count.
+        /// </summary>
+        [XmlIgnore]
+        public int ChildrenCount
+        {
+            get
+            {
+                return Children.Count;
+            }
+        }
+
+        /// <summary>
+        /// Node left number.
+        /// </summary>
+        [XmlAttribute]
+        public int LNum { get; set; }
+
+        /// <summary>
+        /// Node right number.
+        /// </summary>
+        [XmlAttribute]
+        public int RNum { get; set; }
+
+        /// <summary>
+        /// Identifier.
+        /// </summary>
+        [XmlAttribute]
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Nodes count.
+        /// </summary>
+        [XmlIgnore]
+        public int NodesCount
+        {
+            get
+            {
+                return (RNum - LNum + 1) / 2;
+            }
+        }
+
+        /// <summary>
+        /// Check if node is root.
+        /// </summary>
+        [XmlIgnore]
+        public bool IsRoot
+        {
+            get
+            {
+                return Parent == null;
+            }
+        }
+
+        /// <summary>
+        /// Check if node is leaf.
+        /// </summary>
+        [XmlIgnore]
+        public bool IsLeaf
+        {
+            get
+            {
+                return RNum == LNum + 1;
+            }
+        }
+
+        /// <summary>
+        /// Current level of tree nodes.
+        /// For root returns <c>null</c>.
+        /// </summary>
+        [XmlIgnore]
+        public List<MPTTTree> LevelTrees
+        {
+            get
+            {
+                return IsRoot ? null : Parent.Children;
+            }
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public MPTTTree()
+        {
+            Data = null;
+            Parent = null;
+            Children = new List<MPTTTree>();
+
+            // Root numbers.
+            LNum = 0;
+            RNum = 1;
+
+            // Not valid id.
+            Id = -1;
+        }
+
+        /// <summary>
+        /// Constructor by string.
+        /// </summary>
+        /// <param name="data">string data</param>
+        public MPTTTree(string data)
+            : this()
+        {
+            SetDataString(data);
+        }
+
+        /// <summary>
+        /// Constructor by string and identifier.
+        /// </summary>
+        /// <param name="data">string data</param>
+        /// <param name="id">identifier</param>
+        public MPTTTree(string data, int id)
+            : this(data)
+        {
+            Id = id;
+        }
+
+        /// <summary>
+        /// Get root of tree.
+        /// </summary>
+        [XmlIgnore]
+        public MPTTTree Root
+        {
+            get
+            {
+                if (IsRoot)
+                {
+                    return this;
+                }
+
+                return Parent.Root;
+            }
+        }
+
+        /// <summary>
+        /// Shift numbers of nodes.
+        /// </summary>
+        /// <param name="from">first shifted number</param>
+        /// <param name="to">last shifted number</param>
+        /// <param name="shift">shift value</param>
+        /// <remarks>simple not optimal realization</remarks>
+        private void ShiftNumbers(int from, int to, int shift)
+        {
+            if ((LNum > to) || (RNum < from))
+            {
+                // There is nothing to shift.
+                return;
+            }
+
+            if (LNum >= from)
+            {
+                LNum += shift;
+            }
+
+            if (RNum <= to)
+            {
+                RNum += shift;
+            }
+
+            foreach (MPTTTree node in Children)
+            {
+                node.ShiftNumbers(from, to, shift);
+            }
+        }
+
+        /// <summary>
+        /// Shift numbers greater than given value.
+        /// </summary>
+        /// <param name="from">first shift number</param>
+        /// <param name="shift">shift value</param>
+        private void ShiftTailNumbers(int from, int shift)
+        {
+            ShiftNumbers(from, RNum, shift);
+        }
+
+        /// <summary>
+        /// Set numbers starting with given value.
+        /// </summary>
+        /// <param name="start_num">start number</param>
+        /// <returns>count of set numbers</returns>
+        private int SetNumbers(int start_num)
+        {
+            int inner_start = start_num;
+
+            LNum = inner_start++;
+
+            for (int i = 0; i < ChildrenCount; i++)
+            {
+                inner_start += Children[i].SetNumbers(inner_start);
+            }
+
+            RNum = inner_start++;
+
+            return inner_start - start_num;
+        }
+
+        /// <summary>
+        /// Add child before child with given number.
+        /// </summary>
+        /// <param name="child">new child</param>
+        /// <param name="before_num">child for insert before</param>
+        /// <returns>added child</returns>
+        public MPTTTree AddChildBefore(MPTTTree child, int before_num)
+        {
+            // 0 - to begin of list,
+            // ChildrenCount - to end of list.
+            Debug.Assert((before_num >= 0) && (before_num <= ChildrenCount));
+
+            // In general case we can insert not only single child but a tree.
+            int add_nodes_count = child.NodesCount;
+
+            // Start number for added subtree numbers.
+            // If there is no children or insert to the end of children list - current node right number.
+            // In another case - next child left number.
+            int start_num = (before_num == ChildrenCount)
+                            ? RNum
+                            : Children[before_num].LNum;
+
+            // Change numbers.
+            child.SetNumbers(start_num);
+            Root.ShiftTailNumbers(start_num, 2 * add_nodes_count);
+
+            // Insert subtree.
+            Children.Insert(before_num, child);
+            child.Parent = this;
+
+            return child;
+        }
+
+        /// <summary>
+        /// Add new child after child with given number.
+        /// </summary>
+        /// <param name="child">new child</param>
+        /// <param name="after_num">child number for insert after</param>
+        /// <returns>added child</returns>
+        public MPTTTree AddChildAfter(MPTTTree child, int after_num)
+        {
+            return AddChildBefore(child, after_num + 1);
+        }
+
+        /// <summary>
+        /// Adding child to the end of children list.
+        /// </summary>
+        /// <param name="child">child</param>
+        /// <returns>added child</returns>
+        public MPTTTree AddChild(MPTTTree child)
+        {
+            return AddChildAfter(child, ChildrenCount - 1);
+        }
+
+        /// <summary>
+        /// Delete given subtree from general tree.
+        /// </summary>
+        public void Remove()
+        {
+            // It is impossible to delete the root.
+            Debug.Assert(!IsRoot);
+
+            // Delete subtree and shift numbers.
+            Parent.Children.Remove(this);
+            Root.ShiftTailNumbers(RNum + 1, -(2 * NodesCount));
+        }
+
+        /// <summary>
+        /// Check if tree is outer of given tree.
+        /// </summary>
+        /// <param name="tree">tree</param>
+        /// <returns><c>true</c> - if current tree is outer, <c>false</c> - in another case</returns>
+        public bool IsOuter(MPTTTree tree)
+        {
+            return (LNum <= tree.LNum) && (RNum >= tree.RNum);
+        }
+
+        /// <summary>
+        /// Check if tree is inner of given tree.
+        /// </summary>
+        /// <param name="tree">tree</param>
+        /// <returns><c>true</c> - if current tree is inner, <c>false</c> - in another case</returns>
+        public bool IsInner(MPTTTree tree)
+        {
+            return (LNum >= tree.LNum) && (RNum <= tree.RNum);
+        }
+
+        /// <summary>
+        /// Replace subtree before given child.
+        /// </summary>
+        /// <param name="subtree">subtree</param>
+        /// <param name="before_num">number of child to replace before</param>
+        public void ReplaceSubtreeBefore(MPTTTree subtree, int before_num)
+        {
+            // It is impossible to replace outer tree.
+            Debug.Assert(!subtree.IsOuter(this));
+
+            subtree.Remove();
+            AddChildBefore(subtree, before_num);
+        }
+
+        /// <summary>
+        /// Replace subtree after given child
+        /// </summary>
+        /// <param name="subtree">subtree</param>
+        /// <param name="before_num">number of child to replace after</param>
+        public void ReplaceSubtreeAfter(MPTTTree subtree, int before_num)
+        {
+            ReplaceSubtreeBefore(subtree, before_num + 1);
+        }
+
+        /// <summary>
+        /// Replace to the end of children list.
+        /// </summary>
+        /// <param name="subtree">subtree</param>
+        public void ReplaceSubtree(MPTTTree subtree)
+        {
+            ReplaceSubtreeAfter(subtree, ChildrenCount - 1);
+        }
+
+        /// <summary>
+        /// Get data as string.
+        /// </summary>
+        /// <returns>string</returns>
+        public string GetDataString()
+        {
+            return Data as string;
+        }
+
+        /// <summary>
+        /// Set string data.
+        /// </summary>
+        /// <param name="data">string</param>
+        public void SetDataString(string data)
+        {
+            Data = data;
+        }
+
+        /// <summary>
+        /// Add children to <c>TreeNodesCollection</c>.
+        /// </summary>
+        /// <param name="coll">collection</param>
+        /// <remarks>only for trees with string data</remarks>
+        private void AddChildrenToTreeViewNodes(TreeNodeCollection coll)
+        {
+            for (int i = 0; i < ChildrenCount; i++)
+            {
+                MPTTTree child = Children[i];
+
+                coll.Add(child.GetDataString());
+                child.AddChildrenToTreeViewNodes(coll[i].Nodes);
+            }
+        }
+
+        /// <summary>
+        /// Show in <c>TreeView</c>.
+        /// </summary>
+        /// <param name="tv"><c>TreeView</c> object</param>
+        /// <remarks>only for trees with string data</remarks>
+        public void ToTreeView(TreeView tv)
+        {
+            // Clear component.
+            tv.Nodes.Clear();
+
+            // Add subtrees.
+            AddChildrenToTreeViewNodes(tv.Nodes);
+        }
+
+        /// <summary>
+        /// Serialization.
+        /// </summary>
+        /// <param name="file_name">name of file</param>
+        public void XmlSerialize(string file_name)
+        {
+            XmlSerializer serializer = new XmlSerializer(GetType());
+            TextWriter writer = new StreamWriter(file_name);
+
+            serializer.Serialize(writer, this);
+            writer.Flush();
+            writer.Close();
+        }
+
+        /// <summary>
+        /// Restore links to parent.
+        /// </summary>
+        public void RestoreParent()
+        {
+            Children.ForEach(tree =>
+            {
+                tree.Parent = this;
+                tree.RestoreParent();
+            });
+        }
+
+        /// <summary>
+        /// Deserialization.
+        /// </summary>
+        /// <param name="file_name">name of file</param>
+        /// <returns><c>MPTT</c> tree</returns>
+        static public MPTTTree XmlDeserialize(string file_name)
+        {
+            try
+            {
+                TextReader reader = new StreamReader(file_name);
+                XmlSerializer serializer = new XmlSerializer(typeof(MPTTTree));
+                MPTTTree mptt_tree = serializer.Deserialize(reader) as MPTTTree;
+
+                reader.Close();
+
+                mptt_tree.RestoreParent();
+
+                return mptt_tree;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Cast to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return (Data is string) ? (Data as string) : "MPTT";
+        }
+
+        /// <summary>
+        /// Maximum identifier.
+        /// </summary>
+        public int MaxId
+        {
+            get
+            {
+                if (IsLeaf)
+                {
+                    return Id;
+                }
+                else
+                {
+                    return Children.Max(child => child.MaxId);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Find subtree.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>subtree</returns>
+        public MPTTTree FindById(int id)
+        {
+            Debug.Assert(id >= 0);
+
+            if (Id == id)
+            {
+                return this;
+            }
+
+            foreach (MPTTTree tree in Children)
+            {
+                MPTTTree found_tree = tree.FindById(id);
+
+                if (found_tree != null)
+                {
+                    return found_tree;
+                }
+            }
+
+            return null;
+        }
+    }
+}
