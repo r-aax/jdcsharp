@@ -48,6 +48,13 @@
     <Compile Include="DataStruct\StringsList.cs" />
     <Compile Include="Maths\Geometry\AxisType.cs" />
     <Compile Include="Maths\Geometry\Direction.cs" />
+    <Compile Include="Maths\Geometry\Geometry2D\Circle.cs" />
+    <Compile Include="Maths\Geometry\Geometry2D\Line.cs" />
+    <Compile Include="Maths\Geometry\Geometry2D\Point.cs" />
+    <Compile Include="Maths\Geometry\Geometry2D\Rect.cs" />
+    <Compile Include="Maths\Geometry\Geometry2D\RectScaler.cs" />
+    <Compile Include="Maths\Geometry\Geometry2D\Triangle.cs" />
+    <Compile Include="Maths\Geometry\Geometry2D\Vector.cs" />
     <Compile Include="Maths\Geometry\Interval.cs" />
     <Compile Include="Maths\Geometry\IntervalScaler.cs" />
     <Compile Include="Maths\Geometry\Triangle.cs" />
