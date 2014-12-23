@@ -46,6 +46,12 @@
     <Compile Include="DataStruct\MPTTTree.cs" />
     <Compile Include="DataStruct\RecursiveTree.cs" />
     <Compile Include="DataStruct\StringsList.cs" />
+    <Compile Include="Maths\Geometry\AxisType.cs" />
+    <Compile Include="Maths\Geometry\Direction.cs" />
+    <Compile Include="Maths\Geometry\Interval.cs" />
+    <Compile Include="Maths\Geometry\IntervalScaler.cs" />
+    <Compile Include="Maths\Geometry\Triangle.cs" />
+    <Compile Include="Maths\Geometry\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
