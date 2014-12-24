@@ -3,39 +3,48 @@
 using System;
 using System.Diagnostics;
 
-namespace Lib.Maths.Geometry.Geometry2D
+using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
+
+namespace Lib.Maths.Geometry.Geometry3D
 {
     /// <summary>
-    /// 2D-vector.
+    /// 3D vector.
     /// </summary>
     public class Vector : Lib.Maths.Geometry.Vector
     {
         /// <summary>
         /// Coordinate <c>x</c>.
         /// </summary>
-        public double X;
+        public double X = 0.0;
 
         /// <summary>
         /// Coordinate <c>y</c>.
         /// </summary>
-        public double Y;
+        public double Y = 0.0;
+
+        /// <summary>
+        /// Coordinate <c>z</c>.
+        /// </summary>
+        public double Z = 0.0;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="x">first component</param>
         /// <param name="y">second component</param>
-        public Vector(double x, double y)
+        /// <param name="z">third component</param>
+        public Vector(double x, double y, double z)
         {
             X = x;
             Y = y;
+            Z = z;
         }
 
         /// <summary>
         /// Constructor.
         /// </summary>
         public Vector()
-            : this(0.0, 0.0)
+            : this(0.0, 0.0, 0.0)
         {
         }
 
@@ -45,43 +54,43 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("({0:0.##}, {1:0.##})", X, Y);
+            return String.Format("({0:0.##}, {1:0.##}, {2:0.##})", X, Y, Z);
         }
 
         /// <summary>
-        /// Square of module.
+        /// Module square.
         /// </summary>
         public override double Mod2
         {
             get
             {
-                return X * X + Y * Y;
+                return X * X + Y * Y + Z * Z;
             }
         }
 
         /// <summary>
-        /// Sum.
+        /// Sum of vectors.
         /// </summary>
         /// <param name="a">first vector</param>
         /// <param name="b">second vector</param>
         /// <returns>sum</returns>
         public static Vector operator +(Vector a, Vector b)
         {
-            return new Vector(a.X + b.X, a.Y + b.Y);
+            return new Vector(a.X + b.X, a.Y + b.Y, a.Z + b.Z);
         }
 
         /// <summary>
         /// Unary minus.
         /// </summary>
         /// <param name="v">vector</param>
-        /// <returns>inverted vector</returns>
+        /// <returns>negated vector</returns>
         public static Vector operator -(Vector v)
         {
-            return new Vector(-v.X, -v.Y);
+            return new Vector(-v.X, -v.Y, -v.Z);
         }
 
         /// <summary>
-        /// Subtraction.
+        /// Vectors subtraction.
         /// </summary>
         /// <param name="a">first vector</param>
         /// <param name="b">second vector</param>
@@ -99,7 +108,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <returns>result</returns>
         public static Vector operator *(Vector v, double k)
         {
-            return new Vector(v.X * k, v.Y * k);
+            return new Vector(v.X * k, v.Y * k, v.Z * k);
         }
 
         /// <summary>
@@ -114,34 +123,27 @@ namespace Lib.Maths.Geometry.Geometry2D
         }
 
         /// <summary>
-        /// Division by number.
+        /// Division.
         /// </summary>
         /// <param name="v">vector</param>
         /// <param name="k">number</param>
-        /// <returns>result</returns>
+        /// <returns>результат</returns>
         public static Vector operator /(Vector v, double k)
         {
             return v * (1.0 / k);
         }
 
         /// <summary>
-        /// Orthogonal vector.
-        /// </summary>
-        /// <returns>orthogonal vector</returns>
-        public Vector Orthogonal()
-        {
-            return new Vector(Y, -X);
-        }
-
-        /// <summary>
-        /// Vector move.
+        /// Move vector.
         /// </summary>
         /// <param name="x">move <c>x</c></param>
         /// <param name="y">move <c>y</c></param>
-        public void Move(double x, double y)
+        /// <param name="z">move <c>z</c></param>
+        public void Move(double x, double y, double z)
         {
             X += x;
             Y += y;
+            Z += z;
         }
 
         /// <summary>
@@ -150,33 +152,35 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <param name="v">vector</param>
         public void Move(Vector v)
         {
-            Move(v.X, v.Y);
+            Move(v.X, v.Y, v.Z);
         }
 
         /// <summary>
         /// Scaling.
         /// </summary>
-        /// <param name="kx">scaling coefficient <c>x</c></param>
-        /// <param name="ky">scaling coefficient<c>y</c></param>
-        public void Scale(double kx, double ky)
+        /// <param name="kx">scale factor <c>x</c></param>
+        /// <param name="ky">scale factor <c>y</c></param>
+        /// <param name="kz">scale factor <c>z</c></param>
+        public void Scale(double kx, double ky, double kz)
         {
             X *= kx;
             Y *= ky;
+            Z *= kz;
         }
 
         /// <summary>
-        /// General scaling.
+        /// Scaling.
         /// </summary>
-        /// <param name="k">coefficient</param>
+        /// <param name="k">scale factor</param>
         public override void Scale(double k)
         {
-            Scale(k, k);
+            Scale(k, k, k);
         }
 
         /// <summary>
         /// Scaling relative to vector.
         /// </summary>
-        /// <param name="k">coefficient</param>
+        /// <param name="k">scale factor</param>
         /// <param name="v">vector</param>
         public void Scale(double k, Vector v)
         {
@@ -186,10 +190,64 @@ namespace Lib.Maths.Geometry.Geometry2D
         }
 
         /// <summary>
-        /// Rotation.
+        /// Rotate <c>x</c>.
         /// </summary>
         /// <param name="a">angle</param>
-        public void Rot(double a)
+        public void RotX(double a)
+        {
+            double y = Y;
+            double z = Z;
+            double s = Math.Sin(a);
+            double c = Math.Cos(a);
+
+            Y = y * c - z * s;
+            Z = y * s + z * c;
+        }
+
+        /// <summary>
+        /// Rotate <c>x</c> around given vector.
+        /// </summary>
+        /// <param name="v">vector</param>
+        /// <param name="a">angle</param>
+        public void RotX(Vector v, double a)
+        {
+            Move(-v);
+            RotX(a);
+            Move(v);
+        }
+
+        /// <summary>
+        /// Rotate <c>y</c>.
+        /// </summary>
+        /// <param name="a">angle</param>
+        public void RotY(double a)
+        {
+            double x = X;
+            double z = Z;
+            double s = Math.Sin(a);
+            double c = Math.Cos(a);
+
+            X = x * c + z * s;
+            Z = -x * s + z * c;
+        }
+
+        /// <summary>
+        /// Rotate <c>y</c> around given vector.
+        /// </summary>
+        /// <param name="v">vector</param>
+        /// <param name="a">angle</param>
+        public void RotY(Vector v, double a)
+        {
+            Move(-v);
+            RotY(a);
+            Move(v);
+        }
+
+        /// <summary>
+        /// Rotate <c>z</c>.
+        /// </summary>
+        /// <param name="a">angle</param>
+        public void RotZ(double a)
         {
             double x = X;
             double y = Y;
@@ -201,15 +259,79 @@ namespace Lib.Maths.Geometry.Geometry2D
         }
 
         /// <summary>
-        /// Rotation around given point.
+        /// Rotate <c>z</c> around given vector.
         /// </summary>
         /// <param name="v">vector</param>
         /// <param name="a">angle</param>
-        public void Rot(Vector v, double a)
+        public void RotZ(Vector v, double a)
         {
             Move(-v);
-            Rot(a);
+            RotZ(a);
             Move(v);
+        }
+
+        /// <summary>
+        /// Rotate with given axis.
+        /// </summary>
+        /// <param name="a">angle</param>
+        /// <param name="ax">axis</param>
+        public void Rot(double a, AxisType ax)
+        {
+            switch (ax)
+            {
+                case AxisType.X:
+                    RotX(a);
+                    break;
+
+                case AxisType.Y:
+                    RotY(a);
+                    break;
+
+                case AxisType.Z:
+                    RotZ(a);
+                    break;
+
+                default:
+                    Debug.Assert(false);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Rotate with given axis around given vector.
+        /// </summary>
+        /// <param name="v">vector</param>
+        /// <param name="a">angle</param>
+        /// <param name="ax">axis</param>
+        public void Rot(Vector v, double a, AxisType ax)
+        {
+            switch (ax)
+            {
+                case AxisType.X:
+                    RotX(v, a);
+                    break;
+
+                case AxisType.Y:
+                    RotY(v, a);
+                    break;
+
+                case AxisType.Z:
+                    RotZ(v, a);
+                    break;
+
+                default:
+                    Debug.Assert(false);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Delete <c>z</c>, coordinate.
+        /// </summary>
+        /// <returns>двумерный вектор</returns>
+        public Vector2D DelAsixZ()
+        {
+            return new Vector2D(X, Y);
         }
 
         /// <summary>
@@ -218,12 +340,12 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <param name="v1">first vector</param>
         /// <param name="v2">second vector</param>
         /// <param name="k">coefficient</param>
-        /// <returns></returns>
+        /// <returns>mean vector</returns>
         public static Vector Mean(Vector v1, Vector v2, double k)
         {
             // With k = 0.0 we have first vector.
             // With k = 1.0 we have second vector.
-            // In other case we have mean vector.
+            // In other cases we have mean vector.
 
             Debug.Assert((k >= 0.0) && (k <= 1.0));
 
@@ -231,18 +353,18 @@ namespace Lib.Maths.Geometry.Geometry2D
         }
 
         /// <summary>
-        /// Mean vector.
+        /// Middle vector.
         /// </summary>
         /// <param name="v1">first vector</param>
-        /// <param name="v2">second vector</param>
-        /// <returns>mean vector</returns>
+        /// <param name="v2">second</param>
+        /// <returns>middle vector</returns>
         public static Vector Mid(Vector v1, Vector v2)
         {
             return Mean(v1, v2, 0.5);
         }
 
         /// <summary>
-        /// Vectors array average vector.
+        /// Average vector.
         /// </summary>
         /// <param name="vs">vectors array</param>
         /// <returns>average vector</returns>
@@ -271,7 +393,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <returns>result</returns>
         public static Vector ComponentWiseMul(Vector v1, Vector v2)
         {
-            return new Vector(v1.X * v2.X, v1.Y * v2.Y);
+            return new Vector(v1.X * v2.X, v1.Y * v2.Y, v1.Z * v2.Z);
         }
     }
 }
