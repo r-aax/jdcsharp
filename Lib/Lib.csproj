@@ -49,6 +49,9 @@
   <ItemGroup>
     <Compile Include="DataStruct\ColoredObject.cs" />
     <Compile Include="DataStruct\ColoresManager.cs" />
+    <Compile Include="DataStruct\Graph\DrawProperties\EdgeDrawProperties.cs" />
+    <Compile Include="DataStruct\Graph\DrawProperties\GraphDrawProperties.cs" />
+    <Compile Include="DataStruct\Graph\DrawProperties\NodeDrawProperties.cs" />
     <Compile Include="DataStruct\MPTTTree.cs" />
     <Compile Include="DataStruct\RecursiveTree.cs" />
     <Compile Include="DataStruct\StringsList.cs" />
