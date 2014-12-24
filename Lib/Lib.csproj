@@ -52,6 +52,11 @@
     <Compile Include="DataStruct\Graph\DrawProperties\EdgeDrawProperties.cs" />
     <Compile Include="DataStruct\Graph\DrawProperties\GraphDrawProperties.cs" />
     <Compile Include="DataStruct\Graph\DrawProperties\NodeDrawProperties.cs" />
+    <Compile Include="DataStruct\Graph\Edge.cs" />
+    <Compile Include="DataStruct\Graph\Graph.cs" />
+    <Compile Include="DataStruct\Graph\GraphDimensionality.cs" />
+    <Compile Include="DataStruct\Graph\Node.cs" />
+    <Compile Include="DataStruct\Graph\Notation.cs" />
     <Compile Include="DataStruct\MPTTTree.cs" />
     <Compile Include="DataStruct\RecursiveTree.cs" />
     <Compile Include="DataStruct\StringsList.cs" />
