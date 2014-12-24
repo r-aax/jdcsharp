@@ -30,15 +30,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Presentation" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataStruct\ColoredObject.cs" />
@@ -46,6 +52,12 @@
     <Compile Include="DataStruct\MPTTTree.cs" />
     <Compile Include="DataStruct\RecursiveTree.cs" />
     <Compile Include="DataStruct\StringsList.cs" />
+    <Compile Include="Draw\Color.cs" />
+    <Compile Include="Draw\RectDrawer.cs" />
+    <Compile Include="Draw\RectDrawerType.cs" />
+    <Compile Include="Draw\WindowsForms\RectDrawer.cs" />
+    <Compile Include="Draw\WPF\DrawingVisualContainer.cs" />
+    <Compile Include="Draw\WPF\RectDrawer.cs" />
     <Compile Include="Maths\Geometry\AxisType.cs" />
     <Compile Include="Maths\Geometry\Direction.cs" />
     <Compile Include="Maths\Geometry\Geometry2D\Circle.cs" />
@@ -67,6 +79,7 @@
     <Compile Include="Maths\Geometry\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
