@@ -30,7 +30,7 @@ namespace Lib.Net
         /// <summary>
         /// Receive bytes handler.
         /// </summary>
-        /// <param name="bytes">массив байтов</param>
+        /// <param name="bytes">bytes array</param>
         public delegate void OnReceiveBytesHandler(byte[] bytes);
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Lib.Net
         /// <summary>
         /// Receive string handler.
         /// </summary>
-        /// <param name="str">строка</param>
+        /// <param name="str">string</param>
         public delegate void OnReceiveStringHandler(string str);
 
         /// <summary>

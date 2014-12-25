@@ -39,7 +39,7 @@
             this.AcceptB.Name = "AcceptB";
             this.AcceptB.Size = new System.Drawing.Size(75, 23);
             this.AcceptB.TabIndex = 0;
-            this.AcceptB.Text = "Принять";
+            this.AcceptB.Text = "Accept";
             this.AcceptB.UseVisualStyleBackColor = true;
             this.AcceptB.Click += new System.EventHandler(this.AcceptB_Click);
             // 
@@ -49,7 +49,7 @@
             this.CancelB.Name = "CancelB";
             this.CancelB.Size = new System.Drawing.Size(75, 23);
             this.CancelB.TabIndex = 1;
-            this.CancelB.Text = "Отменить";
+            this.CancelB.Text = "Cancel";
             this.CancelB.UseVisualStyleBackColor = true;
             this.CancelB.Click += new System.EventHandler(this.CancelB_Click);
             // 

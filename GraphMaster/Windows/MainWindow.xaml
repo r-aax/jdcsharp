@@ -1,0 +1,183 @@
+﻿<!-- Copyright Joy Developing. -->
+    
+<Window x:Class="GraphMaster.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:GraphMaster"
+        Title="GraphMaster" Height="675" Width="808" Loaded="Window_Loaded">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Height="21.72">
+            <MenuItem Header="Area">
+                <MenuItem Name="AreaZoomInMI" Header="Zoom in" Click="AreaZoomInMI_Click"/>
+                <MenuItem Name="AreaZoomOutMI" Header="Zoom out" Click="AreaZoomOutMI_Click"/>
+                <Separator/>
+                <MenuItem Name="AreaRightMI" Header="Right" Click="AreaRightMI_Click"/>
+                <MenuItem Name="AreaLeftMI" Header="Left" Click="AreaLeftMI_Click"/>
+                <MenuItem Name="AreaUpMI" Header="Up" Click="AreaUpMI_Click"/>
+                <MenuItem Name="AreaDownMI" Header="Down" Click="AreaDownMI_Click"/>
+                <Separator/>
+                <MenuItem Name="AreaParametersMI" Header="Parameters" Click="AreaParametersMI_Click"/>
+            </MenuItem>
+            <MenuItem Header="Transform">
+                <MenuItem Name="AreaRotateXPlus" Header="Rotate clockwise OX" Click="AreaRotateXPlus_Click" />
+                <MenuItem Name="AreaRotateXMinus" Header="Rotate contraclockwise OX" Click="AreaRotateXMinus_Click" />
+                <MenuItem Name="AreaRotateYPlus" Header="Rotate clockwise OY" Click="AreaRotateYPlus_Click" />
+                <MenuItem Name="AreaRotateYMinus" Header="Rotate contraclockwise OY" Click="AreaRotateYMinus_Click" />
+                <MenuItem Name="AreaRotateZPlus" Header="Rotate clockwise OZ" Click="AreaRotateZPlus_Click" />
+                <MenuItem Name="AreaRotateZMinus" Header="Rotate contraclockwise OZ" Click="AreaRotateZMinus_Click" />
+                <Separator/>
+                <MenuItem Name="Transform2DTo3D" Header="Transform 2D -> 3D" Click="Transform2DTo3D_Click" />
+                <MenuItem Name="Transform3DTo2D" Header="Transform 3D -> 2D" Click="Transform3DTo2D_Click" />
+            </MenuItem>
+            <MenuItem Header="Picture">
+                <MenuItem Name="PictureNameMI" Header="Name" Click="PictureNameMI_Click" />
+                <MenuItem Name="PictureSaveMI" Header="Save" Click="PictureSaveMI_Click" />
+            </MenuItem>
+            <MenuItem Header="Examples">
+                <MenuItem Header="Common">
+                    <MenuItem Name="ExampleEmpty" Header="Empty graph" Click="ExampleEmpty_Click" />
+                    <MenuItem Name="ExampleFull" Header="Full graph (K(n))" Click="ExampleFull_Click" />
+                    <MenuItem Name="ExampleRandom" Header="Random graph" Click="ExampleRandom_Click" />
+                    <Separator/>
+                    <MenuItem Name="ExampleCycele" Header="Cycle" Click="ExampleCycele_Click" />
+                    <MenuItem Name="ExampleStar" Header="Start" Click="ExampleStar_Click" />
+                    <MenuItem Name="ExampleWheel" Header="Wheel" Click="ExampleWheel_Click" />
+                    <Separator/>
+                    <MenuItem Name="ExampleSquare" Header="Square graph" Click="ExampleSquare_Click" />
+                    <MenuItem Name="ExampleGrid1" Header="1D grid" Click="ExampleGrid1_Click" />
+                    <MenuItem Name="ExampleGrid2" Header="2D grid" Click="ExampleGrid2_Click" />
+                    <MenuItem Name="ExampleGrid3" Header="3D grid" Click="ExampleGrid3_Click" />
+                    <MenuItem Name="ExampleCircular" Header="Circular graph" Click="ExampleCircular_Click" />
+                    <MenuItem Name="ExampleHatch" Header="Hatch graph" Click="ExampleHatch_Click" />
+                </MenuItem>
+                <MenuItem Header="Cages">
+                    <MenuItem Name="ExampleCage_3_3" Header="(3-3)-cage (K(4))" Click="ExampleCage_3_3_Click" />
+                    <MenuItem Name="ExampleCage_3_4" Header="(3-4)-cage (K(3,3))" Click="ExampleCage_3_4_Click" />
+                    <MenuItem Name="ExampleCage_3_5" Header="(3-5)-cage (Petersen graph)" Click="ExampleCage_3_5_Click" />
+                    <MenuItem Name="ExampleCage_3_6" Header="(3-6)-cage (Heawood graph)" Click="ExampleCage_3_6_Click" />
+                    <MenuItem Name="ExampleCage_3_7" Header="(3-7)-cage (McGee graph)" Click="ExampleCage_3_7_Click" />
+                    <MenuItem Name="ExampleCage_3_8" Header="(3-8)-cage (Tutte-Coxeter graph)" Click="ExampleCage_3_8_Click" />
+                    <MenuItem Name="ExampleCage_3_10_1" Header="(3-10) Balaban cage" Click="ExampleCage_3_10_1_Click" />
+                    <MenuItem Name="ExampleCage_3_10_2" Header="(3-10)-cage (Harries graph)" Click="ExampleCage_3_10_2_Click" />
+                    <MenuItem Name="ExampleCage_3_10_3" Header="(3-10)-cage (Harries-Wong graph)" Click="ExampleCage_3_10_3_Click" />
+                    <MenuItem Name="ExampleCage_3_11" Header="(3-11) Balaban cage" Click="ExampleCage_3_11_Click" />
+                    <MenuItem Name="ExampleCage_3_12" Header="(3-12) Tutte cage" Click="ExampleCage_3_12_Click" />
+                </MenuItem>
+                <MenuItem Header="Levi graphs">
+                    <MenuItem Name="ExampleLevi_Desargues" Header="Desargues graph" Click="ExampleLevi_Desargues_Click" />
+                    <MenuItem Name="ExampleLevi_Heawood" Header="Heawood graph" Click="ExampleLevi_Heawood_Click" />
+                    <MenuItem Name="ExampleLevi_MobiusKantor" Header="Mobius-Kantor graph" Click="ExampleLevi_MobiusKantor_Click" />
+                    <MenuItem Name="ExampleLevi_Pappus" Header="Pappus graph" Click="ExampleLevi_Pappus_Click" />
+                    <MenuItem Name="ExampleLevi_Gray" Header="Gray graph" Click="ExampleLevi_Gray_Click" />
+                    <MenuItem Name="ExampleLevi_TutteCoxeter" Header="Tutte-Coxeter graph" Click="ExampleLevi_TutteCoxeter_Click" />
+                </MenuItem>
+                <MenuItem Header="Generalized Petersen graph">
+                    <MenuItem Name="ExamplePetersen_10_1" Header="GP(10, 1) (10-prizm)" Click="ExamplePetersen_10_1_Click" />
+                    <MenuItem Name="ExamplePetersen_5_2" Header="GP(5, 2) (Petersen graph)" Click="ExamplePetersen_5_2_Click" />
+                    <MenuItem Name="ExamplePetersen_6_2" Header="GP(6, 2) (Durer graph)" Click="ExamplePetersen_6_2_Click" />
+                    <MenuItem Name="ExamplePetersen_8_3" Header="GP(8, 3) (Mobius-Kantor graph)" Click="ExamplePetersen_8_3_Click" />
+                    <MenuItem Name="ExamplePetersen_10_2" Header="GP(10, 2) (dodecahedron)" Click="ExamplePetersen_10_2_Click" />
+                    <MenuItem Name="ExamplePetersen_10_3" Header="GP(10, 3) (Desargues graph)" Click="ExamplePetersen_10_3_Click" />
+                    <MenuItem Name="ExamplePetersen_12_5" Header="GP(12, 5) (Nauru graph)" Click="ExamplePetersen_12_5_Click" />
+                    <MenuItem Name="ExamplePetersen_n_k" Header="Random G(n, k &lt;= n / 2)" Click="ExamplePetersen_n_k_Click" />
+                </MenuItem>
+                <MenuItem Header="LCF notation graphs">
+                    <MenuItem Name="ExampleLCF_Wagner" Header="Wagner graph" Click="ExampleLCF_Wagner_Click" />
+                    <MenuItem Name="ExampleLCF_Franklin" Header="Franklin graph" Click="ExampleLCF_Franklin_Click" />
+                    <MenuItem Name="ExampleLCF_Frucht" Header="Frucht graph" Click="ExampleLCF_Frucht_Click" />
+                    <MenuItem Name="ExampleLCF_Heawood" Header="Heawood graph" Click="ExampleLCF_Heawood_Click" />
+                    <MenuItem Name="ExampleLCF_MobiusKantor" Header="Mobius-Kantor graph" Click="ExampleLCF_MobiusKantor_Click" />
+                    <MenuItem Name="ExampleLCF_Pappus" Header="Pappus graph" Click="ExampleLCF_Pappus_Click" />
+                    <MenuItem Name="ExampleLCF_Desargues" Header="Desargues graph" Click="ExampleLCF_Desargues_Click" />
+                    <MenuItem Name="ExampleLCF_McGee" Header="McGee graph" Click="ExampleLCF_McGee_Click" />
+                    <MenuItem Name="ExampleLCF_Nauru" Header="Nauru graph" Click="ExampleLCF_Nauru_Click" />
+                    <MenuItem Name="ExampleLCF_TutteCoxeter" Header="Tutte-Coxeter graph" Click="ExampleLCF_TutteCoxeter_Click" />
+                    <MenuItem Name="ExampleLCF_Dyck" Header="Dyke graph" Click="ExampleLCF_Dyck_Click" />
+                    <MenuItem Name="ExampleLCF_Gray" Header="Gray graph" Click="ExampleLCF_Gray_Click" />
+                    <MenuItem Name="ExampleLCF_Harries" Header="Harries graph" Click="ExampleLCF_Harries_Click" />
+                    <MenuItem Name="ExampleLCF_HarriesWong" Header="Harries-Wong graph" Click="ExampleLCF_HarriesWong_Click" />
+                    <MenuItem Name="ExampleLCF_3_10_Balaban_Cage" Header="(3-10) Balaban cage" Click="ExampleLCF_3_10_Balaban_Cage_Click" />
+                    <MenuItem Name="ExampleLCF_Foster" Header="Foster graph" Click="ExampleLCF_Foster_Click" />
+                    <MenuItem Name="ExampleLCF_BiggsSmith" Header="Biggs-Smith graph" Click="ExampleLCF_BiggsSmith_Click" />
+                    <MenuItem Name="ExampleLCF_3_11_Balaban_Cage" Header="(3-11) Balaban cage" Click="ExampleLCF_3_11_Balaban_Cage_Click" />
+                    <MenuItem Name="ExampleLCF_Ljubljana" Header="Ljubljana graph" Click="ExampleLCF_Ljubljana_Click" />
+                    <MenuItem Name="ExampleLCF_3_12_Tutte_Cage" Header="(3-12) Tutte cage" Click="ExampleLCF_3_12_Tutte_Cage_Click" />
+                </MenuItem>
+                <MenuItem Header="Ramsey numbers">
+                    <MenuItem Header="Circular graphs without red r-cliques and blue b-cliques">
+                        <MenuItem Header="C5 for R(3, 3) = 6">
+                            <MenuItem Name="RamseyCircC5R33All" Header="All edges" Click="RamseyCircC5R33All_Click" />
+                            <MenuItem Name="RamseyCircC5R33Red" Header="Red edges" Click="RamseyCircC5R33Red_Click" />
+                        </MenuItem>
+                        <MenuItem Header="C8 for R(3, 4) = 9">
+                            <MenuItem Name="RamseyCircC8R34All" Header="All edges" Click="RamseyCircC8R34All_Click" />
+                            <MenuItem Name="RamseyCircC8R34Red" Header="Red edges" Click="RamseyCircC8R34Red_Click" />
+                        </MenuItem>
+                        <MenuItem Header="C13 for R(3, 5) = 14">
+                            <MenuItem Name="RamseyCircC13R35All" Header="All edges" Click="RamseyCircC13R35All_Click" />
+                            <MenuItem Name="RamseyCircC13R35Red" Header="Red edges" Click="RamseyCircC13R35Red_Click" />
+                        </MenuItem>
+                        <MenuItem Header="C17 for R(4, 4) = 18">
+                            <MenuItem Name="RamseyCircC17R44All" Header="All edges" Click="RamseyCircC17R44All_Click" />
+                            <MenuItem Name="RamseyCircC17R44Red" Header="Red edges" Click="RamseyCircC17R44Red_Click" />
+                        </MenuItem>
+                        <MenuItem Header="C24 for R(4, 5) = 25">
+                            <MenuItem Name="RamseyCircC24R45All" Header="All edges" Click="RamseyCircC24R45All_Click" />
+                            <MenuItem Name="RamseyCircC24R45Red" Header="Red edges" Click="RamseyCircC24R45Red_Click" />
+                        </MenuItem>
+                        <MenuItem Header="C41 for R(5, 5) = [43, 49]">
+                            <MenuItem Name="RamseyCircC41R55All" Header="All edges" Click="RamseyCircC41R55All_Click" />
+                            <MenuItem Name="RamseyCircC41R55Red" Header="Red edges" Click="RamseyCircC41R55Red_Click" />
+                        </MenuItem>
+                    </MenuItem>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
+            <ListBoxItem Name="BijectionStrSBLBI" Content="status"/>
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Canvas Name="DrawAreaC"
+                    Grid.Column="0"
+                    SizeChanged="DrawAreaC_SizeChanged"
+                    MouseLeave="DrawAreaC_MouseLeave" 
+                    MouseLeftButtonDown="DrawAreaC_MouseLeftButtonDown"
+                    MouseLeftButtonUp="DrawAreaC_MouseLeftButtonUp"
+                    MouseMove="DrawAreaC_MouseMove" />
+            <Grid Grid.Column="1">
+                <Button Height="36" HorizontalAlignment="Left" Margin="118,222,0,0" Name="RotX_CW_B" VerticalAlignment="Top" Width="36" Click="RotX_CW_B_Click">
+                </Button>
+                <Button Height="36" HorizontalAlignment="Left" Margin="158,222,0,0" Name="RotX_CCW_B" VerticalAlignment="Top" Width="36" Click="RotX_CCW_B_Click">
+                </Button>
+                <Button Height="36" HorizontalAlignment="Left" Margin="118,260,0,0" Name="RotY_CW_B" VerticalAlignment="Top" Width="36" Click="RotY_CW_B_Click">
+                </Button>
+                <Button Height="36" HorizontalAlignment="Left" Margin="158,260,0,0" Name="RotY_CCW_B" VerticalAlignment="Top" Width="36" Click="RotY_CCW_B_Click">
+                </Button>
+                <Button Height="36" HorizontalAlignment="Left" Margin="118,298,0,0" Name="RotZ_CW_B" VerticalAlignment="Top" Width="36" Click="RotZ_CW_B_Click">
+                </Button>
+                <Button Height="36" HorizontalAlignment="Left" Margin="158,298,0,0" Name="RotZ_CCW_B" VerticalAlignment="Top" Width="36" Click="RotZ_CCW_B_Click">
+                </Button>
+                <Label Content="Rotate X" Height="28" HorizontalAlignment="Left" Margin="8,226,0,0" Name="label1" VerticalAlignment="Top" />
+                <Label Content="Rotate Y" Height="28" HorizontalAlignment="Left" Margin="8,268,0,0" Name="label2" VerticalAlignment="Top" />
+                <Label Content="Rotate Z" Height="28" HorizontalAlignment="Left" Margin="8,306,0,0" Name="label3" VerticalAlignment="Top" />
+                <Button Height="32" HorizontalAlignment="Left" Margin="119,55,0,0" Name="AreaRightB" VerticalAlignment="Top" Width="32" Click="AreaRightB_Click">
+                </Button>
+                <Button Height="32" HorizontalAlignment="Left" Margin="51,55,0,0" Name="AreaLeftB" VerticalAlignment="Top" Width="32" Click="AreaLeftB_Click">
+                </Button>
+                <Button Height="32" HorizontalAlignment="Left" Margin="85,21,0,0" Name="AreaUpB" VerticalAlignment="Top" Width="32" Click="AreaUpB_Click">
+                </Button>
+                <Button Height="32" HorizontalAlignment="Left" Margin="85,89,0,0" Name="AreaDownB" VerticalAlignment="Top" Width="32" Click="AreaDownB_Click">
+                </Button>
+                <Button Height="40" HorizontalAlignment="Left" Margin="58,152,0,0" Name="ZoomInB" VerticalAlignment="Top" Width="40" Click="ZoomInB_Click">
+                </Button>
+                <Button Height="40" HorizontalAlignment="Left" Margin="102,152,0,0" Name="ZoomOutB" VerticalAlignment="Top" Width="40" Click="ZoomOutB_Click">
+                </Button>
+            </Grid>
+            <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
+        </Grid>
+    </DockPanel>
+</Window>

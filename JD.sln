@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib.Tests", "Lib.Tests\Lib.Tests.csproj", "{8C96EB4A-96B4-45C3-AF53-AC8274DDC7E7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphMaster", "GraphMaster\GraphMaster.csproj", "{3D00C783-0B14-47AD-B8AE-68081AEAF8EC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{8C96EB4A-96B4-45C3-AF53-AC8274DDC7E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C96EB4A-96B4-45C3-AF53-AC8274DDC7E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C96EB4A-96B4-45C3-AF53-AC8274DDC7E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D00C783-0B14-47AD-B8AE-68081AEAF8EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D00C783-0B14-47AD-B8AE-68081AEAF8EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D00C783-0B14-47AD-B8AE-68081AEAF8EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D00C783-0B14-47AD-B8AE-68081AEAF8EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

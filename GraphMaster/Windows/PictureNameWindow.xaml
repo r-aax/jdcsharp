@@ -1,0 +1,21 @@
+﻿<!-- Copyright Joy Developing. -->
+    
+<Window x:Class="GraphMaster.Windows.PictureNameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Picture name" Height="128" Width="581">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TextBox Name="PictureNameTB" Grid.Row="0" Grid.Column="1" Width="500" Margin="10"></TextBox>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="AcceptB" MinWidth="75" Margin="10" Click="AcceptB_Click">Accept</Button>
+            <Button Name="CancelB" MinWidth="75" Margin="10" Click="CancelB_Click">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>

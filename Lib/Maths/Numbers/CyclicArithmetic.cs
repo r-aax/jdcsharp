@@ -42,7 +42,7 @@ namespace Lib.Maths.Numbers
         /// </summary>
         /// <param name="a">first value</param>
         /// <param name="b">second value</param>
-        /// <returns>разность</returns>
+        /// <returns>result</returns>
         public int Sub(int a, int b)
         {
             Debug.Assert((a >= 0) && (b >= 0));
@@ -68,7 +68,7 @@ namespace Lib.Maths.Numbers
         /// </summary>
         /// <param name="a">first value</param>
         /// <param name="b">second value</param>
-        /// <returns>расстояние</returns>
+        /// <returns>distance</returns>
         public int Dist(int a, int b)
         {
             int d = System.Math.Abs(a - b);

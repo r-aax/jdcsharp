@@ -127,7 +127,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// </summary>
         /// <param name="v">vector</param>
         /// <param name="k">number</param>
-        /// <returns>результат</returns>
+        /// <returns>result</returns>
         public static Vector operator /(Vector v, double k)
         {
             return v * (1.0 / k);
@@ -328,7 +328,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// <summary>
         /// Delete <c>z</c>, coordinate.
         /// </summary>
-        /// <returns>двумерный вектор</returns>
+        /// <returns>2D vector</returns>
         public Vector2D DelAsixZ()
         {
             return new Vector2D(X, Y);

@@ -256,7 +256,7 @@ namespace Lib.DataStruct.Graph
         /// </summary>
         /// <param name="ai">first incident node index</param>
         /// <param name="bi">second incident node index</param>
-        /// <returns>ребро</returns>
+        /// <returns>edge</returns>
         public Edge AddEdge(int ai, int bi)
         {
             return AddEdge(Nodes[ai], Nodes[bi], false);

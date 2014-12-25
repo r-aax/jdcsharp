@@ -11,7 +11,7 @@ namespace Lib.GUI.WindowsForms
     public partial class InputStringForm : Form
     {
         /// <summary>
-        /// Результат.
+        /// Result.
         /// </summary>
         public string Result;
 
@@ -54,7 +54,7 @@ namespace Lib.GUI.WindowsForms
         /// <param name="e">parameters</param>
         private void CancelB_Click(object sender, EventArgs e)
         {
-            // Результатом является исходная строка.
+            // Initial string is result.
             Close();
         }
 

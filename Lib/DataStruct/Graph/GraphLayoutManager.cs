@@ -67,7 +67,7 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Set random graph nodes coordinates.
         /// </summary>
-        /// <param name="g">граф</param>
+        /// <param name="g">graph</param>
         /// <param name="index_from">from index</param>
         /// <param name="index_to">to index</param>
         /// <param name="par">parallelepiped</param>
