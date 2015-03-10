@@ -1,4 +1,4 @@
-﻿// Copyright Joy Developing.
+﻿// Author: Alexey Rybakov
 
 using Lib.Maths.Geometry.Geometry2D;
 

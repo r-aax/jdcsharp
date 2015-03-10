@@ -1,4 +1,4 @@
-﻿<!-- Copyright Joy Developing. -->
+﻿<!-- Author: Alexey Rybakov -->
     
 <Window x:Class="GraphMaster.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

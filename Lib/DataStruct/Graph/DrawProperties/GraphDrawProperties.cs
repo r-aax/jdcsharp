@@ -1,4 +1,4 @@
-﻿// Copyright Joy Developing.
+﻿// Author: Alexey Rybakov
 
 namespace Lib.DataStruct.Graph.DrawProperties
 {

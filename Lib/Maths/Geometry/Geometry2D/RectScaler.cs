@@ -1,4 +1,4 @@
-﻿// Copyright Joy Developing.
+﻿// Author: Alexey Rybakov
 
 using Scaler1D = Lib.Maths.Geometry.IntervalScaler;
 
