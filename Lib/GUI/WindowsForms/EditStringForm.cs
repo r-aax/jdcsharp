@@ -8,7 +8,7 @@ namespace Lib.GUI.WindowsForms
     /// <summary>
     /// Input string form.
     /// </summary>
-    public partial class InputStringForm : Form
+    public partial class EditStringForm : Form
     {
         /// <summary>
         /// Result.
@@ -18,7 +18,7 @@ namespace Lib.GUI.WindowsForms
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public InputStringForm()
+        public EditStringForm()
         {
             InitializeComponent();
         }
@@ -28,7 +28,7 @@ namespace Lib.GUI.WindowsForms
         /// </summary>
         /// <param name="initial_string">initial string</param>
         /// <param name="label">form label</param>
-        public InputStringForm(string initial_string, string label)
+        public EditStringForm(string initial_string, string label)
             : this()
         {
             TextTB.Text = initial_string;

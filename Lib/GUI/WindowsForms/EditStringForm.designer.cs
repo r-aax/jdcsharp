@@ -1,6 +1,6 @@
 ﻿namespace Lib.GUI.WindowsForms
 {
-    partial class InputStringForm
+    partial class EditStringForm
     {
         /// <summary>
         /// Required designer variable.

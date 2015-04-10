@@ -69,11 +69,11 @@
     <Compile Include="Draw\WindowsForms\RectDrawer.cs" />
     <Compile Include="Draw\WPF\DrawingVisualContainer.cs" />
     <Compile Include="Draw\WPF\RectDrawer.cs" />
-    <Compile Include="GUI\WindowsForms\InputStringForm.cs">
+    <Compile Include="GUI\WindowsForms\EditStringForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\WindowsForms\InputStringForm.designer.cs">
-      <DependentUpon>InputStringForm.cs</DependentUpon>
+    <Compile Include="GUI\WindowsForms\EditStringForm.designer.cs">
+      <DependentUpon>EditStringForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\WindowsForms\IO.cs" />
     <Compile Include="GUI\WPF\IO.cs" />
@@ -113,8 +113,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="GUI\WindowsForms\InputStringForm.resx">
-      <DependentUpon>InputStringForm.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\WindowsForms\EditStringForm.resx">
+      <DependentUpon>EditStringForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

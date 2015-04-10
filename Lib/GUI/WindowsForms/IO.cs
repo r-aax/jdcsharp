@@ -144,7 +144,7 @@ namespace Lib.GUI.WindowsForms
         /// <returns></returns>
         public static string InputString(string initial_string, string label)
         {
-            InputStringForm f = new InputStringForm(initial_string, label);
+            EditStringForm f = new EditStringForm(initial_string, label);
 
             f.ShowDialog();
 

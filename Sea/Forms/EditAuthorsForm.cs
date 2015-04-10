@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Author: Alexey Rybakov
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
