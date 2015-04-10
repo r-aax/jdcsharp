@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Authors\Author.cs" />
+    <Compile Include="Core\Authors\AuthorNamePrintStyle.cs" />
     <Compile Include="Core\DataCollection.cs" />
     <Compile Include="Core\DataItem.cs" />
     <Compile Include="Forms\EditAuthorsForm.cs">
@@ -128,6 +130,7 @@
       <Name>Lib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
