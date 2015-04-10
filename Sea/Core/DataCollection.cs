@@ -41,7 +41,7 @@ namespace Sea.Core
         /// Deserialization.
         /// </summary>
         /// <param name="file_name">name of file</param>
-        /// <returns><c>MPTT</c> tree</returns>
+        /// <returns>data items collection</returns>
         static public DataCollection XmlDeserialize(string file_name)
         {
             try

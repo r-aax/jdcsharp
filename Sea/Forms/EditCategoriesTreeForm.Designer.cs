@@ -254,6 +254,7 @@
             this.Controls.Add(this.CategoriesTreeTV);
             this.MinimumSize = new System.Drawing.Size(692, 599);
             this.Name = "EditCategoriesTreeForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit categories tree";
             this.Shown += new System.EventHandler(this.EditCategoriesTreeForm_Shown);
             this.ResumeLayout(false);

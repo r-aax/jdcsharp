@@ -30,5 +30,41 @@ namespace Sea.Forms
             // Storage path info.
             StoragePathSSL.Text = "Storage path: " + Parameters.StoragePath;
         }
+
+        /// <summary>
+        /// Open edit categories form.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DataCategoriesMI_Click(object sender, EventArgs e)
+        {
+            EditCategoriesTreeForm form = new EditCategoriesTreeForm();
+
+            form.ShowDialog();
+        }
+
+        /// <summary>
+        /// Open edit authors form.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DataAuthorsMI_Click(object sender, EventArgs e)
+        {
+            EditAuthorsForm form = new EditAuthorsForm();
+
+            form.ShowDialog();
+        }
+
+        /// <summary>
+        /// Open edit publishers form.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameteres</param>
+        private void DataPublishersMI_Click(object sender, EventArgs e)
+        {
+            EditPublishersForm form = new EditPublishersForm();
+
+            form.ShowDialog();
+        }
     }
 }
