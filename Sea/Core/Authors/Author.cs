@@ -6,12 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Sea.Core.Authors
 {
     /// <summary>
     /// Author class.
-    /// </summary>
+    /// </summary>    
     public class Author
     {
         /// <summary>
@@ -49,6 +51,14 @@ namespace Sea.Core.Authors
         /// <param name="last_name">last name</param>
         public Author(string first_name, string last_name)
             : this(first_name, "", last_name)
+        {
+        }
+
+        /// <summary>
+        /// Constructor (first of all for serialization).
+        /// </summary>
+        public Author()
+            : this("", "", "")
         {
         }
 

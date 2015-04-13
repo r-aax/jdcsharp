@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Sea.Core.Authors
 {
@@ -14,13 +15,32 @@ namespace Sea.Core.Authors
         /// <summary>
         /// List of authors.
         /// </summary>
-        public List<Author> Items = new List<Author>();
+        public List<Author> Items { get; set; }
+
+        /// <summary>
+        /// Indexer.
+        /// </summary>
+        /// <param name="i">index</param>
+        /// <returns>author</returns>
+        public Author this[int i]
+        {
+            get
+            {
+                return Items[i];
+            }
+
+            set
+            {
+                Items[i] = value;
+            }
+        }
 
         /// <summary>
         /// Constructor.
         /// </summary>
         public AuthorsList()
         {
+            Items = new List<Author>();
         }
 
         /// <summary>
@@ -57,6 +77,20 @@ namespace Sea.Core.Authors
             catch (IOException)
             {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Fill list box with authors.
+        /// </summary>
+        /// <param name="lb">list box</param>
+        public void ToListBox(ListBox lb)
+        {
+            lb.Items.Clear();
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                lb.Items.Add(Items[i].Name(AuthorNamePrintStyle.FirstSecondLast));
             }
         }
     }

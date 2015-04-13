@@ -12,7 +12,7 @@ namespace Sea.Tools
         /// <summary>
         /// Path to storage.
         /// </summary>
-        public static readonly string StoragePath = "D:/SeaStorage";
+        public static readonly string StoragePath = "C:/Data/Garbage/Sea";
 
         /// <summary>
         /// Categories tree XML file.
@@ -27,6 +27,22 @@ namespace Sea.Tools
             get
             {
                 return StoragePath + "/" + CategoriesTreeXMLFilename;
+            }
+        }
+
+        /// <summary>
+        /// Authors XML file.
+        /// </summary>
+        public static readonly string AuthorsXMLFilename = "authors.xml";
+
+        /// <summary>
+        /// Full name of authors XML file.
+        /// </summary>
+        public static string AuthorsXMLFullFilename
+        {
+            get
+            {
+                return StoragePath + "/" + AuthorsXMLFilename;
             }
         }
 
