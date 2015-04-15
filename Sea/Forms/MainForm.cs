@@ -2,6 +2,7 @@
 
 using System;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 using Sea.Tools;
 
@@ -29,6 +30,18 @@ namespace Sea.Forms
         {
             // Storage path info.
             StoragePathSSL.Text = "Storage path: " + Parameters.StoragePath;
+        }
+
+        /// <summary>
+        /// Open edit books form.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DataBooksMI_Click(object sender, EventArgs e)
+        {
+            EditBooksForm form = new EditBooksForm();
+
+            form.ShowDialog();
         }
 
         /// <summary>

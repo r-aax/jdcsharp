@@ -35,6 +35,8 @@
             this.DataCategoriesMI = new System.Windows.Forms.ToolStripMenuItem();
             this.DataAuthorsMI = new System.Windows.Forms.ToolStripMenuItem();
             this.DataPublishersMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.DataBooksMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -68,6 +70,8 @@
             // данныеToolStripMenuItem
             // 
             this.данныеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DataBooksMI,
+            this.toolStripSeparator1,
             this.DataCategoriesMI,
             this.DataAuthorsMI,
             this.DataPublishersMI});
@@ -95,6 +99,18 @@
             this.DataPublishersMI.Size = new System.Drawing.Size(152, 22);
             this.DataPublishersMI.Text = "Publishers";
             this.DataPublishersMI.Click += new System.EventHandler(this.DataPublishersMI_Click);
+            // 
+            // DataBooksMI
+            // 
+            this.DataBooksMI.Name = "DataBooksMI";
+            this.DataBooksMI.Size = new System.Drawing.Size(152, 22);
+            this.DataBooksMI.Text = "Books";
+            this.DataBooksMI.Click += new System.EventHandler(this.DataBooksMI_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // MainForm
             // 
@@ -126,6 +142,8 @@
         private System.Windows.Forms.ToolStripMenuItem DataAuthorsMI;
         private System.Windows.Forms.ToolStripMenuItem DataPublishersMI;
         private System.Windows.Forms.ToolStripMenuItem DataCategoriesMI;
+        private System.Windows.Forms.ToolStripMenuItem DataBooksMI;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
