@@ -1,26 +1,31 @@
 ﻿// Author: Alexey Rybakov
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace Sea.Core
+namespace Sea.Core.Books
 {
     /// <summary>
-    /// Data collection.
+    /// List of books.
     /// </summary>
-    public class DataCollection
+    public class BooksList
     {
         /// <summary>
-        /// List of data items.
+        /// Books items.
         /// </summary>
-        public List<DataItem> Items = new List<DataItem>();
+        public List<Book> Items;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public DataCollection()
+        public BooksList()
         {
+            Items = new List<Book>();
         }
 
         /// <summary>
@@ -42,17 +47,17 @@ namespace Sea.Core
         /// </summary>
         /// <param name="file_name">name of file</param>
         /// <returns>data items collection</returns>
-        static public DataCollection XmlDeserialize(string file_name)
+        static public BooksList XmlDeserialize(string file_name)
         {
             try
             {
                 TextReader reader = new StreamReader(file_name);
-                XmlSerializer serializer = new XmlSerializer(typeof(DataCollection));
-                DataCollection collection = serializer.Deserialize(reader) as DataCollection;
+                XmlSerializer serializer = new XmlSerializer(typeof(BooksList));
+                BooksList books = serializer.Deserialize(reader) as BooksList;
 
                 reader.Close();
 
-                return collection;
+                return books;
             }
             catch (IOException)
             {

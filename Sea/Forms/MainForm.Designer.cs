@@ -78,21 +78,21 @@
             // DataCategoriesMI
             // 
             this.DataCategoriesMI.Name = "DataCategoriesMI";
-            this.DataCategoriesMI.Size = new System.Drawing.Size(130, 22);
+            this.DataCategoriesMI.Size = new System.Drawing.Size(152, 22);
             this.DataCategoriesMI.Text = "Categories";
             this.DataCategoriesMI.Click += new System.EventHandler(this.DataCategoriesMI_Click);
             // 
             // DataAuthorsMI
             // 
             this.DataAuthorsMI.Name = "DataAuthorsMI";
-            this.DataAuthorsMI.Size = new System.Drawing.Size(130, 22);
+            this.DataAuthorsMI.Size = new System.Drawing.Size(152, 22);
             this.DataAuthorsMI.Text = "Authors";
             this.DataAuthorsMI.Click += new System.EventHandler(this.DataAuthorsMI_Click);
             // 
             // DataPublishersMI
             // 
             this.DataPublishersMI.Name = "DataPublishersMI";
-            this.DataPublishersMI.Size = new System.Drawing.Size(130, 22);
+            this.DataPublishersMI.Size = new System.Drawing.Size(152, 22);
             this.DataPublishersMI.Text = "Publishers";
             this.DataPublishersMI.Click += new System.EventHandler(this.DataPublishersMI_Click);
             // 
