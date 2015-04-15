@@ -14,7 +14,7 @@ namespace Sea.Core.Authors
     /// <summary>
     /// Author class.
     /// </summary>
-    public class Author
+    public class Author : IComparable<Author>
     {
         /// <summary>
         /// First name of author.
@@ -140,6 +140,60 @@ namespace Sea.Core.Authors
                 default:
                     Debug.Assert(false, "unknown author name print style");
                     return "";
+            }
+        }
+
+        /// <summary>
+        /// Compare to another author.
+        /// </summary>
+        /// <param name="author">author to compare</param>
+        /// <returns>1 - if greater, -1 - if less, 0 - if equal</returns>
+        public int CompareTo(Author author)
+        {
+            if (author == null)
+            {
+                return 1;
+            }
+
+            int compare_last = LastName.CompareTo(author.LastName);
+
+            if (compare_last > 0)
+            {
+                return 1;
+            }
+            else if (compare_last < 0)
+            {
+                return -1;
+            }
+            else
+            {
+                int compare_first = FirstName.CompareTo(author.FirstName);
+
+                if (compare_first > 0)
+                {
+                    return 1;
+                }
+                else if (compare_first < 0)
+                {
+                    return -1;
+                }
+                else
+                {
+                    int compare_second = SecondName.CompareTo(author.SecondName);
+
+                    if (compare_second > 0)
+                    {
+                        return 1;
+                    }
+                    else if (compare_second < 0)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
             }
         }
     }

@@ -97,6 +97,7 @@ namespace Sea.Forms
                 }
 
                 AuthorsList.Items.Add(new Author(form.FirstName, form.SecondName, form.LastName));
+                AuthorsList.Sort();
                 AuthorsList.ToListBox(AuthorsLB);
             }
 
@@ -140,6 +141,7 @@ namespace Sea.Forms
                 AuthorsList[i].FirstName = form.FirstName;
                 AuthorsList[i].SecondName = form.SecondName;
                 AuthorsList[i].LastName = form.LastName;
+                AuthorsList.Sort();
                 AuthorsList.ToListBox(AuthorsLB);
             }
 

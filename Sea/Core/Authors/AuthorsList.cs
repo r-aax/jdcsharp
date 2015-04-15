@@ -55,6 +55,14 @@ namespace Sea.Core.Authors
         }
 
         /// <summary>
+        /// Sort list of authors.
+        /// </summary>
+        public void Sort()
+        {
+            Items.Sort();
+        }
+
+        /// <summary>
         /// Serialization.
         /// </summary>
         /// <param name="file_name">name of file</param>
