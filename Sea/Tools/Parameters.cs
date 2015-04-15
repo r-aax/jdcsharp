@@ -47,6 +47,22 @@ namespace Sea.Tools
         }
 
         /// <summary>
+        /// Publishers XML file.
+        /// </summary>
+        public static readonly string PublishersXMLFilename = "publishers.xml";
+
+        /// <summary>
+        /// Full name of publishers XML file.
+        /// </summary>
+        public static string PublishersXMLFullFilename
+        {
+            get
+            {
+                return StoragePath + "/" + PublishersXMLFilename;
+            }
+        }
+
+        /// <summary>
         /// Data directory.
         /// </summary>
         public static readonly string DataDirectory = "Data";

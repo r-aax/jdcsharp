@@ -35,7 +35,7 @@ namespace Sea.Forms
         /// <summary>
         /// Accept flag.
         /// </summary>
-        public bool IsAccepted = true;
+        public bool IsAccepted;
 
         /// <summary>
         /// Default constructor.
@@ -75,6 +75,7 @@ namespace Sea.Forms
             FirstName = FirstNameTB.Text;
             SecondName = SecondNameTB.Text;
             LastName = LastNameTB.Text;
+            IsAccepted = true;
             Close();
         }
 

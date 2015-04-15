@@ -61,6 +61,11 @@ namespace Lib.DataStruct
             {
                 return Items[index];
             }
+
+            set
+            {
+                Items[index] = value;
+            }
         }
 
         /// <summary>

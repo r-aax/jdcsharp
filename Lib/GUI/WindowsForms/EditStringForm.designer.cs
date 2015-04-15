@@ -55,24 +55,25 @@
             // 
             // TextTB
             // 
-            this.TextTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.TextTB.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TextTB.Location = new System.Drawing.Point(12, 12);
             this.TextTB.Name = "TextTB";
             this.TextTB.Size = new System.Drawing.Size(526, 20);
             this.TextTB.TabIndex = 2;
             // 
-            // InputStringForm
+            // EditStringForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 70);
+            this.ClientSize = new System.Drawing.Size(542, 66);
+            this.ControlBox = false;
             this.Controls.Add(this.TextTB);
             this.Controls.Add(this.CancelB);
             this.Controls.Add(this.AcceptB);
             this.MaximumSize = new System.Drawing.Size(558, 104);
             this.MinimumSize = new System.Drawing.Size(558, 104);
-            this.Name = "InputStringForm";
+            this.Name = "EditStringForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Shown += new System.EventHandler(this.InputStringForm_Shown);
             this.ResumeLayout(false);

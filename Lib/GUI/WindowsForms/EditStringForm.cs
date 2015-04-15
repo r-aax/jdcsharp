@@ -16,6 +16,11 @@ namespace Lib.GUI.WindowsForms
         public string Result;
 
         /// <summary>
+        /// If result accepted;
+        /// </summary>
+        public bool IsAccepted;
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public EditStringForm()
@@ -44,6 +49,7 @@ namespace Lib.GUI.WindowsForms
         private void AcceptB_Click(object sender, EventArgs e)
         {
             Result = TextTB.Text;
+            IsAccepted = true;
             Close();
         }
 
@@ -55,6 +61,7 @@ namespace Lib.GUI.WindowsForms
         private void CancelB_Click(object sender, EventArgs e)
         {
             // Initial string is result.
+            IsAccepted = false;
             Close();
         }
 
