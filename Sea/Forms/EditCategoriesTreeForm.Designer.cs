@@ -237,6 +237,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(684, 565);
+            this.ControlBox = false;
             this.Controls.Add(this.CancelB);
             this.Controls.Add(this.AcceptB);
             this.Controls.Add(this.ReplaceBeforeB);
