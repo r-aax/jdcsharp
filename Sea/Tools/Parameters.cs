@@ -15,6 +15,22 @@ namespace Sea.Tools
         public static readonly string StoragePath = "C:/Data/Garbage/Sea";
 
         /// <summary>
+        /// Books XML file name.
+        /// </summary>
+        public static readonly string BooksXMLFilename = "books.xml";
+
+        /// <summary>
+        /// Full file name of books XML.
+        /// </summary>
+        public static string BooksXMLFullFilename
+        {
+            get
+            {
+                return StoragePath + "/" + BooksXMLFilename;
+            }
+        }
+
+        /// <summary>
         /// Categories tree XML file.
         /// </summary>
         public static readonly string CategoriesTreeXMLFilename = "categories_tree.xml";

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.BooksLB = new System.Windows.Forms.ListBox();
             this.NewB = new System.Windows.Forms.Button();
             this.EditB = new System.Windows.Forms.Button();
             this.DeleteB = new System.Windows.Forms.Button();
@@ -36,13 +36,14 @@
             this.AcceptB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // BooksLB
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 12);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(776, 472);
-            this.listBox1.TabIndex = 0;
+            this.BooksLB.FormattingEnabled = true;
+            this.BooksLB.Location = new System.Drawing.Point(12, 12);
+            this.BooksLB.Name = "BooksLB";
+            this.BooksLB.Size = new System.Drawing.Size(776, 472);
+            this.BooksLB.TabIndex = 0;
+            this.BooksLB.SelectedIndexChanged += new System.EventHandler(this.BooksLB_SelectedIndexChanged);
             // 
             // NewB
             // 
@@ -111,18 +112,20 @@
             this.Controls.Add(this.DeleteB);
             this.Controls.Add(this.EditB);
             this.Controls.Add(this.NewB);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.BooksLB);
             this.MaximumSize = new System.Drawing.Size(816, 557);
             this.MinimumSize = new System.Drawing.Size(816, 557);
             this.Name = "EditBooksForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit books";
+            this.Shown += new System.EventHandler(this.EditBooksForm_Shown);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox BooksLB;
         private System.Windows.Forms.Button NewB;
         private System.Windows.Forms.Button EditB;
         private System.Windows.Forms.Button DeleteB;

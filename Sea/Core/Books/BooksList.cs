@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
+using System.Windows.Forms;
 
 namespace Sea.Core.Books
 {
@@ -26,6 +27,16 @@ namespace Sea.Core.Books
         public BooksList()
         {
             Items = new List<Book>();
+        }
+
+        /// <summary>
+        /// Fill listbox with books information.
+        /// </summary>
+        /// <param name="lb"></param>
+        public void ToListBox(ListBox lb)
+        {
+            lb.Items.Clear();
+            lb.Items.Add("TODO");
         }
 
         /// <summary>

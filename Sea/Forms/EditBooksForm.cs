@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 
+using Sea.Core.Books;
+using Sea.Tools;
+
 namespace Sea.Forms
 {
     /// <summary>
@@ -18,6 +21,22 @@ namespace Sea.Forms
     /// </summary>
     public partial class EditBooksForm : Form
     {
+        /// <summary>
+        /// List of books.
+        /// </summary>
+        private BooksList BooksList;
+
+        /// <summary>
+        /// Set enables properties of buttons.
+        /// </summary>
+        private void SetControlsEnable()
+        {
+            bool is_sel = BooksLB.SelectedIndex > -1;
+
+            EditB.Enabled = is_sel;
+            DeleteB.Enabled = is_sel;
+        }
+
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -27,13 +46,36 @@ namespace Sea.Forms
         }
 
         /// <summary>
+        /// Show form.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void EditBooksForm_Shown(object sender, EventArgs e)
+        {
+            BooksList = BooksList.XmlDeserialize(Parameters.BooksXMLFullFilename);
+
+            if (BooksList == null)
+            {
+                BooksList = new BooksList();
+
+                // No books.
+                Text = "Create new books list (no books file is found)";
+            }
+
+            BooksList.ToListBox(BooksLB);
+            SetControlsEnable();
+        }
+
+        /// <summary>
         /// New book button click.
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
         private void NewB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            EditBookForm form = new EditBookForm();
+
+            form.ShowDialog();
         }
 
         /// <summary>
@@ -74,6 +116,16 @@ namespace Sea.Forms
         private void CancelB_Click(object sender, EventArgs e)
         {
             Debug.Assert(false);
+        }
+
+        /// <summary>
+        /// Change selected index.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void BooksLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetControlsEnable();
         }
     }
 }

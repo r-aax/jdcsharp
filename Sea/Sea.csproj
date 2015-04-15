@@ -69,6 +69,12 @@
     <Compile Include="Forms\EditAuthorsForm.Designer.cs">
       <DependentUpon>EditAuthorsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\EditBookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\EditBookForm.Designer.cs">
+      <DependentUpon>EditBookForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\EditBooksForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditAuthorsForm.resx">
       <DependentUpon>EditAuthorsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\EditBookForm.resx">
+      <DependentUpon>EditBookForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EditBooksForm.resx">
       <DependentUpon>EditBooksForm.cs</DependentUpon>
