@@ -27,6 +27,17 @@ namespace Sea.Forms
         private AuthorsList AuthorsList;
 
         /// <summary>
+        /// Set enable properties for controls.
+        /// </summary>
+        private void SetControlsEnable()
+        {
+            bool is_sel = AuthorsLB.SelectedIndex > -1;
+
+            EditB.Enabled = is_sel;
+            DeleteB.Enabled = is_sel;
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public EditAuthorsForm()
@@ -54,6 +65,8 @@ namespace Sea.Forms
             {
                 AuthorsList.ToListBox(AuthorsLB);
             }
+
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -67,8 +80,27 @@ namespace Sea.Forms
 
             form.ShowDialog();
 
-            AuthorsList.Items.Add(new Author(form.FirstName, form.SecondName, form.LastName));
-            AuthorsList.ToListBox(AuthorsLB);
+            if (form.IsAccepted)
+            {
+                if (form.FirstName == "")
+                {
+                    MessageBox.Show("Author must have first name");
+
+                    return;
+                }
+
+                if (form.LastName == "")
+                {
+                    MessageBox.Show("Author must have last name");
+
+                    return;
+                }
+
+                AuthorsList.Items.Add(new Author(form.FirstName, form.SecondName, form.LastName));
+                AuthorsList.ToListBox(AuthorsLB);
+            }
+
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -91,11 +123,27 @@ namespace Sea.Forms
 
                 form.ShowDialog();
 
+                if (form.FirstName == "")
+                {
+                    MessageBox.Show("Author must have first name");
+
+                    return;
+                }
+
+                if (form.LastName == "")
+                {
+                    MessageBox.Show("Author must have last name");
+
+                    return;
+                }
+
                 AuthorsList[i].FirstName = form.FirstName;
                 AuthorsList[i].SecondName = form.SecondName;
                 AuthorsList[i].LastName = form.LastName;
                 AuthorsList.ToListBox(AuthorsLB);
             }
+
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -105,7 +153,15 @@ namespace Sea.Forms
         /// <param name="e">parameter</param>
         private void DeleteB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            int i = AuthorsLB.SelectedIndex;
+
+            if (i > -1)
+            {
+                AuthorsList.Items.RemoveAt(i);
+                AuthorsList.ToListBox(AuthorsLB);
+            }
+
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -128,6 +184,16 @@ namespace Sea.Forms
         {
             // No changes.
             Close();
+        }
+
+        /// <summary>
+        /// Change selected index.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void AuthorsLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetControlsEnable();
         }
     }
 }

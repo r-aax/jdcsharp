@@ -37,6 +37,21 @@ namespace Sea.Core.Authors
         /// <summary>
         /// Jackson M.
         /// </summary>
-        LastF
+        LastF,
+
+        /// <summary>
+        /// Jackson, Michael Jackson
+        /// </summary>
+        LastFirstSecond,
+
+        /// <summary>
+        /// Jackson, Michael J.
+        /// </summary>
+        LastFirstS,
+
+        /// <summary>
+        /// Jackson, Michael
+        /// </summary>
+        LastFirst
     }
 }

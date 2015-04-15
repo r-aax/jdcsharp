@@ -44,6 +44,17 @@ namespace Sea.Core.Authors
         }
 
         /// <summary>
+        /// Check if authors list empty.
+        /// </summary>
+        public bool IsEmpty
+        {
+            get
+            {
+                return Items.Count == 0;
+            }
+        }
+
+        /// <summary>
         /// Serialization.
         /// </summary>
         /// <param name="file_name">name of file</param>
@@ -90,7 +101,7 @@ namespace Sea.Core.Authors
 
             for (int i = 0; i < Items.Count; i++)
             {
-                lb.Items.Add(Items[i].Name(AuthorNamePrintStyle.FirstSecondLast));
+                lb.Items.Add(Items[i].Name(AuthorNamePrintStyle.LastFirstSecond));
             }
         }
     }

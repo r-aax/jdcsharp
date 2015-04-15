@@ -33,6 +33,11 @@ namespace Sea.Forms
         public string LastName;
 
         /// <summary>
+        /// Accept flag.
+        /// </summary>
+        public bool IsAccepted = true;
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public EditAuthorForm()
@@ -80,6 +85,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void CancelB_Click(object sender, EventArgs e)
         {
+            IsAccepted = false;
             Close();
         }
     }

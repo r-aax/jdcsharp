@@ -43,9 +43,11 @@
             this.AuthorsLB.Name = "AuthorsLB";
             this.AuthorsLB.Size = new System.Drawing.Size(480, 433);
             this.AuthorsLB.TabIndex = 0;
+            this.AuthorsLB.SelectedIndexChanged += new System.EventHandler(this.AuthorsLB_SelectedIndexChanged);
             // 
             // NewB
             // 
+            this.NewB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.NewB.Location = new System.Drawing.Point(12, 451);
             this.NewB.Name = "NewB";
             this.NewB.Size = new System.Drawing.Size(75, 23);
@@ -56,6 +58,7 @@
             // 
             // EditB
             // 
+            this.EditB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.EditB.Location = new System.Drawing.Point(93, 451);
             this.EditB.Name = "EditB";
             this.EditB.Size = new System.Drawing.Size(75, 23);
@@ -66,6 +69,7 @@
             // 
             // DeleteB
             // 
+            this.DeleteB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.DeleteB.Location = new System.Drawing.Point(174, 451);
             this.DeleteB.Name = "DeleteB";
             this.DeleteB.Size = new System.Drawing.Size(75, 23);
@@ -76,6 +80,8 @@
             // 
             // CancelB
             // 
+            this.CancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CancelB.ForeColor = System.Drawing.Color.IndianRed;
             this.CancelB.Location = new System.Drawing.Point(417, 451);
             this.CancelB.Name = "CancelB";
             this.CancelB.Size = new System.Drawing.Size(75, 23);
@@ -86,6 +92,8 @@
             // 
             // AcceptB
             // 
+            this.AcceptB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.AcceptB.ForeColor = System.Drawing.Color.OliveDrab;
             this.AcceptB.Location = new System.Drawing.Point(336, 451);
             this.AcceptB.Name = "AcceptB";
             this.AcceptB.Size = new System.Drawing.Size(75, 23);

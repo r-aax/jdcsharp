@@ -13,7 +13,7 @@ namespace Sea.Core.Authors
 {
     /// <summary>
     /// Author class.
-    /// </summary>    
+    /// </summary>
     public class Author
     {
         /// <summary>
@@ -111,6 +111,31 @@ namespace Sea.Core.Authors
 
                 case AuthorNamePrintStyle.LastF:
                     return String.Format("{0} {1}.", LastName, FirstName[0]);
+
+                case AuthorNamePrintStyle.LastFirstSecond:
+
+                    if (SecondName != "")
+                    {
+                        return String.Format("{0}, {1} {2}", LastName, FirstName, SecondName);
+                    }
+                    else
+                    {
+                        return Name(AuthorNamePrintStyle.LastFirst);
+                    }
+
+                case AuthorNamePrintStyle.LastFirstS:
+
+                    if (SecondName != "")
+                    {
+                        return String.Format("{0}, {1} {2}.", LastName, FirstName, SecondName[0]);
+                    }
+                    else
+                    {
+                        return Name(AuthorNamePrintStyle.LastFirst);
+                    }
+
+                case AuthorNamePrintStyle.LastFirst:
+                    return String.Format("{0}, {1}", LastName, FirstName);
 
                 default:
                     Debug.Assert(false, "unknown author name print style");
