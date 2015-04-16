@@ -31,34 +31,34 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.DeletePublisherB = new System.Windows.Forms.Button();
+            this.AddPublisherB = new System.Windows.Forms.Button();
+            this.DeleteAuthorB = new System.Windows.Forms.Button();
+            this.AddAuthorB = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.DeleteCategoryB = new System.Windows.Forms.Button();
             this.AddCategoryB = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.AcceptB = new System.Windows.Forms.Button();
             this.CancelB = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.listBox2 = new System.Windows.Forms.ListBox();
-            this.listBox3 = new System.Windows.Forms.ListBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.AddAuthorB = new System.Windows.Forms.Button();
-            this.DeleteAuthorB = new System.Windows.Forms.Button();
-            this.AddPublisherB = new System.Windows.Forms.Button();
-            this.DeletePublisherB = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -117,6 +117,193 @@
             this.tabPage1.Text = "General information";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // DeletePublisherB
+            // 
+            this.DeletePublisherB.Location = new System.Drawing.Point(635, 437);
+            this.DeletePublisherB.Name = "DeletePublisherB";
+            this.DeletePublisherB.Size = new System.Drawing.Size(100, 23);
+            this.DeletePublisherB.TabIndex = 21;
+            this.DeletePublisherB.Text = "Delete publisher";
+            this.DeletePublisherB.UseVisualStyleBackColor = true;
+            this.DeletePublisherB.Click += new System.EventHandler(this.DeletePublisherB_Click);
+            // 
+            // AddPublisherB
+            // 
+            this.AddPublisherB.Location = new System.Drawing.Point(529, 437);
+            this.AddPublisherB.Name = "AddPublisherB";
+            this.AddPublisherB.Size = new System.Drawing.Size(100, 23);
+            this.AddPublisherB.TabIndex = 20;
+            this.AddPublisherB.Text = "Add publisher";
+            this.AddPublisherB.UseVisualStyleBackColor = true;
+            this.AddPublisherB.Click += new System.EventHandler(this.AddPublisherB_Click);
+            // 
+            // DeleteAuthorB
+            // 
+            this.DeleteAuthorB.Location = new System.Drawing.Point(275, 437);
+            this.DeleteAuthorB.Name = "DeleteAuthorB";
+            this.DeleteAuthorB.Size = new System.Drawing.Size(100, 23);
+            this.DeleteAuthorB.TabIndex = 19;
+            this.DeleteAuthorB.Text = "Delete author";
+            this.DeleteAuthorB.UseVisualStyleBackColor = true;
+            this.DeleteAuthorB.Click += new System.EventHandler(this.DeleteAuthorB_Click);
+            // 
+            // AddAuthorB
+            // 
+            this.AddAuthorB.Location = new System.Drawing.Point(169, 437);
+            this.AddAuthorB.Name = "AddAuthorB";
+            this.AddAuthorB.Size = new System.Drawing.Size(100, 23);
+            this.AddAuthorB.TabIndex = 18;
+            this.AddAuthorB.Text = "Add author";
+            this.AddAuthorB.UseVisualStyleBackColor = true;
+            this.AddAuthorB.Click += new System.EventHandler(this.AddAuthorB_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(455, 164);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(70, 13);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Publishers list";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(116, 164);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(58, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Authors list";
+            // 
+            // listBox3
+            // 
+            this.listBox3.FormattingEnabled = true;
+            this.listBox3.Location = new System.Drawing.Point(437, 180);
+            this.listBox3.Name = "listBox3";
+            this.listBox3.Size = new System.Drawing.Size(372, 251);
+            this.listBox3.TabIndex = 15;
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.Location = new System.Drawing.Point(92, 180);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(339, 251);
+            this.listBox2.TabIndex = 14;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(659, 107);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Number";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(348, 107);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(39, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Edition";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(57, 107);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(29, 13);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Year";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(709, 104);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 20);
+            this.textBox6.TabIndex = 10;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(393, 104);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 20);
+            this.textBox5.TabIndex = 9;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(92, 104);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 20);
+            this.textBox4.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(45, 81);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Source";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(51, 55);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Name";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(647, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Type";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(70, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(16, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Id";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(684, 25);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(125, 21);
+            this.comboBox1.TabIndex = 3;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(92, 78);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(717, 20);
+            this.textBox3.TabIndex = 2;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(92, 52);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(717, 20);
+            this.textBox2.TabIndex = 1;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(92, 26);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(125, 20);
+            this.textBox1.TabIndex = 0;
+            // 
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.DeleteCategoryB);
@@ -132,7 +319,7 @@
             // 
             // DeleteCategoryB
             // 
-            this.DeleteCategoryB.Location = new System.Drawing.Point(114, 436);
+            this.DeleteCategoryB.Location = new System.Drawing.Point(437, 432);
             this.DeleteCategoryB.Name = "DeleteCategoryB";
             this.DeleteCategoryB.Size = new System.Drawing.Size(100, 23);
             this.DeleteCategoryB.TabIndex = 2;
@@ -142,7 +329,7 @@
             // 
             // AddCategoryB
             // 
-            this.AddCategoryB.Location = new System.Drawing.Point(8, 436);
+            this.AddCategoryB.Location = new System.Drawing.Point(331, 432);
             this.AddCategoryB.Name = "AddCategoryB";
             this.AddCategoryB.Size = new System.Drawing.Size(100, 23);
             this.AddCategoryB.TabIndex = 1;
@@ -181,193 +368,6 @@
             this.CancelB.Text = "Cancel";
             this.CancelB.UseVisualStyleBackColor = true;
             this.CancelB.Click += new System.EventHandler(this.CancelB_Click);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(92, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(92, 52);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(717, 20);
-            this.textBox2.TabIndex = 1;
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(92, 78);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(717, 20);
-            this.textBox3.TabIndex = 2;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(684, 25);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(125, 21);
-            this.comboBox1.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(70, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(16, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Id";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(647, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Type";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(51, 55);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Name";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(45, 81);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "Source";
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(92, 104);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 8;
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(393, 104);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 9;
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(709, 104);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 10;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(57, 107);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(29, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Year";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(348, 107);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Edition";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(659, 107);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Number";
-            // 
-            // listBox2
-            // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(92, 180);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(339, 251);
-            this.listBox2.TabIndex = 14;
-            // 
-            // listBox3
-            // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Location = new System.Drawing.Point(437, 180);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(372, 251);
-            this.listBox3.TabIndex = 15;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(116, 164);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(58, 13);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Authors list";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(455, 164);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(70, 13);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Publishers list";
-            // 
-            // AddAuthorB
-            // 
-            this.AddAuthorB.Location = new System.Drawing.Point(117, 437);
-            this.AddAuthorB.Name = "AddAuthorB";
-            this.AddAuthorB.Size = new System.Drawing.Size(100, 23);
-            this.AddAuthorB.TabIndex = 18;
-            this.AddAuthorB.Text = "Add author";
-            this.AddAuthorB.UseVisualStyleBackColor = true;
-            this.AddAuthorB.Click += new System.EventHandler(this.AddAuthorB_Click);
-            // 
-            // DeleteAuthorB
-            // 
-            this.DeleteAuthorB.Location = new System.Drawing.Point(223, 437);
-            this.DeleteAuthorB.Name = "DeleteAuthorB";
-            this.DeleteAuthorB.Size = new System.Drawing.Size(100, 23);
-            this.DeleteAuthorB.TabIndex = 19;
-            this.DeleteAuthorB.Text = "Delete author";
-            this.DeleteAuthorB.UseVisualStyleBackColor = true;
-            this.DeleteAuthorB.Click += new System.EventHandler(this.DeleteAuthorB_Click);
-            // 
-            // AddPublisherB
-            // 
-            this.AddPublisherB.Location = new System.Drawing.Point(470, 437);
-            this.AddPublisherB.Name = "AddPublisherB";
-            this.AddPublisherB.Size = new System.Drawing.Size(100, 23);
-            this.AddPublisherB.TabIndex = 20;
-            this.AddPublisherB.Text = "Add publisher";
-            this.AddPublisherB.UseVisualStyleBackColor = true;
-            this.AddPublisherB.Click += new System.EventHandler(this.AddPublisherB_Click);
-            // 
-            // DeletePublisherB
-            // 
-            this.DeletePublisherB.Location = new System.Drawing.Point(576, 437);
-            this.DeletePublisherB.Name = "DeletePublisherB";
-            this.DeletePublisherB.Size = new System.Drawing.Size(100, 23);
-            this.DeletePublisherB.TabIndex = 21;
-            this.DeletePublisherB.Text = "Delete publisher";
-            this.DeletePublisherB.UseVisualStyleBackColor = true;
-            this.DeletePublisherB.Click += new System.EventHandler(this.DeletePublisherB_Click);
             // 
             // EditBookForm
             // 
