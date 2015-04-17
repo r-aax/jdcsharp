@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Diagnostics;
 
+using Sea.Core.Books;
+
 namespace Sea.Forms
 {
     /// <summary>
@@ -18,6 +20,16 @@ namespace Sea.Forms
     /// </summary>
     public partial class EditBookForm : Form
     {
+        /// <summary>
+        /// New book.
+        /// </summary>
+        public Book Book = null;
+
+        /// <summary>
+        /// Accept flag.
+        /// </summary>
+        public bool IsAccepted;
+
         /// <summary>
         /// Default constructor.
         /// </summary>
@@ -33,7 +45,14 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            // Save new book.
+            Book = new Book();
+
+            // Fill fields.
+            Book.Name = NameTB.Text;
+
+            IsAccepted = true;
+            Close();
         }
 
         /// <summary>
@@ -43,7 +62,9 @@ namespace Sea.Forms
         /// <param name="e">parameter</param>
         private void CancelB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            // Just close the form.
+            IsAccepted = false;
+            Close();
         }
 
         /// <summary>

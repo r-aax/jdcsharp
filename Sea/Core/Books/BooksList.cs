@@ -30,13 +30,34 @@ namespace Sea.Core.Books
         }
 
         /// <summary>
+        /// Add new book.
+        /// </summary>
+        /// <param name="book">new book</param>
+        public void Add(Book book)
+        {
+            Items.Add(book);
+        }
+
+        /// <summary>
+        /// Sorting books list.
+        /// </summary>
+        public void Sort()
+        {
+            Items.Sort();
+        }
+
+        /// <summary>
         /// Fill listbox with books information.
         /// </summary>
         /// <param name="lb"></param>
         public void ToListBox(ListBox lb)
         {
             lb.Items.Clear();
-            lb.Items.Add("TODO");
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                lb.Items.Add(Items[i].Name);
+            }
         }
 
         /// <summary>

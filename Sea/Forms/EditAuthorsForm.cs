@@ -61,11 +61,8 @@ namespace Sea.Forms
                 // Write that we create new authors list.
                 Text = "Create new authors list (no authors file is found)";
             }
-            else
-            {
-                AuthorsList.ToListBox(AuthorsLB);
-            }
 
+            AuthorsList.ToListBox(AuthorsLB);
             SetControlsEnable();
         }
 

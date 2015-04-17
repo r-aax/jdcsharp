@@ -76,6 +76,15 @@ namespace Sea.Forms
             EditBookForm form = new EditBookForm();
 
             form.ShowDialog();
+
+            if (form.IsAccepted)
+            {
+                BooksList.Add(form.Book);
+                BooksList.Sort();
+                BooksList.ToListBox(BooksLB);
+            }
+
+            SetControlsEnable();
         }
 
         /// <summary>

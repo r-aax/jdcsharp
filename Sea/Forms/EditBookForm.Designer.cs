@@ -51,7 +51,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.NameTB = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.DeleteCategoryB = new System.Windows.Forms.Button();
@@ -107,7 +107,7 @@
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.comboBox1);
             this.tabPage1.Controls.Add(this.textBox3);
-            this.tabPage1.Controls.Add(this.textBox2);
+            this.tabPage1.Controls.Add(this.NameTB);
             this.tabPage1.Controls.Add(this.textBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -290,12 +290,13 @@
             this.textBox3.Size = new System.Drawing.Size(717, 20);
             this.textBox3.TabIndex = 2;
             // 
-            // textBox2
+            // NameTB
             // 
-            this.textBox2.Location = new System.Drawing.Point(92, 52);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(717, 20);
-            this.textBox2.TabIndex = 1;
+            this.NameTB.Location = new System.Drawing.Point(92, 52);
+            this.NameTB.Name = "NameTB";
+            this.NameTB.Size = new System.Drawing.Size(717, 20);
+            this.NameTB.TabIndex = 1;
+            this.NameTB.Text = "Test book";
             // 
             // textBox1
             // 
@@ -415,7 +416,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox NameTB;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button DeletePublisherB;
         private System.Windows.Forms.Button AddPublisherB;

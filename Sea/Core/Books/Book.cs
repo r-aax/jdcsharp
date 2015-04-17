@@ -11,7 +11,7 @@ namespace Sea.Core.Books
     /// <summary>
     /// Book (printed material item).
     /// </summary>
-    public class Book
+    public class Book : IComparable<Book>
     {
         /// <summary>
         /// Full name.
@@ -63,6 +63,34 @@ namespace Sea.Core.Books
             CategoriesIds = new List<int>();
             AuthorsIds = new List<int>();
             PublishersIds = new List<int>();
+        }
+
+        /// <summary>
+        /// Compare to another book.
+        /// </summary>
+        /// <param name="book">book to compare</param>
+        /// <returns>1 - if greater, -1 - if less, 0 - if equal</returns>
+        public int CompareTo(Book book)
+        {
+            if (book == null)
+            {
+                return 1;
+            }
+
+            int compare_name = Name.CompareTo(book.Name);
+
+            if (compare_name > 0)
+            {
+                return 1;
+            }
+            else if (compare_name < 0)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
         }
     }
 }
