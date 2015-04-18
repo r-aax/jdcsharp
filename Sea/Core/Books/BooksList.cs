@@ -19,7 +19,25 @@ namespace Sea.Core.Books
         /// <summary>
         /// Books items.
         /// </summary>
-        public List<Book> Items;
+        public List<Book> Items { get; set; }
+
+        /// <summary>
+        /// Indexer.
+        /// </summary>
+        /// <param name="i">index</param>
+        /// <returns>element</returns>
+        public Book this[int i]
+        {
+            get
+            {
+                return Items[i];
+            }
+
+            set
+            {
+                Items[i] = value;
+            }
+        }
 
         /// <summary>
         /// Constructor.

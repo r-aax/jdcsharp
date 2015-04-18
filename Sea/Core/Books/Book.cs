@@ -11,7 +11,7 @@ namespace Sea.Core.Books
     /// <summary>
     /// Book (printed material item).
     /// </summary>
-    public class Book : IComparable<Book>
+    public class Book : IComparable<Book>, ICloneable
     {
         /// <summary>
         /// Full name.
@@ -91,6 +91,40 @@ namespace Sea.Core.Books
             {
                 return 0;
             }
+        }
+
+        /// <summary>
+        /// Clone book.
+        /// </summary>
+        /// <returns></returns>
+        public object Clone()
+        {
+            Book book = new Book();
+
+            book.Name = Name;
+            book.ArticleSource = ArticleSource;
+            book.Edition = Edition;
+            book.Year = Year;
+
+            book.CategoriesIds = new List<int>();
+            for (int i = 0; i < CategoriesIds.Count; i++)
+            {
+                book.CategoriesIds.Add(CategoriesIds[i]);
+            }
+
+            book.AuthorsIds = new List<int>();
+            for (int i = 0; i < AuthorsIds.Count; i++)
+            {
+                book.AuthorsIds.Add(AuthorsIds[i]);
+            }
+
+            book.PublishersIds = new List<int>();
+            for (int i = 0; i < PublishersIds.Count; i++)
+            {
+                book.PublishersIds.Add(PublishersIds[i]);
+            }
+
+            return book;
         }
     }
 }

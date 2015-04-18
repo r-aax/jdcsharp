@@ -94,7 +94,23 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            int i = BooksLB.SelectedIndex;
+
+            if (i > -1)
+            {
+                Book book = BooksList[i].Clone() as Book;
+
+                EditBookForm form = new EditBookForm();
+
+                form.Book = book;
+                form.ShowDialog();
+
+                BooksList[i] = form.Book.Clone() as Book;
+                BooksList.Sort();
+                BooksList.ToListBox(BooksLB);
+            }
+
+            SetControlsEnable();
         }
 
         /// <summary>
