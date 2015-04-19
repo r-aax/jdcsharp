@@ -120,7 +120,15 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void DeleteB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            int i = BooksLB.SelectedIndex;
+
+            if (i > -1)
+            {
+                BooksList.Items.RemoveAt(i);
+                BooksList.ToListBox(BooksLB);
+            }
+
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -130,7 +138,8 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            BooksList.XmlSerialize(Parameters.BooksXMLFullFilename);
+            Close();
         }
 
         /// <summary>
@@ -140,7 +149,8 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void CancelB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            // No changes.
+            Close();
         }
 
         /// <summary>
