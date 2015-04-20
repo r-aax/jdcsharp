@@ -4,13 +4,17 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Forms;
+using System;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Sea.Core.Authors
 {
     /// <summary>
     /// Authors list class.
     /// </summary>
-    public class AuthorsList
+    public class AuthorsList : ICloneable
     {
         /// <summary>
         /// List of authors.
@@ -52,6 +56,15 @@ namespace Sea.Core.Authors
             {
                 return Items.Count == 0;
             }
+        }
+
+        /// <summary>
+        /// Adding new author.
+        /// </summary>
+        /// <param name="author">new author</param>
+        public void Add(Author author)
+        {
+            Items.Add(author);
         }
 
         /// <summary>
@@ -111,6 +124,22 @@ namespace Sea.Core.Authors
             {
                 lb.Items.Add(Items[i].Name(AuthorNamePrintStyle.LastFirstSecond));
             }
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>copy of object</returns>
+        public object Clone()
+        {
+            AuthorsList authors_list = new AuthorsList();
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                authors_list.Items.Add(Items[i]);
+            }
+
+            return authors_list;
         }
     }
 }

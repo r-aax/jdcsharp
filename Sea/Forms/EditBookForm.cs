@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 
 using Sea.Core.Books;
+using Sea.Core.Authors;
 
 namespace Sea.Forms
 {
@@ -74,7 +75,16 @@ namespace Sea.Forms
         /// <param name="e">parameter</param>
         private void AddAuthorB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            SelectAuthorForm form = new SelectAuthorForm();
+
+            form.ShowDialog();
+
+            if (form.IsAccepted)
+            {
+                Book.AuthorsList.Add(form.Author);
+            }
+
+            Book.AuthorsList.ToListBox(AuthorsLB);
         }
 
         /// <summary>
@@ -125,6 +135,15 @@ namespace Sea.Forms
         private void DeleteCategoryB_Click(object sender, EventArgs e)
         {
             Debug.Assert(false);
+        }
+
+        /// <summary>
+        /// Show form.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void EditBookForm_Shown(object sender, EventArgs e)
+        {
         }
     }
 }

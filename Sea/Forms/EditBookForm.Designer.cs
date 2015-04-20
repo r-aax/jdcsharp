@@ -38,7 +38,7 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.listBox3 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.AuthorsLB = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -94,7 +94,7 @@
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.listBox3);
-            this.tabPage1.Controls.Add(this.listBox2);
+            this.tabPage1.Controls.Add(this.AuthorsLB);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.label5);
@@ -183,13 +183,13 @@
             this.listBox3.Size = new System.Drawing.Size(372, 251);
             this.listBox3.TabIndex = 15;
             // 
-            // listBox2
+            // AuthorsLB
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.Location = new System.Drawing.Point(92, 180);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(339, 251);
-            this.listBox2.TabIndex = 14;
+            this.AuthorsLB.FormattingEnabled = true;
+            this.AuthorsLB.Location = new System.Drawing.Point(92, 180);
+            this.AuthorsLB.Name = "AuthorsLB";
+            this.AuthorsLB.Size = new System.Drawing.Size(339, 251);
+            this.AuthorsLB.TabIndex = 14;
             // 
             // label7
             // 
@@ -382,6 +382,7 @@
             this.Name = "EditBookForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit book";
+            this.Shown += new System.EventHandler(this.EditBookForm_Shown);
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -403,7 +404,7 @@
         private System.Windows.Forms.Button AddCategoryB;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox AuthorsLB;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;

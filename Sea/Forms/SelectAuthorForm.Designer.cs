@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.AuthorsLB = new System.Windows.Forms.ListBox();
             this.AcceptB = new System.Windows.Forms.Button();
             this.CancelB = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listBox1
+            // AuthorsLB
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 12);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(480, 446);
-            this.listBox1.TabIndex = 0;
+            this.AuthorsLB.FormattingEnabled = true;
+            this.AuthorsLB.Location = new System.Drawing.Point(12, 12);
+            this.AuthorsLB.Name = "AuthorsLB";
+            this.AuthorsLB.Size = new System.Drawing.Size(480, 446);
+            this.AuthorsLB.TabIndex = 0;
             // 
             // AcceptB
             // 
@@ -72,18 +72,19 @@
             this.ClientSize = new System.Drawing.Size(504, 495);
             this.Controls.Add(this.CancelB);
             this.Controls.Add(this.AcceptB);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.AuthorsLB);
             this.MaximumSize = new System.Drawing.Size(520, 533);
             this.MinimumSize = new System.Drawing.Size(520, 533);
             this.Name = "SelectAuthorForm";
             this.Text = "Author selection";
+            this.Shown += new System.EventHandler(this.SelectAuthorForm_Shown);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox AuthorsLB;
         private System.Windows.Forms.Button AcceptB;
         private System.Windows.Forms.Button CancelB;
     }

@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Sea.Core.Authors;
+
 namespace Sea.Core.Books
 {
     /// <summary>
@@ -44,7 +46,7 @@ namespace Sea.Core.Books
         /// <summary>
         /// List of authors identifiers.
         /// </summary>
-        public List<int> AuthorsIds;
+        public AuthorsList AuthorsList;
 
         /// <summary>
         /// List of publishers identifiers.
@@ -61,7 +63,7 @@ namespace Sea.Core.Books
             Edition = 0;
             Year = 0;
             CategoriesIds = new List<int>();
-            AuthorsIds = new List<int>();
+            AuthorsList = new AuthorsList();
             PublishersIds = new List<int>();
         }
 
@@ -112,11 +114,7 @@ namespace Sea.Core.Books
                 book.CategoriesIds.Add(CategoriesIds[i]);
             }
 
-            book.AuthorsIds = new List<int>();
-            for (int i = 0; i < AuthorsIds.Count; i++)
-            {
-                book.AuthorsIds.Add(AuthorsIds[i]);
-            }
+            book.AuthorsList = AuthorsList.Clone() as AuthorsList;
 
             book.PublishersIds = new List<int>();
             for (int i = 0; i < PublishersIds.Count; i++)

@@ -14,7 +14,7 @@ namespace Sea.Core.Authors
     /// <summary>
     /// Author class.
     /// </summary>
-    public class Author : IComparable<Author>
+    public class Author : IComparable<Author>, ICloneable
     {
         /// <summary>
         /// First name of author.
@@ -195,6 +195,15 @@ namespace Sea.Core.Authors
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Author cloning.
+        /// </summary>
+        /// <returns>clone</returns>
+        public object Clone()
+        {
+            return new Author(FirstName, SecondName, LastName);
         }
     }
 }
