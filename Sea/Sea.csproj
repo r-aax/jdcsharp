@@ -99,6 +99,12 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SelectAuthorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SelectAuthorForm.Designer.cs">
+      <DependentUpon>SelectAuthorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\SelectCategoriesForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SelectAuthorForm.resx">
+      <DependentUpon>SelectAuthorForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SelectCategoriesForm.resx">
       <DependentUpon>SelectCategoriesForm.cs</DependentUpon>
