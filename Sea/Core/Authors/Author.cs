@@ -1,13 +1,7 @@
 ﻿// Author: Alexey Rybakov
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
-using System.Xml.Serialization;
-using System.IO;
 
 namespace Sea.Core.Authors
 {

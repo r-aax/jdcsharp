@@ -5,9 +5,6 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Forms;
 using System;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sea.Core.Authors
 {
@@ -48,13 +45,24 @@ namespace Sea.Core.Authors
         }
 
         /// <summary>
+        /// Elements count.
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                return Items.Count;
+            }
+        }
+
+        /// <summary>
         /// Check if authors list empty.
         /// </summary>
         public bool IsEmpty
         {
             get
             {
-                return Items.Count == 0;
+                return Count == 0;
             }
         }
 
@@ -120,7 +128,7 @@ namespace Sea.Core.Authors
         {
             lb.Items.Clear();
 
-            for (int i = 0; i < Items.Count; i++)
+            for (int i = 0; i < Count; i++)
             {
                 lb.Items.Add(Items[i].Name(AuthorNamePrintStyle.LastFirstSecond));
             }
@@ -134,9 +142,9 @@ namespace Sea.Core.Authors
         {
             AuthorsList authors_list = new AuthorsList();
 
-            for (int i = 0; i < Items.Count; i++)
+            for (int i = 0; i < Count; i++)
             {
-                authors_list.Items.Add(Items[i]);
+                authors_list.Add(Items[i].Clone() as Author);
             }
 
             return authors_list;
