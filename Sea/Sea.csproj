@@ -57,6 +57,7 @@
     <Compile Include="Core\Books\Book.cs" />
     <Compile Include="Core\Books\BooksList.cs" />
     <Compile Include="Core\Books\BookType.cs" />
+    <Compile Include="Core\Publishers\Publisher.cs" />
     <Compile Include="Forms\EditAuthorForm.cs">
       <SubType>Form</SubType>
     </Compile>
