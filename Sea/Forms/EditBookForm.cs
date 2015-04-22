@@ -81,10 +81,10 @@ namespace Sea.Forms
 
             if (form.IsAccepted)
             {
-                Book.AuthorsList.Add(form.Author);
+                Book.Authors.Add(form.Author);
             }
 
-            Book.AuthorsList.ToListBox(AuthorsLB);
+            Book.Authors.ToListBox(AuthorsLB);
         }
 
         /// <summary>

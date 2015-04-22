@@ -1,10 +1,6 @@
 ﻿// Author: Alexey Rybakov
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Forms;
@@ -48,6 +44,28 @@ namespace Sea.Core.Books
         }
 
         /// <summary>
+        /// Count of items.
+        /// </summary>
+        public int Count
+        {
+            get
+            {
+                return Items.Count;
+            }
+        }
+
+        /// <summary>
+        /// Check if empty.
+        /// </summary>
+        public bool IsEmpty
+        {
+            get
+            {
+                return Count == 0;
+            }
+        }
+
+        /// <summary>
         /// Add new book.
         /// </summary>
         /// <param name="book">new book</param>
@@ -62,20 +80,6 @@ namespace Sea.Core.Books
         public void Sort()
         {
             Items.Sort();
-        }
-
-        /// <summary>
-        /// Fill listbox with books information.
-        /// </summary>
-        /// <param name="lb"></param>
-        public void ToListBox(ListBox lb)
-        {
-            lb.Items.Clear();
-
-            for (int i = 0; i < Items.Count; i++)
-            {
-                lb.Items.Add(Items[i].Name);
-            }
         }
 
         /// <summary>
@@ -112,6 +116,20 @@ namespace Sea.Core.Books
             catch (IOException)
             {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Fill listbox with books information.
+        /// </summary>
+        /// <param name="lb"></param>
+        public void ToListBox(ListBox lb)
+        {
+            lb.Items.Clear();
+
+            for (int i = 0; i < Items.Count; i++)
+            {
+                lb.Items.Add(Items[i].Name);
             }
         }
     }

@@ -2,11 +2,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Sea.Core.Authors;
+using Sea.Core.Publishers;
 
 namespace Sea.Core.Books
 {
@@ -18,40 +16,35 @@ namespace Sea.Core.Books
         /// <summary>
         /// Full name.
         /// </summary>
-        public string Name;
+        public string Name { get; set; }
 
         /// <summary>
         /// Source of article.
         /// (name of magazine or science conference).
         /// </summary>
-        public string ArticleSource;
+        public string ArticleSource { get; set; }
 
         /// <summary>
         /// Edition number.
         /// If 0 - no edition information.
         /// </summary>
-        public int Edition;
+        public int Edition { get; set; }
 
         /// <summary>
         /// Year of publishing.
         /// If 0 - no year information.
         /// </summary>
-        public int Year;
+        public int Year { get; set; }
 
         /// <summary>
-        /// List of categories identifiers.
+        /// List of authors.
         /// </summary>
-        public List<int> CategoriesIds;
+        public AuthorsList Authors { get; set; }
 
         /// <summary>
-        /// List of authors identifiers.
+        /// List of publishers.
         /// </summary>
-        public AuthorsList AuthorsList;
-
-        /// <summary>
-        /// List of publishers identifiers.
-        /// </summary>
-        public List<int> PublishersIds;
+        public PublishersList Publishers { get; set; }
 
         /// <summary>
         /// Default constructor.
@@ -62,9 +55,8 @@ namespace Sea.Core.Books
             ArticleSource = "";
             Edition = 0;
             Year = 0;
-            CategoriesIds = new List<int>();
-            AuthorsList = new AuthorsList();
-            PublishersIds = new List<int>();
+            Authors = new AuthorsList();
+            Publishers = new PublishersList();
         }
 
         /// <summary>
@@ -98,7 +90,7 @@ namespace Sea.Core.Books
         /// <summary>
         /// Clone book.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>clone</returns>
         public object Clone()
         {
             Book book = new Book();
@@ -107,20 +99,8 @@ namespace Sea.Core.Books
             book.ArticleSource = ArticleSource;
             book.Edition = Edition;
             book.Year = Year;
-
-            book.CategoriesIds = new List<int>();
-            for (int i = 0; i < CategoriesIds.Count; i++)
-            {
-                book.CategoriesIds.Add(CategoriesIds[i]);
-            }
-
-            book.AuthorsList = AuthorsList.Clone() as AuthorsList;
-
-            book.PublishersIds = new List<int>();
-            for (int i = 0; i < PublishersIds.Count; i++)
-            {
-                book.PublishersIds.Add(PublishersIds[i]);
-            }
+            book.Authors = Authors.Clone() as AuthorsList;
+            book.Publishers = Publishers.Clone() as PublishersList;
 
             return book;
         }
