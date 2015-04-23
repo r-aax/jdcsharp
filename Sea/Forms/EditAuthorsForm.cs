@@ -1,15 +1,7 @@
 ﻿// Author: Alexey Rybakov
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 using Sea.Tools;
 using Sea.Core.Authors;
@@ -24,7 +16,7 @@ namespace Sea.Forms
         /// <summary>
         /// List of authors.
         /// </summary>
-        private AuthorsList AuthorsList;
+        private AuthorsList Authors;
 
         /// <summary>
         /// Set enable properties for controls.
@@ -52,17 +44,17 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditAuthorsForm_Shown(object sender, EventArgs e)
         {
-            AuthorsList = AuthorsList.XmlDeserialize(Parameters.AuthorsXMLFullFilename);
+            Authors = AuthorsList.XmlDeserialize(Parameters.AuthorsXMLFullFilename);
 
-            if (AuthorsList == null)
+            if (Authors == null)
             {
-                AuthorsList = new AuthorsList();
+                Authors = new AuthorsList();
 
                 // Write that we create new authors list.
                 Text = "Create new authors list (no authors file is found)";
             }
 
-            AuthorsList.ToListBox(AuthorsLB);
+            Authors.ToListBox(AuthorsLB);
             SetControlsEnable();
         }
 
@@ -73,29 +65,32 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void NewB_Click(object sender, EventArgs e)
         {
-            EditAuthorForm form = new EditAuthorForm("", "", "", "Create new author");
+            EditAuthorForm form = new EditAuthorForm("Create new author");
 
+            form.Author = null;
             form.ShowDialog();
 
             if (form.IsAccepted)
             {
-                if (form.FirstName == "")
+                Author author = form.Author;
+
+                if (author.FirstName == "")
                 {
                     MessageBox.Show("Author must have first name");
 
                     return;
                 }
 
-                if (form.LastName == "")
+                if (author.LastName == "")
                 {
                     MessageBox.Show("Author must have last name");
 
                     return;
                 }
 
-                AuthorsList.Items.Add(new Author(form.FirstName, form.SecondName, form.LastName));
-                AuthorsList.Sort();
-                AuthorsList.ToListBox(AuthorsLB);
+                Authors.Add(author);
+                Authors.Sort();
+                Authors.ToListBox(AuthorsLB);
             }
 
             SetControlsEnable();
@@ -112,34 +107,33 @@ namespace Sea.Forms
 
             if (i > -1)
             {
-                Author author = AuthorsList[i];
+                EditAuthorForm form = new EditAuthorForm("Edit author");
 
-                EditAuthorForm form = new EditAuthorForm(author.FirstName,
-                                                         author.SecondName,
-                                                         author.LastName,
-                                                         "Edit author");
-
+                form.Author = Authors[i];
                 form.ShowDialog();
 
-                if (form.FirstName == "")
+                if (form.IsAccepted)
                 {
-                    MessageBox.Show("Author must have first name");
+                    Author author = form.Author;
 
-                    return;
+                    if (author.FirstName == "")
+                    {
+                        MessageBox.Show("Author must have first name");
+
+                        return;
+                    }
+
+                    if (author.LastName == "")
+                    {
+                        MessageBox.Show("Author must have last name");
+
+                        return;
+                    }
+
+                    Authors[i] = author;
+                    Authors.Sort();
+                    Authors.ToListBox(AuthorsLB);
                 }
-
-                if (form.LastName == "")
-                {
-                    MessageBox.Show("Author must have last name");
-
-                    return;
-                }
-
-                AuthorsList[i].FirstName = form.FirstName;
-                AuthorsList[i].SecondName = form.SecondName;
-                AuthorsList[i].LastName = form.LastName;
-                AuthorsList.Sort();
-                AuthorsList.ToListBox(AuthorsLB);
             }
 
             SetControlsEnable();
@@ -156,8 +150,8 @@ namespace Sea.Forms
 
             if (i > -1)
             {
-                AuthorsList.Items.RemoveAt(i);
-                AuthorsList.ToListBox(AuthorsLB);
+                Authors.RemoveAt(i);
+                Authors.ToListBox(AuthorsLB);
             }
 
             SetControlsEnable();
@@ -170,7 +164,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            AuthorsList.XmlSerialize(Parameters.AuthorsXMLFullFilename);
+            Authors.XmlSerialize(Parameters.AuthorsXMLFullFilename);
             Close();
         }
 

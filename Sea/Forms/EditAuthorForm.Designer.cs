@@ -128,6 +128,7 @@
             this.MinimumSize = new System.Drawing.Size(604, 160);
             this.Name = "EditAuthorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Shown += new System.EventHandler(this.EditAuthorForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -76,6 +76,15 @@ namespace Sea.Core.Authors
         }
 
         /// <summary>
+        /// Remove item from authors list.
+        /// </summary>
+        /// <param name="i">index</param>
+        public void RemoveAt(int i)
+        {
+            Items.RemoveAt(i);
+        }
+
+        /// <summary>
         /// Sort list of authors.
         /// </summary>
         public void Sort()

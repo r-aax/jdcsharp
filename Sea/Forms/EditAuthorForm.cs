@@ -1,14 +1,9 @@
 ﻿// Author: Alexey Rybakov
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
+using Sea.Core.Authors;
 
 namespace Sea.Forms
 {
@@ -18,19 +13,9 @@ namespace Sea.Forms
     public partial class EditAuthorForm : Form
     {
         /// <summary>
-        /// First name.
+        /// Author.
         /// </summary>
-        public string FirstName;
-
-        /// <summary>
-        /// Second name.
-        /// </summary>
-        public string SecondName;
-
-        /// <summary>
-        /// Last name.
-        /// </summary>
-        public string LastName;
+        public Author Author { get; set; }
 
         /// <summary>
         /// Accept flag.
@@ -48,21 +33,26 @@ namespace Sea.Forms
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="ini_first_name">initial first name</param>
-        /// <param name="ini_second_name">initial second name</param>
-        /// <param name="ini_last_name">initial last name</param>
         /// <param name="label">label of form</param>
-        public EditAuthorForm(string ini_first_name, string ini_second_name, string ini_last_name,
-                              string label)
+        public EditAuthorForm(string label)
             : this()
         {
-            FirstNameTB.Text = ini_first_name;
-            SecondNameTB.Text = ini_second_name;
-            LastNameTB.Text = ini_last_name;
             Text = label;
-            FirstName = ini_first_name;
-            SecondName = ini_second_name;
-            LastName = ini_last_name;
+        }
+
+        /// <summary>
+        /// Show form.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void EditAuthorForm_Shown(object sender, EventArgs e)
+        {
+            if (Author != null)
+            {
+                FirstNameTB.Text = Author.FirstName;
+                SecondNameTB.Text = Author.SecondName;
+                LastNameTB.Text = Author.LastName;
+            }
         }
 
         /// <summary>
@@ -72,9 +62,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            FirstName = FirstNameTB.Text;
-            SecondName = SecondNameTB.Text;
-            LastName = LastNameTB.Text;
+            Author = new Author(FirstNameTB.Text, SecondNameTB.Text, LastNameTB.Text);
             IsAccepted = true;
             Close();
         }
