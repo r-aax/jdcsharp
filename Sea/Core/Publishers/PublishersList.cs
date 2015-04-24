@@ -76,6 +76,15 @@ namespace Sea.Core.Publishers
         }
 
         /// <summary>
+        /// Remove given element.
+        /// </summary>
+        /// <param name="i">index</param>
+        public void RemoveAt(int i)
+        {
+            Items.RemoveAt(i);
+        }
+
+        /// <summary>
         /// Sort list of publishers.
         /// </summary>
         public void Sort()

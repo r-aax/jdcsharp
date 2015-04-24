@@ -1,17 +1,10 @@
 ﻿// Author: Alexey Rybakov
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Lib.DataStruct;
-using Lib.GUI.WindowsForms;
+
 using Sea.Tools;
+using Sea.Core.Publishers;
 
 namespace Sea.Forms
 {
@@ -21,10 +14,13 @@ namespace Sea.Forms
     public partial class EditPublishersForm : Form
     {
         /// <summary>
-        /// List of publishers.
+        /// Publishers.
         /// </summary>
-        private StringsList PublishersList;
+        private PublishersList Publishers;
 
+        /// <summary>
+        /// Set controls enable.
+        /// </summary>
         private void SetControlsEnable()
         {
             bool is_sel = PublishersLB.SelectedIndex > -1;
@@ -48,20 +44,17 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditPublishersForm_Shown(object sender, EventArgs e)
         {
-            PublishersList = StringsList.XmlDeserialize(Parameters.PublishersXMLFullFilename);
+            Publishers = PublishersList.XmlDeserialize(Parameters.PublishersXMLFullFilename);
 
-            if (PublishersList == null)
+            if (Publishers == null)
             {
                 // Write that we create new publishers list.
                 Text = "Create new publishers list (no publishers file is found)";
 
-                PublishersList = new StringsList();
-            }
-            else
-            {
-                PublishersList.FillListBox(PublishersLB);
+                Publishers = new PublishersList();
             }
 
+            Publishers.ToListBox(PublishersLB);
             SetControlsEnable();
         }
 
@@ -72,22 +65,25 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void NewB_Click(object sender, EventArgs e)
         {
-            EditStringForm form = new EditStringForm("", "Create new publisher");
+            EditPublisherForm form = new EditPublisherForm("Create new publisher");
 
+            form.Publisher = null;
             form.ShowDialog();
 
             if (form.IsAccepted)
             {
-                if (form.Result == "")
+                Publisher publisher = form.Publisher;
+
+                if (publisher.Name == "")
                 {
                     MessageBox.Show("Empty publisher name");
 
                     return;
                 }
 
-                PublishersList.Add(form.Result);
-                PublishersList.Items.Sort();
-                PublishersList.FillListBox(PublishersLB);
+                Publishers.Add(publisher);
+                Publishers.Sort();
+                Publishers.ToListBox(PublishersLB);
             }
 
             SetControlsEnable();
@@ -104,22 +100,26 @@ namespace Sea.Forms
 
             if (i > -1)
             {
-                String publisher = PublishersList[i];
+                EditPublisherForm form = new EditPublisherForm("Edit publisher");
 
-                EditStringForm form = new EditStringForm(publisher, "Edit publisher");
-
+                form.Publisher = Publishers[i];
                 form.ShowDialog();
 
-                if (form.Result == "")
+                if (form.IsAccepted)
                 {
-                    MessageBox.Show("Empty publisher name");
+                    Publisher publisher = form.Publisher;
 
-                    return;
+                    if (publisher.Name == "")
+                    {
+                        MessageBox.Show("Empty publisher name");
+
+                        return;
+                    }
+
+                    Publishers[i] = publisher;
+                    Publishers.Sort();
+                    Publishers.ToListBox(PublishersLB);
                 }
-
-                PublishersList[i] = form.Result;
-                PublishersList.Items.Sort();
-                PublishersList.FillListBox(PublishersLB);
             }
 
             SetControlsEnable();
@@ -136,8 +136,8 @@ namespace Sea.Forms
 
             if (i > -1)
             {
-                PublishersList.Items.RemoveAt(i);
-                PublishersList.FillListBox(PublishersLB);
+                Publishers.RemoveAt(i);
+                Publishers.ToListBox(PublishersLB);
             }
 
             SetControlsEnable();
@@ -150,7 +150,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            PublishersList.XmlSerialize(Parameters.PublishersXMLFullFilename);
+            Publishers.XmlSerialize(Parameters.PublishersXMLFullFilename);
             Close();
         }
 

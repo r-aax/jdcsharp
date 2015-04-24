@@ -25,6 +25,14 @@ namespace Sea.Core.Publishers
         }
 
         /// <summary>
+        /// Constructor without parameters.
+        /// </summary>
+        public Publisher()
+            : this("")
+        {
+        }
+
+        /// <summary>
         /// Compare to another publisher.
         /// </summary>
         /// <param name="publisher">publisher to compare</param>
