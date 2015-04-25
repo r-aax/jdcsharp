@@ -40,6 +40,33 @@ namespace Sea.Forms
         }
 
         /// <summary>
+        /// Convert integer to book type.
+        /// </summary>
+        /// <param name="i">book type number</param>
+        /// <returns>book type</returns>
+        private BookType IntToBookType(int i)
+        {
+            switch (i)
+            {
+                case 0:
+                    return BookType.Book;
+
+                case 1:
+                    return BookType.Magazine;
+
+                case 2:
+                    return BookType.Article;
+
+                case 3:
+                    return BookType.Other;
+
+                default:
+                    Debug.Assert(false, "Unknown book type.");
+                    return BookType.Other;
+            }
+        }
+
+        /// <summary>
         /// Accept changes.
         /// </summary>
         /// <param name="sender">sender</param>
@@ -47,10 +74,18 @@ namespace Sea.Forms
         private void AcceptB_Click(object sender, EventArgs e)
         {
             // Save new book.
-            Book = new Book();
-
-            // Fill fields.
-            Book.Name = NameTB.Text;
+            try
+            {
+                Book = new Book(NameTB.Text,
+                                IntToBookType(TypeCB.SelectedIndex),
+                                ArticleSourceTB.Text,
+                                Convert.ToInt32(EditionTB.Text),
+                                Convert.ToInt32(YearTB.Text));
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Not valid book data.");
+            }
 
             IsAccepted = true;
             Close();
@@ -144,6 +179,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditBookForm_Shown(object sender, EventArgs e)
         {
+            TypeCB.SelectedIndex = 0;
         }
     }
 }

@@ -39,20 +39,18 @@
             this.label8 = new System.Windows.Forms.Label();
             this.listBox3 = new System.Windows.Forms.ListBox();
             this.AuthorsLB = new System.Windows.Forms.ListBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.EditionTB = new System.Windows.Forms.TextBox();
+            this.YearTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.TypeCB = new System.Windows.Forms.ComboBox();
+            this.ArticleSourceTB = new System.Windows.Forms.TextBox();
             this.NameTB = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.IdTB = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.DeleteCategoryB = new System.Windows.Forms.Button();
             this.AddCategoryB = new System.Windows.Forms.Button();
@@ -95,20 +93,18 @@
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.listBox3);
             this.tabPage1.Controls.Add(this.AuthorsLB);
-            this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.label5);
-            this.tabPage1.Controls.Add(this.textBox6);
-            this.tabPage1.Controls.Add(this.textBox5);
-            this.tabPage1.Controls.Add(this.textBox4);
+            this.tabPage1.Controls.Add(this.EditionTB);
+            this.tabPage1.Controls.Add(this.YearTB);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Controls.Add(this.comboBox1);
-            this.tabPage1.Controls.Add(this.textBox3);
+            this.tabPage1.Controls.Add(this.TypeCB);
+            this.tabPage1.Controls.Add(this.ArticleSourceTB);
             this.tabPage1.Controls.Add(this.NameTB);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.IdTB);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -119,7 +115,7 @@
             // 
             // DeletePublisherB
             // 
-            this.DeletePublisherB.Location = new System.Drawing.Point(635, 437);
+            this.DeletePublisherB.Location = new System.Drawing.Point(624, 437);
             this.DeletePublisherB.Name = "DeletePublisherB";
             this.DeletePublisherB.Size = new System.Drawing.Size(100, 23);
             this.DeletePublisherB.TabIndex = 21;
@@ -129,7 +125,7 @@
             // 
             // AddPublisherB
             // 
-            this.AddPublisherB.Location = new System.Drawing.Point(529, 437);
+            this.AddPublisherB.Location = new System.Drawing.Point(518, 437);
             this.AddPublisherB.Name = "AddPublisherB";
             this.AddPublisherB.Size = new System.Drawing.Size(100, 23);
             this.AddPublisherB.TabIndex = 20;
@@ -139,7 +135,7 @@
             // 
             // DeleteAuthorB
             // 
-            this.DeleteAuthorB.Location = new System.Drawing.Point(275, 437);
+            this.DeleteAuthorB.Location = new System.Drawing.Point(265, 437);
             this.DeleteAuthorB.Name = "DeleteAuthorB";
             this.DeleteAuthorB.Size = new System.Drawing.Size(100, 23);
             this.DeleteAuthorB.TabIndex = 19;
@@ -149,7 +145,7 @@
             // 
             // AddAuthorB
             // 
-            this.AddAuthorB.Location = new System.Drawing.Point(169, 437);
+            this.AddAuthorB.Location = new System.Drawing.Point(159, 437);
             this.AddAuthorB.Name = "AddAuthorB";
             this.AddAuthorB.Size = new System.Drawing.Size(100, 23);
             this.AddAuthorB.TabIndex = 18;
@@ -191,19 +187,10 @@
             this.AuthorsLB.Size = new System.Drawing.Size(339, 251);
             this.AuthorsLB.TabIndex = 14;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(659, 107);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "Number";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(348, 107);
+            this.label6.Location = new System.Drawing.Point(664, 107);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(39, 13);
             this.label6.TabIndex = 12;
@@ -218,26 +205,19 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Year";
             // 
-            // textBox6
+            // EditionTB
             // 
-            this.textBox6.Location = new System.Drawing.Point(709, 104);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 20);
-            this.textBox6.TabIndex = 10;
+            this.EditionTB.Location = new System.Drawing.Point(709, 104);
+            this.EditionTB.Name = "EditionTB";
+            this.EditionTB.Size = new System.Drawing.Size(100, 20);
+            this.EditionTB.TabIndex = 9;
             // 
-            // textBox5
+            // YearTB
             // 
-            this.textBox5.Location = new System.Drawing.Point(393, 104);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 20);
-            this.textBox5.TabIndex = 9;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(92, 104);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 20);
-            this.textBox4.TabIndex = 8;
+            this.YearTB.Location = new System.Drawing.Point(92, 104);
+            this.YearTB.Name = "YearTB";
+            this.YearTB.Size = new System.Drawing.Size(100, 20);
+            this.YearTB.TabIndex = 8;
             // 
             // label4
             // 
@@ -275,20 +255,25 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Id";
             // 
-            // comboBox1
+            // TypeCB
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(684, 25);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(125, 21);
-            this.comboBox1.TabIndex = 3;
+            this.TypeCB.FormattingEnabled = true;
+            this.TypeCB.Items.AddRange(new object[] {
+            "Book",
+            "Magazine",
+            "Article",
+            "Other"});
+            this.TypeCB.Location = new System.Drawing.Point(684, 25);
+            this.TypeCB.Name = "TypeCB";
+            this.TypeCB.Size = new System.Drawing.Size(125, 21);
+            this.TypeCB.TabIndex = 3;
             // 
-            // textBox3
+            // ArticleSourceTB
             // 
-            this.textBox3.Location = new System.Drawing.Point(92, 78);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(717, 20);
-            this.textBox3.TabIndex = 2;
+            this.ArticleSourceTB.Location = new System.Drawing.Point(92, 78);
+            this.ArticleSourceTB.Name = "ArticleSourceTB";
+            this.ArticleSourceTB.Size = new System.Drawing.Size(717, 20);
+            this.ArticleSourceTB.TabIndex = 2;
             // 
             // NameTB
             // 
@@ -298,12 +283,12 @@
             this.NameTB.TabIndex = 1;
             this.NameTB.Text = "Test book";
             // 
-            // textBox1
+            // IdTB
             // 
-            this.textBox1.Location = new System.Drawing.Point(92, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(125, 20);
-            this.textBox1.TabIndex = 0;
+            this.IdTB.Location = new System.Drawing.Point(92, 26);
+            this.IdTB.Name = "IdTB";
+            this.IdTB.Size = new System.Drawing.Size(125, 20);
+            this.IdTB.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -405,20 +390,18 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox3;
         private System.Windows.Forms.ListBox AuthorsLB;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox EditionTB;
+        private System.Windows.Forms.TextBox YearTB;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.ComboBox TypeCB;
+        private System.Windows.Forms.TextBox ArticleSourceTB;
         private System.Windows.Forms.TextBox NameTB;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox IdTB;
         private System.Windows.Forms.Button DeletePublisherB;
         private System.Windows.Forms.Button AddPublisherB;
         private System.Windows.Forms.Button DeleteAuthorB;

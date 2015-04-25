@@ -55,6 +55,7 @@
     <Compile Include="Core\Authors\AuthorNamePrintStyle.cs" />
     <Compile Include="Core\Authors\AuthorsList.cs" />
     <Compile Include="Core\Books\Book.cs" />
+    <Compile Include="Core\Books\BookFullNamePrintStyle.cs" />
     <Compile Include="Core\Books\BooksList.cs" />
     <Compile Include="Core\Books\BookType.cs" />
     <Compile Include="Core\Publishers\Publisher.cs" />

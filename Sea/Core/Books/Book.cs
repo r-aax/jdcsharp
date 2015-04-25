@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 using Sea.Core.Authors;
 using Sea.Core.Publishers;
@@ -17,6 +18,11 @@ namespace Sea.Core.Books
         /// Full name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Type of book.
+        /// </summary>
+        public BookType Type { get; set; }
 
         /// <summary>
         /// Source of article.
@@ -47,16 +53,31 @@ namespace Sea.Core.Books
         public PublishersList Publishers { get; set; }
 
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="name">name</param>
+        /// <param name="type">type</param>
+        /// <param name="article_source">source of article</param>
+        /// <param name="edition">edition number</param>
+        /// <param name="year">year</param>
+        public Book(string name, BookType type, string article_source,
+                    int edition, int year)
+        {
+            Name = name;
+            Type = type;
+            ArticleSource = article_source;
+            Edition = edition;
+            Year = year;
+            Authors = new AuthorsList();
+            Publishers = new PublishersList();
+        }
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public Book()
+            : this("", BookType.Book, "", 0, 0)
         {
-            Name = "";
-            ArticleSource = "";
-            Edition = 0;
-            Year = 0;
-            Authors = new AuthorsList();
-            Publishers = new PublishersList();
         }
 
         /// <summary>
@@ -103,6 +124,24 @@ namespace Sea.Core.Books
             book.Publishers = Publishers.Clone() as PublishersList;
 
             return book;
+        }
+
+        /// <summary>
+        /// Construct full name of book.
+        /// </summary>
+        /// <param name="style">style of book printing</param>
+        /// <returns>full name</returns>
+        public string FullName(BookFullNamePrintStyle style)
+        {
+            switch (style)
+            {
+                case BookFullNamePrintStyle.Wide:
+                    return Name;
+
+                default:
+                    Debug.Assert(false, "Unknown book full name print style.");
+                    return "";
+            }
         }
     }
 }

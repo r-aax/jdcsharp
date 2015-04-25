@@ -129,7 +129,7 @@ namespace Sea.Core.Books
 
             for (int i = 0; i < Items.Count; i++)
             {
-                lb.Items.Add(Items[i].Name);
+                lb.Items.Add(Items[i].FullName(BookFullNamePrintStyle.Wide));
             }
         }
     }
