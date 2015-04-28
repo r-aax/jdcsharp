@@ -37,7 +37,7 @@
             this.AddAuthorB = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.PublishersLB = new System.Windows.Forms.ListBox();
             this.AuthorsLB = new System.Windows.Forms.ListBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -91,7 +91,7 @@
             this.tabPage1.Controls.Add(this.AddAuthorB);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.listBox3);
+            this.tabPage1.Controls.Add(this.PublishersLB);
             this.tabPage1.Controls.Add(this.AuthorsLB);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.label5);
@@ -171,13 +171,13 @@
             this.label8.TabIndex = 16;
             this.label8.Text = "Authors list";
             // 
-            // listBox3
+            // PublishersLB
             // 
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.Location = new System.Drawing.Point(437, 180);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(372, 251);
-            this.listBox3.TabIndex = 15;
+            this.PublishersLB.FormattingEnabled = true;
+            this.PublishersLB.Location = new System.Drawing.Point(437, 180);
+            this.PublishersLB.Name = "PublishersLB";
+            this.PublishersLB.Size = new System.Drawing.Size(372, 251);
+            this.PublishersLB.TabIndex = 15;
             // 
             // AuthorsLB
             // 
@@ -388,7 +388,7 @@
         private System.Windows.Forms.Button DeleteCategoryB;
         private System.Windows.Forms.Button AddCategoryB;
         private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox3;
+        private System.Windows.Forms.ListBox PublishersLB;
         private System.Windows.Forms.ListBox AuthorsLB;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;

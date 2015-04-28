@@ -76,7 +76,7 @@ namespace Sea.Core.Books
         /// Default constructor.
         /// </summary>
         public Book()
-            : this("", BookType.Book, "", 0, 0)
+            : this("", BookType.Book, "", 1, 0)
         {
         }
 
@@ -136,7 +136,25 @@ namespace Sea.Core.Books
             switch (style)
             {
                 case BookFullNamePrintStyle.Wide:
-                    return Name;
+
+                    string full_name = "";
+
+                    // First of all print authors.
+                    if (Authors.Count > 0)
+                    {
+                        full_name = Authors[0].Name(AuthorNamePrintStyle.LastF) + " - ";
+                    }
+
+                    // Add name.
+                    full_name = full_name + Name;
+
+                    // Year.
+                    if (Year > 0)
+                    {
+                        full_name += String.Format(" ({0})", Year);
+                    }
+
+                    return full_name;
 
                 default:
                     Debug.Assert(false, "Unknown book full name print style.");

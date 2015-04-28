@@ -67,6 +67,33 @@ namespace Sea.Forms
         }
 
         /// <summary>
+        /// Convert book type to integer.
+        /// </summary>
+        /// <param name="type">book type</param>
+        /// <returns>book type number</returns>
+        private int BookTypeToInt(BookType type)
+        {
+            switch (type)
+            {
+                case BookType.Book:
+                    return 0;
+
+                case BookType.Magazine:
+                    return 1;
+
+                case BookType.Article:
+                    return 2;
+
+                case BookType.Other:
+                    return 3;
+
+                default:
+                    Debug.Assert(false, "Unknown book type.");
+                    return 3;
+            }
+        }
+
+        /// <summary>
         /// Accept changes.
         /// </summary>
         /// <param name="sender">sender</param>
@@ -76,19 +103,19 @@ namespace Sea.Forms
             // Save new book.
             try
             {
-                Book = new Book(NameTB.Text,
-                                IntToBookType(TypeCB.SelectedIndex),
-                                ArticleSourceTB.Text,
-                                Convert.ToInt32(EditionTB.Text),
-                                Convert.ToInt32(YearTB.Text));
+                Book.Name = NameTB.Text;
+                Book.Type = IntToBookType(TypeCB.SelectedIndex);
+                Book.ArticleSource = ArticleSourceTB.Text;
+                Book.Edition = (EditionTB.Text == "") ? 1 : Convert.ToInt32(EditionTB.Text);
+                Book.Year = (YearTB.Text == "") ? 0 : Convert.ToInt32(YearTB.Text);
+
+                IsAccepted = true;
+                Close();
             }
             catch (Exception)
             {
                 MessageBox.Show("Not valid book data.");
             }
-
-            IsAccepted = true;
-            Close();
         }
 
         /// <summary>
@@ -179,7 +206,16 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditBookForm_Shown(object sender, EventArgs e)
         {
-            TypeCB.SelectedIndex = 0;
+            // Show book.
+            NameTB.Text = Book.Name;
+            TypeCB.SelectedIndex = BookTypeToInt(Book.Type);
+            ArticleSourceTB.Text = Book.ArticleSource;
+            YearTB.Text = Book.Year.ToString();
+            EditionTB.Text = Book.Edition.ToString();
+
+            // Lists.
+            Book.Authors.ToListBox(AuthorsLB);
+            Book.Publishers.ToListBox(PublishersLB);
         }
     }
 }
