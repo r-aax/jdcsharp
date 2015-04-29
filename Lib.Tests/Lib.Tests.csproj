@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataStruct\StringListTest.cs" />
+    <Compile Include="Maths\Bits\Bits8Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
