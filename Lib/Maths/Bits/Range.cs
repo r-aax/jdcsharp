@@ -67,12 +67,30 @@ namespace Lib.Maths.Bits
         }
 
         /// <summary>
+        /// Range without <c>LSB</c>.
+        /// </summary>
+        /// <returns>new range</returns>
+        public Range WithoutLSB()
+        {
+            return new Range(LSB + 1, MSB);
+        }
+
+        /// <summary>
         /// Range without <c>MSB</c>.
         /// </summary>
         /// <returns>new range</returns>
         public Range WithoutMSB()
         {
             return new Range(LSB, MSB - 1);
+        }
+
+        /// <summary>
+        /// Range without <c>LSB</c> and <c>MSB</c>.
+        /// </summary>
+        /// <returns></returns>
+        public Range WithoutEdges()
+        {
+            return new Range(LSB + 1, MSB - 1);
         }
     }
 }
