@@ -63,9 +63,9 @@ namespace Lib.DataStruct.Graph
             {
                 for (int j = i + 1; j < graph.Order; j++)
                 {
-                    if (Randoms.IsRandomBool())
+                    if (Randoms.RandomBool())
                     {
-                        graph.AddEdge(i, j, Randoms.IsRandomBool());
+                        graph.AddEdge(i, j, Randoms.RandomBool());
                     }
                 }
             }

@@ -54,7 +54,7 @@ namespace Lib.Maths.Numbers
         /// <returns>random integer</returns>
         public static int RandomInInterval(int from, int to)
         {
-            int r = (int)RandomInInterval((double)from, (double)to);
+            int r = (int)RandomInInterval((double)from, (double)(to + 1));
 
             if (r > to)
             {
@@ -68,7 +68,7 @@ namespace Lib.Maths.Numbers
         /// Random boolean.
         /// </summary>
         /// <returns>random boolean</returns>
-        public static bool IsRandomBool()
+        public static bool RandomBool()
         {
             return Rand.NextDouble() < 0.5;
         }
