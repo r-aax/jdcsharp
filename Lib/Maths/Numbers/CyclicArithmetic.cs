@@ -64,6 +64,31 @@ namespace Lib.Maths.Numbers
         }
 
         /// <summary>
+        /// Power.
+        /// </summary>
+        /// <param name="a">value</param>
+        /// <param name="p">power</param>
+        /// <returns>result</returns>
+        public int Pow(int a, int p)
+        {
+            if (p == 0)
+            {
+                return 1;
+            }
+
+            Debug.Assert(p > 0);
+
+            int res = a % Base;
+
+            for (int i = 1; i < p; i++)
+            {
+                res = (res * a) % Base;
+            }
+
+            return res;
+        }
+
+        /// <summary>
         /// Distance.
         /// </summary>
         /// <param name="a">first value</param>
