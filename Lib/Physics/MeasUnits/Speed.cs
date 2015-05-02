@@ -10,9 +10,9 @@ using System.Diagnostics;
 namespace Lib.Physics.MeasUnits
 {
     /// <summary>
-    /// Linear.
+    /// Speed.
     /// </summary>
-    public class Linear
+    public class Speed
     {
         /// <summary>
         /// Value.
@@ -22,29 +22,14 @@ namespace Lib.Physics.MeasUnits
         /// <summary>
         /// Unit.
         /// </summary>
-        public LinearMeasUnit Unit;
-
-        /// <summary>
-        /// Meters count in one foot.
-        /// </summary>
-        public const double FootMeters = 0.3048;
-
-        /// <summary>
-        /// Meters count in one nautical mile.
-        /// </summary>
-        public const double NauticalMileMeters = 1852.0;
-
-        /// <summary>
-        /// Feet count in one nautical mile.
-        /// </summary>
-        public const double NauticalMileFeet = NauticalMileMeters / FootMeters;
+        public SpeedMeasUnit Unit;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="value">value</param>
         /// <param name="unit">unit</param>
-        public Linear(double value, LinearMeasUnit unit)
+        public Speed(double value, SpeedMeasUnit unit)
         {
             Value = value;
             Unit = unit;
@@ -55,9 +40,9 @@ namespace Lib.Physics.MeasUnits
         /// </summary>
         /// <param name="angle">angle</param>
         /// <returns>double value</returns>
-        public static implicit operator double(Linear linear)
+        public static implicit operator double(Speed speed)
         {
-            return linear.Value;
+            return speed.Value;
         }
 
         /// <summary>
@@ -69,17 +54,17 @@ namespace Lib.Physics.MeasUnits
             {
                 switch (Unit)
                 {
-                    case LinearMeasUnit.Meter:
-                        return "m";
+                    case SpeedMeasUnit.MPS:
+                        return "m/s";
 
-                    case LinearMeasUnit.Kilometer:
-                        return "km";
+                    case SpeedMeasUnit.KMPH:
+                        return "km/h";
 
-                    case LinearMeasUnit.Foot:
-                        return "ft";
+                    case SpeedMeasUnit.FPM:
+                        return "ft/m";
 
-                    case LinearMeasUnit.NauticalMile:
-                        return "nmi";
+                    case SpeedMeasUnit.Knots:
+                        return "knot";
 
                     default:
                         Debug.Assert(false);
@@ -89,25 +74,25 @@ namespace Lib.Physics.MeasUnits
         }
 
         /// <summary>
-        /// Meters in linear
+        /// MPS for speed.
         /// </summary>
         /// <param name="unit">unit</param>
-        /// <returns>angle degrees count</returns>
-        public static double LinearMeters(LinearMeasUnit unit)
+        /// <returns>MPS value</returns>
+        public static double SpeedMPS(SpeedMeasUnit unit)
         {
             switch (unit)
             {
-                case LinearMeasUnit.Meter:
+                case SpeedMeasUnit.MPS:
                     return 1.0;
 
-                case LinearMeasUnit.Kilometer:
-                    return Constants.Kilo;
+                case SpeedMeasUnit.KMPH:
+                    return Constants.Kilo / Constants.HourSeconds;
 
-                case LinearMeasUnit.Foot:
-                    return FootMeters;
+                case SpeedMeasUnit.FPM:
+                    return Linear.FootMeters / Constants.MinuteSeconds;
 
-                case LinearMeasUnit.NauticalMile:
-                    return NauticalMileMeters;
+                case SpeedMeasUnit.Knots:
+                    return Linear.NauticalMileMeters / Constants.HourSeconds;
 
                 default:
                     Debug.Assert(false);
@@ -119,17 +104,17 @@ namespace Lib.Physics.MeasUnits
         /// Get value with given unit.
         /// </summary>
         /// <param name="unit">measurements unit</param>
-        /// <returns>value of linear</returns>
-        public double Get(LinearMeasUnit unit)
+        /// <returns>value of angle</returns>
+        public double Get(SpeedMeasUnit unit)
         {
-            return Value * (LinearMeters(Unit) / LinearMeters(unit));
+            return Value * (SpeedMPS(Unit) / SpeedMPS(unit));
         }
 
         /// <summary>
         /// Convert inner value.
         /// </summary>
         /// <param name="unit">measurements unit</param>
-        public void Convert(LinearMeasUnit unit)
+        public void Convert(SpeedMeasUnit unit)
         {
             Value = Get(unit);
             Unit = unit;

@@ -111,6 +111,8 @@
     <Compile Include="Physics\MeasUnits\Constants.cs" />
     <Compile Include="Physics\MeasUnits\Linear.cs" />
     <Compile Include="Physics\MeasUnits\LinearMeasUnit.cs" />
+    <Compile Include="Physics\MeasUnits\Speed.cs" />
+    <Compile Include="Physics\MeasUnits\SpeedMeasUnit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\Arrays.cs" />
     <Compile Include="Utils\SimplexMethod.cs" />

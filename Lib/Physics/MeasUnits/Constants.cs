@@ -17,5 +17,20 @@ namespace Lib.Physics.MeasUnits
         /// Kilo.
         /// </summary>
         public const double Kilo = 1000.0;
+
+        /// <summary>
+        /// Minutes count in one hour.
+        /// </summary>
+        public const double HourMinutes = 60.0;
+
+        /// <summary>
+        /// Seconds count in one minute.
+        /// </summary>
+        public const double MinuteSeconds = 60.0;
+
+        /// <summary>
+        /// Seconds count in one hour.
+        /// </summary>
+        public const double HourSeconds = HourMinutes * MinuteSeconds;
     }
 }

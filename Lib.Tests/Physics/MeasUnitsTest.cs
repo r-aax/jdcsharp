@@ -47,5 +47,22 @@ namespace Lib.Tests.Physics
 
             Assert.IsTrue(Math.Abs(l - ini) < E);
         }
+
+        /// <summary>
+        /// Speed test.
+        /// </summary>
+        [TestMethod]
+        public void SpeedMeasUnitTest()
+        {
+            double ini = 331.09;
+            Speed s = new Speed(ini, SpeedMeasUnit.MPS);
+
+            s.Convert(SpeedMeasUnit.Knots);
+            s.Convert(SpeedMeasUnit.KMPH);
+            s.Convert(SpeedMeasUnit.FPM);
+            s.Convert(SpeedMeasUnit.MPS);
+
+            Assert.IsTrue(Math.Abs(s - ini) < E);
+        }
     }
 }
