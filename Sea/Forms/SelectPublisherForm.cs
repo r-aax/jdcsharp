@@ -10,37 +10,37 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Sea.Core.Authors;
+using Sea.Core.Publishers;
 using Sea.Tools;
 
 namespace Sea.Forms
 {
     /// <summary>
-    /// Select author form.
+    /// Select publisher form.
     /// </summary>
-    public partial class SelectAuthorForm : Form
+    public partial class SelectPublisherForm : Form
     {
         /// <summary>
-        /// List of authors.
+        /// Publishers.
         /// </summary>
-        private AuthorsList Authors;
+        private PublishersList Publishers;
 
         /// <summary>
-        /// Author.
+        /// Selected publisher.
         /// </summary>
-        public Author Author = null;
+        public Publisher Publisher = null;
 
         /// <summary>
         /// Accept flag.
         /// </summary>
-        public bool IsAccepted = false;
+        public bool IsAcceped = false;
 
         /// <summary>
-        /// Set controls enabled.
+        /// Set controls enable.
         /// </summary>
         private void SetControlsEnable()
         {
-            bool is_sel = AuthorsLB.SelectedIndex > -1;
+            bool is_sel = PublishersLB.SelectedIndex > -1;
 
             AcceptB.Enabled = is_sel;
         }
@@ -48,7 +48,7 @@ namespace Sea.Forms
         /// <summary>
         /// Constructor.
         /// </summary>
-        public SelectAuthorForm()
+        public SelectPublisherForm()
         {
             InitializeComponent();
         }
@@ -60,8 +60,8 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            IsAccepted = true;
-            Author = Authors[AuthorsLB.SelectedIndex];
+            IsAcceped = true;
+            Publisher = Publishers[PublishersLB.SelectedIndex];
             Close();
         }
 
@@ -73,7 +73,7 @@ namespace Sea.Forms
         private void CancelB_Click(object sender, EventArgs e)
         {
             // Nothing happened.
-            IsAccepted = false;
+            IsAcceped = false;
             Close();
         }
 
@@ -82,13 +82,13 @@ namespace Sea.Forms
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
-        private void SelectAuthorForm_Shown(object sender, EventArgs e)
+        private void SelectPublisherForm_Shown(object sender, EventArgs e)
         {
-            Authors = AuthorsList.XmlDeserialize(Parameters.AuthorsXMLFullFilename);
+            Publishers = PublishersList.XmlDeserialize(Parameters.PublishersXMLFullFilename);
 
-            if (Authors != null)
+            if (Publishers != null)
             {
-                Authors.ToListBox(AuthorsLB);
+                Publishers.ToListBox(PublishersLB);
             }
 
             SetControlsEnable();
