@@ -93,5 +93,15 @@ namespace Sea.Forms
 
             SetControlsEnable();
         }
+
+        /// <summary>
+        /// Change selected index.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void AuthorsLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetControlsEnable();
+        }
     }
 }

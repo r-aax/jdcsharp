@@ -40,6 +40,7 @@
             this.PublishersLB.Name = "PublishersLB";
             this.PublishersLB.Size = new System.Drawing.Size(553, 433);
             this.PublishersLB.TabIndex = 0;
+            this.PublishersLB.SelectedIndexChanged += new System.EventHandler(this.PublishersLB_SelectedIndexChanged);
             // 
             // AcceptB
             // 
@@ -76,6 +77,7 @@
             this.MaximumSize = new System.Drawing.Size(593, 521);
             this.MinimumSize = new System.Drawing.Size(593, 521);
             this.Name = "SelectPublisherForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Publisher selection";
             this.Shown += new System.EventHandler(this.SelectPublisherForm_Shown);
             this.ResumeLayout(false);

@@ -32,6 +32,21 @@ namespace Sea.Forms
         public bool IsAccepted;
 
         /// <summary>
+        /// Set controls enable.
+        /// </summary>
+        private void SetControlsEnable()
+        {
+            // Can delete author if it is selected.
+            DeleteAuthorB.Enabled = AuthorsLB.SelectedIndex > -1;
+
+            // Can delete publisher if it is selected.
+            DeletePublisherB.Enabled = PublishersLB.SelectedIndex > -1;
+
+            // Can delete category if it is selected.
+            DeleteCategoryB.Enabled = CategoriesLB.SelectedIndex > -1;
+        }
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public EditBookForm()
@@ -116,6 +131,8 @@ namespace Sea.Forms
             {
                 MessageBox.Show("Not valid book data.");
             }
+
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -147,6 +164,7 @@ namespace Sea.Forms
             }
 
             Book.Authors.ToListBox(AuthorsLB);
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -156,7 +174,9 @@ namespace Sea.Forms
         /// <param name="e">parameter</param>
         private void DeleteAuthorB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            Book.Authors.RemoveAt(AuthorsLB.SelectedIndex);
+            Book.Authors.ToListBox(AuthorsLB);
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -166,7 +186,17 @@ namespace Sea.Forms
         /// <param name="e">parameter</param>
         private void AddPublisherB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            SelectPublisherForm form = new SelectPublisherForm();
+
+            form.ShowDialog();
+
+            if (form.IsAcceped)
+            {
+                Book.Publishers.Add(form.Publisher);
+            }
+
+            Book.Publishers.ToListBox(PublishersLB);
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -176,7 +206,9 @@ namespace Sea.Forms
         /// <param name="e">parameter</param>
         private void DeletePublisherB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            Book.Publishers.RemoveAt(PublishersLB.SelectedIndex);
+            Book.Publishers.ToListBox(PublishersLB);
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -187,6 +219,7 @@ namespace Sea.Forms
         private void AddCategoryB_Click(object sender, EventArgs e)
         {
             Debug.Assert(false);
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -197,6 +230,7 @@ namespace Sea.Forms
         private void DeleteCategoryB_Click(object sender, EventArgs e)
         {
             Debug.Assert(false);
+            SetControlsEnable();
         }
 
         /// <summary>
@@ -216,6 +250,39 @@ namespace Sea.Forms
             // Lists.
             Book.Authors.ToListBox(AuthorsLB);
             Book.Publishers.ToListBox(PublishersLB);
+
+            // Controls.
+            SetControlsEnable();
+        }
+
+        /// <summary>
+        /// Authors selected index change.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void AuthorsLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetControlsEnable();
+        }
+
+        /// <summary>
+        /// Publishers selected index change.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void PublishersLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetControlsEnable();
+        }
+
+        /// <summary>
+        /// Categories selected index change.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void CategoriesLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetControlsEnable();
         }
     }
 }

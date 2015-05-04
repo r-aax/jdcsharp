@@ -40,6 +40,7 @@
             this.AuthorsLB.Name = "AuthorsLB";
             this.AuthorsLB.Size = new System.Drawing.Size(480, 446);
             this.AuthorsLB.TabIndex = 0;
+            this.AuthorsLB.SelectedIndexChanged += new System.EventHandler(this.AuthorsLB_SelectedIndexChanged);
             // 
             // AcceptB
             // 
@@ -76,6 +77,7 @@
             this.MaximumSize = new System.Drawing.Size(520, 533);
             this.MinimumSize = new System.Drawing.Size(520, 533);
             this.Name = "SelectAuthorForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Author selection";
             this.Shown += new System.EventHandler(this.SelectAuthorForm_Shown);
             this.ResumeLayout(false);
