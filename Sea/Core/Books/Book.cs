@@ -31,6 +31,11 @@ namespace Sea.Core.Books
         public string ArticleSource { get; set; }
 
         /// <summary>
+        /// Number (for magazine).
+        /// </summary>
+        public int Number { get; set; }
+
+        /// <summary>
         /// Edition number.
         /// If 0 - no edition information.
         /// </summary>
@@ -58,14 +63,16 @@ namespace Sea.Core.Books
         /// <param name="name">name</param>
         /// <param name="type">type</param>
         /// <param name="article_source">source of article</param>
+        /// <param name="number">number of magazie</param>
         /// <param name="edition">edition number</param>
         /// <param name="year">year</param>
         public Book(string name, BookType type, string article_source,
-                    int edition, int year)
+                    int number, int edition, int year)
         {
             Name = name;
             Type = type;
             ArticleSource = article_source;
+            Number = number;
             Edition = edition;
             Year = year;
             Authors = new AuthorsList();
@@ -76,7 +83,7 @@ namespace Sea.Core.Books
         /// Default constructor.
         /// </summary>
         public Book()
-            : this("", BookType.Book, "", 1, 0)
+            : this("", BookType.Book, "", 0, 1, 0)
         {
         }
 
@@ -118,6 +125,7 @@ namespace Sea.Core.Books
 
             book.Name = Name;
             book.ArticleSource = ArticleSource;
+            book.Number = Number;
             book.Edition = Edition;
             book.Year = Year;
             book.Authors = Authors.Clone() as AuthorsList;

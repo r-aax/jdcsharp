@@ -44,6 +44,25 @@ namespace Sea.Forms
 
             // Can delete category if it is selected.
             DeleteCategoryB.Enabled = CategoriesLB.SelectedIndex > -1;
+
+            // For different types of books controls enables may differ.
+            BookType book_type = IntToBookType(TypeCB.SelectedIndex);
+            bool is_magazine = book_type == BookType.Magazine;
+            bool is_article = book_type == BookType.Article;
+            ArticleSourceTB.Enabled = is_article;
+            NumberTB.Enabled = is_article || is_magazine;
+
+            // Clean not enable text boxes.
+
+            if (!ArticleSourceTB.Enabled)
+            {
+                ArticleSourceTB.Text = "";
+            }
+
+            if (!NumberTB.Enabled)
+            {
+                NumberTB.Text = "";
+            }
         }
 
         /// <summary>
@@ -121,6 +140,7 @@ namespace Sea.Forms
                 Book.Name = NameTB.Text;
                 Book.Type = IntToBookType(TypeCB.SelectedIndex);
                 Book.ArticleSource = ArticleSourceTB.Text;
+                Book.Number = (NumberTB.Text == "") ? 0 : Convert.ToInt32(NumberTB.Text);
                 Book.Edition = (EditionTB.Text == "") ? 1 : Convert.ToInt32(EditionTB.Text);
                 Book.Year = (YearTB.Text == "") ? 0 : Convert.ToInt32(YearTB.Text);
 
@@ -244,6 +264,7 @@ namespace Sea.Forms
             NameTB.Text = Book.Name;
             TypeCB.SelectedIndex = BookTypeToInt(Book.Type);
             ArticleSourceTB.Text = Book.ArticleSource;
+            NumberTB.Text = Book.Number.ToString();
             YearTB.Text = Book.Year.ToString();
             EditionTB.Text = Book.Edition.ToString();
 
@@ -281,6 +302,16 @@ namespace Sea.Forms
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
         private void CategoriesLB_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SetControlsEnable();
+        }
+
+        /// <summary>
+        /// Change type of book click.
+        /// </summary>
+        /// <param name="sender">source</param>
+        /// <param name="e">parameters</param>
+        private void TypeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetControlsEnable();
         }

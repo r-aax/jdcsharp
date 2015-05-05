@@ -57,6 +57,8 @@
             this.CategoriesLB = new System.Windows.Forms.ListBox();
             this.AcceptB = new System.Windows.Forms.Button();
             this.CancelB = new System.Windows.Forms.Button();
+            this.NumberTB = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -85,6 +87,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.NumberTB);
             this.tabPage1.Controls.Add(this.DeletePublisherB);
             this.tabPage1.Controls.Add(this.AddPublisherB);
             this.tabPage1.Controls.Add(this.DeleteAuthorB);
@@ -269,6 +273,7 @@
             this.TypeCB.Name = "TypeCB";
             this.TypeCB.Size = new System.Drawing.Size(125, 21);
             this.TypeCB.TabIndex = 3;
+            this.TypeCB.SelectedIndexChanged += new System.EventHandler(this.TypeCB_SelectedIndexChanged);
             // 
             // ArticleSourceTB
             // 
@@ -287,6 +292,7 @@
             // 
             // IdTB
             // 
+            this.IdTB.Enabled = false;
             this.IdTB.Location = new System.Drawing.Point(92, 26);
             this.IdTB.Name = "IdTB";
             this.IdTB.Size = new System.Drawing.Size(125, 20);
@@ -358,6 +364,22 @@
             this.CancelB.UseVisualStyleBackColor = true;
             this.CancelB.Click += new System.EventHandler(this.CancelB_Click);
             // 
+            // NumberTB
+            // 
+            this.NumberTB.Location = new System.Drawing.Point(402, 104);
+            this.NumberTB.Name = "NumberTB";
+            this.NumberTB.Size = new System.Drawing.Size(100, 20);
+            this.NumberTB.TabIndex = 22;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(352, 107);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(44, 13);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Number";
+            // 
             // EditBookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -411,6 +433,8 @@
         private System.Windows.Forms.Button AddAuthorB;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox NumberTB;
+        private System.Windows.Forms.Label label7;
 
     }
 }
