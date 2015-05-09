@@ -119,6 +119,7 @@
     <Compile Include="Utils\SqlConnector.cs" />
     <Compile Include="Utils\Time\Date.cs" />
     <Compile Include="Utils\Time\Month.cs" />
+    <Compile Include="Utils\Time\Time.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
