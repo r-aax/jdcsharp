@@ -109,6 +109,7 @@
     <Compile Include="Physics\MeasUnits\Angle.cs" />
     <Compile Include="Physics\MeasUnits\AngleMeasUnit.cs" />
     <Compile Include="Physics\MeasUnits\Constants.cs" />
+    <Compile Include="Physics\MeasUnits\Convert.cs" />
     <Compile Include="Physics\MeasUnits\Linear.cs" />
     <Compile Include="Physics\MeasUnits\LinearMeasUnit.cs" />
     <Compile Include="Physics\MeasUnits\Speed.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Utils\Time\Date.cs" />
     <Compile Include="Utils\Time\Month.cs" />
     <Compile Include="Utils\Time\Time.cs" />
+    <Compile Include="Utils\Time\Timer.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -19,6 +19,11 @@ namespace Lib.Physics.MeasUnits
         public const double Kilo = 1000.0;
 
         /// <summary>
+        /// Milli.
+        /// </summary>
+        public const double Milli = 1.0 / Kilo;
+
+        /// <summary>
         /// Hours in one day.
         /// </summary>
         public const double DayHours = 24.0;
