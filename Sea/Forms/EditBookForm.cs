@@ -181,6 +181,7 @@ namespace Sea.Forms
             if (form.IsAccepted)
             {
                 Book.Authors.Add(form.Author);
+                Book.Authors.Sort();
             }
 
             Book.Authors.ToListBox(AuthorsLB);

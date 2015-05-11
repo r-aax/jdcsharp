@@ -8,8 +8,13 @@ namespace Sea.Core.Authors
     /// <summary>
     /// Author class.
     /// </summary>
-    public class Author : IComparable<Author>, ICloneable
+    public class Author : IComparable<Author>, IEquatable<Author>, ICloneable
     {
+        /// <summary>
+        /// Identifier.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// First name of author.
         /// </summary>
@@ -189,6 +194,16 @@ namespace Sea.Core.Authors
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Check equals.
+        /// </summary>
+        /// <param name="author">another author</param>
+        /// <returns><c>true</c> - if authors are equal, <c>false</c> - if authors are not equal</returns>
+        public bool Equals(Author author)
+        {
+            return Id == author.Id;
         }
 
         /// <summary>

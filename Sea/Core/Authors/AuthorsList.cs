@@ -67,11 +67,31 @@ namespace Sea.Core.Authors
         }
 
         /// <summary>
+        /// Get max identifier of author.
+        /// </summary>
+        /// <returns></returns>
+        private int MaxId()
+        {
+            int id = -1;
+
+            foreach(Author author in Items)
+            {
+                if (author.Id > id)
+                {
+                    id = author.Id;
+                }
+            }            
+
+            return id;
+        }
+
+        /// <summary>
         /// Adding new author.
         /// </summary>
         /// <param name="author">new author</param>
         public void Add(Author author)
         {
+            author.Id = MaxId() + 1;
             Items.Add(author);
         }
 
