@@ -67,11 +67,28 @@ namespace Sea.Core.Publishers
         }
 
         /// <summary>
+        /// Get max identifier of publisher.
+        /// </summary>
+        /// <returns>max identifier</returns>
+        private int MaxId()
+        {
+            int id = -1;
+
+            foreach (Publisher publisher in Items)
+            {
+                id = Math.Max(id, publisher.Id);
+            }
+
+            return id;
+        }
+
+        /// <summary>
         /// Adding new publisher.
         /// </summary>
         /// <param name="publisher">new publisher</param>
         public void Add(Publisher publisher)
         {
+            publisher.Id = MaxId() + 1;
             Items.Add(publisher);
         }
 

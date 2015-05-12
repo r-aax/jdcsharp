@@ -69,17 +69,14 @@ namespace Sea.Core.Authors
         /// <summary>
         /// Get max identifier of author.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>max identifier</returns>
         private int MaxId()
         {
             int id = -1;
 
             foreach(Author author in Items)
             {
-                if (author.Id > id)
-                {
-                    id = author.Id;
-                }
+                id = Math.Max(id, author.Id);
             }            
 
             return id;

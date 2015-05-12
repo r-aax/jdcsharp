@@ -8,8 +8,13 @@ namespace Sea.Core.Publishers
     /// <summary>
     /// Publisher class.
     /// </summary>
-    public class Publisher : IComparable<Publisher>, ICloneable
+    public class Publisher : IComparable<Publisher>, IEquatable<Publisher>, ICloneable
     {
+        /// <summary>
+        /// Identifier.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Name of publisher.
         /// </summary>
@@ -58,6 +63,16 @@ namespace Sea.Core.Publishers
             {
                 return 0;
             }
+        }
+
+        /// <summary>
+        /// Check equals.
+        /// </summary>
+        /// <param name="publisher">another publisher</param>
+        /// <returns><c>true</c> - if publishers are equal, <c>false</c> - if publishers are not equal</returns>
+        public bool Equals(Publisher publisher)
+        {
+            return Id == publisher.Id;
         }
 
         /// <summary>
