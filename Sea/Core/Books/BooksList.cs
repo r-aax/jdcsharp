@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
 using System.Windows.Forms;
+using System;
 
 namespace Sea.Core.Books
 {
@@ -63,6 +64,22 @@ namespace Sea.Core.Books
             {
                 return Count == 0;
             }
+        }
+
+        /// <summary>
+        /// Get max identifier of book.
+        /// </summary>
+        /// <returns>max identifier</returns>
+        private int MaxId()
+        {
+            int id = -1;
+
+            foreach (Book book in Items)
+            {
+                id = Math.Max(id, book.Id);
+            }
+
+            return id;
         }
 
         /// <summary>

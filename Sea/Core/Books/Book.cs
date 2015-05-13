@@ -12,8 +12,13 @@ namespace Sea.Core.Books
     /// <summary>
     /// Book (printed material item).
     /// </summary>
-    public class Book : IComparable<Book>, ICloneable
+    public class Book : IComparable<Book>, IEquatable<Book>, ICloneable
     {
+        /// <summary>
+        /// Identifier.
+        /// </summary>
+        public int Id { get; set; }
+
         /// <summary>
         /// Full name.
         /// </summary>
@@ -113,6 +118,16 @@ namespace Sea.Core.Books
             {
                 return 0;
             }
+        }
+
+        /// <summary>
+        /// Check equals.
+        /// </summary>
+        /// <param name="book">another book</param>
+        /// <returns><c>true</c> - if books are equal, <c>false</c> - if books are not equal</returns>
+        public bool Equals(Book book)
+        {
+            return Id == book.Id;
         }
 
         /// <summary>
