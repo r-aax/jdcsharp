@@ -300,7 +300,6 @@
             this.NameTB.Name = "NameTB";
             this.NameTB.Size = new System.Drawing.Size(797, 20);
             this.NameTB.TabIndex = 1;
-            this.NameTB.Text = "Test book";
             // 
             // IdTB
             // 

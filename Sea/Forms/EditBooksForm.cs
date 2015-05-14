@@ -73,7 +73,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void NewB_Click(object sender, EventArgs e)
         {
-            EditBookForm form = new EditBookForm();
+            EditBookForm form = new EditBookForm("Create new book");
 
             form.ShowDialog();
 
@@ -100,7 +100,7 @@ namespace Sea.Forms
             {
                 Book book = BooksList[i].Clone() as Book;
 
-                EditBookForm form = new EditBookForm();
+                EditBookForm form = new EditBookForm("Edit book");
 
                 form.Book = book;
                 form.ShowDialog();

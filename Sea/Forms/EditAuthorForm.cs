@@ -49,6 +49,7 @@ namespace Sea.Forms
         {
             if (Author != null)
             {
+                IdTB.Text = Author.Id.ToString();
                 FirstNameTB.Text = Author.FirstName;
                 SecondNameTB.Text = Author.SecondName;
                 LastNameTB.Text = Author.LastName;

@@ -36,13 +36,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.IdTB = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // AcceptB
             // 
             this.AcceptB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AcceptB.ForeColor = System.Drawing.Color.OliveDrab;
-            this.AcceptB.Location = new System.Drawing.Point(219, 91);
+            this.AcceptB.Location = new System.Drawing.Point(216, 116);
             this.AcceptB.Name = "AcceptB";
             this.AcceptB.Size = new System.Drawing.Size(75, 23);
             this.AcceptB.TabIndex = 0;
@@ -54,7 +56,7 @@
             // 
             this.CancelB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CancelB.ForeColor = System.Drawing.Color.IndianRed;
-            this.CancelB.Location = new System.Drawing.Point(300, 91);
+            this.CancelB.Location = new System.Drawing.Point(297, 116);
             this.CancelB.Name = "CancelB";
             this.CancelB.Size = new System.Drawing.Size(75, 23);
             this.CancelB.TabIndex = 1;
@@ -64,21 +66,21 @@
             // 
             // FirstNameTB
             // 
-            this.FirstNameTB.Location = new System.Drawing.Point(92, 13);
+            this.FirstNameTB.Location = new System.Drawing.Point(89, 38);
             this.FirstNameTB.Name = "FirstNameTB";
             this.FirstNameTB.Size = new System.Drawing.Size(484, 20);
             this.FirstNameTB.TabIndex = 2;
             // 
             // SecondNameTB
             // 
-            this.SecondNameTB.Location = new System.Drawing.Point(92, 39);
+            this.SecondNameTB.Location = new System.Drawing.Point(89, 64);
             this.SecondNameTB.Name = "SecondNameTB";
             this.SecondNameTB.Size = new System.Drawing.Size(484, 20);
             this.SecondNameTB.TabIndex = 3;
             // 
             // LastNameTB
             // 
-            this.LastNameTB.Location = new System.Drawing.Point(92, 65);
+            this.LastNameTB.Location = new System.Drawing.Point(89, 90);
             this.LastNameTB.Name = "LastNameTB";
             this.LastNameTB.Size = new System.Drawing.Size(484, 20);
             this.LastNameTB.TabIndex = 4;
@@ -86,7 +88,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 16);
+            this.label1.Location = new System.Drawing.Point(28, 41);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(55, 13);
             this.label1.TabIndex = 5;
@@ -95,7 +97,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 42);
+            this.label2.Location = new System.Drawing.Point(10, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 6;
@@ -104,18 +106,37 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 68);
+            this.label3.Location = new System.Drawing.Point(27, 93);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(56, 13);
             this.label3.TabIndex = 7;
             this.label3.Text = "Last name";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(67, 15);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(16, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Id";
+            // 
+            // IdTB
+            // 
+            this.IdTB.Enabled = false;
+            this.IdTB.Location = new System.Drawing.Point(89, 12);
+            this.IdTB.Name = "IdTB";
+            this.IdTB.Size = new System.Drawing.Size(100, 20);
+            this.IdTB.TabIndex = 9;
+            // 
             // EditAuthorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(588, 144);
+            this.ClientSize = new System.Drawing.Size(586, 150);
             this.ControlBox = false;
+            this.Controls.Add(this.IdTB);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -124,10 +145,11 @@
             this.Controls.Add(this.FirstNameTB);
             this.Controls.Add(this.CancelB);
             this.Controls.Add(this.AcceptB);
-            this.MaximumSize = new System.Drawing.Size(604, 160);
-            this.MinimumSize = new System.Drawing.Size(604, 160);
+            this.MaximumSize = new System.Drawing.Size(602, 188);
+            this.MinimumSize = new System.Drawing.Size(602, 188);
             this.Name = "EditAuthorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Edit author form";
             this.Shown += new System.EventHandler(this.EditAuthorForm_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -144,5 +166,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox IdTB;
     }
 }

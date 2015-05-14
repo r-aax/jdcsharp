@@ -74,6 +74,16 @@ namespace Sea.Forms
         }
 
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="label">label of form</param>
+        public EditBookForm(string label)
+            : this()
+        {
+            Text = label;
+        }
+
+        /// <summary>
         /// Convert integer to book type.
         /// </summary>
         /// <param name="i">book type number</param>
@@ -261,20 +271,28 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditBookForm_Shown(object sender, EventArgs e)
         {
-            // Show book.
-            NameTB.Text = Book.Name;
-            TypeCB.SelectedIndex = BookTypeToInt(Book.Type);
-            ArticleSourceTB.Text = Book.ArticleSource;
-            NumberTB.Text = Book.Number.ToString();
-            YearTB.Text = Book.Year.ToString();
-            EditionTB.Text = Book.Edition.ToString();
+            if (Book != null)
+            {
+                // Show book.
+                IdTB.Text = Book.Id.ToString();
+                NameTB.Text = Book.Name;
+                TypeCB.SelectedIndex = BookTypeToInt(Book.Type);
+                ArticleSourceTB.Text = Book.ArticleSource;
+                NumberTB.Text = Book.Number.ToString();
+                YearTB.Text = Book.Year.ToString();
+                EditionTB.Text = Book.Edition.ToString();
 
-            // Lists.
-            Book.Authors.ToListBox(AuthorsLB);
-            Book.Publishers.ToListBox(PublishersLB);
+                // Lists.
+                Book.Authors.ToListBox(AuthorsLB);
+                Book.Publishers.ToListBox(PublishersLB);
 
-            // Controls.
-            SetControlsEnable();
+                // Controls.
+                SetControlsEnable();
+            }
+            else
+            {
+                TypeCB.SelectedIndex = (int)BookType.Book;
+            }
         }
 
         /// <summary>

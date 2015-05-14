@@ -72,7 +72,7 @@ namespace Sea.Core.Authors
         /// <returns>max identifier</returns>
         private int MaxId()
         {
-            int id = -1;
+            int id = 0;
 
             foreach(Author author in Items)
             {

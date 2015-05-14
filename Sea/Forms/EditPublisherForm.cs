@@ -49,6 +49,7 @@ namespace Sea.Forms
         {
             if (Publisher != null)
             {
+                IdTB.Text = Publisher.Id.ToString();
                 NameTB.Text = Publisher.Name;
             }
         }
