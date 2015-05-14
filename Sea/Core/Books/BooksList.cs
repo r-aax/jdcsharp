@@ -6,6 +6,8 @@ using System.IO;
 using System.Windows.Forms;
 using System;
 
+using Sea.Tools;
+
 namespace Sea.Core.Books
 {
     /// <summary>
@@ -72,7 +74,7 @@ namespace Sea.Core.Books
         /// <returns>max identifier</returns>
         private int MaxId()
         {
-            int id = 0;
+            int id = InnerParameters.MinimalObjectId - 1;
 
             foreach (Book book in Items)
             {

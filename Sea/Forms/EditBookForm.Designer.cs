@@ -37,8 +37,7 @@
             this.PublishersLB = new System.Windows.Forms.ListBox();
             this.AuthorsLB = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.DeleteCategoryB = new System.Windows.Forms.Button();
-            this.AddCategoryB = new System.Windows.Forms.Button();
+            this.ChangeCategoriesB = new System.Windows.Forms.Button();
             this.CategoriesLB = new System.Windows.Forms.ListBox();
             this.label7 = new System.Windows.Forms.Label();
             this.NumberTB = new System.Windows.Forms.TextBox();
@@ -149,8 +148,7 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.DeleteCategoryB);
-            this.tabPage2.Controls.Add(this.AddCategoryB);
+            this.tabPage2.Controls.Add(this.ChangeCategoriesB);
             this.tabPage2.Controls.Add(this.CategoriesLB);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
@@ -160,25 +158,15 @@
             this.tabPage2.Text = "Categories list";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // DeleteCategoryB
+            // ChangeCategoriesB
             // 
-            this.DeleteCategoryB.Location = new System.Drawing.Point(437, 276);
-            this.DeleteCategoryB.Name = "DeleteCategoryB";
-            this.DeleteCategoryB.Size = new System.Drawing.Size(100, 23);
-            this.DeleteCategoryB.TabIndex = 2;
-            this.DeleteCategoryB.Text = "Delete category";
-            this.DeleteCategoryB.UseVisualStyleBackColor = true;
-            this.DeleteCategoryB.Click += new System.EventHandler(this.DeleteCategoryB_Click);
-            // 
-            // AddCategoryB
-            // 
-            this.AddCategoryB.Location = new System.Drawing.Point(331, 276);
-            this.AddCategoryB.Name = "AddCategoryB";
-            this.AddCategoryB.Size = new System.Drawing.Size(100, 23);
-            this.AddCategoryB.TabIndex = 1;
-            this.AddCategoryB.Text = "Add category";
-            this.AddCategoryB.UseVisualStyleBackColor = true;
-            this.AddCategoryB.Click += new System.EventHandler(this.AddCategoryB_Click);
+            this.ChangeCategoriesB.Location = new System.Drawing.Point(356, 276);
+            this.ChangeCategoriesB.Name = "ChangeCategoriesB";
+            this.ChangeCategoriesB.Size = new System.Drawing.Size(156, 23);
+            this.ChangeCategoriesB.TabIndex = 1;
+            this.ChangeCategoriesB.Text = "Change categories";
+            this.ChangeCategoriesB.UseVisualStyleBackColor = true;
+            this.ChangeCategoriesB.Click += new System.EventHandler(this.ChangeCategoriesB_Click);
             // 
             // CategoriesLB
             // 
@@ -375,8 +363,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button DeleteCategoryB;
-        private System.Windows.Forms.Button AddCategoryB;
+        private System.Windows.Forms.Button ChangeCategoriesB;
         private System.Windows.Forms.ListBox CategoriesLB;
         private System.Windows.Forms.ListBox PublishersLB;
         private System.Windows.Forms.ListBox AuthorsLB;

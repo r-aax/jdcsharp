@@ -42,9 +42,6 @@ namespace Sea.Forms
             // Can delete publisher if it is selected.
             DeletePublisherB.Enabled = PublishersLB.SelectedIndex > -1;
 
-            // Can delete category if it is selected.
-            DeleteCategoryB.Enabled = CategoriesLB.SelectedIndex > -1;
-
             // For different types of books controls enables may differ.
             BookType book_type = IntToBookType(TypeCB.SelectedIndex);
             bool is_magazine = book_type == BookType.Magazine;
@@ -243,22 +240,11 @@ namespace Sea.Forms
         }
 
         /// <summary>
-        /// Add category button click.
+        /// Change categories button click.
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
-        private void AddCategoryB_Click(object sender, EventArgs e)
-        {
-            Debug.Assert(false);
-            SetControlsEnable();
-        }
-
-        /// <summary>
-        /// Delete category button click.
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">parameters</param>
-        private void DeleteCategoryB_Click(object sender, EventArgs e)
+        private void ChangeCategoriesB_Click(object sender, EventArgs e)
         {
             Debug.Assert(false);
             SetControlsEnable();
