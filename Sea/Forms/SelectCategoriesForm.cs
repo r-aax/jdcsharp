@@ -119,7 +119,15 @@ namespace Sea.Forms
 
             foreach (MPTTTree category in categories)
             {
-                TreeNode node = FindTreeNode(category);
+                // Bad way.
+                // We have to remake it back to categories ids.
+                // And on edit book form we should keep whole categories tree.
+
+                MPTTTree tree = Root.FindById(category.Id);
+
+                Debug.Assert(tree != null);
+
+                TreeNode node = FindTreeNode(tree);
 
                 Debug.Assert(node != null);
 
