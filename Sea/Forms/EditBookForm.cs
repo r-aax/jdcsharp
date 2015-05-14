@@ -274,13 +274,18 @@ namespace Sea.Forms
             if (Book != null)
             {
                 // Show book.
+
                 IdTB.Text = Book.Id.ToString();
                 NameTB.Text = Book.Name;
                 TypeCB.SelectedIndex = BookTypeToInt(Book.Type);
                 ArticleSourceTB.Text = Book.ArticleSource;
                 NumberTB.Text = Book.Number.ToString();
-                YearTB.Text = Book.Year.ToString();
-                EditionTB.Text = Book.Edition.ToString();
+
+                // Year 0 is no year.
+                YearTB.Text = (Book.Year != 0) ? Book.Year.ToString() : "";
+
+                // Edition 1 it is edition by default (we do not need to show it).
+                EditionTB.Text = (Book.Edition != 1) ? Book.Edition.ToString() : "";
 
                 // Lists.
                 Book.Authors.ToListBox(AuthorsLB);
@@ -291,6 +296,7 @@ namespace Sea.Forms
             }
             else
             {
+                Book = new Book();
                 TypeCB.SelectedIndex = (int)BookType.Book;
             }
         }

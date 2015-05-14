@@ -88,6 +88,7 @@ namespace Sea.Core.Books
         /// <param name="book">new book</param>
         public void Add(Book book)
         {
+            book.Id = MaxId() + 1;
             Items.Add(book);
         }
 

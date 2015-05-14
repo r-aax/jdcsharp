@@ -212,7 +212,11 @@ namespace Sea.Core.Authors
         /// <returns>clone</returns>
         public object Clone()
         {
-            return new Author(FirstName, SecondName, LastName);
+            Author author = new Author(FirstName, SecondName, LastName);
+
+            author.Id = Id;
+
+            return author;
         }
     }
 }

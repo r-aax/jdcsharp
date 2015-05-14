@@ -81,7 +81,11 @@ namespace Sea.Core.Publishers
         /// <returns>clone</returns>
         public object Clone()
         {
-            return new Publisher(Name);
+            Publisher publisher = new Publisher(Name);
+
+            publisher.Id = Id;
+
+            return publisher;
         }
     }
 }

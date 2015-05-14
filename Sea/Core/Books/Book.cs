@@ -138,6 +138,7 @@ namespace Sea.Core.Books
         {
             Book book = new Book();
 
+            book.Id = Id;
             book.Name = Name;
             book.ArticleSource = ArticleSource;
             book.Number = Number;
