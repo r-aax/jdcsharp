@@ -4,8 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+using Lib.DataStruct;
 using Sea.Core.Authors;
 using Sea.Core.Publishers;
+using Sea.Core.Categories;
 
 namespace Sea.Core.Books
 {
@@ -63,6 +65,11 @@ namespace Sea.Core.Books
         public PublishersList Publishers { get; set; }
 
         /// <summary>
+        /// List of categories.
+        /// </summary>
+        public CategoriesList Categories { get; set; }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="name">name</param>
@@ -82,6 +89,7 @@ namespace Sea.Core.Books
             Year = year;
             Authors = new AuthorsList();
             Publishers = new PublishersList();
+            Categories = new CategoriesList();
         }
 
         /// <summary>
@@ -146,6 +154,7 @@ namespace Sea.Core.Books
             book.Year = Year;
             book.Authors = Authors.Clone() as AuthorsList;
             book.Publishers = Publishers.Clone() as PublishersList;
+            book.Categories = Categories.Clone() as CategoriesList;
 
             return book;
         }

@@ -13,6 +13,7 @@ using System.Diagnostics;
 
 using Sea.Core.Books;
 using Sea.Core.Authors;
+using Sea.Core.Categories;
 
 namespace Sea.Forms
 {
@@ -248,7 +249,14 @@ namespace Sea.Forms
         {
             SelectCategoriesForm form = new SelectCategoriesForm();
 
+            form.Categories = (Book.Categories.Clone() as CategoriesList).Items;
             form.ShowDialog();
+
+            if (form.IsAccepted)
+            {
+                Book.Categories.Items = form.Categories;
+                Book.Categories.ToListBox(CategoriesLB);
+            }
 
             SetControlsEnable();
         }
@@ -279,6 +287,7 @@ namespace Sea.Forms
                 // Lists.
                 Book.Authors.ToListBox(AuthorsLB);
                 Book.Publishers.ToListBox(PublishersLB);
+                Book.Categories.ToListBox(CategoriesLB);
 
                 // Controls.
                 SetControlsEnable();
@@ -328,11 +337,6 @@ namespace Sea.Forms
         private void TypeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetControlsEnable();
-        }
-
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

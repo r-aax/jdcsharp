@@ -13,7 +13,7 @@ namespace Lib.DataStruct
     /// <summary>
     /// Recursive tree, with nodes numeration according to <c>MPTT</c> - Modified Preorder Tree Traversal.
     /// </summary>
-    public class MPTTTree
+    public class MPTTTree : ICloneable
     {
         /// <summary>
         /// Data.
@@ -498,6 +498,25 @@ namespace Lib.DataStruct
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>copy of object</returns>
+        public object Clone()
+        {
+            MPTTTree tree = new MPTTTree();
+            
+            // Clone only references.
+            tree.Data = Data;
+            tree.Parent = Parent;
+            tree.Children = Children;
+            tree.LNum = LNum;
+            tree.RNum = RNum;
+            tree.Id = Id;
+
+            return tree;
         }
     }
 }

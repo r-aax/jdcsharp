@@ -58,6 +58,7 @@
     <Compile Include="Core\Books\BookFullNamePrintStyle.cs" />
     <Compile Include="Core\Books\BooksList.cs" />
     <Compile Include="Core\Books\BookType.cs" />
+    <Compile Include="Core\Categories\CategoriesList.cs" />
     <Compile Include="Core\Publishers\Publisher.cs" />
     <Compile Include="Core\Publishers\PublishersList.cs" />
     <Compile Include="Forms\EditAuthorForm.cs">

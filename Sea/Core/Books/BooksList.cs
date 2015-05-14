@@ -142,7 +142,7 @@ namespace Sea.Core.Books
         /// <summary>
         /// Fill listbox with books information.
         /// </summary>
-        /// <param name="lb"></param>
+        /// <param name="lb">list box</param>
         public void ToListBox(ListBox lb)
         {
             lb.Items.Clear();

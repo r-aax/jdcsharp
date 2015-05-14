@@ -35,6 +35,11 @@ namespace Sea.Forms
         public List<MPTTTree> Categories = null;
 
         /// <summary>
+        /// Accept flag.
+        /// </summary>
+        public bool IsAccepted = false;
+
+        /// <summary>
         /// Find <c>MPTT</c> tree by node.
         /// </summary>
         /// <param name="node">node</param>
@@ -254,6 +259,7 @@ namespace Sea.Forms
             // Rebuild tree.
             Categories = new List<MPTTTree>();
             AddCategoriesToList(CategoriesTreeTV.Nodes, Categories);
+            IsAccepted = true;
 
             Close();
         }
@@ -265,6 +271,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void CancelB_Click(object sender, EventArgs e)
         {
+            IsAccepted = false;
             Close();
         }
     }

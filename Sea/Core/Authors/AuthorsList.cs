@@ -172,7 +172,7 @@ namespace Sea.Core.Authors
 
             for (int i = 0; i < Count; i++)
             {
-                authors_list.Add(Items[i].Clone() as Author);
+                authors_list.Items.Add(Items[i].Clone() as Author);
             }
 
             return authors_list;

@@ -109,6 +109,7 @@
             this.Controls.Add(this.CategoriesTreeTV);
             this.MinimumSize = new System.Drawing.Size(690, 568);
             this.Name = "SelectCategoriesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select categories";
             this.Shown += new System.EventHandler(this.SelectCategoriesForm_Shown);
             this.ResumeLayout(false);

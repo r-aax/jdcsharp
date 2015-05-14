@@ -172,7 +172,7 @@ namespace Sea.Core.Publishers
 
             for (int i = 0; i < Count; i++)
             {
-                authors_list.Add(Items[i].Clone() as Publisher);
+                authors_list.Items.Add(Items[i].Clone() as Publisher);
             }
 
             return authors_list;
