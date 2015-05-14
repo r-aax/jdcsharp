@@ -32,7 +32,7 @@ namespace Sea.Forms
         /// <summary>
         /// List of categories identifiers.
         /// </summary>
-        public List<int> CategoriesIds = null;
+        public List<MPTTTree> Categories = null;
 
         /// <summary>
         /// Find <c>MPTT</c> tree by node.
@@ -104,21 +104,17 @@ namespace Sea.Forms
         /// <summary>
         /// Select categories.
         /// </summary>
-        /// <param name="ids">categories identifiers</param>
-        private void SelectGivenCategories(List<int> ids)
+        /// <param name="categories">categories list</param>
+        private void SelectGivenCategories(List<MPTTTree> categories)
         {
-            if (ids == null)
+            if (categories == null)
             {
                 return;
             }
 
-            foreach (int id in ids)
+            foreach (MPTTTree category in categories)
             {
-                MPTTTree tree = Root.FindById(id);
-
-                Debug.Assert(tree != null);
-
-                TreeNode node = FindTreeNode(tree);
+                TreeNode node = FindTreeNode(category);
 
                 Debug.Assert(node != null);
 
@@ -140,7 +136,7 @@ namespace Sea.Forms
                 Root.ToTreeView(CategoriesTreeTV);
             }
 
-            SelectGivenCategories(CategoriesIds);
+            SelectGivenCategories(Categories);
         }
 
         /// <summary>
@@ -225,23 +221,25 @@ namespace Sea.Forms
         }
 
         /// <summary>
-        /// Add categories identifiers to the list.
+        /// Add categories to the list.
         /// </summary>
         /// <param name="nodes">nodes list</param>
-        /// <param name="ids">identifiers list</param>
-        private void AddCategoriesToIdsList(TreeNodeCollection nodes, List<int> ids)
+        /// <param name="categories">categories list</param>
+        private void AddCategoriesToList(TreeNodeCollection nodes, List<MPTTTree> categories)
         {
             foreach (TreeNode node in nodes)
             {
                 if (node.BackColor == Parameters.SelectColor)
                 {
-                    MPTTTree tree = FindMPTTTree(node);
+                    MPTTTree category = FindMPTTTree(node);
 
-                    ids.Add(tree.Id);
+                    Debug.Assert(category != null);
+
+                    categories.Add(category);
                 }
                 else
                 {
-                    AddCategoriesToIdsList(node.Nodes, ids);
+                    AddCategoriesToList(node.Nodes, categories);
                 }
             }
         }
@@ -254,8 +252,8 @@ namespace Sea.Forms
         private void AcceptB_Click(object sender, EventArgs e)
         {
             // Rebuild tree.
-            CategoriesIds = new List<int>();
-            AddCategoriesToIdsList(CategoriesTreeTV.Nodes, CategoriesIds);
+            Categories = new List<MPTTTree>();
+            AddCategoriesToList(CategoriesTreeTV.Nodes, Categories);
 
             Close();
         }

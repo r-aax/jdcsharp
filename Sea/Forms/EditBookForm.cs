@@ -246,7 +246,10 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void ChangeCategoriesB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            SelectCategoriesForm form = new SelectCategoriesForm();
+
+            form.ShowDialog();
+
             SetControlsEnable();
         }
 
