@@ -62,5 +62,44 @@ namespace Lib.Maths.Geometry
                 return Math.Sqrt(hp * (hp - AB) * (hp - BC) * (hp - AC));
             }
         }
+
+        /// <summary>
+        /// Altitude from A to BC.
+        /// </summary>
+        public double AltitudeA
+        {
+            get
+            {
+                // Square = 0.5 * BC * AltitudeA.
+                // AltitudeA = Square / (0.5 * BC) = 2 * Square / BC.
+                return 2.0 * Square / BC;
+            }
+        }
+
+        /// <summary>
+        /// Altitude from B to AC.
+        /// </summary>
+        public double AltitudeB
+        {
+            get
+            {
+                // Square = 0.5 * AC * AltitudeB.
+                // AltitudeB = Square / (0.5 * AC) = 2 * Square / AC.
+                return 2.0 * Square / AC;
+            }
+        }
+
+        /// <summary>
+        ///  Altitute from C to AB.
+        /// </summary>
+        public double AltitudeC
+        {
+            get
+            {
+                // Square = 0.5 * AB * AltitudeC.
+                // AltitudeC = Square / (0.5 * AB) = 2 * Square / AB.
+                return 2.0 * Square / AB;
+            }
+        }
     }
 }
