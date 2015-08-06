@@ -3,7 +3,7 @@
 <Window x:Class="GraphMaster.Windows.AreaParametersWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Area parameters" Background="AliceBlue" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner">
+        Title="Area parameters" Background="AliceBlue" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

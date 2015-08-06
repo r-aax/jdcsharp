@@ -4,7 +4,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:GraphMaster"
-        Title="GraphMaster" Height="675" Width="808" Loaded="Window_Loaded">
+        Title="GraphMaster" Height="675" Width="808" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Height="21.72">
             <MenuItem Header="Area">

@@ -26,7 +26,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <param name="v">direction vecto</param>
         public Line(Point p, Vector v)
         {
-            Debug.Assert(V.Mod2 > 0.0);
+            Debug.Assert(v.Mod2 > 0.0);
 
             P = p;
             V = v;
