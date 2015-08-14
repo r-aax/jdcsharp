@@ -34,7 +34,7 @@ namespace Lib.DataStruct.Graph
 
             for (int i = index_from; i <= index_to; i++)
             {
-                g.Nodes[i].Point2D = Randoms.RandomPoint2D(rect);
+                g.Nodes[i].Point2D = Point2D.Random(rect);
             }
         }
 
@@ -50,7 +50,7 @@ namespace Lib.DataStruct.Graph
 
             foreach (int i in indices)
             {
-                g.Nodes[indices[i]].Point2D = Randoms.RandomPoint2D(rect);
+                g.Nodes[indices[i]].Point2D = Point2D.Random(rect);
             }
         }
 
@@ -77,7 +77,7 @@ namespace Lib.DataStruct.Graph
 
             for (int i = index_from; i <= index_to; i++)
             {
-                g.Nodes[i].Point3D = Randoms.RandomPoint3D(par);
+                g.Nodes[i].Point3D = Point3D.Random(par);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Lib.DataStruct.Graph
 
             foreach (int i in indices)
             {
-                g.Nodes[indices[i]].Point3D = Randoms.RandomPoint3D(par);
+                g.Nodes[indices[i]].Point3D = Point3D.Random(par);
             }
         }
 

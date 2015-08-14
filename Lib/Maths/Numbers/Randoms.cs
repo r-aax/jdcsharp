@@ -72,48 +72,5 @@ namespace Lib.Maths.Numbers
         {
             return Rand.NextDouble() < 0.5;
         }
-
-        /// <summary>
-        /// Random 2D vector in rectangle.
-        /// </summary>
-        /// <param name="rect">rectangle</param>
-        /// <returns>vector</returns>
-        public static Vector2D RandomVector2D(Rect rect)
-        {
-            return new Vector2D(Randoms.RandomInInterval(rect.XInterval),
-                                Randoms.RandomInInterval(rect.YInterval));
-        }
-
-        /// <summary>
-        /// Random 2D point in rectangle.
-        /// </summary>
-        /// <param name="rect">rectangle</param>
-        /// <returns>point</returns>
-        public static Point2D RandomPoint2D(Rect rect)
-        {
-            return new Point2D(RandomVector2D(rect));
-        }
-
-        /// <summary>
-        /// Random 3D vector in parallelepiped.
-        /// </summary>
-        /// <param name="par">parallelepiped</param>
-        /// <returns>vector</returns>
-        public static Vector3D RandomVector3D(Parallelepiped par)
-        {
-            return new Vector3D(Randoms.RandomInInterval(par.XInterval),
-                                Randoms.RandomInInterval(par.YInterval),
-                                Randoms.RandomInInterval(par.ZInterval));
-        }
-
-        /// <summary>
-        /// Random 3D point in parallelepiped.
-        /// </summary>
-        /// <param name="par">parallelepiped</param>
-        /// <returns>point</returns>
-        public static Point3D RandomPoint3D(Parallelepiped par)
-        {
-            return new Point3D(RandomVector3D(par));
-        }
     }
 }

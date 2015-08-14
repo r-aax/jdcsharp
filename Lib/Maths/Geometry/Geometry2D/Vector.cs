@@ -3,6 +3,8 @@
 using System;
 using System.Diagnostics;
 
+using Lib.Maths.Numbers;
+
 namespace Lib.Maths.Geometry.Geometry2D
 {
     /// <summary>
@@ -272,6 +274,17 @@ namespace Lib.Maths.Geometry.Geometry2D
         public static Vector ComponentWiseMul(Vector v1, Vector v2)
         {
             return new Vector(v1.X * v2.X, v1.Y * v2.Y);
+        }
+
+        /// <summary>
+        /// Random vector.
+        /// </summary>
+        /// <param name="rect">rectangle</param>
+        /// <returns>random vector</returns>
+        public static Vector Random(Rect rect)
+        {
+            return new Vector(Randoms.RandomInInterval(rect.XInterval),
+                              Randoms.RandomInInterval(rect.YInterval));
         }
     }
 }

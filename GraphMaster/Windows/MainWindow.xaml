@@ -147,7 +147,7 @@
                     MouseLeave="DrawAreaC_MouseLeave" 
                     MouseLeftButtonDown="DrawAreaC_MouseLeftButtonDown"
                     MouseLeftButtonUp="DrawAreaC_MouseLeftButtonUp"
-                    MouseMove="DrawAreaC_MouseMove" />
+                    MouseMove="DrawAreaC_MouseMove" ClipToBounds="True" />
             <Grid Grid.Column="1">
                 <Button Height="36" HorizontalAlignment="Left" Margin="118,222,0,0" Name="RotX_CW_B" VerticalAlignment="Top" Width="36" Click="RotX_CW_B_Click">
                 </Button>

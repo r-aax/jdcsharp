@@ -126,5 +126,15 @@ namespace Lib.Maths.Geometry.Geometry3D
         {
             return p + (-v);
         }
+
+        /// <summary>
+        /// Random point.
+        /// </summary>
+        /// <param name="par">parallelepiped</param>
+        /// <returns>random point</returns>
+        public static new Point Random(Parallelepiped par)
+        {
+            return new Point(Vector.Random(par));
+        }
     }
 }

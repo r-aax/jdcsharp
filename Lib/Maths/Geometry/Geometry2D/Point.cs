@@ -120,5 +120,15 @@ namespace Lib.Maths.Geometry.Geometry2D
         {
             return new Point(X, Y);
         }
+
+        /// <summary>
+        /// Random point.
+        /// </summary>
+        /// <param name="rect">rectangle</param>
+        /// <returns>random point</returns>
+        public static new Point Random(Rect rect)
+        {
+            return new Point(Vector.Random(rect));
+        }
     }
 }

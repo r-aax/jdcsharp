@@ -3,6 +3,7 @@
 using System;
 using System.Diagnostics;
 
+using Lib.Maths.Numbers;
 using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
 
 namespace Lib.Maths.Geometry.Geometry3D
@@ -394,6 +395,18 @@ namespace Lib.Maths.Geometry.Geometry3D
         public static Vector ComponentWiseMul(Vector v1, Vector v2)
         {
             return new Vector(v1.X * v2.X, v1.Y * v2.Y, v1.Z * v2.Z);
+        }
+
+        /// <summary>
+        /// Random vector.
+        /// </summary>
+        /// <param name="par">parallelepiped</param>
+        /// <returns>random vector</returns>
+        public static Vector Random(Parallelepiped par)
+        {
+            return new Vector(Randoms.RandomInInterval(par.XInterval),
+                              Randoms.RandomInInterval(par.YInterval),
+                              Randoms.RandomInInterval(par.ZInterval));
         }
     }
 }
