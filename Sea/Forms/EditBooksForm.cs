@@ -27,6 +27,11 @@ namespace Sea.Forms
         private BooksList Books;
 
         /// <summary>
+        /// Accept button flag.
+        /// </summary>
+        public bool IsAccepted = false;
+
+        /// <summary>
         /// Set enables properties of buttons.
         /// </summary>
         private void SetControlsEnable()
@@ -137,7 +142,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            Books.XmlSerialize(Parameters.BooksXMLFullFilename);
+            IsAccepted = true;
             Close();
         }
 
@@ -149,6 +154,7 @@ namespace Sea.Forms
         private void CancelB_Click(object sender, EventArgs e)
         {
             // No changes.
+            IsAccepted = false;
             Close();
         }
 
@@ -160,6 +166,11 @@ namespace Sea.Forms
         private void BooksLB_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetControlsEnable();
+        }
+
+        private void EditBooksForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

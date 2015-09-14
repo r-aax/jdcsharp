@@ -53,6 +53,7 @@ namespace Sea.Forms
             EditBooksForm form = new EditBooksForm(Sea.Books);
 
             form.ShowDialog();
+            Sea.FixBooks(form.IsAccepted);
         }
 
         /// <summary>
@@ -65,6 +66,7 @@ namespace Sea.Forms
             EditCategoriesTreeForm form = new EditCategoriesTreeForm(Sea.CategoryRoot);
 
             form.ShowDialog();
+            Sea.FixCategories(form.IsAccepted);
         }
 
         /// <summary>
@@ -77,6 +79,7 @@ namespace Sea.Forms
             EditAuthorsForm form = new EditAuthorsForm(Sea.Authors);
 
             form.ShowDialog();
+            Sea.FixAuthors(form.IsAccepted);
         }
 
         /// <summary>
@@ -89,6 +92,7 @@ namespace Sea.Forms
             EditPublishersForm form = new EditPublishersForm(Sea.Publishers);
 
             form.ShowDialog();
+            Sea.FixPublishers(form.IsAccepted);
         }
     }
 }

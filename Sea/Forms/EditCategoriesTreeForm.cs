@@ -28,6 +28,11 @@ namespace Sea.Forms
         private TreeNode HoldedNode = null;
 
         /// <summary>
+        /// Accept button flag.
+        /// </summary>
+        public bool IsAccepted = false;
+
+        /// <summary>
         /// Find <c>MPTT</c> tree.
         /// </summary>
         /// <param name="node">node</param>
@@ -508,9 +513,8 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            Root.XmlSerialize(Parameters.CategoriesTreeXMLFullFilename);
-
             // Close form.
+            IsAccepted = true;
             Close();
         }
 
@@ -522,6 +526,7 @@ namespace Sea.Forms
         private void CancelB_Click(object sender, EventArgs e)
         {
             // Cancel changes end exit.
+            IsAccepted = false;
             Close();
         }
 

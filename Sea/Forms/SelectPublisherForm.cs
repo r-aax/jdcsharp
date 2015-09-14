@@ -33,7 +33,7 @@ namespace Sea.Forms
         /// <summary>
         /// Accept flag.
         /// </summary>
-        public bool IsAcceped = false;
+        public bool IsAccepted = false;
 
         /// <summary>
         /// Set controls enable.
@@ -60,7 +60,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            IsAcceped = true;
+            IsAccepted = true;
             Publisher = Publishers[PublishersLB.SelectedIndex];
             Close();
         }
@@ -73,7 +73,7 @@ namespace Sea.Forms
         private void CancelB_Click(object sender, EventArgs e)
         {
             // Nothing happened.
-            IsAcceped = false;
+            IsAccepted = false;
             Close();
         }
 

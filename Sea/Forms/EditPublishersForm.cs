@@ -19,6 +19,11 @@ namespace Sea.Forms
         private PublishersList Publishers;
 
         /// <summary>
+        /// Accept button flag.
+        /// </summary>
+        public bool IsAccepted = false;
+
+        /// <summary>
         /// Set controls enable.
         /// </summary>
         private void SetControlsEnable()
@@ -149,7 +154,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            Publishers.XmlSerialize(Parameters.PublishersXMLFullFilename);
+            IsAccepted = true;
             Close();
         }
 
@@ -161,6 +166,7 @@ namespace Sea.Forms
         private void CancelB_Click(object sender, EventArgs e)
         {
             // No changes.
+            IsAccepted = false;
             Close();
         }
 

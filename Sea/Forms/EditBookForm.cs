@@ -219,7 +219,7 @@ namespace Sea.Forms
 
             form.ShowDialog();
 
-            if (form.IsAcceped)
+            if (form.IsAccepted)
             {
                 Book.Publishers.Add(form.Publisher);
             }
