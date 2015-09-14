@@ -210,7 +210,7 @@ namespace Sea.Forms
             tree.Parent.AddChildBefore(new MPTTTree(name, Root.MaxId + 1), node.Index);
 
             // Change view.
-            GetLevelNodes(node).Insert(node.Index, name);
+            CategoriesTreeTV.SelectedNode = GetLevelNodes(node).Insert(node.Index, name);
             CategoriesTreeTV.Select();
 
             SetButtonsEnable();
@@ -238,7 +238,7 @@ namespace Sea.Forms
             tree.Parent.AddChildAfter(new MPTTTree(name, Root.MaxId + 1), node.Index);
 
             // Change view.
-            GetLevelNodes(node).Insert(node.Index + 1, name);
+            CategoriesTreeTV.SelectedNode = GetLevelNodes(node).Insert(node.Index + 1, name);
             CategoriesTreeTV.Select();
 
             SetButtonsEnable();
@@ -266,7 +266,7 @@ namespace Sea.Forms
             tree.AddChild(new MPTTTree(name, Root.MaxId + 1));
 
             // Change view.
-            node.Nodes.Add(name);
+            CategoriesTreeTV.SelectedNode = node.Nodes.Add(name);
             node.Expand();
             CategoriesTreeTV.Select();
 
@@ -386,6 +386,7 @@ namespace Sea.Forms
             // Change view.
             HoldedNode.Remove();
             GetLevelNodes(sel_node).Insert(sel_node.Index, HoldedNode);
+            CategoriesTreeTV.SelectedNode = HoldedNode;
             CategoriesTreeTV.Select();
 
             ResetHoldedNode();
@@ -417,6 +418,7 @@ namespace Sea.Forms
             // Change view.
             HoldedNode.Remove();
             GetLevelNodes(sel_node).Insert(sel_node.Index + 1, HoldedNode);
+            CategoriesTreeTV.SelectedNode = HoldedNode;
             CategoriesTreeTV.Select();
 
             ResetHoldedNode();
@@ -448,6 +450,7 @@ namespace Sea.Forms
             // Change view.
             HoldedNode.Remove();
             sel_node.Nodes.Add(HoldedNode);
+            CategoriesTreeTV.SelectedNode = HoldedNode;
             sel_node.Expand();
             CategoriesTreeTV.Select();
 
