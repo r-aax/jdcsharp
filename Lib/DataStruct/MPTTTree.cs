@@ -319,13 +319,18 @@ namespace Lib.DataStruct
         /// </summary>
         /// <param name="subtree">subtree</param>
         /// <param name="before_num">number of child to replace before</param>
-        public void ReplaceSubtreeBefore(MPTTTree subtree, int before_num)
+        /// <returns><c>true</c> - if replacement is possible, <c>false</c> - if replacement is inpossible</returns>
+        public bool ReplaceSubtreeBefore(MPTTTree subtree, int before_num)
         {
-            // It is impossible to replace outer tree.
-            Debug.Assert(!subtree.IsOuter(this));
+            bool is_possible = !subtree.IsOuter(this);
 
-            subtree.Remove();
-            AddChildBefore(subtree, before_num);
+            if (is_possible)
+            {
+                subtree.Remove();
+                AddChildBefore(subtree, before_num);
+            }
+
+            return is_possible;
         }
 
         /// <summary>
@@ -333,18 +338,20 @@ namespace Lib.DataStruct
         /// </summary>
         /// <param name="subtree">subtree</param>
         /// <param name="before_num">number of child to replace after</param>
-        public void ReplaceSubtreeAfter(MPTTTree subtree, int before_num)
+        /// <returns><c>true</c> - if replacement is possible, <c>false</c> - if replacement is inpossible</returns>
+        public bool ReplaceSubtreeAfter(MPTTTree subtree, int before_num)
         {
-            ReplaceSubtreeBefore(subtree, before_num + 1);
+            return ReplaceSubtreeBefore(subtree, before_num + 1);
         }
 
         /// <summary>
         /// Replace to the end of children list.
         /// </summary>
         /// <param name="subtree">subtree</param>
-        public void ReplaceSubtree(MPTTTree subtree)
+        /// <returns><c>true</c> - if replacement is possible, <c>false</c> - if replacement is inpossible</returns>
+        public bool ReplaceSubtree(MPTTTree subtree)
         {
-            ReplaceSubtreeAfter(subtree, ChildrenCount - 1);
+            return ReplaceSubtreeAfter(subtree, ChildrenCount - 1);
         }
 
         /// <summary>

@@ -4,12 +4,6 @@ using System;
 using System.Diagnostics;
 
 using Lib.Maths.Geometry;
-using Lib.Maths.Geometry.Geometry2D;
-using Lib.Maths.Geometry.Geometry3D;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
-using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
-using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
-using Vector3D = Lib.Maths.Geometry.Geometry3D.Vector;
 
 namespace Lib.Maths.Numbers
 {

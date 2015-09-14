@@ -292,7 +292,12 @@ namespace Sea.Forms
             }
 
             // Change tree.
-            tree.Parent.ReplaceSubtreeBefore(tree, node.Index - 1);
+            if (!tree.Parent.ReplaceSubtreeBefore(tree, node.Index - 1))
+            {
+                MessageBox.Show("Can not replace subtree.");
+
+                return;
+            }
 
             // Change view.
             int index = node.Index;
@@ -323,7 +328,12 @@ namespace Sea.Forms
             }
 
             // Change tree.
-            tree.Parent.ReplaceSubtreeAfter(tree, node.Index);
+            if (!tree.Parent.ReplaceSubtreeAfter(tree, node.Index))
+            {
+                MessageBox.Show("Can not replace subtree.");
+
+                return;
+            }
 
             // Change view.
             int index = node.Index;
@@ -366,7 +376,12 @@ namespace Sea.Forms
             MPTTTree hold_tree = FindMPTTTree(HoldedNode);
 
             // Change tree.
-            sel_tree.Parent.ReplaceSubtreeBefore(hold_tree, sel_node.Index);
+            if (!sel_tree.Parent.ReplaceSubtreeBefore(hold_tree, sel_node.Index))
+            {
+                MessageBox.Show("Can not replace subtree.");
+
+                return;
+            }
 
             // Change view.
             HoldedNode.Remove();
@@ -392,7 +407,12 @@ namespace Sea.Forms
             MPTTTree hold_tree = FindMPTTTree(HoldedNode);
 
             // Change tree.
-            sel_tree.Parent.ReplaceSubtreeAfter(hold_tree, sel_node.Index);
+            if (!sel_tree.Parent.ReplaceSubtreeAfter(hold_tree, sel_node.Index))
+            {
+                MessageBox.Show("Can not replace subtree.");
+
+                return;
+            }
 
             // Change view.
             HoldedNode.Remove();
@@ -418,7 +438,12 @@ namespace Sea.Forms
             MPTTTree hold_tree = FindMPTTTree(HoldedNode);
 
             // Change tree.
-            sel_tree.ReplaceSubtree(hold_tree);
+            if (!sel_tree.ReplaceSubtree(hold_tree))
+            {
+                MessageBox.Show("Can not replace subtree.");
+
+                return;
+            }
 
             // Change view.
             HoldedNode.Remove();
