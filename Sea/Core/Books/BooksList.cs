@@ -6,7 +6,11 @@ using System.IO;
 using System.Windows.Forms;
 using System;
 
+using Lib.DataStruct;
 using Sea.Tools;
+using Sea.Core.Authors;
+using Sea.Core.Publishers;
+using Sea.Core.Categories;
 
 namespace Sea.Core.Books
 {
@@ -108,6 +112,11 @@ namespace Sea.Core.Books
         /// <param name="file_name">name of file</param>
         public void XmlSerialize(string file_name)
         {
+            foreach (Book book in Items)
+            {
+                book.PrepareToSerialization();
+            }
+
             XmlSerializer serializer = new XmlSerializer(GetType());
             TextWriter writer = new StreamWriter(file_name);
 
@@ -120,8 +129,11 @@ namespace Sea.Core.Books
         /// Deserialization.
         /// </summary>
         /// <param name="file_name">name of file</param>
+        /// <param name="authors">global authors list</param>
+        /// <param name="publishers">global publishers list</param>
+        /// <param name="category_root">root of categories tree</param>
         /// <returns>data items collection</returns>
-        static public BooksList XmlDeserialize(string file_name)
+        static public BooksList XmlDeserialize(string file_name, AuthorsList authors, PublishersList publishers, MPTTTree category_root)
         {
             try
             {
@@ -130,6 +142,11 @@ namespace Sea.Core.Books
                 BooksList books = serializer.Deserialize(reader) as BooksList;
 
                 reader.Close();
+
+                foreach (Book book in books.Items)
+                {
+                    book.CorrectAfterDeserialization(authors, publishers, category_root);
+                }
 
                 return books;
             }

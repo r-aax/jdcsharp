@@ -87,9 +87,11 @@ namespace Sea.Forms
         /// <summary>
         /// Constructor.
         /// </summary>
-        public EditCategoriesTreeForm()
+        public EditCategoriesTreeForm(MPTTTree category_root)
         {
             InitializeComponent();
+
+            Root = category_root;
         }
 
         /// <summary>
@@ -99,13 +101,8 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditCategoriesTreeForm_Shown(object sender, EventArgs e)
         {
-            Root = MPTTTree.XmlDeserialize(Parameters.CategoriesTreeXMLFullFilename);
-
-            if (Root == null)
+            if (Root.IsLeaf)
             {
-                // Empty tree.
-                Root = new MPTTTree(" ");
-
                 // Write that we create new categories tree.
                 Text = "Create new categories tree (no categories file is found)";
             }

@@ -525,5 +525,30 @@ namespace Lib.DataStruct
 
             return tree;
         }
+
+        /// <summary>
+        /// Find subtree by identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>subtree or null</returns>
+        public MPTTTree Find(int id)
+        {
+            if (Id == id)
+            {
+                return this;
+            }
+
+            foreach (MPTTTree child in Children)
+            {
+                MPTTTree subtree = child.Find(id);
+
+                if (subtree != null)
+                {
+                    return subtree;
+                }
+            }
+
+            return null;
+        }
     }
 }

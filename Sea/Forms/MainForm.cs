@@ -4,6 +4,7 @@ using System;
 using System.Windows.Forms;
 using System.Diagnostics;
 
+using Sea.Core;
 using Sea.Tools;
 
 namespace Sea.Forms
@@ -14,11 +15,18 @@ namespace Sea.Forms
     public partial class MainForm : Form
     {
         /// <summary>
+        /// Sea, BD representation.
+        /// </summary>
+        private Core.Sea Sea;
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public MainForm()
         {
             InitializeComponent();
+
+            Sea = new Core.Sea();
         }
 
         /// <summary>
@@ -30,6 +38,9 @@ namespace Sea.Forms
         {
             // Storage path info.
             StoragePathSSL.Text = "Storage path: " + Parameters.StoragePath;
+
+            // Deserialize all.
+            Sea.Deserialize();
         }
 
         /// <summary>
@@ -39,7 +50,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void DataBooksMI_Click(object sender, EventArgs e)
         {
-            EditBooksForm form = new EditBooksForm();
+            EditBooksForm form = new EditBooksForm(Sea.Books);
 
             form.ShowDialog();
         }
@@ -51,7 +62,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void DataCategoriesMI_Click(object sender, EventArgs e)
         {
-            EditCategoriesTreeForm form = new EditCategoriesTreeForm();
+            EditCategoriesTreeForm form = new EditCategoriesTreeForm(Sea.CategoryRoot);
 
             form.ShowDialog();
         }
@@ -63,7 +74,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void DataAuthorsMI_Click(object sender, EventArgs e)
         {
-            EditAuthorsForm form = new EditAuthorsForm();
+            EditAuthorsForm form = new EditAuthorsForm(Sea.Authors);
 
             form.ShowDialog();
         }
@@ -75,7 +86,7 @@ namespace Sea.Forms
         /// <param name="e">parameteres</param>
         private void DataPublishersMI_Click(object sender, EventArgs e)
         {
-            EditPublishersForm form = new EditPublishersForm();
+            EditPublishersForm form = new EditPublishersForm(Sea.Publishers);
 
             form.ShowDialog();
         }

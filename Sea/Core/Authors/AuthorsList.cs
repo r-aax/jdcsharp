@@ -177,5 +177,15 @@ namespace Sea.Core.Authors
 
             return authors_list;
         }
+
+        /// <summary>
+        /// Find author by given identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>author</returns>
+        public Author Find(int id)
+        {
+            return Items.Find((author) => author.Id == id);
+        }
     }
 }

@@ -177,5 +177,15 @@ namespace Sea.Core.Publishers
 
             return authors_list;
         }
+
+        /// <summary>
+        /// Find publisher by identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>publisher</returns>
+        public Publisher Find(int id)
+        {
+            return Items.Find((publisher) => publisher.Id == id);
+        }
     }
 }

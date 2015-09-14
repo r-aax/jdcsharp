@@ -24,7 +24,7 @@ namespace Sea.Forms
         /// <summary>
         /// List of books.
         /// </summary>
-        private BooksList BooksList;
+        private BooksList Books;
 
         /// <summary>
         /// Set enables properties of buttons.
@@ -39,10 +39,13 @@ namespace Sea.Forms
 
         /// <summary>
         /// Default constructor.
+        /// <param name="books">books list</param>
         /// </summary>
-        public EditBooksForm()
+        public EditBooksForm(BooksList books)
         {
             InitializeComponent();
+
+            Books = books;
         }
 
         /// <summary>
@@ -52,17 +55,13 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditBooksForm_Shown(object sender, EventArgs e)
         {
-            BooksList = BooksList.XmlDeserialize(Parameters.BooksXMLFullFilename);
-
-            if (BooksList == null)
+            if (Books.IsEmpty)
             {
-                BooksList = new BooksList();
-
                 // No books.
                 Text = "Create new books list (no books file is found)";
             }
 
-            BooksList.ToListBox(BooksLB);
+            Books.ToListBox(BooksLB);
             SetControlsEnable();
         }
 
@@ -79,9 +78,9 @@ namespace Sea.Forms
 
             if (form.IsAccepted)
             {
-                BooksList.Add(form.Book);
-                BooksList.Sort();
-                BooksList.ToListBox(BooksLB);
+                Books.Add(form.Book);
+                Books.Sort();
+                Books.ToListBox(BooksLB);
             }
 
             SetControlsEnable();
@@ -98,16 +97,16 @@ namespace Sea.Forms
 
             if (i > -1)
             {
-                Book book = BooksList[i].Clone() as Book;
+                Book book = Books[i].Clone() as Book;
 
                 EditBookForm form = new EditBookForm("Edit book");
 
                 form.Book = book;
                 form.ShowDialog();
 
-                BooksList[i] = form.Book.Clone() as Book;
-                BooksList.Sort();
-                BooksList.ToListBox(BooksLB);
+                Books[i] = form.Book.Clone() as Book;
+                Books.Sort();
+                Books.ToListBox(BooksLB);
             }
 
             SetControlsEnable();
@@ -124,8 +123,8 @@ namespace Sea.Forms
 
             if (i > -1)
             {
-                BooksList.Items.RemoveAt(i);
-                BooksList.ToListBox(BooksLB);
+                Books.Items.RemoveAt(i);
+                Books.ToListBox(BooksLB);
             }
 
             SetControlsEnable();
@@ -138,7 +137,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            BooksList.XmlSerialize(Parameters.BooksXMLFullFilename);
+            Books.XmlSerialize(Parameters.BooksXMLFullFilename);
             Close();
         }
 

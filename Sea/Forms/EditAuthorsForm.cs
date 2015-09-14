@@ -32,9 +32,11 @@ namespace Sea.Forms
         /// <summary>
         /// Constructor.
         /// </summary>
-        public EditAuthorsForm()
+        public EditAuthorsForm(AuthorsList authors)
         {
             InitializeComponent();
+
+            Authors = authors;
         }
 
         /// <summary>
@@ -44,12 +46,8 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditAuthorsForm_Shown(object sender, EventArgs e)
         {
-            Authors = AuthorsList.XmlDeserialize(Parameters.AuthorsXMLFullFilename);
-
-            if (Authors == null)
+            if (Authors.IsEmpty)
             {
-                Authors = new AuthorsList();
-
                 // Write that we create new authors list.
                 Text = "Create new authors list (no authors file is found)";
             }

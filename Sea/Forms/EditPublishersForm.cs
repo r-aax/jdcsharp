@@ -31,10 +31,13 @@ namespace Sea.Forms
 
         /// <summary>
         /// Constructor.
+        /// <param name="publishers">publishers list</param>
         /// </summary>
-        public EditPublishersForm()
+        public EditPublishersForm(PublishersList publishers)
         {
             InitializeComponent();
+
+            Publishers = publishers;
         }
 
         /// <summary>
@@ -44,14 +47,10 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void EditPublishersForm_Shown(object sender, EventArgs e)
         {
-            Publishers = PublishersList.XmlDeserialize(Parameters.PublishersXMLFullFilename);
-
-            if (Publishers == null)
+            if (Publishers.IsEmpty)
             {
                 // Write that we create new publishers list.
                 Text = "Create new publishers list (no publishers file is found)";
-
-                Publishers = new PublishersList();
             }
 
             Publishers.ToListBox(PublishersLB);

@@ -98,5 +98,25 @@ namespace Sea.Core.Categories
                 lb.Items.Add(Items[i].Data as string);
             }
         }
+
+        /// <summary>
+        /// Find category by identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>category</returns>
+        public MPTTTree Find(int id)
+        {
+            foreach (MPTTTree tree in Items)
+            {
+                MPTTTree subtree = tree.Find(id);
+
+                if (subtree != null)
+                {
+                    return subtree;
+                }
+            }
+
+            return null;
+        }
     }
 }

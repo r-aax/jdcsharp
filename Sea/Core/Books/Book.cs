@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Xml.Serialization;
 
 using Lib.DataStruct;
 using Sea.Core.Authors;
@@ -57,17 +58,35 @@ namespace Sea.Core.Books
         /// <summary>
         /// List of authors.
         /// </summary>
+        [XmlIgnore]
         public AuthorsList Authors { get; set; }
+
+        /// <summary>
+        /// Authors identifiers for serialization.
+        /// </summary>
+        public List<int> AuthorsIds;
 
         /// <summary>
         /// List of publishers.
         /// </summary>
+        [XmlIgnore]
         public PublishersList Publishers { get; set; }
+
+        /// <summary>
+        /// Publishers identifiers for serialization.
+        /// </summary>
+        public List<int> PublishersIds;
 
         /// <summary>
         /// List of categories.
         /// </summary>
+        [XmlIgnore]
         public CategoriesList Categories { get; set; }
+
+        /// <summary>
+        /// Categories identifiers for serialization.
+        /// </summary>
+        public List<int> CategoriesIds;
 
         /// <summary>
         /// Constructor.
@@ -192,6 +211,110 @@ namespace Sea.Core.Books
                 default:
                     Debug.Assert(false, "Unknown book full name print style.");
                     return "";
+            }
+        }
+
+        /// <summary>
+        /// Serialization prepare.
+        /// </summary>
+        public void PrepareToSerialization()
+        {
+            PrepareAuthorsIds();
+            PreparePublishersIds();
+            PrepareCategoriesIds();
+        }
+
+        /// <summary>
+        /// Prepare authors identifiers.
+        /// </summary>
+        private void PrepareAuthorsIds()
+        {
+            AuthorsIds = new List<int>();
+
+            foreach (Author author in Authors.Items)
+            {
+                AuthorsIds.Add(author.Id);
+            }
+        }
+
+        /// <summary>
+        /// Prepare publishers identifiers.
+        /// </summary>
+        private void PreparePublishersIds()
+        {
+            PublishersIds = new List<int>();
+
+            foreach (Publisher publisher in Publishers.Items)
+            {
+                PublishersIds.Add(publisher.Id);
+            }
+        }
+
+        /// <summary>
+        /// Prepare categories identifiers.
+        /// </summary>
+        private void PrepareCategoriesIds()
+        {
+            CategoriesIds = new List<int>();
+
+            foreach (MPTTTree category in Categories.Items)
+            {
+                CategoriesIds.Add(category.Id);
+            }
+        }
+
+        /// <summary>
+        /// Corrects lists after deserialization.
+        /// <param name="authors">global authors list</param>
+        /// <param name="publishers">global publishers list</param>
+        /// <param name="category_root">global categories list</param>
+        /// </summary>
+        public void CorrectAfterDeserialization(AuthorsList authors, PublishersList publishers, MPTTTree category_root)
+        {
+            CorrectAuthors(authors);
+            CorrectPublishers(publishers);
+            CorrectCategories(category_root);
+        }
+
+        /// <summary>
+        /// Correct authors after deserialization.
+        /// <param name="authors">global authors list</param>
+        /// </summary>
+        private void CorrectAuthors(AuthorsList authors)
+        {
+            Authors = new AuthorsList();
+
+            foreach (int id in AuthorsIds)
+            {
+                Authors.Items.Add(authors.Find(id));
+            }
+        }
+
+        /// <summary>
+        /// Correct publishers after deserialization.
+        /// <param name="publishers">global publishers list</param>
+        /// </summary>
+        private void CorrectPublishers(PublishersList publishers)
+        {
+            Publishers = new PublishersList();
+
+            foreach (int id in PublishersIds)
+            {
+                Publishers.Items.Add(publishers.Find(id));
+            }
+        }
+
+        /// <summary>
+        /// Corrects categories after deserialization.
+        /// <param name="category_root">root of categories tree</param>
+        /// </summary>
+        private void CorrectCategories(MPTTTree category_root)
+        {
+            Categories = new CategoriesList();
+
+            foreach (int id in CategoriesIds)
+            {
+                Categories.Items.Add(category_root.Find(id));
             }
         }
     }
