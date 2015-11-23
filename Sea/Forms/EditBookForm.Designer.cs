@@ -55,6 +55,8 @@
             this.IdTB = new System.Windows.Forms.TextBox();
             this.AcceptB = new System.Windows.Forms.Button();
             this.CancelB = new System.Windows.Forms.Button();
+            this.BookFileTB = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -65,10 +67,10 @@
             this.tabControl1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 136);
+            this.tabControl1.Location = new System.Drawing.Point(12, 151);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(863, 338);
+            this.tabControl1.Size = new System.Drawing.Size(863, 323);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -82,14 +84,14 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(855, 312);
+            this.tabPage1.Size = new System.Drawing.Size(855, 297);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General information";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // DeletePublisherB
             // 
-            this.DeletePublisherB.Location = new System.Drawing.Point(648, 276);
+            this.DeletePublisherB.Location = new System.Drawing.Point(648, 263);
             this.DeletePublisherB.Name = "DeletePublisherB";
             this.DeletePublisherB.Size = new System.Drawing.Size(100, 23);
             this.DeletePublisherB.TabIndex = 21;
@@ -99,7 +101,7 @@
             // 
             // DeleteAuthorB
             // 
-            this.DeleteAuthorB.Location = new System.Drawing.Point(220, 276);
+            this.DeleteAuthorB.Location = new System.Drawing.Point(220, 263);
             this.DeleteAuthorB.Name = "DeleteAuthorB";
             this.DeleteAuthorB.Size = new System.Drawing.Size(100, 23);
             this.DeleteAuthorB.TabIndex = 19;
@@ -109,7 +111,7 @@
             // 
             // AddPublisherB
             // 
-            this.AddPublisherB.Location = new System.Drawing.Point(542, 276);
+            this.AddPublisherB.Location = new System.Drawing.Point(542, 263);
             this.AddPublisherB.Name = "AddPublisherB";
             this.AddPublisherB.Size = new System.Drawing.Size(100, 23);
             this.AddPublisherB.TabIndex = 20;
@@ -119,7 +121,7 @@
             // 
             // AddAuthorB
             // 
-            this.AddAuthorB.Location = new System.Drawing.Point(114, 276);
+            this.AddAuthorB.Location = new System.Drawing.Point(114, 263);
             this.AddAuthorB.Name = "AddAuthorB";
             this.AddAuthorB.Size = new System.Drawing.Size(100, 23);
             this.AddAuthorB.TabIndex = 18;
@@ -132,7 +134,7 @@
             this.PublishersLB.FormattingEnabled = true;
             this.PublishersLB.Location = new System.Drawing.Point(437, 6);
             this.PublishersLB.Name = "PublishersLB";
-            this.PublishersLB.Size = new System.Drawing.Size(412, 264);
+            this.PublishersLB.Size = new System.Drawing.Size(412, 251);
             this.PublishersLB.TabIndex = 15;
             this.PublishersLB.SelectedIndexChanged += new System.EventHandler(this.PublishersLB_SelectedIndexChanged);
             // 
@@ -141,7 +143,7 @@
             this.AuthorsLB.FormattingEnabled = true;
             this.AuthorsLB.Location = new System.Drawing.Point(8, 6);
             this.AuthorsLB.Name = "AuthorsLB";
-            this.AuthorsLB.Size = new System.Drawing.Size(423, 264);
+            this.AuthorsLB.Size = new System.Drawing.Size(423, 251);
             this.AuthorsLB.TabIndex = 14;
             this.AuthorsLB.SelectedIndexChanged += new System.EventHandler(this.AuthorsLB_SelectedIndexChanged);
             // 
@@ -152,14 +154,14 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(855, 312);
+            this.tabPage2.Size = new System.Drawing.Size(855, 297);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Categories list";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // ChangeCategoriesB
             // 
-            this.ChangeCategoriesB.Location = new System.Drawing.Point(356, 276);
+            this.ChangeCategoriesB.Location = new System.Drawing.Point(356, 263);
             this.ChangeCategoriesB.Name = "ChangeCategoriesB";
             this.ChangeCategoriesB.Size = new System.Drawing.Size(156, 23);
             this.ChangeCategoriesB.TabIndex = 1;
@@ -172,14 +174,14 @@
             this.CategoriesLB.FormattingEnabled = true;
             this.CategoriesLB.Location = new System.Drawing.Point(6, 6);
             this.CategoriesLB.Name = "CategoriesLB";
-            this.CategoriesLB.Size = new System.Drawing.Size(865, 264);
+            this.CategoriesLB.Size = new System.Drawing.Size(865, 251);
             this.CategoriesLB.TabIndex = 0;
             this.CategoriesLB.SelectedIndexChanged += new System.EventHandler(this.CategoriesLB_SelectedIndexChanged);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(341, 96);
+            this.label7.Location = new System.Drawing.Point(339, 118);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(44, 13);
             this.label7.TabIndex = 23;
@@ -187,7 +189,7 @@
             // 
             // NumberTB
             // 
-            this.NumberTB.Location = new System.Drawing.Point(391, 93);
+            this.NumberTB.Location = new System.Drawing.Point(389, 115);
             this.NumberTB.Name = "NumberTB";
             this.NumberTB.Size = new System.Drawing.Size(100, 20);
             this.NumberTB.TabIndex = 22;
@@ -195,7 +197,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(685, 97);
+            this.label6.Location = new System.Drawing.Point(685, 118);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(39, 13);
             this.label6.TabIndex = 12;
@@ -204,7 +206,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 93);
+            this.label5.Location = new System.Drawing.Point(23, 118);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 13);
             this.label5.TabIndex = 11;
@@ -212,14 +214,14 @@
             // 
             // EditionTB
             // 
-            this.EditionTB.Location = new System.Drawing.Point(730, 93);
+            this.EditionTB.Location = new System.Drawing.Point(730, 115);
             this.EditionTB.Name = "EditionTB";
             this.EditionTB.Size = new System.Drawing.Size(125, 20);
             this.EditionTB.TabIndex = 9;
             // 
             // YearTB
             // 
-            this.YearTB.Location = new System.Drawing.Point(58, 90);
+            this.YearTB.Location = new System.Drawing.Point(58, 115);
             this.YearTB.Name = "YearTB";
             this.YearTB.Size = new System.Drawing.Size(125, 20);
             this.YearTB.TabIndex = 8;
@@ -320,12 +322,31 @@
             this.CancelB.UseVisualStyleBackColor = true;
             this.CancelB.Click += new System.EventHandler(this.CancelB_Click);
             // 
+            // BookFileTB
+            // 
+            this.BookFileTB.Location = new System.Drawing.Point(58, 89);
+            this.BookFileTB.Name = "BookFileTB";
+            this.BookFileTB.Size = new System.Drawing.Size(797, 20);
+            this.BookFileTB.TabIndex = 24;
+            this.BookFileTB.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BookFileTB_MouseClick);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(29, 92);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(23, 13);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "File";
+            // 
             // EditBookForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(887, 513);
             this.ControlBox = false;
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.BookFileTB);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.CancelB);
@@ -384,6 +405,8 @@
         private System.Windows.Forms.Button AddAuthorB;
         private System.Windows.Forms.TextBox NumberTB;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox BookFileTB;
+        private System.Windows.Forms.Label label8;
 
     }
 }

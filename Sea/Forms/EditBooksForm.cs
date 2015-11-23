@@ -167,10 +167,5 @@ namespace Sea.Forms
         {
             SetControlsEnable();
         }
-
-        private void EditBooksForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

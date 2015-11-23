@@ -119,7 +119,6 @@
             this.Name = "EditBooksForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Edit books";
-            this.Load += new System.EventHandler(this.EditBooksForm_Load);
             this.Shown += new System.EventHandler(this.EditBooksForm_Shown);
             this.ResumeLayout(false);
 

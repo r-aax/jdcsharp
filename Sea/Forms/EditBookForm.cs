@@ -151,6 +151,7 @@ namespace Sea.Forms
                 Book.Number = (NumberTB.Text == "") ? 0 : Convert.ToInt32(NumberTB.Text);
                 Book.Edition = (EditionTB.Text == "") ? 1 : Convert.ToInt32(EditionTB.Text);
                 Book.Year = (YearTB.Text == "") ? 0 : Convert.ToInt32(YearTB.Text);
+                Book.File = BookFileTB.Text;
 
                 IsAccepted = true;
                 Close();
@@ -284,6 +285,9 @@ namespace Sea.Forms
                 // Edition 1 it is edition by default (we do not need to show it).
                 EditionTB.Text = (Book.Edition != 1) ? Book.Edition.ToString() : "";
 
+                // File.
+                BookFileTB.Text = Book.File;
+
                 // Lists.
                 Book.Authors.ToListBox(AuthorsLB);
                 Book.Publishers.ToListBox(PublishersLB);
@@ -294,6 +298,8 @@ namespace Sea.Forms
             }
             else
             {
+                // New book.
+
                 Book = new Book();
                 TypeCB.SelectedIndex = (int)BookType.Book;
             }
@@ -337,6 +343,19 @@ namespace Sea.Forms
         private void TypeCB_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetControlsEnable();
+        }
+
+        /// <summary>
+        /// Mouse click on Open File Dialog.
+        /// </summary>
+        /// <param name="sender">source</param>
+        /// <param name="e">parameters</param>
+        private void BookFileTB_MouseClick(object sender, MouseEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+
+            ofd.ShowDialog();
+            BookFileTB.Text = ofd.FileName;
         }
     }
 }

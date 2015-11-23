@@ -56,6 +56,11 @@ namespace Sea.Core.Books
         public int Year { get; set; }
 
         /// <summary>
+        /// Book file reference.
+        /// </summary>
+        public string File { get; set; }
+
+        /// <summary>
         /// List of authors.
         /// </summary>
         [XmlIgnore]
@@ -97,8 +102,9 @@ namespace Sea.Core.Books
         /// <param name="number">number of magazie</param>
         /// <param name="edition">edition number</param>
         /// <param name="year">year</param>
+        /// <param name="file">file</param>
         public Book(string name, BookType type, string article_source,
-                    int number, int edition, int year)
+                    int number, int edition, int year, string file)
         {
             Name = name;
             Type = type;
@@ -106,6 +112,7 @@ namespace Sea.Core.Books
             Number = number;
             Edition = edition;
             Year = year;
+            File = file;
             Authors = new AuthorsList();
             Publishers = new PublishersList();
             Categories = new CategoriesList();
@@ -115,7 +122,7 @@ namespace Sea.Core.Books
         /// Default constructor.
         /// </summary>
         public Book()
-            : this("", BookType.Book, "", 0, 1, 0)
+            : this("", BookType.Book, "", 0, 1, 0, "")
         {
         }
 
@@ -171,6 +178,7 @@ namespace Sea.Core.Books
             book.Number = Number;
             book.Edition = Edition;
             book.Year = Year;
+            book.File = File;
             book.Authors = Authors.Clone() as AuthorsList;
             book.Publishers = Publishers.Clone() as PublishersList;
             book.Categories = Categories.Clone() as CategoriesList;
