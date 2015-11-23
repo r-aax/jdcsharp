@@ -61,6 +61,17 @@ namespace Sea.Core.Books
         public string File { get; set; }
 
         /// <summary>
+        /// Canonic name of book file.
+        /// </summary>
+        public string CanonFile
+        {
+            get
+            {
+                return Id.ToString() + File.Substring(File.LastIndexOf('.'));
+            }
+        }
+
+        /// <summary>
         /// List of authors.
         /// </summary>
         [XmlIgnore]

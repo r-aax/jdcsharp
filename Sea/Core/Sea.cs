@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 using Lib.DataStruct;
 using Sea.Core.Authors;
@@ -210,11 +211,42 @@ namespace Sea.Core
         {
             if (is_approved)
             {
+                // First we have to copy our books data
+                // to /Data directory in Sea location.
+                CopyBooksFiles();
+
+                // Serialize now.
                 SerializeBooks();
             }
             else
             {
                 DeserializeBooks();
+            }
+        }
+
+        /// <summary>
+        /// Copy books files.
+        /// </summary>
+        private void CopyBooksFiles()
+        {
+            // Create data directory.
+            if (!Directory.Exists(Parameters.DataPath))
+            {
+                Directory.CreateDirectory(Parameters.DataPath);
+            }
+
+            foreach (Book book in Books.Items)
+            {
+                string file = book.File;
+                string canon = book.CanonFile;
+                string full_to_file = Parameters.DataPath + "/" + canon;
+
+                // Refresh file.
+                if (String.Compare(file, canon) != 0)
+                {
+                    book.File = canon;
+                    File.Copy(file, full_to_file, true);
+                }
             }
         }
     }
