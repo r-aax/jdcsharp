@@ -41,6 +41,7 @@
             this.ToolsArchiveMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolArchiveMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsDearchiveMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolsRestoreMI = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -128,7 +129,8 @@
             // 
             this.ToolsArchiveMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolArchiveMI,
-            this.ToolsDearchiveMI});
+            this.ToolsDearchiveMI,
+            this.ToolsRestoreMI});
             this.ToolsArchiveMI.Name = "ToolsArchiveMI";
             this.ToolsArchiveMI.Size = new System.Drawing.Size(48, 20);
             this.ToolsArchiveMI.Text = "Tools";
@@ -146,6 +148,13 @@
             this.ToolsDearchiveMI.Size = new System.Drawing.Size(152, 22);
             this.ToolsDearchiveMI.Text = "Dearchive";
             this.ToolsDearchiveMI.Click += new System.EventHandler(this.ToolsDearchiveMI_Click);
+            // 
+            // ToolsRestoreMI
+            // 
+            this.ToolsRestoreMI.Name = "ToolsRestoreMI";
+            this.ToolsRestoreMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolsRestoreMI.Text = "Restore";
+            this.ToolsRestoreMI.Click += new System.EventHandler(this.ToolsRestoreMI_Click);
             // 
             // MainForm
             // 
@@ -183,6 +192,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolsArchiveMI;
         private System.Windows.Forms.ToolStripMenuItem ToolArchiveMI;
         private System.Windows.Forms.ToolStripMenuItem ToolsDearchiveMI;
+        private System.Windows.Forms.ToolStripMenuItem ToolsRestoreMI;
     }
 }
 

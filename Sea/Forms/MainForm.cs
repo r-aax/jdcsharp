@@ -45,6 +45,10 @@ namespace Sea.Forms
 
             // Deserialize all.
             Sea.Deserialize();
+
+            // Backup.
+            // We do backup while data base is not too big.
+            Sea.Archive(Parameters.StoragePathBackupArchive);
         }
 
         /// <summary>
@@ -115,16 +119,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void ToolArchiveMI_Click(object sender, EventArgs e)
         {
-            ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
-
-            // Delete old archive.
-            if (File.Exists(Parameters.StoragePathArchive))
-            {
-                File.Delete(Parameters.StoragePathArchive);
-            }
-
-            fz.CreateZip(Parameters.StoragePathArchive, Parameters.StoragePath, true, null);
-            ShowLastAction("archivation is completed");
+            Sea.Archive(Parameters.StoragePathArchive);
         }
 
         /// <summary>
@@ -134,14 +129,22 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void ToolsDearchiveMI_Click(object sender, EventArgs e)
         {
-            // Dearchive only if archive is found.
-            if (File.Exists(Parameters.StoragePathArchive))
+            if (Sea.Dearchive(Parameters.StoragePathArchive))
             {
-                Directory.Delete(Parameters.StoragePath, true);
-                ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
-                fz.ExtractZip(Parameters.StoragePathArchive, Parameters.StoragePath, null);
-                Sea.Deserialize();
                 ShowLastAction("dearchivation is completed");
+            }
+        }
+
+        /// <summary>
+        /// Restore data from last backup.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void ToolsRestoreMI_Click(object sender, EventArgs e)
+        {
+            if (Sea.Dearchive(Parameters.StoragePathBackupArchive))
+            {
+                ShowLastAction("data restore is completed");
             }
         }
     }

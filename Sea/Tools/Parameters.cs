@@ -20,6 +20,11 @@ namespace Sea.Tools
         public static readonly string StoragePathArchive = StoragePath + ".zip";
 
         /// <summary>
+        /// Backup storage.
+        /// </summary>
+        public static readonly string StoragePathBackupArchive = StoragePath + "_backup.zip";
+
+        /// <summary>
         /// Books XML file name.
         /// </summary>
         public static readonly string BooksXMLFilename = "books.xml";

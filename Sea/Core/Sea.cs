@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+using ICSharpCode.SharpZipLib;
+
 using Lib.DataStruct;
 using Sea.Core.Authors;
 using Sea.Core.Publishers;
@@ -247,6 +249,46 @@ namespace Sea.Core
                     book.File = canon;
                     File.Copy(file, full_to_file, true);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Archive all data.
+        /// </summary>
+        /// <param name="archive_name">name of archive</param>
+        public void Archive(string archive_name)
+        {
+            ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
+
+            // Delete old archive.
+            if (File.Exists(archive_name))
+            {
+                File.Delete(archive_name);
+            }
+
+            fz.CreateZip(archive_name, Parameters.StoragePath, true, null);
+        }
+
+        /// <summary>
+        /// Dearchive all data.
+        /// </summary>
+        /// <param name="archive_name">archive name</param>
+        /// <returns><c>true</c> if dearchivation is done, <c>false</c> otherwise</returns>
+        public bool Dearchive(string archive_name)
+        {
+            // Dearchive only if archive is found.
+            if (File.Exists(archive_name))
+            {
+                Directory.Delete(Parameters.StoragePath, true);
+                ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
+                fz.ExtractZip(archive_name, Parameters.StoragePath, null);
+                Deserialize();
+
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }
