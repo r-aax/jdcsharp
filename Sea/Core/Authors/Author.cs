@@ -38,6 +38,7 @@ namespace Sea.Core.Authors
         /// <param name="last_name">last name</param>
         public Author(string first_name, string second_name, string last_name)
         {
+            Id = -1;
             FirstName = first_name;
             SecondName = second_name;
             LastName = last_name;

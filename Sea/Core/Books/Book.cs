@@ -117,6 +117,7 @@ namespace Sea.Core.Books
         public Book(string name, BookType type, string article_source,
                     int number, int edition, int year, string file)
         {
+            Id = -1;
             Name = name;
             Type = type;
             ArticleSource = article_source;

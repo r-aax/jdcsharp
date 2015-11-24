@@ -90,7 +90,11 @@ namespace Sea.Core.Publishers
         /// <param name="publisher">new publisher</param>
         public void Add(Publisher publisher)
         {
-            publisher.Id = MaxId() + 1;
+            if (publisher.Id < 0)
+            {
+                publisher.Id = MaxId() + 1;
+            }
+
             Items.Add(publisher);
         }
 

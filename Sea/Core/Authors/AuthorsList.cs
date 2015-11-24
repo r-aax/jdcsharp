@@ -90,7 +90,11 @@ namespace Sea.Core.Authors
         /// <param name="author">new author</param>
         public void Add(Author author)
         {
-            author.Id = MaxId() + 1;
+            if (author.Id < 0)
+            {
+                author.Id = MaxId() + 1;
+            }
+
             Items.Add(author);
         }
 

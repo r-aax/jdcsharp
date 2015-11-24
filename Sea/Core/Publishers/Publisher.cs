@@ -26,6 +26,7 @@ namespace Sea.Core.Publishers
         /// <param name="name">name</param>
         public Publisher(string name)
         {
+            Id = -1;
             Name = name;
         }
 
