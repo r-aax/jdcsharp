@@ -4,6 +4,8 @@ using System;
 using System.Windows.Forms;
 using System.Diagnostics;
 
+using ICSharpCode.SharpZipLib;
+
 using Sea.Core;
 using Sea.Tools;
 
@@ -27,6 +29,7 @@ namespace Sea.Forms
             InitializeComponent();
 
             Sea = new Core.Sea();
+            ShowLastAction("data is loaded");
         }
 
         /// <summary>
@@ -93,6 +96,27 @@ namespace Sea.Forms
 
             form.ShowDialog();
             Sea.FixPublishers(form.IsAccepted);
+        }
+
+        /// <summary>
+        /// Show last action.
+        /// </summary>
+        /// <param name="action">action description</param>
+        private void ShowLastAction(string action)
+        {
+            LastActionSSL.Text = "Last action: " + action;
+        }
+
+        /// <summary>
+        /// Archive all data.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void ToolArchiveMI_Click(object sender, EventArgs e)
+        {
+            ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
+
+            fz.CreateZip(Parameters.StoragePath + ".zip", Parameters.StoragePath, true, null);
         }
     }
 }
