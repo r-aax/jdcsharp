@@ -3,6 +3,7 @@
 using System;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
 
 using ICSharpCode.SharpZipLib;
 
@@ -116,7 +117,32 @@ namespace Sea.Forms
         {
             ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
 
-            fz.CreateZip(Parameters.StoragePath + ".zip", Parameters.StoragePath, true, null);
+            // Delete old archive.
+            if (File.Exists(Parameters.StoragePathArchive))
+            {
+                File.Delete(Parameters.StoragePathArchive);
+            }
+
+            fz.CreateZip(Parameters.StoragePathArchive, Parameters.StoragePath, true, null);
+            ShowLastAction("archivation is completed");
+        }
+
+        /// <summary>
+        /// Dearchive all data.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void ToolsDearchiveMI_Click(object sender, EventArgs e)
+        {
+            // Dearchive only if archive is found.
+            if (File.Exists(Parameters.StoragePathArchive))
+            {
+                Directory.Delete(Parameters.StoragePath, true);
+                ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
+                fz.ExtractZip(Parameters.StoragePathArchive, Parameters.StoragePath, null);
+                Sea.Deserialize();
+                ShowLastAction("dearchivation is completed");
+            }
         }
     }
 }
