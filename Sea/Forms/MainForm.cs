@@ -147,5 +147,15 @@ namespace Sea.Forms
                 ShowLastAction("data restore is completed");
             }
         }
+
+        /// <summary>
+        /// Run correction (delete extra categories and so on).
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void ToolsRunCorrectionMI_Click(object sender, EventArgs e)
+        {
+            Sea.Books.DeleteExtraCategories();
+        }
     }
 }

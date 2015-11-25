@@ -118,5 +118,30 @@ namespace Sea.Core.Categories
 
             return null;
         }
+
+        /// <summary>
+        /// Delete extra categories.
+        /// </summary>
+        public void DeleteExtra()
+        {
+            for (int i = Items.Count - 1; i >= 0; i--)
+            {
+                for (int j = Items.Count - 1; j > i; j--)
+                {
+                    MPTTTree ti = Items[i];
+                    MPTTTree tj = Items[j];
+
+                    if (ti.IsInner(tj))
+                    {
+                        Items.RemoveAt(i);
+                        break;
+                    }
+                    else if (ti.IsOuter(tj))
+                    {
+                        Items.RemoveAt(j);
+                    }
+                }
+            }
+        }
     }
 }

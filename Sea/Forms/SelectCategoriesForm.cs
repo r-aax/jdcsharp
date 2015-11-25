@@ -241,6 +241,16 @@ namespace Sea.Forms
         /// <param name="categories">categories list</param>
         private void AddCategoriesToList(TreeNodeCollection nodes, List<MPTTTree> categories)
         {
+            /*
+             * We have autocorrection of wrong categories configuration here.
+             * Suppose we have the following categories configuration:
+             *   cat Math [marked]
+             *     cat Geom [marked]
+             * And both of them are marked.
+             * When we encounter Math category we add it to categories list and do not process Geom subcategory.
+             * It is correct behaviour, it is not needed to be fixed.
+             */
+
             foreach (TreeNode node in nodes)
             {
                 if (node.BackColor == Parameters.SelectColor)

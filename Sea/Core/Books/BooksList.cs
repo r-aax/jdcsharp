@@ -173,5 +173,16 @@ namespace Sea.Core.Books
                 lb.Items.Add(Items[i].FullName(BookFullNamePrintStyle.Wide));
             }
         }
+
+        /// <summary>
+        /// Delete extra categories.
+        /// </summary>
+        public void DeleteExtraCategories()
+        {
+            foreach (Book b in Items)
+            {
+                b.Categories.DeleteExtra();
+            }
+        }
     }
 }
