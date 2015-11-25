@@ -59,12 +59,14 @@
             // 
             // StoragePathSSL
             // 
+            this.StoragePathSSL.ForeColor = System.Drawing.SystemColors.ControlDark;
             this.StoragePathSSL.Name = "StoragePathSSL";
             this.StoragePathSSL.Size = new System.Drawing.Size(162, 17);
             this.StoragePathSSL.Text = "Storage path: <storage path>";
             // 
             // LastActionSSL
             // 
+            this.LastActionSSL.ForeColor = System.Drawing.Color.SteelBlue;
             this.LastActionSSL.Name = "LastActionSSL";
             this.LastActionSSL.Size = new System.Drawing.Size(67, 17);
             this.LastActionSSL.Text = "Last action:";

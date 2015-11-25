@@ -150,6 +150,7 @@ namespace Sea.Forms
             }
 
             SelectGivenCategories(Categories);
+            CategoriesTreeTV.Nodes[0].ExpandAll();
         }
 
         /// <summary>
