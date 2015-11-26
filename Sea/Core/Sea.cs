@@ -48,6 +48,11 @@ namespace Sea.Core
         /// </summary>
         public Sea()
         {
+            // Create Sea directory if it does not exist.
+            if (!Directory.Exists(Parameters.StoragePath))
+            {
+                Directory.CreateDirectory(Parameters.StoragePath);
+            }
         }
 
         /// <summary>
