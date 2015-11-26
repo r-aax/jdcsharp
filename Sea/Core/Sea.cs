@@ -244,15 +244,18 @@ namespace Sea.Core
 
             foreach (Book book in Books.Items)
             {
-                string file = book.File;
-                string canon = book.CanonFile;
-                string full_to_file = Parameters.DataPath + "/" + canon;
-
-                // Refresh file.
-                if (String.Compare(file, canon) != 0)
+                if (book.File != "")
                 {
-                    book.File = canon;
-                    File.Copy(file, full_to_file, true);
+                    string file = book.File;
+                    string canon = book.CanonFile;
+                    string full_to_file = Parameters.DataPath + "/" + canon;
+
+                    // Refresh file.
+                    if (String.Compare(file, canon) != 0)
+                    {
+                        book.File = canon;
+                        File.Copy(file, full_to_file, true);
+                    }
                 }
             }
         }

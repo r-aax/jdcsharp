@@ -134,7 +134,7 @@ namespace Sea.Core.Books
         /// Default constructor.
         /// </summary>
         public Book()
-            : this("", BookType.Book, "", 0, 1, 0, "")
+            : this("", BookType.Book, "", 0, 0, 0, "")
         {
         }
 
@@ -224,6 +224,18 @@ namespace Sea.Core.Books
                     if (Year > 0)
                     {
                         full_name += String.Format(" ({0})", Year);
+                    }
+
+                    // Edition.
+                    if (Edition > 0)
+                    {
+                        full_name += String.Format(" e{0}", Edition);
+                    }
+
+                    // Number of magazine.
+                    if (Type == BookType.Magazine)
+                    {
+                        full_name += String.Format(" n{0}", Number);
                     }
 
                     return full_name;

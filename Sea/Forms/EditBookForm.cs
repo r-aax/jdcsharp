@@ -149,7 +149,7 @@ namespace Sea.Forms
                 Book.Type = IntToBookType(TypeCB.SelectedIndex);
                 Book.ArticleSource = ArticleSourceTB.Text;
                 Book.Number = (NumberTB.Text == "") ? 0 : Convert.ToInt32(NumberTB.Text);
-                Book.Edition = (EditionTB.Text == "") ? 1 : Convert.ToInt32(EditionTB.Text);
+                Book.Edition = (EditionTB.Text == "") ? 0 : Convert.ToInt32(EditionTB.Text);
                 Book.Year = (YearTB.Text == "") ? 0 : Convert.ToInt32(YearTB.Text);
                 Book.File = BookFileTB.Text;
 
@@ -283,7 +283,7 @@ namespace Sea.Forms
                 YearTB.Text = (Book.Year != 0) ? Book.Year.ToString() : "";
 
                 // Edition 1 it is edition by default (we do not need to show it).
-                EditionTB.Text = (Book.Edition != 1) ? Book.Edition.ToString() : "";
+                EditionTB.Text = (Book.Edition != 0) ? Book.Edition.ToString() : "";
 
                 // File.
                 BookFileTB.Text = Book.File;
