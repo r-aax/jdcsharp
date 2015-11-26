@@ -67,7 +67,7 @@ namespace Sea.Core.Books
         {
             get
             {
-                return FullName(BookFullNamePrintStyle.Default) + File.Substring(File.LastIndexOf('.'));
+                return Id.ToString() + File.Substring(File.LastIndexOf('.'));
             }
         }
 
@@ -186,6 +186,7 @@ namespace Sea.Core.Books
 
             book.Id = Id;
             book.Name = Name;
+            book.Type = Type;
             book.ArticleSource = ArticleSource;
             book.Number = Number;
             book.Edition = Edition;

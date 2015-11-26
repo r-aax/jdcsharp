@@ -44,6 +44,7 @@
             this.ToolsRestoreMI = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolsRunCorrectionMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.BooksLB = new System.Windows.Forms.ListBox();
             this.statusStrip1.SuspendLayout();
             this.MainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -99,33 +100,33 @@
             // DataBooksMI
             // 
             this.DataBooksMI.Name = "DataBooksMI";
-            this.DataBooksMI.Size = new System.Drawing.Size(152, 22);
+            this.DataBooksMI.Size = new System.Drawing.Size(130, 22);
             this.DataBooksMI.Text = "Books";
             this.DataBooksMI.Click += new System.EventHandler(this.DataBooksMI_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
             // 
             // DataCategoriesMI
             // 
             this.DataCategoriesMI.Name = "DataCategoriesMI";
-            this.DataCategoriesMI.Size = new System.Drawing.Size(152, 22);
+            this.DataCategoriesMI.Size = new System.Drawing.Size(130, 22);
             this.DataCategoriesMI.Text = "Categories";
             this.DataCategoriesMI.Click += new System.EventHandler(this.DataCategoriesMI_Click);
             // 
             // DataAuthorsMI
             // 
             this.DataAuthorsMI.Name = "DataAuthorsMI";
-            this.DataAuthorsMI.Size = new System.Drawing.Size(152, 22);
+            this.DataAuthorsMI.Size = new System.Drawing.Size(130, 22);
             this.DataAuthorsMI.Text = "Authors";
             this.DataAuthorsMI.Click += new System.EventHandler(this.DataAuthorsMI_Click);
             // 
             // DataPublishersMI
             // 
             this.DataPublishersMI.Name = "DataPublishersMI";
-            this.DataPublishersMI.Size = new System.Drawing.Size(152, 22);
+            this.DataPublishersMI.Size = new System.Drawing.Size(130, 22);
             this.DataPublishersMI.Text = "Publishers";
             this.DataPublishersMI.Click += new System.EventHandler(this.DataPublishersMI_Click);
             // 
@@ -174,11 +175,21 @@
             this.ToolsRunCorrectionMI.Text = "Run Correction";
             this.ToolsRunCorrectionMI.Click += new System.EventHandler(this.ToolsRunCorrectionMI_Click);
             // 
+            // BooksLB
+            // 
+            this.BooksLB.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BooksLB.FormattingEnabled = true;
+            this.BooksLB.Location = new System.Drawing.Point(0, 24);
+            this.BooksLB.Name = "BooksLB";
+            this.BooksLB.Size = new System.Drawing.Size(819, 440);
+            this.BooksLB.TabIndex = 2;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(819, 486);
+            this.Controls.Add(this.BooksLB);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.MainMenu);
             this.MainMenuStrip = this.MainMenu;
@@ -213,6 +224,7 @@
         private System.Windows.Forms.ToolStripMenuItem ToolsRestoreMI;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ToolsRunCorrectionMI;
+        private System.Windows.Forms.ListBox BooksLB;
     }
 }
 
