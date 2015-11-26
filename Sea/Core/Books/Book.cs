@@ -67,7 +67,7 @@ namespace Sea.Core.Books
         {
             get
             {
-                return Id.ToString() + File.Substring(File.LastIndexOf('.'));
+                return FullName(BookFullNamePrintStyle.Default) + File.Substring(File.LastIndexOf('.'));
             }
         }
 

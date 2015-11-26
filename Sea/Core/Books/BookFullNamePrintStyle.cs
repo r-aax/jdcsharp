@@ -16,6 +16,11 @@ namespace Sea.Core.Books
         /// <summary>
         /// Wide information.
         /// </summary>
-        Wide
+        Wide,
+
+        /// <summary>
+        /// Default value.
+        /// </summary>
+        Default = Wide
     }
 }
