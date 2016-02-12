@@ -106,23 +106,44 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
-        /// Incident edges.
-        /// </summary>
-        private List<Edge> _Edges;
-
-        /// <summary>
         /// Incident edges access.
         /// </summary>
         public List<Edge> Edges
         {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Count of incident edges.
+        /// </summary>
+        public int Degree
+        {
             get
             {
-                return _Edges;
+                return Edges.Count();
             }
+        }
 
-            private set
+        /// <summary>
+        /// Check if node is isolated.
+        /// </summary>
+        public bool IsIsolated
+        {
+            get
             {
-                _Edges = value;
+                return Degree == 0;
+            }
+        }
+
+        /// <summary>
+        /// Check if node is hanging.
+        /// </summary>
+        public bool IsHanging
+        {
+            get
+            {
+                return Degree == 1;
             }
         }
 
@@ -158,6 +179,17 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Count of in edges.
+        /// </summary>
+        public int InDegree
+        {
+            get
+            {
+                return InEdges.Count();
+            }
+        }
+
+        /// <summary>
         /// Find out edges.
         /// </summary>
         public List<Edge> OutEdges
@@ -165,6 +197,17 @@ namespace Lib.DataStruct.Graph
             get
             {
                 return Edges.FindAll(e => !e.IsOriented || (e.A == this));
+            }
+        }
+
+        /// <summary>
+        /// Count of out edges.
+        /// </summary>
+        public int OutDegree
+        {
+            get
+            {
+                return OutEdges.Count();
             }
         }
 

@@ -86,6 +86,28 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Count of isolated nodes.
+        /// </summary>
+        public int IsolatedNodesCount
+        {
+            get
+            {
+                return Nodes.FindAll(n => n.IsIsolated).Count;
+            }
+        }
+        
+        /// <summary>
+        /// Count of hanging nodes.
+        /// </summary>
+        public int HangingNodesCount
+        {
+            get
+            {
+                return Nodes.FindAll(n => n.IsHanging).Count;
+            }
+        }
+
+        /// <summary>
         /// Edges.
         /// </summary>
         private List<Edge> _Edges = null;
