@@ -20,22 +20,7 @@ namespace Lib.GUI.WindowsForms
         /// <returns>value <c>int</c></returns>
         public static int GetInt(TextBox tb)
         {
-            int i = 0;
-            NumberFormatInfo info = CultureInfo.GetCultureInfo("en-US").NumberFormat.Clone()
-                                    as NumberFormatInfo;
-            info.NumberDecimalSeparator = ".";
-
-            try
-            {
-                i = Convert.ToInt32(tb.Text, info);
-            }
-            catch (Exception)
-            {
-                // Not nesessary to fault.
-                Debug.Assert(false);
-            }
-
-            return i;
+            return Lib.Utils.Convert.GetInt(tb.Text);
         }
 
         /// <summary>
@@ -45,22 +30,7 @@ namespace Lib.GUI.WindowsForms
         /// <returns>value <c>double</c></returns>
         public static double GetDouble(TextBox tb)
         {
-            double d = 0.0;
-            NumberFormatInfo info = CultureInfo.GetCultureInfo("en-US").NumberFormat.Clone()
-                                    as NumberFormatInfo;
-            info.NumberDecimalSeparator = ".";
-
-            try
-            {
-                d = Convert.ToDouble(tb.Text, info);
-            }
-            catch (Exception)
-            {
-                // Not nesessary to fault.
-                Debug.Assert(false);
-            }
-
-            return d;
+            return Lib.Utils.Convert.GetDouble(tb.Text);
         }
 
         /// <summary>
@@ -141,7 +111,7 @@ namespace Lib.GUI.WindowsForms
         /// </summary>
         /// <param name="initial_string">initial string</param>
         /// <param name="label">form label</param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string InputString(string initial_string, string label)
         {
             EditStringForm f = new EditStringForm(initial_string, label);

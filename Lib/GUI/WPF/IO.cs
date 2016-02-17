@@ -13,28 +13,38 @@ namespace Lib.GUI.WPF
     public class IO
     {
         /// <summary>
+        /// Get int from <c>int</c> text box.
+        /// </summary>
+        /// <param name="text_box">text box</param>
+        /// <returns>value</returns>
+        public static double GetInt(TextBox text_box)
+        {
+            return Lib.Utils.Convert.GetInt(text_box.Text);
+        }
+        
+        /// <summary>
         /// Get double from <c>double</c> text box.
         /// </summary>
         /// <param name="text_box">text box</param>
         /// <returns>value</returns>
         public static double GetDouble(TextBox text_box)
         {
-            double d = 0.0;
-            NumberFormatInfo info = CultureInfo.GetCultureInfo("en-US").NumberFormat.Clone()
-                                    as NumberFormatInfo;
-            info.NumberDecimalSeparator = ".";
+            return Lib.Utils.Convert.GetDouble(text_box.Text);
+        }
 
-            try
-            {
-                d = Convert.ToDouble(text_box.Text, info);
-            }
-            catch (Exception)
-            {
-                // Not nessesary to fault.
-                Debug.Assert(false);
-            }
+        /// <summary>
+        /// Input string (or edit given string).
+        /// </summary>
+        /// <param name="initial_string">initial string</param>
+        /// <param name="label">form label</param>
+        /// <returns>string</returns>
+        public static string InputString(string initial_string, string label)
+        {
+            EditStringWindow w = new EditStringWindow();
 
-            return d;
+            w.ShowDialog();
+
+            return w.Result;
         }
     }
 }
