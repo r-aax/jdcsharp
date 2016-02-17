@@ -114,7 +114,7 @@ namespace GraphMaster.Windows
             InitializeComponent();
 
             // Init graph.
-            Graph = GraphCreator.HatchGraph(10, new int[] { 0, 1, 2, 3 }, Circle);
+            Graph = GraphCreator.RandomGraph(20, Circle);
         }
 
         /// <summary>
@@ -1125,7 +1125,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleFull_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.FullGraph(RandomOrder, Circle);
+            Graph = GraphCreator.FullGraph(GetOrder, Circle);
             Paint();
         }
 
@@ -1136,7 +1136,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleRandom_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.RandomGraph(RandomOrder, Circle);
+            Graph = GraphCreator.RandomGraph(GetOrder, Circle);
             Paint();
         }
 
@@ -1145,9 +1145,9 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">paremeters</param>
-        private void ExampleCycele_Click(object sender, RoutedEventArgs e)
+        private void ExampleCycle_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Cycle(RandomOrder, Circle);
+            Graph = GraphCreator.Cycle(GetOrder, Circle);
             Paint();
         }
 
@@ -1158,7 +1158,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleStar_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Star(RandomOrder, Circle);
+            Graph = GraphCreator.Star(GetOrder, Circle);
             Paint();
         }
 
@@ -1169,7 +1169,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleWheel_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Wheel(RandomOrder, Circle);
+            Graph = GraphCreator.Wheel(GetOrder, Circle);
             Paint();
         }
 
