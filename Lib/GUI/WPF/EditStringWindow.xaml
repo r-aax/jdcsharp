@@ -5,12 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
         mc:Ignorable="d"
         Background="AliceBlue" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False"
-        d:DesignHeight="100" d:DesignWidth="300">
+        d:DesignHeight="100" d:DesignWidth="300" >
     <StackPanel Orientation="Vertical">
         <TextBox Name="TextTB"></TextBox>
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Name="AcceptB" MinWidth="75" Margin="10">Accept</Button>
-            <Button Name="CancelB" MinWidth="75" Margin="10">Cancel</Button>
+            <Button Name="AcceptB" MinWidth="75" Margin="10" Click="AcceptB_Click">Accept</Button>
+            <Button Name="CancelB" MinWidth="75" Margin="10" Click="CancelB_Click">Cancel</Button>
         </StackPanel>
     </StackPanel>
 </Window>

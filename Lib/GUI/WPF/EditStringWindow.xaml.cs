@@ -28,9 +28,33 @@ namespace Lib.GUI.WPF
         /// <summary>
         /// Constructor.
         /// </summary>
-        public EditStringWindow()
+        public EditStringWindow(string ini, string label)
         {
             InitializeComponent();
+            Result = ini;
+            TextTB.Text = ini;
+            Title = label;
+        }
+
+        /// <summary>
+        /// Accept button click.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void AcceptB_Click(object sender, RoutedEventArgs e)
+        {
+            Result = TextTB.Text;
+            Close();
+        }
+
+        /// <summary>
+        /// Cancel button click.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void CancelB_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -20,6 +20,7 @@ using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
 using GraphMaster.Tools;
+using Lib.GUI.WPF;
 
 namespace GraphMaster.Windows
 {
@@ -51,6 +52,17 @@ namespace GraphMaster.Windows
             get
             {
                 return Randoms.RandomInInterval(MinOrder, MaxOrder);
+            }
+        }
+
+        /// <summary>
+        /// Get order of graph.
+        /// </summary>
+        private int GetOrder
+        {
+            get
+            {
+                return IO.InputInt(RandomOrder, "Input order");
             }
         }
 
@@ -1102,7 +1114,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleEmpty_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.EmptyGraph(RandomOrder, Circle);
+            Graph = GraphCreator.EmptyGraph(GetOrder, Circle);
             Paint();
         }
 

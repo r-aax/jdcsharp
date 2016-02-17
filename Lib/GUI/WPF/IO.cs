@@ -35,16 +35,48 @@ namespace Lib.GUI.WPF
         /// <summary>
         /// Input string (or edit given string).
         /// </summary>
-        /// <param name="initial_string">initial string</param>
+        /// <param name="ini">ini</param>
         /// <param name="label">form label</param>
         /// <returns>string</returns>
-        public static string InputString(string initial_string, string label)
+        public static string InputString(string ini, string label)
         {
-            EditStringWindow w = new EditStringWindow();
+            EditStringWindow w = new EditStringWindow(ini, label);
 
             w.ShowDialog();
 
             return w.Result;
+        }
+
+        /// <summary>
+        /// Input string (or edit given string).
+        /// </summary>
+        /// <param name="label">form label</param>
+        /// <returns>string</returns>
+        public static string InputString(string label)
+        {
+            return InputString("", label);
+        }
+
+        /// <summary>
+        /// Input int.
+        /// </summary>
+        /// <param name="ini">ini</param>
+        /// <param name="label">window label</param>
+        /// <returns>value</returns>
+        public static int InputInt(int ini, string label)
+        {
+            return Lib.Utils.Convert.GetInt(InputString(ini.ToString(), label));
+        }
+
+        /// <summary>
+        /// Input double.
+        /// </summary>
+        /// <param name="ini">ini</param>
+        /// <param name="label">window label</param>
+        /// <returns>value</returns>
+        public static double InputDouble(double ini, string label)
+        {
+            return Lib.Utils.Convert.GetDouble(InputString(ini.ToString(), label));
         }
     }
 }
