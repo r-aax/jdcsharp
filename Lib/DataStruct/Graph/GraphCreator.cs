@@ -1061,47 +1061,6 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
-        /// Square graph.
-        /// </summary>
-        /// <param name="n">order square</param>
-        /// <param name="circle">outer circle</param>
-        /// <param name="graph">graph</param>
-        public static Graph SquareGraph(int n, Circle circle)
-        {
-            Graph g = InitialGraph(GraphDimensionality.D2, n * n);
-
-            GraphLayoutManager.SetLayoutCircle(g, circle, Math.PI / 2.0);
-
-            for (int i = 0; i < g.Order; i++)
-            {
-                int i1 = i / n;
-                int i2 = i % n;
-
-                for (int j = i + 1; j < g.Order; j++)
-                {
-                    int j1 = j / n;
-                    int j2 = j % n;
-                    bool is_edge = false;
-
-                    if ((i1 == j1) || (i2 == j1) || (i1 == j2) || (i2 == j2))
-                    {
-                        if (!((i1 == j2) && (i2 == j1)))
-                        {
-                            is_edge = true;
-                        }
-                    }
-
-                    if (is_edge)
-                    {
-                        g.AddEdge(i, j);
-                    }
-                }
-            }
-
-            return g;
-        }
-
-        /// <summary>
         /// 1D grid.
         /// </summary>
         /// <param name="n">order</param>

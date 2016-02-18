@@ -43,7 +43,6 @@
                     <MenuItem Name="ExampleStar" Header="Star" Click="ExampleStar_Click" />
                     <MenuItem Name="ExampleWheel" Header="Wheel" Click="ExampleWheel_Click" />
                     <Separator/>
-                    <MenuItem Name="ExampleSquare" Header="Square graph" Click="ExampleSquare_Click" />
                     <MenuItem Name="ExampleGrid1" Header="1D grid" Click="ExampleGrid1_Click" />
                     <MenuItem Name="ExampleGrid2" Header="2D grid" Click="ExampleGrid2_Click" />
                     <MenuItem Name="ExampleGrid3" Header="3D grid" Click="ExampleGrid3_Click" />

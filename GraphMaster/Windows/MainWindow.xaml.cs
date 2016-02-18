@@ -1337,17 +1337,6 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
-        /// Square graph.
-        /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">paremeters</param>
-        private void ExampleSquare_Click(object sender, RoutedEventArgs e)
-        {
-            Graph = GraphCreator.SquareGraph((int)Math.Sqrt(RandomOrder), Circle);
-            Paint();
-        }
-
-        /// <summary>
         /// 1D grid.
         /// </summary>
         /// <param name="sender">object</param>
