@@ -14,6 +14,12 @@ namespace Lib.Utils
     public class Convert
     {
         /// <summary>
+        /// Global format.
+        /// </summary>
+        private static NumberFormatInfo Info = CultureInfo.GetCultureInfo("en-US").NumberFormat.Clone()
+                                               as NumberFormatInfo;
+
+        /// <summary>
         /// Get int from string.
         /// </summary>
         /// <param name="t">string</param>
@@ -21,13 +27,11 @@ namespace Lib.Utils
         public static int GetInt(string t)
         {
             int i = 0;
-            NumberFormatInfo info = CultureInfo.GetCultureInfo("en-US").NumberFormat.Clone()
-                                    as NumberFormatInfo;
-            info.NumberDecimalSeparator = ".";
+            Info.NumberDecimalSeparator = ".";
 
             try
             {
-                i = System.Convert.ToInt32(t, info);
+                i = System.Convert.ToInt32(t, Info);
             }
             catch (Exception)
             {
@@ -46,13 +50,11 @@ namespace Lib.Utils
         public static double GetDouble(string t)
         {
             double d = 0.0;
-            NumberFormatInfo info = CultureInfo.GetCultureInfo("en-US").NumberFormat.Clone()
-                                    as NumberFormatInfo;
-            info.NumberDecimalSeparator = ".";
+            Info.NumberDecimalSeparator = ".";
 
             try
             {
-                d = System.Convert.ToDouble(t, info);
+                d = System.Convert.ToDouble(t, Info);
             }
             catch (Exception)
             {
@@ -70,11 +72,9 @@ namespace Lib.Utils
         /// <returns>string</returns>
         public static string GetString(double d)
         {
-            NumberFormatInfo info = CultureInfo.GetCultureInfo("en-US").NumberFormat.Clone()
-                                    as NumberFormatInfo;
-            info.NumberDecimalSeparator = ".";
+            Info.NumberDecimalSeparator = ".";
 
-            return System.Convert.ToString(d, info);
+            return System.Convert.ToString(d, Info);
         }
     }
 }
