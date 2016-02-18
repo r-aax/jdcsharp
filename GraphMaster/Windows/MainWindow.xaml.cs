@@ -816,8 +816,14 @@ namespace GraphMaster.Windows
         {
             int n = Randoms.RandomInInterval(Math.Max(2 + 1, MinOrder), MaxOrder - 1);
             int k = Randoms.RandomInInterval(1, n / 2);
+            PetersenGraphParametersWindow w = new PetersenGraphParametersWindow(n, k);
+            w.ShowDialog();
 
-            Graph = GraphCreator.GeneralizedPetersenGraph(n, k, Circle);
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.GeneralizedPetersenGraph(w.HalfOrder, w.InnerChord, Circle);
+            }
+
             Paint();
         }
 

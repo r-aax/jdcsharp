@@ -83,6 +83,9 @@
     <Compile Include="Windows\OrderAndIntsWindow.xaml.cs">
       <DependentUpon>OrderAndIntsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\PetersenGraphParametersWindow.xaml.cs">
+      <DependentUpon>PetersenGraphParametersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PictureNameWindow.xaml.cs">
       <DependentUpon>PictureNameWindow.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Windows\OrderAndIntsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\PetersenGraphParametersWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

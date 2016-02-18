@@ -1,0 +1,25 @@
+﻿<Window x:Class="GraphMaster.Windows.PetersenGraphParametersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Petersen graph parameters"
+        Background="AliceBlue" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center">Half order</Label>
+        <TextBox Name="HalfOrderTB" Grid.Row="0" Grid.Column="1" Width="50" Margin="10"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center">Inner chord</Label>
+        <TextBox Name="InnerChordTB" Grid.Row="1" Grid.Column="1" Width="50" Margin="10"></TextBox>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="AcceptB" MinWidth="75" Margin="10" Click="AcceptB_Click">Accept</Button>
+            <Button Name="CancelB" MinWidth="75" Margin="10" Click="CancelB_Click">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>
