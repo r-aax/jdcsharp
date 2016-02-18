@@ -1561,7 +1561,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleCircular_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.CircularGraph(12, new int[] { 1, 2, 4 }, Circle);
+            OrderAndChordsWindow w = new OrderAndChordsWindow(RandomOrder, new int[] { 1, 2 });
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.CircularGraph(w.Order, w.Chords, Circle);
+            }
+
             Paint();
         }
 
@@ -1572,7 +1579,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleHatch_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.HatchGraph(15, new int[] { 0, 2, 4, 6 }, Circle);
+            OrderAndChordsWindow w = new OrderAndChordsWindow(RandomOrder, new int[] { 1, 2 });
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.HatchGraph(w.Order, w.Chords, Circle);
+            }
+
             Paint();
         }
     }
