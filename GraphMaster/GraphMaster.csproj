@@ -80,8 +80,8 @@
     <Compile Include="Windows\Grid3DSizesWindow.xaml.cs">
       <DependentUpon>Grid3DSizesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\OrderAndChordsWindow.xaml.cs">
-      <DependentUpon>OrderAndChordsWindow.xaml</DependentUpon>
+    <Compile Include="Windows\OrderAndIntsWindow.xaml.cs">
+      <DependentUpon>OrderAndIntsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\PictureNameWindow.xaml.cs">
       <DependentUpon>PictureNameWindow.xaml</DependentUpon>
@@ -116,7 +116,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Windows\OrderAndChordsWindow.xaml">
+    <Page Include="Windows\OrderAndIntsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
