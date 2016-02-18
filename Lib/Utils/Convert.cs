@@ -62,5 +62,19 @@ namespace Lib.Utils
 
             return d;
         }
+
+        /// <summary>
+        /// Convert double to string.
+        /// </summary>
+        /// <param name="d">double</param>
+        /// <returns>string</returns>
+        public static string GetString(double d)
+        {
+            NumberFormatInfo info = CultureInfo.GetCultureInfo("en-US").NumberFormat.Clone()
+                                    as NumberFormatInfo;
+            info.NumberDecimalSeparator = ".";
+
+            return System.Convert.ToString(d, info);
+        }
     }
 }

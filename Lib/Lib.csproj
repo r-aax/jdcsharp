@@ -76,6 +76,9 @@
       <DependentUpon>EditStringForm.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\WindowsForms\IO.cs" />
+    <Compile Include="GUI\WPF\EditIntDoubleWindow.xaml.cs">
+      <DependentUpon>EditIntDoubleWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GUI\WPF\IO.cs" />
     <Compile Include="GUI\WPF\EditStringWindow.xaml.cs">
       <DependentUpon>EditStringWindow.xaml</DependentUpon>
@@ -137,6 +140,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="GUI\WPF\EditIntDoubleWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="GUI\WPF\EditStringWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

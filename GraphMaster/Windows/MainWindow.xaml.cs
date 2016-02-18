@@ -103,7 +103,7 @@ namespace GraphMaster.Windows
             InitializeComponent();
 
             // Init graph.
-            Graph = GraphCreator.RandomGraph(20, Circle);
+            Graph = GraphCreator.RandomGraph(20, 0.5, Circle);
         }
 
         /// <summary>
@@ -1145,12 +1145,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleRandom_Click(object sender, RoutedEventArgs e)
         {
-            EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
+            EditIntDoubleWindow w = new EditIntDoubleWindow(RandomOrder, 0.5,
+                                                            "Random graph parameters",
+                                                            "Order", "Edge probability");
             w.ShowDialog();
 
             if (w.IsAccepted)
             {
-                Graph = GraphCreator.RandomGraph(w.Result, Circle);
+                Graph = GraphCreator.RandomGraph(w.IntV, w.DoubleV, Circle);
             }
 
             Paint();

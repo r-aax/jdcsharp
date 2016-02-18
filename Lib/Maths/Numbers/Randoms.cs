@@ -31,6 +31,15 @@ namespace Lib.Maths.Numbers
         }
 
         /// <summary>
+        /// Random value from 0 to 1.
+        /// </summary>
+        /// <returns>random floating value in [0, 1]</returns>
+        public static double Random01()
+        {
+            return RandomInInterval(0.0, 1.0);
+        }
+
+        /// <summary>
         /// Random in interval.
         /// </summary>
         /// <param name="interval">interval</param>

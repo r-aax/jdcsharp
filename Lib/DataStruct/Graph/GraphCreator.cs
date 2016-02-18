@@ -56,14 +56,15 @@ namespace Lib.DataStruct.Graph
         /// Set edges for random graph.
         /// </summary>
         /// <param name="graph">graph</param>
-        private static void SetRandomEdges(Graph graph)
+        /// <param name="p">edge probability</param>
+        private static void SetRandomEdges(Graph graph, double p)
         {
             // Add edges.
             for (int i = 0; i < graph.Order; i++)
             {
                 for (int j = i + 1; j < graph.Order; j++)
                 {
-                    if (Randoms.RandomBool())
+                    if (Randoms.Random01() <= p)
                     {
                         graph.AddEdge(i, j, Randoms.RandomBool());
                     }
@@ -344,9 +345,10 @@ namespace Lib.DataStruct.Graph
         /// Random graph in rectangle.
         /// </summary>
         /// <param name="n">nodes count</param>
+        /// <param name="p">edge probability</param>
         /// <param name="rect">rectangle</param>
         /// <param name="graph">graph</param>
-        public static Graph RandomGraph(int n, Rect rect)
+        public static Graph RandomGraph(int n, double p, Rect rect)
         {
             // 2D graph.
             Graph g = InitialGraph(GraphDimensionality.D2, n);
@@ -355,7 +357,7 @@ namespace Lib.DataStruct.Graph
             GraphLayoutManager.SetLayoutRandom(g, rect);
 
             // Add edges.
-            SetRandomEdges(g);
+            SetRandomEdges(g, p);
 
             return g;
         }
@@ -364,14 +366,15 @@ namespace Lib.DataStruct.Graph
         /// Random graph on circle.
         /// </summary>
         /// <param name="n">order</param>
+        /// <param name="p">edge probability</param>
         /// <param name="circle">outer circle</param>
         /// <param name="graph">graph</param>
-        public static Graph RandomGraph(int n, Circle circle)
+        public static Graph RandomGraph(int n, double p, Circle circle)
         {
             Graph g = InitialGraph(GraphDimensionality.D2, n);
 
             GraphLayoutManager.SetLayoutCircle(g, circle, Math.PI / 2.0);
-            SetRandomEdges(g);
+            SetRandomEdges(g, p);
 
             return g;
         }
@@ -380,9 +383,10 @@ namespace Lib.DataStruct.Graph
         /// Random graph in parallelepiped.
         /// </summary>
         /// <param name="n">nodes count</param>
+        /// <param name="p">edge probability</param>
         /// <param name="par">parallelepiped</param>
         /// <param name="graph">graph</param>
-        public static Graph RandomGraph(int n, Parallelepiped par)
+        public static Graph RandomGraph(int n, double p, Parallelepiped par)
         {
             // 3D graph.
             Graph g = InitialGraph(GraphDimensionality.D3, n);
@@ -391,7 +395,7 @@ namespace Lib.DataStruct.Graph
             GraphLayoutManager.SetLayoutRandom(g, par);
 
             // Add edges.
-            SetRandomEdges(g);
+            SetRandomEdges(g, p);
 
             return g;
         }
