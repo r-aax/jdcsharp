@@ -1317,7 +1317,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleGrid1_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Grid1D(RandomOrder, Rect);
+            Graph = GraphCreator.Grid1D(GetOrder, Rect);
             Paint();
         }
         
@@ -1328,7 +1328,9 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleGrid2_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Grid2D(RandomOrder, RandomOrder, Rect);
+            Grid2DSizesWindow w = new Grid2DSizesWindow(RandomOrder, RandomOrder);
+            w.ShowDialog();
+            Graph = GraphCreator.Grid2D(w.XSize, w.YSize, Rect);
             Paint();
         }
 
@@ -1339,7 +1341,9 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleGrid3_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Grid3D(RandomOrder, RandomOrder, RandomOrder,
+            Grid3DSizesWindow w = new Grid3DSizesWindow(RandomOrder, RandomOrder, RandomOrder);
+            w.ShowDialog();
+            Graph = GraphCreator.Grid3D(w.XSize, w.YSize, w.ZSize,
                                         Rect.Extend(Rect.YInterval));
             Paint();
         }

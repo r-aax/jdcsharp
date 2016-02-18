@@ -74,10 +74,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windows\Grid2DSizesWindow.xaml.cs">
+      <DependentUpon>Grid2DSizesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Grid3DSizesWindow.xaml.cs">
+      <DependentUpon>Grid3DSizesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\PictureNameWindow.xaml.cs">
       <DependentUpon>PictureNameWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Windows\AreaParametersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Grid2DSizesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Grid3DSizesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
