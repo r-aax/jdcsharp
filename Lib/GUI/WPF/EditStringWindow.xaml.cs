@@ -26,11 +26,17 @@ namespace Lib.GUI.WPF
         public string Result;
 
         /// <summary>
+        /// Accepted flag.
+        /// </summary>
+        public bool IsAccepted = false;
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public EditStringWindow(string ini, string label)
         {
             InitializeComponent();
+
             Result = ini;
             TextTB.Text = ini;
             Title = label;
@@ -44,6 +50,7 @@ namespace Lib.GUI.WPF
         private void AcceptB_Click(object sender, RoutedEventArgs e)
         {
             Result = TextTB.Text;
+            IsAccepted = true;
             Close();
         }
 

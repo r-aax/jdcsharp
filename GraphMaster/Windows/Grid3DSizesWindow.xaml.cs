@@ -35,6 +35,11 @@ namespace GraphMaster.Windows
         public int ZSize;
 
         /// <summary>
+        /// Accepted flag.
+        /// </summary>
+        public bool IsAccepted = false;
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="x_size">X size</param>
@@ -63,6 +68,7 @@ namespace GraphMaster.Windows
             XSize = Lib.Utils.Convert.GetInt(XSizeTB.Text);
             YSize = Lib.Utils.Convert.GetInt(YSizeTB.Text);
             ZSize = Lib.Utils.Convert.GetInt(ZSizeTB.Text);
+            IsAccepted = true;
             Close();
         }
 

@@ -10,24 +10,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GraphMaster.Windows
+namespace Lib.GUI.WPF
 {
     /// <summary>
-    /// Logic for Grid 2D sizes Grid2DSizesWindow.xaml
+    /// Logic for EditIntWindow.xaml
     /// </summary>
-    public partial class Grid2DSizesWindow : Window
+    public partial class EditIntWindow : Window
     {
         /// <summary>
-        /// X size.
+        /// Int.
         /// </summary>
-        public int XSize;
-
-        /// <summary>
-        /// Y size.
-        /// </summary>
-        public int YSize;
+        public int Result;
 
         /// <summary>
         /// Accepted flag.
@@ -37,16 +33,15 @@ namespace GraphMaster.Windows
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="x_size">X size</param>
-        /// <param name="y_size">Y size</param>
-        public Grid2DSizesWindow(int x_size, int y_size)
+        /// <param name="ini">initialization value</param>
+        /// <param name="label">description (form label)</param>
+        public EditIntWindow(int ini, string label)
         {
             InitializeComponent();
 
-            XSize = x_size;
-            YSize = y_size;
-            XSizeTB.Text = XSize.ToString();
-            YSizeTB.Text = YSize.ToString();
+            Result = ini;
+            TextTB.Text = ini.ToString();
+            Title = label;
         }
 
         /// <summary>
@@ -56,8 +51,7 @@ namespace GraphMaster.Windows
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, RoutedEventArgs e)
         {
-            XSize = Lib.Utils.Convert.GetInt(XSizeTB.Text);
-            YSize = Lib.Utils.Convert.GetInt(YSizeTB.Text);
+            Result = Lib.Utils.Convert.GetInt(TextTB.Text);
             IsAccepted = true;
             Close();
         }

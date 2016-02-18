@@ -80,6 +80,9 @@
     <Compile Include="GUI\WPF\EditStringWindow.xaml.cs">
       <DependentUpon>EditStringWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\WPF\EditIntWindow.xaml.cs">
+      <DependentUpon>EditIntWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Maths\Bits\Bits32.cs" />
     <Compile Include="Maths\Bits\Bits8.cs" />
     <Compile Include="Maths\Bits\Mask.cs" />
@@ -135,6 +138,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="GUI\WPF\EditStringWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\WPF\EditIntWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

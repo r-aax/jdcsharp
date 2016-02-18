@@ -56,17 +56,6 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
-        /// Get order of graph.
-        /// </summary>
-        private int GetOrder
-        {
-            get
-            {
-                return IO.InputInt(RandomOrder, "Input order");
-            }
-        }
-
-        /// <summary>
         /// Draw master.
         /// </summary>
         private RectDrawer Drawer = null;
@@ -1114,7 +1103,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleEmpty_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.EmptyGraph(GetOrder, Circle);
+            EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.EmptyGraph(w.Result, Circle);
+            }
+
             Paint();
         }
 
@@ -1125,7 +1121,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleFull_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.FullGraph(GetOrder, Circle);
+            EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.FullGraph(w.Result, Circle);
+            }
+
             Paint();
         }
 
@@ -1136,7 +1139,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleRandom_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.RandomGraph(GetOrder, Circle);
+            EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.RandomGraph(w.Result, Circle);
+            }
+
             Paint();
         }
 
@@ -1147,7 +1157,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleCycle_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Cycle(GetOrder, Circle);
+            EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.Cycle(w.Result, Circle);
+            }
+
             Paint();
         }
 
@@ -1158,7 +1175,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleStar_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Star(GetOrder, Circle);
+            EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.Star(w.Result, Circle);
+            }
+
             Paint();
         }
 
@@ -1169,7 +1193,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleWheel_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Wheel(GetOrder, Circle);
+            EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.Wheel(w.Result, Circle);
+            }
+
             Paint();
         }
 
@@ -1317,7 +1348,14 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void ExampleGrid1_Click(object sender, RoutedEventArgs e)
         {
-            Graph = GraphCreator.Grid1D(GetOrder, Rect);
+            EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.Grid1D(w.Result, Rect);
+            }
+
             Paint();
         }
         
@@ -1330,7 +1368,12 @@ namespace GraphMaster.Windows
         {
             Grid2DSizesWindow w = new Grid2DSizesWindow(RandomOrder, RandomOrder);
             w.ShowDialog();
-            Graph = GraphCreator.Grid2D(w.XSize, w.YSize, Rect);
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.Grid2D(w.XSize, w.YSize, Rect);
+            }
+
             Paint();
         }
 
@@ -1343,8 +1386,13 @@ namespace GraphMaster.Windows
         {
             Grid3DSizesWindow w = new Grid3DSizesWindow(RandomOrder, RandomOrder, RandomOrder);
             w.ShowDialog();
-            Graph = GraphCreator.Grid3D(w.XSize, w.YSize, w.ZSize,
-                                        Rect.Extend(Rect.YInterval));
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.Grid3D(w.XSize, w.YSize, w.ZSize,
+                                            Rect.Extend(Rect.YInterval));
+            }
+
             Paint();
         }
 
