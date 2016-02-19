@@ -103,7 +103,7 @@ namespace GraphMaster.Windows
             InitializeComponent();
 
             // Init graph.
-            Graph = GraphCreator.RandomGraph(20, 0.5, Circle);
+            Graph = GraphCreator.ErdosRenyiRandomGraph(20, 0.5, Circle);
         }
 
         /// <summary>
@@ -1146,13 +1146,13 @@ namespace GraphMaster.Windows
         private void ExampleRandom_Click(object sender, RoutedEventArgs e)
         {
             EditIntDoubleWindow w = new EditIntDoubleWindow(RandomOrder, 0.5,
-                                                            "Random graph parameters",
+                                                            "Erdos - Renyi random graph parameters",
                                                             "Order", "Edge probability");
             w.ShowDialog();
 
             if (w.IsAccepted)
             {
-                Graph = GraphCreator.RandomGraph(w.IntV, w.DoubleV, Circle);
+                Graph = GraphCreator.ErdosRenyiRandomGraph(w.IntV, w.DoubleV, Circle);
             }
 
             Paint();

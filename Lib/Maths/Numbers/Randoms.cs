@@ -68,12 +68,22 @@ namespace Lib.Maths.Numbers
         }
 
         /// <summary>
+        /// Ranndom boolean value with given true probability.
+        /// </summary>
+        /// <param name="true_p">probability of true value</param>
+        /// <returns>bool value</returns>
+        public static bool RandomBool(double true_p)
+        {
+            return Rand.NextDouble() <= true_p;
+        }
+
+        /// <summary>
         /// Random boolean.
         /// </summary>
         /// <returns>random boolean</returns>
         public static bool RandomBool()
         {
-            return Rand.NextDouble() < 0.5;
+            return RandomBool(0.5);
         }
     }
 }
