@@ -53,11 +53,11 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
-        /// Set edges for random graph in Erdos - Renyi model.
+        /// Set edges for random graph in Erdos - Renyi model (binomial case).
         /// </summary> 
         /// <param name="graph">graph</param>
         /// <param name="p">edge probability</param>
-        private static void SetErdosRenyiRandomEdges(Graph graph, double p)
+        private static void SetErdosRenyiBinomialRandomEdges(Graph graph, double p)
         {
             // Add edges.
             for (int i = 0; i < graph.Order; i++)
@@ -66,8 +66,37 @@ namespace Lib.DataStruct.Graph
                 {
                     if (Randoms.Random01() <= p)
                     {
-                        graph.AddEdge(i, j, Randoms.RandomBool());
+                        graph.AddEdge(i, j);
                     }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Set edges for random graph in Erdos - Renyi model (uniform case).
+        /// </summary>
+        /// <param name="graph">graph</param>
+        /// <param name="m">edges count</param>
+        private static void SetErdosRenyiUniformRandomEdges(Graph graph, int m)
+        {
+            int n = graph.Order;
+            int k = 0;
+
+            // Generate random vector.
+            Bits b = new Bits(n * (n - 1) / 2);
+            b.SetRandomSet(m);
+
+            // Add edges.
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    if (b[k])
+                    {
+                        graph.AddEdge(i, j);
+                    }
+
+                    k++;
                 }
             }
         }
@@ -348,7 +377,7 @@ namespace Lib.DataStruct.Graph
         /// <param name="p">edge probability</param>
         /// <param name="rect">rectangle</param>
         /// <param name="graph">graph</param>
-        public static Graph ErdosRenyiRandomGraph(int n, double p, Rect rect)
+        public static Graph ErdosRenyiBinomialRandomGraph(int n, double p, Rect rect)
         {
             // 2D graph.
             Graph g = InitialGraph(GraphDimensionality.D2, n);
@@ -357,7 +386,7 @@ namespace Lib.DataStruct.Graph
             GraphLayoutManager.SetLayoutRandom(g, rect);
 
             // Add edges.
-            SetErdosRenyiRandomEdges(g, p);
+            SetErdosRenyiBinomialRandomEdges(g, p);
 
             return g;
         }
@@ -369,12 +398,12 @@ namespace Lib.DataStruct.Graph
         /// <param name="p">edge probability</param>
         /// <param name="circle">outer circle</param>
         /// <param name="graph">graph</param>
-        public static Graph ErdosRenyiRandomGraph(int n, double p, Circle circle)
+        public static Graph ErdosRenyiBinomialRandomGraph(int n, double p, Circle circle)
         {
             Graph g = InitialGraph(GraphDimensionality.D2, n);
 
             GraphLayoutManager.SetLayoutCircle(g, circle, Math.PI / 2.0);
-            SetErdosRenyiRandomEdges(g, p);
+            SetErdosRenyiBinomialRandomEdges(g, p);
 
             return g;
         }
@@ -386,7 +415,7 @@ namespace Lib.DataStruct.Graph
         /// <param name="p">edge probability</param>
         /// <param name="par">parallelepiped</param>
         /// <param name="graph">graph</param>
-        public static Graph ErdosRenyiRandomGraph(int n, double p, Parallelepiped par)
+        public static Graph ErdosRenyiBinomialRandomGraph(int n, double p, Parallelepiped par)
         {
             // 3D graph.
             Graph g = InitialGraph(GraphDimensionality.D3, n);
@@ -395,7 +424,66 @@ namespace Lib.DataStruct.Graph
             GraphLayoutManager.SetLayoutRandom(g, par);
 
             // Add edges.
-            SetErdosRenyiRandomEdges(g, p);
+            SetErdosRenyiBinomialRandomEdges(g, p);
+
+            return g;
+        }
+
+        /// <summary>
+        /// Random graph in rectangle.
+        /// </summary>
+        /// <param name="n">nodes count</param>
+        /// <param name="m">edges count</param>
+        /// <param name="rect">rectangle</param>
+        /// <param name="graph">graph</param>
+        public static Graph ErdosRenyiUniformRandomGraph(int n, int m, Rect rect)
+        {
+            // 2D graph.
+            Graph g = InitialGraph(GraphDimensionality.D2, n);
+
+            // Random layout.
+            GraphLayoutManager.SetLayoutRandom(g, rect);
+
+            // Add edges.
+            SetErdosRenyiUniformRandomEdges(g, m);
+
+            return g;
+        }
+
+        /// <summary>
+        /// Random graph on circle.
+        /// </summary>
+        /// <param name="n">order</param>
+        /// <param name="m">edges count</param>
+        /// <param name="circle">outer circle</param>
+        /// <param name="graph">graph</param>
+        public static Graph ErdosRenyiUniformRandomGraph(int n, int m, Circle circle)
+        {
+            Graph g = InitialGraph(GraphDimensionality.D2, n);
+
+            GraphLayoutManager.SetLayoutCircle(g, circle, Math.PI / 2.0);
+            SetErdosRenyiUniformRandomEdges(g, m);
+
+            return g;
+        }
+
+        /// <summary>
+        /// Random graph in parallelepiped.
+        /// </summary>
+        /// <param name="n">nodes count</param>
+        /// <param name="m">edges count</param>
+        /// <param name="par">parallelepiped</param>
+        /// <param name="graph">graph</param>
+        public static Graph ErdosRenyiUniformRandomGraph(int n, int m, Parallelepiped par)
+        {
+            // 3D graph.
+            Graph g = InitialGraph(GraphDimensionality.D3, n);
+
+            // Random layout.
+            GraphLayoutManager.SetLayoutRandom(g, par);
+
+            // Add edges.
+            SetErdosRenyiUniformRandomEdges(g, m);
 
             return g;
         }

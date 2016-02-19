@@ -103,7 +103,7 @@ namespace GraphMaster.Windows
             InitializeComponent();
 
             // Init graph.
-            Graph = GraphCreator.ErdosRenyiRandomGraph(20, 0.5, Circle);
+            Graph = GraphCreator.ErdosRenyiBinomialRandomGraph(20, 0.5, Circle);
         }
 
         /// <summary>
@@ -1139,26 +1139,6 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
-        /// Random graph.
-        /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">paremeters</param>
-        private void ExampleRandom_Click(object sender, RoutedEventArgs e)
-        {
-            EditIntDoubleWindow w = new EditIntDoubleWindow(RandomOrder, 0.5,
-                                                            "Erdos - Renyi random graph parameters",
-                                                            "Order", "Edge probability");
-            w.ShowDialog();
-
-            if (w.IsAccepted)
-            {
-                Graph = GraphCreator.ErdosRenyiRandomGraph(w.IntV, w.DoubleV, Circle);
-            }
-
-            Paint();
-        }
-
-        /// <summary>
         /// Cycle.
         /// </summary>
         /// <param name="sender">object</param>
@@ -1582,6 +1562,48 @@ namespace GraphMaster.Windows
             if (w.IsAccepted)
             {
                 Graph = GraphCreator.HatchGraph(w.Order, w.Ints, Circle);
+            }
+
+            Paint();
+        }
+
+        /// <summary>
+        /// Random graph in Erdos - Renyi model (binomial).
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">paremeters</param>
+        private void ExampleErdosRenyiBinomialRandom_Click(object sender, RoutedEventArgs e)
+        {
+            EditIntDoubleWindow w = new EditIntDoubleWindow(RandomOrder, 0.5,
+                                                            "Erdos - Renyi binomial random graph parameters",
+                                                            "Order", "Edge probability");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.ErdosRenyiBinomialRandomGraph(w.IntV, w.DoubleV, Circle);
+            }
+
+            Paint();
+        }
+
+        /// <summary>
+        /// Random graph in Erdos - Renyi model (uniform).
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ExampleErdosRenyiUniformRandom_Click(object sender, RoutedEventArgs e)
+        {
+            int n = RandomOrder;
+
+            EditIntIntWindow w = new EditIntIntWindow(n, n * (n - 1) / 4,
+                                                      "Erdos - Renyi uniform random graph parameters",
+                                                      "Order", "Edges count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.ErdosRenyiUniformRandomGraph(w.Int1V, w.Int2V, Circle);
             }
 
             Paint();

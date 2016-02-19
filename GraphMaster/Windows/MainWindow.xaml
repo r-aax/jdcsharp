@@ -37,7 +37,12 @@
                 <MenuItem Header="Common">
                     <MenuItem Name="ExampleEmpty" Header="Empty graph" Click="ExampleEmpty_Click" />
                     <MenuItem Name="ExampleFull" Header="Full graph (K(n))" Click="ExampleFull_Click" />
-                    <MenuItem Name="ExampleRandom" Header="Random graph" Click="ExampleRandom_Click" />
+                    <MenuItem Header="Random graph">
+                        <MenuItem Header="Erdos - Renyi random graph">
+                            <MenuItem Name="ExampleErdosRenyiBinomialRandom" Header="Binomial" Click="ExampleErdosRenyiBinomialRandom_Click"/>
+                            <MenuItem Name="ExampleErdosRenyiUniformRandom" Header="Uniform" Click="ExampleErdosRenyiUniformRandom_Click"/>
+                        </MenuItem>
+                    </MenuItem>
                     <Separator/>
                     <MenuItem Name="ExampleCycele" Header="Cycle" Click="ExampleCycle_Click" />
                     <MenuItem Name="ExampleStar" Header="Star" Click="ExampleStar_Click" />

@@ -86,6 +86,9 @@
     <Compile Include="GUI\WPF\EditIntWindow.xaml.cs">
       <DependentUpon>EditIntWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GUI\WPF\EditIntIntWindow.xaml.cs">
+      <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Maths\Bits\Bits.cs" />
     <Compile Include="Maths\Bits\Bits32.cs" />
     <Compile Include="Maths\Bits\Bits8.cs" />
@@ -150,6 +153,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GUI\WPF\EditIntWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GUI\WPF\EditIntIntWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

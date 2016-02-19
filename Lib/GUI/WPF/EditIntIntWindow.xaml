@@ -1,0 +1,28 @@
+﻿<Window x:Class="Lib.GUI.WPF.EditIntIntWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        mc:Ignorable="d" 
+        Title="Edit int1 and int2"
+        Background="AliceBlue" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Name="Int1L">Int1</Label>
+        <TextBox Name="Int1TB" Grid.Row="0" Grid.Column="1" Width="50" Margin="10"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Name="Int2L">Int2</Label>
+        <TextBox Name="Int2TB" Grid.Row="1" Grid.Column="1" Width="50" Margin="10"></TextBox>
+        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Name="AcceptB" MinWidth="75" Margin="10" Click="AcceptB_Click">Accept</Button>
+            <Button Name="CancelB" MinWidth="75" Margin="10" Click="CancelB_Click">Cancel</Button>
+        </StackPanel>
+    </Grid>
+</Window>
