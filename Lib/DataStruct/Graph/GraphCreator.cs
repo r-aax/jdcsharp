@@ -1251,6 +1251,76 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Create grid in given circle.
+        /// </summary>
+        /// <param name="radiuses_count">count of radiuses</param>
+        /// <param name="points_on_radius">count of points on radius</param>
+        /// <param name="is_center_point">is center point in grid</param>
+        /// <param name="circle">circle for layout</param>
+        /// <returns>graph</returns>
+        public static Graph GridCicle(int radiuses_count, int points_on_radius, bool is_center_point, Circle circle)
+        {
+            if (is_center_point)
+            {
+                int n = 1 + radiuses_count * (points_on_radius - 1);
+                Graph g = InitialGraph(GraphDimensionality.D2, n);
+
+                g.Nodes[0].Point2D = circle.Center;
+
+                // layout and circle edges
+                for (int i = 0; i < points_on_radius - 1; i++)
+                {
+                    int start = 1 + i * radiuses_count;
+                    int end = 1 + i * radiuses_count + (radiuses_count - 1);
+                    Circle c = circle.Scaled(((double)i + 1.0) / ((double)points_on_radius - 1.0));
+
+                    GraphLayoutManager.SetLayoutCircle(g, start, end, c, Math.PI / 2.0);
+                    GraphCreator.AddCycle(g, start, end);
+                }
+
+                // radius edges
+                for (int i = 0; i < radiuses_count; i++)
+                {
+                    g.AddEdge(0, i + 1);
+
+                    for (int j = 0; j < points_on_radius - 2; j++)
+                    {
+                        g.AddEdge(i + 1 + j * radiuses_count, i + 1 + (j + 1) * radiuses_count);
+                    }
+                }
+
+                return g;
+            }
+            else
+            {
+                int n = radiuses_count * points_on_radius;
+                Graph g = InitialGraph(GraphDimensionality.D2, n);
+
+                // layout and circle edges
+                for (int i = 0; i < points_on_radius; i++)
+                {
+                    int start = i * radiuses_count;
+                    int end = i * radiuses_count + (radiuses_count - 1);
+                    Circle c = circle.Scaled(((double)i + 1.0) / ((double)points_on_radius));
+
+                    GraphLayoutManager.SetLayoutCircle(g, start, end, c, Math.PI / 2.0);
+                    GraphCreator.AddCycle(g, start, end);
+                }
+
+                // radius edges
+                for (int i = 0; i < radiuses_count; i++)
+                {
+                    for (int j = 0; j < points_on_radius - 1; j++)
+                    {
+                        g.AddEdge(i + j * radiuses_count, i + (j + 1) * radiuses_count);
+                    }
+                }
+
+                return g;
+            }
+        }
+
+        /// <summary>
         /// Circular graph.
         /// </summary>
         /// <param name="n">order</param>

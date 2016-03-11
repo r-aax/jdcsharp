@@ -1608,5 +1608,50 @@ namespace GraphMaster.Windows
 
             Paint();
         }
+
+        /// <summary>
+        /// Grid in circle with center point.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ExampleGridCircleWithCenter_Click(object sender, RoutedEventArgs e)
+        {
+            int n = RandomOrder;
+
+            EditIntIntWindow w = new EditIntIntWindow(n, n * (n - 1) / 4,
+                                                      "Grid in circle with center point parameters",
+                                                      "Count of radiuses", "Points on radius");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.GridCicle(w.Int1V, w.Int2V, true, Circle);
+            }
+
+            Paint();
+        }
+
+        /// <summary>
+        /// Grid in circle without center point.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ExampleGridCircleWithoutCenter_Click(object sender, RoutedEventArgs e)
+        {
+            int n = RandomOrder;
+
+            EditIntIntWindow w = new EditIntIntWindow(n, n * (n - 1) / 4,
+                                                      "Grid in circle with center point parameters",
+                                                      "Count of radiuses", "Points on radius");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.GridCicle(w.Int1V, w.Int2V, false, Circle);
+            }
+
+            Paint();
+        }
+
     }
 }

@@ -44,15 +44,21 @@
                         </MenuItem>
                     </MenuItem>
                     <Separator/>
-                    <MenuItem Name="ExampleCycele" Header="Cycle" Click="ExampleCycle_Click" />
+                    <MenuItem Name="ExampleCycle" Header="Cycle" Click="ExampleCycle_Click" />
                     <MenuItem Name="ExampleStar" Header="Star" Click="ExampleStar_Click" />
                     <MenuItem Name="ExampleWheel" Header="Wheel" Click="ExampleWheel_Click" />
                     <Separator/>
+                    <MenuItem Name="ExampleCircular" Header="Circular graph" Click="ExampleCircular_Click" />
+                    <MenuItem Name="ExampleHatch" Header="Hatch graph" Click="ExampleHatch_Click" />
+                </MenuItem>
+                <MenuItem Header="Grids">
                     <MenuItem Name="ExampleGrid1" Header="1D grid" Click="ExampleGrid1_Click" />
                     <MenuItem Name="ExampleGrid2" Header="2D grid" Click="ExampleGrid2_Click" />
                     <MenuItem Name="ExampleGrid3" Header="3D grid" Click="ExampleGrid3_Click" />
-                    <MenuItem Name="ExampleCircular" Header="Circular graph" Click="ExampleCircular_Click" />
-                    <MenuItem Name="ExampleHatch" Header="Hatch graph" Click="ExampleHatch_Click" />
+                    <MenuItem Header="Circle">
+                        <MenuItem Name="ExampleGridCircleWithCenter" Header="With center point" Click="ExampleGridCircleWithCenter_Click"/>
+                        <MenuItem Name="ExampleGridCircleWithoutCenter" Header="Without center point" Click="ExampleGridCircleWithoutCenter_Click"/>
+                    </MenuItem>                        
                 </MenuItem>
                 <MenuItem Header="Cages">
                     <MenuItem Name="ExampleCage_3_3" Header="(3-3)-cage (K(4))" Click="ExampleCage_3_3_Click" />
