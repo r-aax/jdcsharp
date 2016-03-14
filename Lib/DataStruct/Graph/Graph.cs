@@ -140,6 +140,17 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Density of graph.
+        /// </summary>
+        public double Density
+        {
+            get
+            {
+                return (double)Size / (double)Order;
+            }
+        }
+
+        /// <summary>
         /// Draw properties.
         /// </summary>
         public GraphDrawProperties DrawProperties = null;
