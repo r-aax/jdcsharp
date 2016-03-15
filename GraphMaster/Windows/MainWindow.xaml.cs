@@ -13,6 +13,7 @@ using Lib.Maths.Numbers;
 using Lib.Draw;
 using Lib.DataStruct.Graph;
 using Lib.Maths.Geometry.Geometry2D;
+using Lib.Maths.Geometry.Geometry3D;
 using SWPoint = System.Windows.Point;
 using SWRect = System.Windows.Rect;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
@@ -79,6 +80,11 @@ namespace GraphMaster.Windows
         /// Outer circle.
         /// </summary>
         private static readonly Circle Circle = RelDrawRect.CenteredCircle(ScaleK);
+
+        /// <summary>
+        /// Outer shpere.
+        /// </summary>
+        private static readonly Sphere Sphere = Circle.Extended();
 
         /// <summary>
         /// Outer rectangle.
@@ -1367,7 +1373,7 @@ namespace GraphMaster.Windows
             if (w.IsAccepted)
             {
                 Graph = GraphCreator.Grid3D(w.XSize, w.YSize, w.ZSize,
-                                            Rect.Extend(Rect.YInterval));
+                                            Rect.Extended(Rect.YInterval));
             }
 
             Paint();
@@ -1653,5 +1659,59 @@ namespace GraphMaster.Windows
             Paint();
         }
 
+        /// <summary>
+        /// Tetrahedron.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Example3DTetrahedron_Click(object sender, RoutedEventArgs e)
+        {
+            Graph = GraphCreator.Tetrahedron(Sphere);
+            Paint();
+        }
+
+        /// <summary>
+        /// Cube.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Example3DCube_Click(object sender, RoutedEventArgs e)
+        {
+            Graph = GraphCreator.Cube(Sphere);
+            Paint();
+        }
+
+        /// <summary>
+        /// Octahedron.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Example3DOctahedron_Click(object sender, RoutedEventArgs e)
+        {
+            Graph = GraphCreator.Octahedron(Sphere);
+            Paint();
+        }
+
+        /// <summary>
+        /// Dodecahedron.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Example3DDodecahedron_Click(object sender, RoutedEventArgs e)
+        {
+            Graph = GraphCreator.Dodecahedron(Sphere);
+            Paint();
+        }
+
+        /// <summary>
+        /// Icosahedron.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Example3DIcosahedron_Click(object sender, RoutedEventArgs e)
+        {
+            Graph = GraphCreator.Icosahedron(Sphere);
+            Paint();
+        }
     }
 }

@@ -60,6 +60,13 @@
                         <MenuItem Name="ExampleGridCircleWithoutCenter" Header="Without center point" Click="ExampleGridCircleWithoutCenter_Click"/>
                     </MenuItem>                        
                 </MenuItem>
+                <MenuItem Header="3D shapes">
+                    <MenuItem Name="Example3DTetrahedron" Header="Tetrahedron" Click="Example3DTetrahedron_Click"/>
+                    <MenuItem Name="Example3DCube" Header="Cube" Click="Example3DCube_Click"/>
+                    <MenuItem Name="Example3DOctahedron" Header="Octahedron" Click="Example3DOctahedron_Click"/>
+                    <MenuItem Name="Example3DDodecahedron" Header="Dodecahedron" Click="Example3DDodecahedron_Click"/>
+                    <MenuItem Name="Example3DIcosahedron" Header="Icosahedron" Click="Example3DIcosahedron_Click"/>
+                </MenuItem>
                 <MenuItem Header="Cages">
                     <MenuItem Name="ExampleCage_3_3" Header="(3-3)-cage (K(4))" Click="ExampleCage_3_3_Click" />
                     <MenuItem Name="ExampleCage_3_4" Header="(3-4)-cage (K(3,3))" Click="ExampleCage_3_4_Click" />

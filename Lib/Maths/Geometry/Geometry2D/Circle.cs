@@ -45,5 +45,14 @@ namespace Lib.Maths.Geometry.Geometry2D
         {
             return new Circle(Center, Radius * k);
         }
+
+        /// <summary>
+        /// Extend to sphere.
+        /// </summary>
+        /// <returns>sphere</returns>
+        public Lib.Maths.Geometry.Geometry3D.Sphere Extended()
+        {
+            return new Geometry3D.Sphere(Center.Extended(), Radius);
+        }
     }
 }

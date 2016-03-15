@@ -130,5 +130,14 @@ namespace Lib.Maths.Geometry.Geometry2D
         {
             return new Point(Vector.Random(rect));
         }
+
+        /// <summary>
+        /// Extend to 3D point.
+        /// </summary>
+        /// <returns>3D point</returns>
+        public Lib.Maths.Geometry.Geometry3D.Point Extended()
+        {
+            return new Geometry3D.Point(X, Y, 0.0);
+        }
     }
 }

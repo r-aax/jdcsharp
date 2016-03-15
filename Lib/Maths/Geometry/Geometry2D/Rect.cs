@@ -309,7 +309,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// </summary>
         /// <param name="z_interval">interval <c>z</c></param>
         /// <returns>parallelepiped</returns>
-        public Lib.Maths.Geometry.Geometry3D.Parallelepiped Extend(Interval z_interval)
+        public Lib.Maths.Geometry.Geometry3D.Parallelepiped Extended(Interval z_interval)
         {
             return new Geometry3D.Parallelepiped(XInterval.Clone() as Interval,
                                                  YInterval.Clone() as Interval,

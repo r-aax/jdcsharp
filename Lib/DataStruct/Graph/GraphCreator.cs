@@ -578,7 +578,7 @@ namespace Lib.DataStruct.Graph
         /// </summary>
         /// <param name="p">point</param>
         /// <param name="r">escribed sphere radius</param>
-        /// <returns>tetrahedron</returns>
+        /// <returns>tetrahedron graph</returns>
         public static Graph Tetrahedron(Point3D p, double r)
         {
             const int order = 4;
@@ -618,11 +618,21 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Tetrahedron.
+        /// </summary>
+        /// <param name="s">sphere</param>
+        /// <returns>tetrahedron graph</returns>
+        public static Graph Tetrahedron(Sphere s)
+        {
+            return Tetrahedron(s.Center, s.Radius);
+        }
+
+        /// <summary>
         /// Cube
         /// </summary>
         /// <param name="p">point</param>
         /// <param name="r">escribed sphere radius</param>
-        /// <returns>cube</returns>
+        /// <returns>cube graph</returns>
         public static Graph Cube(Point3D p, double r)
         {
             const int order = 8;
@@ -659,6 +669,16 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Cube.
+        /// </summary>
+        /// <param name="s">sphere</param>
+        /// <returns>cube graph</returns>
+        public static Graph Cube(Sphere s)
+        {
+            return Cube(s.Center, s.Radius);
+        }
+
+        /// <summary>
         /// Octahedron.
         /// </summary>
         /// <param name="p">point</param>
@@ -683,6 +703,16 @@ namespace Lib.DataStruct.Graph
             AddCycle(g, 1, 4);
 
             return g;
+        }
+
+        /// <summary>
+        /// Octahedron.
+        /// </summary>
+        /// <param name="s">sphere</param>
+        /// <returns>octahedron graph</returns>
+        public static Graph Octahedron(Sphere s)
+        {
+            return Octahedron(s.Center, s.Radius);
         }
 
         /// <summary>
@@ -740,6 +770,16 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Dodecahedron.
+        /// </summary>
+        /// <param name="s">sphere</param>
+        /// <returns>dodecahedro graph</returns>
+        public static Graph Dodecahedron(Sphere s)
+        {
+            return Dodecahedron(s.Center, s.Radius);
+        }
+
+        /// <summary>
         /// Icosahedron.
         /// </summary>
         /// <param name="p">point</param>
@@ -783,6 +823,16 @@ namespace Lib.DataStruct.Graph
             }
 
             return g;
+        }
+
+        /// <summary>
+        /// Icosahedron.
+        /// </summary>
+        /// <param name="s">sphere</param>
+        /// <returns>icosahedron graph</returns>
+        public static Graph Icosahedron(Sphere s)
+        {
+            return Icosahedron(s.Center, s.Radius);
         }
 
         /// <summary>
