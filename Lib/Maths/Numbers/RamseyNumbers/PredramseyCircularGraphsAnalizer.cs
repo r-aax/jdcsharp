@@ -1,6 +1,8 @@
 ﻿// Author: Alexey Rybakov
 
 using System.Diagnostics;
+using System.Collections.Generic;
+using System;
 
 using Lib.Maths.Bits;
 
@@ -21,6 +23,11 @@ namespace Lib.Maths.Numbers.RamseyNumbers
         private int N;
 
         /// <summary>
+        /// Order / 2.
+        /// </summary>
+        private int Nd2;
+
+        /// <summary>
         /// Red edges mask.
         /// </summary>
         private Mask RedMask;
@@ -33,9 +40,10 @@ namespace Lib.Maths.Numbers.RamseyNumbers
         {
             // Set sizes.
             N = n;
+            Nd2 = N / 2;
 
             // Set empty red mask.
-            RedMask = Mask.MakeEmpty(N / 2);
+            RedMask = Mask.MakeEmpty(Nd2);
         }
 
         /// <summary>
@@ -333,6 +341,241 @@ namespace Lib.Maths.Numbers.RamseyNumbers
             } while (NextColoring());
 
             return count;
+        }
+
+        /// <summary>
+        /// Get list of masks, generated from multiangle chords.
+        /// </summary>
+        /// <param name="k">count of angles</param>
+        /// <returns>list of masks</returns>
+        public List<UInt64> MultiangleMasksList(int k)
+        {
+            switch (k)
+            {
+                case 6:
+                    return For6AngleMasksList();
+
+                default:
+                    Debug.Assert(false);
+                    return null;
+            }
+        }
+
+        /// <summary>
+        /// Get list of masks, generated from 4-angle chords.
+        /// </summary>
+        /// <returns>list of masks</returns>
+        public List<Mask> For4AngleMasksList()
+        {
+            List<Mask> list = new List<Mask>();
+            CyclicArithmetic ar = new CyclicArithmetic(N);
+
+            // First node is always 0.
+            int i0 = 0;
+
+            // Second node (from i0 + 1 to N - 1).
+            for (int i1 = i0 + 1; i1 <= N - 1; i1++)
+            {
+                // Third node (from i1 + 1 to N - 1).
+                for (int i2 = i1 + 1; i2 <= N - 1; i2++)
+                {
+                    // Fourth node (from i2 + 1 to N - 1).
+                    for (int i3 = i2 + 1; i3 <= N - 1; i3++)
+                    {
+                        // Create mask.
+                        Mask m = Mask.MakeEmpty(Nd2);
+                        m[ar.Dist(i0, i1) - 1] = true;
+                        m[ar.Dist(i0, i2) - 1] = true;
+                        m[ar.Dist(i0, i3) - 1] = true;
+                        m[ar.Dist(i1, i2) - 1] = true;
+                        m[ar.Dist(i1, i3) - 1] = true;
+                        m[ar.Dist(i2, i3) - 1] = true;
+
+                        // Add mask to list.
+                        list.RemoveAll(e => e.IsContain(m));
+                        if (!list.Exists(e => m.IsContain(e)))
+                        {
+                            list.Add(m);
+                        }
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Get list of masks, generated from 5-angle chords.
+        /// </summary>
+        /// <returns>list of masks</returns>
+        public List<Mask> For5AngleMasksList()
+        {
+            List<Mask> list = new List<Mask>();
+            CyclicArithmetic ar = new CyclicArithmetic(N);
+
+            // First node is always 0.
+            int i0 = 0;
+
+            // Second node (from i0 + 1 to N - 1).
+            for (int i1 = i0 + 1; i1 <= N - 1; i1++)
+            {
+                // Third node (from i1 + 1 to N - 1).
+                for (int i2 = i1 + 1; i2 <= N - 1; i2++)
+                {
+                    // Fourth node (from i2 + 1 to N - 1).
+                    for (int i3 = i2 + 1; i3 <= N - 1; i3++)
+                    {
+                        // Fifth node (from i3 + 1 to N - 1).
+                        for (int i4 = i3 + 1; i4 <= N - 1; i4++)
+                        {
+                            // Create mask.
+                            Mask m = Mask.MakeEmpty(Nd2);
+                            m[ar.Dist(i0, i1) - 1] = true;
+                            m[ar.Dist(i0, i2) - 1] = true;
+                            m[ar.Dist(i0, i3) - 1] = true;
+                            m[ar.Dist(i0, i4) - 1] = true;
+                            m[ar.Dist(i1, i2) - 1] = true;
+                            m[ar.Dist(i1, i3) - 1] = true;
+                            m[ar.Dist(i1, i4) - 1] = true;
+                            m[ar.Dist(i2, i3) - 1] = true;
+                            m[ar.Dist(i2, i4) - 1] = true;
+                            m[ar.Dist(i3, i4) - 1] = true;
+
+                            // Add mask to list.
+                            list.RemoveAll(e => e.IsContain(m));
+                            if (!list.Exists(e => m.IsContain(e)))
+                            {
+                                list.Add(m);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        /// <summary>
+        /// Get list of masks, generated from 6-angle chords.
+        /// </summary>
+        /// <returns>list of masks</returns>
+        public List<UInt64> For6AngleMasksList()
+        {
+            HashSet<UInt64> hs = new HashSet<UInt64>();
+            CyclicArithmetic ar = new CyclicArithmetic(N);
+
+            // First node is always 0.
+            int i0 = 0;
+
+            // Second node (from i0 + 1 to N - 1).
+            for (int i1 = i0 + 1; i1 <= N - 1; i1++)
+            {
+                int d01 = ar.Dist(i0, i1) - 1;
+                UInt64 m1 = (1ul << d01);
+
+                // d01 - minimal chord.
+
+                // Third node (from i1 + 1 to N - 1).
+                for (int i2 = i1 + 1; i2 <= N - 1; i2++)
+                {
+                    int d12 = ar.Dist(i1, i2) - 1;
+
+                    if (d12 > d01)
+                    {
+                        continue;
+                    }
+
+                    int d02 = ar.Dist(i0, i2) - 1;
+                    UInt64 m2 = m1 | (1ul << d02) | (1ul << d12);
+
+                    // Fourth node (from i2 + 1 to N - 1).
+                    for (int i3 = i2 + 1; i3 <= N - 1; i3++)
+                    {
+                        int d23 = ar.Dist(i2, i3) - 1;
+
+                        if (d23 > d01)
+                        {
+                            continue;
+                        }
+
+                        int d03 = ar.Dist(i0, i3) - 1;
+                        int d13 = ar.Dist(i1, i3) - 1;
+                        UInt64 m3 = m2 | (1ul << d03) | (1ul << d13) | (1ul << d23);
+
+                        // Fifth node (from i3 + 1 to N - 1).
+                        for (int i4 = i3 + 1; i4 <= N - 1; i4++)
+                        {
+                            int d34 = ar.Dist(i3, i4) - 1;
+
+                            if (d34 > d01)
+                            {
+                                continue;
+                            }
+
+                            int d04 = ar.Dist(i0, i4) - 1;
+                            int d14 = ar.Dist(i1, i4) - 1;
+                            int d24 = ar.Dist(i2, i4) - 1;
+                            UInt64 m4 = m3 | (1ul << d04) | (1ul << d14) | (1ul << d24) | (1ul << d34);
+
+                            // Sixth node (from i4 + 1 to N - 1).
+                            for (int i5 = i4 + 1; i5 <= N - 1; i5++)
+                            {
+                                int d05 = ar.Dist(i0, i5) - 1;
+                                int d45 = ar.Dist(i4, i5) - 1;
+
+                                if ((d05 > d01) || (d45 > d01))
+                                {
+                                    continue;
+                                }
+
+                                int d15 = ar.Dist(i1, i5) - 1;
+                                int d25 = ar.Dist(i2, i5) - 1;
+                                int d35 = ar.Dist(i3, i5) - 1;
+                                UInt64 m5 = m4
+                                            | (1ul << d05) | (1ul << d15) | (1ul << d25)
+                                            | (1ul << d35) | (1ul << d45);
+
+                                // Add mask to list.
+                                hs.Add(m5);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Now we need to delete dublicates and overlapped elements and return the list.
+
+            List<UInt64> list = new List<UInt64>(hs as ICollection<UInt64>);
+            list.Sort();
+
+            // It it too long.
+
+            //int i = 0;
+            //while (i < list.Count)
+            //{
+            //    if ((i % 100) == 0)
+            //    {
+            //        Console.WriteLine("Count = {0}, i = {1}", list.Count, i);
+            //    }
+            //    
+            //    UInt64 u = list[i];
+            //
+            //    if (list.RemoveAll(e => (e != u) && ((e & u) == u)) == 0)
+            //    {
+            //        i++;
+            //    }
+            //}
+            //
+            //for (int ii = 0; ii < list.Count; ii++)
+            //{
+            //    for (int jj = ii + 1; jj < list.Count; jj++)
+            //    {
+            //        Debug.Assert(!(((list[ii] & list[jj]) == list[ii])
+            //                       || ((list[ii] & list[jj]) == list[jj])));
+            //    }
+            //}
+
+            return list;
         }
     }
 }
