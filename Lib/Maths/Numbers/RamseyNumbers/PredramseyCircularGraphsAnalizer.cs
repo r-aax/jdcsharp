@@ -21,11 +21,6 @@ namespace Lib.Maths.Numbers.RamseyNumbers
         private int N;
 
         /// <summary>
-        /// Cliques sizes.
-        /// </summary>
-        private int Kr, Kb;
-
-        /// <summary>
         /// Red edges mask.
         /// </summary>
         private Mask RedMask;
@@ -34,14 +29,10 @@ namespace Lib.Maths.Numbers.RamseyNumbers
         /// Constructor.
         /// </summary>
         /// <param name="n">order</param>
-        /// <param name="k_r">red clique size</param>
-        /// <param name="k_b">blue clique size</param>
-        public PredramseyCircularGraphsAnalizer(int n, int k_r, int k_b)
+        public PredramseyCircularGraphsAnalizer(int n)
         {
             // Set sizes.
             N = n;
-            Kr = k_r;
-            Kb = k_b;
 
             // Set empty red mask.
             RedMask = Mask.MakeEmpty(N / 2);
@@ -62,25 +53,27 @@ namespace Lib.Maths.Numbers.RamseyNumbers
         /// <summary>
         /// Check for red clique.
         /// </summary>
+        /// <param name="kr">red clique size</param>
         /// <returns>
         /// <c>true</c> - if graph has red clique,
         /// <c>false</c> - if graph do not have red clique
         /// </returns>
-        public bool HasRed()
+        public bool HasRed(int kr)
         {
-            return HasFull(RedMask, Kr);
+            return HasFull(RedMask, kr);
         }
 
         /// <summary>
         /// Check for blue clique.
         /// </summary>
+        /// <param name="kb">blue clique size</param>
         /// <returns>
         /// <c>true</c> - if graph has blue clique,
         /// <c>false</c> - if graph do not have blue clique
         /// </returns>
-        public bool HasBlue()
+        public bool HasBlue(int kb)
         {
-            return HasFull(RedMask.Invert(), Kb);
+            return HasFull(RedMask.Invert(), kb);
         }
 
         /// <summary>
@@ -323,14 +316,16 @@ namespace Lib.Maths.Numbers.RamseyNumbers
         /// <summary>
         /// Count of predramsey graphs paintings.
         /// </summary>
+        /// <param name="kr">red clique size</param>
+        /// <param name="kb">blue clique size</param>
         /// <returns>paintings count</returns>
-        public int PaintingsCount()
+        public int PaintingsCount(int kr, int kb)
         {
             int count = 0;
 
             do
             {
-                if (!HasRed() && !HasBlue())
+                if (!HasRed(kr) && !HasBlue(kb))
                 {
                     RedMask.Print(1);
                     count++;
