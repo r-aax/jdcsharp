@@ -233,11 +233,22 @@
             // 
             // BooksDGV
             // 
+            this.BooksDGV.AllowUserToAddRows = false;
+            this.BooksDGV.AllowUserToDeleteRows = false;
+            this.BooksDGV.AllowUserToResizeRows = false;
+            this.BooksDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BooksDGV.BackgroundColor = System.Drawing.Color.White;
             this.BooksDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.BooksDGV.Location = new System.Drawing.Point(14, 136);
+            this.BooksDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.BooksDGV.Location = new System.Drawing.Point(0, 124);
+            this.BooksDGV.Margin = new System.Windows.Forms.Padding(10);
             this.BooksDGV.Name = "BooksDGV";
-            this.BooksDGV.Size = new System.Drawing.Size(835, 325);
+            this.BooksDGV.ReadOnly = true;
+            this.BooksDGV.Size = new System.Drawing.Size(866, 340);
             this.BooksDGV.TabIndex = 11;
+            this.BooksDGV.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.BooksDGV_CellMouseDoubleClick);
             // 
             // MainForm
             // 

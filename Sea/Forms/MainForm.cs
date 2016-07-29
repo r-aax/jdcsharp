@@ -4,8 +4,10 @@ using System;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Drawing;
 
 using Sea.Core;
+using Sea.Core.Books;
 using Sea.Tools;
 
 namespace Sea.Forms
@@ -176,10 +178,7 @@ namespace Sea.Forms
             // Now we ignore all filters, just copy all books and display them.
             Sea.SearchBooks();
             ShowLastAction(Sea.SBooks.Count.ToString() + " books found");
-
-            {
-                ;
-            }
+            FillBooksDataGridView(BooksDGV, Sea.SBooks);
         }
 
         /// <summary>
@@ -190,6 +189,38 @@ namespace Sea.Forms
         private void CleanB_Click(object sender, EventArgs e)
         {
             Debug.Assert(false);
+        }
+
+        /// <summary>
+        /// Fill data grid with books.
+        /// </summary>
+        /// <param name="g">data grid view</param>
+        /// <param name="b">books list</param>
+        private void FillBooksDataGridView(DataGridView g, BooksList b)
+        {
+            g.RowCount = b.Count;
+            g.ColumnCount = 1;
+            g.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            g.Columns[0].HeaderText = "Description";
+
+            for (int i = 0; i < b.Count; i++)
+            {
+                g.Rows[i].Cells[0].Value = b[i].FullName(BookFullNamePrintStyle.Wide);
+            }
+
+            // Set bold style to description.
+            g.Columns[0].HeaderCell.Style.BackColor = Color.LightGray;
+            g.Columns[0].HeaderCell.Style.Font = new Font(g.Font.Name, g.Font.Size, FontStyle.Bold);
+        }
+
+        /// <summary>
+        /// Click on cell.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BooksDGV_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            MessageBox.Show("cell click : " + e.RowIndex + ", " + e.ColumnIndex);
         }
     }
 }
