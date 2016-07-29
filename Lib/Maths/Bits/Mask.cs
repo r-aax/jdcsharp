@@ -238,5 +238,31 @@ namespace Lib.Maths.Bits
 
             return c;
         }
+
+        /// <summary>
+        /// Check if mask contains another mask.
+        /// </summary>
+        /// <param name="m">another mask</param>
+        /// <returns>true - if this contans m, false - otherwise</returns>
+        public bool IsContain(Mask m)
+        {
+            for (int i = 0; i < m.Length; i++)
+            {
+                if (m[i])
+                {
+                    if (i >= Length)
+                    {
+                        return false;
+                    }
+
+                    if (!this[i])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
     }
 }
