@@ -117,7 +117,11 @@ namespace Sea.Forms
             }
 
             SetButtonsEnable();
-            CategoriesTreeTV.Nodes[0].ExpandAll();
+
+            if (CategoriesTreeTV.Nodes.Count > 0)
+            {
+                CategoriesTreeTV.Nodes[0].ExpandAll();
+            }
         }
 
         /// <summary>

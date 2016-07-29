@@ -239,6 +239,12 @@ namespace Sea.Core.Books
                         full_name += String.Format(" n{0}", Number);
                     }
 
+                    // Mark if is no file for book.
+                    if (File == "")
+                    {
+                        full_name += " *";
+                    }
+
                     return full_name;
 
                 default:

@@ -121,6 +121,7 @@ namespace Sea.Core.Categories
 
         /// <summary>
         /// Delete extra categories.
+        /// Categories list must be a forest.
         /// </summary>
         public void DeleteExtra()
         {

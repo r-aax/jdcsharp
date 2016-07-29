@@ -6,8 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
-using ICSharpCode.SharpZipLib;
+using System.Diagnostics;
 
 using Lib.DataStruct;
 using Sea.Core.Authors;
@@ -44,6 +43,11 @@ namespace Sea.Core
         public BooksList Books;
 
         /// <summary>
+        /// List of search books.
+        /// </summary>
+        public BooksList SBooks;
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public Sea()
@@ -53,6 +57,8 @@ namespace Sea.Core
             {
                 Directory.CreateDirectory(Parameters.StoragePath);
             }
+
+            SBooks = null;
         }
 
         /// <summary>
@@ -257,6 +263,11 @@ namespace Sea.Core
                         File.Copy(file, full_to_file, true);
                     }
                 }
+                else
+                {
+                    // If there is no file we have to delete old file.
+                    // But we can delete extra files with some global service (for example when program is started).
+                }
             }
         }
 
@@ -291,12 +302,28 @@ namespace Sea.Core
                 ICSharpCode.SharpZipLib.Zip.FastZip fz = new ICSharpCode.SharpZipLib.Zip.FastZip();
                 fz.ExtractZip(archive_name, Parameters.StoragePath, null);
                 Deserialize();
-
+            
                 return true;
             }
             else
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// Search books.
+        /// </summary>
+        public void SearchBooks()
+        {
+            // Deserialize all from files.
+            Deserialize();
+
+            SBooks = new BooksList();
+
+            for (int i = 0; i < Books.Count; i++)
+            {
+                SBooks.Add(Books[i]);
             }
         }
     }

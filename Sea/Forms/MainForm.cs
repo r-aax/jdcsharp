@@ -5,8 +5,6 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 
-using ICSharpCode.SharpZipLib;
-
 using Sea.Core;
 using Sea.Tools;
 
@@ -149,13 +147,49 @@ namespace Sea.Forms
         }
 
         /// <summary>
-        /// Run correction (delete extra categories and so on).
+        /// Delete extra categories.
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
-        private void ToolsRunCorrectionMI_Click(object sender, EventArgs e)
+        private void deleteExtraCategoriesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Sea.Books.DeleteExtraCategories();
+        }
+
+        /// <summary>
+        /// Delete extra book files.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void deleteExtraBookFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Debug.Assert(false);
+        }
+
+        /// <summary>
+        /// Start search.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void SearchB_Click(object sender, EventArgs e)
+        {
+            // Now we ignore all filters, just copy all books and display them.
+            Sea.SearchBooks();
+            ShowLastAction(Sea.SBooks.Count.ToString() + " books found");
+
+            {
+                ;
+            }
+        }
+
+        /// <summary>
+        /// Clean filters.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void CleanB_Click(object sender, EventArgs e)
+        {
+            Debug.Assert(false);
         }
     }
 }
