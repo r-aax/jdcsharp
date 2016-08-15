@@ -9,11 +9,17 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Height="21.72">
             <MenuItem Header="Draw">
+                <MenuItem Name="DrawTestMI" Header="Test" Click="DrawTestMI_Click"/>
                 <MenuItem Name="DrawPlanOMP_MI" Header="PlanOMP" Click="DrawPlanOMP_MI_Click"/>
             </MenuItem>
             <MenuItem Header="Picture">
                 <MenuItem Name="PictureSaveMI" Header="Save" Click="PictureSaveMI_Click"/>
             </MenuItem>
         </Menu>
+        <Grid>
+            <Canvas Name="DrawAreaC" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                    SizeChanged="DrawAreaC_SizeChanged">
+            </Canvas>
+        </Grid>
     </DockPanel>
 </Window>
