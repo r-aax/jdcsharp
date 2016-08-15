@@ -175,20 +175,75 @@ namespace DrawBox
 
             double beg_time = 3494.15;
             double end_time = 3496.1;
+            int master_threads = 3;
+            int max_threads = 4;
 
-            RelDrawRect = new Rect2D(new Interval(beg_time, end_time), new Interval(100.0));
+            RelDrawRect = new Rect2D(new Interval(beg_time, end_time), new Interval(max_threads));
             Drawer = null;
 
             CreateDrawer();
             Drawer.BeginDraw();
 
-            for (int i = 1; i < els.Count<ThreadsCountChangeElement>(); i++)
-            {
-                ThreadsCountChangeElement pe = els[i - 1];
-                ThreadsCountChangeElement e = els[i];
-                double r = Lib.Maths.Numbers.Randoms.RandomInInterval(0, 100.0);
+            int[] ths = new int[master_threads];
 
-                Drawer.FillRect(new Rect2D(new Point2D(pe.WTime, r - 5.0), new Point2D(e.WTime, r + 5.0)));
+            for (int i = 0; i < ths.Count<int>(); i++)
+            {
+                ths[i] = 1;
+            }
+
+            for (int i = 0; i < els.Count<ThreadsCountChangeElement>(); i++)
+            {
+                ThreadsCountChangeElement e = els[i];
+
+                if (i == 0)
+                {
+                    ths[e.ThreadNum] += e.ChangeCount;
+                }
+
+                if (i > 0)
+                {
+                    ThreadsCountChangeElement pe = els[i - 1];
+
+                    // Draw rectangles.
+                    double low = 0.0;
+                    for (int j = 0; j < ths.Count<int>(); j++)
+                    {
+                        Color c;
+
+                        switch (j)
+                        {
+                            case 0:
+                                c = Colors.Blue;
+                                break;
+
+                            case 1:
+                                c = Colors.Green;
+                                break;
+
+                            case 2:
+                                c = Colors.Red;
+                                break;
+
+                            default:
+                                c = Colors.Black;
+                                break;
+                        }
+
+                        Drawer.SetBrush(new Lib.Draw.Color(c));
+                        Drawer.FillRect(new Rect2D(new Interval(pe.WTime, e.WTime),
+                                                   new Interval(low, low + ths[j])));
+                        low += ths[j];
+                    }
+
+                    ths[e.ThreadNum] += e.ChangeCount;
+                }
+            }
+
+            Drawer.SetPenColor(new Lib.Draw.Color(Colors.Silver));
+            for (int i = 1; i < els.Count<ThreadsCountChangeElement>() - 1; i++)
+            {
+                ThreadsCountChangeElement e = els[i];
+                Drawer.DrawLine(new Point2D(e.WTime, 0.0), new Point2D(e.WTime, max_threads));
             }
 
             Drawer.EndDraw();
