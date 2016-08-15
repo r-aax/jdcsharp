@@ -8,6 +8,8 @@ using System.Diagnostics;
 
 using Lib.Maths.Geometry.Geometry2D;
 using LPoint = Lib.Maths.Geometry.Geometry2D.Point;
+using LVector = Lib.Maths.Geometry.Geometry2D.Vector;
+using LRect = Lib.Maths.Geometry.Geometry2D.Rect;
 using LColor = Lib.Draw.Color;
 using SDColor = System.Drawing.Color;
 
@@ -233,6 +235,32 @@ namespace Lib.Draw.WindowsForms
             Graphics.FillEllipse(Brush,
                                  (int)(tp.X - r), (int)(tp.Y - r),
                                  (int)(2 * r), (int)(2 * r));
+        }
+
+        /// <summary>
+        /// Draw rectangle.
+        /// </summary>
+        /// <param name="r">rectangle</param>
+        public override void DrawRect(Rect r)
+        {
+            LPoint tlb = Scaler.T(r.LB);
+            LPoint trt = Scaler.T(r.RT);
+            LVector s = trt - tlb;
+            Graphics.DrawRectangle(Pen,
+                                   new Rectangle((int)tlb.X, (int)tlb.Y, (int)s.X, (int)s.Y));
+        }
+
+        /// <summary>
+        /// Fill rectangle.
+        /// </summary>
+        /// <param name="r">rectangle</param>
+        public override void FillRect(LRect r)
+        {
+            LPoint tlb = Scaler.T(r.LB);
+            LPoint trt = Scaler.T(r.RT);
+            LVector s = trt - tlb;
+            Graphics.FillRectangle(Brush,
+                                   new Rectangle((int)tlb.X, (int)tlb.Y, (int)s.X, (int)s.Y));
         }
 
         /// <summary>

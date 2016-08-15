@@ -11,6 +11,7 @@ using LPoint = Lib.Maths.Geometry.Geometry2D.Point;
 using LRect = Lib.Maths.Geometry.Geometry2D.Rect;
 using LColor = Lib.Draw.Color;
 using SWPoint = System.Windows.Point;
+using SWRect = System.Windows.Rect;
 using SWMColor = System.Windows.Media.Color;
 
 namespace Lib.Draw.WPF
@@ -211,6 +212,30 @@ namespace Lib.Draw.WPF
         {
             LPoint tp = Scaler.T(p);
             Context.DrawEllipse(Brush, null, new SWPoint(tp.X, tp.Y), r, r);
+        }
+
+        /// <summary>
+        /// Draw rectangle.
+        /// </summary>
+        /// <param name="r">rectangle</param>
+        public override void DrawRect(LRect r)
+        {
+            LPoint tlb = Scaler.T(r.LB);
+            LPoint trt = Scaler.T(r.RT);
+            Context.DrawRectangle(null, Pen,
+                                  new SWRect(new SWPoint(tlb.X, tlb.Y), new SWPoint(trt.X, trt.Y)));
+        }
+
+        /// <summary>
+        /// Fill rectangle.
+        /// </summary>
+        /// <param name="r">rectangle</param>
+        public override void FillRect(LRect r)
+        {
+            LPoint tlb = Scaler.T(r.LB);
+            LPoint trt = Scaler.T(r.RT);
+            Context.DrawRectangle(Brush, null,
+                                  new SWRect(new SWPoint(tlb.X, tlb.Y), new SWPoint(trt.X, trt.Y)));
         }
 
         /// <summary>

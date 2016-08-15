@@ -16,6 +16,7 @@ using System.Windows.Forms;
 using System.IO;
 
 using Lib.Draw.WPF;
+using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry2D;
 using SWRect = System.Windows.Rect;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
@@ -47,6 +48,40 @@ namespace DrawBox
     };
 
     /// <summary>
+    /// Element of threads count change.
+    /// </summary>
+    class ThreadsCountChangeElement
+    {
+        /// <summary>
+        /// Thread number (parent thread).
+        /// </summary>
+        public int ThreadNum;
+
+        /// <summary>
+        /// World (global) time.
+        /// </summary>
+        public double WTime;
+
+        /// <summary>
+        /// Threads count change.
+        /// </summary>
+        public int ChangeCount;
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="thread_num">thread number</param>
+        /// <param name="wtime">world time</param>
+        /// <param name="change_count">count of threads (change)</param>
+        public ThreadsCountChangeElement(int thread_num, double wtime, int change_count)
+        {
+            ThreadNum = thread_num;
+            WTime = wtime;
+            ChangeCount = change_count;
+        }
+    };
+
+    /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
@@ -59,7 +94,7 @@ namespace DrawBox
         /// <summary>
         /// Relative rectangle for drawing.
         /// </summary>
-        private static readonly Rect2D RelDrawRect = new Rect2D(100.0, 100.0);
+        private Rect2D RelDrawRect = new Rect2D(100.0, 100.0);
 
         /// <summary>
         /// Element of painting.
@@ -90,8 +125,13 @@ namespace DrawBox
         /// </summary>
         private void PaintTest()
         {
+            CreateDrawer();
+            Drawer.BeginDraw();
+
             Drawer.DrawLine(new Point2D(0.0, 0.0), new Point2D(100.0, 100.0));
             Drawer.DrawLine(new Point2D(0.0, 100.0), new Point2D(100.0, 0.0));
+
+            Drawer.EndDraw();
         }
 
         /// <summary>
@@ -99,7 +139,59 @@ namespace DrawBox
         /// </summary>
         private void PaintPlanOMP()
         {
-            ;
+            ThreadsCountChangeElement[] els =
+            {
+                new ThreadsCountChangeElement(0, 3494.15, +1),
+                new ThreadsCountChangeElement(0, 3494.35, -1),
+                new ThreadsCountChangeElement(1, 3494.35, +1),
+                new ThreadsCountChangeElement(0, 3494.35, +0),
+                new ThreadsCountChangeElement(0, 3494.45, -0),
+                new ThreadsCountChangeElement(1, 3494.55, -1),
+                new ThreadsCountChangeElement(2, 3494.55, +1),
+                new ThreadsCountChangeElement(1, 3494.55, +0),
+                new ThreadsCountChangeElement(1, 3494.65, -0),
+                new ThreadsCountChangeElement(2, 3494.8, -1),
+                new ThreadsCountChangeElement(1, 3494.8, +1),
+                new ThreadsCountChangeElement(2, 3494.8, +0),
+                new ThreadsCountChangeElement(2, 3494.9, -0),
+                new ThreadsCountChangeElement(1, 3495, -1),
+                new ThreadsCountChangeElement(0, 3495, +1),
+                new ThreadsCountChangeElement(1, 3495, +0),
+                new ThreadsCountChangeElement(1, 3495.1, -0),
+                new ThreadsCountChangeElement(0, 3495.2, -1),
+                new ThreadsCountChangeElement(1, 3495.2, +1),
+                new ThreadsCountChangeElement(0, 3495.2, +0),
+                new ThreadsCountChangeElement(0, 3495.3, -0),
+                new ThreadsCountChangeElement(1, 3495.4, -1),
+                new ThreadsCountChangeElement(2, 3495.4, +1),
+                new ThreadsCountChangeElement(2, 3495.65, -1),
+                new ThreadsCountChangeElement(0, 3495.65, +1),
+                new ThreadsCountChangeElement(2, 3495.65, +0),
+                new ThreadsCountChangeElement(2, 3495.76, -0),
+                new ThreadsCountChangeElement(0, 3495.85, -1),
+                new ThreadsCountChangeElement(2, 3495.85, +1),
+                new ThreadsCountChangeElement(2, 3496.1, -1)
+            };
+
+            double beg_time = 3494.15;
+            double end_time = 3496.1;
+
+            RelDrawRect = new Rect2D(new Interval(beg_time, end_time), new Interval(100.0));
+            Drawer = null;
+
+            CreateDrawer();
+            Drawer.BeginDraw();
+
+            for (int i = 1; i < els.Count<ThreadsCountChangeElement>(); i++)
+            {
+                ThreadsCountChangeElement pe = els[i - 1];
+                ThreadsCountChangeElement e = els[i];
+                double r = Lib.Maths.Numbers.Randoms.RandomInInterval(0, 100.0);
+
+                Drawer.FillRect(new Rect2D(new Point2D(pe.WTime, r - 5.0), new Point2D(e.WTime, r + 5.0)));
+            }
+
+            Drawer.EndDraw();
         }
 
         /// <summary>
@@ -107,9 +199,6 @@ namespace DrawBox
         /// </summary>
         private void Paint()
         {
-            CreateDrawer();
-            Drawer.BeginDraw();
-
             switch (PEl)
             {
                 case PaintElement.Test:
@@ -120,8 +209,6 @@ namespace DrawBox
                     PaintPlanOMP();
                     break;
             }
-
-            Drawer.EndDraw();
         }
 
         /// <summary>

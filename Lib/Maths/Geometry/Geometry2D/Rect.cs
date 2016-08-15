@@ -58,6 +58,17 @@ namespace Lib.Maths.Geometry.Geometry2D
         }
 
         /// <summary>
+        /// Constructor from intervals.
+        /// </summary>
+        /// <param name="p1"></param>
+        /// <param name="p2"></param>
+        public Rect(Point p1, Point p2)
+            : this(new Interval(Math.Min(p1.X, p2.X), Math.Max(p1.X, p2.X)),
+                   new Interval(Math.Min(p1.Y, p2.Y), Math.Max(p1.Y, p2.Y)))
+        {
+        }
+
+        /// <summary>
         /// Width (size <c>x</c>).
         /// </summary>
         public double Width
@@ -87,6 +98,50 @@ namespace Lib.Maths.Geometry.Geometry2D
             get
             {
                 return Math.Min(Width, Height) / 2.0;
+            }
+        }
+
+        /// <summary>
+        /// Left-Bottom point.
+        /// </summary>
+        public Point LB
+        {
+            get
+            {
+                return new Point(Left, Bottom);
+            }
+        }
+
+        /// <summary>
+        ///  Left-Top point.
+        /// </summary>
+        public Point LT
+        {
+            get
+            {
+                return new Point(Left, Top);
+            }
+        }
+
+        /// <summary>
+        ///  Right-Bottom point.
+        /// </summary>
+        public Point RB
+        {
+            get
+            {
+                return new Point(Right, Bottom);
+            }
+        }
+
+        /// <summary>
+        /// Right-Top point.
+        /// </summary>
+        public Point RT
+        {
+            get
+            {
+                return new Point(Right, Top);
             }
         }
 

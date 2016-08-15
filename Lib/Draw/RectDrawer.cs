@@ -99,6 +99,18 @@ namespace Lib.Draw
         public abstract void FillPoint(Point p, double r);
 
         /// <summary>
+        /// Draw rectangle.
+        /// </summary>
+        /// <param name="r">rectangle</param>
+        public abstract void DrawRect(Rect r);
+
+        /// <summary>
+        /// Fill rectangle.
+        /// </summary>
+        /// <param name="r">rectangle</param>
+        public abstract void FillRect(Rect r);
+
+        /// <summary>
         /// Draw ellipse.
         /// </summary>
         /// <param name="p">center</param>
