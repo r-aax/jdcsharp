@@ -68,16 +68,23 @@ namespace DrawBox
         public int ChangeCount;
 
         /// <summary>
+        /// Check if we allocate threads.
+        /// </summary>
+        public bool IsAlloc;
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="thread_num">thread number</param>
         /// <param name="wtime">world time</param>
         /// <param name="change_count">count of threads (change)</param>
-        public ThreadsCountChangeElement(int thread_num, double wtime, int change_count)
+        /// <param name="is_alloc">if we allocate threads</param>
+        public ThreadsCountChangeElement(int thread_num, double wtime, int change_count, bool is_alloc)
         {
             ThreadNum = thread_num;
             WTime = wtime;
             ChangeCount = change_count;
+            IsAlloc = is_alloc;
         }
     };
 
@@ -139,44 +146,44 @@ namespace DrawBox
         /// </summary>
         private void PaintPlanOMP()
         {
-            ThreadsCountChangeElement[] els =
-            {
-                new ThreadsCountChangeElement(0, 3494.15, +1),
-                new ThreadsCountChangeElement(0, 3494.35, -1),
-                new ThreadsCountChangeElement(1, 3494.35, +1),
-                new ThreadsCountChangeElement(0, 3494.35, +0),
-                new ThreadsCountChangeElement(0, 3494.45, -0),
-                new ThreadsCountChangeElement(1, 3494.55, -1),
-                new ThreadsCountChangeElement(2, 3494.55, +1),
-                new ThreadsCountChangeElement(1, 3494.55, +0),
-                new ThreadsCountChangeElement(1, 3494.65, -0),
-                new ThreadsCountChangeElement(2, 3494.8, -1),
-                new ThreadsCountChangeElement(1, 3494.8, +1),
-                new ThreadsCountChangeElement(2, 3494.8, +0),
-                new ThreadsCountChangeElement(2, 3494.9, -0),
-                new ThreadsCountChangeElement(1, 3495, -1),
-                new ThreadsCountChangeElement(0, 3495, +1),
-                new ThreadsCountChangeElement(1, 3495, +0),
-                new ThreadsCountChangeElement(1, 3495.1, -0),
-                new ThreadsCountChangeElement(0, 3495.2, -1),
-                new ThreadsCountChangeElement(1, 3495.2, +1),
-                new ThreadsCountChangeElement(0, 3495.2, +0),
-                new ThreadsCountChangeElement(0, 3495.3, -0),
-                new ThreadsCountChangeElement(1, 3495.4, -1),
-                new ThreadsCountChangeElement(2, 3495.4, +1),
-                new ThreadsCountChangeElement(2, 3495.65, -1),
-                new ThreadsCountChangeElement(0, 3495.65, +1),
-                new ThreadsCountChangeElement(2, 3495.65, +0),
-                new ThreadsCountChangeElement(2, 3495.76, -0),
-                new ThreadsCountChangeElement(0, 3495.85, -1),
-                new ThreadsCountChangeElement(2, 3495.85, +1),
-                new ThreadsCountChangeElement(2, 3496.1, -1)
-            };
-
-            double beg_time = 3494.15;
-            double end_time = 3496.1;
             int master_threads = 3;
             int max_threads = 4;
+            ThreadsCountChangeElement[] els =
+            {
+                new ThreadsCountChangeElement(0, 3494.15, +1, true),
+                new ThreadsCountChangeElement(0, 3494.35, -1, false),
+                new ThreadsCountChangeElement(1, 3494.35, +1, true),
+                new ThreadsCountChangeElement(0, 3494.35, +0, true),
+                new ThreadsCountChangeElement(0, 3494.45, -0, false),
+                new ThreadsCountChangeElement(1, 3494.55, -1, false),
+                new ThreadsCountChangeElement(2, 3494.55, +1, true),
+                new ThreadsCountChangeElement(1, 3494.55, +0, true),
+                new ThreadsCountChangeElement(1, 3494.65, -0, false),
+                new ThreadsCountChangeElement(2, 3494.8, -1, false),
+                new ThreadsCountChangeElement(1, 3494.8, +1, true),
+                new ThreadsCountChangeElement(2, 3494.8, +0, true),
+                new ThreadsCountChangeElement(2, 3494.9, -0, false),
+                new ThreadsCountChangeElement(1, 3495, -1, false),
+                new ThreadsCountChangeElement(0, 3495, +1, true),
+                new ThreadsCountChangeElement(1, 3495, +0, true),
+                new ThreadsCountChangeElement(1, 3495.1, -0, false),
+                new ThreadsCountChangeElement(0, 3495.2, -1, false),
+                new ThreadsCountChangeElement(1, 3495.2, +1, true),
+                new ThreadsCountChangeElement(0, 3495.2, +0, true),
+                new ThreadsCountChangeElement(0, 3495.3, -0, false),
+                new ThreadsCountChangeElement(1, 3495.4, -1, false),
+                new ThreadsCountChangeElement(2, 3495.4, +1, true),
+                new ThreadsCountChangeElement(2, 3495.65, -1, false),
+                new ThreadsCountChangeElement(0, 3495.65, +1, true),
+                new ThreadsCountChangeElement(2, 3495.65, +0, true),
+                new ThreadsCountChangeElement(2, 3495.76, -0, false),
+                new ThreadsCountChangeElement(0, 3495.85, -1, false),
+                new ThreadsCountChangeElement(2, 3495.85, +1, true),
+                new ThreadsCountChangeElement(2, 3496.1, -1, false)
+            };
+
+            double beg_time = els.First<ThreadsCountChangeElement>().WTime;
+            double end_time = els.Last<ThreadsCountChangeElement>().WTime;
 
             RelDrawRect = new Rect2D(new Interval(beg_time, end_time), new Interval(max_threads));
             Drawer = null;
@@ -185,11 +192,19 @@ namespace DrawBox
             Drawer.BeginDraw();
 
             int[] ths = new int[master_threads];
+            bool[] is_draw = new bool[master_threads];
 
             for (int i = 0; i < ths.Count<int>(); i++)
             {
                 ths[i] = 1;
             }
+
+            for (int i = 0; i < is_draw.Count<bool>(); i++)
+            {
+                is_draw[i] = false;
+            }
+
+            Drawer.SetPenColor(new Lib.Draw.Color(Colors.DarkGray));
 
             for (int i = 0; i < els.Count<ThreadsCountChangeElement>(); i++)
             {
@@ -198,9 +213,9 @@ namespace DrawBox
                 if (i == 0)
                 {
                     ths[e.ThreadNum] += e.ChangeCount;
+                    is_draw[e.ThreadNum] = e.IsAlloc;
                 }
-
-                if (i > 0)
+                else if (i > 0)
                 {
                     ThreadsCountChangeElement pe = els[i - 1];
 
@@ -229,17 +244,31 @@ namespace DrawBox
                                 break;
                         }
 
-                        Drawer.SetBrush(new Lib.Draw.Color(c));
+                        if (is_draw[j])
+                        {
+                            Drawer.SetBrush(new Lib.Draw.Color(c));
+                        }
+                        else
+                        {
+                            Drawer.SetBrush(new Lib.Draw.Color(Colors.LightGray));
+                        }
+
                         Drawer.FillRect(new Rect2D(new Interval(pe.WTime, e.WTime),
                                                    new Interval(low, low + ths[j])));
+
+                        if (low > 0.0)
+                        {
+                            Drawer.DrawLine(new Point2D(pe.WTime, low), new Point2D(e.WTime, low));
+                        }
+
                         low += ths[j];
                     }
 
                     ths[e.ThreadNum] += e.ChangeCount;
+                    is_draw[e.ThreadNum] = e.IsAlloc;
                 }
             }
 
-            Drawer.SetPenColor(new Lib.Draw.Color(Colors.Silver));
             for (int i = 1; i < els.Count<ThreadsCountChangeElement>() - 1; i++)
             {
                 ThreadsCountChangeElement e = els[i];
