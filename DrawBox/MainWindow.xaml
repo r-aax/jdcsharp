@@ -10,7 +10,11 @@
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Height="21.72">
             <MenuItem Header="Draw">
                 <MenuItem Name="DrawTestMI" Header="Test" Click="DrawTestMI_Click"/>
-                <MenuItem Name="DrawPlanOMP_MI" Header="PlanOMP" Click="DrawPlanOMP_MI_Click"/>
+                <MenuItem Header="PlanOMP">
+                    <MenuItem Name="DrawPlanOMP4MI" Header="4 threads (2 2 2)" Click="DrawPlanOMP4MI_Click"/>
+                    <MenuItem Name="DrawPlanOMP8MI" Header="8 threads (3 3 3 3)" Click="DrawPlanOMP8MI_Click"/>
+                    <MenuItem Name="DrawPlanOMP16MI" Header="16 threads (5 5 5 5 5 5 5 5)" Click="DrawPlanOMP16MI_Click"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Picture">
                 <MenuItem Name="PictureSaveMI" Header="Save" Click="PictureSaveMI_Click"/>
