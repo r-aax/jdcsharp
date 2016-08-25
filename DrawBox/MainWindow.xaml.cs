@@ -146,40 +146,178 @@ namespace DrawBox
         /// </summary>
         private void PaintPlanOMP()
         {
-            int master_threads = 3;
-            int max_threads = 4;
+            // 4 threads.
+            // 3 procesures with parallel part 2.
+            //int master_threads = 3;
+            //int max_threads = 4;
+            //ThreadsCountChangeElement[] els =
+            //{
+            //    new ThreadsCountChangeElement(2, 388.114, +1, true),
+            //    new ThreadsCountChangeElement(2, 388.364, -1, false),
+            //    new ThreadsCountChangeElement(1, 388.365, +1, true),
+            //    new ThreadsCountChangeElement(2, 388.365, +0, true),
+            //    new ThreadsCountChangeElement(2, 388.465, -0, false),
+            //    new ThreadsCountChangeElement(1, 388.566, -1, false),
+            //    new ThreadsCountChangeElement(0, 388.567, +1, true),
+            //    new ThreadsCountChangeElement(1, 388.568, +0, true),
+            //    new ThreadsCountChangeElement(1, 388.669, -0, false),
+            //    new ThreadsCountChangeElement(0, 388.768, -1, false),
+            //    new ThreadsCountChangeElement(1, 388.768, +1, true),
+            //    new ThreadsCountChangeElement(0, 388.769, +0, true),
+            //    new ThreadsCountChangeElement(0, 388.869, -0, false),
+            //    new ThreadsCountChangeElement(1, 388.969, -1, false),
+            //    new ThreadsCountChangeElement(2, 388.97, +1, true),
+            //    new ThreadsCountChangeElement(1, 388.97, +0, true),
+            //    new ThreadsCountChangeElement(1, 389.07, -0, false),
+            //    new ThreadsCountChangeElement(2, 389.22, -1, false),
+            //    new ThreadsCountChangeElement(0, 389.22, +1, true),
+            //    new ThreadsCountChangeElement(2, 389.221, +0, true),
+            //    new ThreadsCountChangeElement(2, 389.321, -0, false),
+            //    new ThreadsCountChangeElement(0, 389.421, -1, false),
+            //    new ThreadsCountChangeElement(1, 389.422, +1, true),
+            //    new ThreadsCountChangeElement(0, 389.423, +0, true),
+            //    new ThreadsCountChangeElement(0, 389.524, -0, false),
+            //    new ThreadsCountChangeElement(1, 389.623, -1, false),
+            //    new ThreadsCountChangeElement(2, 389.624, +1, true),
+            //    new ThreadsCountChangeElement(2, 389.874, -1, false),
+            //    new ThreadsCountChangeElement(0, 389.875, +1, true),
+            //    new ThreadsCountChangeElement(0, 390.075, -1, false)
+            //};
+
+            // 8 threads.
+            // 4 procedures with parallel part 3.
+            //int master_threads = 4;
+            //int max_threads = 8;
+            //ThreadsCountChangeElement[] els =
+            //{
+            //    new ThreadsCountChangeElement(2, 408.677, +2, true),
+            //    new ThreadsCountChangeElement(1, 408.679, +2, true),
+            //    new ThreadsCountChangeElement(2, 409.007, -2, false),
+            //    new ThreadsCountChangeElement(3, 409.008, +2, true),
+            //    new ThreadsCountChangeElement(2, 409.008, +0, true),
+            //    new ThreadsCountChangeElement(1, 409.052, -2, false),
+            //    new ThreadsCountChangeElement(1, 409.053, +0, true),
+            //    new ThreadsCountChangeElement(0, 409.055, +2, true),
+            //    new ThreadsCountChangeElement(2, 409.112, -0, false),
+            //    new ThreadsCountChangeElement(1, 409.16, -0, false),
+            //    new ThreadsCountChangeElement(3, 409.309, -2, false),
+            //    new ThreadsCountChangeElement(3, 409.311, +0, true),
+            //    new ThreadsCountChangeElement(1, 409.312, +2, true),
+            //    new ThreadsCountChangeElement(0, 409.385, -2, false),
+            //    new ThreadsCountChangeElement(0, 409.387, +0, true),
+            //    new ThreadsCountChangeElement(2, 409.389, +2, true),
+            //    new ThreadsCountChangeElement(3, 409.412, -0, false),
+            //    new ThreadsCountChangeElement(0, 409.66, -0, false),
+            //    new ThreadsCountChangeElement(1, 409.68, -2, false),
+            //    new ThreadsCountChangeElement(1, 409.688, +0, true),
+            //    new ThreadsCountChangeElement(0, 409.688, +2, true),
+            //    new ThreadsCountChangeElement(2, 409.751, -2, false),
+            //    new ThreadsCountChangeElement(2, 409.753, +0, true),
+            //    new ThreadsCountChangeElement(3, 409.76, +2, true),
+            //    new ThreadsCountChangeElement(1, 409.789, -0, false),
+            //    new ThreadsCountChangeElement(2, 409.856, -0, false),
+            //    new ThreadsCountChangeElement(0, 410.065, -2, false),
+            //    new ThreadsCountChangeElement(1, 410.067, +2, true),
+            //    new ThreadsCountChangeElement(0, 410.07, +0, true),
+            //    new ThreadsCountChangeElement(3, 410.138, -2, false),
+            //    new ThreadsCountChangeElement(3, 410.139, +0, true),
+            //    new ThreadsCountChangeElement(0, 410.17, -0, false),
+            //    new ThreadsCountChangeElement(0, 410.17, +2, true),
+            //    new ThreadsCountChangeElement(3, 410.241, -0, false),
+            //    new ThreadsCountChangeElement(1, 410.448, -2, false),
+            //    new ThreadsCountChangeElement(2, 410.448, +2, true),
+            //    new ThreadsCountChangeElement(0, 410.54, -2, false),
+            //    new ThreadsCountChangeElement(3, 410.544, +2, true),
+            //    new ThreadsCountChangeElement(2, 410.849, -2, false),
+            //    new ThreadsCountChangeElement(3, 410.853, -2, false),
+            //};
+
+            // 16 threads.
+            // 8 procedures with parallel part 5.
+            int master_threads = 8;
+            int max_threads = 16;
             ThreadsCountChangeElement[] els =
             {
-                new ThreadsCountChangeElement(0, 3494.15, +1, true),
-                new ThreadsCountChangeElement(0, 3494.35, -1, false),
-                new ThreadsCountChangeElement(1, 3494.35, +1, true),
-                new ThreadsCountChangeElement(0, 3494.35, +0, true),
-                new ThreadsCountChangeElement(0, 3494.45, -0, false),
-                new ThreadsCountChangeElement(1, 3494.55, -1, false),
-                new ThreadsCountChangeElement(2, 3494.55, +1, true),
-                new ThreadsCountChangeElement(1, 3494.55, +0, true),
-                new ThreadsCountChangeElement(1, 3494.65, -0, false),
-                new ThreadsCountChangeElement(2, 3494.8, -1, false),
-                new ThreadsCountChangeElement(1, 3494.8, +1, true),
-                new ThreadsCountChangeElement(2, 3494.8, +0, true),
-                new ThreadsCountChangeElement(2, 3494.9, -0, false),
-                new ThreadsCountChangeElement(1, 3495, -1, false),
-                new ThreadsCountChangeElement(0, 3495, +1, true),
-                new ThreadsCountChangeElement(1, 3495, +0, true),
-                new ThreadsCountChangeElement(1, 3495.1, -0, false),
-                new ThreadsCountChangeElement(0, 3495.2, -1, false),
-                new ThreadsCountChangeElement(1, 3495.2, +1, true),
-                new ThreadsCountChangeElement(0, 3495.2, +0, true),
-                new ThreadsCountChangeElement(0, 3495.3, -0, false),
-                new ThreadsCountChangeElement(1, 3495.4, -1, false),
-                new ThreadsCountChangeElement(2, 3495.4, +1, true),
-                new ThreadsCountChangeElement(2, 3495.65, -1, false),
-                new ThreadsCountChangeElement(0, 3495.65, +1, true),
-                new ThreadsCountChangeElement(2, 3495.65, +0, true),
-                new ThreadsCountChangeElement(2, 3495.76, -0, false),
-                new ThreadsCountChangeElement(0, 3495.85, -1, false),
-                new ThreadsCountChangeElement(2, 3495.85, +1, true),
-                new ThreadsCountChangeElement(2, 3496.1, -1, false)
+new ThreadsCountChangeElement(5, 5577833.0099753961, +4, true),
+new ThreadsCountChangeElement(3, 5577833.0099943206, +4, true),
+new ThreadsCountChangeElement(5, 5577833.5124745565, -4, false),
+new ThreadsCountChangeElement(0, 5577833.5125041064, +4, true),
+new ThreadsCountChangeElement(5, 5577833.5125268744, +0, true),
+new ThreadsCountChangeElement(3, 5577833.5471619712, -4, false),
+new ThreadsCountChangeElement(4, 5577833.5471749380, +4, true),
+new ThreadsCountChangeElement(3, 5577833.5471887691, +0, true),
+new ThreadsCountChangeElement(5, 5577833.6125374380, -0, false),
+new ThreadsCountChangeElement(3, 5577833.6471966403, -0, false),
+new ThreadsCountChangeElement(0, 5577834.0340576628, -4, false),
+new ThreadsCountChangeElement(7, 5577834.0340704927, +4, true),
+new ThreadsCountChangeElement(0, 5577834.0346367927, +0, true),
+new ThreadsCountChangeElement(4, 5577834.0655096648, -4, false),
+new ThreadsCountChangeElement(2, 5577834.0655218307, +4, true),
+new ThreadsCountChangeElement(4, 5577834.0655408408, +0, true),
+new ThreadsCountChangeElement(0, 5577834.1346462630, -0, false),
+new ThreadsCountChangeElement(4, 5577834.1655496806, -0, false),
+new ThreadsCountChangeElement(7, 5577834.5444746763, -4, false),
+new ThreadsCountChangeElement(1, 5577834.5444871774, +4, true),
+new ThreadsCountChangeElement(7, 5577834.5445210636, +0, true),
+new ThreadsCountChangeElement(2, 5577834.5842119688, -4, false),
+new ThreadsCountChangeElement(5, 5577834.5842235191, +4, true),
+new ThreadsCountChangeElement(2, 5577834.5842359466, +0, true),
+new ThreadsCountChangeElement(7, 5577834.6445294069, -0, false),
+new ThreadsCountChangeElement(2, 5577834.6842435403, -0, false),
+new ThreadsCountChangeElement(1, 5577835.0565129193, -4, false),
+new ThreadsCountChangeElement(7, 5577835.0565260584, +4, true),
+new ThreadsCountChangeElement(1, 5577835.0565369902, +0, true),
+new ThreadsCountChangeElement(5, 5577835.1140246792, -4, false),
+new ThreadsCountChangeElement(2, 5577835.1140343836, +4, true),
+new ThreadsCountChangeElement(5, 5577835.1140469294, +0, true),
+new ThreadsCountChangeElement(1, 5577835.1565456940, -0, false),
+new ThreadsCountChangeElement(5, 5577835.2140535619, -0, false),
+new ThreadsCountChangeElement(7, 5577835.5742434701, -4, false),
+new ThreadsCountChangeElement(1, 5577835.5742751639, +4, true),
+new ThreadsCountChangeElement(7, 5577835.5742879147, +0, true),
+new ThreadsCountChangeElement(2, 5577835.6452569077, -4, false),
+new ThreadsCountChangeElement(5, 5577835.6452702312, +4, true),
+new ThreadsCountChangeElement(2, 5577835.6452785227, +0, true),
+new ThreadsCountChangeElement(7, 5577835.6742966063, -0, false),
+new ThreadsCountChangeElement(2, 5577835.7452854794, -0, false),
+new ThreadsCountChangeElement(1, 5577836.1042396221, -4, false),
+new ThreadsCountChangeElement(2, 5577836.1042530127, +4, true),
+new ThreadsCountChangeElement(1, 5577836.1042645304, +0, true),
+new ThreadsCountChangeElement(5, 5577836.1640223833, -4, false),
+new ThreadsCountChangeElement(4, 5577836.1640571915, +4, true),
+new ThreadsCountChangeElement(1, 5577836.2042734539, -0, false),
+new ThreadsCountChangeElement(2, 5577836.6178896176, -4, false),
+new ThreadsCountChangeElement(1, 5577836.6179036163, +4, true),
+new ThreadsCountChangeElement(4, 5577836.6750670411, -4, false),
+new ThreadsCountChangeElement(0, 5577836.6750839837, +4, true),
+new ThreadsCountChangeElement(4, 5577836.6750964643, +0, true),
+new ThreadsCountChangeElement(4, 5577836.7751029292, -0, false),
+new ThreadsCountChangeElement(1, 5577837.1205102904, -4, false),
+new ThreadsCountChangeElement(7, 5577837.1205306854, +4, true),
+new ThreadsCountChangeElement(0, 5577837.1930591632, -4, false),
+new ThreadsCountChangeElement(4, 5577837.1930715563, +4, true),
+new ThreadsCountChangeElement(0, 5577837.1930795750, +0, true),
+new ThreadsCountChangeElement(0, 5577837.2930873139, -0, false),
+new ThreadsCountChangeElement(7, 5577837.6250944706, -4, false),
+new ThreadsCountChangeElement(0, 5577837.6251213914, +4, true),
+new ThreadsCountChangeElement(4, 5577837.6941649364, -4, false),
+new ThreadsCountChangeElement(6, 5577837.6941757919, +4, true),
+new ThreadsCountChangeElement(0, 5577838.1252781218, -4, false),
+new ThreadsCountChangeElement(3, 5577838.1253044363, +4, true),
+new ThreadsCountChangeElement(6, 5577838.1953132842, -4, false),
+new ThreadsCountChangeElement(6, 5577838.1953254333, +0, true),
+new ThreadsCountChangeElement(6, 5577838.2953344677, -0, false),
+new ThreadsCountChangeElement(6, 5577838.2953495011, +4, true),
+new ThreadsCountChangeElement(3, 5577838.6254296834, -4, false),
+new ThreadsCountChangeElement(3, 5577838.6254535802, +0, true),
+new ThreadsCountChangeElement(3, 5577838.7254626239, -0, false),
+new ThreadsCountChangeElement(3, 5577838.7254729578, +4, true),
+new ThreadsCountChangeElement(6, 5577838.7961322945, -4, false),
+new ThreadsCountChangeElement(6, 5577838.7961454904, +0, true),
+new ThreadsCountChangeElement(6, 5577838.8961538943, -0, false),
+new ThreadsCountChangeElement(6, 5577838.8961666226, +4, true),
+new ThreadsCountChangeElement(3, 5577839.2255727733, -4, false),
+new ThreadsCountChangeElement(6, 5577839.4085708056, -4, false)
             };
 
             double beg_time = els.First<ThreadsCountChangeElement>().WTime;
@@ -237,6 +375,26 @@ namespace DrawBox
 
                             case 2:
                                 c = Colors.Red;
+                                break;
+
+                            case 3:
+                                c = Colors.Yellow;
+                                break;
+
+                            case 4:
+                                c = Colors.SteelBlue;
+                                break;
+
+                            case 5:
+                                c = Colors.Coral;
+                                break;
+
+                            case 6:
+                                c = Colors.Khaki;
+                                break;
+
+                            case 7:
+                                c = Colors.Orange;
                                 break;
 
                             default:
