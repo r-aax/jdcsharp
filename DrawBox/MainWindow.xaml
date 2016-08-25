@@ -13,7 +13,7 @@
                 <MenuItem Header="PlanOMP">
                     <MenuItem Name="DrawPlanOMP4MI" Header="4 threads (2 2 2)" Click="DrawPlanOMP4MI_Click"/>
                     <MenuItem Name="DrawPlanOMP8MI" Header="8 threads (3 3 3 3)" Click="DrawPlanOMP8MI_Click"/>
-                    <MenuItem Name="DrawPlanOMP16MI" Header="16 threads (5 5 5 5 5 5 5 5)" Click="DrawPlanOMP16MI_Click"/>
+                    <MenuItem Name="DrawPlanOMP16MI" Header="16 threads (4 4 4 4 4 4 4)" Click="DrawPlanOMP16MI_Click"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Picture">
