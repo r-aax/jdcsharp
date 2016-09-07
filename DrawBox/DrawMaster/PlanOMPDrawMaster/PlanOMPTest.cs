@@ -14,7 +14,27 @@ namespace DrawBox.DrawMaster.PlanOMPDrawMaster
         /// <summary>
         /// 4 threads, 3 procedures, 2 width
         /// </summary>
-        Test4th3p2w,
+        Test4th3p2w_1,
+
+        /// <summary>
+        /// 4 threads, 3 procedures, 2 width
+        /// </summary>
+        Test4th3p2w_2,
+
+        /// <summary>
+        /// 4 threads, 3 procedures, 2 width
+        /// </summary>
+        Test4th3p2w_3,
+
+        /// <summary>
+        /// 4 threads, 3 procedures, 2 width
+        /// </summary>
+        Test4th3p2w_4,
+
+        /// <summary>
+        /// 4 threads, 3 procedures, 2 width
+        /// </summary>
+        Test4th3p2w_5,
 
         /// <summary>
         /// 8 threads, 4 procedures, 3, width

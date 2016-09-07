@@ -86,10 +86,58 @@ namespace DrawBox
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
-        private void DrawPlanOMP4th3p2w_Click(object sender, RoutedEventArgs e)
+        private void DrawPlanOMP4th3p2w_1_Click(object sender, RoutedEventArgs e)
         {
             PEl = DrawElement.PlanOMP;
-            Test = PlanOMPTest.Test4th3p2w;
+            Test = PlanOMPTest.Test4th3p2w_1;
+            Paint();
+        }
+
+        /// <summary>
+        /// Draw Plan OMP menu item (4th 3p 2w).
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DrawPlanOMP4th3p2w_2_Click(object sender, RoutedEventArgs e)
+        {
+            PEl = DrawElement.PlanOMP;
+            Test = PlanOMPTest.Test4th3p2w_2;
+            Paint();
+        }
+
+        /// <summary>
+        /// Draw Plan OMP menu item (4th 3p 2w).
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DrawPlanOMP4th3p2w_3_Click(object sender, RoutedEventArgs e)
+        {
+            PEl = DrawElement.PlanOMP;
+            Test = PlanOMPTest.Test4th3p2w_3;
+            Paint();
+        }
+
+        /// <summary>
+        /// Draw Plan OMP menu item (4th 3p 2w).
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DrawPlanOMP4th3p2w_4_Click(object sender, RoutedEventArgs e)
+        {
+            PEl = DrawElement.PlanOMP;
+            Test = PlanOMPTest.Test4th3p2w_4;
+            Paint();
+        }
+
+        /// <summary>
+        /// Draw Plan OMP menu item (4th 3p 2w).
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DrawPlanOMP4th3p2w_5_Click(object sender, RoutedEventArgs e)
+        {
+            PEl = DrawElement.PlanOMP;
+            Test = PlanOMPTest.Test4th3p2w_5;
             Paint();
         }
 
