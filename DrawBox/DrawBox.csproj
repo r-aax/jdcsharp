@@ -66,6 +66,7 @@
     </Compile>
     <Compile Include="DrawMaster\DrawElement.cs" />
     <Compile Include="DrawMaster\PlanOMPDrawMaster\PlanOMPDrawMaster.cs" />
+    <Compile Include="DrawMaster\PlanOMPDrawMaster\PlanOMPTest.cs" />
     <Compile Include="DrawMaster\PlanOMPDrawMaster\ThreadsCountChangeElement.cs" />
     <Compile Include="DrawMaster\TestDrawMaster\TestDrawMaster.cs" />
     <Compile Include="MainWindow.xaml.cs">

@@ -26,6 +26,8 @@ using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
 
+using DrawBox.DrawMaster.PlanOMPDrawMaster;
+
 namespace DrawBox
 {
     /// <summary>
@@ -39,9 +41,9 @@ namespace DrawBox
         private DrawElement PEl = DrawElement.None;
 
         /// <summary>
-        /// Threads in examle for PlanOMP.
+        /// Test.
         /// </summary>
-        private int ThreadsInExample = 0;
+        private PlanOMPTest Test = PlanOMPTest.Test244thGround;
 
         /// <summary>
         /// Constructor.
@@ -63,7 +65,7 @@ namespace DrawBox
                     break;
 
                 case DrawElement.PlanOMP:
-                    DrawMaster.PlanOMPDrawMaster.PlanOMPDrawMaster.Draw(DrawAreaC, ThreadsInExample);
+                    PlanOMPDrawMaster.Draw(DrawAreaC, Test);
                     break;
             }
         }
@@ -80,38 +82,74 @@ namespace DrawBox
         }
 
         /// <summary>
-        /// Click on Draw PlanOMP 4 threads example.
+        /// Draw Plan OMP menu item (4th 3p 2w).
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
-        private void DrawPlanOMP4MI_Click(object sender, RoutedEventArgs e)
+        private void DrawPlanOMP4th3p2w_Click(object sender, RoutedEventArgs e)
         {
             PEl = DrawElement.PlanOMP;
-            ThreadsInExample = 4;
+            Test = PlanOMPTest.Test4th3p2w;
             Paint();
         }
 
         /// <summary>
-        /// Click on Draw PlanOMP 8 threads example.
+        /// Draw Plan OMP menu item (8th 4p 3w).
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
-        private void DrawPlanOMP8MI_Click(object sender, RoutedEventArgs e)
+        private void DrawPlanOMP8th4p3w_Click(object sender, RoutedEventArgs e)
         {
             PEl = DrawElement.PlanOMP;
-            ThreadsInExample = 8;
+            Test = PlanOMPTest.Test8th4p3w;
             Paint();
         }
 
         /// <summary>
-        /// Click on Draw PlanOMP 16 threads example.
+        /// Draw Plan OMP menu item (16th 7p 4w).
         /// </summary>
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
-        private void DrawPlanOMP16MI_Click(object sender, RoutedEventArgs e)
+        private void DrawPlanOMP16th7p4w_Click(object sender, RoutedEventArgs e)
         {
             PEl = DrawElement.PlanOMP;
-            ThreadsInExample = 16;
+            Test = PlanOMPTest.Test16th7p4w;
+            Paint();
+        }
+
+        /// <summary>
+        /// Draw Plan OMP menu item (16th 8p 5w).
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DrawPlanOMP16th8p5w_Click(object sender, RoutedEventArgs e)
+        {
+            PEl = DrawElement.PlanOMP;
+            Test = PlanOMPTest.Test16th8p5w;
+            Paint();
+        }
+
+        /// <summary>
+        /// Draw Plan OMP menu item (244th 34p 21w).
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DrawPlanOMP244th34p21w_Click(object sender, RoutedEventArgs e)
+        {
+            PEl = DrawElement.PlanOMP;
+            Test = PlanOMPTest.Test244th34p21w;
+            Paint();
+        }
+
+        /// <summary>
+        /// Draw Plan OMP menu item (244th ground grid based test example).
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DrawPlanOMP244thGround_Click(object sender, RoutedEventArgs e)
+        {
+            PEl = DrawElement.PlanOMP;
+            Test = PlanOMPTest.Test244thGround;
             Paint();
         }
 

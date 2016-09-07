@@ -11,9 +11,12 @@
             <MenuItem Header="Draw">
                 <MenuItem Name="DrawTestMI" Header="Test" Click="DrawTestMI_Click"/>
                 <MenuItem Header="PlanOMP">
-                    <MenuItem Name="DrawPlanOMP4MI" Header="4 threads (2 2 2)" Click="DrawPlanOMP4MI_Click"/>
-                    <MenuItem Name="DrawPlanOMP8MI" Header="8 threads (3 3 3 3)" Click="DrawPlanOMP8MI_Click"/>
-                    <MenuItem Name="DrawPlanOMP16MI" Header="16 threads (4 4 4 4 4 4 4)" Click="DrawPlanOMP16MI_Click"/>
+                    <MenuItem Name="DrawPlanOMP4th3p2w" Header="4th 3p 2w" Click="DrawPlanOMP4th3p2w_Click"/>
+                    <MenuItem Name="DrawPlanOMP8th4p3w" Header="8th 4p 3w" Click="DrawPlanOMP8th4p3w_Click"/>
+                    <MenuItem Name="DrawPlanOMP16th7p4w" Header="16th 7p 4w" Click="DrawPlanOMP16th7p4w_Click"/>
+                    <MenuItem Name="DrawPlanOMP16th8p5w" Header="16th 8p 5w" Click="DrawPlanOMP16th8p5w_Click"/>
+                    <MenuItem Name="DrawPlanOMP244th34p21w" Header="244th 23p 21w" Click="DrawPlanOMP244th34p21w_Click"/>
+                    <MenuItem Name="DrawPlanOMP244thGround" Header="244th ground" Click="DrawPlanOMP244thGround_Click"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Picture">
