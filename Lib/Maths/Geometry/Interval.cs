@@ -8,18 +8,8 @@ namespace Lib.Maths.Geometry
     /// <summary>
     /// Interval <c>(L, H)</c>.
     /// </summary>
-    public class Interval : ICloneable
+    public class Interval : Segm<double>, ICloneable
     {
-        /// <summary>
-        /// Begin.
-        /// </summary>
-        public double L { get; private set; }
-
-        /// <summary>
-        /// End.
-        /// </summary>
-        public double H { get; private set; }
-
         /// <summary>
         /// Constructor.
         /// </summary>

@@ -89,6 +89,8 @@
     <Compile Include="GUI\WPF\EditIntIntWindow.xaml.cs">
       <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MathMod\Grid\Block.cs" />
+    <Compile Include="MathMod\Grid\StructuredGrid.cs" />
     <Compile Include="Maths\Bits\Bits.cs" />
     <Compile Include="Maths\Bits\Bits32.cs" />
     <Compile Include="Maths\Bits\Bits8.cs" />
@@ -111,6 +113,7 @@
     <Compile Include="Maths\Geometry\Geometry3D\Vector.cs" />
     <Compile Include="Maths\Geometry\Interval.cs" />
     <Compile Include="Maths\Geometry\IntervalScaler.cs" />
+    <Compile Include="Maths\Geometry\Segm.cs" />
     <Compile Include="Maths\Geometry\Triangle.cs" />
     <Compile Include="Maths\Geometry\Vector.cs" />
     <Compile Include="Maths\Numbers\CyclicArithmetic.cs" />
