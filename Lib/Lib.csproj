@@ -90,6 +90,8 @@
       <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MathMod\Grid\Block.cs" />
+    <Compile Include="MathMod\Grid\DescartesObject.cs" />
+    <Compile Include="MathMod\Grid\Dir.cs" />
     <Compile Include="MathMod\Grid\StructuredGrid.cs" />
     <Compile Include="Maths\Bits\Bits.cs" />
     <Compile Include="Maths\Bits\Bits32.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Maths\Numbers\RamseyNumbers\Constants.cs" />
     <Compile Include="Maths\Numbers\RamseyNumbers\PredramseyCircularGraphsAnalizer.cs" />
     <Compile Include="Maths\Numbers\Randoms.cs" />
+    <Compile Include="Maths\WeightsDistribution.cs" />
     <Compile Include="Net\UDP.cs" />
     <Compile Include="Net\UDPListener.cs" />
     <Compile Include="Physics\MeasUnits\Angle.cs" />

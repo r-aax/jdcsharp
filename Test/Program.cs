@@ -23,26 +23,52 @@ namespace Test
         /// <param name="args">arguments</param>
         static void Main(string[] args)
         {
-            Console.WriteLine("Start");
-            PredramseyCircularGraphsAnalizer an = new PredramseyCircularGraphsAnalizer(102);
+            TestWeightsDistribution();
+        }
 
-            DateTime from = DateTime.Now;
-            List<UInt64> list = an.MultiangleMasksList(6);
-            DateTime to = DateTime.Now;
+        /// <summary>
+        /// Test for weights distribution.
+        /// </summary>
+        static void TestWeightsDistribution()
+        {
+            List<double> x = new List<double>(new double[] { 5.0, 5.0, 2.0, 2.0, 2.0, 2.0, 2.0 });
+            List<double> x1 = new List<double>();
+            List<double> x2 = new List<double>();
 
-            //for (int i = 0; i < list.Count; i++)
-            //{
-            //    Console.WriteLine("{0}", list[i].ToString("x16"));
-            //}
+            for (int i = 0; i < 200; i++)
+            {
+                //x.Add((double)i * (double)i);
+            }
 
-            XmlSerializer serializer = new XmlSerializer(list.GetType());
-            TextWriter writer = new StreamWriter("base_masks_multiangle_6.xml");
-            serializer.Serialize(writer, list);
-            writer.Flush();
-            writer.Close();
+            Lib.Maths.WeightsDistribution.DistributeDelta2(x, x1, x2);
+            Console.WriteLine("Delta2");
+            Console.Write("X1 :");
+            foreach (double d in x1)
+            {
+                Console.Write(" " + d.ToString());
+            }
+            Console.WriteLine(" : " + x1.Sum());
+            Console.Write("X2 :");
+            foreach (double d in x2)
+            {
+                Console.Write(" " + d.ToString());
+            }
+            Console.WriteLine(" : " + x2.Sum());
 
-            Console.WriteLine("Masks count = {0}", list.Count);
-            Console.WriteLine("Seconds = {0}", (to - from).Seconds.ToString());
+            Lib.Maths.WeightsDistribution.DistributeGreedy2(x, x1, x2);
+            Console.WriteLine("Greedy2");
+            Console.Write("X1 :");
+            foreach (double d in x1)
+            {
+                Console.Write(" " + d.ToString());
+            }
+            Console.WriteLine(" : " + x1.Sum());
+            Console.Write("X2 :");
+            foreach (double d in x2)
+            {
+                Console.Write(" " + d.ToString());
+            }
+            Console.WriteLine(" : " + x2.Sum());
 
             Console.ReadKey();
         }
