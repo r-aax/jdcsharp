@@ -31,7 +31,7 @@ namespace Test
         /// </summary>
         static void TestWeightsDistribution()
         {
-            List<double> x = new List<double>(new double[] { 5.0, 5.0, 2.0, 2.0, 2.0, 2.0, 2.0 });
+            List<double> x = new List<double>(new double[] { 6.0, 3.0, 4.0, 2.0, 0.0, 2.0, 0.0, 1.0 });
             List<double> x1 = new List<double>();
             List<double> x2 = new List<double>();
 

@@ -191,5 +191,37 @@ namespace Sea.Core.Authors
         {
             return Items.Find((author) => author.Id == id);
         }
+
+        /// <summary>
+        /// Check if authors list contain substring.
+        /// </summary>
+        /// <param name="substr">substring</param>
+        /// <param name="is_force_to_lower">force authors names to lower case</param>
+        /// <returns>true - if contains substring, false - otherwise</returns>
+        public bool Contains(String substr, bool is_force_to_lower)
+        {
+            if (substr == "")
+            {
+                return true;
+            }
+
+            for (int i = 0; i < Count; i++)
+            {
+                Author a = this[i];
+                String n = a.FirstName + " " + a.SecondName + " " + a.LastName;
+
+                if (is_force_to_lower)
+                {
+                    n = n.ToLower();
+                }
+
+                if (n.Contains(substr))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

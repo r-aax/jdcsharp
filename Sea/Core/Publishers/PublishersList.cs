@@ -191,5 +191,37 @@ namespace Sea.Core.Publishers
         {
             return Items.Find((publisher) => publisher.Id == id);
         }
+
+        /// <summary>
+        /// Check if publishers list contain substring.
+        /// </summary>
+        /// <param name="substr">substring</param>
+        /// <param name="is_force_to_lower">force apublishers to lower case</param>
+        /// <returns>true - if contains substring, false - otherwise</returns>
+        public bool Contains(String substr, bool is_force_to_lower)
+        {
+            if (substr == "")
+            {
+                return true;
+            }
+
+            for (int i = 0; i < Count; i++)
+            {
+                Publisher p = this[i];
+                String n = p.Name;
+
+                if (is_force_to_lower)
+                {
+                    n = n.ToLower();
+                }
+
+                if (n.Contains(substr))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

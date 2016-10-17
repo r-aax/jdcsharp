@@ -314,7 +314,10 @@ namespace Sea.Core
         /// <summary>
         /// Search books.
         /// </summary>
-        public void SearchBooks()
+        /// <param name="name_substr">name substring</param>
+        /// <param name="author_substr">author substring</param>
+        /// <param name="publisher_substr">publisher substring</param>
+        public void SearchBooks(String name_substr, String author_substr, String publisher_substr)
         {
             // Deserialize all from files.
             Deserialize();
@@ -323,6 +326,16 @@ namespace Sea.Core
 
             for (int i = 0; i < Books.Count; i++)
             {
+                Book b = Books[i];
+
+                // Check name staring.
+                if (!b.Name.ToLower().Contains(name_substr)
+                    || !b.Authors.Contains(author_substr, true)
+                    || !b.Publishers.Contains(publisher_substr, true))
+                {
+                    continue;
+                }
+
                 SBooks.Add(Books[i]);
             }
         }

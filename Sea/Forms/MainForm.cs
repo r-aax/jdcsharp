@@ -175,8 +175,9 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void SearchB_Click(object sender, EventArgs e)
         {
-            // Now we ignore all filters, just copy all books and display them.
-            Sea.SearchBooks();
+            Sea.SearchBooks(NameTB.Text.ToLower(),
+                            AuthorTB.Text.ToLower(),
+                            PublisherTB.Text.ToLower());
             ShowLastAction(Sea.SBooks.Count.ToString() + " books found");
             FillBooksDataGridView(BooksDGV, Sea.SBooks);
         }
@@ -188,7 +189,10 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void CleanB_Click(object sender, EventArgs e)
         {
-            Debug.Assert(false);
+            // Clean search forms.
+            NameTB.Text = "";
+            AuthorTB.Text = "";
+            PublisherTB.Text = "";
         }
 
         /// <summary>

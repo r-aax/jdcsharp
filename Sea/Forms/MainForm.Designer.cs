@@ -50,6 +50,10 @@
             this.SearchB = new System.Windows.Forms.Button();
             this.CleanB = new System.Windows.Forms.Button();
             this.BooksDGV = new System.Windows.Forms.DataGridView();
+            this.AuthorTB = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.PublisherTB = new System.Windows.Forms.TextBox();
+            this.PublisherL = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BooksDGV)).BeginInit();
@@ -202,9 +206,9 @@
             // 
             // NameTB
             // 
-            this.NameTB.Location = new System.Drawing.Point(52, 43);
+            this.NameTB.Location = new System.Drawing.Point(87, 43);
             this.NameTB.Name = "NameTB";
-            this.NameTB.Size = new System.Drawing.Size(797, 20);
+            this.NameTB.Size = new System.Drawing.Size(196, 20);
             this.NameTB.TabIndex = 7;
             // 
             // SearchB
@@ -250,11 +254,47 @@
             this.BooksDGV.TabIndex = 11;
             this.BooksDGV.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.BooksDGV_CellMouseDoubleClick);
             // 
+            // AuthorTB
+            // 
+            this.AuthorTB.Location = new System.Drawing.Point(87, 69);
+            this.AuthorTB.Name = "AuthorTB";
+            this.AuthorTB.Size = new System.Drawing.Size(196, 20);
+            this.AuthorTB.TabIndex = 12;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 72);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Author";
+            // 
+            // PublisherTB
+            // 
+            this.PublisherTB.Location = new System.Drawing.Point(87, 95);
+            this.PublisherTB.Name = "PublisherTB";
+            this.PublisherTB.Size = new System.Drawing.Size(196, 20);
+            this.PublisherTB.TabIndex = 14;
+            // 
+            // PublisherL
+            // 
+            this.PublisherL.AutoSize = true;
+            this.PublisherL.Location = new System.Drawing.Point(11, 98);
+            this.PublisherL.Name = "PublisherL";
+            this.PublisherL.Size = new System.Drawing.Size(50, 13);
+            this.PublisherL.TabIndex = 15;
+            this.PublisherL.Text = "Publisher";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 486);
+            this.Controls.Add(this.PublisherL);
+            this.Controls.Add(this.PublisherTB);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.AuthorTB);
             this.Controls.Add(this.BooksDGV);
             this.Controls.Add(this.CleanB);
             this.Controls.Add(this.SearchB);
@@ -301,6 +341,10 @@
         private System.Windows.Forms.Button SearchB;
         private System.Windows.Forms.Button CleanB;
         private System.Windows.Forms.DataGridView BooksDGV;
+        private System.Windows.Forms.TextBox AuthorTB;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox PublisherTB;
+        private System.Windows.Forms.Label PublisherL;
     }
 }
 
