@@ -9,6 +9,7 @@ using System.Drawing;
 using Sea.Core;
 using Sea.Core.Books;
 using Sea.Tools;
+using Sea.Core.Categories;
 
 namespace Sea.Forms
 {
@@ -23,6 +24,11 @@ namespace Sea.Forms
         private Core.Sea Sea;
 
         /// <summary>
+        /// Categories for filter.
+        /// </summary>
+        private CategoriesList FilterCategories;
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public MainForm()
@@ -30,6 +36,7 @@ namespace Sea.Forms
             InitializeComponent();
 
             Sea = new Core.Sea();
+            FilterCategories = new CategoriesList();
             ShowLastAction("data is loaded");
         }
 
@@ -178,6 +185,7 @@ namespace Sea.Forms
             Sea.SearchBooks(NameTB.Text.ToLower(),
                             AuthorTB.Text.ToLower(),
                             PublisherTB.Text.ToLower(),
+                            FilterCategories,
                             YearFromTB.Text,
                             YearToTB.Text);
             ShowLastAction(Sea.SBooks.Count.ToString() + " books found");
@@ -197,6 +205,7 @@ namespace Sea.Forms
             PublisherTB.Clear();
             YearFromTB.Clear();
             YearToTB.Clear();
+            FilterCategories.Clear();
         }
 
         /// <summary>
@@ -224,16 +233,30 @@ namespace Sea.Forms
         /// <summary>
         /// Click on cell.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
         private void BooksDGV_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             MessageBox.Show("cell click : " + e.RowIndex + ", " + e.ColumnIndex);
         }
 
-        private void AuthorTB_TextChanged(object sender, EventArgs e)
+        /// <summary>
+        /// Click on categories list.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void CategoriesLB_Click(object sender, EventArgs e)
         {
+            SelectCategoriesForm form = new SelectCategoriesForm();
 
+            form.Categories = (FilterCategories.Clone() as CategoriesList).Items;
+            form.ShowDialog();
+
+            if (form.IsAccepted)
+            {
+                FilterCategories.Items = form.Categories;
+                FilterCategories.ToListBox(CategoriesLB);
+            }
         }
     }
 }

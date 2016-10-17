@@ -317,10 +317,11 @@ namespace Sea.Core
         /// <param name="name_substr">name substring</param>
         /// <param name="author_substr">author substring</param>
         /// <param name="publisher_substr">publisher substring</param>
+        /// <param name="filter_categories">filter categories</param>
         /// <param name="year_from">year from string</param>
         /// <param name="year_to">year to string</param>
         public void SearchBooks(String name_substr, String author_substr, String publisher_substr,
-                                String year_from, String year_to)
+                                CategoriesList filter_categories, String year_from, String year_to)
         {
             // Deserialize all from files.
             Deserialize();
@@ -337,6 +338,15 @@ namespace Sea.Core
                     || !b.Publishers.Contains(publisher_substr, true))
                 {
                     continue;
+                }
+
+                // Check categories.
+                if (!filter_categories.IsEmpty)
+                {
+                    if (!filter_categories.IsIntersection(b.Categories))
+                    {
+                        continue;
+                    }
                 }
 
                 // Check years.

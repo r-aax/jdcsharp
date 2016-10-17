@@ -265,7 +265,6 @@
             this.AuthorTB.Name = "AuthorTB";
             this.AuthorTB.Size = new System.Drawing.Size(196, 20);
             this.AuthorTB.TabIndex = 12;
-            this.AuthorTB.TextChanged += new System.EventHandler(this.AuthorTB_TextChanged);
             // 
             // label1
             // 
@@ -299,6 +298,7 @@
             this.CategoriesLB.Name = "CategoriesLB";
             this.CategoriesLB.Size = new System.Drawing.Size(291, 43);
             this.CategoriesLB.TabIndex = 16;
+            this.CategoriesLB.Click += new System.EventHandler(this.CategoriesLB_Click);
             // 
             // label2
             // 

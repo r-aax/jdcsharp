@@ -315,6 +315,16 @@ namespace Lib.DataStruct
         }
 
         /// <summary>
+        /// Check two trees intersection.
+        /// </summary>
+        /// <param name="tree">tree</param>
+        /// <returns><c>true</c> - is trees intersect, <c>false</c> - otherwise</returns>
+        public bool IsIntersection(MPTTTree tree)
+        {
+            return IsOuter(tree) || IsInner(tree);
+        }
+
+        /// <summary>
         /// Replace subtree before given child.
         /// </summary>
         /// <param name="subtree">subtree</param>

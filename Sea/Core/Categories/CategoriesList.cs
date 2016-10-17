@@ -81,7 +81,7 @@ namespace Sea.Core.Categories
             {
                 categories_list.Items.Add(Items[i].Clone() as MPTTTree);
             }
-            
+
             return categories_list;
         }
 
@@ -143,6 +143,35 @@ namespace Sea.Core.Categories
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Clear categories.
+        /// </summary>
+        public void Clear()
+        {
+            Items.Clear();
+        }
+
+        /// <summary>
+        /// Check intersection between two categories lists.
+        /// </summary>
+        /// <param name="list">list of categories</param>
+        /// <returns><c>true</c> - if there is intersection, <c>false</c> - otherwise</returns>
+        public bool IsIntersection(CategoriesList list)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                for (int listi = 0; listi < list.Count; listi++)
+                {
+                    if (this[i].IsIntersection(list[listi]))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }
