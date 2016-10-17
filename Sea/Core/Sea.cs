@@ -317,7 +317,10 @@ namespace Sea.Core
         /// <param name="name_substr">name substring</param>
         /// <param name="author_substr">author substring</param>
         /// <param name="publisher_substr">publisher substring</param>
-        public void SearchBooks(String name_substr, String author_substr, String publisher_substr)
+        /// <param name="year_from">year from string</param>
+        /// <param name="year_to">year to string</param>
+        public void SearchBooks(String name_substr, String author_substr, String publisher_substr,
+                                String year_from, String year_to)
         {
             // Deserialize all from files.
             Deserialize();
@@ -334,6 +337,30 @@ namespace Sea.Core
                     || !b.Publishers.Contains(publisher_substr, true))
                 {
                     continue;
+                }
+
+                // Check years.
+                if (b.Year != 0)
+                {
+                    if (year_from != "")
+                    {
+                        int yfi = Lib.Utils.Convert.GetInt(year_from);
+
+                        if (b.Year < yfi)
+                        {
+                            continue;
+                        }
+                    }
+
+                    if (year_to != "")
+                    {
+                        int yti = Lib.Utils.Convert.GetInt(year_to);
+
+                        if (b.Year > yti)
+                        {
+                            continue;
+                        }
+                    }
                 }
 
                 SBooks.Add(Books[i]);

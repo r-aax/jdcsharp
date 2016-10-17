@@ -54,6 +54,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.PublisherTB = new System.Windows.Forms.TextBox();
             this.PublisherL = new System.Windows.Forms.Label();
+            this.CategoriesLB = new System.Windows.Forms.ListBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.YearFromTB = new System.Windows.Forms.TextBox();
+            this.YearToTB = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BooksDGV)).BeginInit();
@@ -215,7 +220,7 @@
             // 
             this.SearchB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SearchB.ForeColor = System.Drawing.Color.OliveDrab;
-            this.SearchB.Location = new System.Drawing.Point(693, 88);
+            this.SearchB.Location = new System.Drawing.Point(779, 62);
             this.SearchB.Name = "SearchB";
             this.SearchB.Size = new System.Drawing.Size(75, 23);
             this.SearchB.TabIndex = 9;
@@ -227,7 +232,7 @@
             // 
             this.CleanB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CleanB.ForeColor = System.Drawing.Color.OliveDrab;
-            this.CleanB.Location = new System.Drawing.Point(774, 88);
+            this.CleanB.Location = new System.Drawing.Point(779, 91);
             this.CleanB.Name = "CleanB";
             this.CleanB.Size = new System.Drawing.Size(75, 23);
             this.CleanB.TabIndex = 10;
@@ -246,11 +251,11 @@
             this.BooksDGV.BackgroundColor = System.Drawing.Color.White;
             this.BooksDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.BooksDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.BooksDGV.Location = new System.Drawing.Point(0, 124);
+            this.BooksDGV.Location = new System.Drawing.Point(0, 128);
             this.BooksDGV.Margin = new System.Windows.Forms.Padding(10);
             this.BooksDGV.Name = "BooksDGV";
             this.BooksDGV.ReadOnly = true;
-            this.BooksDGV.Size = new System.Drawing.Size(866, 340);
+            this.BooksDGV.Size = new System.Drawing.Size(866, 336);
             this.BooksDGV.TabIndex = 11;
             this.BooksDGV.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.BooksDGV_CellMouseDoubleClick);
             // 
@@ -260,6 +265,7 @@
             this.AuthorTB.Name = "AuthorTB";
             this.AuthorTB.Size = new System.Drawing.Size(196, 20);
             this.AuthorTB.TabIndex = 12;
+            this.AuthorTB.TextChanged += new System.EventHandler(this.AuthorTB_TextChanged);
             // 
             // label1
             // 
@@ -286,11 +292,56 @@
             this.PublisherL.TabIndex = 15;
             this.PublisherL.Text = "Publisher";
             // 
+            // CategoriesLB
+            // 
+            this.CategoriesLB.FormattingEnabled = true;
+            this.CategoriesLB.Location = new System.Drawing.Point(462, 42);
+            this.CategoriesLB.Name = "CategoriesLB";
+            this.CategoriesLB.Size = new System.Drawing.Size(291, 43);
+            this.CategoriesLB.TabIndex = 16;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(394, 46);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 13);
+            this.label2.TabIndex = 17;
+            this.label2.Text = "Categories";
+            // 
+            // YearFromTB
+            // 
+            this.YearFromTB.Location = new System.Drawing.Point(462, 95);
+            this.YearFromTB.Name = "YearFromTB";
+            this.YearFromTB.Size = new System.Drawing.Size(139, 20);
+            this.YearFromTB.TabIndex = 18;
+            // 
+            // YearToTB
+            // 
+            this.YearToTB.Location = new System.Drawing.Point(614, 94);
+            this.YearToTB.Name = "YearToTB";
+            this.YearToTB.Size = new System.Drawing.Size(139, 20);
+            this.YearToTB.TabIndex = 19;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(394, 97);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(34, 13);
+            this.label4.TabIndex = 20;
+            this.label4.Text = "Years";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 486);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.YearToTB);
+            this.Controls.Add(this.YearFromTB);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.CategoriesLB);
             this.Controls.Add(this.PublisherL);
             this.Controls.Add(this.PublisherTB);
             this.Controls.Add(this.label1);
@@ -345,6 +396,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox PublisherTB;
         private System.Windows.Forms.Label PublisherL;
+        private System.Windows.Forms.ListBox CategoriesLB;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox YearFromTB;
+        private System.Windows.Forms.TextBox YearToTB;
+        private System.Windows.Forms.Label label4;
     }
 }
 

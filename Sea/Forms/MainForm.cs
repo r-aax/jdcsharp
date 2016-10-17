@@ -177,7 +177,9 @@ namespace Sea.Forms
         {
             Sea.SearchBooks(NameTB.Text.ToLower(),
                             AuthorTB.Text.ToLower(),
-                            PublisherTB.Text.ToLower());
+                            PublisherTB.Text.ToLower(),
+                            YearFromTB.Text,
+                            YearToTB.Text);
             ShowLastAction(Sea.SBooks.Count.ToString() + " books found");
             FillBooksDataGridView(BooksDGV, Sea.SBooks);
         }
@@ -190,9 +192,11 @@ namespace Sea.Forms
         private void CleanB_Click(object sender, EventArgs e)
         {
             // Clean search forms.
-            NameTB.Text = "";
-            AuthorTB.Text = "";
-            PublisherTB.Text = "";
+            NameTB.Clear();
+            AuthorTB.Clear();
+            PublisherTB.Clear();
+            YearFromTB.Clear();
+            YearToTB.Clear();
         }
 
         /// <summary>
@@ -225,6 +229,11 @@ namespace Sea.Forms
         private void BooksDGV_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
         {
             MessageBox.Show("cell click : " + e.RowIndex + ", " + e.ColumnIndex);
+        }
+
+        private void AuthorTB_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
