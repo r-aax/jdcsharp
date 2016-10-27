@@ -142,6 +142,13 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
+            if (BookFileTB.Text == "")
+            {
+                MessageBox.Show("No book file.");
+
+                return;
+            }
+
             // Save new book.
             try
             {
