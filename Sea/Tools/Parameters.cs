@@ -12,7 +12,7 @@ namespace Sea.Tools
         /// <summary>
         /// Path to storage.
         /// </summary>
-        public static readonly string StoragePath = "C:/Data/Garbage/Sea";
+        public static readonly string StoragePath = "C:/Data/MaterialsSea/Sea";
 
         /// <summary>
         /// Storage path archive.

@@ -52,10 +52,6 @@ namespace Sea.Forms
 
             // Deserialize all.
             Sea.Deserialize();
-
-            // Backup.
-            // We do backup while data base is not too big.
-            Sea.Archive(Parameters.StoragePathBackupArchive);
         }
 
         /// <summary>
@@ -140,6 +136,16 @@ namespace Sea.Forms
             {
                 ShowLastAction("dearchivation is completed");
             }
+        }
+
+        /// <summary>
+        /// Backup data.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void ToolsBackupMI_Click(object sender, EventArgs e)
+        {
+            Sea.Archive(Parameters.StoragePathBackupArchive);
         }
 
         /// <summary>
