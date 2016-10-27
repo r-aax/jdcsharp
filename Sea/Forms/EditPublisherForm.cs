@@ -61,7 +61,19 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            Publisher = new Publisher(NameTB.Text);
+            if (Publisher == null)
+            {
+                // New publisher.
+                Publisher = new Publisher(NameTB.Text);
+            }
+            else
+            {
+                // Old publisher, save identifier.
+                int id = Publisher.Id;
+                Publisher = new Publisher(NameTB.Text);
+                Publisher.Id = id;
+            }
+
             IsAccepted = true;
             Close();
         }

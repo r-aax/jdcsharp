@@ -66,11 +66,21 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            // We have to save author identifier.
-            int id = Author.Id;
-            Author = new Author(RusFirstNameTB.Text, RusSecondNameTB.Text, RusLastNameTB.Text,
-                                EngFirstNameTB.Text, EngSecondNameTB.Text, EngLastNameTB.Text);
-            Author.Id = id;
+            if (Author == null)
+            {
+                // New author.
+                Author = new Author(RusFirstNameTB.Text, RusSecondNameTB.Text, RusLastNameTB.Text,
+                                    EngFirstNameTB.Text, EngSecondNameTB.Text, EngLastNameTB.Text);
+            }
+            else
+            {
+                // Old author, save identifier.
+                int id = Author.Id;
+                Author = new Author(RusFirstNameTB.Text, RusSecondNameTB.Text, RusLastNameTB.Text,
+                                    EngFirstNameTB.Text, EngSecondNameTB.Text, EngLastNameTB.Text);
+                Author.Id = id;
+            }
+
             IsAccepted = true;
             Close();
         }
