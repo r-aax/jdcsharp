@@ -217,7 +217,7 @@ namespace Sea.Core.Books
                     {
                         full_name = Authors[0].Name(AuthorNamePrintStyle.BothLastFS);
 
-                        for (int i = 0; i < Authors.Count; i++)
+                        for (int i = 1; i < Authors.Count; i++)
                         {
                             full_name = full_name + "; " + Authors[i].Name(AuthorNamePrintStyle.BothLastFS);
                         }

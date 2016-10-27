@@ -157,7 +157,7 @@ namespace Sea.Core.Authors
         {
             if (second_name == "")
             {
-                return NameLastFirstSecond(first_name, second_name, last_name);
+                return NameLastFirst(first_name, last_name);
             }
             else
             {
