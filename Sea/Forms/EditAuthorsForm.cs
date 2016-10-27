@@ -77,16 +77,9 @@ namespace Sea.Forms
             {
                 Author author = form.Author;
 
-                if (author.FirstName == "")
+                if (!author.HasAnyLanguage())
                 {
-                    MessageBox.Show("Author must have first name");
-
-                    return;
-                }
-
-                if (author.LastName == "")
-                {
-                    MessageBox.Show("Author must have last name");
+                    MessageBox.Show("Author must have name (first and last) in any language.");
 
                     return;
                 }
@@ -119,16 +112,9 @@ namespace Sea.Forms
                 {
                     Author author = form.Author;
 
-                    if (author.FirstName == "")
+                    if (!author.HasAnyLanguage())
                     {
-                        MessageBox.Show("Author must have first name");
-
-                        return;
-                    }
-
-                    if (author.LastName == "")
-                    {
-                        MessageBox.Show("Author must have last name");
+                        MessageBox.Show("Author must have name (first and last) in any language.");
 
                         return;
                     }

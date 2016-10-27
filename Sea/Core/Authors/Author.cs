@@ -16,50 +16,153 @@ namespace Sea.Core.Authors
         public int Id { get; set; }
 
         /// <summary>
-        /// First name of author.
+        /// First russian name of author.
         /// </summary>
-        public string FirstName { get; set; }
+        public string RusFirstName { get; set; }
 
         /// <summary>
-        /// Second name of author.
+        /// Second russian name of author.
         /// </summary>
-        public string SecondName { get; set; }
+        public string RusSecondName { get; set; }
 
         /// <summary>
-        /// Last Name of author.
+        /// Last russian name of author.
         /// </summary>
-        public string LastName { get; set; }
+        public string RusLastName { get; set; }
+
+        /// <summary>
+        /// First english name of author.
+        /// </summary>
+        public string EngFirstName { get; set; }
+
+        /// <summary>
+        /// Second english name of author.
+        /// </summary>
+        public string EngSecondName { get; set; }
+
+        /// <summary>
+        /// Last english name of author.
+        /// </summary>
+        public string EngLastName { get; set; }
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="first_name">first name</param>
-        /// <param name="second_name">second name</param>
-        /// <param name="last_name">last name</param>
-        public Author(string first_name, string second_name, string last_name)
+        /// <param name="rus_first_name">russian first name</param>
+        /// <param name="rus_second_name">russian second name</param>
+        /// <param name="rus_last_name">russian last name</param>
+        /// <param name="eng_first_name">english first name</param>
+        /// <param name="eng_last_name">english second name</param>
+        /// <param name="eng_second_name">english last name</param>
+        public Author(string rus_first_name, string rus_second_name, string rus_last_name,
+                      string eng_first_name, string eng_second_name, string eng_last_name)
         {
             Id = -1;
-            FirstName = first_name;
-            SecondName = second_name;
-            LastName = last_name;
-        }
-
-        /// <summary>
-        /// Constructor by first and last names.
-        /// </summary>
-        /// <param name="first_name">first name</param>
-        /// <param name="last_name">last name</param>
-        public Author(string first_name, string last_name)
-            : this(first_name, "", last_name)
-        {
+            RusFirstName = rus_first_name;
+            RusSecondName = rus_second_name;
+            RusLastName = rus_last_name;
+            EngFirstName = eng_first_name;
+            EngSecondName = eng_second_name;
+            EngLastName = eng_last_name;
         }
 
         /// <summary>
         /// Constructor (first of all for serialization).
         /// </summary>
         public Author()
-            : this("", "", "")
+            : this("", "", "", "", "", "")
         {
+        }
+
+        /// <summary>
+        /// Check if author has russian name.
+        /// </summary>
+        /// <returns>true - if has, false - otherwise.</returns>
+        public bool HasRus()
+        {
+            return (RusFirstName != "") && (RusLastName != "");
+        }
+        
+        /// <summary>
+        /// Check if author has english name.
+        /// </summary>
+        /// <returns>true - if has, false - otherwise.</returns>
+        public bool HasEng()
+        {
+            return (EngFirstName != "") && (EngLastName != "");
+        }
+
+        /// <summary>
+        /// Check if author has name set in any language.
+        /// </summary>
+        /// <returns>true - if has name, false - otherwise</returns>
+        public bool HasAnyLanguage()
+        {
+            return HasRus() || HasEng();
+        }
+
+        /// <summary>
+        /// Name in format Jackson M.
+        /// </summary>
+        /// <param name="first_name">first name</param>
+        /// <param name="last_name">second name</param>
+        /// <returns>name in given format</returns>
+        public static string NameLastF(string first_name, string last_name)
+        {
+            Debug.Assert((first_name != "") && (last_name != ""), "name is not set in chosen language");
+
+            return String.Format("{0} {1}.", last_name, first_name[0]);
+        }
+
+        /// <summary>
+        /// Name in format Jacksom M. J.
+        /// </summary>
+        /// <param name="first_name">first name</param>
+        /// <param name="second_name">second name</param>
+        /// <param name="last_name">last name</param>
+        /// <returns>name in given format</returns>
+        public static string NameLastFS(string first_name, string second_name, string last_name)
+        {
+            if (second_name == "")
+            {
+                return NameLastF(first_name, last_name);
+            }
+            else
+            {
+                return String.Format("{0} {1}. {2}.", last_name, first_name[0], second_name[0]);
+            }
+        }
+
+        /// <summary>
+        /// Name in format Jackson, Michael.
+        /// </summary>
+        /// <param name="first_name">first name</param>
+        /// <param name="last_name">second name</param>
+        /// <returns>name in given format</returns>
+        public static string NameLastFirst(string first_name, string last_name)
+        {
+            Debug.Assert((first_name != "") && (last_name != ""), "name is not set in chosen language");
+
+            return String.Format("{0}, {1}", last_name, first_name);
+        }
+
+        /// <summary>
+        /// Name in format Jackson, Michael Joseph.
+        /// </summary>
+        /// <param name="first_name">first name</param>
+        /// <param name="second_name">second name</param>
+        /// <param name="last_name">last name</param>
+        /// <returns>name in given format</returns>
+        public static string NameLastFirstSecond(string first_name, string second_name, string last_name)
+        {
+            if (second_name == "")
+            {
+                return NameLastFirstSecond(first_name, second_name, last_name);
+            }
+            else
+            {
+                return String.Format("{0}, {1} {2}", last_name, first_name, second_name);
+            }
         }
 
         /// <summary>
@@ -69,73 +172,74 @@ namespace Sea.Core.Authors
         /// <returns>name</returns>
         public string Name(AuthorNamePrintStyle style)
         {
-            Debug.Assert((FirstName != "") && (LastName != ""), "unknown author first or last name");
+            bool has_rus = false;
+            bool has_eng = false;
 
             switch (style)
             {
-                case AuthorNamePrintStyle.FirstSecondLast:
+                case AuthorNamePrintStyle.RusLastFS:
+                    return NameLastFS(RusFirstName, RusSecondName, RusLastName);
 
-                    if (SecondName != "")
+                case AuthorNamePrintStyle.RusLastFirstSecond:
+                    return NameLastFirstSecond(RusFirstName, RusSecondName, RusLastName);
+
+                case AuthorNamePrintStyle.EngLastFS:
+                    return NameLastFS(EngFirstName, EngSecondName, EngLastName);
+
+                case AuthorNamePrintStyle.EngLastFirstSecond:
+                    return NameLastFirstSecond(EngFirstName, EngSecondName, EngLastName);
+
+                case AuthorNamePrintStyle.BothLastFS:
+
+                    has_rus = HasRus();
+                    has_eng = HasEng();
+
+                    if (has_rus)
                     {
-                        return String.Format("{0} {1} {2}", FirstName, SecondName, LastName);
+                        if (has_eng)
+                        {
+                            // Both names.
+                            return String.Format("{0} / {1}",
+                                                 Name(AuthorNamePrintStyle.RusLastFS),
+                                                 Name(AuthorNamePrintStyle.EngLastFS));
+                        }
+                        else
+                        {
+                            // Return only russian name.
+                            return Name(AuthorNamePrintStyle.RusLastFS);
+                        }
                     }
                     else
                     {
-                        return Name(AuthorNamePrintStyle.FistLast);
+                        // Try to return english name.
+                        return Name(AuthorNamePrintStyle.EngLastFS);
                     }
 
-                case AuthorNamePrintStyle.FirstSLast:
+                case AuthorNamePrintStyle.BothLastFirstSecond:
 
-                    if (SecondName != "")
+                    has_rus = HasRus();
+                    has_eng = HasEng();
+
+                    if (has_rus)
                     {
-                        return String.Format("{0} {1}. {2}", FirstName, SecondName[0], LastName);
+                        if (has_eng)
+                        {
+                            // Both names.
+                            return String.Format("{0} / {1}",
+                                                 Name(AuthorNamePrintStyle.RusLastFirstSecond),
+                                                 Name(AuthorNamePrintStyle.EngLastFirstSecond));
+                        }
+                        else
+                        {
+                            // Return only russian name.
+                            return Name(AuthorNamePrintStyle.RusLastFirstSecond);
+                        }
                     }
                     else
                     {
-                        return Name(AuthorNamePrintStyle.FistLast);
+                        // Try to return english name.
+                        return Name(AuthorNamePrintStyle.EngLastFirstSecond);
                     }
-
-                case AuthorNamePrintStyle.FistLast:
-                    return String.Format("{0} {1}", FirstName, LastName);
-
-                case AuthorNamePrintStyle.LastFS:
-
-                    if (SecondName != "")
-                    {
-                        return String.Format("{0} {1}. {2}.", LastName, FirstName[0], SecondName[0]);
-                    }
-                    else
-                    {
-                        return Name(AuthorNamePrintStyle.LastF);
-                    }
-
-                case AuthorNamePrintStyle.LastF:
-                    return String.Format("{0} {1}.", LastName, FirstName[0]);
-
-                case AuthorNamePrintStyle.LastFirstSecond:
-
-                    if (SecondName != "")
-                    {
-                        return String.Format("{0}, {1} {2}", LastName, FirstName, SecondName);
-                    }
-                    else
-                    {
-                        return Name(AuthorNamePrintStyle.LastFirst);
-                    }
-
-                case AuthorNamePrintStyle.LastFirstS:
-
-                    if (SecondName != "")
-                    {
-                        return String.Format("{0}, {1} {2}.", LastName, FirstName, SecondName[0]);
-                    }
-                    else
-                    {
-                        return Name(AuthorNamePrintStyle.LastFirst);
-                    }
-
-                case AuthorNamePrintStyle.LastFirst:
-                    return String.Format("{0}, {1}", LastName, FirstName);
 
                 default:
                     Debug.Assert(false, "unknown author name print style");
@@ -155,45 +259,20 @@ namespace Sea.Core.Authors
                 return 1;
             }
 
-            int compare_last = LastName.CompareTo(author.LastName);
+            string author_name = author.Name(AuthorNamePrintStyle.BothLastFirstSecond);
+            int compare = Name(AuthorNamePrintStyle.BothLastFirstSecond).CompareTo(author_name);
 
-            if (compare_last > 0)
+            if (compare > 0)
             {
                 return 1;
             }
-            else if (compare_last < 0)
+            else if (compare < 0)
             {
                 return -1;
             }
             else
             {
-                int compare_first = FirstName.CompareTo(author.FirstName);
-
-                if (compare_first > 0)
-                {
-                    return 1;
-                }
-                else if (compare_first < 0)
-                {
-                    return -1;
-                }
-                else
-                {
-                    int compare_second = SecondName.CompareTo(author.SecondName);
-
-                    if (compare_second > 0)
-                    {
-                        return 1;
-                    }
-                    else if (compare_second < 0)
-                    {
-                        return -1;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                }
+                return 0;
             }
         }
 
@@ -213,7 +292,8 @@ namespace Sea.Core.Authors
         /// <returns>clone</returns>
         public object Clone()
         {
-            Author author = new Author(FirstName, SecondName, LastName);
+            Author author = new Author(RusFirstName, RusSecondName, RusLastName,
+                                       EngFirstName, EngSecondName, EngLastName);
 
             author.Id = Id;
 

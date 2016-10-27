@@ -50,9 +50,12 @@ namespace Sea.Forms
             if (Author != null)
             {
                 IdTB.Text = Author.Id.ToString();
-                FirstNameTB.Text = Author.FirstName;
-                SecondNameTB.Text = Author.SecondName;
-                LastNameTB.Text = Author.LastName;
+                RusFirstNameTB.Text = Author.RusFirstName;
+                RusSecondNameTB.Text = Author.RusSecondName;
+                RusLastNameTB.Text = Author.RusLastName;
+                EngFirstNameTB.Text = Author.EngFirstName;
+                EngSecondNameTB.Text = Author.EngSecondName;
+                EngLastNameTB.Text = Author.EngLastName;
             }
         }
 
@@ -63,7 +66,8 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void AcceptB_Click(object sender, EventArgs e)
         {
-            Author = new Author(FirstNameTB.Text, SecondNameTB.Text, LastNameTB.Text);
+            Author = new Author(RusFirstNameTB.Text, RusSecondNameTB.Text, RusLastNameTB.Text,
+                                EngFirstNameTB.Text, EngSecondNameTB.Text, EngLastNameTB.Text);
             IsAccepted = true;
             Close();
         }

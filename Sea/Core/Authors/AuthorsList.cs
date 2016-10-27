@@ -162,7 +162,7 @@ namespace Sea.Core.Authors
 
             for (int i = 0; i < Count; i++)
             {
-                lb.Items.Add(Items[i].Name(AuthorNamePrintStyle.LastFirstSecond));
+                lb.Items.Add(Items[i].Name(AuthorNamePrintStyle.BothLastFirstSecond));
             }
         }
 
@@ -208,7 +208,7 @@ namespace Sea.Core.Authors
             for (int i = 0; i < Count; i++)
             {
                 Author a = this[i];
-                String n = a.FirstName + " " + a.SecondName + " " + a.LastName;
+                String n = a.Name(AuthorNamePrintStyle.BothLastFirstSecond);
 
                 if (is_force_to_lower)
                 {

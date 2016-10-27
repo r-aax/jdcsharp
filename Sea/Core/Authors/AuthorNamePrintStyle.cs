@@ -9,43 +9,33 @@ namespace Sea.Core.Authors
     public enum AuthorNamePrintStyle
     {
         /// <summary>
-        /// Michael Joseph Jackson
-        /// </summary>
-        FirstSecondLast,
-
-        /// <summary>
-        /// Michael J. Jackson
-        /// </summary>
-        FirstSLast,
-
-        /// <summary>
-        /// Michael Jackson
-        /// </summary>
-        FistLast,
-
-        /// <summary>
         /// Jackson M. J.
         /// </summary>
-        LastFS,
-
-        /// <summary>
-        /// Jackson M.
-        /// </summary>
-        LastF,
+        RusLastFS,
 
         /// <summary>
         /// Jackson, Michael Jackson
         /// </summary>
-        LastFirstSecond,
+        RusLastFirstSecond,
 
         /// <summary>
-        /// Jackson, Michael J.
+        /// Jackson M. J.
         /// </summary>
-        LastFirstS,
+        EngLastFS,
 
         /// <summary>
-        /// Jackson, Michael
+        /// Jackson, Michael Jackson
         /// </summary>
-        LastFirst
+        EngLastFirstSecond,
+
+        /// <summary>
+        /// LastFS - both languages
+        /// </summary>
+        BothLastFS,
+
+        /// <summary>
+        /// Last, First Second - both languages
+        /// </summary>
+        BothLastFirstSecond
     }
 }
