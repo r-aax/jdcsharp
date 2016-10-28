@@ -164,33 +164,33 @@
             // ToolArchiveMI
             // 
             this.ToolArchiveMI.Name = "ToolArchiveMI";
-            this.ToolArchiveMI.Size = new System.Drawing.Size(126, 22);
+            this.ToolArchiveMI.Size = new System.Drawing.Size(152, 22);
             this.ToolArchiveMI.Text = "Archive";
             this.ToolArchiveMI.Click += new System.EventHandler(this.ToolArchiveMI_Click);
             // 
             // ToolsDearchiveMI
             // 
             this.ToolsDearchiveMI.Name = "ToolsDearchiveMI";
-            this.ToolsDearchiveMI.Size = new System.Drawing.Size(126, 22);
+            this.ToolsDearchiveMI.Size = new System.Drawing.Size(152, 22);
             this.ToolsDearchiveMI.Text = "Dearchive";
             this.ToolsDearchiveMI.Click += new System.EventHandler(this.ToolsDearchiveMI_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(123, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // ToolsBackupMI
             // 
             this.ToolsBackupMI.Name = "ToolsBackupMI";
-            this.ToolsBackupMI.Size = new System.Drawing.Size(126, 22);
+            this.ToolsBackupMI.Size = new System.Drawing.Size(152, 22);
             this.ToolsBackupMI.Text = "Backup";
             this.ToolsBackupMI.Click += new System.EventHandler(this.ToolsBackupMI_Click);
             // 
             // ToolsRestoreMI
             // 
             this.ToolsRestoreMI.Name = "ToolsRestoreMI";
-            this.ToolsRestoreMI.Size = new System.Drawing.Size(126, 22);
+            this.ToolsRestoreMI.Size = new System.Drawing.Size(152, 22);
             this.ToolsRestoreMI.Text = "Restore";
             this.ToolsRestoreMI.Click += new System.EventHandler(this.ToolsRestoreMI_Click);
             // 
@@ -356,6 +356,7 @@
             this.BooksDGV.Name = "BooksDGV";
             this.BooksDGV.Size = new System.Drawing.Size(866, 331);
             this.BooksDGV.TabIndex = 21;
+            this.BooksDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BooksDGV_CellDoubleClick);
             // 
             // MainForm
             // 

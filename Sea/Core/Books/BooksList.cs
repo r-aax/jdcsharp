@@ -184,5 +184,23 @@ namespace Sea.Core.Books
                 b.Categories.DeleteExtra();
             }
         }
+
+        /// <summary>
+        /// Find book by identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>book</returns>
+        public Book FindById(int id)
+        {
+            foreach (Book b in Items)
+            {
+                if (b.Id == id)
+                {
+                    return b;
+                }
+            }
+
+            return null;
+        }
     }
 }

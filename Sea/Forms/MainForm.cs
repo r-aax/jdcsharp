@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Drawing;
 
+using Lib.Utils;
+
 using Sea.Core;
 using Sea.Core.Books;
 using Sea.Tools;
@@ -289,6 +291,26 @@ namespace Sea.Forms
                 FilterCategories.Items = form.Categories;
                 FilterCategories.ToListBox(CategoriesLB);
             }
+        }
+
+        /// <summary>
+        /// Double-click on table cell.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void BooksDGV_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int col_ind = e.ColumnIndex;
+            int row_ind = e.RowIndex;
+            string id_string = BooksDGV.Rows[row_ind].Cells[1].Value as string;
+            int id = Lib.Utils.Convert.GetInt(id_string);
+            Book b = Sea.SBooks.FindById(id);
+
+            // Start process.
+            ProcessStartInfo info = new ProcessStartInfo();
+            info.WorkingDirectory = Parameters.DataPath;
+            info.FileName = Parameters.DataPath + "/" + b.File;
+            Process.Start(info);
         }
     }
 }
