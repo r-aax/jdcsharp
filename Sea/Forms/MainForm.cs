@@ -122,7 +122,14 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void ToolArchiveMI_Click(object sender, EventArgs e)
         {
-            Sea.Archive(Parameters.StoragePathArchive);
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Archive (*.zip)|*.zip";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Sea.Archive(sfd.FileName);
+                ShowLastAction("archivation to " + sfd.FileName + " is completed");
+            }
         }
 
         /// <summary>
@@ -132,9 +139,15 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void ToolsDearchiveMI_Click(object sender, EventArgs e)
         {
-            if (Sea.Dearchive(Parameters.StoragePathArchive))
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Archive (*.zip)|*.zip";
+
+            if (ofd.ShowDialog() == DialogResult.OK)
             {
-                ShowLastAction("dearchivation is completed");
+                if (Sea.Dearchive(ofd.FileName))
+                {
+                    ShowLastAction("dearchivation from " + ofd.FileName + " is completed");
+                }
             }
         }
 
@@ -212,6 +225,7 @@ namespace Sea.Forms
             YearFromTB.Clear();
             YearToTB.Clear();
             FilterCategories.Clear();
+            FilterCategories.ToListBox(CategoriesLB);
         }
 
         /// <summary>

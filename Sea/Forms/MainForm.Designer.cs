@@ -41,6 +41,8 @@
             this.ToolsArchiveMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolArchiveMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsDearchiveMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolsBackupMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsRestoreMI = new System.Windows.Forms.ToolStripMenuItem();
             this.correctionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteExtraCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,8 +61,6 @@
             this.YearFromTB = new System.Windows.Forms.TextBox();
             this.YearToTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.ToolsBackupMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1.SuspendLayout();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BooksDGV)).BeginInit();
@@ -118,33 +118,33 @@
             // DataBooksMI
             // 
             this.DataBooksMI.Name = "DataBooksMI";
-            this.DataBooksMI.Size = new System.Drawing.Size(152, 22);
+            this.DataBooksMI.Size = new System.Drawing.Size(130, 22);
             this.DataBooksMI.Text = "Books";
             this.DataBooksMI.Click += new System.EventHandler(this.DataBooksMI_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
             // 
             // DataCategoriesMI
             // 
             this.DataCategoriesMI.Name = "DataCategoriesMI";
-            this.DataCategoriesMI.Size = new System.Drawing.Size(152, 22);
+            this.DataCategoriesMI.Size = new System.Drawing.Size(130, 22);
             this.DataCategoriesMI.Text = "Categories";
             this.DataCategoriesMI.Click += new System.EventHandler(this.DataCategoriesMI_Click);
             // 
             // DataAuthorsMI
             // 
             this.DataAuthorsMI.Name = "DataAuthorsMI";
-            this.DataAuthorsMI.Size = new System.Drawing.Size(152, 22);
+            this.DataAuthorsMI.Size = new System.Drawing.Size(130, 22);
             this.DataAuthorsMI.Text = "Authors";
             this.DataAuthorsMI.Click += new System.EventHandler(this.DataAuthorsMI_Click);
             // 
             // DataPublishersMI
             // 
             this.DataPublishersMI.Name = "DataPublishersMI";
-            this.DataPublishersMI.Size = new System.Drawing.Size(152, 22);
+            this.DataPublishersMI.Size = new System.Drawing.Size(130, 22);
             this.DataPublishersMI.Text = "Publishers";
             this.DataPublishersMI.Click += new System.EventHandler(this.DataPublishersMI_Click);
             // 
@@ -163,21 +163,33 @@
             // ToolArchiveMI
             // 
             this.ToolArchiveMI.Name = "ToolArchiveMI";
-            this.ToolArchiveMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolArchiveMI.Size = new System.Drawing.Size(126, 22);
             this.ToolArchiveMI.Text = "Archive";
             this.ToolArchiveMI.Click += new System.EventHandler(this.ToolArchiveMI_Click);
             // 
             // ToolsDearchiveMI
             // 
             this.ToolsDearchiveMI.Name = "ToolsDearchiveMI";
-            this.ToolsDearchiveMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolsDearchiveMI.Size = new System.Drawing.Size(126, 22);
             this.ToolsDearchiveMI.Text = "Dearchive";
             this.ToolsDearchiveMI.Click += new System.EventHandler(this.ToolsDearchiveMI_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(123, 6);
+            // 
+            // ToolsBackupMI
+            // 
+            this.ToolsBackupMI.Name = "ToolsBackupMI";
+            this.ToolsBackupMI.Size = new System.Drawing.Size(126, 22);
+            this.ToolsBackupMI.Text = "Backup";
+            this.ToolsBackupMI.Click += new System.EventHandler(this.ToolsBackupMI_Click);
             // 
             // ToolsRestoreMI
             // 
             this.ToolsRestoreMI.Name = "ToolsRestoreMI";
-            this.ToolsRestoreMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolsRestoreMI.Size = new System.Drawing.Size(126, 22);
             this.ToolsRestoreMI.Text = "Restore";
             this.ToolsRestoreMI.Click += new System.EventHandler(this.ToolsRestoreMI_Click);
             // 
@@ -335,18 +347,6 @@
             this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 20;
             this.label4.Text = "Years";
-            // 
-            // ToolsBackupMI
-            // 
-            this.ToolsBackupMI.Name = "ToolsBackupMI";
-            this.ToolsBackupMI.Size = new System.Drawing.Size(152, 22);
-            this.ToolsBackupMI.Text = "Backup";
-            this.ToolsBackupMI.Click += new System.EventHandler(this.ToolsBackupMI_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
             // MainForm
             // 
