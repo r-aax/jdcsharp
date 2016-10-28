@@ -261,6 +261,34 @@ namespace Sea.Core.Books
         }
 
         /// <summary>
+        /// Book type - string form.
+        /// </summary>
+        public string TypeString
+        {
+            get
+            {
+                switch (Type)
+                {
+                    case BookType.Book:
+                        return "Book";
+
+                    case BookType.Magazine:
+                        return "Magazine";
+
+                    case BookType.Article:
+                        return "Article";
+
+                    case BookType.Other:
+                        return "Other";
+
+                    default:
+                        Debug.Assert(false, "Unknown book type.");
+                        return "";
+                }
+            }
+        }
+
+        /// <summary>
         /// Serialization prepare.
         /// </summary>
         public void PrepareToSerialization()

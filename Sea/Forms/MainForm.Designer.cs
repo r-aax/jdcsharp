@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StoragePathSSL = new System.Windows.Forms.ToolStripStatusLabel();
             this.LastActionSSL = new System.Windows.Forms.ToolStripStatusLabel();
@@ -51,7 +52,6 @@
             this.NameTB = new System.Windows.Forms.TextBox();
             this.SearchB = new System.Windows.Forms.Button();
             this.CleanB = new System.Windows.Forms.Button();
-            this.BooksDGV = new System.Windows.Forms.DataGridView();
             this.AuthorTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.PublisherTB = new System.Windows.Forms.TextBox();
@@ -61,6 +61,7 @@
             this.YearFromTB = new System.Windows.Forms.TextBox();
             this.YearToTB = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.BooksDGV = new System.Windows.Forms.DataGridView();
             this.statusStrip1.SuspendLayout();
             this.MainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BooksDGV)).BeginInit();
@@ -256,25 +257,6 @@
             this.CleanB.UseVisualStyleBackColor = true;
             this.CleanB.Click += new System.EventHandler(this.CleanB_Click);
             // 
-            // BooksDGV
-            // 
-            this.BooksDGV.AllowUserToAddRows = false;
-            this.BooksDGV.AllowUserToDeleteRows = false;
-            this.BooksDGV.AllowUserToResizeRows = false;
-            this.BooksDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BooksDGV.BackgroundColor = System.Drawing.Color.White;
-            this.BooksDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.BooksDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.BooksDGV.Location = new System.Drawing.Point(0, 128);
-            this.BooksDGV.Margin = new System.Windows.Forms.Padding(10);
-            this.BooksDGV.Name = "BooksDGV";
-            this.BooksDGV.ReadOnly = true;
-            this.BooksDGV.Size = new System.Drawing.Size(866, 336);
-            this.BooksDGV.TabIndex = 11;
-            this.BooksDGV.CellMouseDoubleClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.BooksDGV_CellMouseDoubleClick);
-            // 
             // AuthorTB
             // 
             this.AuthorTB.Location = new System.Drawing.Point(87, 69);
@@ -348,11 +330,39 @@
             this.label4.TabIndex = 20;
             this.label4.Text = "Years";
             // 
+            // BooksDGV
+            // 
+            this.BooksDGV.AllowUserToAddRows = false;
+            this.BooksDGV.AllowUserToDeleteRows = false;
+            this.BooksDGV.AllowUserToResizeColumns = false;
+            this.BooksDGV.AllowUserToResizeRows = false;
+            this.BooksDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BooksDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.BooksDGV.BackgroundColor = System.Drawing.Color.WhiteSmoke;
+            this.BooksDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BooksDGV.DefaultCellStyle = dataGridViewCellStyle1;
+            this.BooksDGV.GridColor = System.Drawing.Color.Gainsboro;
+            this.BooksDGV.Location = new System.Drawing.Point(0, 133);
+            this.BooksDGV.Name = "BooksDGV";
+            this.BooksDGV.Size = new System.Drawing.Size(866, 331);
+            this.BooksDGV.TabIndex = 21;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(866, 486);
+            this.Controls.Add(this.BooksDGV);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.YearToTB);
             this.Controls.Add(this.YearFromTB);
@@ -362,7 +372,6 @@
             this.Controls.Add(this.PublisherTB);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AuthorTB);
-            this.Controls.Add(this.BooksDGV);
             this.Controls.Add(this.CleanB);
             this.Controls.Add(this.SearchB);
             this.Controls.Add(this.label3);
@@ -407,7 +416,6 @@
         private System.Windows.Forms.TextBox NameTB;
         private System.Windows.Forms.Button SearchB;
         private System.Windows.Forms.Button CleanB;
-        private System.Windows.Forms.DataGridView BooksDGV;
         private System.Windows.Forms.TextBox AuthorTB;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox PublisherTB;
@@ -419,6 +427,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ToolsBackupMI;
+        private System.Windows.Forms.DataGridView BooksDGV;
     }
 }
 

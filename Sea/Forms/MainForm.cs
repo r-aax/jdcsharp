@@ -235,19 +235,31 @@ namespace Sea.Forms
         /// <param name="b">books list</param>
         private void FillBooksDataGridView(DataGridView g, BooksList b)
         {
+            // Set grid.
             g.RowCount = b.Count;
-            g.ColumnCount = 1;
+            g.ColumnCount = 3;
             g.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             g.Columns[0].HeaderText = "Description";
+            g.Columns[1].HeaderText = "Id";
+            g.Columns[2].HeaderText = "Info";
 
-            for (int i = 0; i < b.Count; i++)
+            // Set font.
+            Font font = new Font(g.Font.Name, g.Font.Size, FontStyle.Bold);
+            foreach (DataGridViewColumn col in g.Columns)
             {
-                g.Rows[i].Cells[0].Value = b[i].FullName(BookFullNamePrintStyle.Wide);
+                col.HeaderCell.Style.Font = font;
             }
 
-            // Set bold style to description.
-            g.Columns[0].HeaderCell.Style.BackColor = Color.LightGray;
-            g.Columns[0].HeaderCell.Style.Font = new Font(g.Font.Name, g.Font.Size, FontStyle.Bold);
+            // Set data to grid.
+            for (int i = 0; i < b.Count; i++)
+            {
+                DataGridViewRow row = g.Rows[i];
+                row.Cells[0].Value = b[i].FullName(BookFullNamePrintStyle.Wide);
+                row.Cells[1].Style.Alignment = DataGridViewContentAlignment.TopRight;
+                row.Cells[1].Value = b[i].Id.ToString();
+                row.Cells[2].Style.Alignment = DataGridViewContentAlignment.TopRight;
+                row.Cells[2].Value = b[i].TypeString;
+            }
         }
 
         /// <summary>
