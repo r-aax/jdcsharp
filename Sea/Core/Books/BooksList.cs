@@ -107,7 +107,7 @@ namespace Sea.Core.Books
         /// </summary>
         public void Sort()
         {
-            Items.Sort();
+            Items.Sort((b1, b2) => b1.FullName(BookFullNamePrintStyle.Wide).CompareTo(b2.FullName(BookFullNamePrintStyle.Wide)));
         }
 
         /// <summary>

@@ -66,6 +66,7 @@ namespace Sea.Forms
                 Text = "Create new books list (no books file is found)";
             }
 
+            Books.Sort();
             Books.ToListBox(BooksLB);
             SetControlsEnable();
         }

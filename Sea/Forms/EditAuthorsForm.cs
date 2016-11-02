@@ -57,6 +57,7 @@ namespace Sea.Forms
                 Text = "Create new authors list (no authors file is found)";
             }
 
+            Authors.Sort();
             Authors.ToListBox(AuthorsLB);
             SetControlsEnable();
         }

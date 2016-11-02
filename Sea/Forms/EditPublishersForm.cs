@@ -58,6 +58,7 @@ namespace Sea.Forms
                 Text = "Create new publishers list (no publishers file is found)";
             }
 
+            Publishers.Sort();
             Publishers.ToListBox(PublishersLB);
             SetControlsEnable();
         }

@@ -211,6 +211,7 @@ namespace Sea.Forms
                             YearToTB.Text);
             ShowLastAction(Sea.SBooks.Count.ToString() + " books found");
             FillBooksDataGridView(BooksDGV, Sea.SBooks);
+            BooksDGV.Sort(BooksDGV.Columns[0], System.ComponentModel.ListSortDirection.Ascending);
         }
 
         /// <summary>
