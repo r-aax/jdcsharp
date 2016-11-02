@@ -332,7 +332,7 @@ namespace Sea.Core
             {
                 Book b = Books[i];
 
-                // Check name staring.
+                // Check names.
                 if (!b.Name.ToLower().Contains(name_substr)
                     || !b.Authors.Contains(author_substr, true)
                     || !b.Publishers.Contains(publisher_substr, true))
@@ -343,7 +343,7 @@ namespace Sea.Core
                 // Check categories.
                 if (!filter_categories.IsEmpty)
                 {
-                    if (!filter_categories.IsIntersection(b.Categories))
+                    if (!filter_categories.IsAnyOuter(b.Categories))
                     {
                         continue;
                     }

@@ -173,5 +173,47 @@ namespace Sea.Core.Categories
 
             return false;
         }
+
+        /// <summary>
+        /// Check if at least one category is inner in relation to another categories list.
+        /// </summary>
+        /// <param name="list">another categories list</param>
+        /// <returns><c>true</c> - if there is inner category, <c>false</c> - otherwise</returns>
+        public bool IsAnyInner(CategoriesList list)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                for (int listi = 0; listi < list.Count; listi++)
+                {
+                    if (this[i].IsInner(list[listi]))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Check if at least one category is outer in relation to another categories list.
+        /// </summary>
+        /// <param name="list">another categories list</param>
+        /// <returns><c>true</c> - if there is outer category, <c>false</c> - otherwise</returns>
+        public bool IsAnyOuter(CategoriesList list)
+        {
+            for (int i = 0; i < Count; i++)
+            {
+                for (int listi = 0; listi < list.Count; listi++)
+                {
+                    if (this[i].IsOuter(list[listi]))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
     }
 }
