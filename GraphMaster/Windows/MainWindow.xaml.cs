@@ -153,6 +153,11 @@ namespace GraphMaster.Windows
                             PictureName, 12.0, "Lucida Console");
             Drawer.EndDraw();
 
+            // Warnings.
+            // I do not want to study routed events, so make a little hack here.
+            DrawAreaC.Children[0].PreviewMouseLeftButtonDown += DrawAreaC_MouseLeftButtonDown;
+            DrawAreaC.Children[0].PreviewMouseLeftButtonUp += DrawAreaC_MouseLeftButtonUp;
+
             // Mapping information.
             BijectionStrSBLBI.Content = Drawer.GetBijectionString();
 

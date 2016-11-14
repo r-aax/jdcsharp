@@ -1,5 +1,5 @@
 ﻿<!-- Author: Alexey Rybakov -->
-    
+
 <Window x:Class="GraphMaster.Windows.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -58,7 +58,7 @@
                     <MenuItem Header="Circle">
                         <MenuItem Name="ExampleGridCircleWithCenter" Header="With center point" Click="ExampleGridCircleWithCenter_Click"/>
                         <MenuItem Name="ExampleGridCircleWithoutCenter" Header="Without center point" Click="ExampleGridCircleWithoutCenter_Click"/>
-                    </MenuItem>                        
+                    </MenuItem>
                 </MenuItem>
                 <MenuItem Header="3D shapes">
                     <MenuItem Name="Example3DTetrahedron" Header="Tetrahedron" Click="Example3DTetrahedron_Click"/>
@@ -159,12 +159,14 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Canvas Name="DrawAreaC"
+                    Background="White"
                     Grid.Column="0"
                     SizeChanged="DrawAreaC_SizeChanged"
                     MouseLeave="DrawAreaC_MouseLeave" 
                     MouseLeftButtonDown="DrawAreaC_MouseLeftButtonDown"
                     MouseLeftButtonUp="DrawAreaC_MouseLeftButtonUp"
-                    MouseMove="DrawAreaC_MouseMove" ClipToBounds="True" />
+                    MouseMove="DrawAreaC_MouseMove" ClipToBounds="True">
+            </Canvas>
             <Grid Grid.Column="1">
                 <Button Height="36" HorizontalAlignment="Left" Margin="118,222,0,0" Name="RotX_CW_B" VerticalAlignment="Top" Width="36" Click="RotX_CW_B_Click">
                 </Button>
