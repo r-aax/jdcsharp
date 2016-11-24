@@ -124,10 +124,10 @@ namespace GraphMaster.Windows
             RotX_CCW_B.IsEnabled = is_3d;
             RotY_CW_B.IsEnabled = is_3d;
             RotY_CCW_B.IsEnabled = is_3d;
-            AreaRotateXPlus.IsEnabled = is_3d;
-            AreaRotateXMinus.IsEnabled = is_3d;
-            AreaRotateYPlus.IsEnabled = is_3d;
-            AreaRotateYMinus.IsEnabled = is_3d;
+            AreaRotateX_CW.IsEnabled = is_3d;
+            AreaRotateX_CCW.IsEnabled = is_3d;
+            AreaRotateY_CW.IsEnabled = is_3d;
+            AreaRotateY_CCW.IsEnabled = is_3d;
 
             // Change dimensionality.
             Transform2DTo3D.IsEnabled = !is_3d;
@@ -356,54 +356,54 @@ namespace GraphMaster.Windows
         /// <summary>
         /// Rotate clockwise X.
         /// </summary>
-        private void RotX_Plus()
-        {
-            Graph.RotX(Parameters.GraphRotAngle);
-            Paint();
-        }
-
-        /// <summary>
-        /// Rotate contraclockwise X.
-        /// </summary>
-        private void RotX_Minus()
+        private void RotX_CW()
         {
             Graph.RotX(-Parameters.GraphRotAngle);
             Paint();
         }
 
         /// <summary>
-        /// Rotate clockwise Y.
+        /// Rotate contraclockwise X.
         /// </summary>
-        private void RotY_Plus()
+        private void RotX_CCW()
         {
-            Graph.RotY(Parameters.GraphRotAngle);
+            Graph.RotX(Parameters.GraphRotAngle);
             Paint();
         }
 
         /// <summary>
-        /// Rotate contraclockwise Y.
+        /// Rotate clockwise Y.
         /// </summary>
-        private void RotY_Minus()
+        private void RotY_CW()
         {
             Graph.RotY(-Parameters.GraphRotAngle);
             Paint();
         }
 
         /// <summary>
+        /// Rotate contraclockwise Y.
+        /// </summary>
+        private void RotY_CCW()
+        {
+            Graph.RotY(Parameters.GraphRotAngle);
+            Paint();
+        }
+
+        /// <summary>
         /// Rotate clockwise Z.
         /// </summary>
-        private void RotZ_Plus()
+        private void RotZ_CW()
         {
-            Graph.RotZ(Parameters.GraphRotAngle);
+            Graph.RotZ(-Parameters.GraphRotAngle);
             Paint();
         }
 
         /// <summary>
         /// Rotate contraclockwise Z.
         /// </summary>
-        private void RotZ_Minus()
+        private void RotZ_CCW()
         {
-            Graph.RotZ(-Parameters.GraphRotAngle);
+            Graph.RotZ(Parameters.GraphRotAngle);
             Paint();
         }
 
@@ -412,9 +412,9 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">paremeters</param>
-        private void AreaRotateXPlus_Click(object sender, RoutedEventArgs e)
+        private void AreaRotateX_CW_Click(object sender, RoutedEventArgs e)
         {
-            RotX_Plus();
+            RotX_CW();
         }
 
         /// <summary>
@@ -422,9 +422,9 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">paremeters</param>
-        private void AreaRotateXMinus_Click(object sender, RoutedEventArgs e)
+        private void AreaRotateX_CCW_Click(object sender, RoutedEventArgs e)
         {
-            RotX_Minus();
+            RotX_CCW();
         }
 
         /// <summary>
@@ -432,9 +432,9 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">paremeters</param>
-        private void AreaRotateYPlus_Click(object sender, RoutedEventArgs e)
+        private void AreaRotateY_CW_Click(object sender, RoutedEventArgs e)
         {
-            RotY_Plus();
+            RotY_CW();
         }
 
         /// <summary>
@@ -442,9 +442,9 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">paremeters</param>
-        private void AreaRotateYMinus_Click(object sender, RoutedEventArgs e)
+        private void AreaRotateY_CCW_Click(object sender, RoutedEventArgs e)
         {
-            RotY_Minus();
+            RotY_CCW();
         }
 
         /// <summary>
@@ -452,9 +452,9 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">paremeters</param>
-        private void AreaRotateZPlus_Click(object sender, RoutedEventArgs e)
+        private void AreaRotateZ_CW_Click(object sender, RoutedEventArgs e)
         {
-            RotZ_Plus();
+            RotZ_CW();
         }
 
         /// <summary>
@@ -462,9 +462,9 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">paremeters</param>
-        private void AreaRotateZMinus_Click(object sender, RoutedEventArgs e)
+        private void AreaRotateZ_CCW_Click(object sender, RoutedEventArgs e)
         {
-            RotZ_Minus();
+            RotZ_CCW();
         }
 
         /// <summary>
@@ -474,7 +474,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void RotX_CW_B_Click(object sender, RoutedEventArgs e)
         {
-            RotX_Plus();
+            RotX_CW();
         }
 
         /// <summary>
@@ -484,7 +484,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void RotX_CCW_B_Click(object sender, RoutedEventArgs e)
         {
-            RotX_Minus();
+            RotX_CCW();
         }
 
         /// <summary>
@@ -494,7 +494,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void RotY_CW_B_Click(object sender, RoutedEventArgs e)
         {
-            RotY_Plus();
+            RotY_CW();
         }
 
         /// <summary>
@@ -504,7 +504,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void RotY_CCW_B_Click(object sender, RoutedEventArgs e)
         {
-            RotY_Minus();
+            RotY_CCW();
         }
 
         /// <summary>
@@ -514,7 +514,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void RotZ_CW_B_Click(object sender, RoutedEventArgs e)
         {
-            RotZ_Plus();
+            RotZ_CW();
         }
 
         /// <summary>
@@ -524,7 +524,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void RotZ_CCW_B_Click(object sender, RoutedEventArgs e)
         {
-            RotZ_Minus();
+            RotZ_CCW();
         }
 
         /// <summary>

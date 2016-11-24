@@ -19,12 +19,12 @@
                 <MenuItem Name="AreaParametersMI" Header="Parameters" Click="AreaParametersMI_Click"/>
             </MenuItem>
             <MenuItem Header="Transform">
-                <MenuItem Name="AreaRotateXPlus" Header="Rotate clockwise OX" Click="AreaRotateXPlus_Click" />
-                <MenuItem Name="AreaRotateXMinus" Header="Rotate contraclockwise OX" Click="AreaRotateXMinus_Click" />
-                <MenuItem Name="AreaRotateYPlus" Header="Rotate clockwise OY" Click="AreaRotateYPlus_Click" />
-                <MenuItem Name="AreaRotateYMinus" Header="Rotate contraclockwise OY" Click="AreaRotateYMinus_Click" />
-                <MenuItem Name="AreaRotateZPlus" Header="Rotate clockwise OZ" Click="AreaRotateZPlus_Click" />
-                <MenuItem Name="AreaRotateZMinus" Header="Rotate contraclockwise OZ" Click="AreaRotateZMinus_Click" />
+                <MenuItem Name="AreaRotateX_CW" Header="Rotate clockwise OX" Click="AreaRotateX_CW_Click" />
+                <MenuItem Name="AreaRotateX_CCW" Header="Rotate contraclockwise OX" Click="AreaRotateX_CCW_Click" />
+                <MenuItem Name="AreaRotateY_CW" Header="Rotate clockwise OY" Click="AreaRotateY_CW_Click" />
+                <MenuItem Name="AreaRotateY_CCW" Header="Rotate contraclockwise OY" Click="AreaRotateY_CCW_Click" />
+                <MenuItem Name="AreaRotateZ_CW" Header="Rotate clockwise OZ" Click="AreaRotateZ_CW_Click" />
+                <MenuItem Name="AreaRotateZ_CCW" Header="Rotate contraclockwise OZ" Click="AreaRotateZ_CCW_Click" />
                 <Separator/>
                 <MenuItem Name="Transform2DTo3D" Header="Transform 2D -> 3D" Click="Transform2DTo3D_Click" />
                 <MenuItem Name="Transform3DTo2D" Header="Transform 3D -> 2D" Click="Transform3DTo2D_Click" />
