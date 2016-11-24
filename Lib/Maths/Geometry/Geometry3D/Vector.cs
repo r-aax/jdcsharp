@@ -191,7 +191,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Rotate <c>x</c>.
+        /// Rotate <c>x</c> contraclockwise.
         /// </summary>
         /// <param name="a">angle</param>
         public void RotX(double a)
@@ -218,7 +218,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Rotate <c>y</c>.
+        /// Rotate <c>y</c> contraclockwise.
         /// </summary>
         /// <param name="a">angle</param>
         public void RotY(double a)
@@ -245,7 +245,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Rotate <c>z</c>.
+        /// Rotate <c>z</c> contraclockwise.
         /// </summary>
         /// <param name="a">angle</param>
         public void RotZ(double a)
