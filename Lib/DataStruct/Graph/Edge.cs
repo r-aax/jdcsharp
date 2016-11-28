@@ -9,7 +9,7 @@ namespace Lib.DataStruct.Graph
     /// <summary>
     /// Edge.
     /// </summary>
-    public class Edge
+    public class Edge : SelectableObject
     {
         /// <summary>
         /// Parent graph.

@@ -1336,6 +1336,26 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
+        /// Right button down.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void DrawAreaC_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ;
+        }
+
+        /// <summary>
+        /// Right button up.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void DrawAreaC_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ;
+        }
+
+        /// <summary>
         /// Mouse move event.
         /// </summary>
         /// <param name="sender">object</param>

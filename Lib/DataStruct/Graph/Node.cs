@@ -12,7 +12,7 @@ namespace Lib.DataStruct.Graph
     /// <summary>
     /// Node.
     /// </summary>
-    public class Node
+    public class Node : SelectableObject
     {
         /// <summary>
         /// Parent graph.
