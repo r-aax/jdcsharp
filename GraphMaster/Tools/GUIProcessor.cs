@@ -41,6 +41,17 @@ namespace GraphMaster.Tools
         }
 
         /// <summary>
+        /// Check if node captured.
+        /// </summary>
+        public bool IsNodeCaptured
+        {
+            get
+            {
+                return CapturedNode != null;
+            }
+        }
+
+        /// <summary>
         /// Try to capture node.
         /// </summary>
         /// <param name="g">graph</param>
@@ -66,7 +77,6 @@ namespace GraphMaster.Tools
             BasePoint = p;
             CapturedNode = n;
             CapturedNodePoint = n.Point2D.Clone() as Point2D;
-            State = GUIState.SingleNodeCaptured;
 
             return true;
         }
@@ -77,9 +87,13 @@ namespace GraphMaster.Tools
         /// <param name="p">current position</param>
         public void MoveCapturedNode(Point2D p)
         {
-            Debug.Assert((State == GUIState.SingleNodeCaptured)
-                         && (BasePoint != null)
-                         && (CapturedNode != null)
+            if (!IsNodeCaptured)
+            {
+                // No node captured.
+                return;
+            }
+
+            Debug.Assert((BasePoint != null)
                          && (CapturedNodePoint != null));
 
             // Shift.
@@ -95,16 +109,18 @@ namespace GraphMaster.Tools
         /// <param name="p">point</param>
         public void FinishNodeDrag(Point2D p)
         {
-            Debug.Assert((State == GUIState.SingleNodeCaptured)
-                         && (BasePoint != null)
-                         && (CapturedNode != null)
+            if (!IsNodeCaptured)
+            {
+                // No node captured, nothing to do.
+                return;
+            }
+
+            Debug.Assert((BasePoint != null)
                          && (CapturedNodePoint != null));
 
             BasePoint = null;
             CapturedNode = null;
             CapturedNodePoint = null;
-
-            State = GUIState.Common;
         }
 
         /// <summary>
@@ -112,9 +128,13 @@ namespace GraphMaster.Tools
         /// </summary>
         public void CancelNodeDrag()
         {
-            Debug.Assert((State == GUIState.SingleNodeCaptured)
-                         && (BasePoint != null)
-                         && (CapturedNode != null)
+            if (!IsNodeCaptured)
+            {
+                // Nothing to cancel.
+                return;
+            }
+
+            Debug.Assert((BasePoint != null)
                          && (CapturedNodePoint != null));
 
             // Set old coordinates back.
@@ -122,8 +142,6 @@ namespace GraphMaster.Tools
             BasePoint = null;
             CapturedNode = null;
             CapturedNodePoint = null;
-
-            State = GUIState.Common;
         }
     }
 }

@@ -1239,9 +1239,6 @@ namespace GraphMaster.Windows
             switch (GUIProcessor.State)
             {
                 case GUIState.Common:
-                    break;
-
-                case GUIState.SingleNodeCaptured:
                     GUIProcessor.CancelNodeDrag();
                     break;
 
@@ -1268,9 +1265,6 @@ namespace GraphMaster.Windows
                     GUIProcessor.TryToCaptureNode(Graph, fp);
                     break;
 
-                case GUIState.SingleNodeCaptured:
-                    break;
-
                 default:
                     Debug.Assert(false);
                     break;
@@ -1289,9 +1283,6 @@ namespace GraphMaster.Windows
             switch (GUIProcessor.State)
             {
                 case GUIState.Common:
-                    break;
-
-                case GUIState.SingleNodeCaptured:
                     GUIProcessor.FinishNodeDrag(fp);
                     break;
 
@@ -1315,9 +1306,6 @@ namespace GraphMaster.Windows
             switch (GUIProcessor.State)
             {
                 case GUIState.Common:
-                    break;
-
-                case GUIState.SingleNodeCaptured:
                     GUIProcessor.MoveCapturedNode(fp);
                     break;
 

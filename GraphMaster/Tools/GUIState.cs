@@ -9,12 +9,8 @@ namespace GraphMaster.Tools
     {
         /// <summary>
         /// No special sense.
+        /// But we can capture single node in this mode.
         /// </summary>
-        Common,
-
-        /// <summary>
-        /// Single node captured.
-        /// </summary>
-        SingleNodeCaptured
+        Common
     }
 }
