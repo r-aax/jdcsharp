@@ -11,6 +11,16 @@ namespace GraphMaster.Tools
         /// No special sense.
         /// But we can capture single node in this mode.
         /// </summary>
-        Common
+        Common,
+
+        /// <summary>
+        /// Mode for select multi nodes and edges.
+        /// </summary>
+        MultiSelect,
+
+        /// <summary>
+        /// Move all selected elements.
+        /// </summary>
+        Move
     }
 }

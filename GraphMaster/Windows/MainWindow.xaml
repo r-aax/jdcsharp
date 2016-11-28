@@ -167,46 +167,49 @@
                     MouseLeftButtonUp="DrawAreaC_MouseLeftButtonUp"
                     MouseMove="DrawAreaC_MouseMove" ClipToBounds="True">
             </Canvas>
-            <Grid Grid.Column="1">
-                <Button Height="36" HorizontalAlignment="Left" Margin="118,222,0,0" Name="RotX_CW_B" VerticalAlignment="Top" Width="36" Click="RotX_CW_B_Click">
+            <Grid Grid.Column="1" Margin="0,10,0,0">
+                <Button Height="36" HorizontalAlignment="Left" Margin="118,272,0,0" Name="RotX_CW_B" VerticalAlignment="Top" Width="36" Click="RotX_CW_B_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_rot_r.png"/>
                 </Button>
-                <Button Height="36" HorizontalAlignment="Left" Margin="158,222,0,0" Name="RotX_CCW_B" VerticalAlignment="Top" Width="36" Click="RotX_CCW_B_Click">
+                <Button Height="36" HorizontalAlignment="Left" Margin="158,272,0,0" Name="RotX_CCW_B" VerticalAlignment="Top" Width="36" Click="RotX_CCW_B_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_rot_l.png"/>
                 </Button>
-                <Button Height="36" HorizontalAlignment="Left" Margin="118,260,0,0" Name="RotY_CW_B" VerticalAlignment="Top" Width="36" Click="RotY_CW_B_Click">
+                <Button Height="36" HorizontalAlignment="Left" Margin="118,310,0,0" Name="RotY_CW_B" VerticalAlignment="Top" Width="36" Click="RotY_CW_B_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_rot_r.png"/>
                 </Button>
-                <Button Height="36" HorizontalAlignment="Left" Margin="158,260,0,0" Name="RotY_CCW_B" VerticalAlignment="Top" Width="36" Click="RotY_CCW_B_Click">
+                <Button Height="36" HorizontalAlignment="Left" Margin="158,310,0,0" Name="RotY_CCW_B" VerticalAlignment="Top" Width="36" Click="RotY_CCW_B_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_rot_l.png"/>
                 </Button>
-                <Button Height="36" HorizontalAlignment="Left" Margin="118,298,0,0" Name="RotZ_CW_B" VerticalAlignment="Top" Width="36" Click="RotZ_CW_B_Click">
+                <Button Height="36" HorizontalAlignment="Left" Margin="118,348,0,0" Name="RotZ_CW_B" VerticalAlignment="Top" Width="36" Click="RotZ_CW_B_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_rot_r.png"/>
                 </Button>
-                <Button Height="36" HorizontalAlignment="Left" Margin="158,298,0,0" Name="RotZ_CCW_B" VerticalAlignment="Top" Width="36" Click="RotZ_CCW_B_Click">
+                <Button Height="36" HorizontalAlignment="Left" Margin="158,348,0,0" Name="RotZ_CCW_B" VerticalAlignment="Top" Width="36" Click="RotZ_CCW_B_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_rot_l.png"/>
                 </Button>
-                <Label Content="Rotate X" Height="28" HorizontalAlignment="Left" Margin="8,226,0,0" Name="label1" VerticalAlignment="Top" />
-                <Label Content="Rotate Y" Height="28" HorizontalAlignment="Left" Margin="8,268,0,0" Name="label2" VerticalAlignment="Top" />
-                <Label Content="Rotate Z" Height="28" HorizontalAlignment="Left" Margin="8,306,0,0" Name="label3" VerticalAlignment="Top" />
-                <Button Height="32" HorizontalAlignment="Left" Margin="119,55,0,0" Name="AreaRightB" VerticalAlignment="Top" Width="32" Click="AreaRightB_Click">
+                <Label Content="Rotate X" Height="28" HorizontalAlignment="Left" Margin="8,276,0,0" Name="label1" VerticalAlignment="Top" />
+                <Label Content="Rotate Y" Height="28" HorizontalAlignment="Left" Margin="8,318,0,0" Name="label2" VerticalAlignment="Top" />
+                <Label Content="Rotate Z" Height="28" HorizontalAlignment="Left" Margin="8,356,0,0" Name="label3" VerticalAlignment="Top" />
+                <Button Height="32" HorizontalAlignment="Left" Margin="119,105,0,0" Name="AreaRightB" VerticalAlignment="Top" Width="32" Click="AreaRightB_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_r.gif"/>
                 </Button>
-                <Button Height="32" HorizontalAlignment="Left" Margin="51,55,0,0" Name="AreaLeftB" VerticalAlignment="Top" Width="32" Click="AreaLeftB_Click">
+                <Button Height="32" HorizontalAlignment="Left" Margin="51,105,0,0" Name="AreaLeftB" VerticalAlignment="Top" Width="32" Click="AreaLeftB_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_l.gif"/>
                 </Button>
-                <Button Height="32" HorizontalAlignment="Left" Margin="85,21,0,0" Name="AreaUpB" VerticalAlignment="Top" Width="32" Click="AreaUpB_Click">
+                <Button Height="32" HorizontalAlignment="Left" Margin="85,71,0,0" Name="AreaUpB" VerticalAlignment="Top" Width="32" Click="AreaUpB_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_u.gif"/>
                 </Button>
-                <Button Height="32" HorizontalAlignment="Left" Margin="85,89,0,0" Name="AreaDownB" VerticalAlignment="Top" Width="32" Click="AreaDownB_Click">
+                <Button Height="32" HorizontalAlignment="Left" Margin="85,139,0,0" Name="AreaDownB" VerticalAlignment="Top" Width="32" Click="AreaDownB_Click">
                     <Image Source="/GraphMaster;component/pics/arrow_d.gif"/>
                 </Button>
-                <Button Height="40" HorizontalAlignment="Left" Margin="58,152,0,0" Name="ZoomInB" VerticalAlignment="Top" Width="40" Click="ZoomInB_Click">
+                <Button Height="40" HorizontalAlignment="Left" Margin="58,202,0,0" Name="ZoomInB" VerticalAlignment="Top" Width="40" Click="ZoomInB_Click">
                     <Image Source="/GraphMaster;component/pics/zoom_in.png"/>
                 </Button>
-                <Button Height="40" HorizontalAlignment="Left" Margin="102,152,0,0" Name="ZoomOutB" VerticalAlignment="Top" Width="40" Click="ZoomOutB_Click">
+                <Button Height="40" HorizontalAlignment="Left" Margin="102,202,0,0" Name="ZoomOutB" VerticalAlignment="Top" Width="40" Click="ZoomOutB_Click">
                     <Image Source="/GraphMaster;component/pics/zoom_out.png"/>
                 </Button>
+                <Button x:Name="ModeDragB" Content="D" HorizontalAlignment="Left" Margin="122,3,0,0" VerticalAlignment="Top" Width="32" Height="32" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Black" Click="ModeDragB_Click"/>
+                <Button x:Name="ModeMultiSelectB" Content="M" HorizontalAlignment="Left" Margin="85,3,0,0" VerticalAlignment="Top" Width="32" Height="32" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Black" Click="ModeMultiSelectB_Click"/>
+                <Label Content="Mode" Height="28" HorizontalAlignment="Left" Margin="10,3,0,0" x:Name="label1_Copy" VerticalAlignment="Top" RenderTransformOrigin="0.491,-1.714" />
             </Grid>
             <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
         </Grid>

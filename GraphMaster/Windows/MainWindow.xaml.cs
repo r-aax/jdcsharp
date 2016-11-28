@@ -108,6 +108,8 @@ namespace GraphMaster.Windows
         {
             InitializeComponent();
 
+            ResetModeButtons();
+
             // Init graph.
             Graph = GraphCreator.ErdosRenyiBinomialRandomGraph(20, 0.5, Circle);
         }
@@ -132,6 +134,27 @@ namespace GraphMaster.Windows
             // Change dimensionality.
             Transform2DTo3D.IsEnabled = !is_3d;
             Transform3DTo2D.IsEnabled = is_3d;
+        }
+
+        /// <summary>
+        /// Change button colors.
+        /// </summary>
+        /// <param name="b">button</param>
+        /// <param name="brush">brush</param>
+        /// <param name="border_brush">border brush</param>
+        private void SetButtonColors(System.Windows.Controls.Button b, Brush brush, Brush border_brush)
+        {
+            b.Background = brush;
+            b.BorderBrush = border_brush;
+        }
+
+        /// <summary>
+        /// Reset mode buttons.
+        /// </summary>
+        private void ResetModeButtons()
+        {
+            SetButtonColors(ModeMultiSelectB, Brushes.LightGray, Brushes.Black);
+            SetButtonColors(ModeDragB, Brushes.LightGray, Brushes.Black);
         }
 
         /// <summary>
@@ -1242,6 +1265,12 @@ namespace GraphMaster.Windows
                     GUIProcessor.CancelNodeDrag();
                     break;
 
+                case GUIState.MultiSelect:
+                    break;
+
+                case GUIState.Move:
+                    break;
+
                 default:
                     Debug.Assert(false);
                     break;
@@ -1265,6 +1294,12 @@ namespace GraphMaster.Windows
                     GUIProcessor.TryToCaptureNode(Graph, fp);
                     break;
 
+                case GUIState.MultiSelect:
+                    break;
+
+                case GUIState.Move:
+                    break;
+
                 default:
                     Debug.Assert(false);
                     break;
@@ -1284,6 +1319,12 @@ namespace GraphMaster.Windows
             {
                 case GUIState.Common:
                     GUIProcessor.FinishNodeDrag(fp);
+                    break;
+
+                case GUIState.MultiSelect:
+                    break;
+
+                case GUIState.Move:
                     break;
 
                 default:
@@ -1307,6 +1348,12 @@ namespace GraphMaster.Windows
             {
                 case GUIState.Common:
                     GUIProcessor.MoveCapturedNode(fp);
+                    break;
+
+                case GUIState.MultiSelect:
+                    break;
+
+                case GUIState.Move:
                     break;
 
                 default:
@@ -1705,6 +1752,46 @@ namespace GraphMaster.Windows
         {
             Graph = GraphCreator.Icosahedron(Sphere);
             Paint();
+        }
+
+        /// <summary>
+        /// Click on multiselect mode button.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ModeMultiSelectB_Click(object sender, RoutedEventArgs e)
+        {
+            ResetModeButtons();
+
+            if (GUIProcessor.State == GUIState.MultiSelect)
+            {
+                GUIProcessor.State = GUIState.Common;
+            }
+            else
+            {
+                SetButtonColors(ModeMultiSelectB, Brushes.Green, Brushes.Green);
+                GUIProcessor.State = GUIState.MultiSelect;
+            }
+        }
+
+        /// <summary>
+        /// Click on drag mode button.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ModeDragB_Click(object sender, RoutedEventArgs e)
+        {
+            ResetModeButtons();
+
+            if (GUIProcessor.State == GUIState.Move)
+            {
+                GUIProcessor.State = GUIState.Common;
+            }
+            else
+            {
+                SetButtonColors(ModeDragB, Brushes.Green, Brushes.Green);
+                GUIProcessor.State = GUIState.Move;
+            }
         }
     }
 }
