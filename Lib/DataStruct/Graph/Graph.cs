@@ -296,6 +296,27 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Find edge with given nodes.
+        /// </summary>
+        /// <param name="a">first node</param>
+        /// <param name="b">second node</param>
+        /// <returns>edge or null</returns>
+        public Edge FindEdge(Node a, Node b)
+        {
+            Debug.Assert((a.Parent == this) && (b.Parent == this));
+
+            foreach (Edge e in a.Edges)
+            {
+                if (e.IsIncident(b))
+                {
+                    return e;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Check if edge in graph.
         /// </summary>
         /// <param name="a">first node</param>
@@ -303,17 +324,7 @@ namespace Lib.DataStruct.Graph
         /// <returns>true - if edge in graph, false - if there is no such edge</returns>
         public bool IsEdge(Node a, Node b)
         {
-            Debug.Assert((a.Parent == this) && (b.Parent == this));
-
-            foreach (Edge e in a.Edges)
-            {
-                if (e.B == b)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return FindEdge(a, b) != null;
         }
 
         /// <summary>

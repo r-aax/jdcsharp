@@ -172,6 +172,10 @@ namespace GraphMaster.Windows
             // Drawing.
             Drawer.BeginDraw();
             GraphDrawer.DrawGraph(Graph);
+            if ((GUIProcessor.State == GUIState.Select) && (GUIProcessor.Node != null))
+            {
+                GraphDrawer.DrawNode(GUIProcessor.Node, Graph.DrawProperties.DefaultCaptutedNodeDrawProperties);
+            }
             Drawer.DrawText(Drawer.Scaler.F(new Point2D(15.0, DrawAreaC.ActualHeight - 25.0)),
                             PictureName, 12.0, "Lucida Console");
             Drawer.EndDraw();
@@ -180,7 +184,9 @@ namespace GraphMaster.Windows
             // I do not want to study routed events, so make a little hack here.
             DrawAreaC.Children[0].PreviewMouseLeftButtonDown += DrawAreaC_MouseLeftButtonDown;
             DrawAreaC.Children[0].PreviewMouseLeftButtonUp += DrawAreaC_MouseLeftButtonUp;
-
+            DrawAreaC.Children[0].PreviewMouseRightButtonDown += DrawAreaC_MouseRightButtonDown;
+            DrawAreaC.Children[0].PreviewMouseRightButtonUp += DrawAreaC_MouseRightButtonUp;
+                
             // Mapping information.
             BijectionStrSBLBI.Content = Drawer.GetBijectionString();
 
@@ -1295,11 +1301,14 @@ namespace GraphMaster.Windows
                     break;
 
                 case GUIState.Select:
+
                     Node n = Graph.FindNearestNode(fp);
+
                     if (n != null)
                     {
                         n.SwitchSelection();
                     }
+
                     break;
 
                 case GUIState.Move:
@@ -1309,6 +1318,8 @@ namespace GraphMaster.Windows
                     Debug.Assert(false);
                     break;
             }
+
+            Paint();
         }
 
         /// <summary>
@@ -1347,7 +1358,51 @@ namespace GraphMaster.Windows
         /// <param name="e">parameters</param>
         private void DrawAreaC_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            ;
+            Point2D fp = GetEventPoint(e);
+
+            switch (GUIProcessor.State)
+            {
+                case GUIState.Common:
+                    break;
+
+                case GUIState.Select:
+
+                    Node n = Graph.FindNearestNode(fp);
+
+                    if (n != null)
+                    {
+                        if (GUIProcessor.Node == null)
+                        {
+                            GUIProcessor.Node = n;
+                        }
+                        else if (GUIProcessor.Node == n)
+                        {
+                            GUIProcessor.Node = null;
+                        }
+                        else
+                        {
+                            Edge edge = Graph.FindEdge(GUIProcessor.Node, n);
+
+                            if (edge != null)
+                            {
+                                edge.SwitchSelection();
+                            }
+
+                            GUIProcessor.Node = n;
+                        }
+                    }
+
+                    break;
+
+                case GUIState.Move:
+                    break;
+
+                default:
+                    Debug.Assert(false);
+                    break;
+            }
+
+            Paint();
         }
 
         /// <summary>
@@ -1357,7 +1412,7 @@ namespace GraphMaster.Windows
         /// <param name="e">parameters</param>
         private void DrawAreaC_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
         {
-            ;
+            Paint();
         }
 
         /// <summary>

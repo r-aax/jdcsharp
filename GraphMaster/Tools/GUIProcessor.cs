@@ -26,12 +26,12 @@ namespace GraphMaster.Tools
         /// <summary>
         /// Captured node.
         /// </summary>
-        private Node CapturedNode = null;
+        public Node Node = null;
 
         /// <summary>
         /// Begin coordinates of captured node.
         /// </summary>
-        private Point2D CapturedNodePoint = null;
+        private Point2D NodePoint = null;
 
         /// <summary>
         /// Constructor.
@@ -47,7 +47,7 @@ namespace GraphMaster.Tools
         {
             get
             {
-                return CapturedNode != null;
+                return Node != null;
             }
         }
 
@@ -64,8 +64,8 @@ namespace GraphMaster.Tools
         {
             Debug.Assert((State == GUIState.Common)
                          && (BasePoint == null)
-                         && (CapturedNode == null)
-                         && (CapturedNodePoint == null));
+                         && (Node == null)
+                         && (NodePoint == null));
 
             Node n = g.FindNearestNode(p);
 
@@ -75,8 +75,8 @@ namespace GraphMaster.Tools
             }
 
             BasePoint = p;
-            CapturedNode = n;
-            CapturedNodePoint = n.Point2D.Clone() as Point2D;
+            Node = n;
+            NodePoint = n.Point2D.Clone() as Point2D;
 
             return true;
         }
@@ -94,13 +94,13 @@ namespace GraphMaster.Tools
             }
 
             Debug.Assert((BasePoint != null)
-                         && (CapturedNodePoint != null));
+                         && (NodePoint != null));
 
             // Shift.
             Vector2D v = p - BasePoint;
 
             // Move node.
-            CapturedNode.Point2D = CapturedNodePoint + v;
+            Node.Point2D = NodePoint + v;
         }
 
         /// <summary>
@@ -116,11 +116,11 @@ namespace GraphMaster.Tools
             }
 
             Debug.Assert((BasePoint != null)
-                         && (CapturedNodePoint != null));
+                         && (NodePoint != null));
 
             BasePoint = null;
-            CapturedNode = null;
-            CapturedNodePoint = null;
+            Node = null;
+            NodePoint = null;
         }
 
         /// <summary>
@@ -135,13 +135,13 @@ namespace GraphMaster.Tools
             }
 
             Debug.Assert((BasePoint != null)
-                         && (CapturedNodePoint != null));
+                         && (NodePoint != null));
 
             // Set old coordinates back.
-            CapturedNode.Point2D = CapturedNodePoint;
+            Node.Point2D = NodePoint;
             BasePoint = null;
-            CapturedNode = null;
-            CapturedNodePoint = null;
+            Node = null;
+            NodePoint = null;
         }
     }
 }

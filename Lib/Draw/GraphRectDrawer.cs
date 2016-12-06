@@ -47,13 +47,11 @@ namespace Lib.Draw
         /// Draw node.
         /// </summary>
         /// <param name="node">node</param>
-        public void DrawNode(Node node)
+        /// <param name="nprops">draw properties</param>
+        public void DrawNode(Node node, NodeDrawProperties nprops)
         {
             Graph g = node.Parent;
-            NodeDrawProperties nprops = node.DrawProperties;
-            Color color = node.IsSelected
-                          ? node.Parent.DrawProperties.DefaultSelectedNodeColor
-                          : color = nprops.Color;
+            Color color = color = nprops.Color;
 
             if (g.Is2D)
             {
@@ -81,13 +79,26 @@ namespace Lib.Draw
         }
 
         /// <summary>
+        /// Draw node.
+        /// </summary>
+        /// <param name="node">node</param>
+        public void DrawNode(Node node)
+        {
+            NodeDrawProperties nprops = node.IsSelected
+                                        ? node.Parent.DrawProperties.DefaultSelectedNodeDrawProperties
+                                        : node.DrawProperties;
+
+            DrawNode(node, nprops);
+        }
+
+        /// <summary>
         /// Draw edge.
         /// </summary>
         /// <param name="edge">edge</param>
-        public void DrawEdge(Edge edge)
+        /// <param name="eprops">draw properties</param>
+        public void DrawEdge(Edge edge, EdgeDrawProperties eprops)
         {
             Graph g = edge.Parent;
-            EdgeDrawProperties eprops = edge.DrawProperties;
 
             if (g.Is2D)
             {
@@ -108,6 +119,19 @@ namespace Lib.Draw
             }
 
             Drawer.DrawMarginedLine(edge.A.Point2D, edge.B.Point2D, eprops.NodesMargin);
+        }
+
+        /// <summary>
+        /// Draw edge.
+        /// </summary>
+        /// <param name="edge">edge</param>
+        public void DrawEdge(Edge edge)
+        {
+            EdgeDrawProperties eprops = edge.IsSelected
+                                        ? edge.Parent.DrawProperties.DefaultSelectedEdgeDrawProperties
+                                        : edge.DrawProperties;
+
+            DrawEdge(edge, eprops);
         }
     }
 }
