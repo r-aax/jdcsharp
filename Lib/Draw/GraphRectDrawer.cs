@@ -51,18 +51,20 @@ namespace Lib.Draw
         {
             Graph g = node.Parent;
             NodeDrawProperties nprops = node.DrawProperties;
+            Color color = node.IsSelected
+                          ? node.Parent.DrawProperties.DefaultSelectedNodeColor
+                          : color = nprops.Color;
 
             if (g.Is2D)
             {
                 Drawer.SetBrush(nprops.BorderColor);
                 Drawer.FillPoint(node.Point2D, nprops.BorderRadius);
-                Drawer.SetBrush(nprops.Color);
+                Drawer.SetBrush(color);
                 Drawer.FillPoint(node.Point2D, nprops.InnerRadius);
             }
             else
             {
                 Color bcolor = nprops.BorderColor;
-                Color color = nprops.Color;
                 double in_front_of_barycenter = node.Point3D.Z - (g.Barycenter() as Point).Z;
 
                 if (in_front_of_barycenter < 0.0)

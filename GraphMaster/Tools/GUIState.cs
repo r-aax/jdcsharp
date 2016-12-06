@@ -16,7 +16,7 @@ namespace GraphMaster.Tools
         /// <summary>
         /// Mode for select multi nodes and edges.
         /// </summary>
-        MultiSelect,
+        Select,
 
         /// <summary>
         /// Move all selected elements.

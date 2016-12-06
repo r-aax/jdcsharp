@@ -153,8 +153,8 @@ namespace GraphMaster.Windows
         /// </summary>
         private void ResetModeButtons()
         {
-            SetButtonColors(ModeMultiSelectB, Brushes.LightGray, Brushes.Black);
-            SetButtonColors(ModeDragB, Brushes.LightGray, Brushes.Black);
+            SetButtonColors(ModeSelectB, Brushes.LightGray, Brushes.Black);
+            SetButtonColors(ModeMoveB, Brushes.LightGray, Brushes.Black);
         }
 
         /// <summary>
@@ -1265,7 +1265,7 @@ namespace GraphMaster.Windows
                     GUIProcessor.CancelNodeDrag();
                     break;
 
-                case GUIState.MultiSelect:
+                case GUIState.Select:
                     break;
 
                 case GUIState.Move:
@@ -1294,7 +1294,12 @@ namespace GraphMaster.Windows
                     GUIProcessor.TryToCaptureNode(Graph, fp);
                     break;
 
-                case GUIState.MultiSelect:
+                case GUIState.Select:
+                    Node n = Graph.FindNearestNode(fp);
+                    if (n != null)
+                    {
+                        n.SwitchSelection();
+                    }
                     break;
 
                 case GUIState.Move:
@@ -1321,7 +1326,7 @@ namespace GraphMaster.Windows
                     GUIProcessor.FinishNodeDrag(fp);
                     break;
 
-                case GUIState.MultiSelect:
+                case GUIState.Select:
                     break;
 
                 case GUIState.Move:
@@ -1370,7 +1375,7 @@ namespace GraphMaster.Windows
                     GUIProcessor.MoveCapturedNode(fp);
                     break;
 
-                case GUIState.MultiSelect:
+                case GUIState.Select:
                     break;
 
                 case GUIState.Move:
@@ -1783,14 +1788,14 @@ namespace GraphMaster.Windows
         {
             ResetModeButtons();
 
-            if (GUIProcessor.State == GUIState.MultiSelect)
+            if (GUIProcessor.State == GUIState.Select)
             {
                 GUIProcessor.State = GUIState.Common;
             }
             else
             {
-                SetButtonColors(ModeMultiSelectB, Brushes.Green, Brushes.Green);
-                GUIProcessor.State = GUIState.MultiSelect;
+                SetButtonColors(ModeSelectB, Brushes.Green, Brushes.Green);
+                GUIProcessor.State = GUIState.Select;
             }
         }
 
@@ -1809,7 +1814,7 @@ namespace GraphMaster.Windows
             }
             else
             {
-                SetButtonColors(ModeDragB, Brushes.Green, Brushes.Green);
+                SetButtonColors(ModeMoveB, Brushes.Green, Brushes.Green);
                 GUIProcessor.State = GUIState.Move;
             }
         }

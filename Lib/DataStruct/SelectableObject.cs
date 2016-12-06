@@ -14,26 +14,10 @@ namespace Lib.DataStruct
         /// <summary>
         /// Selection flag.
         /// </summary>
-        private bool _IsSelected;
-
-        /// <summary>
-        /// Check if object is selected.
-        /// </summary>
         public bool IsSelected
         {
-            get
-            {
-                return _IsSelected;
-            }
-        }
-
-        /// <summary>
-        /// Set selection.
-        /// </summary>
-        /// <param name="is_selected">selection flag</param>
-        private void SetSelection(bool is_selected)
-        {
-            _IsSelected = is_selected;
+            get;
+            private set;
         }
 
         /// <summary>
@@ -41,7 +25,7 @@ namespace Lib.DataStruct
         /// </summary>
         public void Select()
         {
-            SetSelection(true);
+            IsSelected = true;
         }
 
         /// <summary>
@@ -49,7 +33,15 @@ namespace Lib.DataStruct
         /// </summary>
         public void UnSelect()
         {
-            SetSelection(false);
+            IsSelected = false;
+        }
+
+        /// <summary>
+        /// Change selection.
+        /// </summary>
+        public void SwitchSelection()
+        {
+            IsSelected = !IsSelected;
         }
     }
 }

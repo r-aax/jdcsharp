@@ -1,5 +1,7 @@
 ﻿// Author: Alexey Rybakov
 
+using Lib.Draw;
+
 namespace Lib.DataStruct.Graph.DrawProperties
 {
     /// <summary>
@@ -16,6 +18,11 @@ namespace Lib.DataStruct.Graph.DrawProperties
         /// Default <c>EdgeDrawProperties</c>.
         /// </summary>
         public EdgeDrawProperties DefaultEdgeDrawProperties = null;
+
+        /// <summary>
+        /// Default color for node selection.
+        /// </summary>
+        readonly public Color DefaultSelectedNodeColor = new Color(System.Windows.Media.Colors.Orange);
 
         /// <summary>
         /// Default constructor.

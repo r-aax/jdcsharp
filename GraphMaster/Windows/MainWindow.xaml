@@ -207,8 +207,8 @@
                 <Button Height="40" HorizontalAlignment="Left" Margin="102,202,0,0" Name="ZoomOutB" VerticalAlignment="Top" Width="40" Click="ZoomOutB_Click">
                     <Image Source="/GraphMaster;component/pics/zoom_out.png"/>
                 </Button>
-                <Button x:Name="ModeDragB" Content="D" HorizontalAlignment="Left" Margin="122,3,0,0" VerticalAlignment="Top" Width="32" Height="32" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Black" Click="ModeDragB_Click"/>
-                <Button x:Name="ModeMultiSelectB" Content="M" HorizontalAlignment="Left" Margin="85,3,0,0" VerticalAlignment="Top" Width="32" Height="32" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Black" Click="ModeMultiSelectB_Click"/>
+                <Button x:Name="ModeMoveB" Content="M" HorizontalAlignment="Left" Margin="122,3,0,0" VerticalAlignment="Top" Width="32" Height="32" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Black" Click="ModeDragB_Click"/>
+                <Button x:Name="ModeSelectB" Content="S" HorizontalAlignment="Left" Margin="85,3,0,0" VerticalAlignment="Top" Width="32" Height="32" FontSize="18" FontWeight="Bold" FontFamily="Segoe UI Black" Click="ModeMultiSelectB_Click"/>
                 <Label Content="Mode" Height="28" HorizontalAlignment="Left" Margin="10,3,0,0" x:Name="label1_Copy" VerticalAlignment="Top" RenderTransformOrigin="0.491,-1.714" />
             </Grid>
             <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
