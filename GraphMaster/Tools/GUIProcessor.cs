@@ -41,6 +41,16 @@ namespace GraphMaster.Tools
         }
 
         /// <summary>
+        /// Set new state.
+        /// </summary>
+        /// <param name="state">state</param>
+        public void SetState(GUIState state)
+        {
+            Node = null;
+            State = state;
+        }
+
+        /// <summary>
         /// Check if node captured.
         /// </summary>
         public bool IsNodeCaptured

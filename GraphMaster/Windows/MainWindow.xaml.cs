@@ -1845,12 +1845,12 @@ namespace GraphMaster.Windows
 
             if (GUIProcessor.State == GUIState.Select)
             {
-                GUIProcessor.State = GUIState.Common;
+                GUIProcessor.SetState(GUIState.Common);
             }
             else
             {
                 SetButtonColors(ModeSelectB, Brushes.Green, Brushes.Green);
-                GUIProcessor.State = GUIState.Select;
+                GUIProcessor.SetState(GUIState.Select);
             }
         }
 
@@ -1865,12 +1865,12 @@ namespace GraphMaster.Windows
 
             if (GUIProcessor.State == GUIState.Move)
             {
-                GUIProcessor.State = GUIState.Common;
+                GUIProcessor.SetState(GUIState.Common);
             }
             else
             {
                 SetButtonColors(ModeMoveB, Brushes.Green, Brushes.Green);
-                GUIProcessor.State = GUIState.Move;
+                GUIProcessor.SetState(GUIState.Move);
             }
         }
     }
