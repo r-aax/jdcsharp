@@ -1,6 +1,8 @@
 ﻿// Author: Alexey Rybakov
 
 using System;
+using System.Xml.Serialization;
+using System.IO;
 
 using Lib.DataStruct.Graph.DrawProperties;
 
@@ -14,70 +16,37 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Parent graph.
         /// </summary>
+        [XmlIgnore]
         public Graph Parent = null;
-
-        /// <summary>
-        /// First incident node.
-        /// </summary>
-        private Node _A = null;
 
         /// <summary>
         /// First incident node access.
         /// </summary>
+        [XmlIgnore]
         public Node A
         {
-            get
-            {
-                return _A;
-            }
-
-            private set
-            {
-                _A = value;
-            }
+            get;
+            private set;
         }
-
-        /// <summary>
-        /// Second incident node.
-        /// </summary>
-        private Node _B = null;
 
         /// <summary>
         /// Second incident node access.
         /// </summary>
+        [XmlIgnore]
         public Node B
         {
-            get
-            {
-                return _B;
-            }
-
-            private set
-            {
-                _B = value;
-            }
+            get;
+            private set;
         }
-
-        /// <summary>
-        /// Oriented edge check.
-        /// If edge is oriented it is from <c>A</c> to <c>B</c>.
-        /// </summary>
-        private bool _IsOriented = false;
 
         /// <summary>
         /// Oriented edge flag access.
         /// </summary>
+        [XmlAttribute]
         public bool IsOriented
         {
-            get
-            {
-                return _IsOriented;
-            }
-
-            private set
-            {
-                _IsOriented = value;
-            }
+            get;
+            set;
         }
 
         /// <summary>
@@ -88,6 +57,7 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Draw properties access.
         /// </summary>
+        [XmlIgnore]
         public EdgeDrawProperties DrawProperties
         {
             get
@@ -101,6 +71,13 @@ namespace Lib.DataStruct.Graph
             {
                 _DrawProperties = value;
             }
+        }
+
+        /// <summary>
+        /// Empty consstructor for serialization.
+        /// </summary>
+        public Edge()
+        {
         }
 
         /// <summary>

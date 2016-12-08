@@ -31,6 +31,13 @@ namespace Lib.Draw
         public byte B = 0;
 
         /// <summary>
+        /// Empty constructor for serialization.
+        /// </summary>
+        public Color()
+        {
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="a">alpha value</param>

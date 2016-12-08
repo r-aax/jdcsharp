@@ -7,6 +7,10 @@
         Title="GraphMaster" Height="675" Width="808" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Height="21.72">
+            <MenuItem Header="Graph">
+                <MenuItem Name="GraphOpenMI" Header="Open" Click="GraphOpenMI_Click"/>
+                <MenuItem Name="GraphSaveMI" Header="Save" Click="GraphSaveMI_Click"/>
+            </MenuItem>
             <MenuItem Header="Area">
                 <MenuItem Name="AreaZoomInMI" Header="Zoom in" Click="AreaZoomInMI_Click"/>
                 <MenuItem Name="AreaZoomOutMI" Header="Zoom out" Click="AreaZoomOutMI_Click"/>

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace Lib.DataStruct
 {
@@ -14,6 +16,7 @@ namespace Lib.DataStruct
         /// <summary>
         /// Selection flag.
         /// </summary>
+        [XmlIgnore]
         public bool IsSelected
         {
             get;

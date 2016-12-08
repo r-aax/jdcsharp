@@ -3,6 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Xml.Serialization;
+using System.IO;
 
 using Lib.DataStruct.Graph.DrawProperties;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
@@ -18,7 +20,8 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Dimensionality.
         /// </summary>
-        private GraphDimensionality Dimensionality = GraphDimensionality.None;
+        [XmlAttribute]
+        public GraphDimensionality Dimensionality = GraphDimensionality.None;
 
         /// <summary>
         /// 2D check.
@@ -45,22 +48,10 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Nodes.
         /// </summary>
-        private List<Node> _Nodes = null;
-
-        /// <summary>
-        /// Nodes access.
-        /// </summary>
         public List<Node> Nodes
         {
-            get
-            {
-                return _Nodes;
-            }
-
-            private set
-            {
-                _Nodes = value;
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -95,7 +86,7 @@ namespace Lib.DataStruct.Graph
                 return Nodes.FindAll(n => n.IsIsolated).Count;
             }
         }
-        
+
         /// <summary>
         /// Count of hanging nodes.
         /// </summary>
@@ -110,22 +101,10 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Edges.
         /// </summary>
-        private List<Edge> _Edges = null;
-
-        /// <summary>
-        /// Edges access.
-        /// </summary>
         public List<Edge> Edges
         {
-            get
-            {
-                return _Edges;
-            }
-
-            private set
-            {
-                _Edges = value;
-            }
+            get;
+            private set;
         }
 
         /// <summary>
@@ -158,6 +137,7 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Copy node draw properties flag.
         /// </summary>
+        [XmlAttribute]
         public bool IsCopyNodeDrawProperties
         {
             get;
@@ -167,6 +147,7 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Copy edge draw properties flag.
         /// </summary>
+        [XmlAttribute]
         public bool IsCopyEdgeDrawProperties
         {
             get;
@@ -538,6 +519,20 @@ namespace Lib.DataStruct.Graph
             }
 
             return n;
+        }
+
+        /// <summary>
+        /// Serialize graph.
+        /// </summary>
+        /// <param name="file_name">file</param>
+        public void XmlSerialize(string file_name)
+        {
+            XmlSerializer serializer = new XmlSerializer(GetType());
+            TextWriter writer = new StreamWriter(file_name);
+
+            serializer.Serialize(writer, this);
+            writer.Flush();
+            writer.Close();
         }
     }
 }

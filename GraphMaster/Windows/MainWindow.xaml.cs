@@ -1873,5 +1873,42 @@ namespace GraphMaster.Windows
                 GUIProcessor.SetState(GUIState.Move);
             }
         }
+
+        /// <summary>
+        /// Click on open graph menu item.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void GraphOpenMI_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            string filename = null;
+
+            ofd.Filter = "XML (*.xml)|*.xml";
+
+            if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                filename = ofd.FileName;
+
+                // TODO: deserialize
+            }
+        }
+
+        /// <summary>
+        /// Click on save graph menu item.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void GraphSaveMI_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            sfd.Filter = "XML (*.xml)|*.xml";
+
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                Graph.XmlSerialize(sfd.FileName);
+            }
+        }
     }
 }
