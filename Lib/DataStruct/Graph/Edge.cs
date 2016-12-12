@@ -16,13 +16,11 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Parent graph.
         /// </summary>
-        [XmlIgnore]
         public Graph Parent = null;
 
         /// <summary>
         /// First incident node access.
         /// </summary>
-        [XmlIgnore]
         public Node A
         {
             get;
@@ -32,7 +30,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Second incident node access.
         /// </summary>
-        [XmlIgnore]
         public Node B
         {
             get;
@@ -42,7 +39,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Oriented edge flag access.
         /// </summary>
-        [XmlAttribute]
         public bool IsOriented
         {
             get;
@@ -57,7 +53,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Draw properties access.
         /// </summary>
-        [XmlIgnore]
         public EdgeDrawProperties DrawProperties
         {
             get

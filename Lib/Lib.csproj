@@ -57,6 +57,7 @@
     <Compile Include="DataStruct\Graph\GraphCreator.cs" />
     <Compile Include="DataStruct\Graph\GraphDimensionality.cs" />
     <Compile Include="DataStruct\Graph\GraphLayoutManager.cs" />
+    <Compile Include="DataStruct\Graph\GraphSerialized.cs" />
     <Compile Include="DataStruct\Graph\Node.cs" />
     <Compile Include="DataStruct\Graph\Notation.cs" />
     <Compile Include="DataStruct\MPTTTree.cs" />

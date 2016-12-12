@@ -59,5 +59,15 @@ namespace Lib.DataStruct.Graph.DrawProperties
 
             return edprops;
         }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("color={0};thickness={1};nodes_margin={2}",
+                                 Color, Thickness, NodesMargin);
+        }
     }
 }

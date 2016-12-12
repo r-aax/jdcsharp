@@ -174,7 +174,7 @@ namespace GraphMaster.Windows
             GraphDrawer.DrawGraph(Graph);
             if ((GUIProcessor.State == GUIState.Select) && (GUIProcessor.Node != null))
             {
-                GraphDrawer.DrawNode(GUIProcessor.Node, Graph.DrawProperties.DefaultCaptutedNodeDrawProperties);
+                GraphDrawer.DrawNode(GUIProcessor.Node, Graph.DrawProperties.DefaultCapturedNodeDrawProperties);
             }
             Drawer.DrawText(Drawer.Scaler.F(new Point2D(15.0, DrawAreaC.ActualHeight - 25.0)),
                             PictureName, 12.0, "Lucida Console");

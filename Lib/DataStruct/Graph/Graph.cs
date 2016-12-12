@@ -20,7 +20,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Dimensionality.
         /// </summary>
-        [XmlAttribute]
         public GraphDimensionality Dimensionality = GraphDimensionality.None;
 
         /// <summary>
@@ -137,7 +136,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Copy node draw properties flag.
         /// </summary>
-        [XmlAttribute]
         public bool IsCopyNodeDrawProperties
         {
             get;
@@ -147,7 +145,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Copy edge draw properties flag.
         /// </summary>
-        [XmlAttribute]
         public bool IsCopyEdgeDrawProperties
         {
             get;
@@ -522,17 +519,21 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Export to graph serialized.
+        /// </summary>
+        /// <returns>serialization information</returns>
+        public GraphSerialized ToSerialized()
+        {
+            return new GraphSerialized(this);
+        }
+
+        /// <summary>
         /// Serialize graph.
         /// </summary>
         /// <param name="file_name">file</param>
         public void XmlSerialize(string file_name)
         {
-            XmlSerializer serializer = new XmlSerializer(GetType());
-            TextWriter writer = new StreamWriter(file_name);
-
-            serializer.Serialize(writer, this);
-            writer.Flush();
-            writer.Close();
+            ToSerialized().XmlSerialize(file_name);
         }
     }
 }

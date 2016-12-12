@@ -96,5 +96,14 @@ namespace Lib.Draw
                              (byte)(255 - (255 - G) / k),
                              (byte)(255 - (255 - B) / k));
         }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return String.Format("#{0,2:X2}{1,2:X2}{2,2:X2}{3,2:X2}", A, R, G, B);
+        }
     }
 }

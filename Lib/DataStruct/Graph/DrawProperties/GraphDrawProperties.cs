@@ -1,6 +1,7 @@
 ﻿// Author: Alexey Rybakov
 
 using Lib.Draw;
+using System.Xml.Serialization;
 
 namespace Lib.DataStruct.Graph.DrawProperties
 {
@@ -27,7 +28,7 @@ namespace Lib.DataStruct.Graph.DrawProperties
         /// <summary>
         /// Default draw properties for captured node.
         /// </summary>
-        public NodeDrawProperties DefaultCaptutedNodeDrawProperties = null;
+        public NodeDrawProperties DefaultCapturedNodeDrawProperties = null;
 
         /// <summary>
         /// Default draw properties for selected edge.
@@ -45,8 +46,8 @@ namespace Lib.DataStruct.Graph.DrawProperties
             DefaultSelectedNodeDrawProperties = new NodeDrawProperties();
             DefaultSelectedNodeDrawProperties.Color = new Color(System.Windows.Media.Colors.Red);
 
-            DefaultCaptutedNodeDrawProperties = new NodeDrawProperties();
-            DefaultCaptutedNodeDrawProperties.Color = new Color(System.Windows.Media.Colors.Orange);
+            DefaultCapturedNodeDrawProperties = new NodeDrawProperties();
+            DefaultCapturedNodeDrawProperties.Color = new Color(System.Windows.Media.Colors.Orange);
 
             DefaultSelectedEdgeDrawProperties = new EdgeDrawProperties();
             DefaultSelectedEdgeDrawProperties.Color = new Color(System.Windows.Media.Colors.Red);

@@ -19,7 +19,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Parent graph.
         /// </summary>
-        [XmlIgnore]
         public Graph Parent = null;
 
         /// <summary>
@@ -35,7 +34,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Draw properties access.
         /// </summary>
-        [XmlIgnore]
         public NodeDrawProperties DrawProperties
         {
             get
@@ -54,7 +52,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// 2D point.
         /// </summary>
-        [XmlIgnore]
         public Point2D Point2D
         {
             get
@@ -84,7 +81,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// 3D point.
         /// </summary>
-        [XmlIgnore]
         public Point3D Point3D
         {
             get
@@ -114,7 +110,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Incident edges access.
         /// </summary>
-        [XmlIgnore]
         public List<Edge> Edges
         {
             get;
@@ -184,7 +179,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Find in edges.
         /// </summary>
-        [XmlIgnore]
         public List<Edge> InEdges
         {
             get
@@ -207,7 +201,6 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Find out edges.
         /// </summary>
-        [XmlIgnore]
         public List<Edge> OutEdges
         {
             get

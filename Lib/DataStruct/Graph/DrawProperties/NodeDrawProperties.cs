@@ -57,5 +57,15 @@ namespace Lib.DataStruct.Graph.DrawProperties
 
             return ndprops;
         }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("inner_radius={0};border_radius={1};color={2};border_color={3}",
+                                 InnerRadius, BorderRadius, Color, BorderColor);
+        }
     }
 }
