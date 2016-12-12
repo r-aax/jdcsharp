@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace Lib.DataStruct.Graph
+using Lib.DataStruct.Graph;
+
+namespace Lib.DataStruct.Graph.Serialized
 {
     /// <summary>
     /// Graph information for more flexible serialization.
@@ -62,6 +64,16 @@ namespace Lib.DataStruct.Graph
         public DrawPropertiesStrings DrawProperties;
 
         /// <summary>
+        /// Nodes.
+        /// </summary>
+        public List<NodeSerialized> Nodes;
+
+        /// <summary>
+        /// Edges.
+        /// </summary>
+        public List<EdgeSerialized> Edges;
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public GraphSerialized()
@@ -76,12 +88,27 @@ namespace Lib.DataStruct.Graph
         {
             Dimensionality = g.Dimensionality;
 
+            // Draw properties.
             DrawProperties = new DrawPropertiesStrings();
             DrawProperties.DefaultNodeDrawProperties = g.DrawProperties.DefaultNodeDrawProperties.ToString();
             DrawProperties.DefaultSelectedNodeDrawProperties = g.DrawProperties.DefaultSelectedNodeDrawProperties.ToString();
             DrawProperties.DefaultCapturedNodeDrawProperties = g.DrawProperties.DefaultCapturedNodeDrawProperties.ToString();
             DrawProperties.DefaultEdgeDrawProperties = g.DrawProperties.DefaultEdgeDrawProperties.ToString();
             DrawProperties.DefaultSelectedEdgeDrawProperties = g.DrawProperties.DefaultSelectedEdgeDrawProperties.ToString();
+
+            // Nodes.
+            Nodes = new List<NodeSerialized>();
+            foreach (Node n in g.Nodes)
+            {
+                Nodes.Add(new NodeSerialized(n));
+            }
+
+            // Edge.
+            Edges = new List<EdgeSerialized>();
+            foreach (Edge e in g.Edges)
+            {
+                Edges.Add(new EdgeSerialized(e));
+            }
         }
 
         /// <summary>

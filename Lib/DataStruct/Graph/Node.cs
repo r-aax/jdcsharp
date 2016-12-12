@@ -50,6 +50,17 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Check if parent draw properties used.
+        /// </summary>
+        public bool IsParentDrawProperties
+        {
+            get
+            {
+                return _DrawProperties == null;
+            }
+        }
+
+        /// <summary>
         /// 2D point.
         /// </summary>
         public Point2D Point2D
@@ -105,6 +116,17 @@ namespace Lib.DataStruct.Graph
             {
                 Position = value;
             }
+        }
+
+        /// <summary>
+        /// Position as string.
+        /// </summary>
+        /// <returns>string</returns>
+        public string PositionString()
+        {
+            return (Position is Point2D)
+                   ? (Position as Point2D).ToString()
+                   : (Position as Point3D).ToString();
         }
 
         /// <summary>

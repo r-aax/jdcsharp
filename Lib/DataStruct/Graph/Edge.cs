@@ -69,6 +69,17 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Check if parent draw properties used.
+        /// </summary>
+        public bool IsParentDrawProperties
+        {
+            get
+            {
+                return _DrawProperties == null;
+            }
+        }
+
+        /// <summary>
         /// Empty consstructor for serialization.
         /// </summary>
         public Edge()

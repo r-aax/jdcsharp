@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using System.IO;
 
 using Lib.DataStruct.Graph.DrawProperties;
+using Lib.DataStruct.Graph.Serialized;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
 using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
 
