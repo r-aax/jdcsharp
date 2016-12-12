@@ -224,7 +224,7 @@ namespace Lib.DataStruct.Graph
             MaxNodeId++;
 
             return node;
-        }
+        } 
 
         /// <summary>
         /// Add new edge.

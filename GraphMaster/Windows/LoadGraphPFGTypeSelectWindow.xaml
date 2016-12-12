@@ -1,0 +1,19 @@
+﻿<Window x:Class="GraphMaster.Windows.LoadGraphPFGTypeSelectWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GraphMaster.Windows"
+        mc:Ignorable="d"
+        Title="Select PFG load type"
+        Background="AliceBlue" SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False">
+    <StackPanel Orientation="Vertical">
+        <RadioButton x:Name="SkeletonRB" Content="Skeleton graph" Margin="10" Width="150" IsChecked="True"></RadioButton>
+        <RadioButton x:Name="BlocksAdjacencyRB" Content="Blocks adjacency graph" Margin="10" Width="150"></RadioButton>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="AcceptB" Content="Accept" MinWidth="75" Margin="10" Click="AcceptB_Click"></Button>
+            <Button x:Name="CancelB" Content="Cancel" MinWidth="75" Margin="10" Click="CancelB_Click"></Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

@@ -12,6 +12,7 @@ using System.IO;
 using Lib.Maths.Numbers;
 using Lib.Draw;
 using Lib.DataStruct.Graph;
+using Lib.DataStruct.Graph.Load;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Maths.Geometry.Geometry3D;
 using SWPoint = System.Windows.Point;
@@ -1882,16 +1883,48 @@ namespace GraphMaster.Windows
         private void GraphOpenMI_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            string filename = null;
+            string filename;
+            string extension;
 
-            ofd.Filter = "XML (*.xml)|*.xml";
+            ofd.Filter = "XML (*.xml)|*.xml|PFG (*.pfg)|*.pfg";
 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 filename = ofd.FileName;
+                extension = Path.GetExtension(filename);
 
-                // TODO: deserialize
+                if (extension == ".xml")
+                {
+                    throw new Exception("not implemented");
+                }
+                else if (extension == ".pfg")
+                {
+                    LoadGraphPFGTypeSelectWindow w = new LoadGraphPFGTypeSelectWindow();
+                    w.ShowDialog();
+
+                    if (w.IsAccepted)
+                    {
+                        if (w.IsSkeleton)
+                        {
+                            Graph = GraphLoaderPFG.LoadSkeleton(filename);
+                        }
+                        else if (w.IsBlocksAdjacency)
+                        {
+                            throw new Exception("not implemented");
+                        }
+                        else
+                        {
+                            throw new Exception("unknown PFG graph load type");
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("unknown extension while graph loading");
+                }
             }
+
+            Paint();
         }
 
         /// <summary>

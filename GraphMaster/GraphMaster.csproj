@@ -80,6 +80,9 @@
     <Compile Include="Windows\Grid3DSizesWindow.xaml.cs">
       <DependentUpon>Grid3DSizesWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\LoadGraphPFGTypeSelectWindow.xaml.cs">
+      <DependentUpon>LoadGraphPFGTypeSelectWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\OrderAndIntsWindow.xaml.cs">
       <DependentUpon>OrderAndIntsWindow.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\Grid3DSizesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoadGraphPFGTypeSelectWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
