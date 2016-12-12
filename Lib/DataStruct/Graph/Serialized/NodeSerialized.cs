@@ -17,6 +17,12 @@ namespace Lib.DataStruct.Graph.Serialized
     public class NodeSerialized
     {
         /// <summary>
+        /// Identifier.
+        /// </summary>
+        [XmlAttribute]
+        public int Id;
+
+        /// <summary>
         /// 2D or 3D position.
         /// </summary>
         [XmlAttribute]
@@ -41,6 +47,7 @@ namespace Lib.DataStruct.Graph.Serialized
         /// <param name="n">node</param>
         public NodeSerialized(Node n)
         {
+            Id = n.Id;
             Position = n.PositionString();
 
             if (n.IsParentDrawProperties)

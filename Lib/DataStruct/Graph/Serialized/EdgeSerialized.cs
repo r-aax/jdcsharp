@@ -17,6 +17,18 @@ namespace Lib.DataStruct.Graph.Serialized
     public class EdgeSerialized
     {
         /// <summary>
+        /// First node identifier.
+        /// </summary>
+        [XmlAttribute]
+        public int AId;
+
+        /// <summary>
+        /// Second node identifier.
+        /// </summary>
+        [XmlAttribute]
+        public int BId;
+
+        /// <summary>
         /// Oriented property.
         /// </summary>
         [XmlAttribute]
@@ -41,6 +53,8 @@ namespace Lib.DataStruct.Graph.Serialized
         /// <param name="e">edge</param>
         public EdgeSerialized(Edge e)
         {
+            AId = e.A.Id;
+            BId = e.B.Id;
             IsOriented = e.IsOriented;
 
             if (e.IsParentDrawProperties)

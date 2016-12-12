@@ -153,6 +153,11 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Max node identifier.
+        /// </summary>
+        private int MaxNodeId;
+
+        /// <summary>
         /// Constructor from dimensionality.
         /// </summary>
         /// <param name="dim">dimensionality</param>
@@ -171,6 +176,9 @@ namespace Lib.DataStruct.Graph
             // Flags of copy nodes and edges draw properties.
             IsCopyNodeDrawProperties = false;
             IsCopyEdgeDrawProperties = false;
+
+            // No nodes yet.
+            MaxNodeId = -1;
         }
 
         /// <summary>
@@ -205,7 +213,7 @@ namespace Lib.DataStruct.Graph
         /// <returns>node</returns>
         public Node AddNode()
         {
-            Node node = new Node(this);
+            Node node = new Node(MaxNodeId + 1, this);
 
             if (IsCopyNodeDrawProperties)
             {
@@ -213,6 +221,7 @@ namespace Lib.DataStruct.Graph
             }
 
             Nodes.Add(node);
+            MaxNodeId++;
 
             return node;
         }

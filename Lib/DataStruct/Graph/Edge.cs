@@ -80,13 +80,6 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
-        /// Empty consstructor for serialization.
-        /// </summary>
-        public Edge()
-        {
-        }
-
-        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="parent">parent graph</param>

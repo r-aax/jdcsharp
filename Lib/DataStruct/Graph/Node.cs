@@ -17,6 +17,15 @@ namespace Lib.DataStruct.Graph
     public class Node : SelectableObject
     {
         /// <summary>
+        /// Identifier.
+        /// </summary>
+        public int Id
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Parent graph.
         /// </summary>
         public Graph Parent = null;
@@ -172,18 +181,13 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
-        /// Constructor for serialization.
-        /// </summary>
-        public Node()
-        {
-        }
-
-        /// <summary>
         /// Constructor.
         /// </summary>
+        /// <param name="id">identifier</param>
         /// <param name="parent">parent graph</param>
-        public Node(Graph parent)
+        public Node(int id, Graph parent)
         {
+            Id = id;
             Parent = parent;
             Edges = new List<Edge>();
         }
