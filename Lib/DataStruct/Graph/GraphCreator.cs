@@ -25,6 +25,19 @@ namespace Lib.DataStruct.Graph
     public static class GraphCreator
     {
         /// <summary>
+        /// Add nodes.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="n">nodes count</param>
+        public static void AddNodes(Graph g, int n)
+        {
+            for (int i= 0; i < n; i++)
+            {
+                g.AddNode();
+            }
+        }
+
+        /// <summary>
         /// Initial graph.
         /// </summary>
         /// <param name="dim">dimensionality</param>
@@ -34,10 +47,7 @@ namespace Lib.DataStruct.Graph
         {
             Graph g = new Graph(dim);
 
-            for (int i = 0; i < n; i++)
-            {
-                g.AddNode();
-            }
+            AddNodes(g, n);
 
             return g;
         }

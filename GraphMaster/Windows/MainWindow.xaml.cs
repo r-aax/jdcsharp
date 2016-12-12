@@ -1906,7 +1906,16 @@ namespace GraphMaster.Windows
                     {
                         if (w.IsSkeleton)
                         {
-                            Graph = GraphLoaderPFG.LoadSkeleton(filename);
+                            Graph new_graph = new Graph();
+
+                            if (GraphLoaderPFG.LoadSkeleton(new_graph, filename))
+                            {
+                                Graph = new_graph;
+                            }
+                            else
+                            {
+                                System.Windows.MessageBox.Show("Can not read graph from file " + filename);
+                            }
                         }
                         else if (w.IsBlocksAdjacency)
                         {
