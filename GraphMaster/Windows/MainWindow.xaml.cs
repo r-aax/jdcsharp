@@ -1904,7 +1904,20 @@ namespace GraphMaster.Windows
 
                     if (w.IsAccepted)
                     {
-                        if (w.IsSkeleton)
+                        if (w.IsWhole)
+                        {
+                            Graph new_graph = new Graph();
+
+                            if (GraphLoaderPFG.LoadWhole(new_graph, filename))
+                            {
+                                Graph = new_graph;
+                            }
+                            else
+                            {
+                                System.Windows.MessageBox.Show("Can not read graph from file " + filename);
+                            }
+                        }
+                        else if (w.IsSkeleton)
                         {
                             Graph new_graph = new Graph();
 
@@ -1919,11 +1932,11 @@ namespace GraphMaster.Windows
                         }
                         else if (w.IsBlocksAdjacency)
                         {
-                            throw new Exception("not implemented");
+                            Debug.Assert(false, "not implemented");
                         }
                         else
                         {
-                            throw new Exception("unknown PFG graph load type");
+                            Debug.Assert(false, "unknown PFG graph load type");
                         }
                     }
                 }

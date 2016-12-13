@@ -54,6 +54,17 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
+        /// Whole grid graph mode.
+        /// </summary>
+        public bool IsWhole
+        {
+            get
+            {
+                return (bool)WholeRB.IsChecked;
+            }
+        }
+
+        /// <summary>
         /// Skeleton load mode.
         /// </summary>
         public bool IsSkeleton
