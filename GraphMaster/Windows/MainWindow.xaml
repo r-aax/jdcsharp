@@ -4,9 +4,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:GraphMaster"
-        Title="GraphMaster" Height="675" Width="808" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Title="GraphMaster" Height="686" Width="816" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <DockPanel>
-        <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Height="21.72">
+        <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Height="21.04">
             <MenuItem Header="Graph">
                 <MenuItem Name="GraphOpenMI" Header="Open" Click="GraphOpenMI_Click"/>
                 <MenuItem Name="GraphSaveMI" Header="Save" Click="GraphSaveMI_Click"/>

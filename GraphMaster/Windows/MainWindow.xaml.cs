@@ -1912,7 +1912,7 @@ namespace GraphMaster.Windows
                             {
                                 Graph = new_graph;
                                 Graph.SetStyleSimple();
-                                Drawer.SetRect(Graph.WraparoundRect(0.1));
+                                Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));
                             }
                             else
                             {
@@ -1927,7 +1927,7 @@ namespace GraphMaster.Windows
                             {
                                 Graph = new_graph;
                                 Graph.SetStyleSimple();
-                                Drawer.SetRect(Graph.WraparoundRect(0.1));
+                                Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));
                             }
                             else
                             {

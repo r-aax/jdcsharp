@@ -490,11 +490,12 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
-        /// Wraparound rectange for graph.
+        /// Wraparound rectangle for graph.
         /// </summary>
-        /// <param name="margin_k"></param>
-        /// <returns>rectangle</returns>
-        public Rect2D WraparoundRect(double margin_k)
+        /// <param name="margin_k">margin coefficient</param>
+        /// <param name="wh_ratio">width/height ratio</param>
+        /// <returns></returns>
+        public Rect2D WraparoundRect(double margin_k, double wh_ratio)
         {
             double min_x = MinX();
             double max_x = MaxX();
@@ -502,8 +503,30 @@ namespace Lib.DataStruct.Graph
             double max_y = MaxY();
             double mx = (max_x - min_x) * margin_k;
             double my = (max_y - min_y) * margin_k;
+            double w = max_x - min_x + 2 * mx;
+            double h = max_y - min_y + 2 * my;
+            double r = w / h;
+
+            if (r > wh_ratio)
+            {
+                my += 0.5 * (w / wh_ratio - h);
+            }
+            else if (r < wh_ratio)
+            {
+                mx += 0.5 * (h * wh_ratio - w);
+            }
 
             return new Rect2D(min_x - mx, max_x + mx, min_y - my, max_y + my);
+        }
+
+        /// <summary>
+        /// Wraparound rectange for graph.
+        /// </summary>
+        /// <param name="margin_k">margin coefficient</param>
+        /// <returns>rectangle</returns>
+        public Rect2D WraparoundRect(double margin_k)
+        {
+            return WraparoundRect(margin_k, 1.0);
         }
 
         /// <summary>
