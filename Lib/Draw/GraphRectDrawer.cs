@@ -19,6 +19,11 @@ namespace Lib.Draw
         private RectDrawer Drawer = null;
 
         /// <summary>
+        /// Temporry barycenter for nodes and edges drawing.
+        /// </summary>
+        private Point TmpBarycenter;
+
+        /// <summary>
         /// Lightning coefficient of nodes which is placed deeper than barycenter.
         /// </summary>
         private readonly double ShiftToWhiteCoefficient = 0.05;
@@ -39,6 +44,8 @@ namespace Lib.Draw
         /// <param name="graph">graph</param>
         public void DrawGraph(Graph graph)
         {
+            TmpBarycenter = graph.Barycenter() as Point;
+
             graph.Edges.ForEach((Edge edge) => DrawEdge(edge));
             graph.Nodes.ForEach((Node node) => DrawNode(node));
         }
@@ -69,7 +76,7 @@ namespace Lib.Draw
             else
             {
                 Color bcolor = nprops.BorderColor;
-                double in_front_of_barycenter = node.Point3D.Z - (g.Barycenter() as Point).Z;
+                double in_front_of_barycenter = node.Point3D.Z - TmpBarycenter.Z;
 
                 if (in_front_of_barycenter < 0.0)
                 {
@@ -114,7 +121,7 @@ namespace Lib.Draw
             {
                 Color color = eprops.Color;
                 Vector v = Vector.Mid(edge.A.Point3D, edge.B.Point3D);
-                double in_front_of_barycenter = v.Z - (g.Barycenter() as Point).Z;
+                double in_front_of_barycenter = v.Z - TmpBarycenter.Z;
 
                 if (in_front_of_barycenter < 0.0)
                 {
