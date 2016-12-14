@@ -1908,7 +1908,7 @@ namespace GraphMaster.Windows
                         {
                             Graph new_graph = new Graph();
 
-                            if (GraphLoaderPFG.LoadWhole(new_graph, filename))
+                            if (GraphLoaderPFG.LoadWhole(new_graph, filename, w.IsIBlank))
                             {
                                 Graph = new_graph;
                                 Graph.SetStyleSimple();
@@ -1923,7 +1923,7 @@ namespace GraphMaster.Windows
                         {
                             Graph new_graph = new Graph();
 
-                            if (GraphLoaderPFG.LoadSkeleton(new_graph, filename))
+                            if (GraphLoaderPFG.LoadSkeleton(new_graph, filename, w.IsIBlank))
                             {
                                 Graph = new_graph;
                                 Graph.SetStyleSimple();

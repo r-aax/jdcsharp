@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
+using System.Diagnostics;
 
 using Lib.DataStruct.Graph;
 using Lib.Maths.Geometry.Geometry3D;
@@ -173,11 +174,12 @@ namespace Lib.DataStruct.Graph.Load
         /// <param name="blocks_is">blocks i-sizes</param>
         /// <param name="blocks_js">blocks j-sizes</param>
         /// <param name="blocks_ks">blocks k-sizes</param>
+        /// <param name="is_iblank">iblank data</param>
         /// <param name="cs">coordinates array</param>
         /// <returns>count of coordinates readed</returns>
         private static int ReadSkeletonNodesCoords(StreamReader sr, int blocks_count,
                                                    int[] blocks_is, int[] blocks_js, int[] blocks_ks,
-                                                   double[] cs)
+                                                   double[] cs, bool is_iblank)
         {
             string line;
 
@@ -199,6 +201,9 @@ namespace Lib.DataStruct.Graph.Load
             // Degree of edge.
             int deg = 0;
 
+            // Count of iblank data to read.
+            int iblank_data_left = 0;
+
             // Base cycle of read.
             while ((line = sr.ReadLine()) != null)
             {
@@ -211,6 +216,14 @@ namespace Lib.DataStruct.Graph.Load
                     {
                         // If it is empty string - this is end of it.
                         break;
+                    }
+
+                    if (iblank_data_left > 0)
+                    {
+                        double value = Double.Parse(conversion(s[i], sep));
+                        iblank_data_left--;
+
+                        continue;
                     }
 
                     deg = 0;
@@ -252,6 +265,13 @@ namespace Lib.DataStruct.Graph.Load
                                     if (cur_block == blocks_count)
                                     {
                                         return c_pos;
+                                    }
+                                    else
+                                    {
+                                        // Now it is time to read iblank data.
+                                        iblank_data_left = BlockNodesCount(blocks_is[cur_block - 1],
+                                                                           blocks_js[cur_block - 1],
+                                                                           blocks_ks[cur_block - 1]);
                                     }
                                 }
                             }
@@ -391,11 +411,14 @@ namespace Lib.DataStruct.Graph.Load
         /// <param name="ii">array of i sizes</param>
         /// <param name="jj">array of j sizes</param>
         /// <param name="kk">array of k sizes</param>
-        private static void ReadAndAddBlocksSkeletonNodes(StreamReader sr, Graph g, int bc, int[] ii, int[] jj, int[] kk)
+        /// <param name="is_iblank">iblank data</param>
+        private static void ReadAndAddBlocksSkeletonNodes(StreamReader sr, Graph g,
+                                                          int bc, int[] ii, int[] jj, int[] kk,
+                                                          bool is_iblank)
         {
             ReadBlocksSizes(sr, bc, ii, jj, kk);
             double[] cs = new double[3 * BlocksSkeletonNodesCount(bc, ii, jj, kk)];
-            ReadSkeletonNodesCoords(sr, bc, ii, jj, kk, cs);
+            ReadSkeletonNodesCoords(sr, bc, ii, jj, kk, cs, is_iblank);
             g.ChangeDimensionality(GraphDimensionality.D3);
             AddBlocksSkeletonNodes(g, cs, bc, ii, jj, kk);
         }
@@ -469,10 +492,18 @@ namespace Lib.DataStruct.Graph.Load
         /// </summary>
         /// <param name="g">graph</param>
         /// <param name="file_name">file name</param>
+        /// <param name="is_iblank">iblank data</param>
         /// <returns><c>true</c> - if success, <c>false</c> - otherwise</returns>
-        public static bool LoadWhole(Graph g, string file_name)
+        public static bool LoadWhole(Graph g, string file_name, bool is_iblank)
         {
             bool is_succ = true;
+
+            if (is_iblank)
+            {
+                System.Windows.MessageBox.Show("iblank mode is not supported");
+
+                return false;
+            }
 
             try
             {
@@ -507,8 +538,9 @@ namespace Lib.DataStruct.Graph.Load
         /// </summary>
         /// <param name="g">graph</param>
         /// <param name="file_name">file name</param>
+        /// <param name="is_iblank">iblank data</param>
         /// <returns><c>true</c> - if success, <c>false</c> - otherwise</returns>
-        public static bool LoadSkeleton(Graph g, string file_name)
+        public static bool LoadSkeleton(Graph g, string file_name, bool is_iblank)
         {
             bool is_succ = true;
 
@@ -528,7 +560,7 @@ namespace Lib.DataStruct.Graph.Load
                         int[] kk = new int[bc];
 
                         // Read coordinates and add as graph nodes.
-                        ReadAndAddBlocksSkeletonNodes(sr, g, bc, ii, jj, kk);
+                        ReadAndAddBlocksSkeletonNodes(sr, g, bc, ii, jj, kk, is_iblank);
 
                         // Add edges.
                         AddBlocksSkeletonEdges(g, bc, ii, jj, kk);

@@ -85,5 +85,16 @@ namespace GraphMaster.Windows
                 return (bool)BlocksAdjacencyRB.IsChecked;
             }
         }
+
+        /// <summary>
+        /// IBlank data is used in PFG file.
+        /// </summary>
+        public bool IsIBlank
+        {
+            get
+            {
+                return (bool)IBlankCB.IsChecked;
+            }
+        }
     }
 }

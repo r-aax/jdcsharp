@@ -9,9 +9,16 @@
         Background="AliceBlue" SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize" ShowInTaskbar="False">
     <StackPanel Orientation="Vertical">
-        <RadioButton x:Name="WholeRB" Content="Whole grid graph" Margin="10" Width="150"></RadioButton>
-        <RadioButton x:Name="SkeletonRB" Content="Skeleton graph" Margin="10" Width="150" IsChecked="True"></RadioButton>
-        <RadioButton x:Name="BlocksAdjacencyRB" Content="Blocks adjacency graph" Margin="10" Width="150"></RadioButton>
+        <GroupBox Header="Mode">
+            <StackPanel Orientation="Vertical">
+                <RadioButton x:Name="WholeRB" Content="Whole grid graph" Margin="10" Width="150"></RadioButton>
+                <RadioButton x:Name="SkeletonRB" Content="Skeleton graph" Margin="10" Width="150" IsChecked="True"></RadioButton>
+                <RadioButton x:Name="BlocksAdjacencyRB" Content="Blocks adjacency graph" Margin="10" Width="150"></RadioButton>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Header="Settings">
+            <CheckBox x:Name="IBlankCB" Content="iblank data in PFG file" Margin="10" Width="150" HorizontalAlignment="Center"></CheckBox>
+        </GroupBox>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="AcceptB" Content="Accept" MinWidth="75" Margin="10" Click="AcceptB_Click"></Button>
             <Button x:Name="CancelB" Content="Cancel" MinWidth="75" Margin="10" Click="CancelB_Click"></Button>
