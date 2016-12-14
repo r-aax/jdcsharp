@@ -424,6 +424,63 @@ namespace Lib.DataStruct.Graph.Load
         }
 
         /// <summary>
+        /// Add edges for 1 block.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="off">offset</param>
+        /// <param name="i">i size</param>
+        /// <param name="j">j size</param>
+        /// <param name="k">k size</param>
+        private static void AddBlockEdges(Graph g, int off, int i, int j, int k)
+        {
+            for (int i_ = 0; i_ < i; i_++)
+            {
+                for (int j_ = 0; j_ < j; j_++)
+                {
+                    for (int k_ = 0; k_ < k; k_++)
+                    {
+                        if (i_ < i - 1)
+                        {
+                            g.AddEdge(off + i_ + j_ * i + k_ * i * j,
+                                      off + i_ + 1 + j_ * i + k_ * i * j);
+                        }
+
+                        if (j_ < j - 1)
+                        {
+                            g.AddEdge(off + i_ + j_ * i + k_ * i * j,
+                                      off + i_ + (j_ + 1) * i + k_ * i * j);
+                        }
+
+                        if (k_ < k - 1)
+                        {
+                            g.AddEdge(off + i_ + j_ * i + k_ * i * j,
+                                      off + i_ + j_ * i + (k_ + 1) * i * j);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add edges for all blocks.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="bc">blocks count</param>
+        /// <param name="ii">array of i sizes</param>
+        /// <param name="jj">array of j sizes</param>
+        /// <param name="kk">array of k sizes</param>
+        private static void AddBlocksEdges(Graph g, int bc, int[] ii, int[] jj, int[] kk)
+        {
+            int off = 0;
+
+            for (int i = 0; i < bc; i++)
+            {
+                AddBlockEdges(g, off, ii[i], jj[i], kk[i]);
+                off += BlockNodesCount(ii[i], jj[i], kk[i]);
+            }
+        }
+
+        /// <summary>
         /// Add skeleton edges for 1 block.
         /// </summary>
         /// <param name="g">graph</param>
@@ -522,6 +579,9 @@ namespace Lib.DataStruct.Graph.Load
 
                         // Read coordinates and add as graph nodes.
                         ReadAndAddBlocksNodes(sr, g, bc, ii, jj, kk);
+
+                        // Add edges.
+                        AddBlocksEdges(g, bc, ii, jj, kk);
                     }
                 }
             }
