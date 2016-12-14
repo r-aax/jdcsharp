@@ -50,6 +50,12 @@ namespace Lib.Draw
         /// <param name="nprops">draw properties</param>
         public void DrawNode(Node node, NodeDrawProperties nprops)
         {
+            // Do not draw if no draw properties.
+            if (nprops == null)
+            {
+                return;
+            }
+
             Graph g = node.Parent;
             Color color = color = nprops.Color;
 

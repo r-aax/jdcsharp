@@ -1911,6 +1911,7 @@ namespace GraphMaster.Windows
                             if (GraphLoaderPFG.LoadWhole(new_graph, filename))
                             {
                                 Graph = new_graph;
+                                Graph.SetStyleSimple();
                                 Drawer.SetRect(Graph.WraparoundRect(0.1));
                             }
                             else
@@ -1925,6 +1926,7 @@ namespace GraphMaster.Windows
                             if (GraphLoaderPFG.LoadSkeleton(new_graph, filename))
                             {
                                 Graph = new_graph;
+                                Graph.SetStyleSimple();
                                 Drawer.SetRect(Graph.WraparoundRect(0.1));
                             }
                             else

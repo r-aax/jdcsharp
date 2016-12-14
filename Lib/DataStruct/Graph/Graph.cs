@@ -632,5 +632,14 @@ namespace Lib.DataStruct.Graph
         {
             ToSerialized().XmlSerialize(file_name);
         }
+
+        /// <summary>
+        /// Set simpe style for graph (no nodes, no edges margins).
+        /// </summary>
+        public void SetStyleSimple()
+        {
+            DrawProperties.DefaultNodeDrawProperties = null;
+            DrawProperties.DefaultEdgeDrawProperties.NodesMargin = 0.0;
+        }
     }
 }
