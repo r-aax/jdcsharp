@@ -20,17 +20,22 @@ namespace Lib.DataStruct.Graph.Load
         /// <summary>
         /// Conversion.
         /// </summary>
-        /// <param name="str1"></param>
-        /// <param name="str2"></param>
-        /// <returns></returns>
-        static string conversion(string str1, string str2)
+        /// <param name="s">string</param>
+        /// <param name="p">separator</param>
+        /// <returns>converted string</returns>
+        static string Conv(string s, string p)
         {
+            if (s.Contains(".") && (p != "."))
+            {
+                return s.Replace('.', ',');
+            }
 
-            if (str1.Contains(".") && (str2 != "."))
-                return str1.Replace('.', ',');
-            if (str1.Contains(",") && (str2 != ","))
-                return str1.Replace(',', '.');
-            return str1;
+            if (s.Contains(",") && (p != ","))
+            {
+                return s.Replace(',', '.');
+            }
+
+            return s;
         }
 
         /// <summary>
@@ -166,13 +171,13 @@ namespace Lib.DataStruct.Graph.Load
 
                     if (iblank_data_left > 0)
                     {
-                        Double.Parse(conversion(s[i], sep));
+                        Double.Parse(Conv(s[i], sep));
                         iblank_data_left--;
 
                         continue;
                     }
 
-                    cs[c_pos++] = Double.Parse(conversion(s[i], sep));
+                    cs[c_pos++] = Double.Parse(Conv(s[i], sep));
                     coords_left--;
 
                     if (coords_left == 0)
@@ -257,7 +262,7 @@ namespace Lib.DataStruct.Graph.Load
 
                     if (iblank_data_left > 0)
                     {
-                        Double.Parse(conversion(s[i], sep));
+                        Double.Parse(Conv(s[i], sep));
                         iblank_data_left--;
 
                         continue;
@@ -278,7 +283,7 @@ namespace Lib.DataStruct.Graph.Load
                     }
                     if (deg >= 2)
                     {
-                        cs[c_pos++] = Double.Parse(conversion(s[i], sep));
+                        cs[c_pos++] = Double.Parse(Conv(s[i], sep));
                     }
 
                     // Chift counters;

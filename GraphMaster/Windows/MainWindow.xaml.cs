@@ -1298,7 +1298,12 @@ namespace GraphMaster.Windows
             switch (GUIProcessor.State)
             {
                 case GUIState.Common:
-                    GUIProcessor.TryToCaptureNode(Graph, fp);
+
+                    if (Graph.Is2D)
+                    {
+                        GUIProcessor.TryToCaptureNode(Graph, fp);
+                    }
+
                     break;
 
                 case GUIState.Select:

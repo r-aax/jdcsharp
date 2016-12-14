@@ -84,12 +84,7 @@ namespace Lib.MathMod.Grid
             /// <summary>
             /// Total directions count.
             /// </summary>
-            Count = 6,
-
-            /// <summary>
-            /// Special value for volume objects.
-            /// </summary>
-            Volume = 7
+            Count = 6
         }
 
         /// <summary>
@@ -174,6 +169,25 @@ namespace Lib.MathMod.Grid
         public static bool operator !=(Dir d1, Dir d2)
         {
             return !(d1 == d2);
+        }
+
+        /// <summary>
+        /// Check equal of two directions.
+        /// </summary>
+        /// <param name="obj">other direction</param>
+        /// <returns><c>true</c> - if objects are equal, <c>false</c> - otherwise</returns>
+        public override bool Equals(object obj)
+        {
+            return (obj is Dir) && ((obj as Dir).T == T);
+        }
+
+        /// <summary>
+        /// Get hash code.
+        /// </summary>
+        /// <returns>hash code</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         /// <summary>
