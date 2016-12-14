@@ -201,6 +201,21 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Add distant chain.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="index_from">start index</param>
+        /// <param name="index_to">end index</param>
+        /// <param name="dist">distance between nodes</param>
+        public static void AddDistChain(Graph g, int index_from, int index_to, int dist)
+        {
+            for (int i = index_from; i + dist <= index_to; i += dist)
+            {
+                g.AddEdge(i, i + dist);
+            }
+        }
+
+        /// <summary>
         /// Add cycle.
         /// </summary>
         /// <param name="g">graph</param>

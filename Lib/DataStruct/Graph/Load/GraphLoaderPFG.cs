@@ -401,6 +401,70 @@ namespace Lib.DataStruct.Graph.Load
         }
 
         /// <summary>
+        /// Add skeleton edges for 1 block.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="off">offset</param>
+        /// <param name="i">i size</param>
+        /// <param name="j">j size</param>
+        /// <param name="k">k size</param>
+        private static void AddBlockSkeletonEdges(Graph g, int off, int i, int j, int k)
+        {
+            // i direction skeleton edges.
+            GraphCreator.AddChain(g, off, off + i - 1);
+            GraphCreator.AddChain(g, off + i + 2 * j - 4, off + 2 * i + 2 * j - 5);
+            GraphCreator.AddChain(g, off + 2 * i + 2 * j + 4 * k - 12, off + 3 * i + 2 * j + 4 * k - 13);
+            GraphCreator.AddChain(g, off + 3 * i + 4 * j + 4 * k - 16, off + 4 * i + 4 * j + 4 * k - 17);
+
+            // j direction skeleton edges.
+            g.AddEdge(off, off + i);
+            GraphCreator.AddDistChain(g, off + i, off + i + 2 * j - 4, 2);
+            //
+            g.AddEdge(off + 2 * i + 2 * j + 4 * k - 12, off + 3 * i + 2 * j + 4 * k - 12);
+            GraphCreator.AddDistChain(g, off + 3 * i + 2 * j + 4 * k - 12, off + 3 * i + 4 * j + 4 * k - 16, 2);
+            //
+            g.AddEdge(off + i + 2 * j - 5, off + 2 * i + 2 * j - 5);
+            GraphCreator.AddDistChain(g, off + i - 1, off + i + 2 * j - 5, 2);
+            //
+            g.AddEdge(off + 3 * i + 4 * j + 4 * k - 17, off + 4 * i + 4 * j + 4 * k - 17);
+            GraphCreator.AddDistChain(g, off + 3 * i + 2 * j + 4 * k - 13, off + 3 * i + 4 * j + 4 * k - 17, 2);
+
+            // k direction skeleton edges.
+            g.AddEdge(off, off + 2 * i + 2 * j - 4);
+            GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 4, off + 2 * i + 2 * j + 4 * k - 12, 4);
+            //
+            g.AddEdge(off + i - 1, off + 2 * i + 2 * j - 3);
+            g.AddEdge(off + 2 * i + 2 * j + 4 * k - 15, off + 3 * i + 2 * j + 4 * k - 13);
+            GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 3, off + 2 * i + 2 * j + 4 * k - 15, 4);
+            //
+            g.AddEdge(off + i + 2 * j - 4, off + 2 * i + 2 * j - 2);
+            g.AddEdge(off + 2 * i + 2 * j + 4 * k - 14, off + 3 * i + 4 * j + 4 * k - 16);
+            GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 2, off + 2 * i + 2 * j + 4 * k - 14, 4);
+            //
+            g.AddEdge(off + 2 * i + 2 * j + 4 * k - 13, off + 4 * i + 4 * j + 4 * k - 17);
+            GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 5, off + 2 * i + 2 * j + 4 * k - 13, 4);
+        }
+
+        /// <summary>
+        /// Add skeleton edges.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="bc">blocks count</param>
+        /// <param name="ii">array of i sizes</param>
+        /// <param name="jj">array of j sizes</param>
+        /// <param name="kk">array of k sizes</param>
+        private static void AddBlocksSkeletonEdges(Graph g, int bc, int[] ii, int[] jj, int[] kk)
+        {
+            int off = 0;
+
+            for (int i = 0; i < bc; i++)
+            {
+                AddBlockSkeletonEdges(g, off, ii[i], jj[i], kk[i]);
+                off += BlockSkeletonNodesCount(ii[i], jj[i], kk[i]);
+            }
+        }
+
+        /// <summary>
         /// Load whole grid representation.
         /// </summary>
         /// <param name="g">graph</param>
@@ -465,6 +529,9 @@ namespace Lib.DataStruct.Graph.Load
 
                         // Read coordinates and add as graph nodes.
                         ReadAndAddBlocksSkeletonNodes(sr, g, bc, ii, jj, kk);
+
+                        // Add edges.
+                        AddBlocksSkeletonEdges(g, bc, ii, jj, kk);
                     }
                 }
             }
