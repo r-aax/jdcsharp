@@ -1,5 +1,7 @@
 ﻿// Author: Alexey Rybakov
 
+using System;
+
 using Lib.Maths.Geometry.Geometry2D;
 
 namespace Lib.Draw
@@ -12,7 +14,11 @@ namespace Lib.Draw
         /// <summary>
         /// Initial scope.
         /// </summary>
-        public Rect Rect { get; protected set; }
+        public Rect Rect
+        {
+            get;
+            protected set;
+        }
 
         /// <summary>
         /// Scaler.
@@ -51,6 +57,17 @@ namespace Lib.Draw
         /// </summary>
         /// <param name="thickness">thickness</param>
         public abstract void SetPenThickness(double thickness);
+
+        /// <summary>
+        /// Set rectangle.
+        /// </summary>
+        /// <param name="rect">rectangle</param>
+        public void SetRect(Rect rect)
+        {
+            Rect = rect;
+            Rect.OnChange += new EventHandler((sender, e) => MakeScaler());
+            MakeScaler();
+        }
 
         /// <summary>
         /// Set pen.

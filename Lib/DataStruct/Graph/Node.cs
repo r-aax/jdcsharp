@@ -70,6 +70,24 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Check if position is 2D.
+        /// </summary>
+        /// <returns><c>true</c> - if position is 2D, <c>false</c> - otherwise.</returns>
+        public bool Is2D()
+        {
+            return Position is Point2D;
+        }
+
+        /// <summary>
+        /// Check if position is 3D.
+        /// </summary>
+        /// <returns><c>true</c> - if position is 3D, <c>false</c> - otherwise.</returns>
+        public bool Is3D()
+        {
+            return Position is Point3D;
+        }
+
+        /// <summary>
         /// 2D point.
         /// </summary>
         public Point2D Point2D
@@ -124,6 +142,39 @@ namespace Lib.DataStruct.Graph
             set
             {
                 Position = value;
+            }
+        }
+        
+        /// <summary>
+        /// X coordinate.
+        /// </summary>
+        public double X
+        {
+            get
+            {
+                return Is2D() ? Point2D.X : Point3D.X;
+            }
+        }
+
+        /// <summary>
+        /// Y coordinate.
+        /// </summary>
+        public double Y
+        {
+            get
+            {
+                return Is2D() ? Point2D.Y : Point3D.Y;
+            }
+        }
+
+        /// <summary>
+        /// Z coordinate.
+        /// </summary>
+        public double Z
+        {
+            get
+            {
+                return Is2D() ? 0.0 : Point3D.Z;
             }
         }
 

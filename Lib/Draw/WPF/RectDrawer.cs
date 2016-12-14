@@ -72,14 +72,10 @@ namespace Lib.Draw.WPF
                           bool is_x_invert, bool is_y_invert)
         {
             Canvas = canvas;
-            Rect = rect;
-            MakeScaler();
+            SetRect(rect);
 
             // Event handler for PictureBox resize.
             Canvas.SizeChanged += new SizeChangedEventHandler((sender, e) => MakeScaler());
-
-            // Event handler for real scope resize.
-            Rect.OnChange += new EventHandler((sender, e) => MakeScaler());
 
             // Default values.
             BackColor = Colors.White;

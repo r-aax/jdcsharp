@@ -10,6 +10,7 @@ using Lib.DataStruct.Graph.DrawProperties;
 using Lib.DataStruct.Graph.Serialized;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
 using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
+using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 
 namespace Lib.DataStruct.Graph
 {
@@ -327,13 +328,119 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Minimum x coordinate.
+        /// </summary>
+        /// <returns>minimum x coordinate</returns>
+        public double MinX()
+        {
+            Debug.Assert(Order > 0, "the graph has no nodes");
+
+            double min_x = Nodes[0].X;
+
+            foreach (Node n in Nodes)
+            {
+                min_x = Math.Min(min_x, n.X);
+            }
+
+            return min_x;
+        }
+
+        /// <summary>
+        /// Maximum x coordinate.
+        /// </summary>
+        /// <returns>maximum x coordinate</returns>
+        public double MaxX()
+        {
+            Debug.Assert(Order > 0, "the graph has no nodes");
+
+            double max_x = Nodes[0].X;
+
+            foreach (Node n in Nodes)
+            {
+                max_x = Math.Max(max_x, n.X);
+            }
+
+            return max_x;
+        }
+
+        /// <summary>
+        /// Minimum y coordinate.
+        /// </summary>
+        /// <returns>minimum y coordinate</returns>
+        public double MinY()
+        {
+            Debug.Assert(Order > 0, "the graph has no nodes");
+
+            double min_y = Nodes[0].Y;
+
+            foreach (Node n in Nodes)
+            {
+                min_y = Math.Min(min_y, n.Y);
+            }
+
+            return min_y;
+        }
+
+        /// <summary>
+        /// Maximum y coordinate.
+        /// </summary>
+        /// <returns>maximum y coordinate</returns>
+        public double MaxY()
+        {
+            Debug.Assert(Order > 0, "the graph has no nodes");
+
+            double max_y = Nodes[0].Y;
+
+            foreach (Node n in Nodes)
+            {
+                max_y = Math.Max(max_y, n.Y);
+            }
+
+            return max_y;
+        }
+
+        /// <summary>
+        /// Minimum z coordinate.
+        /// </summary>
+        /// <returns>minimum z coordinate</returns>
+        public double MinZ()
+        {
+            Debug.Assert(Order > 0, "the graph has no nodes");
+
+            double min_z = Nodes[0].Z;
+
+            foreach (Node n in Nodes)
+            {
+                min_z = Math.Min(min_z, n.Z);
+            }
+
+            return min_z;
+        }
+
+        /// <summary>
+        /// Maximum z coordinate.
+        /// </summary>
+        /// <returns>maximum z coordinate</returns>
+        public double MaxZ()
+        {
+            Debug.Assert(Order > 0, "the graph has no nodes");
+
+            double max_z = Nodes[0].Z;
+
+            foreach (Node n in Nodes)
+            {
+                max_z = Math.Max(max_z, n.Z);
+            }
+
+            return max_z;
+        }
+
+        /// <summary>
         /// Center point (center of minimal outer rectangle or parallelepiped).
         /// </summary>
         /// <returns>center point</returns>
         public object Center()
         {
-            double min_x, max_x, min_y, max_y, min_z, max_z;
-
             if (IsEmpty)
             {
                 return null;
@@ -341,51 +448,14 @@ namespace Lib.DataStruct.Graph
 
             if (Is2D)
             {
-                min_x = Nodes[0].Point2D.X;
-                max_x = min_x;
-                min_y = Nodes[0].Point2D.Y;
-                max_y = min_y;
-
-                foreach (Node n in Nodes)
-                {
-                    double x = n.Point2D.X;
-                    double y = n.Point2D.X;
-
-                    min_x = Math.Min(min_x, x);
-                    max_x = Math.Max(max_x, x);
-                    min_y = Math.Min(min_y, y);
-                    max_y = Math.Max(max_y, y);
-                }
-
-                return new Point2D(0.5 * (min_x + max_x),
-                                   0.5 * (min_y + max_y));
+                return new Point2D(0.5 * (MinX() + MaxX()),
+                                   0.5 * (MinY() + MaxY()));
             }
             else
             {
-                min_x = Nodes[0].Point3D.X;
-                max_x = min_x;
-                min_y = Nodes[0].Point3D.Y;
-                max_y = min_y;
-                min_z = Nodes[0].Point3D.Z;
-                max_z = min_z;
-
-                foreach (Node n in Nodes)
-                {
-                    double x = n.Point3D.X;
-                    double y = n.Point3D.X;
-                    double z = n.Point3D.Z;
-
-                    min_x = Math.Min(min_x, x);
-                    max_x = Math.Max(max_x, x);
-                    min_y = Math.Min(min_y, y);
-                    max_y = Math.Max(max_y, y);
-                    min_z = Math.Min(min_z, z);
-                    max_z = Math.Max(max_z, z);
-                }
-
-                return new Point3D(0.5 * (min_x + max_x),
-                                   0.5 * (min_y + max_y),
-                                   0.5 * (min_z + max_z));
+                return new Point3D(0.5 * (MinX() + MaxX()),
+                                   0.5 * (MinY() + MaxY()),
+                                   0.5 * (MinZ() + MaxZ()));
             }
         }
 
@@ -417,6 +487,23 @@ namespace Lib.DataStruct.Graph
 
                 return new Point3D(Point3D.Avg(p));
             }
+        }
+
+        /// <summary>
+        /// Wraparound rectange for graph.
+        /// </summary>
+        /// <param name="margin_k"></param>
+        /// <returns>rectangle</returns>
+        public Rect2D WraparoundRect(double margin_k)
+        {
+            double min_x = MinX();
+            double max_x = MaxX();
+            double min_y = MinY();
+            double max_y = MaxY();
+            double mx = (max_x - min_x) * margin_k;
+            double my = (max_y - min_y) * margin_k;
+
+            return new Rect2D(min_x - mx, max_x + mx, min_y - my, max_y + my);
         }
 
         /// <summary>

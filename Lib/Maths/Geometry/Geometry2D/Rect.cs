@@ -58,6 +58,18 @@ namespace Lib.Maths.Geometry.Geometry2D
         }
 
         /// <summary>
+        /// Constructor by min/max x/y coordinates.
+        /// </summary>
+        /// <param name="min_x"></param>
+        /// <param name="max_x"></param>
+        /// <param name="min_y"></param>
+        /// <param name="max_y"></param>
+        public Rect(double min_x, double max_x, double min_y, double max_y)
+            : this(new Interval(min_x, max_x), new Interval(min_y, max_y))
+        {
+        }
+
+        /// <summary>
         /// Constructor from intervals.
         /// </summary>
         /// <param name="p1"></param>
