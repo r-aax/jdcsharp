@@ -190,10 +190,13 @@ namespace Lib.DataStruct.Graph.Load
                         }
                         else
                         {
-                            // IBlank data left from previous block.
-                            iblank_data_left = BlockNodesCount(blocks_is[cur_block - 1],
-                                                               blocks_js[cur_block - 1],
-                                                               blocks_ks[cur_block - 1]);
+                            if (is_iblank)
+                            {
+                                // IBlank data left from previous block.
+                                iblank_data_left = BlockNodesCount(blocks_is[cur_block - 1],
+                                                                   blocks_js[cur_block - 1],
+                                                                   blocks_ks[cur_block - 1]);
+                            }
 
                             // We have to process next block.
                             coords_left = 3 * BlockNodesCount(blocks_is[cur_block],
@@ -308,10 +311,13 @@ namespace Lib.DataStruct.Graph.Load
                                     }
                                     else
                                     {
-                                        // Now it is time to read iblank data.
-                                        iblank_data_left = BlockNodesCount(blocks_is[cur_block - 1],
-                                                                           blocks_js[cur_block - 1],
-                                                                           blocks_ks[cur_block - 1]);
+                                        if (is_iblank)
+                                        {
+                                            // Now it is time to read iblank data.
+                                            iblank_data_left = BlockNodesCount(blocks_is[cur_block - 1],
+                                                                               blocks_js[cur_block - 1],
+                                                                               blocks_ks[cur_block - 1]);
+                                        }
                                     }
                                 }
                             }
@@ -404,8 +410,11 @@ namespace Lib.DataStruct.Graph.Load
                             }
                             else
                             {
-                                // IBlank data left from previous block.
-                                iblank_data_left = BlockNodesCount(ii[cur_block - 1], jj[cur_block - 1], kk[cur_block - 1]);
+                                if (is_iblank)
+                                {
+                                    // IBlank data left from previous block.
+                                    iblank_data_left = BlockNodesCount(ii[cur_block - 1], jj[cur_block - 1], kk[cur_block - 1]);
+                                }
 
                                 // New size;
                                 size = BlockNodesCount(ii[cur_block], jj[cur_block], kk[cur_block]);
@@ -786,7 +795,7 @@ namespace Lib.DataStruct.Graph.Load
                         ReadAndAddBlocksSkeletonNodes(sr, g, bc, ii, jj, kk, is_iblank);
 
                         // Add edges.
-                        //AddBlocksSkeletonEdges(g, bc, ii, jj, kk);
+                        AddBlocksSkeletonEdges(g, bc, ii, jj, kk);
                     }
                 }
             }
