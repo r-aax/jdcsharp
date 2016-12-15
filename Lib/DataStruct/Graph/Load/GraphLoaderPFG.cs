@@ -171,7 +171,6 @@ namespace Lib.DataStruct.Graph.Load
 
                     if (iblank_data_left > 0)
                     {
-                        Double.Parse(Conv(s[i], sep));
                         iblank_data_left--;
 
                         continue;
@@ -262,7 +261,6 @@ namespace Lib.DataStruct.Graph.Load
 
                     if (iblank_data_left > 0)
                     {
-                        Double.Parse(Conv(s[i], sep));
                         iblank_data_left--;
 
                         continue;
@@ -323,6 +321,99 @@ namespace Lib.DataStruct.Graph.Load
             }
 
             return c_pos;
+        }
+
+        /// <summary>
+        /// Read blocks centers from file.
+        /// </summary>
+        /// <param name="sr">stream reader</param>
+        /// <param name="bc">blocks count</param>
+        /// <param name="ii">array of i sizes</param>
+        /// <param name="jj">array of j sizes</param>
+        /// <param name="kk">array of k sizes</param>
+        /// <param name="cs">coordinates array</param>
+        /// <param name="is_iblank">iblank data</param>
+        private static void ReadBlocksCentersCoords(StreamReader sr, int bc,
+                                                    int[] ii, int[] jj, int[] kk,
+                                                    double[] cs, bool is_iblank)
+        {
+            string line;
+
+            // Get separator for read real numbers.
+            string sep = NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator;
+
+            // Variables for splitting.
+            string[] s;
+            int s_count;
+
+            // Positions.
+            int cur_block = 0;
+            int dim = 0;
+            int size = BlockNodesCount(ii[cur_block], jj[cur_block], kk[cur_block]);
+            int pos = 0;
+            int iblank_data_left = 0;
+
+            // Clear coords.
+            for (int i = 0; i < cs.Count(); i++)
+            {
+                cs[i] = 0.0;
+            }
+
+            // Base cycle of read.
+            while ((line = sr.ReadLine()) != null)
+            {
+                s = line.Split(' ');
+                s_count = s.Count();
+
+                for (int i = 0; i < s_count; i++)
+                {
+                    if (s[i] == "")
+                    {
+                        // If it is empty string - this is end of it.
+                        break;
+                    }
+
+                    if (iblank_data_left > 0)
+                    {
+                        iblank_data_left--;
+
+                        continue;
+                    }
+
+                    cs[3 * cur_block + dim] += Double.Parse(Conv(s[i], sep));
+                    pos++;
+
+                    if (pos == size)
+                    {
+                        pos = 0;
+                        dim++;
+
+                        if (dim == 3)
+                        {
+                            dim = 0;
+
+                            // Average values of coords.
+                            cs[3 * cur_block] /= size;
+                            cs[3 * cur_block + 1] /= size;
+                            cs[3 * cur_block + 2] /= size;
+                            cur_block++;
+
+                            if (cur_block == bc)
+                            {
+                                return;
+                            }
+                            else
+                            {
+                                // IBlank data left from previous block.
+                                iblank_data_left = BlockNodesCount(ii[cur_block - 1], jj[cur_block - 1], kk[cur_block - 1]);
+
+                                // New size;
+                                size = BlockNodesCount(ii[cur_block], jj[cur_block], kk[cur_block]);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -426,6 +517,21 @@ namespace Lib.DataStruct.Graph.Load
         }
 
         /// <summary>
+        /// Add blocks centers nodes to graph.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="cs">coordinates of blocks centers</param>
+        /// <param name="bc">blocks count</param>
+        private static void AddBlocksCentersNodes(Graph g, double[] cs, int bc)
+        {
+            for (int i = 0; i < bc; i++)
+            {
+                Node node = g.AddNode();
+                node.Point3D = new Point(cs[3 * i], cs[3 * i + 1], cs[3 * i + 2]);
+            }
+        }
+
+        /// <summary>
         /// Read from stream and add to graph nodes.
         /// </summary>
         /// <param name="sr">stream reader</param>
@@ -464,6 +570,27 @@ namespace Lib.DataStruct.Graph.Load
             ReadSkeletonNodesCoords(sr, bc, ii, jj, kk, cs, is_iblank);
             g.ChangeDimensionality(GraphDimensionality.D3);
             AddBlocksSkeletonNodes(g, cs, bc, ii, jj, kk);
+        }
+
+        /// <summary>
+        /// Reas from stream blocks nodes coordinates and add blocks centers as nodes.
+        /// </summary>
+        /// <param name="sr">stream</param>
+        /// <param name="g">graph</param>
+        /// <param name="bc">blocks count</param>
+        /// <param name="ii">array of i sizes</param>
+        /// <param name="jj">array of j sizes</param>
+        /// <param name="kk">array of k sizes</param>
+        /// <param name="is_iblank">iblank data</param>
+        private static void ReadAndAddBlocksCenters(StreamReader sr, Graph g,
+                                                    int bc, int[] ii, int[] jj, int[] kk,
+                                                    bool is_iblank)
+        {
+            ReadBlocksSizes(sr, bc, ii, jj, kk);
+            double[] cs = new double[3 * bc];
+            ReadBlocksCentersCoords(sr, bc, ii, jj, kk, cs, is_iblank);
+            g.ChangeDimensionality(GraphDimensionality.D3);
+            AddBlocksCentersNodes(g, cs, bc);
         }
 
         /// <summary>
@@ -659,7 +786,46 @@ namespace Lib.DataStruct.Graph.Load
                         ReadAndAddBlocksSkeletonNodes(sr, g, bc, ii, jj, kk, is_iblank);
 
                         // Add edges.
-                        AddBlocksSkeletonEdges(g, bc, ii, jj, kk);
+                        //AddBlocksSkeletonEdges(g, bc, ii, jj, kk);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                is_succ = false;
+            }
+
+            return is_succ;
+        }
+
+        /// <summary>
+        /// Load blocks adjacency graph.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="file_name">file name</param>
+        /// <param name="is_iblank">iblank data</param>
+        /// <returns><c>true</c> - if success, <c>false</c> - otherwise</returns>
+        public static bool LoadBlocksAdjacency(Graph g, string file_name, bool is_iblank)
+        {
+            bool is_succ = true;
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(file_name))
+                {
+                    string line;
+
+                    if ((line = sr.ReadLine()) != null)
+                    {
+                        int bc = Int32.Parse(line);
+
+                        // Allocate memory for blocks sizes.
+                        int[] ii = new int[bc];
+                        int[] jj = new int[bc];
+                        int[] kk = new int[bc];
+
+                        // Read coordinates of all blocks nodes and add their centers as nodes.
+                        ReadAndAddBlocksCenters(sr, g, bc, ii, jj, kk, is_iblank);
                     }
                 }
             }

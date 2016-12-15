@@ -499,8 +499,24 @@ namespace Lib.DataStruct.Graph
         {
             double min_x = MinX();
             double max_x = MaxX();
+
+            if (min_x == max_x)
+            {
+                // Some margin for too thin graph (in y coordinate).
+                min_x -= 1.0;
+                max_x += 1.0;
+            }
+
             double min_y = MinY();
             double max_y = MaxY();
+
+            if (min_y == max_y)
+            {
+                // Some margin for too thin graph (in x coordinate).
+                min_y -= 1.0;
+                max_y += 1.0;
+            }
+
             double mx = (max_x - min_x) * margin_k;
             double my = (max_y - min_y) * margin_k;
             double w = max_x - min_x + 2 * mx;

@@ -1931,7 +1931,7 @@ namespace GraphMaster.Windows
                             if (GraphLoaderPFG.LoadSkeleton(new_graph, filename, w.IsIBlank))
                             {
                                 Graph = new_graph;
-                                Graph.SetStyleSimple();
+                                //Graph.SetStyleSimple();
                                 Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));
                             }
                             else
@@ -1941,7 +1941,17 @@ namespace GraphMaster.Windows
                         }
                         else if (w.IsBlocksAdjacency)
                         {
-                            Debug.Assert(false, "not implemented");
+                            Graph new_graph = new Graph();
+
+                            if (GraphLoaderPFG.LoadBlocksAdjacency(new_graph, filename, w.IsIBlank))
+                            {
+                                Graph = new_graph;
+                                Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));
+                            }
+                            else
+                            {
+                                System.Windows.MessageBox.Show("Can not read graph from file " + filename);
+                            }
                         }
                         else
                         {
