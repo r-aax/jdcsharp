@@ -2028,5 +2028,126 @@ namespace GraphMaster.Windows
                 Paint();
             }
         }
+
+        /// <summary>
+        /// Select all nodes click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsSelectAllNodesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.SetSelection(true, true, false);
+            Paint();
+        }
+
+        /// <summary>
+        /// Select all edges click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsSelectAllEdgesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.SetSelection(true, false, true);
+            Paint();
+        }
+
+        /// <summary>
+        /// Select all nodes and edges click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsSelectAllNodesEdgesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.SetSelection(true, true, true);
+            Paint();
+        }
+
+        /// <summary>
+        /// Unselect all nodes click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsUnselectAllNodesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.SetSelection(false, true, false);
+            Paint();
+        }
+
+        /// <summary>
+        /// Unselect all edges click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsUnselectAllEdgesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.SetSelection(false, false, true);
+            Paint();
+        }
+
+        /// <summary>
+        /// Unselect all nodes and edges click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsUnselectAllNodesEdgesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.SetSelection(false, true, true);
+            Paint();
+        }
+
+        /// <summary>
+        /// Invert nodes selection click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsInvertSelectionNodesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.InvertSelection(true, false);
+            Paint();
+        }
+
+        /// <summary>
+        /// Invert edges selection click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsInvertSelectionEdgesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.InvertSelection(false, true);
+            Paint();
+        }
+
+        /// <summary>
+        /// Invert nodes and edges selection.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsInvertSelectionNodesEdgesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.InvertSelection(true, true);
+            Paint();
+        }
+
+        /// <summary>
+        /// Add incident nodes click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsSelectIncidentNodesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.SelectIncident(true, false);
+            Paint();
+        }
+
+        /// <summary>
+        /// Add incident edges click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsSelectIncidentEdgesMI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph.SelectIncident(false, true);
+            Paint();
+        }
     }
 }

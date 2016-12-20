@@ -702,5 +702,73 @@ namespace Lib.DataStruct.Graph
             DrawProperties.DefaultNodeDrawProperties = null;
             DrawProperties.DefaultEdgeDrawProperties.NodesMargin = 0.0;
         }
+
+        /// <summary>
+        /// Set selection values for nodes and edges.
+        /// </summary>
+        /// <param name="value">selected or not</param>
+        /// <param name="is_nodes">if apply to nodes</param>
+        /// <param name="is_edges">if apply to edges</param>
+        public void SetSelection(bool value, bool is_nodes, bool is_edges)
+        {
+            if (is_nodes)
+            {
+                Nodes.ForEach(n => n.SetSelection(value));
+            }
+
+            if (is_edges)
+            {
+                Edges.ForEach(e => e.SetSelection(value));
+            }
+        }
+
+        /// <summary>
+        /// Invert selection of nodes and edges.
+        /// </summary>
+        /// <param name="is_nodes">if apply to nodes</param>
+        /// <param name="is_edges">if apply to edges</param>
+        public void InvertSelection(bool is_nodes, bool is_edges)
+        {
+            if (is_nodes)
+            {
+                Nodes.ForEach(n => n.SwitchSelection());
+            }
+
+            if (is_edges)
+            {
+                Edges.ForEach(e => e.SwitchSelection());
+            }
+        }
+
+        /// <summary>
+        /// Add incident objects to selection.
+        /// </summary>
+        /// <param name="is_nodes">apply to nodes</param>
+        /// <param name="is_edges">apply to edges</param>
+        public void SelectIncident(bool is_nodes, bool is_edges)
+        {
+            if (is_nodes)
+            {
+                foreach (Edge e in Edges)
+                {
+                    if (e.IsSelected)
+                    {
+                        e.A.Select();
+                        e.B.Select();
+                    }
+                }
+            }
+
+            if (is_edges)
+            {
+                foreach (Edge e in Edges)
+                {
+                    if (e.A.IsSelected || e.B.IsSelected)
+                    {
+                        e.Select();
+                    }
+                }
+            }
+        }
     }
 }

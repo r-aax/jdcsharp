@@ -24,6 +24,15 @@ namespace Lib.DataStruct
         }
 
         /// <summary>
+        /// Set selection.
+        /// </summary>
+        /// <param name="is_selected">selection value</param>
+        public void SetSelection(bool is_selected)
+        {
+            IsSelected = is_selected;
+        }
+
+        /// <summary>
         /// Set selction to true.
         /// </summary>
         public void Select()

@@ -11,16 +11,26 @@
                 <MenuItem Name="GraphOpenMI" Header="Open" Click="GraphOpenMI_Click"/>
                 <MenuItem Name="GraphSaveMI" Header="Save" Click="GraphSaveMI_Click"/>
             </MenuItem>
-            <MenuItem Header="Area">
-                <MenuItem Name="AreaZoomInMI" Header="Zoom in" Click="AreaZoomInMI_Click"/>
-                <MenuItem Name="AreaZoomOutMI" Header="Zoom out" Click="AreaZoomOutMI_Click"/>
-                <Separator/>
-                <MenuItem Name="AreaRightMI" Header="Right" Click="AreaRightMI_Click"/>
-                <MenuItem Name="AreaLeftMI" Header="Left" Click="AreaLeftMI_Click"/>
-                <MenuItem Name="AreaUpMI" Header="Up" Click="AreaUpMI_Click"/>
-                <MenuItem Name="AreaDownMI" Header="Down" Click="AreaDownMI_Click"/>
-                <Separator/>
-                <MenuItem Name="AreaParametersMI" Header="Parameters" Click="AreaParametersMI_Click"/>
+            <MenuItem Header="Operations">
+                <MenuItem Header="Select all">
+                    <MenuItem Name="OperationsSelectAllNodesMI" Header="Nodes" Click="OperationsSelectAllNodesMI_Click"/>
+                    <MenuItem Name="OperationsSelectAllEdgesMI" Header="Edges" Click="OperationsSelectAllEdgesMI_Click"/>
+                    <MenuItem Name="OperationsSelectAllNodesEdgesMI" Header="Nodes and edges" Click="OperationsSelectAllNodesEdgesMI_Click"/>
+                </MenuItem>
+                <MenuItem Header="Unselect all">
+                    <MenuItem Name="OperationsUnselectAllNodesMI" Header="Nodes" Click="OperationsUnselectAllNodesMI_Click"/>
+                    <MenuItem Name="OperationsUnselectAllEdgesMI" Header="Edges" Click="OperationsUnselectAllEdgesMI_Click"/>
+                    <MenuItem Name="OperationsUnselectAllNodesEdgesMI" Header="Nodes and edges" Click="OperationsUnselectAllNodesEdgesMI_Click"/>
+                </MenuItem>
+                <MenuItem Header="Invert selection">
+                    <MenuItem Name="OperationsInvertSelectionNodesMI" Header="Nodes" Click="OperationsInvertSelectionNodesMI_Click"/>
+                    <MenuItem Name="OperationsInvertSelectionEdgesMI" Header="Edges" Click="OperationsInvertSelectionEdgesMI_Click"/>
+                    <MenuItem Name="OperationsInvertSelectionNodesEdgesMI" Header="Nodes and edges" Click="OperationsInvertSelectionNodesEdgesMI_Click"/>
+                </MenuItem>
+                <MenuItem Header="Select incident">
+                    <MenuItem Name="OperationsSelectIncidentNodesMI" Header="Nodes" Click="OperationsSelectIncidentNodesMI_Click"/>
+                    <MenuItem Name="OperationsSelectIncidentEdgesMI"  Header="Edges" Click="OperationsSelectIncidentEdgesMI_Click"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Transform">
                 <MenuItem Name="AreaRotateX_CW" Header="Rotate clockwise OX" Click="AreaRotateX_CW_Click" />
@@ -32,6 +42,17 @@
                 <Separator/>
                 <MenuItem Name="Transform2DTo3D" Header="Transform 2D -> 3D" Click="Transform2DTo3D_Click" />
                 <MenuItem Name="Transform3DTo2D" Header="Transform 3D -> 2D" Click="Transform3DTo2D_Click" />
+            </MenuItem>
+            <MenuItem Header="Area">
+                <MenuItem Name="AreaZoomInMI" Header="Zoom in" Click="AreaZoomInMI_Click"/>
+                <MenuItem Name="AreaZoomOutMI" Header="Zoom out" Click="AreaZoomOutMI_Click"/>
+                <Separator/>
+                <MenuItem Name="AreaRightMI" Header="Right" Click="AreaRightMI_Click"/>
+                <MenuItem Name="AreaLeftMI" Header="Left" Click="AreaLeftMI_Click"/>
+                <MenuItem Name="AreaUpMI" Header="Up" Click="AreaUpMI_Click"/>
+                <MenuItem Name="AreaDownMI" Header="Down" Click="AreaDownMI_Click"/>
+                <Separator/>
+                <MenuItem Name="AreaParametersMI" Header="Parameters" Click="AreaParametersMI_Click"/>
             </MenuItem>
             <MenuItem Header="Picture">
                 <MenuItem Name="PictureNameMI" Header="Name" Click="PictureNameMI_Click" />
