@@ -59,7 +59,7 @@ namespace Lib.DataStruct.Graph.Serialized
 
             if (e.IsParentDrawProperties)
             {
-                DrawProperties = "default";
+                DrawProperties = null;
             }
             else
             {

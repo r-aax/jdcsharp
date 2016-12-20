@@ -1984,5 +1984,17 @@ namespace GraphMaster.Windows
                 Graph.XmlSerialize(sfd.FileName);
             }
         }
+
+        /// <summary>
+        /// Edit button click event.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ActionEditB_Click(object sender, RoutedEventArgs e)
+        {
+            EditNodesEdgesWindow w = new EditNodesEdgesWindow();
+
+            w.ShowDialog();
+        }
     }
 }

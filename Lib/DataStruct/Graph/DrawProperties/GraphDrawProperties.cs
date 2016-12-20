@@ -1,7 +1,9 @@
 ﻿// Author: Alexey Rybakov
 
-using Lib.Draw;
+using System;
 using System.Xml.Serialization;
+
+using Lib.Draw;
 
 namespace Lib.DataStruct.Graph.DrawProperties
 {

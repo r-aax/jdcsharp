@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using System.IO;
 
 using Lib.DataStruct.Graph;
+using Lib.DataStruct.Graph.DrawProperties;
 
 namespace Lib.DataStruct.Graph.Serialized
 {
@@ -90,11 +91,22 @@ namespace Lib.DataStruct.Graph.Serialized
 
             // Draw properties.
             DrawProperties = new DrawPropertiesStrings();
-            DrawProperties.DefaultNodeDrawProperties = g.DrawProperties.DefaultNodeDrawProperties.ToString();
-            DrawProperties.DefaultSelectedNodeDrawProperties = g.DrawProperties.DefaultSelectedNodeDrawProperties.ToString();
-            DrawProperties.DefaultCapturedNodeDrawProperties = g.DrawProperties.DefaultCapturedNodeDrawProperties.ToString();
-            DrawProperties.DefaultEdgeDrawProperties = g.DrawProperties.DefaultEdgeDrawProperties.ToString();
-            DrawProperties.DefaultSelectedEdgeDrawProperties = g.DrawProperties.DefaultSelectedEdgeDrawProperties.ToString();
+            GraphDrawProperties gdp = g.DrawProperties;
+            DrawProperties.DefaultNodeDrawProperties = (gdp.DefaultNodeDrawProperties != null)
+                                                       ? gdp.DefaultNodeDrawProperties.ToString()
+                                                       : null;
+            DrawProperties.DefaultSelectedNodeDrawProperties = (gdp.DefaultSelectedNodeDrawProperties != null)
+                                                               ? gdp.DefaultSelectedNodeDrawProperties.ToString()
+                                                               : null;
+            DrawProperties.DefaultCapturedNodeDrawProperties = (gdp.DefaultCapturedNodeDrawProperties != null)
+                                                               ? gdp.DefaultCapturedNodeDrawProperties.ToString()
+                                                               : null;
+            DrawProperties.DefaultEdgeDrawProperties = (gdp.DefaultEdgeDrawProperties != null)
+                                                       ? gdp.DefaultEdgeDrawProperties.ToString()
+                                                       : null;
+            DrawProperties.DefaultSelectedEdgeDrawProperties = (gdp.DefaultSelectedEdgeDrawProperties != null)
+                                                               ? gdp.DefaultSelectedEdgeDrawProperties.ToString()
+                                                               : null;
 
             // Nodes.
             Nodes = new List<NodeSerialized>();
