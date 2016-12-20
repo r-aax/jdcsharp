@@ -241,26 +241,6 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
-        /// Accept button click.
-        /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">parameters</param>
-        private void AcceptB_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        /// <summary>
-        /// Cancel button click.
-        /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">parameters</param>
-        private void CancelB_Click(object sender, RoutedEventArgs e)
-        {
-            // Do nothing.
-            Close();
-        }
-
-        /// <summary>
         /// Get color.
         /// </summary>
         /// <param name="c">initial color</param>
@@ -310,6 +290,96 @@ namespace GraphMaster.Windows
         {
             SWMColor c = (EdgeColorTB.Background as SolidColorBrush).Color;
             EdgeColorTB.Background = new SolidColorBrush(GetColor(c));
+        }
+
+        /// <summary>
+        /// Get node draw properties from the form.
+        /// </summary>
+        /// <returns>node draw properties</returns>
+        private NodeDrawProperties GetNodeDrawProperties()
+        {
+            NodeDrawProperties dp = new NodeDrawProperties();
+
+            dp.InnerRadius = Lib.GUI.WPF.IO.GetDouble(NodeInnerRadiusTB);
+            dp.BorderRadius = Lib.GUI.WPF.IO.GetDouble(NodeBorderRadiusTB);
+            dp.Color = new Lib.Draw.Color((NodeColorTB.Background as SolidColorBrush).Color);
+            dp.BorderColor = new Lib.Draw.Color((NodeBorderColorTB.Background as SolidColorBrush).Color);
+
+            return dp;
+        }
+
+        /// <summary>
+        /// Get edge draw properties from the form.
+        /// </summary>
+        /// <returns>edge draw properties</returns>
+        private EdgeDrawProperties GetEdgeDrawProperties()
+        {
+            EdgeDrawProperties dp = new EdgeDrawProperties();
+
+            dp.Color = new Lib.Draw.Color((EdgeColorTB.Background as SolidColorBrush).Color);
+            dp.Thickness = Lib.GUI.WPF.IO.GetDouble(EdgeThicknessTB);
+            dp.NodesMargin = Lib.GUI.WPF.IO.GetDouble(EdgeNodesMarginTB);
+
+            return dp;
+        }
+
+        /// <summary>
+        /// Accept button click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void AcceptB_Click(object sender, RoutedEventArgs e)
+        {
+            if (Node != null)
+            {
+                // Single node.
+                Node.Label = NodeLabelTB.Text;
+                Node.DrawProperties = ((bool)NodeHasDrawPropertiesCB.IsChecked)
+                                      ? GetNodeDrawProperties()
+                                      : null;
+            }
+            else if (Nodes != null)
+            {
+                // Many nodes.
+                foreach (Node node in Nodes)
+                {
+                    node.DrawProperties = ((bool)NodeHasDrawPropertiesCB.IsChecked)
+                                          ? GetNodeDrawProperties()
+                                          : null;
+                }
+            }
+
+            if (Edge != null)
+            {
+                // Single edge.
+                Edge.Label = EdgeLabelTB.Text;
+                Edge.DrawProperties = ((bool)EdgeHasDrawPropertiesCB.IsChecked)
+                                      ? GetEdgeDrawProperties()
+                                      : null;
+            }
+            else if (Edges != null)
+            {
+                // Many edges.
+                foreach (Edge edge in Edges)
+                {
+                    edge.DrawProperties = ((bool)EdgeHasDrawPropertiesCB.IsChecked)
+                                          ? GetEdgeDrawProperties()
+                                          : null;
+                }
+            }
+
+            Close();
+        }
+
+        /// <summary>
+        /// Cancel button click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void CancelB_Click(object sender, RoutedEventArgs e)
+        {
+            // Do nothing.
+            Close();
         }
     }
 }

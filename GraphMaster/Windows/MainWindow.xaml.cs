@@ -2025,6 +2025,7 @@ namespace GraphMaster.Windows
                 }
 
                 w.ShowDialog();
+                Paint();
             }
         }
     }
