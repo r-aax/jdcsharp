@@ -56,6 +56,17 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// List of selected nodes.
+        /// </summary>
+        public List<Node> SelectedNodes
+        {
+            get
+            {
+                return Nodes.FindAll(n => n.IsSelected);
+            }
+        }
+
+        /// <summary>
         /// Order of graph.
         /// </summary>
         public int Order
@@ -106,6 +117,17 @@ namespace Lib.DataStruct.Graph
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// List of selected edges.
+        /// </summary>
+        public List<Edge> SelectedEdges
+        {
+            get
+            {
+                return Edges.FindAll(e => e.IsSelected);
+            }
         }
 
         /// <summary>

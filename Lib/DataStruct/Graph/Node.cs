@@ -31,6 +31,15 @@ namespace Lib.DataStruct.Graph
         public Graph Parent = null;
 
         /// <summary>
+        /// Label.
+        /// </summary>
+        public string Label
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Position (2D or 3D point).
         /// </summary>
         private object Position = null;
@@ -239,6 +248,7 @@ namespace Lib.DataStruct.Graph
         public Node(int id, Graph parent)
         {
             Id = id;
+            Label = Id.ToString();
             Parent = parent;
             Edges = new List<Edge>();
         }

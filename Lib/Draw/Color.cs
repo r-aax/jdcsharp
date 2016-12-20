@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Windows.Media;
 
 namespace Lib.Draw
 {
@@ -100,10 +101,19 @@ namespace Lib.Draw
         /// <summary>
         /// Convert to string.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public override string ToString()
         {
             return String.Format("#{0,2:X2}{1,2:X2}{2,2:X2}{3,2:X2}", A, R, G, B);
+        }
+
+        /// <summary>
+        /// Convert to System.Windows.Media.Color.
+        /// </summary>
+        /// <returns>color</returns>
+        public System.Windows.Media.Color ToSWMColor()
+        {
+            return System.Windows.Media.Color.FromArgb(A, R, G, B);
         }
     }
 }

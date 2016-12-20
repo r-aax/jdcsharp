@@ -5,8 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GraphMaster.Windows"
         mc:Ignorable="d"
-        Title="EditNodesEdgesWindow" Height="300" Width="300">
-    <Grid>
-        
-    </Grid>
+        Title="Edit nodes and edges draw properties" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
+    <StackPanel Orientation="Vertical">
+        <GroupBox Name="NodeNodesGB" Header="Node/Nodes">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Name="NodeLabelL"  Grid.Row="0" Grid.Column="0" Content="Label" Margin="5"/>
+                <TextBox Name="NodeLabelTB"  Grid.Row="0" Grid.Column="1" Width="150" Margin="5"/>
+                <CheckBox x:Name="NodeHasDrawPropertiesCB" Grid.Row="1" Grid.Column="1" Content="Enabled" Margin="5" Checked="NodeHasDrawPropertiesCB_Checked" Unchecked="NodeHasDrawPropertiesCB_Unchecked"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Inner Radius" Margin="5"/>
+                <TextBox Name="NodeInnerRadiusTB" Grid.Row="2" Grid.Column="1" Width="150" Margin="5"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Border Radius" Margin="5"/>
+                <TextBox Name="NodeBorderRadiusTB" Grid.Row="3" Grid.Column="1" Width="150" Margin="5"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Color" Margin="5"/>
+                <TextBox Name="NodeColorTB"  Grid.Row="4" Grid.Column="1" Width="150" Margin="5"/>
+                <Label Grid.Row="5" Grid.Column="0" Content="Border Color" Margin="5"/>
+                <TextBox Name="NodeBorderColorTB" Grid.Row="5" Grid.Column="1" Width="150" Margin="5"/>
+            </Grid> 
+        </GroupBox>
+        <GroupBox Name="EdgeEdgesGB" Header="Edge/Edges">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Name="EdgeLabelL"  Grid.Row="0" Grid.Column="0" Content="Label" Margin="5"/>
+                <TextBox Name="EdgeLabelTB"  Grid.Row="0" Grid.Column="1" Width="150" Margin="5"/>
+                <CheckBox Name="EdgeHasDrawPropertiesCB" Grid.Row="1" Grid.Column="1" Content="Enabled" Margin="5" Checked="EdgeHasDrawPropertiesCB_Checked" Unchecked="EdgeHasDrawPropertiesCB_Unchecked"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Color" Margin="5"/>
+                <TextBox Name="EdgeColorTB"  Grid.Row="2" Grid.Column="1" Width="150" Margin="5"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Thickness" Margin="5"/>
+                <TextBox Name="EdgeThicknessTB" Grid.Row="3" Grid.Column="1" Width="150" Margin="5"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Nodes Margin" Margin="5"/>
+                <TextBox Name="EdgeNodesMarginTB" Grid.Row="4" Grid.Column="1" Width="150" Margin="5"/>
+            </Grid>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="AcceptB" Content="Accept" MinWidth="75" Margin="10" Click="AcceptB_Click"></Button>
+            <Button x:Name="CancelB" Content="Cancel" MinWidth="75" Margin="10" Click="CancelB_Click"></Button>
+        </StackPanel>
+    </StackPanel>
 </Window>

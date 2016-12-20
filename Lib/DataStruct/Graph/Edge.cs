@@ -19,6 +19,15 @@ namespace Lib.DataStruct.Graph
         public Graph Parent = null;
 
         /// <summary>
+        /// Label.
+        /// </summary>
+        public string Label
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// First incident node access.
         /// </summary>
         public Node A

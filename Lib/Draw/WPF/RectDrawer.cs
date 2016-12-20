@@ -121,22 +121,12 @@ namespace Lib.Draw.WPF
         }
 
         /// <summary>
-        /// Convert color to <c>System.Drawing.Color</c>.
-        /// </summary>
-        /// <param name="color">color</param>
-        /// <returns>color <c>System.Drawing.Color</c></returns>
-        private SWMColor ConvertColor(LColor color)
-        {
-            return SWMColor.FromArgb(color.A, color.R, color.G, color.B);
-        }
-
-        /// <summary>
         /// Set pen clolor.
         /// </summary>
         /// <param name="color">color</param>
         public override void SetPenColor(LColor color)
         {
-            Pen = new Pen(new SolidColorBrush(ConvertColor(color)), Pen.Thickness);
+            Pen = new Pen(new SolidColorBrush(color.ToSWMColor()), Pen.Thickness);
         }
 
         /// <summary>
@@ -154,7 +144,7 @@ namespace Lib.Draw.WPF
         /// <param name="color">color</param>
         public override void SetBrush(LColor color)
         {
-            Brush = new SolidColorBrush(ConvertColor(color));
+            Brush = new SolidColorBrush(color.ToSWMColor());
         }
 
         /// <summary>

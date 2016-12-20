@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using System.Collections.Generic;
 
 using Lib.Maths.Numbers;
 using Lib.Draw;
@@ -1992,9 +1993,39 @@ namespace GraphMaster.Windows
         /// <param name="e">parameters</param>
         private void ActionEditB_Click(object sender, RoutedEventArgs e)
         {
-            EditNodesEdgesWindow w = new EditNodesEdgesWindow();
+            List<Node> nodes = Graph.SelectedNodes;
+            List<Edge> edges = Graph.SelectedEdges;
+            int nc = nodes.Count;
+            int ec = edges.Count;
 
-            w.ShowDialog();
+            if ((nc == 0) && (ec == 0))
+            {
+                System.Windows.MessageBox.Show("No nodes or edges selected for editing!");
+            }
+            else
+            {
+                EditNodesEdgesWindow w = new EditNodesEdgesWindow();
+
+                if (nc == 1)
+                {
+                    w.Node = nodes[0];
+                }
+                else if (nc > 1)
+                {
+                    w.Nodes = nodes;
+                }
+
+                if (ec == 1)
+                {
+                    w.Edge = edges[0];
+                }
+                else if (ec > 1)
+                {
+                    w.Edges = edges;
+                }
+
+                w.ShowDialog();
+            }
         }
     }
 }
