@@ -63,6 +63,15 @@ namespace Lib.Draw
         }
 
         /// <summary>
+        /// Constructor from <c>System.Drawing.Color</c>.
+        /// </summary>
+        /// <param name="color">color</param>
+        public Color(System.Drawing.Color color)
+            : this(color.A, color.R, color.G, color.B)
+        {
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>clone</returns>
@@ -114,6 +123,15 @@ namespace Lib.Draw
         public System.Windows.Media.Color ToSWMColor()
         {
             return System.Windows.Media.Color.FromArgb(A, R, G, B);
+        }
+
+        /// <summary>
+        /// Convert to System.Drawing.Color.
+        /// </summary>
+        /// <returns>color</returns>
+        public System.Drawing.Color ToSDColor()
+        {
+            return System.Drawing.Color.FromArgb(A, R, G, B);
         }
     }
 }

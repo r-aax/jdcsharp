@@ -11,9 +11,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Forms;
+using System.Drawing;
 
+using Lib.Draw;
 using Lib.DataStruct.Graph;
 using Lib.DataStruct.Graph.DrawProperties;
+
+using SWMColor = System.Windows.Media.Color;
+using SWMBrushes = System.Windows.Media.Brushes;
 
 namespace GraphMaster.Windows
 {
@@ -79,8 +85,8 @@ namespace GraphMaster.Windows
             NodeBorderColorTB.IsEnabled = false;
             NodeInnerRadiusTB.Text = "";
             NodeBorderRadiusTB.Text = "";
-            NodeColorTB.Background = Brushes.Black;
-            NodeBorderColorTB.Background = Brushes.Black;
+            NodeColorTB.Background = SWMBrushes.Black;
+            NodeBorderColorTB.Background = SWMBrushes.Black;
         }
 
         /// <summary>
@@ -124,7 +130,7 @@ namespace GraphMaster.Windows
             EdgeColorTB.IsEnabled = false;
             EdgeThicknessTB.IsEnabled = false;
             EdgeNodesMarginTB.IsEnabled = false;
-            EdgeColorTB.Background = Brushes.Black;
+            EdgeColorTB.Background = SWMBrushes.Black;
             EdgeThicknessTB.Text = "";
             EdgeNodesMarginTB.Text = "";
         }
@@ -250,6 +256,60 @@ namespace GraphMaster.Windows
         /// <param name="e">parameters</param>
         private void CancelB_Click(object sender, RoutedEventArgs e)
         {
+            // Do nothing.
+            Close();
+        }
+
+        /// <summary>
+        /// Get color.
+        /// </summary>
+        /// <param name="c">initial color</param>
+        /// <returns>color</returns>
+        private SWMColor GetColor(SWMColor c)
+        {
+            ColorDialog d = new ColorDialog();
+
+            d.Color = new Lib.Draw.Color(c).ToSDColor();
+
+            if (d.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                return new Lib.Draw.Color(d.Color).ToSWMColor();
+            }
+
+            return c;
+        }
+
+        /// <summary>
+        /// Node color change click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void NodeColorTB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SWMColor c = (NodeColorTB.Background as SolidColorBrush).Color;
+            NodeColorTB.Background = new SolidColorBrush(GetColor(c));
+        }
+
+        /// <summary>
+        /// Node border color change click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void NodeBorderColorTB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SWMColor c = (NodeBorderColorTB.Background as SolidColorBrush).Color;
+            NodeBorderColorTB.Background = new SolidColorBrush(GetColor(c));
+        }
+
+        /// <summary>
+        /// Edge color change click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void EdgeColorTB_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SWMColor c = (EdgeColorTB.Background as SolidColorBrush).Color;
+            EdgeColorTB.Background = new SolidColorBrush(GetColor(c));
         }
     }
 }

@@ -29,9 +29,9 @@
                 <Label Grid.Row="3" Grid.Column="0" Content="Border Radius" Margin="5"/>
                 <TextBox Name="NodeBorderRadiusTB" Grid.Row="3" Grid.Column="1" Width="150" Margin="5"/>
                 <Label Grid.Row="4" Grid.Column="0" Content="Color" Margin="5"/>
-                <TextBox Name="NodeColorTB"  Grid.Row="4" Grid.Column="1" Width="150" Margin="5"/>
+                <TextBox Name="NodeColorTB"  Grid.Row="4" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="NodeColorTB_MouseDoubleClick"/>
                 <Label Grid.Row="5" Grid.Column="0" Content="Border Color" Margin="5"/>
-                <TextBox Name="NodeBorderColorTB" Grid.Row="5" Grid.Column="1" Width="150" Margin="5"/>
+                <TextBox Name="NodeBorderColorTB" Grid.Row="5" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="NodeBorderColorTB_MouseDoubleClick"/>
             </Grid> 
         </GroupBox>
         <GroupBox Name="EdgeEdgesGB" Header="Edge/Edges">
@@ -51,7 +51,7 @@
                 <TextBox Name="EdgeLabelTB"  Grid.Row="0" Grid.Column="1" Width="150" Margin="5"/>
                 <CheckBox Name="EdgeHasDrawPropertiesCB" Grid.Row="1" Grid.Column="1" Content="Enabled" Margin="5" Checked="EdgeHasDrawPropertiesCB_Checked" Unchecked="EdgeHasDrawPropertiesCB_Unchecked"/>
                 <Label Grid.Row="2" Grid.Column="0" Content="Color" Margin="5"/>
-                <TextBox Name="EdgeColorTB"  Grid.Row="2" Grid.Column="1" Width="150" Margin="5"/>
+                <TextBox Name="EdgeColorTB"  Grid.Row="2" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="EdgeColorTB_MouseDoubleClick"/>
                 <Label Grid.Row="3" Grid.Column="0" Content="Thickness" Margin="5"/>
                 <TextBox Name="EdgeThicknessTB" Grid.Row="3" Grid.Column="1" Width="150" Margin="5"/>
                 <Label Grid.Row="4" Grid.Column="0" Content="Nodes Margin" Margin="5"/>
