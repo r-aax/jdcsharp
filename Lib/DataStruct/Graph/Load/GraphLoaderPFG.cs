@@ -724,6 +724,43 @@ namespace Lib.DataStruct.Graph.Load
         }
 
         /// <summary>
+        /// Read blocks adjacencies from ibc file and add to graph.
+        /// </summary>
+        /// <param name="sr">ibc stream</param>
+        /// <param name="g">graph</param>
+        private static void ReadAndAddBlocksAdjacencies(StreamReader sr, Graph g)
+        {
+            string line;
+
+            // Ignore two lines.
+            for (int i = 0; i < 2; i++)
+            {
+                if (sr.ReadLine() == null)
+                {
+                    return;
+                }
+            }
+
+            if ((line = sr.ReadLine()) != null)
+            {
+                int ic = Int32.Parse(line);
+
+                // Read all interfaces.
+                for (int i = 0; i < ic; i++)
+                {
+                    line = sr.ReadLine();
+                    string[] s = line.Split(' ');
+                    int ai = Int32.Parse(s[1]);
+                    int bi = Int32.Parse(s[8]);
+
+                    // Block in ibc file are enumerated from 1.
+                    // We enumerate blocks from 0.
+                    g.AddEdge(ai - 1, bi - 1);
+                }
+            }
+        }
+
+        /// <summary>
         /// Load whole grid representation.
         /// </summary>
         /// <param name="g">graph</param>
@@ -811,30 +848,37 @@ namespace Lib.DataStruct.Graph.Load
         /// Load blocks adjacency graph.
         /// </summary>
         /// <param name="g">graph</param>
-        /// <param name="file_name">file name</param>
+        /// <param name="file_name_pfg">file name of PFG file</param>
+        /// <param name="file_name_ibc">file name of IBC file</param>
         /// <param name="is_iblank">iblank data</param>
         /// <returns><c>true</c> - if success, <c>false</c> - otherwise</returns>
-        public static bool LoadBlocksAdjacency(Graph g, string file_name, bool is_iblank)
+        public static bool LoadBlocksAdjacency(Graph g, string file_name_pfg, string file_name_ibc, bool is_iblank)
         {
             bool is_succ = true;
 
             try
             {
-                using (StreamReader sr = new StreamReader(file_name))
+                using (StreamReader sr_pfg = new StreamReader(file_name_pfg))
                 {
-                    string line;
-
-                    if ((line = sr.ReadLine()) != null)
+                    using (StreamReader sr_ibc = new StreamReader(file_name_ibc))
                     {
-                        int bc = Int32.Parse(line);
+                        string line;
 
-                        // Allocate memory for blocks sizes.
-                        int[] ii = new int[bc];
-                        int[] jj = new int[bc];
-                        int[] kk = new int[bc];
+                        if ((line = sr_pfg.ReadLine()) != null)
+                        {
+                            int bc = Int32.Parse(line);
 
-                        // Read coordinates of all blocks nodes and add their centers as nodes.
-                        ReadAndAddBlocksCenters(sr, g, bc, ii, jj, kk, is_iblank);
+                            // Allocate memory for blocks sizes.
+                            int[] ii = new int[bc];
+                            int[] jj = new int[bc];
+                            int[] kk = new int[bc];
+
+                            // Read coordinates of all blocks nodes and add their centers as nodes.
+                            ReadAndAddBlocksCenters(sr_pfg, g, bc, ii, jj, kk, is_iblank);
+
+                            // Now we need read all edges.
+                            ReadAndAddBlocksAdjacencies(sr_ibc, g);
+                        }
                     }
                 }
             }

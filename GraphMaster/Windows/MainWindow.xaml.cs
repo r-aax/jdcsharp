@@ -1943,7 +1943,7 @@ namespace GraphMaster.Windows
                         {
                             Graph new_graph = new Graph();
 
-                            if (GraphLoaderPFG.LoadBlocksAdjacency(new_graph, filename, w.IsIBlank))
+                            if (GraphLoaderPFG.LoadBlocksAdjacency(new_graph, filename,  filename.Replace(".pfg", ".ibc"), w.IsIBlank))
                             {
                                 Graph = new_graph;
                                 Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));

@@ -63,10 +63,12 @@
     <Compile Include="DataStruct\Graph\Node.cs" />
     <Compile Include="DataStruct\Graph\Notation.cs" />
     <Compile Include="DataStruct\Graph\Serialized\NodeSerialized.cs" />
+    <Compile Include="DataStruct\LabeledObject.cs" />
     <Compile Include="DataStruct\MPTTTree.cs" />
     <Compile Include="DataStruct\RecursiveTree.cs" />
     <Compile Include="DataStruct\SelectableObject.cs" />
     <Compile Include="DataStruct\StringsList.cs" />
+    <Compile Include="DataStruct\WeightedObject.cs" />
     <Compile Include="Draw\Color.cs" />
     <Compile Include="Draw\GraphRectDrawer.cs" />
     <Compile Include="Draw\RectDrawer.cs" />
