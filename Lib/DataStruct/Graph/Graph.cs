@@ -487,6 +487,17 @@ namespace Lib.DataStruct.Graph
         /// <returns>barycenter</returns>
         public object Barycenter()
         {
+            if (IsEmpty)
+            {
+                if (Is2D)
+                {
+                    return new Point2D();
+                }
+                else
+                {
+                    return new Point3D();
+                }
+            }
             if (Is2D)
             {
                 Point2D[] p = new Point2D[Order];
@@ -692,6 +703,30 @@ namespace Lib.DataStruct.Graph
         public void XmlSerialize(string file_name)
         {
             ToSerialized().XmlSerialize(file_name);
+        }
+
+        /// <summary>
+        /// Create grah from serialized information.
+        /// </summary>
+        /// <param name="s">serialized graph</param>
+        /// <returns>graph</returns>
+        public static Graph FromSerialized(GraphSerialized s)
+        {
+            Graph g = new Graph();
+
+            return g;
+        }
+
+        /// <summary>
+        /// Graph deserialization.
+        /// </summary>
+        /// <param name="file_name"></param>
+        /// <returns>deserialized graph</returns>
+        static public Graph XmlDeserialize(string file_name)
+        {
+            GraphSerialized s = GraphSerialized.XmlDeserialize(file_name);
+
+            return Graph.FromSerialized(s);
         }
 
         /// <summary>

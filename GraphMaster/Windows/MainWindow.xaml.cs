@@ -1906,7 +1906,7 @@ namespace GraphMaster.Windows
 
                 if (extension == ".xml")
                 {
-                    throw new Exception("not implemented");
+                    Graph = Graph.XmlDeserialize(filename);
                 }
                 else if (extension == ".pfg")
                 {

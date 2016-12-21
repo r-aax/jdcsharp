@@ -109,6 +109,7 @@ namespace Lib.DataStruct.Graph.Serialized
                                                       : null;
 
             // Nodes.
+            Nodes = new List<NodeSerialized>();
             foreach (Node n in g.Nodes)
             {
                 Nodes.Add(new NodeSerialized(n));
@@ -134,6 +135,29 @@ namespace Lib.DataStruct.Graph.Serialized
             serializer.Serialize(writer, this);
             writer.Flush();
             writer.Close();
+        }
+
+        /// <summary>
+        /// Deserialized graph information from file.
+        /// </summary>
+        /// <param name="file_name">file name</param>
+        /// <returns>graph information</returns>
+        static public GraphSerialized XmlDeserialize(string file_name)
+        {
+            try
+            {
+                TextReader reader = new StreamReader(file_name);
+                XmlSerializer serializer = new XmlSerializer(typeof(GraphSerialized));
+                GraphSerialized collection = serializer.Deserialize(reader) as GraphSerialized;
+
+                reader.Close();
+
+                return collection;
+            }
+            catch (IOException)
+            {
+                return null;
+            }
         }
     }
 }
