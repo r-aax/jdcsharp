@@ -23,36 +23,33 @@ namespace Lib.DataStruct.Graph.DrawProperties
         public EdgeDrawProperties DefaultEdgeDrawProperties = null;
 
         /// <summary>
-        /// Default draw properties for selected node.
+        /// Default selected node color.
         /// </summary>
-        public NodeDrawProperties DefaultSelectedNodeDrawProperties = null;
+        public Color DefaultSelectedNodeColor = null;
 
         /// <summary>
-        /// Default draw properties for captured node.
+        /// Default captured node color.
         /// </summary>
-        public NodeDrawProperties DefaultCapturedNodeDrawProperties = null;
+        public Color DefaultCapturedNodeColor = null;
 
         /// <summary>
-        /// Default draw properties for selected edge.
+        /// Default selected edge color.
         /// </summary>
-        public EdgeDrawProperties DefaultSelectedEdgeDrawProperties = null;
+        public Color DefaultSelectedEdgeColor = null;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public GraphDrawProperties()
         {
+            // Draw properties.
             DefaultNodeDrawProperties = new NodeDrawProperties();
             DefaultEdgeDrawProperties = new EdgeDrawProperties();
 
-            DefaultSelectedNodeDrawProperties = new NodeDrawProperties();
-            DefaultSelectedNodeDrawProperties.Color = new Color(System.Windows.Media.Colors.Red);
-
-            DefaultCapturedNodeDrawProperties = new NodeDrawProperties();
-            DefaultCapturedNodeDrawProperties.Color = new Color(System.Windows.Media.Colors.Orange);
-
-            DefaultSelectedEdgeDrawProperties = new EdgeDrawProperties();
-            DefaultSelectedEdgeDrawProperties.Color = new Color(System.Windows.Media.Colors.Red);
+            // Colors.
+            DefaultSelectedNodeColor = new Color(System.Windows.Media.Colors.Red);
+            DefaultCapturedNodeColor = new Color(System.Windows.Media.Colors.Orange);
+            DefaultSelectedEdgeColor = new Color(System.Windows.Media.Colors.Red);
         }
     }
 }

@@ -38,13 +38,13 @@ namespace Lib.DataStruct.Graph.Serialized
             /// Default selected node draw properties.
             /// </summary>
             [XmlAttribute]
-            public string DefaultSelectedNodeDrawProperties;
+            public string DefaultSelectedNodeColor;
 
             /// <summary>
             /// Default captured node draw properties.
             /// </summary>
             [XmlAttribute]
-            public string DefaultCapturedNodeDrawProperties;
+            public string DefaultCapturedNodeColor;
 
             /// <summary>
             /// Default edge draw properties.
@@ -56,7 +56,7 @@ namespace Lib.DataStruct.Graph.Serialized
             /// Default selected edge draw properties.
             /// </summary>
             [XmlAttribute]
-            public string DefaultSelectedEdgeDrawProperties;
+            public string DefaultSelectedEdgeColor;
         };
 
         /// <summary>
@@ -95,21 +95,20 @@ namespace Lib.DataStruct.Graph.Serialized
             DrawProperties.DefaultNodeDrawProperties = (gdp.DefaultNodeDrawProperties != null)
                                                        ? gdp.DefaultNodeDrawProperties.ToString()
                                                        : null;
-            DrawProperties.DefaultSelectedNodeDrawProperties = (gdp.DefaultSelectedNodeDrawProperties != null)
-                                                               ? gdp.DefaultSelectedNodeDrawProperties.ToString()
-                                                               : null;
-            DrawProperties.DefaultCapturedNodeDrawProperties = (gdp.DefaultCapturedNodeDrawProperties != null)
-                                                               ? gdp.DefaultCapturedNodeDrawProperties.ToString()
-                                                               : null;
+            DrawProperties.DefaultSelectedNodeColor = (gdp.DefaultSelectedNodeColor != null)
+                                                      ? gdp.DefaultSelectedNodeColor.ToString()
+                                                      : null;
+            DrawProperties.DefaultCapturedNodeColor = (gdp.DefaultCapturedNodeColor != null)
+                                                      ? gdp.DefaultCapturedNodeColor.ToString()
+                                                      : null;
             DrawProperties.DefaultEdgeDrawProperties = (gdp.DefaultEdgeDrawProperties != null)
                                                        ? gdp.DefaultEdgeDrawProperties.ToString()
                                                        : null;
-            DrawProperties.DefaultSelectedEdgeDrawProperties = (gdp.DefaultSelectedEdgeDrawProperties != null)
-                                                               ? gdp.DefaultSelectedEdgeDrawProperties.ToString()
-                                                               : null;
+            DrawProperties.DefaultSelectedEdgeColor = (gdp.DefaultSelectedEdgeColor != null)
+                                                      ? gdp.DefaultSelectedEdgeColor.ToString()
+                                                      : null;
 
             // Nodes.
-            Nodes = new List<NodeSerialized>();
             foreach (Node n in g.Nodes)
             {
                 Nodes.Add(new NodeSerialized(n));

@@ -97,11 +97,19 @@ namespace Lib.Draw
         /// <param name="node">node</param>
         public void DrawNode(Node node)
         {
-            NodeDrawProperties nprops = node.IsSelected
-                                        ? node.Parent.DrawProperties.DefaultSelectedNodeDrawProperties
-                                        : node.DrawProperties;
+            NodeDrawProperties nprops = node.DrawProperties;
 
-            DrawNode(node, nprops);
+            if (node.IsSelected)
+            {
+                Color save_color = nprops.Color;
+                nprops.Color = node.Parent.DrawProperties.DefaultSelectedNodeColor;
+                DrawNode(node, nprops);
+                nprops.Color = save_color;
+            }
+            else
+            {
+                DrawNode(node, nprops);
+            }
         }
 
         /// <summary>
@@ -140,11 +148,19 @@ namespace Lib.Draw
         /// <param name="edge">edge</param>
         public void DrawEdge(Edge edge)
         {
-            EdgeDrawProperties eprops = edge.IsSelected
-                                        ? edge.Parent.DrawProperties.DefaultSelectedEdgeDrawProperties
-                                        : edge.DrawProperties;
+            EdgeDrawProperties eprops = edge.DrawProperties;
 
-            DrawEdge(edge, eprops);
+            if (edge.IsSelected)
+            {
+                Color save_color = eprops.Color;
+                eprops.Color = edge.Parent.DrawProperties.DefaultSelectedEdgeColor;
+                DrawEdge(edge, eprops);
+                eprops.Color = save_color;
+            }
+            else
+            {
+                DrawEdge(edge, eprops);
+            }
         }
     }
 }

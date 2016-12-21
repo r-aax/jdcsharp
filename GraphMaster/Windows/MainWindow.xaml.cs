@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using Lib.Maths.Numbers;
 using Lib.Draw;
 using Lib.DataStruct.Graph;
+using Lib.DataStruct.Graph.DrawProperties;
 using Lib.DataStruct.Graph.Load;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Maths.Geometry.Geometry3D;
@@ -176,7 +177,11 @@ namespace GraphMaster.Windows
             GraphDrawer.DrawGraph(Graph);
             if ((GUIProcessor.State == GUIState.Select) && (GUIProcessor.Node != null))
             {
-                GraphDrawer.DrawNode(GUIProcessor.Node, Graph.DrawProperties.DefaultCapturedNodeDrawProperties);
+                NodeDrawProperties nprops = GUIProcessor.Node.DrawProperties;
+                Lib.Draw.Color save_color = nprops.Color;
+                nprops.Color = Graph.DrawProperties.DefaultCapturedNodeColor; 
+                GraphDrawer.DrawNode(GUIProcessor.Node, nprops);
+                nprops.Color = save_color;
             }
             Drawer.DrawText(Drawer.Scaler.F(new Point2D(15.0, DrawAreaC.ActualHeight - 25.0)),
                             PictureName, 12.0, "Lucida Console");
