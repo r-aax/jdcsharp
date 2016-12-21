@@ -714,6 +714,13 @@ namespace Lib.DataStruct.Graph
         {
             Graph g = new Graph();
 
+            // Draw properties.
+            g.DrawProperties.DefaultNodeDrawProperties = new NodeDrawProperties(s.DrawProperties.DefaultNodeDrawProperties);
+            g.DrawProperties.DefaultSelectedNodeColor = new Draw.Color(s.DrawProperties.DefaultSelectedNodeColor);
+            g.DrawProperties.DefaultCapturedNodeColor = new Draw.Color(s.DrawProperties.DefaultCapturedNodeColor);
+            g.DrawProperties.DefaultEdgeDrawProperties = new EdgeDrawProperties(s.DrawProperties.DefaultEdgeDrawProperties);
+            g.DrawProperties.DefaultSelectedEdgeColor = new Draw.Color(s.DrawProperties.DefaultSelectedEdgeColor);
+
             return g;
         }
 

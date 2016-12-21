@@ -72,6 +72,23 @@ namespace Lib.Draw
         }
 
         /// <summary>
+        /// Constructor from string #AARRGGBB.
+        /// </summary>
+        /// <param name="str">string</param>
+        public Color(string str)
+        {
+            string aa = str.Substring(1, 2);
+            string rr = str.Substring(3, 2);
+            string gg = str.Substring(5, 2);
+            string bb = str.Substring(7, 2);
+
+            A = Byte.Parse(aa, System.Globalization.NumberStyles.AllowHexSpecifier);
+            R = Byte.Parse(rr, System.Globalization.NumberStyles.AllowHexSpecifier);
+            G = Byte.Parse(gg, System.Globalization.NumberStyles.AllowHexSpecifier);
+            B = Byte.Parse(bb, System.Globalization.NumberStyles.AllowHexSpecifier);
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>clone</returns>

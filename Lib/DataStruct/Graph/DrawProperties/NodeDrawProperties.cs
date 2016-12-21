@@ -43,6 +43,21 @@ namespace Lib.DataStruct.Graph.DrawProperties
         }
 
         /// <summary>
+        /// Constructor from string.
+        /// </summary>
+        /// <param name="str">string</param>
+        public NodeDrawProperties(string str)
+        {
+            string[] s = str.Split(new char[] { ';', '=' });
+
+            // Parse.
+            InnerRadius = Double.Parse(s[1]);
+            BorderRadius = Double.Parse(s[3]);
+            Color = new Color(s[5]);
+            BorderColor = new Color(s[7]);
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>clone</returns>

@@ -46,6 +46,20 @@ namespace Lib.DataStruct.Graph.DrawProperties
         }
 
         /// <summary>
+        /// Constructoor from string.
+        /// </summary>
+        /// <param name="str">string</param>
+        public EdgeDrawProperties(string str)
+        {
+            string[] s = str.Split(new char[] { ';', '=' });
+
+            // Parse.
+            Color = new Color(s[1]);
+            Thickness = Double.Parse(s[3]);
+            NodesMargin = Double.Parse(s[5]);
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>clone</returns>
