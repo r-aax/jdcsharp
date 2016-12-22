@@ -762,7 +762,26 @@ namespace Lib.DataStruct.Graph.Load
 
                     // Block in ibc file are enumerated from 1.
                     // We enumerate blocks from 0.
-                    g.AddEdge(ai - 1, bi - 1);
+                    Edge e = g.AddEdge(ai - 1, bi - 1);
+
+                    // Now we need to add weight of this edge,
+                    int si = Int32.Parse(s[3]) - Int32.Parse(s[2]);
+                    int sj = Int32.Parse(s[5]) - Int32.Parse(s[4]);
+                    int sk = Int32.Parse(s[7]) - Int32.Parse(s[6]);
+                    double w = 1.0;
+                    if (si > 0)
+                    {
+                        w *= si;
+                    }
+                    if (sj > 0)
+                    {
+                        w *= sj;
+                    }
+                    if (sk > 0)
+                    {
+                        w *= sk;
+                    }
+                    e.Weight = w;
                 }
             }
         }
