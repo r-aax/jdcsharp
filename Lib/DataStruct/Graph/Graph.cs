@@ -213,6 +213,46 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Constructor from serialized information.
+        /// </summary>
+        /// <param name="s">serialized information of graph</param>
+        public Graph(GraphSerialized s)
+        {
+            Dimensionality = s.Dimensionality;
+
+            // Draw properties.
+            DrawProperties = new GraphDrawProperties();
+            DrawProperties.DefaultNodeDrawProperties = new NodeDrawProperties(s.DrawProperties.DefaultNodeDrawProperties);
+            DrawProperties.DefaultSelectedNodeColor = new Draw.Color(s.DrawProperties.DefaultSelectedNodeColor);
+            DrawProperties.DefaultCapturedNodeColor = new Draw.Color(s.DrawProperties.DefaultCapturedNodeColor);
+            DrawProperties.DefaultEdgeDrawProperties = new EdgeDrawProperties(s.DrawProperties.DefaultEdgeDrawProperties);
+            DrawProperties.DefaultSelectedEdgeColor = new Draw.Color(s.DrawProperties.DefaultSelectedEdgeColor);
+
+            // Nodes.
+            Nodes = new List<Node>();
+            MaxNodeId = -1;
+            for (int i = 0; i < s.Nodes.Count; i++)
+            {
+                Node n = new Node(s.Nodes[i].Id, this);
+                n.SetPosition(s.Nodes[i].Position);
+                Nodes.Add(n);
+
+                if (n.Id > MaxNodeId)
+                {
+                    MaxNodeId = n.Id;
+                }
+            }
+
+            // Edges.
+            Edges = new List<Edge>();
+            for (int i = 0; i < s.Edges.Count; i++)
+            {
+                Edge e = new Edge(this, FindNode(s.Edges[i].AId), FindNode(s.Edges[i].BId), s.Edges[i].IsOriented);
+                Edges.Add(e);
+            }
+        }
+
+        /// <summary>
         /// Check dimensionality of graph.
         /// </summary>
         /// <param name="dim">new dimensionality</param>
@@ -304,6 +344,24 @@ namespace Lib.DataStruct.Graph
         public Edge AddEdge(int ai, int bi)
         {
             return AddEdge(Nodes[ai], Nodes[bi], false);
+        }
+
+        /// <summary>
+        /// Find node by identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>node or null</returns>
+        public Node FindNode(int id)
+        {
+            foreach (Node n in Nodes)
+            {
+                if (n.Id == id)
+                {
+                    return n;
+                }
+            }
+
+            return null;
         }
 
         /// <summary>
@@ -712,16 +770,7 @@ namespace Lib.DataStruct.Graph
         /// <returns>graph</returns>
         public static Graph FromSerialized(GraphSerialized s)
         {
-            Graph g = new Graph();
-
-            // Draw properties.
-            g.DrawProperties.DefaultNodeDrawProperties = new NodeDrawProperties(s.DrawProperties.DefaultNodeDrawProperties);
-            g.DrawProperties.DefaultSelectedNodeColor = new Draw.Color(s.DrawProperties.DefaultSelectedNodeColor);
-            g.DrawProperties.DefaultCapturedNodeColor = new Draw.Color(s.DrawProperties.DefaultCapturedNodeColor);
-            g.DrawProperties.DefaultEdgeDrawProperties = new EdgeDrawProperties(s.DrawProperties.DefaultEdgeDrawProperties);
-            g.DrawProperties.DefaultSelectedEdgeColor = new Draw.Color(s.DrawProperties.DefaultSelectedEdgeColor);
-
-            return g;
+            return new Graph(s);            
         }
 
         /// <summary>

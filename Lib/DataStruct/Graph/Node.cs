@@ -1,9 +1,11 @@
 ﻿// Author: Alexey Rybakov
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
 using System.IO;
+using System.Diagnostics;
 
 using Lib.DataStruct.Graph.DrawProperties;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
@@ -314,6 +316,31 @@ namespace Lib.DataStruct.Graph
         public override string ToString()
         {
             return "Node";
+        }
+
+        /// <summary>
+        /// Restore position from string.
+        /// </summary>
+        /// <param name="str">string</param>
+        public void SetPosition(string str)
+        {
+            string[] s = str.Split(new char[] { '(', ')', ',' });
+            int n = s.Count();
+
+            switch (n)
+            {
+                case 4:
+                    Point2D = new Point2D(Double.Parse(s[1]), Double.Parse(s[2]));
+                    break;
+
+                case 5:
+                    Point3D = new Point3D(Double.Parse(s[1]), Double.Parse(s[2]), Double.Parse(s[3]));
+                    break;
+
+                default:
+                    Debug.Assert(false, "unknown node position type");
+                    break;
+            }
         }
     }
 }
