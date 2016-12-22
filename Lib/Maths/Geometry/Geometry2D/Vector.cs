@@ -47,7 +47,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("({0:0.##}, {1:0.##})", X, Y);
+            return String.Format("({0},{1})", X, Y);
         }
 
         /// <summary>

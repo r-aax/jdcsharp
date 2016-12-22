@@ -55,7 +55,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("({0:0.##}, {1:0.##}, {2:0.##})", X, Y, Z);
+            return String.Format("({0},{1},{2})", X, Y, Z);
         }
 
         /// <summary>

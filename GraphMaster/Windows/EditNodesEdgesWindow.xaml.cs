@@ -176,7 +176,12 @@ namespace GraphMaster.Windows
             else
             {
                 // No nodes.
-                NodeNodesGB.Visibility = Visibility.Hidden;
+                NodeNodesGB.Header = "No nodes";
+                NodeNodesGB.IsEnabled = false;
+                NodeHasDrawPropertiesCB.IsEnabled = false;
+                NodeLabelTB.IsEnabled = false;
+                NodeLabelTB.Text = "inaccessible";
+                NodeDrawPropertiesOff();
             }
 
             if (Edge != null)
@@ -196,7 +201,12 @@ namespace GraphMaster.Windows
             else
             {
                 // No edges.
-                EdgeEdgesGB.Visibility = Visibility.Hidden;
+                EdgeEdgesGB.Header = "No edges";
+                EdgeEdgesGB.IsEnabled = false;
+                EdgeHasDrawPropertiesCB.IsEnabled = false;
+                EdgeLabelTB.IsEnabled = false;
+                EdgeLabelTB.Text = "inaccessible";
+                EdgeDrawPropertiesOff();
             }
         }
 
