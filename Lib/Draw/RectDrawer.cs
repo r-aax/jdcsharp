@@ -147,10 +147,35 @@ namespace Lib.Draw
         /// Draw text.
         /// </summary>
         /// <param name="p">point</param>
+        /// <param name="off">offset</param>
         /// <param name="text">test</param>
         /// <param name="size">size</param>
         /// <param name="family">font</param>
-        public abstract void DrawText(Point p, string text, double size, string family);
+        public abstract void DrawText(Point p, Vector off, string text, double size, string family);
+
+        /// <summary>
+        /// Draw text with zero offset.
+        /// </summary>
+        /// <param name="p">base point</param>
+        /// <param name="text">text</param>
+        /// <param name="size">size</param>
+        /// <param name="family">font</param>
+        public void DrawText(Point p, string text, double size, string family)
+        {
+            DrawText(p, new Vector(0.0, 0.0), text, size, family);
+        }
+
+        /// <summary>
+        /// Draw <c>Verdana</c> text.
+        /// </summary>
+        /// <param name="p">point</param>
+        /// <param name="off">offset</param>
+        /// <param name="text">text</param>
+        /// <param name="size">size</param>
+        public void DrawVerdanaText(Point p, Vector off, string text, double size)
+        {
+            DrawText(p, off, text, size, "Verdana");
+        }
 
         /// <summary>
         /// Draw <c>Verdana</c> text.
@@ -158,9 +183,21 @@ namespace Lib.Draw
         /// <param name="p">point</param>
         /// <param name="text">text</param>
         /// <param name="size">size</param>
-        void DrawVerdanaText(Point p, string text, double size)
+        public void DrawVerdanaText(Point p, string text, double size)
         {
             DrawText(p, text, size, "Verdana");
+        }
+
+        /// <summary>
+        /// Draw <c>Lucida Console</c> text.
+        /// </summary>
+        /// <param name="p"></param>
+        /// <param name="off"></param>
+        /// <param name="text"></param>
+        /// <param name="size"></param>
+        public void DrawConsoleText(Point p, Vector off, string text, double size)
+        {
+            DrawText(p, off, text, size, "Verdana");
         }
 
         /// <summary>
@@ -169,7 +206,7 @@ namespace Lib.Draw
         /// <param name="p">point</param>
         /// <param name="text">text</param>
         /// <param name="size">size</param>
-        void DrawConsoleText(Point p, string text, double size)
+        public void DrawConsoleText(Point p, string text, double size)
         {
             DrawText(p, text, size, "Lucida Console");
         }

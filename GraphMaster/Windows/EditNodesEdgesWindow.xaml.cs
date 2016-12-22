@@ -67,10 +67,29 @@ namespace GraphMaster.Windows
             NodeBorderRadiusTB.IsEnabled = true;
             NodeColorTB.IsEnabled = true;
             NodeBorderColorTB.IsEnabled = true;
+            NodeLabelVisibilityCB.IsEnabled = true;
+            NodeLabelOffsetX_TB.IsEnabled = true;
+            NodeLabelOffsetY_TB.IsEnabled = true;
+            NodeFontSizeTB.IsEnabled = true;
             NodeInnerRadiusTB.Text = dp.InnerRadius.ToString();
             NodeBorderRadiusTB.Text = dp.BorderRadius.ToString();
             NodeColorTB.Background = new SolidColorBrush(dp.Color.ToSWMColor());
             NodeBorderColorTB.Background = new SolidColorBrush(dp.BorderColor.ToSWMColor());
+            if (dp.LabelVisibility == Lib.DataStruct.Graph.DrawProperties.Visibility.No)
+            {
+                NodeLabelVisibilityCB.SelectedIndex = 0;
+            }
+            else if (dp.LabelVisibility == Lib.DataStruct.Graph.DrawProperties.Visibility.Yes)
+            {
+                NodeLabelVisibilityCB.SelectedIndex = 1;
+            }
+            else if (dp.LabelVisibility == Lib.DataStruct.Graph.DrawProperties.Visibility.Parent)
+            {
+                NodeLabelVisibilityCB.SelectedIndex = 2;
+            }
+            NodeLabelOffsetX_TB.Text = dp.LabelOffset.X.ToString();
+            NodeLabelOffsetY_TB.Text = dp.LabelOffset.Y.ToString();
+            NodeFontSizeTB.Text = dp.FontSize.ToString();
         }
 
         /// <summary>
@@ -83,10 +102,18 @@ namespace GraphMaster.Windows
             NodeBorderRadiusTB.IsEnabled = false;
             NodeColorTB.IsEnabled = false;
             NodeBorderColorTB.IsEnabled = false;
+            NodeLabelVisibilityCB.IsEnabled = false;
+            NodeLabelOffsetX_TB.IsEnabled = false;
+            NodeLabelOffsetY_TB.IsEnabled = false;
+            NodeFontSizeTB.IsEnabled = false;
             NodeInnerRadiusTB.Text = "";
             NodeBorderRadiusTB.Text = "";
             NodeColorTB.Background = SWMBrushes.Black;
             NodeBorderColorTB.Background = SWMBrushes.Black;
+            NodeLabelVisibilityCB.SelectedIndex = 0;
+            NodeLabelOffsetX_TB.Text = "";
+            NodeLabelOffsetY_TB.Text = "";
+            NodeFontSizeTB.Text = "";
         }
 
         /// <summary>
@@ -314,6 +341,26 @@ namespace GraphMaster.Windows
             dp.BorderRadius = Lib.GUI.WPF.IO.GetDouble(NodeBorderRadiusTB);
             dp.Color = new Lib.Draw.Color((NodeColorTB.Background as SolidColorBrush).Color);
             dp.BorderColor = new Lib.Draw.Color((NodeBorderColorTB.Background as SolidColorBrush).Color);
+            switch (NodeLabelVisibilityCB.SelectedIndex)
+            {
+                case 0:
+                    dp.LabelVisibility = Lib.DataStruct.Graph.DrawProperties.Visibility.No;
+                    break;
+
+                case 1:
+                    dp.LabelVisibility = Lib.DataStruct.Graph.DrawProperties.Visibility.Yes;
+                    break;
+
+                case 2:
+                    dp.LabelVisibility = Lib.DataStruct.Graph.DrawProperties.Visibility.Parent;
+                    break;
+
+                default:
+                    throw new ApplicationException();
+            }
+            dp.LabelOffset = new Lib.Maths.Geometry.Geometry2D.Vector(Lib.GUI.WPF.IO.GetDouble(NodeLabelOffsetX_TB),
+                                                                      Lib.GUI.WPF.IO.GetDouble(NodeLabelOffsetY_TB));
+            dp.FontSize = Lib.GUI.WPF.IO.GetDouble(NodeFontSizeTB);
 
             return dp;
         }

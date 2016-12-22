@@ -16,6 +16,9 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -24,14 +27,27 @@
                 <Label Name="NodeLabelL"  Grid.Row="0" Grid.Column="0" Content="Label" Margin="5"/>
                 <TextBox Name="NodeLabelTB"  Grid.Row="0" Grid.Column="1" Width="150" Margin="5"/>
                 <CheckBox x:Name="NodeHasDrawPropertiesCB" Grid.Row="1" Grid.Column="1" Content="Enabled" Margin="5" Checked="NodeHasDrawPropertiesCB_Checked" Unchecked="NodeHasDrawPropertiesCB_Unchecked"/>
-                <Label Grid.Row="2" Grid.Column="0" Content="Inner Radius" Margin="5"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Inner radius" Margin="5"/>
                 <TextBox Name="NodeInnerRadiusTB" Grid.Row="2" Grid.Column="1" Width="150" Margin="5"/>
-                <Label Grid.Row="3" Grid.Column="0" Content="Border Radius" Margin="5"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Border radius" Margin="5"/>
                 <TextBox Name="NodeBorderRadiusTB" Grid.Row="3" Grid.Column="1" Width="150" Margin="5"/>
                 <Label Grid.Row="4" Grid.Column="0" Content="Color" Margin="5"/>
                 <TextBox Name="NodeColorTB"  Grid.Row="4" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="NodeColorTB_MouseDoubleClick"/>
-                <Label Grid.Row="5" Grid.Column="0" Content="Border Color" Margin="5"/>
+                <Label Grid.Row="5" Grid.Column="0" Content="Border color" Margin="5"/>
                 <TextBox Name="NodeBorderColorTB" Grid.Row="5" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="NodeBorderColorTB_MouseDoubleClick"/>
+                <Label Grid.Row="6" Grid.Column="0" Content="Label visibility" Margin="5"/>
+                <ComboBox Name="NodeLabelVisibilityCB" Grid.Row="6" Grid.Column="1" Margin="5">
+                    <TextBlock>No</TextBlock>
+                    <TextBlock>Yes</TextBlock>
+                    <TextBlock>Parent</TextBlock>
+                </ComboBox>
+                <Label Grid.Row="7" Grid.Column="0" Content="Label offset" Margin="5"/>
+                <StackPanel Grid.Row="7" Grid.Column="1" Orientation="Horizontal">
+                    <TextBox Name="NodeLabelOffsetX_TB" Width="70" Margin="5"/>
+                    <TextBox Name="NodeLabelOffsetY_TB" Width="70" Margin="5"/>
+                </StackPanel>
+                <Label Grid.Row="8" Grid.Column="0" Content="Font size" Margin="5"/>
+                <TextBox Name="NodeFontSizeTB" Grid.Row="8" Grid.Column="1" Width="150" Margin="5"/>
             </Grid> 
         </GroupBox>
         <GroupBox Name="EdgeEdgesGB" Header="Edge/Edges">
@@ -54,7 +70,7 @@
                 <TextBox Name="EdgeColorTB"  Grid.Row="2" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="EdgeColorTB_MouseDoubleClick"/>
                 <Label Grid.Row="3" Grid.Column="0" Content="Thickness" Margin="5"/>
                 <TextBox Name="EdgeThicknessTB" Grid.Row="3" Grid.Column="1" Width="150" Margin="5"/>
-                <Label Grid.Row="4" Grid.Column="0" Content="Nodes Margin" Margin="5"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Nodes margin" Margin="5"/>
                 <TextBox Name="EdgeNodesMarginTB" Grid.Row="4" Grid.Column="1" Width="150" Margin="5"/>
             </Grid>
         </GroupBox>

@@ -3,6 +3,7 @@
 using System;
 
 using Lib.Draw;
+using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
 
 namespace Lib.DataStruct.Graph.DrawProperties
 {
@@ -14,22 +15,37 @@ namespace Lib.DataStruct.Graph.DrawProperties
         /// <summary>
         /// Inner radius.
         /// </summary>
-        public double InnerRadius = 0.0;
+        public double InnerRadius;
 
         /// <summary>
         /// Border radius.
         /// </summary>
-        public double BorderRadius = 0.0;
+        public double BorderRadius;
 
         /// <summary>
         /// Color.
         /// </summary>
-        public Color Color = null;
+        public Color Color;
 
         /// <summary>
         /// Border color.
         /// </summary>
-        public Color BorderColor = null;
+        public Color BorderColor;
+
+        /// <summary>
+        /// Visibility.
+        /// </summary>
+        public Visibility LabelVisibility;
+
+        /// <summary>
+        /// Label offset.
+        /// </summary>
+        public Vector2D LabelOffset;
+
+        /// <summary>
+        /// Size of font.
+        /// </summary>
+        public double FontSize;
 
         /// <summary>
         /// Defaul Constructor.
@@ -40,6 +56,9 @@ namespace Lib.DataStruct.Graph.DrawProperties
             BorderRadius = 4.0;
             Color = new Color(0xFF, 0xDD, 0xDD, 0xDD);
             BorderColor = new Color(0xFF, 0xAA, 0xAA, 0xAA);
+            LabelVisibility = Visibility.Parent;
+            LabelOffset = new Vector2D(0.0, 0.0);
+            FontSize = 10.0;
         }
 
         /// <summary>
@@ -48,13 +67,31 @@ namespace Lib.DataStruct.Graph.DrawProperties
         /// <param name="str">string</param>
         public NodeDrawProperties(string str)
         {
-            string[] s = str.Split(new char[] { ';', '=' });
+            string[] s = str.Split(new char[] { ';', '=', '(', ')', ',' });
 
             // Parse.
             InnerRadius = Double.Parse(s[1]);
             BorderRadius = Double.Parse(s[3]);
             Color = new Color(s[5]);
             BorderColor = new Color(s[7]);
+            if (s[9] == "No")
+            {
+                LabelVisibility = Visibility.No;
+            }
+            else if (s[9] == "Yes")
+            {
+                LabelVisibility = Visibility.Yes;
+            }
+            else if (s[9] == "Parent")
+            {
+                LabelVisibility = Visibility.Parent;
+            }
+            else
+            {
+                throw new ApplicationException();
+            }
+            LabelOffset = new Vector2D(Double.Parse(s[12]), Double.Parse(s[13]));
+            FontSize = Double.Parse(s[16]);
         }
 
         /// <summary>
@@ -79,8 +116,8 @@ namespace Lib.DataStruct.Graph.DrawProperties
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("inner_radius={0};border_radius={1};color={2};border_color={3}",
-                                 InnerRadius, BorderRadius, Color, BorderColor);
+            return String.Format("inner_radius={0};border_radius={1};color={2};border_color={3};visibility={4};label_offset={5};font_size={6}",
+                                 InnerRadius, BorderRadius, Color, BorderColor, LabelVisibility.ToString(), LabelOffset.ToString(), FontSize);
         }
     }
 }

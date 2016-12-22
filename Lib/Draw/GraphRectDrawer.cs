@@ -6,6 +6,10 @@ using Lib.DataStruct.Graph;
 using Lib.DataStruct.Graph.DrawProperties;
 using Lib.Maths.Geometry.Geometry3D;
 
+using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
+using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
+using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
+
 namespace Lib.Draw
 {
     /// <summary>
@@ -64,19 +68,20 @@ namespace Lib.Draw
             }
 
             Graph g = node.Parent;
+            Point2D p = node.Point2D;
             Color color = color = nprops.Color;
 
             if (g.Is2D)
             {
                 Drawer.SetBrush(nprops.BorderColor);
-                Drawer.FillPoint(node.Point2D, nprops.BorderRadius);
+                Drawer.FillPoint(p, nprops.BorderRadius);
                 Drawer.SetBrush(color);
-                Drawer.FillPoint(node.Point2D, nprops.InnerRadius);
+                Drawer.FillPoint(p, nprops.InnerRadius);
             }
             else
             {
                 Color bcolor = nprops.BorderColor;
-                double in_front_of_barycenter = node.Point3D.Z - TmpBarycenter.Z;
+                double in_front_of_barycenter = node.Z - TmpBarycenter.Z;
 
                 if (in_front_of_barycenter < 0.0)
                 {
@@ -85,9 +90,33 @@ namespace Lib.Draw
                 }
 
                 Drawer.SetBrush(bcolor);
-                Drawer.FillPoint(node.Point2D, nprops.BorderRadius);
+                Drawer.FillPoint(p, nprops.BorderRadius);
                 Drawer.SetBrush(color);
-                Drawer.FillPoint(node.Point2D, nprops.InnerRadius);
+                Drawer.FillPoint(p, nprops.InnerRadius);
+            }
+
+            // Draw label.
+
+            bool is_visible = false;
+
+            if (nprops.LabelVisibility == Visibility.Yes)
+            {
+                is_visible = true;
+            }
+            else if (nprops.LabelVisibility == Visibility.Parent)
+            {
+                if (g.DrawProperties.DefaultNodeDrawProperties != null)
+                {
+                    if (g.DrawProperties.DefaultNodeDrawProperties.LabelVisibility == Visibility.Yes)
+                    {
+                        is_visible = true;
+                    }
+                }
+            }
+
+            if (is_visible)
+            {
+                Drawer.DrawVerdanaText(p, nprops.LabelOffset, node.Label, nprops.FontSize);
             }
         }
 

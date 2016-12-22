@@ -266,10 +266,11 @@ namespace Lib.Draw.WPF
         /// Draw text.
         /// </summary>
         /// <param name="p">point</param>
+        /// <param name="off">offset</param>
         /// <param name="text">text</param>
         /// <param name="size">size</param>
         /// <param name="family">font</param>
-        public override void DrawText(LPoint p, string text, double size, string family)
+        public override void DrawText(LPoint p, LVector off, string text, double size, string family)
         {
             LPoint tp = Scaler.T(p);
             FormattedText ftext = new FormattedText(text,
@@ -279,7 +280,7 @@ namespace Lib.Draw.WPF
                                                     size,
                                                     Brushes.Black);
 
-            Context.DrawText(ftext, new SWPoint(tp.X, tp.Y));
+            Context.DrawText(ftext, new SWPoint(tp.X + off.X, tp.Y + off.Y));
         }
     }
 }

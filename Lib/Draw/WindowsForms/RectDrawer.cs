@@ -299,10 +299,11 @@ namespace Lib.Draw.WindowsForms
         /// Draw text.
         /// </summary>
         /// <param name="p">poit</param>
+        /// <param name="off">offset</param>
         /// <param name="text">text</param>
         /// <param name="size">size</param>
         /// <param name="family">font</param>
-        public override void DrawText(LPoint p, string text, double size, string family)
+        public override void DrawText(LPoint p, LVector off, string text, double size, string family)
         {
             throw new NotImplementedException();
         }

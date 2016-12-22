@@ -44,6 +44,7 @@ namespace Lib.DataStruct.Graph.DrawProperties
         {
             // Draw properties.
             DefaultNodeDrawProperties = new NodeDrawProperties();
+            DefaultNodeDrawProperties.LabelVisibility = Visibility.Yes;
             DefaultEdgeDrawProperties = new EdgeDrawProperties();
 
             // Colors.
