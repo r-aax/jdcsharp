@@ -696,19 +696,32 @@ namespace Lib.DataStruct.Graph.Load
             GraphCreator.AddDistChain(g, off + 3 * i + 2 * j + 4 * k - 13, off + 3 * i + 4 * j + 4 * k - 17, 2);
 
             // k direction skeleton edges.
-            g.AddEdge(off, off + 2 * i + 2 * j - 4);
-            GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 4, off + 2 * i + 2 * j + 4 * k - 12, 4);
-            //
-            g.AddEdge(off + i - 1, off + 2 * i + 2 * j - 3);
-            g.AddEdge(off + 2 * i + 2 * j + 4 * k - 15, off + 3 * i + 2 * j + 4 * k - 13);
-            GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 3, off + 2 * i + 2 * j + 4 * k - 15, 4);
-            //
-            g.AddEdge(off + i + 2 * j - 4, off + 2 * i + 2 * j - 2);
-            g.AddEdge(off + 2 * i + 2 * j + 4 * k - 14, off + 3 * i + 4 * j + 4 * k - 16);
-            GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 2, off + 2 * i + 2 * j + 4 * k - 14, 4);
-            //
-            g.AddEdge(off + 2 * i + 2 * j + 4 * k - 13, off + 4 * i + 4 * j + 4 * k - 17);
-            GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 5, off + 2 * i + 2 * j + 4 * k - 13, 4);
+            if (k == 2)
+            {
+                int nodes_on_front = 2 * (i + j) - 4;
+
+                // Simple case 4 edges.
+                g.AddEdge(off, off + nodes_on_front);
+                g.AddEdge(off + i - 1, off + i - 1 + nodes_on_front);
+                g.AddEdge(off + i + 2 * j - 4, off + i + 2 * j - 4 + nodes_on_front);
+                g.AddEdge(off + 2 * i + 2 * j + 4 * k - 13, off + 2 * i + 2 * j + 4 * k - 13 + nodes_on_front);
+            }
+            else
+            {
+                g.AddEdge(off, off + 2 * i + 2 * j - 4);
+                GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 4, off + 2 * i + 2 * j + 4 * k - 12, 4);
+                //
+                g.AddEdge(off + i - 1, off + 2 * i + 2 * j - 3);
+                g.AddEdge(off + 2 * i + 2 * j + 4 * k - 15, off + 3 * i + 2 * j + 4 * k - 13);
+                GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 3, off + 2 * i + 2 * j + 4 * k - 15, 4);
+                //
+                g.AddEdge(off + i + 2 * j - 4, off + 2 * i + 2 * j - 2);
+                g.AddEdge(off + 2 * i + 2 * j + 4 * k - 14, off + 3 * i + 4 * j + 4 * k - 16);
+                GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 2, off + 2 * i + 2 * j + 4 * k - 14, 4);
+                //
+                g.AddEdge(off + 2 * i + 2 * j + 4 * k - 13, off + 4 * i + 4 * j + 4 * k - 17);
+                GraphCreator.AddDistChain(g, off + 2 * i + 2 * j - 5, off + 2 * i + 2 * j + 4 * k - 13, 4);
+            }
         }
 
         /// <summary>
