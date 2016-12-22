@@ -235,6 +235,7 @@ namespace Lib.DataStruct.Graph
             {
                 Node n = new Node(s.Nodes[i].Id, this);
                 n.SetPosition(s.Nodes[i].Position);
+                n.Weight = Double.Parse(s.Nodes[i].Weight);
                 Nodes.Add(n);
 
                 if (n.Id > MaxNodeId)

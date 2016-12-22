@@ -531,11 +531,18 @@ namespace Lib.DataStruct.Graph.Load
         /// <param name="g">graph</param>
         /// <param name="cs">coordinates of blocks centers</param>
         /// <param name="bc">blocks count</param>
-        private static void AddBlocksCentersNodes(Graph g, double[] cs, int bc)
+        /// <param name="ii">array of i sizes</param>
+        /// <param name="jj">array of j sizes</param>
+        /// <param name="kk">array of k sizes</param>
+        private static void AddBlocksCentersNodes(Graph g, double[] cs, int bc, int[] ii, int[] jj, int[] kk)
         {
             for (int i = 0; i < bc; i++)
             {
                 Node node = g.AddNode();
+
+                // Weight of block is count of cells (not nodes).
+                node.Weight = (ii[i] - 1) * (jj[i] - 1) * (kk[i] - 1);
+
                 node.Point3D = new Point(cs[3 * i], cs[3 * i + 1], cs[3 * i + 2]);
             }
         }
@@ -599,7 +606,7 @@ namespace Lib.DataStruct.Graph.Load
             double[] cs = new double[3 * bc];
             ReadBlocksCentersCoords(sr, bc, ii, jj, kk, cs, is_iblank);
             g.ChangeDimensionality(GraphDimensionality.D3);
-            AddBlocksCentersNodes(g, cs, bc);
+            AddBlocksCentersNodes(g, cs, bc, ii, jj, kk);
         }
 
         /// <summary>

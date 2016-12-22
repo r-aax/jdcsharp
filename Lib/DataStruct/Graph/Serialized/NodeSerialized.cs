@@ -29,6 +29,12 @@ namespace Lib.DataStruct.Graph.Serialized
         public string Position;
 
         /// <summary>
+        /// Weight.
+        /// </summary>
+        [XmlAttribute]
+        public string Weight;
+
+        /// <summary>
         /// Drawproperties.
         /// </summary>
         [XmlAttribute]
@@ -49,6 +55,7 @@ namespace Lib.DataStruct.Graph.Serialized
         {
             Id = n.Id;
             Position = n.PositionString();
+            Weight = n.Weight.ToString();
 
             if (n.IsParentDrawProperties)
             {

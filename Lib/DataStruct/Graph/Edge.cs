@@ -28,6 +28,15 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Weight.
+        /// </summary>
+        public double Weight
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// First incident node access.
         /// </summary>
         public Node A
@@ -100,6 +109,8 @@ namespace Lib.DataStruct.Graph
             Parent = parent;
             A = a;
             B = b;
+            Label = "";
+            Weight = 0.0;
             IsOriented = is_oriented;
         }
 
