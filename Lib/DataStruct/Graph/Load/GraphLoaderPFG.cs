@@ -228,7 +228,7 @@ namespace Lib.DataStruct.Graph.Load
             string line;
 
             // Get separator for read real numbers.
-            string sep = NumberFormatInfo.CurrentInfo.CurrencyDecimalSeparator;
+            string sep = NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
 
             // Variables for splitting.
             string[] s;
