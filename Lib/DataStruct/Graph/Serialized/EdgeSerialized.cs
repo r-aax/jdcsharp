@@ -35,6 +35,12 @@ namespace Lib.DataStruct.Graph.Serialized
         public bool IsOriented;
 
         /// <summary>
+        /// Weight.
+        /// </summary>
+        [XmlAttribute]
+        public double Weight;
+
+        /// <summary>
         /// Draw properties.
         /// </summary>
         [XmlAttribute]
@@ -56,6 +62,7 @@ namespace Lib.DataStruct.Graph.Serialized
             AId = e.A.Id;
             BId = e.B.Id;
             IsOriented = e.IsOriented;
+            Weight = e.Weight;
 
             if (e.IsParentDrawProperties)
             {

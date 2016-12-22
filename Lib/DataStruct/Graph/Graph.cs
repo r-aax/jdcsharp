@@ -235,7 +235,7 @@ namespace Lib.DataStruct.Graph
             {
                 Node n = new Node(s.Nodes[i].Id, this);
                 n.SetPosition(s.Nodes[i].Position);
-                n.Weight = Double.Parse(s.Nodes[i].Weight);
+                n.Weight = s.Nodes[i].Weight;
                 Nodes.Add(n);
 
                 if (n.Id > MaxNodeId)
@@ -249,6 +249,7 @@ namespace Lib.DataStruct.Graph
             for (int i = 0; i < s.Edges.Count; i++)
             {
                 Edge e = new Edge(this, FindNode(s.Edges[i].AId), FindNode(s.Edges[i].BId), s.Edges[i].IsOriented);
+                e.Weight = s.Edges[i].Weight;
                 Edges.Add(e);
             }
         }
