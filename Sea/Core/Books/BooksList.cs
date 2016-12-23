@@ -111,15 +111,23 @@ namespace Sea.Core.Books
         }
 
         /// <summary>
+        /// Prepare to serialization.
+        /// </summary>
+        public void PrepareToSerialization()
+        {
+            foreach (Book b in Items)
+            {
+                b.PrepareToSerialization();
+            }
+        }
+
+        /// <summary>
         /// Serialization.
         /// </summary>
         /// <param name="file_name">name of file</param>
         public void XmlSerialize(string file_name)
         {
-            foreach (Book book in Items)
-            {
-                book.PrepareToSerialization();
-            }
+            PrepareToSerialization();
 
             XmlSerializer serializer = new XmlSerializer(GetType());
             TextWriter writer = new StreamWriter(file_name);

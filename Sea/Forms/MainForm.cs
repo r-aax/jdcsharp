@@ -187,6 +187,10 @@ namespace Sea.Forms
         {
             (new AuthorsListSpecial(Sea.Authors)).XmlSerialize(Parameters.AuthorsXMLFullFilename + ".converted");
             (new PublishersListSpecial(Sea.Publishers)).XmlSerialize(Parameters.PublishersXMLFullFilename + ".converted");
+
+            // Books serialization needs preparation.
+            Sea.Books.PrepareToSerialization();
+            (new BooksListSpecial(Sea.Books)).XmlSerialize(Parameters.BooksXMLFullFilename + ".converted");
         }
 
         /// <summary>

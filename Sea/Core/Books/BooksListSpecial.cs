@@ -4,40 +4,44 @@ using System.IO;
 using System.Windows.Forms;
 using System;
 
+using Lib.DataStruct;
 using Sea.Tools;
+using Sea.Core.Authors;
+using Sea.Core.Publishers;
+using Sea.Core.Categories;
 
-namespace Sea.Core.Publishers
+namespace Sea.Core.Books
 {
     /// <summary>
-    /// Publishers list class.
+    /// List of books.
     /// </summary>
-    [XmlType("PublishersList")]
-    public class PublishersListSpecial
+    [XmlType("BooksList")]
+    public class BooksListSpecial
     {
         /// <summary>
-        /// List of publishers.
+        /// Books items.
         /// </summary>
-        public List<PublisherSpecial> Items { get; set; }
+        public List<BookSpecial> Items { get; set; }
 
         /// <summary>
-        /// Empty constructor.
+        /// Constructor.
         /// </summary>
-        public PublishersListSpecial()
+        public BooksListSpecial()
         {
-            Items = new List<PublisherSpecial>();
+            Items = new List<BookSpecial>();
         }
 
         /// <summary>
-        /// Constructor from list of publishers.
+        /// Constructor from books list.
         /// </summary>
-        /// <param name="pl">publishers list</param>
-        public PublishersListSpecial(PublishersList pl)
+        /// <param name="bl">books list</param>
+        public BooksListSpecial(BooksList bl)
         {
-            Items = new List<PublisherSpecial>();
+            Items = new List<BookSpecial>();
 
-            for (int i = 0; i < pl.Count; i++)
+            for (int i = 0; i < bl.Count; i++)
             {
-                Items.Add(new PublisherSpecial(pl[i]));
+                Items.Add(new BookSpecial(bl[i]));
             }
         }
 

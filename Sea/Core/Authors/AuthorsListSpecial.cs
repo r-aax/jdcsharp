@@ -24,6 +24,7 @@ namespace Sea.Core.Authors
         /// </summary>
         public AuthorsListSpecial()
         {
+            Items = new List<AuthorSpecial>();
         }
 
         /// <summary>

@@ -64,6 +64,8 @@
     <Compile Include="Core\Books\Book.cs" />
     <Compile Include="Core\Books\BookFullNamePrintStyle.cs" />
     <Compile Include="Core\Books\BooksList.cs" />
+    <Compile Include="Core\Books\BooksListSpecial.cs" />
+    <Compile Include="Core\Books\BookSpecial.cs" />
     <Compile Include="Core\Books\BookType.cs" />
     <Compile Include="Core\Categories\CategoriesList.cs" />
     <Compile Include="Core\Publishers\Publisher.cs" />
