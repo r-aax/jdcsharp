@@ -68,6 +68,8 @@
     <Compile Include="Core\Categories\CategoriesList.cs" />
     <Compile Include="Core\Publishers\Publisher.cs" />
     <Compile Include="Core\Publishers\PublishersList.cs" />
+    <Compile Include="Core\Publishers\PublishersListSpecial.cs" />
+    <Compile Include="Core\Publishers\PublisherSpecial.cs" />
     <Compile Include="Core\Sea.cs" />
     <Compile Include="Forms\EditAuthorForm.cs">
       <SubType>Form</SubType>

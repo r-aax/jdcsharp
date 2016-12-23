@@ -6,37 +6,37 @@ using System;
 
 using Sea.Tools;
 
-namespace Sea.Core.Authors
+namespace Sea.Core.Publishers
 {
     /// <summary>
-    /// Authors list class.
+    /// Publishers list class.
     /// </summary>
-    [XmlType("AuthorsList")]
-    public class AuthorsListSpecial
+    [XmlType("PublishersList")]
+    public class PublishersListSpecial
     {
         /// <summary>
-        /// List of authors.
+        /// List of publishers.
         /// </summary>
-        public List<AuthorSpecial> Items { get; set; }
+        public List<PublisherSpecial> Items { get; set; }
 
         /// <summary>
         /// Empty constructor.
         /// </summary>
-        public AuthorsListSpecial()
+        public PublishersListSpecial()
         {
         }
 
         /// <summary>
-        /// List of authors for serialization.
+        /// Constructor from list of publishers.
         /// </summary>
-        /// <param name="al">authors list</param>
-        public AuthorsListSpecial(AuthorsList al)
+        /// <param name="pl">publishers list</param>
+        public PublishersListSpecial(PublishersList pl)
         {
-            Items = new List<AuthorSpecial>();
+            Items = new List<PublisherSpecial>();
 
-            for (int i = 0; i < al.Count; i++)
+            for (int i = 0; i < pl.Count; i++)
             {
-                Items.Add(new AuthorSpecial(al[i]));
+                Items.Add(new PublisherSpecial(pl[i]));
             }
         }
 
