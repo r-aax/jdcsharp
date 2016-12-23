@@ -10,6 +10,7 @@ using Lib.Utils;
 
 using Sea.Core;
 using Sea.Core.Books;
+using Sea.Core.Authors;
 using Sea.Tools;
 using Sea.Core.Categories;
 
@@ -174,6 +175,16 @@ namespace Sea.Forms
             {
                 ShowLastAction("data restore is completed");
             }
+        }
+
+        /// <summary>
+        /// Convert data to new format.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void ToolConvertMI_Click(object sender, EventArgs e)
+        {
+            (new AuthorsListSpecial(Sea.Authors)).XmlSerialize(Parameters.AuthorsXMLFullFilename + ".converted");
         }
 
         /// <summary>

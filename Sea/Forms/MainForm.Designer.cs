@@ -45,6 +45,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.ToolsBackupMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsRestoreMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.ToolConvertMI = new System.Windows.Forms.ToolStripMenuItem();
             this.correctionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteExtraCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteExtraBookFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -156,7 +158,9 @@
             this.ToolsDearchiveMI,
             this.toolStripMenuItem1,
             this.ToolsBackupMI,
-            this.ToolsRestoreMI});
+            this.ToolsRestoreMI,
+            this.toolStripSeparator2,
+            this.ToolConvertMI});
             this.ToolsArchiveMI.Name = "ToolsArchiveMI";
             this.ToolsArchiveMI.Size = new System.Drawing.Size(47, 20);
             this.ToolsArchiveMI.Text = "Tools";
@@ -193,6 +197,18 @@
             this.ToolsRestoreMI.Size = new System.Drawing.Size(152, 22);
             this.ToolsRestoreMI.Text = "Restore";
             this.ToolsRestoreMI.Click += new System.EventHandler(this.ToolsRestoreMI_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // ToolConvertMI
+            // 
+            this.ToolConvertMI.Name = "ToolConvertMI";
+            this.ToolConvertMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolConvertMI.Text = "Convert";
+            this.ToolConvertMI.Click += new System.EventHandler(this.ToolConvertMI_Click);
             // 
             // correctionToolStripMenuItem
             // 
@@ -429,6 +445,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem ToolsBackupMI;
         private System.Windows.Forms.DataGridView BooksDGV;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem ToolConvertMI;
     }
 }
 

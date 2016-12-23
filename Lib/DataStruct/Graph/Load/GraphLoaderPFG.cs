@@ -833,7 +833,7 @@ namespace Lib.DataStruct.Graph.Load
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 is_succ = false;
             }
@@ -875,7 +875,7 @@ namespace Lib.DataStruct.Graph.Load
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 is_succ = false;
             }
@@ -921,7 +921,7 @@ namespace Lib.DataStruct.Graph.Load
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 is_succ = false;
             }
