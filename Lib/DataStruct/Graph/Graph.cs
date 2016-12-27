@@ -233,7 +233,7 @@ namespace Lib.DataStruct.Graph
             MaxNodeId = -1;
             for (int i = 0; i < s.Nodes.Count; i++)
             {
-                Node n = new Node(s.Nodes[i], this);
+                Node n = new Node(this, s.Nodes[i]);
                 Nodes.Add(n);
 
                 if (n.Id > MaxNodeId)
@@ -248,6 +248,8 @@ namespace Lib.DataStruct.Graph
             {
                 Edge e = new Edge(this, s.Edges[i]);
                 Edges.Add(e);
+                e.A.Edges.Add(e);
+                e.B.Edges.Add(e);
             }
         }
 
@@ -275,7 +277,7 @@ namespace Lib.DataStruct.Graph
         /// <returns>node</returns>
         public Node AddNode()
         {
-            Node node = new Node(MaxNodeId + 1, this);
+            Node node = new Node(this, MaxNodeId + 1);
 
             if (IsCopyNodeDrawProperties)
             {

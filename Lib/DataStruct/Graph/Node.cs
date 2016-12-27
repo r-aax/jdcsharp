@@ -255,9 +255,9 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="id">identifier</param>
         /// <param name="parent">parent graph</param>
-        public Node(int id, Graph parent)
+        /// <param name="id">identifier</param>
+        public Node(Graph parent, int id)
         {
             Id = id;
             Label = Id.ToString();
@@ -269,10 +269,10 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Constructor from node serialized.
         /// </summary>
-        /// <param name="ns">node serialized</param>
         /// <param name="parent">parent graph</param>
-        public Node(NodeSerialized ns, Graph parent)
-            : this(ns.Id, parent)
+        /// <param name="ns">node serialized</param>
+        public Node(Graph parent, NodeSerialized ns)
+            : this(parent, ns.Id)
         {
             Label = ns.Label;
             SetPosition(ns.Position);
