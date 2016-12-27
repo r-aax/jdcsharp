@@ -1907,6 +1907,7 @@ namespace GraphMaster.Windows
                 if (extension == ".xml")
                 {
                     Graph = Graph.XmlDeserialize(filename);
+                    Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));
                 }
                 else if (extension == ".pfg")
                 {
