@@ -23,6 +23,12 @@ namespace Lib.DataStruct.Graph.Serialized
         public int Id;
 
         /// <summary>
+        /// Label.
+        /// </summary>
+        [XmlAttribute]
+        public string Label;
+
+        /// <summary>
         /// 2D or 3D position.
         /// </summary>
         [XmlAttribute]
@@ -54,6 +60,7 @@ namespace Lib.DataStruct.Graph.Serialized
         public NodeSerialized(Node n)
         {
             Id = n.Id;
+            Label = n.Label;
             Position = n.PositionString();
             Weight = n.Weight;
 

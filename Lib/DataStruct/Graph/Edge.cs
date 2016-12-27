@@ -4,6 +4,7 @@ using System;
 using System.Xml.Serialization;
 using System.IO;
 
+using Lib.DataStruct.Graph.Serialized;
 using Lib.DataStruct.Graph.DrawProperties;
 
 namespace Lib.DataStruct.Graph
@@ -112,6 +113,27 @@ namespace Lib.DataStruct.Graph
             Label = "";
             Weight = 0.0;
             IsOriented = is_oriented;
+        }
+
+        /// <summary>
+        /// Constructor from edge serialized.
+        /// </summary>
+        /// <param name="parent">parent graph</param>
+        /// <param name="es">esge serialized</param>
+        public Edge(Graph parent, EdgeSerialized es)
+            : this(parent, parent.FindNode(es.AId), parent.FindNode(es.BId), es.IsOriented)
+        {
+            Label = es.Label;
+            Weight = es.Weight;
+
+            if (es.DrawProperties == null)
+            {
+                DrawProperties = null;
+            }
+            else
+            {
+                DrawProperties = new EdgeDrawProperties(es.DrawProperties);
+            }
         }
 
         /// <summary>

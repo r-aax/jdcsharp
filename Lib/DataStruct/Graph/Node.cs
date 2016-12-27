@@ -8,6 +8,7 @@ using System.IO;
 using System.Diagnostics;
 
 using Lib.DataStruct.Graph.DrawProperties;
+using Lib.DataStruct.Graph.Serialized;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
 using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
 
@@ -263,6 +264,28 @@ namespace Lib.DataStruct.Graph
             Weight = 0.0;
             Parent = parent;
             Edges = new List<Edge>();
+        }
+
+        /// <summary>
+        /// Constructor from node serialized.
+        /// </summary>
+        /// <param name="ns">node serialized</param>
+        /// <param name="parent">parent graph</param>
+        public Node(NodeSerialized ns, Graph parent)
+            : this(ns.Id, parent)
+        {
+            Label = ns.Label;
+            SetPosition(ns.Position);
+            Weight = ns.Weight;
+
+            if (ns.DrawProperties == null)
+            {
+                DrawProperties = null;
+            }
+            else
+            {
+                DrawProperties = new NodeDrawProperties(ns.DrawProperties);
+            }
         }
 
         /// <summary>
