@@ -153,9 +153,9 @@ namespace GraphMaster.Windows
                 EdgeDrawPropertiesOff();
             }
 
-            SelectedNodeColorTB.Background = new SolidColorBrush(Graph.DrawProperties.DefaultSelectedNodeColor.ToSWMColor());
-            CapturedNodeColorTB.Background = new SolidColorBrush(Graph.DrawProperties.DefaultCapturedNodeColor.ToSWMColor());
-            SelectedEdgeColorTB.Background = new SolidColorBrush(Graph.DrawProperties.DefaultSelectedEdgeColor.ToSWMColor());
+            SelectedNodeColorTB.Background = new SolidColorBrush(Graph.DrawProperties.SelectedNodeColor.ToSWMColor());
+            CapturedNodeColorTB.Background = new SolidColorBrush(Graph.DrawProperties.CapturedNodeColor.ToSWMColor());
+            SelectedEdgeColorTB.Background = new SolidColorBrush(Graph.DrawProperties.SelectedEdgeColor.ToSWMColor());
         }
 
         /// <summary>
@@ -358,9 +358,9 @@ namespace GraphMaster.Windows
             }
 
             // Other properties.
-            Graph.DrawProperties.DefaultSelectedNodeColor = new Lib.Draw.Color((SelectedNodeColorTB.Background as SolidColorBrush).Color);
-            Graph.DrawProperties.DefaultCapturedNodeColor = new Lib.Draw.Color((CapturedNodeColorTB.Background as SolidColorBrush).Color);
-            Graph.DrawProperties.DefaultSelectedEdgeColor = new Lib.Draw.Color((SelectedEdgeColorTB.Background as SolidColorBrush).Color);
+            Graph.DrawProperties.SelectedNodeColor = new Lib.Draw.Color((SelectedNodeColorTB.Background as SolidColorBrush).Color);
+            Graph.DrawProperties.CapturedNodeColor = new Lib.Draw.Color((CapturedNodeColorTB.Background as SolidColorBrush).Color);
+            Graph.DrawProperties.SelectedEdgeColor = new Lib.Draw.Color((SelectedEdgeColorTB.Background as SolidColorBrush).Color);
 
             Close();
         }

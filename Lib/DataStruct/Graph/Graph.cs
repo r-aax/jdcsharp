@@ -223,10 +223,10 @@ namespace Lib.DataStruct.Graph
             // Draw properties.
             DrawProperties = new GraphDrawProperties();
             DrawProperties.DefaultNodeDrawProperties = new NodeDrawProperties(s.DrawProperties.DefaultNodeDrawProperties);
-            DrawProperties.DefaultSelectedNodeColor = new Draw.Color(s.DrawProperties.DefaultSelectedNodeColor);
-            DrawProperties.DefaultCapturedNodeColor = new Draw.Color(s.DrawProperties.DefaultCapturedNodeColor);
+            DrawProperties.SelectedNodeColor = new Draw.Color(s.DrawProperties.DefaultSelectedNodeColor);
+            DrawProperties.CapturedNodeColor = new Draw.Color(s.DrawProperties.DefaultCapturedNodeColor);
             DrawProperties.DefaultEdgeDrawProperties = new EdgeDrawProperties(s.DrawProperties.DefaultEdgeDrawProperties);
-            DrawProperties.DefaultSelectedEdgeColor = new Draw.Color(s.DrawProperties.DefaultSelectedEdgeColor);
+            DrawProperties.SelectedEdgeColor = new Draw.Color(s.DrawProperties.DefaultSelectedEdgeColor);
 
             // Nodes.
             Nodes = new List<Node>();

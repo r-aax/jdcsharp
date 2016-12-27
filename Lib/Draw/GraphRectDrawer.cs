@@ -131,7 +131,7 @@ namespace Lib.Draw
             if (node.IsSelected)
             {
                 Color save_color = nprops.Color;
-                nprops.Color = node.Parent.DrawProperties.DefaultSelectedNodeColor;
+                nprops.Color = node.Parent.DrawProperties.SelectedNodeColor;
                 DrawNode(node, nprops);
                 nprops.Color = save_color;
             }
@@ -182,7 +182,7 @@ namespace Lib.Draw
             if (edge.IsSelected)
             {
                 Color save_color = eprops.Color;
-                eprops.Color = edge.Parent.DrawProperties.DefaultSelectedEdgeColor;
+                eprops.Color = edge.Parent.DrawProperties.SelectedEdgeColor;
                 DrawEdge(edge, eprops);
                 eprops.Color = save_color;
             }

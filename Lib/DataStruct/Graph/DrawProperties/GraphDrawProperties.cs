@@ -23,19 +23,19 @@ namespace Lib.DataStruct.Graph.DrawProperties
         public EdgeDrawProperties DefaultEdgeDrawProperties = null;
 
         /// <summary>
-        /// Default selected node color.
+        /// Selected node color.
         /// </summary>
-        public Color DefaultSelectedNodeColor = null;
+        public Color SelectedNodeColor = null;
 
         /// <summary>
-        /// Default captured node color.
+        /// Captured node color.
         /// </summary>
-        public Color DefaultCapturedNodeColor = null;
+        public Color CapturedNodeColor = null;
 
         /// <summary>
-        /// Default selected edge color.
+        /// Selected edge color.
         /// </summary>
-        public Color DefaultSelectedEdgeColor = null;
+        public Color SelectedEdgeColor = null;
 
         /// <summary>
         /// Default constructor.
@@ -48,9 +48,9 @@ namespace Lib.DataStruct.Graph.DrawProperties
             DefaultEdgeDrawProperties = new EdgeDrawProperties();
 
             // Colors.
-            DefaultSelectedNodeColor = new Color(System.Windows.Media.Colors.Red);
-            DefaultCapturedNodeColor = new Color(System.Windows.Media.Colors.Orange);
-            DefaultSelectedEdgeColor = new Color(System.Windows.Media.Colors.Red);
+            SelectedNodeColor = new Color(System.Windows.Media.Colors.Red);
+            CapturedNodeColor = new Color(System.Windows.Media.Colors.Orange);
+            SelectedEdgeColor = new Color(System.Windows.Media.Colors.Red);
         }
     }
 }

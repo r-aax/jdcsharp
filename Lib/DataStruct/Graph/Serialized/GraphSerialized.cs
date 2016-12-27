@@ -95,17 +95,17 @@ namespace Lib.DataStruct.Graph.Serialized
             DrawProperties.DefaultNodeDrawProperties = (gdp.DefaultNodeDrawProperties != null)
                                                        ? gdp.DefaultNodeDrawProperties.ToString()
                                                        : null;
-            DrawProperties.DefaultSelectedNodeColor = (gdp.DefaultSelectedNodeColor != null)
-                                                      ? gdp.DefaultSelectedNodeColor.ToString()
+            DrawProperties.DefaultSelectedNodeColor = (gdp.SelectedNodeColor != null)
+                                                      ? gdp.SelectedNodeColor.ToString()
                                                       : null;
-            DrawProperties.DefaultCapturedNodeColor = (gdp.DefaultCapturedNodeColor != null)
-                                                      ? gdp.DefaultCapturedNodeColor.ToString()
+            DrawProperties.DefaultCapturedNodeColor = (gdp.CapturedNodeColor != null)
+                                                      ? gdp.CapturedNodeColor.ToString()
                                                       : null;
             DrawProperties.DefaultEdgeDrawProperties = (gdp.DefaultEdgeDrawProperties != null)
                                                        ? gdp.DefaultEdgeDrawProperties.ToString()
                                                        : null;
-            DrawProperties.DefaultSelectedEdgeColor = (gdp.DefaultSelectedEdgeColor != null)
-                                                      ? gdp.DefaultSelectedEdgeColor.ToString()
+            DrawProperties.DefaultSelectedEdgeColor = (gdp.SelectedEdgeColor != null)
+                                                      ? gdp.SelectedEdgeColor.ToString()
                                                       : null;
 
             // Nodes.

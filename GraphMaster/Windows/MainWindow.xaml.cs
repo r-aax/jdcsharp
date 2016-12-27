@@ -179,7 +179,7 @@ namespace GraphMaster.Windows
             {
                 NodeDrawProperties nprops = GUIProcessor.Node.DrawProperties;
                 Lib.Draw.Color save_color = nprops.Color;
-                nprops.Color = Graph.DrawProperties.DefaultCapturedNodeColor; 
+                nprops.Color = Graph.DrawProperties.CapturedNodeColor; 
                 GraphDrawer.DrawNode(GUIProcessor.Node, nprops);
                 nprops.Color = save_color;
             }
