@@ -58,6 +58,9 @@
                 <MenuItem Name="PictureNameMI" Header="Name" Click="PictureNameMI_Click" />
                 <MenuItem Name="PictureSaveMI" Header="Save" Click="PictureSaveMI_Click" />
             </MenuItem>
+            <MenuItem Header="Settings">
+                <MenuItem Name="SettingsDefaultDrawPropertiesMI" Header="Default draw properties" Click="SettingsDefaultDrawPropertiesMI_Click"/>
+            </MenuItem>
             <MenuItem Header="Examples">
                 <MenuItem Header="Common">
                     <MenuItem Name="ExampleEmpty" Header="Empty graph" Click="ExampleEmpty_Click" />

@@ -1,0 +1,95 @@
+﻿<Window x:Class="GraphMaster.Windows.EditGraphDrawPropertiesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GraphMaster.Windows"
+        mc:Ignorable="d"
+        Title="Edit graph draw properties" SizeToContent="WidthAndHeight" Loaded="Window_Loaded">
+    <StackPanel Orientation="Vertical">
+        <GroupBox Name="DefNodeGB" Header="Default node draw properties">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="DefNodeHasDrawPropertiesCB" Grid.Row="0" Grid.Column="1" Content="Enabled" Margin="5" Checked="DefNodeHasDrawPropertiesCB_Checked" Unchecked="DefNodeHasDrawPropertiesCB_Unchecked"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Inner radius" Margin="5"/>
+                <TextBox Name="DefNodeInnerRadiusTB" Grid.Row="1" Grid.Column="1" Width="150" Margin="5"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Border radius" Margin="5"/>
+                <TextBox Name="DefNodeBorderRadiusTB" Grid.Row="2" Grid.Column="1" Width="150" Margin="5"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Color" Margin="5"/>
+                <TextBox Name="DefNodeColorTB"  Grid.Row="3" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="DefNodeColorTB_MouseDoubleClick"/>
+                <Label Grid.Row="4" Grid.Column="0" Content="Border color" Margin="5"/>
+                <TextBox Name="DefNodeBorderColorTB" Grid.Row="4" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="DefNodeBorderColorTB_MouseDoubleClick"/>
+                <Label Grid.Row="5" Grid.Column="0" Content="Label visibility" Margin="5"/>
+                <ComboBox Name="DefNodeLabelVisibilityCB" Grid.Row="5" Grid.Column="1" Margin="5">
+                    <TextBlock>No</TextBlock>
+                    <TextBlock>Yes</TextBlock>
+                    <TextBlock>Parent</TextBlock>
+                </ComboBox>
+                <Label Grid.Row="6" Grid.Column="0" Content="Label offset" Margin="5"/>
+                <StackPanel Grid.Row="6" Grid.Column="1" Orientation="Horizontal">
+                    <TextBox Name="DefNodeLabelOffsetX_TB" Width="70" Margin="5"/>
+                    <TextBox Name="DefNodeLabelOffsetY_TB" Width="70" Margin="5"/>
+                </StackPanel>
+                <Label Grid.Row="7" Grid.Column="0" Content="Font size" Margin="5"/>
+                <TextBox Name="DefNodeFontSizeTB" Grid.Row="7" Grid.Column="1" Width="150" Margin="5"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Name="DefEdgeGB" Header="Default edge draw properties">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <CheckBox Name="DefEdgeHasDrawPropertiesCB" Grid.Row="0" Grid.Column="1" Content="Enabled" Margin="5" Checked="DefEdgeHasDrawPropertiesCB_Checked" Unchecked="DefEdgeHasDrawPropertiesCB_Unchecked"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Color" Margin="5"/>
+                <TextBox Name="DefEdgeColorTB"  Grid.Row="1" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="DefEdgeColorTB_MouseDoubleClick"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Thickness" Margin="5"/>
+                <TextBox Name="DefEdgeThicknessTB" Grid.Row="2" Grid.Column="1" Width="150" Margin="5"/>
+                <Label Grid.Row="3" Grid.Column="0" Content="Nodes margin" Margin="5"/>
+                <TextBox Name="DefEdgeNodesMarginTB" Grid.Row="3" Grid.Column="1" Width="150" Margin="5"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Other">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="Selected node color" Margin="5"/>
+                <TextBox Name="SelectedNodeColorTB"  Grid.Row="0" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="SelectedNodeColorTB_MouseDoubleClick"/>
+                <Label Grid.Row="1" Grid.Column="0" Content="Captured node color" Margin="5"/>
+                <TextBox Name="CapturedNodeColorTB"  Grid.Row="1" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="CapturedNodeColorTB_MouseDoubleClick"/>
+                <Label Grid.Row="2" Grid.Column="0" Content="Selected edge color" Margin="5"/>
+                <TextBox Name="SelectedEdgeColorTB"  Grid.Row="2" Grid.Column="1" Width="150" Margin="5" MouseDoubleClick="SelectedEdgeColorTB_MouseDoubleClick"/>
+            </Grid>
+        </GroupBox>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="AcceptB" Content="Accept" MinWidth="75" Margin="10" Click="AcceptB_Click"></Button>
+            <Button x:Name="CancelB" Content="Cancel" MinWidth="75" Margin="10" Click="CancelB_Click"></Button>
+        </StackPanel>
+    </StackPanel>
+</Window>

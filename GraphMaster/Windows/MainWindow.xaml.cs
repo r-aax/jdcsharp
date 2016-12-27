@@ -2154,5 +2154,18 @@ namespace GraphMaster.Windows
             Graph.SelectIncident(false, true);
             Paint();
         }
+
+        /// <summary>
+        /// Click on menu item edit graph draw properties.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void SettingsDefaultDrawPropertiesMI_Click(object sender, RoutedEventArgs e)
+        {
+            EditGraphDrawPropertiesWindow w = new EditGraphDrawPropertiesWindow();
+            w.Graph = Graph;
+            w.ShowDialog();
+            Paint();
+        }
     }
 }

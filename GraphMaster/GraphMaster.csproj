@@ -75,6 +75,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Windows\EditGraphDrawPropertiesWindow.xaml.cs">
+      <DependentUpon>EditGraphDrawPropertiesWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\EditNodesEdgesWindow.xaml.cs">
       <DependentUpon>EditNodesEdgesWindow.xaml</DependentUpon>
     </Compile>
@@ -97,6 +100,10 @@
       <DependentUpon>PictureNameWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="Windows\AreaParametersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditGraphDrawPropertiesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
