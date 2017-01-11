@@ -59,6 +59,7 @@
     <Compile Include="DataStruct\Graph\GraphDimensionality.cs" />
     <Compile Include="DataStruct\Graph\GraphLayoutManager.cs" />
     <Compile Include="DataStruct\Graph\Load\GraphLoaderPFG.cs" />
+    <Compile Include="DataStruct\Graph\Partitioning\UniformGreedyPartitioner.cs" />
     <Compile Include="DataStruct\Graph\Serialized\EdgeSerialized.cs" />
     <Compile Include="DataStruct\Graph\Serialized\GraphSerialized.cs" />
     <Compile Include="DataStruct\Graph\Node.cs" />
