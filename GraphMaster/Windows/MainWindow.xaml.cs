@@ -2189,5 +2189,25 @@ namespace GraphMaster.Windows
                 Paint();
             }
         }
+
+        /// <summary>
+        /// Click on menu item with Random Volume Points partitioning.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AlgorithmsPartitioningRVP_MI_Click(object sender, RoutedEventArgs e)
+        {
+            int partitions_count = 5;
+
+            EditIntWindow w = new EditIntWindow(partitions_count, "Enter partitions count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                RandomVolumePointsPartitioner.Partition(Graph, w.Result);
+                DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
+                Paint();
+            }
+        }
     }
 }

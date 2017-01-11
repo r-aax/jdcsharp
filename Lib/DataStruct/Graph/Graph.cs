@@ -8,6 +8,7 @@ using System.IO;
 
 using Lib.DataStruct.Graph.DrawProperties;
 using Lib.DataStruct.Graph.Serialized;
+using Lib.Maths.Geometry.Geometry3D;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
 using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
@@ -635,6 +636,17 @@ namespace Lib.DataStruct.Graph
         public Rect2D WraparoundRect(double margin_k)
         {
             return WraparoundRect(margin_k, 1.0);
+        }
+
+        /// <summary>
+        /// Wraparound parallelepiped for graph.
+        /// </summary>
+        /// <returns>parallelepiped</returns>
+        public Parallelepiped WraparoundParallelepiped()
+        {
+            Debug.Assert(Is3D, "Need 3D graph for wraparound parallelepiped.");
+
+            return new Parallelepiped(MinX(), MaxX(), MinY(), MaxY(), MinZ(), MaxZ());
         }
 
         /// <summary>

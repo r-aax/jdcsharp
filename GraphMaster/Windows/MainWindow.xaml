@@ -46,6 +46,7 @@
             <MenuItem Header="Algorithms">
                 <MenuItem Header="Partitioning">
                     <MenuItem Name="AlgorithmsPartitioningUG_MI" Header="Uniform Greedy" Click="AlgorithmsPartitioningUG_MI_Click"/>
+                    <MenuItem Name="AlgorithmsPartitioningRVP_MI" Header="Random Volume Points" Click="AlgorithmsPartitioningRVP_MI_Click"/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Area">

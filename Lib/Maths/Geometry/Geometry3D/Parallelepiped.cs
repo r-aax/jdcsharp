@@ -47,6 +47,22 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
+        /// Constructor from all min and max values.
+        /// </summary>
+        /// <param name="x_min">min <c>x</c></param>
+        /// <param name="x_max">max <c>x</c></param>
+        /// <param name="y_min">min <c>y</c></param>
+        /// <param name="y_max">max <c>y</c></param>
+        /// <param name="z_min">min <c>z</c></param>
+        /// <param name="z_max">max <c>z</c></param>
+        public Parallelepiped(double x_min, double x_max,
+                              double y_min, double y_max,
+                              double z_min, double z_max)
+            : this(new Interval(x_min, x_max), new Interval(y_min, y_max), new Interval(z_min, z_max))
+        {
+        }
+
+        /// <summary>
         /// Left side.
         /// </summary>
         public double Left
