@@ -85,5 +85,14 @@ namespace Lib.Maths.Numbers
         {
             return RandomBool(0.5);
         }
+
+        /// <summary>
+        /// Random byte.
+        /// </summary>
+        /// <returns>random byte</returns>
+        public static byte RandomByte()
+        {
+            return (byte)RandomInInterval(0, 255);
+        }
     }
 }

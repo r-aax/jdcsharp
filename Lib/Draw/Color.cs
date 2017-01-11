@@ -4,6 +4,8 @@ using System;
 using System.Diagnostics;
 using System.Windows.Media;
 
+using Lib.Maths.Numbers;
+
 namespace Lib.Draw
 {
     /// <summary>
@@ -149,6 +151,32 @@ namespace Lib.Draw
         public System.Drawing.Color ToSDColor()
         {
             return System.Drawing.Color.FromArgb(A, R, G, B);
+        }
+
+        /// <summary>
+        /// Get random color.
+        /// </summary>
+        /// <returns>random color</returns>
+        public static Color Random()
+        {
+            return new Color(0, Randoms.RandomByte(), Randoms.RandomByte(), Randoms.RandomByte());               
+        }
+
+        /// <summary>
+        /// Get array of random colors.
+        /// </summary>
+        /// <param name="n">count of colors</param>
+        /// <returns>array of random colors</returns>
+        public static Color[] ArrayOfRandoms(int n)
+        {
+            Color[] arr = new Color[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                arr[i] = Random();
+            }
+
+            return arr;
         }
     }
 }
