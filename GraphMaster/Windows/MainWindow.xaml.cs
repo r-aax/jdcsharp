@@ -2186,6 +2186,7 @@ namespace GraphMaster.Windows
             {
                 UniformGreedyPartitioner.Partition(Graph, w.Result);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
+                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
             }
         }
@@ -2206,6 +2207,7 @@ namespace GraphMaster.Windows
             {
                 RandomVolumePointsPartitioner.Partition(Graph, w.Result);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
+                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
             }
         }
