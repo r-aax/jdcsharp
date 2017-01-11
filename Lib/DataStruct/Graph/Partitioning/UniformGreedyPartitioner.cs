@@ -39,7 +39,7 @@ namespace Lib.DataStruct.Graph.Partitioning
             // Erase nodes labels.
             foreach (Node n in g.Nodes)
             {
-                n.Label = "";
+                n.Partition = -1;
             }
 
             // Outer cycle.
@@ -49,7 +49,7 @@ namespace Lib.DataStruct.Graph.Partitioning
                 Node max_node = null;
                 foreach (Node n in g.Nodes)
                 {
-                    if (n.Label != "")
+                    if (n.Partition != -1)
                     {
                         continue;
                     }
@@ -79,7 +79,7 @@ namespace Lib.DataStruct.Graph.Partitioning
                 }
 
                 // We have to put node max_node to partition min_partition_index.
-                max_node.Label = min_partition_index.ToString();
+                max_node.Partition = min_partition_index;
                 partitions_weights[min_partition_index] += max_node.Weight;
             }
         }

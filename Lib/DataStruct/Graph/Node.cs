@@ -52,6 +52,15 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Partition (number).
+        /// </summary>
+        public int Partition
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Position (2D or 3D point).
         /// </summary>
         private object Position = null;
@@ -273,6 +282,7 @@ namespace Lib.DataStruct.Graph
             Id = id;
             Label = Id.ToString();
             Weight = 0.0;
+            Partition = 0;
             Parent = parent;
             Edges = new List<Edge>();
         }

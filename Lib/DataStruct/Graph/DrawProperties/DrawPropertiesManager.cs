@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 using Lib.Draw;
-using Lib.Utils;
 
 namespace Lib.DataStruct.Graph.DrawProperties
 {
@@ -33,7 +32,7 @@ namespace Lib.DataStruct.Graph.DrawProperties
                     n.CreateOwnDrawProperties();
                 }
 
-                int cn = Lib.Utils.Convert.GetInt(n.Label);
+                int cn = n.Partition;
 
                 Debug.Assert(cn < cc, "Wrong color in graph node label.");
 
