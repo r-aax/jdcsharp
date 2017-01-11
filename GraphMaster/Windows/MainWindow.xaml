@@ -43,6 +43,11 @@
                 <MenuItem Name="Transform2DTo3D" Header="Transform 2D -> 3D" Click="Transform2DTo3D_Click" />
                 <MenuItem Name="Transform3DTo2D" Header="Transform 3D -> 2D" Click="Transform3DTo2D_Click" />
             </MenuItem>
+            <MenuItem Header="Algorithms">
+                <MenuItem Header="Partitioning">
+                    <MenuItem Name="AlgorithmsPartitioningUG_MI" Header="Uniform Greedy" Click="AlgorithmsPartitioningUG_MI_Click"/>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Area">
                 <MenuItem Name="AreaZoomInMI" Header="Zoom in" Click="AreaZoomInMI_Click"/>
                 <MenuItem Name="AreaZoomOutMI" Header="Zoom out" Click="AreaZoomOutMI_Click"/>

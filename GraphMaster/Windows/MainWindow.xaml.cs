@@ -15,6 +15,7 @@ using Lib.Draw;
 using Lib.DataStruct.Graph;
 using Lib.DataStruct.Graph.DrawProperties;
 using Lib.DataStruct.Graph.Load;
+using Lib.DataStruct.Graph.Partitioning;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Maths.Geometry.Geometry3D;
 using SWPoint = System.Windows.Point;
@@ -2167,6 +2168,26 @@ namespace GraphMaster.Windows
             w.Graph = Graph;
             w.ShowDialog();
             Paint();
+        }
+
+        /// <summary>
+        /// Click on menu item with Uniform Greedy partitioning.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void AlgorithmsPartitioningUG_MI_Click(object sender, RoutedEventArgs e)
+        {
+            int partitions_count = 5;
+
+            EditIntWindow w = new EditIntWindow(partitions_count, "Enter partitions count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                UniformGreedyPartitioner.Partition(Graph, w.Result);
+                DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
+                Paint();
+            }
         }
     }
 }

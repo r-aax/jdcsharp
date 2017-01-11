@@ -51,6 +51,7 @@
     <Compile Include="DataStruct\ColoresManager.cs" />
     <Compile Include="DataStruct\Graph\DrawProperties\EdgeDrawProperties.cs" />
     <Compile Include="DataStruct\Graph\DrawProperties\GraphDrawProperties.cs" />
+    <Compile Include="DataStruct\Graph\DrawProperties\DrawPropertiesManager.cs" />
     <Compile Include="DataStruct\Graph\DrawProperties\NodeDrawProperties.cs" />
     <Compile Include="DataStruct\Graph\DrawProperties\Visibility.cs" />
     <Compile Include="DataStruct\Graph\Edge.cs" />

@@ -159,7 +159,7 @@ namespace Lib.Draw
         /// <returns>random color</returns>
         public static Color Random()
         {
-            return new Color(0, Randoms.RandomByte(), Randoms.RandomByte(), Randoms.RandomByte());               
+            return new Color(255, Randoms.RandomByte(), Randoms.RandomByte(), Randoms.RandomByte());               
         }
 
         /// <summary>

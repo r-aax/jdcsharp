@@ -80,6 +80,7 @@ namespace Lib.DataStruct.Graph.Partitioning
 
                 // We have to put node max_node to partition min_partition_index.
                 max_node.Label = min_partition_index.ToString();
+                partitions_weights[min_partition_index] += max_node.Weight;
             }
         }
     }

@@ -91,6 +91,17 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Set own draw properties for node.
+        /// </summary>
+        public void CreateOwnDrawProperties()
+        {
+            if (IsParentDrawProperties)
+            {
+                _DrawProperties = DrawProperties.Clone() as NodeDrawProperties;
+            }
+        }
+
+        /// <summary>
         /// Check if position is 2D.
         /// </summary>
         /// <returns><c>true</c> - if position is 2D, <c>false</c> - otherwise.</returns>
