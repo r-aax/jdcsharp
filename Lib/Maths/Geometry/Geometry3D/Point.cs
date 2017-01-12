@@ -136,5 +136,15 @@ namespace Lib.Maths.Geometry.Geometry3D
         {
             return new Point(Vector.Random(par));
         }
+
+        /// <summary>
+        /// Random point on parallelepiped surface.
+        /// </summary>
+        /// <param name="par">parallelepiped</param>
+        /// <returns>random point</returns>
+        public static new Point RandomOnSurface(Parallelepiped par)
+        {
+            return new Point(Vector.RandomOnSurface(par));
+        }
     }
 }

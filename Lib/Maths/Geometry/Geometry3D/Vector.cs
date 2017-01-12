@@ -408,5 +408,44 @@ namespace Lib.Maths.Geometry.Geometry3D
                               Randoms.RandomInInterval(par.YInterval),
                               Randoms.RandomInInterval(par.ZInterval));
         }
+
+        /// <summary>
+        /// Random vector on surface of parallelepiped.
+        /// </summary>
+        /// <param name="par">parallelepiped</param>
+        /// <returns>random vector</returns>
+        public static Vector RandomOnSurface(Parallelepiped par)
+        {
+            Interval xi = par.XInterval;
+            Interval yi = par.YInterval;
+            Interval zi = par.ZInterval;
+            double sx = yi.Length * zi.Length;
+            double sy = xi.Length * zi.Length;
+            double sz = xi.Length * yi.Length;
+            double s = sx + sy + sz;
+            double r = Randoms.RandomInInterval(0.0, s);
+
+            if (r <= sx)
+            {
+                // On x facet.
+                return new Vector(Randoms.RandomBool() ? par.Right : par.Left,
+                                  Randoms.RandomInInterval(par.YInterval),
+                                  Randoms.RandomInInterval(par.ZInterval));
+            }
+            else if (r <= sx + sy)
+            {
+                // On y facet.
+                return new Vector(Randoms.RandomInInterval(par.XInterval),
+                                  Randoms.RandomBool() ? par.Top : par.Bottom,
+                                  Randoms.RandomInInterval(par.ZInterval));
+            }
+            else
+            {
+                // On z facet.
+                return new Vector(Randoms.RandomInInterval(par.XInterval),
+                                  Randoms.RandomInInterval(par.YInterval),
+                                  Randoms.RandomBool() ? par.Front : par.Back);
+            }
+        }
     }
 }
