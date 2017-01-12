@@ -39,6 +39,27 @@ namespace Lib.DataStruct.Graph.DrawProperties
                 n.DrawProperties.InnerRadius = n.DrawProperties.BorderRadius;
                 n.DrawProperties.Color = colors[cn];
             }
+
+            // After this we want to repaint edges too.
+            foreach (Edge e in g.Edges)
+            {
+                if (e.A.Partition == e.B.Partition)
+                {
+                    if (e.IsParentDrawProperties)
+                    {
+                        e.CreateOwnDrawProperties();
+                    }
+
+                    e.DrawProperties.Color = colors[e.A.Partition];
+                }
+                else
+                {
+                    if (!e.IsParentDrawProperties)
+                    {
+                        e.DrawProperties.Color = e.Parent.DrawProperties.DefaultEdgeDrawProperties.Color;
+                    }
+                }
+            }
         }
     }
 }

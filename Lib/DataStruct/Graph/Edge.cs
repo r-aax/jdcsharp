@@ -99,6 +99,17 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Create own draw properties from parent.
+        /// </summary>
+        public void CreateOwnDrawProperties()
+        {
+            if (IsParentDrawProperties)
+            {
+                _DrawProperties = DrawProperties.Clone() as EdgeDrawProperties;
+            }
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="parent">parent graph</param>
