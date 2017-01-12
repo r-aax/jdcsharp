@@ -2194,8 +2194,8 @@ namespace GraphMaster.Windows
         /// <summary>
         /// Click on menu item with Random Volume Points partitioning.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
         private void AlgorithmsPartitioningRVPS_MI_Click(object sender, RoutedEventArgs e)
         {
             int partitions_count = 5;
@@ -2212,14 +2212,46 @@ namespace GraphMaster.Windows
             }
         }
 
+        /// <summary>
+        /// Click on menu item with Random Volume Points to Nearest Propagation.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
         private void AlgorithmsPartitioningRVPNP_MI_Click(object sender, RoutedEventArgs e)
         {
+            int partitions_count = 5;
 
+            EditIntWindow w = new EditIntWindow(partitions_count, "Enter partitions count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                RandomVolumePointsPartitioner.PartirionToNearestPropagation(Graph, w.Result);
+                DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
+                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
+                Paint();
+            }
         }
 
+        /// <summary>
+        /// Click on menu item with Random Volume Points with Edges Propagation.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
         private void AlgorithmsPartitioningRVPEP_MI_Click(object sender, RoutedEventArgs e)
         {
+            int partitions_count = 5;
 
+            EditIntWindow w = new EditIntWindow(partitions_count, "Enter partitions count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, w.Result);
+                DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
+                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
+                Paint();
+            }
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using Lib.Maths.Geometry.Geometry3D;
 
@@ -14,8 +15,27 @@ namespace Lib.DataStruct.Graph.Partitioning
     /// associate each node with nearest point in simple case
     /// or apply some propagation methods.
     /// </summary>
-    public class RandomVolumePointsPartitioner
+    public class RandomVolumePointsPartitioner : Partitioner
     {
+        /// <summary>
+        /// Get array of random points.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="pc">partitions count</param>
+        /// <returns>random points</returns>
+        private static Point[] RandomPoints(Graph g, int pc)
+        {
+            Parallelepiped par = g.WraparoundParallelepiped();
+            Point[] ps = new Point[pc];
+
+            for (int i = 0; i < pc; i++)
+            {
+                ps[i] = Point.Random(par);
+            }
+
+            return ps;
+        }
+
         /// <summary>
         /// Partition.
         /// </summary>
@@ -23,14 +43,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <param name="pc">partitions count</param>
         public static void PartitionSimple(Graph g, int pc)
         {
-            Parallelepiped par = g.WraparoundParallelepiped();
-
-            // Generate random points.
-            Point[] points = new Point[pc];
-            for (int i = 0; i < pc; i++)
-            {
-                points[i] = Point.Random(par);
-            }
+            Point[] points = RandomPoints(g, pc);
 
             // Analize each node.
             foreach (Node n in g.Nodes)
@@ -59,7 +72,27 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <param name="pc">partitions count</param>
         public static void PartirionToNearestPropagation(Graph g, int pc)
         {
-            PartitionSimple(g, pc);
+            Point[] points = RandomPoints(g, pc);
+            InitPartitionsWeigths(pc);
+            EraseNodesPartitions(g);
+
+            // In infinite loop we should propagate min partition.
+            while (true)
+            {
+                // Find min partition.
+                int min_partition_index = -1;
+                double min_partition_weight = 0.0;
+                for (int i = 0; i < pc; i++)
+                {
+                    if ((min_partition_index == -1) || (PartitionsWeights[i] < min_partition_weight))
+                    {
+                        min_partition_index = i;
+                        min_partition_weight = PartitionsWeights[min_partition_index];
+                    }
+                }
+
+                Debug.Assert(false, "Not implemented.");
+            }
         }
 
         /// <summary>
@@ -69,7 +102,10 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <param name="pc">partitions count</param>
         public static void PartitionEdgesPropagation(Graph g, int pc)
         {
-            PartitionSimple(g, pc);
+            Point[] points = RandomPoints(g, pc);
+            InitPartitionsWeigths(pc);
+
+            Debug.Assert(false, "Not implemented.");
         }
     }
 }

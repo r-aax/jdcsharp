@@ -18,7 +18,7 @@ namespace Lib.DataStruct.Graph.Partitioning
     /// - while there is next node without cluster - get it,
     /// - put current node to cluster with minimum total weight.
     /// </summary>
-    public class UniformGreedyPartitioner
+    public class UniformGreedyPartitioner : Partitioner
     {
         /// <summary>
         /// Partition the given graph.
@@ -29,18 +29,8 @@ namespace Lib.DataStruct.Graph.Partitioning
         {
             Debug.Assert(pc > 0, "Partitions count must be greater than 0.");
 
-            // Init empty array of partiotions weights.
-            double[] partitions_weights = new double[pc];
-            for (int i = 0; i < pc; i++)
-            {
-                partitions_weights[i] = 0.0;
-            }
-
-            // Erase nodes labels.
-            foreach (Node n in g.Nodes)
-            {
-                n.Partition = -1;
-            }
+            InitPartitionsWeigths(pc);
+            EraseNodesPartitions(g);
 
             // Outer cycle.
             // Find node without label with maximum weight.
@@ -71,16 +61,16 @@ namespace Lib.DataStruct.Graph.Partitioning
                 double min_partition_weight = 0.0;
                 for (int i = 0; i < pc; i++)
                 {
-                    if ((min_partition_index == -1) || (partitions_weights[i] < min_partition_weight))
+                    if ((min_partition_index == -1) || (PartitionsWeights[i] < min_partition_weight))
                     {
                         min_partition_index = i;
-                        min_partition_weight = partitions_weights[min_partition_index];
+                        min_partition_weight = PartitionsWeights[min_partition_index];
                     }
                 }
 
                 // We have to put node max_node to partition min_partition_index.
                 max_node.Partition = min_partition_index;
-                partitions_weights[min_partition_index] += max_node.Weight;
+                PartitionsWeights[min_partition_index] += max_node.Weight;
             }
         }
     }
