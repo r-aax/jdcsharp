@@ -2292,10 +2292,12 @@ namespace GraphMaster.Windows
             {
                 Parallelepiped par = Graph.WraparoundParallelepiped();
 
+                Point3D[] ps = Generator.UniformPointsInParallelepiped(w.Result, par); 
+
                 for (int i = 0; i < w.Result; i++)
                 {
                     Node n = Graph.AddNode();
-                    n.Point3D = Point3D.Random(par);
+                    n.Point3D = ps[i];
                     n.CreateOwnDrawProperties();
                     n.DrawProperties.BorderRadius = 8.0;
                     n.DrawProperties.InnerRadius = 8.0;

@@ -119,6 +119,7 @@
     <Compile Include="Maths\Geometry\Geometry2D\RectScaler.cs" />
     <Compile Include="Maths\Geometry\Geometry2D\Triangle.cs" />
     <Compile Include="Maths\Geometry\Geometry2D\Vector.cs" />
+    <Compile Include="Maths\Geometry\Geometry3D\Generator.cs" />
     <Compile Include="Maths\Geometry\Geometry3D\Line.cs" />
     <Compile Include="Maths\Geometry\Geometry3D\Parallelepiped.cs" />
     <Compile Include="Maths\Geometry\Geometry3D\Point.cs" />

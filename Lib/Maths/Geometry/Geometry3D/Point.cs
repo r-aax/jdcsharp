@@ -146,5 +146,42 @@ namespace Lib.Maths.Geometry.Geometry3D
         {
             return new Point(Vector.RandomOnSurface(par));
         }
+
+        /// <summary>
+        /// Return point to parallelepiped.
+        /// </summary>
+        /// <param name="par">parallelepiped</param>
+        public void ReturnToParallelepiped(Parallelepiped par)
+        {
+            if (X > par.Right)
+            {
+                X = par.Right;
+            }
+
+            if (X < par.Left)
+            {
+                X = par.Left;
+            }
+
+            if (Y > par.Top)
+            {
+                Y = par.Top;
+            }
+
+            if (Y < par.Bottom)
+            {
+                Y = par.Bottom;
+            }
+
+            if (Z > par.Front)
+            {
+                Z = par.Front;
+            }
+
+            if (Z < par.Back)
+            {
+                Z = par.Back;
+            }
+        }
     }
 }

@@ -26,15 +26,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <returns>random points</returns>
         private static Point[] RandomPoints(Graph g, int pc)
         {
-            Parallelepiped par = g.WraparoundParallelepiped();
-            Point[] ps = new Point[pc];
-
-            for (int i = 0; i < pc; i++)
-            {
-                ps[i] = Point.Random(par);
-            }
-
-            return ps;
+            return Generator.UniformPointsInParallelepiped(pc, g.WraparoundParallelepiped());
         }
 
         /// <summary>
