@@ -11,7 +11,8 @@ namespace Lib.DataStruct.Graph.Partitioning
     /// <summary>
     /// Partition by method of random points n volume.
     /// We take n points in volume of graph and then
-    /// associate each node with nearest point.
+    /// associate each node with nearest point in simple case
+    /// or apply some propagation methods.
     /// </summary>
     public class RandomVolumePointsPartitioner
     {
@@ -20,7 +21,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// </summary>
         /// <param name="g">graph</param>
         /// <param name="pc">partitions count</param>
-        public static void Partition(Graph g, int pc)
+        public static void PartitionSimple(Graph g, int pc)
         {
             Parallelepiped par = g.WraparoundParallelepiped();
 
@@ -49,6 +50,26 @@ namespace Lib.DataStruct.Graph.Partitioning
 
                 n.Partition = nearest_point_index;
             }
+        }
+
+        /// <summary>
+        /// Partitioning with propagation to nearest node.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="pc">partitions count</param>
+        public static void PartirionToNearestPropagation(Graph g, int pc)
+        {
+            PartitionSimple(g, pc);
+        }
+
+        /// <summary>
+        /// Partitioning with propagation by edges.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="pc">partitions count</param>
+        public static void PartitionEdgesPropagation(Graph g, int pc)
+        {
+            PartitionSimple(g, pc);
         }
     }
 }

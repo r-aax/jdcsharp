@@ -2196,7 +2196,7 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AlgorithmsPartitioningRVP_MI_Click(object sender, RoutedEventArgs e)
+        private void AlgorithmsPartitioningRVPS_MI_Click(object sender, RoutedEventArgs e)
         {
             int partitions_count = 5;
 
@@ -2205,11 +2205,21 @@ namespace GraphMaster.Windows
 
             if (w.IsAccepted)
             {
-                RandomVolumePointsPartitioner.Partition(Graph, w.Result);
+                RandomVolumePointsPartitioner.PartitionSimple(Graph, w.Result);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
                 PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
             }
+        }
+
+        private void AlgorithmsPartitioningRVPNP_MI_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AlgorithmsPartitioningRVPEP_MI_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
