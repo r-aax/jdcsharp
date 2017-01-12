@@ -396,5 +396,65 @@ namespace Lib.DataStruct.Graph
                     break;
             }
         }
+
+        /// <summary>
+        /// Get node successor by the edge.
+        /// </summary>
+        /// <param name="e">edge</param>
+        /// <returns>node successor</returns>
+        public Node Succ(Edge e)
+        {
+            if (e.A == this)
+            {
+                return e.B;
+            }
+
+            if (e.B == this)
+            {
+                return e.IsOriented ? null : e.A;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get node predecessor by edge.
+        /// </summary>
+        /// <param name="e">edge</param>
+        /// <returns>node predecessor</returns>
+        public Node Pred(Edge e)
+        {
+            if (e.B == this)
+            {
+                return e.A;
+            }
+
+            if (e.A == this)
+            {
+                return e.IsOriented ? null : e.B;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Get node neighbour by edge.
+        /// </summary>
+        /// <param name="e">edge</param>
+        /// <returns>node neighbour</returns>
+        public Node Neighbour(Edge e)
+        {
+            if (e.A == this)
+            {
+                return e.B;
+            }
+
+            if (e.B == this)
+            {
+                return e.A;
+            }
+
+            return null;
+        }
     }
 }

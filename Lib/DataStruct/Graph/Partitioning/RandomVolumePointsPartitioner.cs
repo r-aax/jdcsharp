@@ -102,6 +102,8 @@ namespace Lib.DataStruct.Graph.Partitioning
 
                 // We use nearest node for propagation.
                 Node n = no_partition_nodes[NumbersArrays.MinIndex(ms)];
+
+                // Update partitions information.
                 n.Partition = min_partition_index;
                 PartitionsWeights[min_partition_index] += n.Weight;
             }
@@ -121,9 +123,68 @@ namespace Lib.DataStruct.Graph.Partitioning
             // In infinite loop we should propagate min partition.
             while (true)
             {
-                int min_partition_index = NumbersArrays.MinIndex(PartitionsWeights);
+                List<Node> no_partition_nodes = NoPartitionNodes(g);
 
-                Debug.Assert(false, "Not implemented.");
+                // We finish when there is no nodes without partition.
+                // Nowhere to propagate.
+                if (no_partition_nodes.Count == 0)
+                {
+                    break;
+                }
+
+                int min_partition_index = NumbersArrays.MinIndex(PartitionsWeights);
+                List<Node> partition_nodes = PartitionNodes(g, min_partition_index);
+
+                // Node.
+                Node n = null;
+
+                if (partition_nodes.Count == 0)
+                {
+                    double[] ms = new double[no_partition_nodes.Count];
+
+                    // If partition is empty we take nearest node to random point.
+                    for (int i = 0; i < ms.Count(); i++)
+                    {
+                        ms[i] = no_partition_nodes[i].Point3D.Dist(points[min_partition_index]);
+                    }
+
+                    n = no_partition_nodes[NumbersArrays.MinIndex(ms)];
+                }
+                else
+                {
+                    // Take neighbourhood.
+                    List<Node> neighbourhood = GraphOperator.Neighbourhood(partition_nodes);
+                    List<Node> no_partition_neighbourhood = neighbourhood.FindAll(nn => nn.Partition == -1); 
+
+                    if (no_partition_neighbourhood.Count != 0)
+                    {
+                        double[] ms = new double[no_partition_neighbourhood.Count];
+
+                        for (int i = 0; i < ms.Count(); i++)
+                        {
+                            ms[i] = no_partition_neighbourhood[i].Weight;
+                        }
+
+                        n = no_partition_neighbourhood[NumbersArrays.MaxIndex(ms)];
+                    }
+                    else
+                    {
+                        double[] ms = new double[no_partition_nodes.Count];
+
+                        // If partition is empty we take nearest node to random point.
+                        for (int i = 0; i < ms.Count(); i++)
+                        {
+                            ms[i] = no_partition_nodes[i].Point3D.Dist(points[min_partition_index]);
+                        }
+
+                        n = no_partition_nodes[NumbersArrays.MinIndex(ms)];
+                    }
+                }
+
+
+                // Update partitions information.
+                n.Partition = min_partition_index;
+                PartitionsWeights[min_partition_index] += n.Weight;
             }
         }
     }
