@@ -23,6 +23,7 @@ using SWRect = System.Windows.Rect;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
+using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
 using GraphMaster.Tools;
 using Lib.GUI.WPF;
@@ -2234,11 +2235,11 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
-        /// Click on menu item with Random Volume Points with Edges Propagation.
+        /// Click on menu item with Random Volume Points with Edges Propagation (Nodes weights metric).
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">parameters</param>
-        private void AlgorithmsPartitioningRVPEP_MI_Click(object sender, RoutedEventArgs e)
+        private void AlgorithmsPartitioningRVPEP_NM_MI_Click(object sender, RoutedEventArgs e)
         {
             int partitions_count = 5;
 
@@ -2247,9 +2248,60 @@ namespace GraphMaster.Windows
 
             if (w.IsAccepted)
             {
-                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, w.Result);
+                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, w.Result, true);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
                 PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
+                Paint();
+            }
+        }
+
+        /// <summary>
+        /// Click on menu item with Random Volume Points with Edges Propagation (Edges weights metric).
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void AlgorithmsPartitioningRVPEP_EM_MI_Click(object sender, RoutedEventArgs e)
+        {
+            int partitions_count = 5;
+
+            EditIntWindow w = new EditIntWindow(partitions_count, "Enter partitions count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, w.Result, false);
+                DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
+                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
+                Paint();
+            }
+        }
+
+        /// <summary>
+        /// Test random points for graph.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestRandomPoints_MI_Click(object sender, RoutedEventArgs e)
+        {
+            int count = 5;
+
+            EditIntWindow w = new EditIntWindow(count, "Enter points count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Parallelepiped par = Graph.WraparoundParallelepiped();
+
+                for (int i = 0; i < w.Result; i++)
+                {
+                    Node n = Graph.AddNode();
+                    n.Point3D = Point3D.Random(par);
+                    n.CreateOwnDrawProperties();
+                    n.DrawProperties.BorderRadius = 8.0;
+                    n.DrawProperties.InnerRadius = 8.0;
+                    n.DrawProperties.Color = new Lib.Draw.Color(Colors.Black);
+                }
+
                 Paint();
             }
         }

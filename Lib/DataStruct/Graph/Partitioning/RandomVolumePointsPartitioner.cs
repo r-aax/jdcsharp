@@ -114,7 +114,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// </summary>
         /// <param name="g">graph</param>
         /// <param name="pc">partitions count</param>
-        public static void PartitionEdgesPropagation(Graph g, int pc)
+        public static void PartitionEdgesPropagation(Graph g, int pc, bool is_nodes_metric)
         {
             Point[] points = RandomPoints(g, pc);
             InitPartitionsWeigths(pc);
@@ -160,7 +160,25 @@ namespace Lib.DataStruct.Graph.Partitioning
 
                     for (int i = 0; i < ms.Count(); i++)
                     {
-                        ms[i] = no_partition_neighbourhood[i].Weight;
+                        if (is_nodes_metric)
+                        {
+                            // I. Weight metric.
+                            ms[i] = no_partition_neighbourhood[i].Weight;
+                        }
+                        else
+                        {
+                            // II. Sum of edges weighs metric.
+                            Node _n = no_partition_neighbourhood[i];
+                            foreach (Edge _e in _n.Edges)
+                            {
+                                Node _nn = _n.Neighbour(_e);
+
+                                if (_nn.Partition == min_partition_index)
+                                {
+                                    ms[i] += _e.Weight;
+                                }
+                            }
+                        }
                     }
 
                     n = no_partition_neighbourhood[NumbersArrays.MaxIndex(ms)];

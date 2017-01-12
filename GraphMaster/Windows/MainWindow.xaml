@@ -45,11 +45,14 @@
             </MenuItem>
             <MenuItem Header="Algorithms">
                 <MenuItem Header="Partitioning">
-                    <MenuItem Name="AlgorithmsPartitioningUG_MI" Header="Uniform Greedy" Click="AlgorithmsPartitioningUG_MI_Click"/>
-                    <MenuItem Header="Random Volume Points">
-                        <MenuItem Name="AlgorithmsPartitioningRVPS_MI" Header="Simple" Click="AlgorithmsPartitioningRVPS_MI_Click"/>
-                        <MenuItem Name="AlgorithmsPartitioningRVPNP_MI" Header="to Nearest Propagation" Click="AlgorithmsPartitioningRVPNP_MI_Click"/>
-                        <MenuItem Name="AlgorithmsPartitioningRVPEP_MI" Header="Edges Propagation" Click="AlgorithmsPartitioningRVPEP_MI_Click"/>
+                    <MenuItem Name="AlgorithmsPartitioningUG_MI" Header="Uniform greedy (UG)" Click="AlgorithmsPartitioningUG_MI_Click"/>
+                    <MenuItem Header="Random volume points (RVP)">
+                        <MenuItem Name="AlgorithmsPartitioningRVPS_MI" Header="Simple (RVPS)" Click="AlgorithmsPartitioningRVPS_MI_Click"/>
+                        <MenuItem Name="AlgorithmsPartitioningRVPNP_MI" Header="To nearest propagation (RVPNP)" Click="AlgorithmsPartitioningRVPNP_MI_Click"/>
+                        <MenuItem Header="Edges propagation (RVPEP)">
+                            <MenuItem Name="AlgorithmsPartitioningRVPEP_NM_MI" Header="Nodes weights metric (RVPEP/NM)" Click="AlgorithmsPartitioningRVPEP_NM_MI_Click"/>
+                            <MenuItem Name="AlgorithmsPartitioningRVPEP_EM_MI" Header="Edges weights metric (RVPEP/EM)" Click="AlgorithmsPartitioningRVPEP_EM_MI_Click"/>
+                        </MenuItem>
                     </MenuItem>
                 </MenuItem>
             </MenuItem>
@@ -186,6 +189,9 @@
                         </MenuItem>
                     </MenuItem>
                 </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Test">
+                <MenuItem Name="TestRandomPoints_MI" Header="Random points" Click="TestRandomPoints_MI_Click"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
