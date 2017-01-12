@@ -41,5 +41,79 @@ namespace Lib.DataStruct.Graph.Partitioning
                 n.Partition = -1;
             }
         }
+
+        /// <summary>
+        /// Find max node without partition.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <returns>node</returns>
+        protected static Node FindMaxNodeWithoutPartition(Graph g)
+        {
+            Node max_node = null;
+
+            foreach (Node n in g.Nodes)
+            {
+                if (n.Partition != -1)
+                {
+                    continue;
+                }
+
+                if ((max_node == null) || (n.Weight > max_node.Weight))
+                {
+                    max_node = n;
+                }
+            }
+
+            return max_node;
+        }
+
+        /// <summary>
+        /// Get all nodes of given partition.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="pn">partition number</param>
+        /// <returns>partition nodes</returns>
+        protected static List<Node> PartitionNodes(Graph g, int pn)
+        {
+            List<Node> nodes = new List<Node>();
+
+            foreach (Node n in g.Nodes)
+            {
+                if (n.Partition == pn)
+                {
+                    nodes.Add(n);
+                }
+            }
+
+            return nodes;
+        }
+
+        /// <summary>
+        /// Get all nodes without partition.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <returns>nodes without partition</returns>
+        protected static List<Node> NoPartitionNodes(Graph g)
+        {
+            return PartitionNodes(g, -1);
+        }
+
+        /// <summary>
+        /// Sum of distances from one node to list of nodes.
+        /// </summary>
+        /// <param name="n">node</param>
+        /// <param name="ns">list of nodes</param>
+        /// <returns>sum of distances</returns>
+        protected static double DistFromNodeToNodes(Node n, List<Node> ns)
+        {
+            double d = 0.0;
+
+            foreach (Node tn in ns)
+            {
+                d += n.Point3D.Dist(tn.Point3D);
+            }
+
+            return d;
+        }
     }
 }

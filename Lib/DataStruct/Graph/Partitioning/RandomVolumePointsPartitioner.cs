@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 using Lib.Maths.Geometry.Geometry3D;
+using Lib.Maths.Numbers;
 
 namespace Lib.DataStruct.Graph.Partitioning
 {
@@ -79,19 +80,30 @@ namespace Lib.DataStruct.Graph.Partitioning
             // In infinite loop we should propagate min partition.
             while (true)
             {
-                // Find min partition.
-                int min_partition_index = -1;
-                double min_partition_weight = 0.0;
-                for (int i = 0; i < pc; i++)
+                List<Node> no_partition_nodes = NoPartitionNodes(g);
+
+                // We finish when there is no nodes without partition.
+                // Nowhere to propagate.
+                if (no_partition_nodes.Count == 0)
                 {
-                    if ((min_partition_index == -1) || (PartitionsWeights[i] < min_partition_weight))
-                    {
-                        min_partition_index = i;
-                        min_partition_weight = PartitionsWeights[min_partition_index];
-                    }
+                    break;
                 }
 
-                Debug.Assert(false, "Not implemented.");
+                int min_partition_index = NumbersArrays.MinIndex(PartitionsWeights);
+                List<Node> partition_nodes = PartitionNodes(g, min_partition_index);
+
+                // Allocate array for no partition nodes metrics.
+                double[] ms = new double[no_partition_nodes.Count];
+                for (int i = 0; i < ms.Count(); i++)
+                {
+                    ms[i] = no_partition_nodes[i].Point3D.Dist(points[min_partition_index])
+                            + DistFromNodeToNodes(no_partition_nodes[i], partition_nodes);
+                }
+
+                // We use nearest node for propagation.
+                Node n = no_partition_nodes[NumbersArrays.MinIndex(ms)];
+                n.Partition = min_partition_index;
+                PartitionsWeights[min_partition_index] += n.Weight;
             }
         }
 
@@ -104,8 +116,15 @@ namespace Lib.DataStruct.Graph.Partitioning
         {
             Point[] points = RandomPoints(g, pc);
             InitPartitionsWeigths(pc);
+            EraseNodesPartitions(g);
 
-            Debug.Assert(false, "Not implemented.");
+            // In infinite loop we should propagate min partition.
+            while (true)
+            {
+                int min_partition_index = NumbersArrays.MinIndex(PartitionsWeights);
+
+                Debug.Assert(false, "Not implemented.");
+            }
         }
     }
 }

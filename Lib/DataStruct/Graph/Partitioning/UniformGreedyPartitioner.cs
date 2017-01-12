@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 using Lib.DataStruct.Graph;
+using Lib.Maths.Numbers;
 
 namespace Lib.DataStruct.Graph.Partitioning
 {
@@ -33,22 +34,9 @@ namespace Lib.DataStruct.Graph.Partitioning
             EraseNodesPartitions(g);
 
             // Outer cycle.
-            // Find node without label with maximum weight.
             while (true)
             {
-                Node max_node = null;
-                foreach (Node n in g.Nodes)
-                {
-                    if (n.Partition != -1)
-                    {
-                        continue;
-                    }
-
-                    if ((max_node == null) || (n.Weight > max_node.Weight))
-                    {
-                        max_node = n;
-                    }
-                }
+                Node max_node = FindMaxNodeWithoutPartition(g);
 
                 // If there is no next node - process is finished.
                 if (max_node == null)
@@ -56,17 +44,7 @@ namespace Lib.DataStruct.Graph.Partitioning
                     break;
                 }
 
-                // We have next node to process.
-                int min_partition_index = -1;
-                double min_partition_weight = 0.0;
-                for (int i = 0; i < pc; i++)
-                {
-                    if ((min_partition_index == -1) || (PartitionsWeights[i] < min_partition_weight))
-                    {
-                        min_partition_index = i;
-                        min_partition_weight = PartitionsWeights[min_partition_index];
-                    }
-                }
+                int min_partition_index = NumbersArrays.MinIndex(PartitionsWeights);
 
                 // We have to put node max_node to partition min_partition_index.
                 max_node.Partition = min_partition_index;
