@@ -138,7 +138,11 @@ namespace Lib.DataStruct.Graph.Partitioning
                 // Node.
                 Node n = null;
 
-                if (partition_nodes.Count == 0)
+                // Take neighbourhood without partition.
+                List<Node> neighbourhood = GraphOperator.Neighbourhood(partition_nodes);
+                List<Node> no_partition_neighbourhood = neighbourhood.FindAll(nn => nn.Partition == -1);
+
+                if ((partition_nodes.Count == 0) || (no_partition_neighbourhood.Count == 0))
                 {
                     double[] ms = new double[no_partition_nodes.Count];
 
@@ -152,35 +156,15 @@ namespace Lib.DataStruct.Graph.Partitioning
                 }
                 else
                 {
-                    // Take neighbourhood.
-                    List<Node> neighbourhood = GraphOperator.Neighbourhood(partition_nodes);
-                    List<Node> no_partition_neighbourhood = neighbourhood.FindAll(nn => nn.Partition == -1); 
+                    double[] ms = new double[no_partition_neighbourhood.Count];
 
-                    if (no_partition_neighbourhood.Count != 0)
+                    for (int i = 0; i < ms.Count(); i++)
                     {
-                        double[] ms = new double[no_partition_neighbourhood.Count];
-
-                        for (int i = 0; i < ms.Count(); i++)
-                        {
-                            ms[i] = no_partition_neighbourhood[i].Weight;
-                        }
-
-                        n = no_partition_neighbourhood[NumbersArrays.MaxIndex(ms)];
+                        ms[i] = no_partition_neighbourhood[i].Weight;
                     }
-                    else
-                    {
-                        double[] ms = new double[no_partition_nodes.Count];
 
-                        // If partition is empty we take nearest node to random point.
-                        for (int i = 0; i < ms.Count(); i++)
-                        {
-                            ms[i] = no_partition_nodes[i].Point3D.Dist(points[min_partition_index]);
-                        }
-
-                        n = no_partition_nodes[NumbersArrays.MinIndex(ms)];
-                    }
+                    n = no_partition_neighbourhood[NumbersArrays.MaxIndex(ms)];
                 }
-
 
                 // Update partitions information.
                 n.Partition = min_partition_index;

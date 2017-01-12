@@ -75,17 +75,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <returns>partition nodes</returns>
         protected static List<Node> PartitionNodes(Graph g, int pn)
         {
-            List<Node> nodes = new List<Node>();
-
-            foreach (Node n in g.Nodes)
-            {
-                if (n.Partition == pn)
-                {
-                    nodes.Add(n);
-                }
-            }
-
-            return nodes;
+            return g.Nodes.FindAll(n => n.Partition == pn);
         }
 
         /// <summary>
