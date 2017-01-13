@@ -149,5 +149,74 @@ namespace Lib.Maths.Geometry.Geometry2D
         {
             return rect.XInterval.Contains(X) && rect.YInterval.Contains(Y);
         }
+
+        /// <summary>
+        /// Toroid distance.
+        /// </summary>
+        /// <param name="p">point</param>
+        /// <param name="rect">rectangle</param>
+        /// <returns>distance</returns>
+        public double ToroidDist(Point p, Rect rect)
+        {
+            return ToroidDir(p, rect).Mod;
+        }
+
+        /// <summary>
+        /// Toroid direction to point.
+        /// </summary>
+        /// <param name="p">point</param>
+        /// <param name="rect">rectangle</param>
+        /// <returns>vector in direction to given point</returns>
+        public Vector ToroidDir(Point p, Rect rect)
+        {
+            Debug.Assert(IsIn(rect) && p.IsIn(rect), "Toroid direction is available only for inner points.");
+
+            // First find direction for X component.
+            double dx = DistX(p);
+            double edx = 0.0;
+            if (dx <= rect.Width - dx)
+            {
+                // Inner dist.
+                // |----- this =====> p -----|
+                edx = p.X - X;
+            }
+            else
+            {
+                // Outer toroid dist.
+                if (X > p.X)
+                {
+                    // Direction to the right.
+                    // |----- p ----- this =====>|
+                    edx = (rect.Right - X) + (p.X - rect.Left);
+                }
+                else
+                {
+                    // Direction to the left.
+                    // |<===== this ----- p -----|
+                    edx = (rect.Left - X) + (p.X - rect.Right);
+                }
+            }
+
+            // The same action for X component.
+            double dy = DistY(p);
+            double edy = 0.0;
+            if (dy <= rect.Height - dy)
+            {
+                edy = p.Y - Y;
+            }
+            else
+            {
+                if (Y > p.Y)
+                {
+                    edy = (rect.Top - Y) + (p.Y - rect.Bottom);
+                }
+                else
+                {
+                    edy = (rect.Bottom - Y) + (p.Y - rect.Top);
+                }
+            }
+
+            return new Vector(edx, edy);
+        }
     }
 }
