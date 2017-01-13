@@ -37,6 +37,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -69,6 +70,7 @@
     <Compile Include="DrawMaster\PlanOMPDrawMaster\PlanOMPTest.cs" />
     <Compile Include="DrawMaster\PlanOMPDrawMaster\ThreadsCountChangeElement.cs" />
     <Compile Include="DrawMaster\TestDrawMaster\TestDrawMaster.cs" />
+    <Compile Include="DrawMaster\UniformPointsDrawMaster\UniformPointsDrawMaster.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

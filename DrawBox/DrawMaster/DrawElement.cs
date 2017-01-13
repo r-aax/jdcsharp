@@ -18,6 +18,11 @@
         /// <summary>
         /// Plan OMP.
         /// </summary>
-        PlanOMP
+        PlanOMP,
+
+        /// <summary>
+        /// Uniform points.
+        /// </summary>
+        UniformPoints
     };
 }

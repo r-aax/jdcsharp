@@ -27,6 +27,7 @@ using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
 
 using DrawBox.DrawMaster.PlanOMPDrawMaster;
+using DrawBox.DrawMaster.UniformPointsDrawMaster;
 
 namespace DrawBox
 {
@@ -67,6 +68,10 @@ namespace DrawBox
                 case DrawElement.PlanOMP:
                     PlanOMPDrawMaster.Draw(DrawAreaC, Test);
                     break;
+
+                case DrawElement.UniformPoints:
+                    UniformPointsDrawMaster.Draw(DrawAreaC);
+                    break;                    
             }
         }
 
@@ -201,6 +206,18 @@ namespace DrawBox
             Paint();
         }
 
+
+        /// <summary>
+        /// Draw test of uniform points.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            PEl = DrawElement.UniformPoints;
+            Paint();
+        }
+
         /// <summary>
         /// Click on Picture Save menu item.
         /// </summary>
@@ -247,6 +264,16 @@ namespace DrawBox
         /// <param name="sender">sender</param>
         /// <param name="e">parameters</param>
         private void DrawAreaC_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Paint();
+        }
+
+        /// <summary>
+        /// Move mouse event in status bar.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void StatusBar_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
             Paint();
         }

@@ -113,6 +113,7 @@
     <Compile Include="Maths\Geometry\AxisType.cs" />
     <Compile Include="Maths\Geometry\Direction.cs" />
     <Compile Include="Maths\Geometry\Geometry2D\Circle.cs" />
+    <Compile Include="Maths\Geometry\Geometry2D\Generator.cs" />
     <Compile Include="Maths\Geometry\Geometry2D\Line.cs" />
     <Compile Include="Maths\Geometry\Geometry2D\Point.cs" />
     <Compile Include="Maths\Geometry\Geometry2D\Rect.cs" />
