@@ -139,5 +139,15 @@ namespace Lib.Maths.Geometry.Geometry2D
         {
             return new Geometry3D.Point(X, Y, 0.0);
         }
+
+        /// <summary>
+        /// Check if point is in rectangle.
+        /// </summary>
+        /// <param name="rect">rectangle</param>
+        /// <returns><c>true</c> - if point is in rectangle, <c>false</c> - otherwise</returns>
+        public bool IsIn(Rect rect)
+        {
+            return rect.XInterval.IsIn(X) && rect.YInterval.IsIn(Y);
+        }
     }
 }
