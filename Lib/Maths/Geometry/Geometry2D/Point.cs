@@ -197,7 +197,7 @@ namespace Lib.Maths.Geometry.Geometry2D
                 }
             }
 
-            // The same action for X component.
+            // The same action for Y component.
             double dy = DistY(p);
             double edy = 0.0;
             if (dy <= rect.Height - dy)

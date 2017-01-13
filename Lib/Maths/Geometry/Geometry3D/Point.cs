@@ -183,5 +183,144 @@ namespace Lib.Maths.Geometry.Geometry3D
                 Z = par.Back;
             }
         }
+
+        /// <summary>
+        /// Check if point is inside of parallelepiped.
+        /// </summary>
+        /// <param name="par">parallelepiped</param>
+        /// <returns><c>true</c> - if point is inside of parallelepiped, <c>false</c> - otherwise</returns>
+        public bool IsIn(Parallelepiped par)
+        {
+            return par.XInterval.Contains(X) && par.YInterval.Contains(Y) && par.ZInterval.Contains(Z);
+        }
+
+        /// <summary>
+        /// Toroid distance.
+        /// </summary>
+        /// <param name="p">point</param>
+        /// <param name="par">parallelepiped</param>
+        /// <returns>distance</returns>
+        public double ToroidDist(Point p, Parallelepiped par)
+        {
+            return ToroidDir(p, par).Mod;
+        }
+
+        /// <summary>
+        /// Toroid direction to point.
+        /// </summary>
+        /// <param name="p">point</param>
+        /// <param name="par">parallelepiped</param>
+        /// <returns>vector in direction to given point</returns>
+        public Vector ToroidDir(Point p, Parallelepiped par)
+        {
+            Debug.Assert(IsIn(par) && p.IsIn(par), "Toroid direction is available only for inner points.");
+
+            // First find direction for X component.
+            double dx = DistX(p);
+            double edx = 0.0;
+            if (dx <= par.Width - dx)
+            {
+                // Inner dist.
+                // |----- this =====> p -----|
+                edx = p.X - X;
+            }
+            else
+            {
+                // Outer toroid dist.
+                if (X > p.X)
+                {
+                    // Direction to the right.
+                    // |----- p ----- this =====>|
+                    edx = (par.Right - X) + (p.X - par.Left);
+                }
+                else
+                {
+                    // Direction to the left.
+                    // |<===== this ----- p -----|
+                    edx = (par.Left - X) + (p.X - par.Right);
+                }
+            }
+
+            // The same action for Y component.
+            double dy = DistY(p);
+            double edy = 0.0;
+            if (dy <= par.Height - dy)
+            {
+                edy = p.Y - Y;
+            }
+            else
+            {
+                if (Y > p.Y)
+                {
+                    edy = (par.Top - Y) + (p.Y - par.Bottom);
+                }
+                else
+                {
+                    edy = (par.Bottom - Y) + (p.Y - par.Top);
+                }
+            }
+
+            // The same action for Z component.
+            double dz = DistZ(p);
+            double edz = 0.0;
+            if (dz <= par.Depth - dz)
+            {
+                edz = p.Z - Z;
+            }
+            else
+            {
+                if (Z > p.Z)
+                {
+                    edz = (par.Front - Z) + (p.Z - par.Back);
+                }
+                else
+                {
+                    edz = (par.Back - Z) + (p.Z - par.Front);
+                }
+            }
+
+            return new Vector(edx, edy, edz);
+        }
+
+        /// <summary>
+        /// Move point in toroid.
+        /// </summary>
+        /// <param name="v">vector</param>
+        /// <param name="par">parallelepiped</param>
+        public void ToroidMove(Vector v, Parallelepiped par)
+        {
+            Debug.Assert(IsIn(par), "Toroid operations are available only for inner points.");
+            Debug.Assert(v.Mod < par.Radius, "Too big shift for toroid operation");
+
+            X += v.X;
+            if (X > par.Right)
+            {
+                X -= par.Width;
+            }
+            else if (X < par.Left)
+            {
+                X += par.Width;
+            }
+
+            Y += v.Y;
+            if (Y > par.Top)
+            {
+                Y -= par.Height;
+            }
+            else if (Y < par.Bottom)
+            {
+                Y += par.Height;
+            }
+
+            Z += v.Z;
+            if (Z > par.Front)
+            {
+                Z -= par.Depth;
+            }
+            else if (Z < par.Back)
+            {
+                Z += par.Depth;
+            }
+        }
     }
 }

@@ -1,5 +1,7 @@
 ﻿// Author: Alexey Rybakov
 
+using System;
+
 namespace Lib.Maths.Geometry.Geometry3D
 {
     /// <summary>
@@ -158,6 +160,30 @@ namespace Lib.Maths.Geometry.Geometry3D
             get
             {
                 return ZInterval.Length;
+            }
+        }
+
+        /// <summary>
+        /// Middle point of parallelepiped.
+        /// </summary>
+        public Point Mid
+        {
+            get
+            {
+                return new Point(XInterval.Mid, YInterval.Mid, ZInterval.Mid);
+            }
+        }
+
+        /// <summary>
+        /// Parallelepiped radius.
+        /// </summary>
+        public double Radius
+        {
+            get
+            {
+                double m = Math.Min(Width, Height);
+
+                return Math.Min(m, Depth) / 2.0;
             }
         }
     }
