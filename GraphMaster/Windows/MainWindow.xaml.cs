@@ -2292,7 +2292,7 @@ namespace GraphMaster.Windows
             {
                 Parallelepiped par = Graph.WraparoundParallelepiped();
 
-                Point3D[] ps = Generator.UniformPointsInParallelepiped(w.Result, par); 
+                Point3D[] ps = Lib.Maths.Geometry.Geometry3D.Generator.UniformPointsInParallelepiped(w.Result, par); 
 
                 for (int i = 0; i < w.Result; i++)
                 {

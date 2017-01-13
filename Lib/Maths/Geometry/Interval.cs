@@ -80,7 +80,7 @@ namespace Lib.Maths.Geometry
         /// </summary>
         /// <param name="p">point</param>
         /// <returns>check result</returns>
-        public bool IsIn(double p)
+        public bool Contains(double p)
         {
             return ((p >= L) && (p <= H));
         }

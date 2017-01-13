@@ -162,9 +162,9 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// </summary>
         /// <param name="p">point</param>
         /// <returns>result</returns>
-        public bool IsIn(Point p)
+        public bool Contains(Point p)
         {
-            return XInterval.IsIn(p.X) && YInterval.IsIn(p.Y);
+            return XInterval.Contains(p.X) && YInterval.Contains(p.Y);
         }
 
         /// <summary>

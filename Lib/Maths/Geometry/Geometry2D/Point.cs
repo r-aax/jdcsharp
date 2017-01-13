@@ -147,7 +147,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <returns><c>true</c> - if point is in rectangle, <c>false</c> - otherwise</returns>
         public bool IsIn(Rect rect)
         {
-            return rect.XInterval.IsIn(X) && rect.YInterval.IsIn(Y);
+            return rect.XInterval.Contains(X) && rect.YInterval.Contains(Y);
         }
     }
 }
