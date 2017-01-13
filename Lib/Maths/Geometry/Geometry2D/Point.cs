@@ -218,5 +218,36 @@ namespace Lib.Maths.Geometry.Geometry2D
 
             return new Vector(edx, edy);
         }
+
+        /// <summary>
+        /// Move point in toroid.
+        /// </summary>
+        /// <param name="v">vector</param>
+        /// <param name="rect">rect</param>
+        public void ToroidMove(Vector v, Rect rect)
+        {
+            Debug.Assert(IsIn(rect), "Toroid operations are available only for inner points.");
+            Debug.Assert(v.Mod < rect.Radius, "Too big shift for toroid operation");
+
+            X += v.X;
+            if (X > rect.Right)
+            {
+                X -= rect.Width;
+            }
+            else if (X < rect.Left)
+            {
+                X += rect.Width;
+            }
+
+            Y += v.Y;
+            if (Y > rect.Top)
+            {
+                Y -= rect.Height;
+            }
+            else if (Y < rect.Bottom)
+            {
+                Y += rect.Height;
+            }
+        }
     }
 }

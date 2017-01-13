@@ -362,6 +362,17 @@ namespace Lib.Maths.Geometry.Geometry2D
         }
 
         /// <summary>
+        /// Middle of the rectangle.
+        /// </summary>
+        public Vector Mid
+        {
+            get
+            {
+                return new Vector(XInterval.Mid, YInterval.Mid);
+            }
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>clone</returns>
