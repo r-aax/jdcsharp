@@ -2187,7 +2187,7 @@ namespace GraphMaster.Windows
             {
                 UniformGreedyPartitioner.Partition(Graph, w.Result);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
-                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
+                PictureName = "UG : " + PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
             }
         }
@@ -2208,7 +2208,7 @@ namespace GraphMaster.Windows
             {
                 RandomVolumePointsPartitioner.PartitionSimple(Graph, w.Result);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
-                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
+                PictureName = "RVPS : " + PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
             }
         }
@@ -2227,9 +2227,9 @@ namespace GraphMaster.Windows
 
             if (w.IsAccepted)
             {
-                RandomVolumePointsPartitioner.PartirionToNearestPropagation(Graph, w.Result);
+                RandomVolumePointsPartitioner.PartitionToNearestPropagation(Graph, w.Result);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
-                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
+                PictureName = "RVPNP : " + PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
             }
         }
@@ -2250,7 +2250,7 @@ namespace GraphMaster.Windows
             {
                 RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, w.Result, true);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
-                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
+                PictureName = "RVPEP/NM : " + PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
             }
         }
@@ -2271,7 +2271,7 @@ namespace GraphMaster.Windows
             {
                 RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, w.Result, false);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
-                PictureName = PartitioningStatistics.PartitioningQualityDescription(Graph);
+                PictureName = "RVPEP/EM : " + PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
             }
         }
@@ -2305,6 +2305,54 @@ namespace GraphMaster.Windows
                 }
 
                 Paint();
+            }
+        }
+
+        /// <summary>
+        /// Test partitioning algorithms.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestPartitioning_MI_Click(object sender, RoutedEventArgs e)
+        {
+            int n = 0;
+
+            TB.Clear();
+
+            n = 2;
+            TB.Text += "UG\n";
+            while (n <= 64)
+            {
+                UniformGreedyPartitioner.Partition(Graph, n);
+                TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
+                n *= 2;
+            }
+
+            n = 2;
+            TB.Text += "RVPNP\n";
+            while (n <= 64)
+            {
+                RandomVolumePointsPartitioner.PartitionToNearestPropagation(Graph, n);
+                TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
+                n *= 2;
+            }
+
+            n = 2;
+            TB.Text += "RVPEP/NM\n";
+            while (n <= 64)
+            {
+                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, n, true);
+                TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
+                n *= 2;
+            }
+
+            n = 2;
+            TB.Text += "RVPEP/EM\n";
+            while (n <= 64)
+            {
+                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, n, false);
+                TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
+                n *= 2;
             }
         }
     }

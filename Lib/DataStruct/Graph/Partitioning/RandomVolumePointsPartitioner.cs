@@ -63,7 +63,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// </summary>
         /// <param name="g">graph</param>
         /// <param name="pc">partitions count</param>
-        public static void PartirionToNearestPropagation(Graph g, int pc)
+        public static void PartitionToNearestPropagation(Graph g, int pc)
         {
             Point[] points = RandomPoints(g, pc);
             InitPartitionsWeigths(pc);
