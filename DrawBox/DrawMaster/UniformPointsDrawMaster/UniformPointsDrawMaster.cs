@@ -30,7 +30,7 @@ namespace DrawBox.DrawMaster.UniformPointsDrawMaster
             d.SetBrush(new Lib.Draw.Color(System.Windows.Media.Colors.Silver));
             d.FillRect(rect);
 
-            Point2D[] ps = Lib.Maths.Geometry.Geometry2D.Generator.UniformPointsInRect(25, rect);
+            Point2D[] ps = Lib.Maths.Geometry.Geometry2D.Generator.UniformPointsInRect(81, rect);
 
             d.SetBrush(new Lib.Draw.Color(System.Windows.Media.Colors.Black));
 

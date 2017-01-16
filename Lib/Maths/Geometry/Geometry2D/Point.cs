@@ -227,7 +227,6 @@ namespace Lib.Maths.Geometry.Geometry2D
         public void ToroidMove(Vector v, Rect rect)
         {
             Debug.Assert(IsIn(rect), "Toroid operations are available only for inner points.");
-            Debug.Assert(v.Mod < rect.Radius, "Too big shift for toroid operation");
 
             X += v.X;
             if (X > rect.Right)
@@ -248,6 +247,8 @@ namespace Lib.Maths.Geometry.Geometry2D
             {
                 Y += rect.Height;
             }
+
+            Debug.Assert(IsIn(rect), "Too big shift for toroid operation.");
         }
     }
 }

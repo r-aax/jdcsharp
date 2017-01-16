@@ -290,7 +290,6 @@ namespace Lib.Maths.Geometry.Geometry3D
         public void ToroidMove(Vector v, Parallelepiped par)
         {
             Debug.Assert(IsIn(par), "Toroid operations are available only for inner points.");
-            Debug.Assert(v.Mod < par.Radius, "Too big shift for toroid operation");
 
             X += v.X;
             if (X > par.Right)
@@ -321,6 +320,8 @@ namespace Lib.Maths.Geometry.Geometry3D
             {
                 Z += par.Depth;
             }
+
+            Debug.Assert(IsIn(par), "Too big shift for toroid operation.");
         }
     }
 }
