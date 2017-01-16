@@ -56,6 +56,26 @@ namespace Lib.Draw
         }
 
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="r">red</param>
+        /// <param name="g">green</param>
+        /// <param name="b">blue</param>
+        public Color(byte r, byte g, byte b)
+            : this(255, r, g, b)
+        {
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="rgb">blue</param>
+        public Color(byte rgb)
+            : this(rgb, rgb, rgb)
+        {
+        }
+
+        /// <summary>
         /// Constructor from <c>System.Windows.Media</c>.
         /// </summary>
         /// <param name="color">color</param>
@@ -174,6 +194,24 @@ namespace Lib.Draw
             for (int i = 0; i < n; i++)
             {
                 arr[i] = Random();
+            }
+
+            return arr;
+        }
+
+        /// <summary>
+        /// Array of gray colors.
+        /// </summary>
+        /// <param name="n"></param>
+        /// <param name="high_gray"></param>
+        /// <returns></returns>
+        public static Color[] GrayArray(int n, int high_gray)
+        {
+            Color[] arr = new Color[n];
+
+            for (int i = 0; i < n; i++)
+            {
+                arr[i] = new Color((byte)(i * high_gray / (n - 1)));
             }
 
             return arr;
