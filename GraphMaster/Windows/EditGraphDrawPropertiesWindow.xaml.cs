@@ -305,7 +305,7 @@ namespace GraphMaster.Windows
         private void AcceptB_Click(object sender, RoutedEventArgs e)
         {
             // Default node draw properties.
-            if ((bool)DefEdgeHasDrawPropertiesCB.IsChecked)
+            if ((bool)DefNodeHasDrawPropertiesCB.IsChecked)
             {
                 NodeDrawProperties dp = new NodeDrawProperties();
 
