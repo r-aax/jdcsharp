@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApplication1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="GridMaster" Height="350" Width="525">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
+            <MenuItem Header="Graph">
+                <MenuItem Header="Open"/>
+                <MenuItem Header="Close"/>
+            </MenuItem>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
+            <TextBlock Foreground="SteelBlue" Text="No text yet"/>
+        </StatusBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Canvas Grid.Column="0"
+                    Name="DrawAreaC"
+                    Background="White"/>
+            <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
+            <Grid Grid.Column="1">
+            </Grid>
+        </Grid>
+    </DockPanel>
 </Window>
