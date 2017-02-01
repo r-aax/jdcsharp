@@ -1911,7 +1911,7 @@ namespace GraphMaster.Windows
                     Graph = Graph.XmlDeserialize(filename);
                     Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));
                 }
-                else if (extension == ".pfg")
+                else if (extension.ToLower() == ".pfg")
                 {
                     LoadGraphPFGTypeSelectWindow w = new LoadGraphPFGTypeSelectWindow();
                     w.ShowDialog();
