@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrawBox", "DrawBox\DrawBox.csproj", "{23A42E30-9EA4-4BD7-A627-000DFBDC3F23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridMaster", "WpfApplication1\GridMaster.csproj", "{CC93780F-0B62-47EA-AD24-5503B4CF513B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridMaster", "GridMaster\GridMaster.csproj", "{CC93780F-0B62-47EA-AD24-5503B4CF513B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
