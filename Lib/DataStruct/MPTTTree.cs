@@ -21,6 +21,18 @@ namespace Lib.DataStruct
         public Object Data { get; set; }
 
         /// <summary>
+        /// Counter.
+        /// </summary>
+        [XmlIgnore]
+        public int I { get; set; }
+
+        /// <summary>
+        /// Boolean flag.
+        /// </summary>
+        [XmlIgnore]
+        public bool B { get; set; }
+
+        /// <summary>
         /// Parent.
         /// </summary>
         [XmlIgnore]
@@ -116,6 +128,8 @@ namespace Lib.DataStruct
         public MPTTTree()
         {
             Data = null;
+            I = 0;
+            B = false;
             Parent = null;
             Children = new List<MPTTTree>();
 
@@ -374,6 +388,15 @@ namespace Lib.DataStruct
         }
 
         /// <summary>
+        /// Get data as string with I detalization.
+        /// </summary>
+        /// <returns></returns>
+        public string GetDataStringWithI()
+        {
+            return String.Format("{0} ({1})", Data as string, I);
+        }
+
+        /// <summary>
         /// Set string data.
         /// </summary>
         /// <param name="data">string</param>
@@ -387,14 +410,14 @@ namespace Lib.DataStruct
         /// </summary>
         /// <param name="coll">collection</param>
         /// <remarks>only for trees with string data</remarks>
-        private void AddChildrenToTreeViewNodes(TreeNodeCollection coll)
+        private void AddChildrenToTreeViewNodes(TreeNodeCollection coll, bool is_counters_to_show)
         {
             for (int i = 0; i < ChildrenCount; i++)
             {
                 MPTTTree child = Children[i];
 
-                coll.Add(child.GetDataString());
-                child.AddChildrenToTreeViewNodes(coll[i].Nodes);
+                coll.Add(is_counters_to_show ? child.GetDataStringWithI() : child.GetDataString());
+                child.AddChildrenToTreeViewNodes(coll[i].Nodes, is_counters_to_show);
             }
         }
 
@@ -405,11 +428,13 @@ namespace Lib.DataStruct
         /// <remarks>only for trees with string data</remarks>
         public void ToTreeView(TreeView tv)
         {
+            bool is_counters_to_show = (I > 0);
+
             // Clear component.
             tv.Nodes.Clear();
 
             // Add subtrees.
-            AddChildrenToTreeViewNodes(tv.Nodes);
+            AddChildrenToTreeViewNodes(tv.Nodes, is_counters_to_show);
         }
 
         /// <summary>
@@ -527,6 +552,8 @@ namespace Lib.DataStruct
             
             // Clone only references.
             tree.Data = Data;
+            tree.I = I;
+            tree.B = B;
             tree.Parent = Parent;
             tree.Children = Children;
             tree.LNum = LNum;
@@ -559,6 +586,61 @@ namespace Lib.DataStruct
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Reset all Is.
+        /// </summary>
+        public void ResetI()
+        {
+            I = 0;
+
+            foreach (MPTTTree t in Children)
+            {
+                t.ResetI();
+            }
+        }
+
+        /// <summary>
+        /// Reset all Bs.
+        /// </summary>
+        public void ResetB()
+        {
+            B = false;
+
+            foreach (MPTTTree t in Children)
+            {
+                t.ResetB();
+            }
+        }
+
+        /// <summary>
+        /// Send impulse to all the tree up till the root.
+        /// </summary>
+        public void ImpulseB()
+        {
+            B = true;
+
+            if (!IsRoot)
+            {
+                Parent.ImpulseB();
+            }
+        }
+
+        /// <summary>
+        /// Increment all subnodes for which B = true.
+        /// </summary>
+        public void IncI()
+        {
+            if (B)
+            {
+                I++;
+            }
+
+            foreach (MPTTTree t in Children)
+            {
+                t.IncI();
+            }
         }
     }
 }

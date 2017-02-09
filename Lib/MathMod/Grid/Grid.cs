@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using NNUm = System.Int32;
-
 namespace Lib.MathMod.Grid
 {
     /// <summary>
-    /// Descartes object.
+    /// Any type grid.
     /// </summary>
-    class DescartesObject
+    public class Grid
     {
     }
 }

@@ -9,7 +9,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Block.
     /// </summary>
-    class Block
+    public class Block
     {
     }
 }

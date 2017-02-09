@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 
 using Sea.Tools;
+using Sea.Core.Books;
 using Lib.DataStruct;
 using Lib.GUI.WindowsForms;
 
@@ -21,6 +22,11 @@ namespace Sea.Forms
         /// Root.
         /// </summary>
         private MPTTTree Root = null;
+
+        /// <summary>
+        /// Books.
+        /// </summary>
+        private BooksList Books = null;
 
         /// <summary>
         /// Captured node.
@@ -92,11 +98,13 @@ namespace Sea.Forms
         /// <summary>
         /// Constructor.
         /// </summary>
-        public EditCategoriesTreeForm(MPTTTree category_root)
+        /// <param name="sea">sea</param>
+        public EditCategoriesTreeForm(Core.Sea sea)
         {
             InitializeComponent();
 
-            Root = category_root;
+            Books = sea.Books;
+            Root = sea.CategoryRoot;
         }
 
         /// <summary>
@@ -543,6 +551,62 @@ namespace Sea.Forms
         private void CategoriesTreeTV_AfterSelect(object sender, TreeViewEventArgs e)
         {
             SetButtonsEnable();
+        }
+
+        /// <summary>
+        /// Resresh counters.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void FunctionsRefreshCountersMI_Click(object sender, EventArgs e)
+        {
+            // First reset Is.
+            Root.ResetI();
+
+            foreach (Book b in Books.Items)
+            {
+                // First propagate counters.
+                foreach (MPTTTree t in b.Categories.Items)
+                {
+                    t.ImpulseB();
+                }
+
+                // Now from root node we increment I for all nodes where B = true.
+                Root.IncI();
+                Root.ResetB();
+            }
+
+            if (Root != null)
+            {
+                Root.ToTreeView(CategoriesTreeTV);
+                SetButtonsEnable();
+
+                if (CategoriesTreeTV.Nodes.Count > 0)
+                {
+                    CategoriesTreeTV.Nodes[0].ExpandAll();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Hide counters.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void FunctionsHideCountersMI_Click(object sender, EventArgs e)
+        {
+            Root.ResetI();
+
+            if (Root != null)
+            {
+                Root.ToTreeView(CategoriesTreeTV);
+                SetButtonsEnable();
+
+                if (CategoriesTreeTV.Nodes.Count > 0)
+                {
+                    CategoriesTreeTV.Nodes[0].ExpandAll();
+                }
+            }
         }
     }
 }

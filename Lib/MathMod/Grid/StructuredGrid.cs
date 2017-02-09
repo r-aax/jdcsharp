@@ -9,7 +9,34 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Structured grid.
     /// </summary>
-    class StructuredGrid
+    public class StructuredGrid : Grid
     {
+        /// <summary>
+        /// List of blocks.
+        /// </summary>
+        public List<Block> Blocks
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Count of blocks.
+        /// </summary>
+        public int BlocksCount
+        {
+            get
+            {
+                return Blocks.Count;
+            }
+        }
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public StructuredGrid()
+        {
+            Blocks = new List<Block>();
+        }
     }
 }

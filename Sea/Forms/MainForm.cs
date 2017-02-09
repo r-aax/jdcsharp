@@ -78,7 +78,7 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void DataCategoriesMI_Click(object sender, EventArgs e)
         {
-            EditCategoriesTreeForm form = new EditCategoriesTreeForm(Sea.CategoryRoot);
+            EditCategoriesTreeForm form = new EditCategoriesTreeForm(Sea);
 
             form.ShowDialog();
             Sea.FixCategories(form.IsAccepted);

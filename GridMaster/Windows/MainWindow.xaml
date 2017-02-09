@@ -8,9 +8,9 @@
         Title="GridMaster" Height="350" Width="525">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
-            <MenuItem Header="Graph">
-                <MenuItem Header="Open"/>
-                <MenuItem Header="Close"/>
+            <MenuItem Header="Grid">
+                <MenuItem x:Name="GridLoadMI" Header="Load"/>
+                <MenuItem x:Name="GridSaveMI" Header="Save"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">

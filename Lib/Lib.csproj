@@ -102,8 +102,9 @@
       <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MathMod\Grid\Block.cs" />
-    <Compile Include="MathMod\Grid\DescartesObject.cs" />
     <Compile Include="MathMod\Grid\Dir.cs" />
+    <Compile Include="MathMod\Grid\Grid.cs" />
+    <Compile Include="MathMod\Grid\Load\GridLoaderPFG.cs" />
     <Compile Include="MathMod\Grid\StructuredGrid.cs" />
     <Compile Include="Maths\Bits\Bits.cs" />
     <Compile Include="Maths\Bits\Bits32.cs" />
