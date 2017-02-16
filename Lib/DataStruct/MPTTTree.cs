@@ -504,20 +504,23 @@ namespace Lib.DataStruct
         }
 
         /// <summary>
-        /// Maximum identifier.
+        /// Get maximum identifier.
         /// </summary>
-        public int MaxId
+        /// <returns>maximum identifier</returns>
+        public int MaxId()
         {
-            get
+            if (IsLeaf)
             {
-                if (IsLeaf)
-                {
-                    return Id;
-                }
-                else
-                {
-                    return Children.Max(child => child.MaxId);
-                }
+                return Id;
+            }
+            else
+            {
+                // bug!
+                // We must consider own identifier here.
+
+                int children_max_id = Children.Max(child => child.MaxId());
+
+                return Math.Max(Id, children_max_id);
             }
         }
 

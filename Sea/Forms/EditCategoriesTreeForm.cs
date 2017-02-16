@@ -193,7 +193,7 @@ namespace Sea.Forms
             }
 
             // Change tree.
-            Root.AddChild(new MPTTTree(name, Root.MaxId + 1));
+            Root.AddChild(new MPTTTree(name, Root.MaxId() + 1));
 
             // Change view.
             TreeNode node = CategoriesTreeTV.Nodes.Add(name);
@@ -222,7 +222,7 @@ namespace Sea.Forms
             MPTTTree tree = FindMPTTTree(node);
 
             // Change tree.
-            tree.Parent.AddChildBefore(new MPTTTree(name, Root.MaxId + 1), node.Index);
+            tree.Parent.AddChildBefore(new MPTTTree(name, Root.MaxId() + 1), node.Index);
 
             // Change view.
             CategoriesTreeTV.SelectedNode = GetLevelNodes(node).Insert(node.Index, name);
@@ -250,7 +250,7 @@ namespace Sea.Forms
             MPTTTree tree = FindMPTTTree(node);
 
             // Change tree.
-            tree.Parent.AddChildAfter(new MPTTTree(name, Root.MaxId + 1), node.Index);
+            tree.Parent.AddChildAfter(new MPTTTree(name, Root.MaxId() + 1), node.Index);
 
             // Change view.
             CategoriesTreeTV.SelectedNode = GetLevelNodes(node).Insert(node.Index + 1, name);
@@ -278,7 +278,7 @@ namespace Sea.Forms
             MPTTTree tree = FindMPTTTree(node);
 
             // Change tree.
-            tree.AddChild(new MPTTTree(name, Root.MaxId + 1));
+            tree.AddChild(new MPTTTree(name, Root.MaxId() + 1));
 
             // Change view.
             CategoriesTreeTV.SelectedNode = node.Nodes.Add(name);
