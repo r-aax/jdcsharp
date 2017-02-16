@@ -253,6 +253,12 @@ namespace Lib.DataStruct
             // ChildrenCount - to end of list.
             Debug.Assert((before_num >= 0) && (before_num <= ChildrenCount));
 
+            // Check if tree already contains element with given id.
+            if (Root.ContainsId(child.Id))
+            {
+                throw new Exception("The outer tree already contains the given identifier.");
+            }
+
             // In general case we can insert not only single child but a tree.
             int add_nodes_count = child.NodesCount;
 
@@ -540,6 +546,29 @@ namespace Lib.DataStruct
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Check if tree contains identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns><c>true</c> - if tree contains identifier, <c>false</c> - otherwise.</returns>
+        public bool ContainsId(int id)
+        {
+            if (Id == id)
+            {
+                return true;
+            }
+
+            foreach (MPTTTree t in Children)
+            {
+                if (t.ContainsId(id))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>
