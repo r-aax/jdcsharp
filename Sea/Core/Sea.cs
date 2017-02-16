@@ -265,8 +265,7 @@ namespace Sea.Core
                 }
                 else
                 {
-                    // If there is no file we have to delete old file.
-                    // But we can delete extra files with some global service (for example when program is started).
+                    throw new Exception("we can not have a book without file");
                 }
             }
         }

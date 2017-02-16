@@ -642,5 +642,27 @@ namespace Lib.DataStruct
                 t.IncI();
             }
         }
+
+        /// <summary>
+        /// Write all MPTT tree identifiers to array.
+        /// </summary>
+        /// <param name="arr">array of integers</param>
+        /// <param name="pos">array position</param>
+        public void WriteIdsToArray(int[] arr, int pos)
+        {
+            if (pos >= arr.Length)
+            {
+                throw new Exception("Array out if range.");
+            }
+
+            arr[pos] = Id;
+            pos++;
+
+            for (int i = 0; i < ChildrenCount; i++)
+            {
+                Children[i].WriteIdsToArray(arr, pos);
+                pos += Children[i].NodesCount;
+            }
+        }
     }
 }

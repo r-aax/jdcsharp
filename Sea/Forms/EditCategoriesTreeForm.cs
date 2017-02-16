@@ -608,5 +608,42 @@ namespace Sea.Forms
                 }
             }
         }
+
+        /// <summary>
+        /// Check identifiers.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void DiagnosticsCheckIdsMI_Click(object sender, EventArgs e)
+        {
+            int[] ids = new int[Root.NodesCount];
+
+            // Zero all.
+            for (int i = 0; i < ids.Length; i++)
+            {
+                ids[i] = 0;
+            }
+
+            // Write ids.
+            Root.WriteIdsToArray(ids, 0);
+            Array.Sort(ids);
+
+            // Check all identifiers.
+            for (int i = 0; i < ids.Length; i++)
+            {
+                if (ids[i] != i - 1)
+                {
+                    MessageBox.Show(String.Format("Check if fault: position = {0}, value = {1} (right value is {2}).",
+                                                  i,
+                                                  ids[i],
+                                                  i - 1),
+                                    "Identifiers checking");
+
+                    return;
+                }
+            }
+
+            MessageBox.Show("Check is complete: no errors are found.", "Identifiers checking");
+        }
     }
 }

@@ -47,6 +47,8 @@
             this.обновитьСчетчикиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FunctionsShowCountersMI = new System.Windows.Forms.ToolStripMenuItem();
             this.FunctionsHideCountersMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.DiagnosticsMI = new System.Windows.Forms.ToolStripMenuItem();
+            this.DiagnosticsCheckIdsMI = new System.Windows.Forms.ToolStripMenuItem();
             this.MainMenuMS.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -239,7 +241,8 @@
             // MainMenuMS
             // 
             this.MainMenuMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.обновитьСчетчикиToolStripMenuItem});
+            this.обновитьСчетчикиToolStripMenuItem,
+            this.DiagnosticsMI});
             this.MainMenuMS.Location = new System.Drawing.Point(0, 0);
             this.MainMenuMS.Name = "MainMenuMS";
             this.MainMenuMS.Size = new System.Drawing.Size(684, 24);
@@ -268,6 +271,21 @@
             this.FunctionsHideCountersMI.Size = new System.Drawing.Size(178, 22);
             this.FunctionsHideCountersMI.Text = "Скрыть счетчики";
             this.FunctionsHideCountersMI.Click += new System.EventHandler(this.FunctionsHideCountersMI_Click);
+            // 
+            // DiagnosticsMI
+            // 
+            this.DiagnosticsMI.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.DiagnosticsCheckIdsMI});
+            this.DiagnosticsMI.Name = "DiagnosticsMI";
+            this.DiagnosticsMI.Size = new System.Drawing.Size(89, 20);
+            this.DiagnosticsMI.Text = "Диагностика";
+            // 
+            // DiagnosticsCheckIdsMI
+            // 
+            this.DiagnosticsCheckIdsMI.Name = "DiagnosticsCheckIdsMI";
+            this.DiagnosticsCheckIdsMI.Size = new System.Drawing.Size(229, 22);
+            this.DiagnosticsCheckIdsMI.Text = "Проверка идентификаторов";
+            this.DiagnosticsCheckIdsMI.Click += new System.EventHandler(this.DiagnosticsCheckIdsMI_Click);
             // 
             // EditCategoriesTreeForm
             // 
@@ -326,5 +344,7 @@
         private System.Windows.Forms.ToolStripMenuItem обновитьСчетчикиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem FunctionsShowCountersMI;
         private System.Windows.Forms.ToolStripMenuItem FunctionsHideCountersMI;
+        private System.Windows.Forms.ToolStripMenuItem DiagnosticsMI;
+        private System.Windows.Forms.ToolStripMenuItem DiagnosticsCheckIdsMI;
     }
 }
