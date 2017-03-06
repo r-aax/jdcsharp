@@ -189,7 +189,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Nodes count in I direction.
         /// </summary>
-        int INodes
+        public int INodes
         {
             get
             {
@@ -200,7 +200,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Nodes count in J direction.
         /// </summary>
-        int JNodes
+        public int JNodes
         {
             get
             {
@@ -211,7 +211,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Nodes count in K direction.
         /// </summary>
-        int KNodes
+        public int KNodes
         {
             get
             {

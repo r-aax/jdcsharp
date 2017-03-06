@@ -14,7 +14,8 @@
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
-            <TextBlock Foreground="SteelBlue" Text="No text yet"/>
+            <TextBlock Name="GridDescriptionTB" Width="100" Foreground="SteelBlue" Text="No text yet"/>
+            <TextBlock Name="LastActionTB" Foreground="SteelBlue" Text="No text yet 2"/>
         </StatusBar>
         <Grid>
             <Grid.ColumnDefinitions>

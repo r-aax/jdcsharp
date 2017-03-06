@@ -245,5 +245,20 @@ namespace Lib.MathMod.Grid
         {
             return Gen() == K;
         }
+
+        /// <summary>
+        /// Check if three directions produce the basis.
+        /// </summary>
+        /// <param name="d1">first direction</param>
+        /// <param name="d2">second direction</param>
+        /// <param name="d3">third direction</param>
+        public static bool IsBasis(Dir d1, Dir d2, Dir d3)
+        {
+            Dir gd1 = d1.Gen();
+            Dir gd2 = d2.Gen();
+            Dir gd3 = d3.Gen();
+
+            return ((1 << (int)gd1.N) | (1 << (int)gd2.N) | (1 << (int)gd3.N)) == 0x7;
+        }
     }
 }
