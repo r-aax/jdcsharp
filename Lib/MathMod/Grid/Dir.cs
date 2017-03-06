@@ -90,7 +90,11 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Direction number.
         /// </summary>
-        private Num N;
+        public Num N
+        {
+            get;
+            private set;
+        }
 
         /// <summary>
         /// Default constructor.

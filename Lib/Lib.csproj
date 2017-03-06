@@ -103,6 +103,7 @@
       <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MathMod\Grid\Block.cs" />
+    <Compile Include="MathMod\Grid\DescartesObject.cs" />
     <Compile Include="MathMod\Grid\Dir.cs" />
     <Compile Include="MathMod\Grid\Grid.cs" />
     <Compile Include="MathMod\Grid\Load\GridLoaderPFG.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Maths\Geometry\Geometry3D\Vector.cs" />
     <Compile Include="Maths\Geometry\Interval.cs" />
     <Compile Include="Maths\Geometry\IntervalScaler.cs" />
+    <Compile Include="Maths\Geometry\ISegm.cs" />
     <Compile Include="Maths\Geometry\Segm.cs" />
     <Compile Include="Maths\Geometry\Triangle.cs" />
     <Compile Include="Maths\Geometry\Vector.cs" />

@@ -17,8 +17,13 @@ namespace Lib.MathMod.Grid.Load
         /// </summary>
         /// <param name="g">grid</param>
         /// <param name="sr">stream reader</param>
+        /// <param name="inodes">nodes count in I direction</param>
+        /// <param name="jnodes">nodes count in J direction</param>
+        /// <param name="knodes">nodes count in K direction</param>
         /// <param name="is_blank">isblank feature</param>
-        public static void LoadBlock(StructuredGrid g, StreamReader sr, bool is_blank)
+        public static void LoadBlock(StructuredGrid g, StreamReader sr,
+                                     int inodes, int jnodes, int knodes,
+                                     bool is_blank)
         {
             ;
         }
@@ -37,9 +42,14 @@ namespace Lib.MathMod.Grid.Load
             {
                 int bc = Int32.Parse(line);
 
+                // Allocate memory for blocks sizes.
+                int[] ii = new int[bc];
+                int[] jj = new int[bc];
+                int[] kk = new int[bc];
+
                 for (int i = 0; i < bc; i++)
                 {
-                    LoadBlock(g, sr, is_blank);
+                    LoadBlock(g, sr, ii[i], jj[i], kk[i], is_blank);
                 }
             }
         }
