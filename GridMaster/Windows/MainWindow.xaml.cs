@@ -20,9 +20,22 @@ namespace GridMaster
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Init components.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Load grid.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void GridLoadMI_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

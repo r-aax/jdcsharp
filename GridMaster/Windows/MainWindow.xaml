@@ -9,7 +9,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
             <MenuItem Header="Grid">
-                <MenuItem x:Name="GridLoadMI" Header="Load"/>
+                <MenuItem x:Name="GridLoadMI" Header="Load" Click="GridLoadMI_Click"/>
                 <MenuItem x:Name="GridSaveMI" Header="Save"/>
             </MenuItem>
         </Menu>

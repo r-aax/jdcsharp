@@ -12,9 +12,9 @@ namespace Lib.MathMod.Grid
     public class Dir
     {
         /// <summary>
-        /// Direction type.
+        /// Direction number.
         /// </summary>
-        public enum Type
+        public enum Num
         {
             /// <summary>
             /// No direction.
@@ -29,32 +29,32 @@ namespace Lib.MathMod.Grid
             /// <summary>
             /// Positive I direction.
             /// </summary>
-            I1N = 0,
+            I1 = 0,
 
             /// <summary>
             /// I direction.
             /// </summary>
-            IN = 0,
+            I = 0,
 
             /// <summary>
             /// Positive J direction.
             /// </summary>
-            J1N = 1,
+            J1 = 1,
 
             /// <summary>
             /// J direction.
             /// </summary>
-            JN = 1,
+            J = 1,
 
             /// <summary>
             /// Positive K direction.
             /// </summary>
-            K1N = 2,
+            K1 = 2,
 
             /// <summary>
             /// K direction.
             /// </summary>
-            KN = 2,
+            K = 2,
 
             /// <summary>
             /// General directions count.
@@ -64,17 +64,17 @@ namespace Lib.MathMod.Grid
             /// <summary>
             /// Negative I direction.
             /// </summary>
-            I0N = 3,
+            I0 = 3,
 
             /// <summary>
             /// Negative J direction.
             /// </summary>
-            J0N = 4,
+            J0 = 4,
 
             /// <summary>
             /// Negative K direction.
             /// </summary>
-            K0N = 5,
+            K0 = 5,
 
             /// <summary>
             /// Last direction.
@@ -88,36 +88,25 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Type.
+        /// Direction number.
         /// </summary>
-        private Type T;
-
-        /// <summary>
-        /// Dir number - cast direction type to integer.
-        /// </summary>
-        private int N
-        {
-            get
-            {
-                return (int)T;
-            }
-        }
+        private Num N;
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public Dir()
         {
-            T = Type.None;
+            N = Num.None;
         }
 
         /// <summary>
-        /// Constructor by type.
+        /// Constructor by direction number.
         /// </summary>
-        /// <param name="t">type</param>
-        public Dir(Type t)
+        /// <param name="n">number</param>
+        public Dir(Num n)
         {
-            T = t;
+            N = n;
         }
 
         /// <summary>
@@ -126,7 +115,7 @@ namespace Lib.MathMod.Grid
         /// <param name="d"></param>
         public Dir(Dir d)
         {
-            T = d.T;
+            N = d.N;
         }
 
         /// <summary>
@@ -137,7 +126,7 @@ namespace Lib.MathMod.Grid
         {
             string[] str = { "I+", "J+", "K+", "I-", "J-", "K-" };
 
-            return str[N];
+            return str[(int)N];
         }
 
         /// <summary>
@@ -146,7 +135,7 @@ namespace Lib.MathMod.Grid
         /// <returns>general direction</returns>
         public Dir Gen()
         {
-            return new Dir((Type)(N % (int)Type.GenCount));
+            return new Dir((Num)((int)N % (int)Num.GenCount));
         }
 
         /// <summary>
@@ -157,7 +146,7 @@ namespace Lib.MathMod.Grid
         /// <returns>true - if equal, false - if not equal</returns>
         public static bool operator ==(Dir d1, Dir d2)
         {
-            return d1.T == d2.T;
+            return d1.N == d2.N;
         }
 
         /// <summary>
@@ -178,62 +167,53 @@ namespace Lib.MathMod.Grid
         /// <returns><c>true</c> - if objects are equal, <c>false</c> - otherwise</returns>
         public override bool Equals(object obj)
         {
-            return (obj is Dir) && ((obj as Dir).T == T);
-        }
-
-        /// <summary>
-        /// Get hash code.
-        /// </summary>
-        /// <returns>hash code</returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
+            return (obj is Dir) && ((obj as Dir).N == N);
         }
 
         /// <summary>
         /// General direction I.
         /// </summary>
-        public static Dir I = new Dir(Type.IN);
+        public static Dir I = new Dir(Num.I);
 
         /// <summary>
         /// General direction J.
         /// </summary>
-        public static Dir J = new Dir(Type.IN);
+        public static Dir J = new Dir(Num.J);
 
         /// <summary>
         /// General direction K.
         /// </summary>
-        public static Dir K = new Dir(Type.KN);
+        public static Dir K = new Dir(Num.K);
 
         /// <summary>
         /// Positive I direction.
         /// </summary>
-        public static Dir I1 = new Dir(Type.I1N);
+        public static Dir I1 = I;
 
         /// <summary>
         /// Positive J direction.
         /// </summary>
-        public static Dir J1 = new Dir(Type.I1N);
+        public static Dir J1 = J;
 
         /// <summary>
         /// Positive K direction.
         /// </summary>
-        public static Dir K1 = new Dir(Type.K1N);
+        public static Dir K1 = K;
 
         /// <summary>
         /// Negative I direction.
         /// </summary>
-        public static Dir I0 = new Dir(Type.I0N);
+        public static Dir I0 = new Dir(Num.I0);
 
         /// <summary>
         /// Negative J direction.
         /// </summary>
-        public static Dir J0 = new Dir(Type.I0N);
+        public static Dir J0 = new Dir(Num.J0);
 
         /// <summary>
         /// Negative K direction.
         /// </summary>
-        public static Dir K0 = new Dir(Type.K0N);
+        public static Dir K0 = new Dir(Num.K0);
 
         /// <summary>
         /// Check if is I direction.

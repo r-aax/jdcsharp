@@ -47,6 +47,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataFormats\PFG.cs" />
     <Compile Include="DataStruct\ColoredObject.cs" />
     <Compile Include="DataStruct\ColoresManager.cs" />
     <Compile Include="DataStruct\Graph\DrawProperties\EdgeDrawProperties.cs" />

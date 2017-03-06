@@ -50,7 +50,7 @@ namespace Lib.MathMod.Grid.Load
         /// <param name="g">grid</param>
         /// <param name="file_name">PFG file name</param>
         /// <param name="is_iblank">isblank feature</param>
-        /// <returns></returns>
+        /// <returns><c>true</c> - if grid is loaded, <c>false</c> - otherwise</returns>
         public static bool Load(StructuredGrid g, string pfg_file_name, bool is_iblank)
         {
             bool is_succ = true;
