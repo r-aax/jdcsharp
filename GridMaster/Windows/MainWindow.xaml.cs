@@ -35,6 +35,18 @@ namespace GridMaster
         public MainWindow()
         {
             InitializeComponent();
+
+            // Create empty grid.
+            Grid = new StructuredGrid();
+        }
+
+        /// <summary>
+        /// Set brief grid statistic.
+        /// </summary>
+        /// <param name="stat">statistic string</param>
+        public void UpdateBriefGridStatistic()
+        {
+            BriefGridStatisticTB.Text = Grid.BriefStatistic();
         }
 
         /// <summary>
@@ -45,7 +57,7 @@ namespace GridMaster
         {
             LastActionTB.Text = last_action;
         }
-
+        
         /// <summary>
         /// Load grid.
         /// </summary>
@@ -69,6 +81,7 @@ namespace GridMaster
 
                     GridLoaderPFG.Load(Grid, filename, false);
                     UpdateLastAction("Grid " + filename + " is loaded.");
+                    UpdateBriefGridStatistic();
                 }
                 else
                 {

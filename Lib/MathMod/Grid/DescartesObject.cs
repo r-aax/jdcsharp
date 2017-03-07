@@ -48,9 +48,9 @@ namespace Lib.MathMod.Grid
         /// <param name="k"></param>
         public DescartesObject(ISegm i, ISegm j, ISegm k)
         {
-            I = new ISegm(I);
-            J = new ISegm(J);
-            K = new ISegm(K);
+            I = new ISegm(i);
+            J = new ISegm(j);
+            K = new ISegm(k);
             Coords = new ISegm[(int)Dir.Num.GenCount];
             Coords[(int)Dir.Num.I] = I;
             Coords[(int)Dir.Num.J] = J;
@@ -222,7 +222,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Count of cells.
         /// </summary>
-        int CellsCount
+        public int CellsCount
         {
             get
             {
@@ -233,7 +233,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Surface area.
         /// </summary>
-        int SurfaceArea
+        public int SurfaceArea
         {
             get
             {
@@ -244,7 +244,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Count of nodes.
         /// </summary>
-        int NodesCount
+        public int NodesCount
         {
             get
             {

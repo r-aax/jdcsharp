@@ -48,6 +48,17 @@ namespace Lib.MathMod.Grid
         {
             // Allocate nodes.
             Nodes = new Point[INodes, JNodes, KNodes];
+
+            for (int i = 0; i < INodes; i++)
+            {
+                for (int j = 0; j < JNodes; j++)
+                {
+                    for (int k = 0; k < KNodes; k++)
+                    {
+                        Nodes[i, j, k] = new Point();
+                    }
+                }
+            }
         }
 
         /// <summary>

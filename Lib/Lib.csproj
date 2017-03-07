@@ -102,12 +102,17 @@
     <Compile Include="GUI\WPF\EditIntIntWindow.xaml.cs">
       <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MathMod\Grid\BCond.cs" />
+    <Compile Include="MathMod\Grid\BCondDescr.cs" />
     <Compile Include="MathMod\Grid\Block.cs" />
     <Compile Include="MathMod\Grid\DescartesObject.cs" />
     <Compile Include="MathMod\Grid\Dir.cs" />
     <Compile Include="MathMod\Grid\Grid.cs" />
+    <Compile Include="MathMod\Grid\Iface.cs" />
     <Compile Include="MathMod\Grid\Load\GridLoaderPFG.cs" />
+    <Compile Include="MathMod\Grid\Scope.cs" />
     <Compile Include="MathMod\Grid\StructuredGrid.cs" />
+    <Compile Include="MathMod\Grid\ThinDescartesObject.cs" />
     <Compile Include="Maths\Bits\Bits.cs" />
     <Compile Include="Maths\Bits\Bits32.cs" />
     <Compile Include="Maths\Bits\Bits8.cs" />

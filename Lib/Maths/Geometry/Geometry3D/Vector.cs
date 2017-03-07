@@ -135,6 +135,53 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
+        /// Acces with iterator.
+        /// </summary>
+        /// <param name="i">number</param>
+        /// <returns>vector element</returns>
+        public double this[int i]
+        {
+            get
+            {
+                switch (i)
+                {
+                    case 0:
+                        return X;
+
+                    case 1:
+                        return Y;
+
+                    case 2:
+                        return Z;
+
+                    default:
+                        throw new Exception("wrong coordinate of 3D vector");
+                }
+            }
+
+            set
+            {
+                switch (i)
+                {
+                    case 0:
+                        X = value;
+                        break;
+
+                    case 1:
+                        Y = value;
+                        break;
+
+                    case 2:
+                        Z = value;
+                        break;
+
+                    default:
+                        throw new Exception("wrong coordinate of 3D vector");
+                }
+            }
+        }
+
+        /// <summary>
         /// Move vector.
         /// </summary>
         /// <param name="x">move <c>x</c></param>

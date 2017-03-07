@@ -62,6 +62,7 @@ namespace Lib.Maths.Geometry
         /// <param name="l">low value</param>
         /// <param name="h">high value</param>
         public Segm(T l, T h)
+            : this()
         {
             L = l;
             H = h;
@@ -72,6 +73,7 @@ namespace Lib.Maths.Geometry
         /// </summary>
         /// <param name="s">segment</param>
         public Segm(Segm<T> s)
+            : this()
         {
             L = s.L;
             H = s.H;
@@ -80,7 +82,7 @@ namespace Lib.Maths.Geometry
         /// <summary>
         /// Indexer.
         /// </summary>
-        /// <param name="i"></param>
+        /// <param name="i">number</param>
         /// <returns>Element of segment.</returns>
         public T this[int i]
         {

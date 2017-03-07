@@ -38,5 +38,33 @@ namespace Lib.MathMod.Grid
         {
             Blocks = new List<Block>();
         }
+
+        /// <summary>
+        /// Count of nods.
+        /// </summary>
+        /// <returns>nodes count</returns>
+        public int NodesCount()
+        {
+            int nc = 0;
+
+            foreach (Block b in Blocks)
+            {
+                nc += b.NodesCount;
+            }
+                
+            return nc;
+        }
+
+        /// <summary>
+        /// Brief statistic of the grid.
+        /// </summary>
+        /// <returns>brief statistic</returns>
+        public string BriefStatistic()
+        {
+            int bc = BlocksCount;
+            int nc = NodesCount();
+
+            return String.Format("[Grid: {0}b, {1}n]", bc, nc);
+        }
     }
 }

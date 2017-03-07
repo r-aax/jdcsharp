@@ -175,6 +175,15 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Override of get hash code.
+        /// </summary>
+        /// <returns>hash code</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        /// <summary>
         /// General direction I.
         /// </summary>
         public static Dir I = new Dir(Num.I);

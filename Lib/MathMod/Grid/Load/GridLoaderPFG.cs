@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Globalization;
+
+using Lib.DataFormats;
 
 namespace Lib.MathMod.Grid.Load
 {
@@ -13,19 +16,24 @@ namespace Lib.MathMod.Grid.Load
     public class GridLoaderPFG
     {
         /// <summary>
-        /// Load block from PFG file.
+        /// Conversion.
         /// </summary>
-        /// <param name="g">grid</param>
-        /// <param name="sr">stream reader</param>
-        /// <param name="inodes">nodes count in I direction</param>
-        /// <param name="jnodes">nodes count in J direction</param>
-        /// <param name="knodes">nodes count in K direction</param>
-        /// <param name="is_blank">isblank feature</param>
-        public static void LoadBlock(StructuredGrid g, StreamReader sr,
-                                     int inodes, int jnodes, int knodes,
-                                     bool is_blank)
+        /// <param name="s">string</param>
+        /// <param name="p">separator</param>
+        /// <returns>converted string</returns>
+        static string Conv(string s, string p)
         {
-            ;
+            if (s.Contains(".") && (p != "."))
+            {
+                return s.Replace('.', ',');
+            }
+
+            if (s.Contains(",") && (p != ","))
+            {
+                return s.Replace(',', '.');
+            }
+
+            return s;
         }
 
         /// <summary>
@@ -38,6 +46,9 @@ namespace Lib.MathMod.Grid.Load
         {
             string line;
 
+            // Get separator for read real numbers.
+            string sep = NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
+
             if ((line = sr.ReadLine()) != null)
             {
                 int bc = Int32.Parse(line);
@@ -47,9 +58,91 @@ namespace Lib.MathMod.Grid.Load
                 int[] jj = new int[bc];
                 int[] kk = new int[bc];
 
+                // Read blocks sizes.
+                PFG.ReadBlocksSizes(sr, bc, ii, jj, kk);
+
+                // Add all blocks and allocate memory for them
                 for (int i = 0; i < bc; i++)
                 {
-                    LoadBlock(g, sr, ii[i], jj[i], kk[i], is_blank);
+                    Block b = new Block(i, ii[i], jj[i], kk[i]);
+                    b.Allocate();
+                    g.Blocks.Add(b);
+                }
+
+                // Read coordsinates.
+
+                int cur_block_num = 0;
+                Block cur_block = g.Blocks[cur_block_num];
+                int cur_coord = 0;
+                int cur_i = 0;
+                int cur_j = 0;
+                int cur_k = 0;
+                int iblank_data_left = 0;
+
+                while ((line = sr.ReadLine()) != null)
+                {
+                    string[] s = line.Split(' ');
+
+                    for (int i = 0; i < s.Count(); i++)
+                    {
+                        if (s[i] == "")
+                        {
+                            // If element if empty this is the end of the line.
+                            break;
+                        }
+
+                        if (iblank_data_left > 0)
+                        {
+                            // If we use iblank data, we must read it out.
+
+                            iblank_data_left--;
+
+                            continue;
+                        }
+
+                        // Load value.
+                        double val = Double.Parse(Conv(s[i], sep));
+                        cur_block.Nodes[cur_i, cur_j, cur_k][cur_coord] = val;
+
+                        cur_i++;
+
+                        // Shift cur_*.
+                        if (cur_i == cur_block.INodes)
+                        {
+                            cur_i = 0;
+                            cur_j++;
+
+                            if (cur_j == cur_block.JNodes)
+                            {
+                                cur_j = 0;
+                                cur_k++;
+
+                                if (cur_k == cur_block.KNodes)
+                                {
+                                    cur_k = 0;
+                                    cur_coord++;
+
+                                    if (cur_coord == 3)
+                                    {
+                                        cur_coord = 0;
+                                        cur_block_num++;
+
+                                        if (cur_block_num == bc)
+                                        {
+                                            // All blocks data is readed.
+                                            return;
+                                        }
+                                        else
+                                        {
+                                            iblank_data_left = cur_block.NodesCount;
+                                        }
+
+                                        cur_block = g.Blocks[cur_block_num];
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
