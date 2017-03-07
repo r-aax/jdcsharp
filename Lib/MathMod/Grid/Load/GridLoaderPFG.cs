@@ -7,6 +7,7 @@ using System.IO;
 using System.Globalization;
 
 using Lib.DataFormats;
+using Lib.Maths.Geometry;
 
 namespace Lib.MathMod.Grid.Load
 {
@@ -42,7 +43,7 @@ namespace Lib.MathMod.Grid.Load
         /// <param name="g">grid</param>
         /// <param name="sr">stream reader</param>
         /// <param name="is_blank">isblank feature</param>
-        public static void LoadBlocks(StructuredGrid g, StreamReader sr, bool is_blank)
+        private static void LoadBlocks(StructuredGrid g, StreamReader sr, bool is_blank)
         {
             string line;
 
@@ -148,13 +149,147 @@ namespace Lib.MathMod.Grid.Load
         }
 
         /// <summary>
+        /// Load interfaces, border conditions and scopes.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="sr">stream</param>
+        private static void LoadIfacesBCondsScopes(StructuredGrid g, StreamReader sr)
+        {
+            // Ignore two lines.
+            for (int i = 0; i < 2; i++)
+            {
+                string line = sr.ReadLine();
+
+                if (line == null)
+                {
+                    return;
+                }
+            }
+
+            LoadIfaces(g, sr);
+            LoadBConds(g, sr);
+            LoadScopes(g, sr);
+        }
+
+        /// <summary>
+        /// Load interfaces.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="sr">stream reader</param>
+        private static void LoadIfaces(StructuredGrid g, StreamReader sr)
+        {
+            string line;
+
+            if ((line = sr.ReadLine()) != null)
+            {
+                int ic = Int32.Parse(line);
+
+                // Read all interfaces.
+                for (int i = 0; i < ic; i++)
+                {
+                    line = sr.ReadLine();
+                    string[] s = line.Split(' ');
+                    int id = Int32.Parse(s[0]);
+                    int bi = Int32.Parse(s[1]);
+                    int i0 = Int32.Parse(s[2]);
+                    int i1 = Int32.Parse(s[3]);
+                    int j0 = Int32.Parse(s[4]);
+                    int j1 = Int32.Parse(s[5]);
+                    int k0 = Int32.Parse(s[6]);
+                    int k1 = Int32.Parse(s[7]);
+                    int nbi = Int32.Parse(s[8]);
+
+                    // Create interface.
+                    Iface iface = new Iface(id, g.Blocks[bi - 1],
+                                            new ISegm(i0 - 1, i1 - 1),
+                                            new ISegm(j0 - 1, j1 - 1),
+                                            new ISegm(k0 - 1, k1 - 1),
+                                            g.Blocks[nbi - 1]);
+
+                    // Paste into interfaces list.
+
+                    for (int j = 0; j < g.IfacesCount; j++)
+                    {
+                        Iface cur_iface = g.Ifaces[j];
+
+                        if (cur_iface.Id == iface.Id)
+                        {
+                            g.Ifaces.Insert(j, iface);
+                            iface = null;
+
+                            break;
+                        }
+                    }
+
+                    if (iface != null)
+                    {
+                        g.Ifaces.Add(iface);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Load border conditions.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="sr">stream reader</param>
+        private static void LoadBConds(StructuredGrid g, StreamReader sr)
+        {
+            string line;
+
+            if ((line = sr.ReadLine()) != null)
+            {
+                int bcc = Int32.Parse(line);
+
+                // Read all interfaces.
+                for (int i = 0; i < bcc; i++)
+                {
+                    line = sr.ReadLine();
+                    string[] s = line.Split(' ');
+                    int id = Int32.Parse(s[0]);
+                    int bi = Int32.Parse(s[1]);
+                    int i0 = Int32.Parse(s[2]);
+                    int i1 = Int32.Parse(s[3]);
+                    int j0 = Int32.Parse(s[4]);
+                    int j1 = Int32.Parse(s[5]);
+                    int k0 = Int32.Parse(s[6]);
+                    int k1 = Int32.Parse(s[7]);
+                    string type = s[8];
+                    string subtype = s[9];
+                    string name = s[10];
+
+                    // Create border condition.
+                    BCond bcond = new BCond(id, g.Blocks[bi - 1],
+                                            new ISegm(i0 - 1, i1 - 1),
+                                            new ISegm(j0 - 1, j1 - 1),
+                                            new ISegm(k0 - 1, k1 - 1),
+                                            type, subtype, name);
+                    g.BConds.Add(bcond);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Load scopes.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="sr">stream reader</param>
+        private static void LoadScopes(StructuredGrid g, StreamReader sr)
+        {
+        }
+
+        /// <summary>
         /// Load structured grid from PFG/IBC files.
         /// </summary>
         /// <param name="g">grid</param>
-        /// <param name="file_name">PFG file name</param>
+        /// <param name="pfg_file_name">PFG file name</param>
+        /// <param name="ibc_file_name">IBC file name</param>
         /// <param name="is_iblank">isblank feature</param>
         /// <returns><c>true</c> - if grid is loaded, <c>false</c> - otherwise</returns>
-        public static bool Load(StructuredGrid g, string pfg_file_name, bool is_iblank)
+        public static bool Load(StructuredGrid g,
+                                string pfg_file_name, string ibc_file_name,
+                                bool is_iblank)
         {
             bool is_succ = true;
 
@@ -162,7 +297,12 @@ namespace Lib.MathMod.Grid.Load
             {
                 using (StreamReader pfg_sr = new StreamReader(pfg_file_name))
                 {
-                    LoadBlocks(g, pfg_sr, is_iblank);
+                    using (StreamReader ibc_sr = new StreamReader(ibc_file_name))
+                    {
+                        g.Clear();
+                        LoadBlocks(g, pfg_sr, is_iblank);
+                        LoadIfacesBCondsScopes(g, ibc_sr);
+                    }
                 }
             }
             catch (Exception)

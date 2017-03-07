@@ -77,9 +77,10 @@ namespace GridMaster
 
                 if ((extension == ".pfg") || (extension == ".PFG"))
                 {
-                    string extenstion_ibc = ((extension == ".pfg") ? ".ibc" : ".IBC");
+                    string extension_ibc = ((extension == ".pfg") ? ".ibc" : ".IBC");
+                    string filename_ibc = filename.Replace(extension, extension_ibc);
 
-                    GridLoaderPFG.Load(Grid, filename, false);
+                    GridLoaderPFG.Load(Grid, filename, filename_ibc, false);
                     UpdateLastAction("Grid " + filename + " is loaded.");
                     UpdateBriefGridStatistic();
                 }

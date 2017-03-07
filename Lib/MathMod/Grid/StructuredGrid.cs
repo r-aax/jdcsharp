@@ -32,11 +32,61 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// List of interfaces.
+        /// </summary>
+        public List<Iface> Ifaces
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Interfaces count.
+        /// </summary>
+        public int IfacesCount
+        {
+            get
+            {
+                return Ifaces.Count;
+            }
+        }
+
+        /// <summary>
+        /// List of border condditions.
+        /// </summary>
+        public List<BCond> BConds
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Count of border conditions.
+        /// </summary>
+        public int BCondsCount
+        {
+            get
+            {
+                return BConds.Count;
+            }
+        }
+
+        /// <summary>
+        /// Clear all objects.
+        /// </summary>
+        public void Clear()
+        {
+            Blocks = new List<Block>();
+            Ifaces = new List<Iface>();
+            BConds = new List<BCond>();
+        }
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public StructuredGrid()
         {
-            Blocks = new List<Block>();
+            Clear();
         }
 
         /// <summary>
