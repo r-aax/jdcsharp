@@ -396,6 +396,95 @@ namespace Lib.MathMod.Grid.Load
         /// <param name="is_blank">iblank data flag</param>
         public static void SaveBlocks(StructuredGrid g, StreamWriter sw, bool is_blank)
         {
+            int bc = g.BlocksCount;
+            const int max_items_count = 5;
+            const int max_iblank_items_count = 38;
+
+            // Write blocks count.
+            sw.WriteLine(bc.ToString());
+
+            // Write blocks sizes.
+            for (int bi = 0; bi < bc; bi++)
+            {
+                Block b = g.Blocks[bi];
+
+                sw.WriteLine(b.INodes.ToString() + " " + b.JNodes.ToString() + " " + b.KNodes.ToString());
+            }
+
+            // Write each block.
+            for (int bi = 0; bi < bc; bi++)
+            {
+                string line;
+                int items_count;
+
+                Block b = g.Blocks[bi];
+
+                // Write X, Y, Z coordinates.
+                for (int coord_num = 0; coord_num < 3; coord_num++)
+                {
+                    line = "";
+                    items_count = 0;
+
+                    for (int k = 0; k < b.KNodes; k++)
+                    {
+                        for (int j = 0; j < b.JNodes; j++)
+                        {
+                            for (int i = 0; i < b.INodes; i++)
+                            {
+                                if (items_count > 0)
+                                {
+                                    line += " ";
+                                }
+
+                                line += String.Format("{0:0.00000000e+00}", b.Nodes[i, j, k][coord_num]);
+                                items_count++;
+
+                                if (items_count == max_items_count)
+                                {
+                                    sw.WriteLine(line);
+                                    line = "";
+                                    items_count = 0;
+                                }
+                            }
+                        }
+                    }
+
+                    if (items_count > 0)
+                    {
+                        sw.WriteLine(line);
+                    }
+                }
+
+                // Write blank data to the end of file.
+                if (is_blank)
+                {
+                    line = "";
+                    items_count = 0;
+
+                    for (int i = 0; i < b.NodesCount; i++)
+                    {
+                        if (items_count > 0)
+                        {
+                            line += " ";
+                        }
+
+                        line += "1";
+                        items_count++;
+
+                        if (items_count == max_iblank_items_count)
+                        {
+                            sw.WriteLine(line);
+                            line = "";
+                            items_count = 0;
+                        }
+                    }
+
+                    if (items_count > 0)
+                    {
+                        sw.WriteLine(line);
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -405,6 +494,77 @@ namespace Lib.MathMod.Grid.Load
         /// <param name="sw">stream</param>
         public static void SaveIfacesBCondsScopes(StructuredGrid g, StreamWriter sw)
         {
+            sw.WriteLine("! Version 3");
+            sw.WriteLine("! DO NOT MODIFY THIS FILE.  RESULTS LIKELY TO BE UNDESIRABLE");
+            SaveIfaces(g, sw);
+            SaveBConds(g, sw);
+            SaveScopes(g, sw);
+        }
+
+        /// <summary>
+        /// Save interfaces.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="sw">stream</param>
+        public static void SaveIfaces(StructuredGrid g, StreamWriter sw)
+        {
+            sw.WriteLine(g.IfacesCount.ToString());
+
+            for (int i = 0; i < g.IfacesCount; i++)
+            {
+                Iface iface = g.Ifaces[i];
+
+                sw.WriteLine(String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8}",
+                                           iface.Id, iface.B.Id + 1,
+                                           iface.I0 + 1, iface.I1 + 1,
+                                           iface.J0 + 1, iface.J1 + 1,
+                                           iface.K0 + 1, iface.K1 + 1,
+                                           iface.NB.Id + 1));
+            }
+        }
+
+        /// <summary>
+        /// Save border conditions.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="sw">stream</param>
+        public static void SaveBConds(StructuredGrid g, StreamWriter sw)
+        {
+            sw.WriteLine(g.BCondsCount.ToString());
+
+            for (int i = 0; i < g.BCondsCount; i++)
+            {
+                BCond b = g.BConds[i];
+
+                sw.WriteLine(String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10}",
+                                           b.Id, b.B.Id + 1,
+                                           b.I0 + 1, b.I1 + 1,
+                                           b.J0 + 1, b.J1 + 1,
+                                           b.K0 + 1, b.K1 + 1,
+                                           b.Label.Type, b.Label.Subtype, b.Label.Name));
+            }
+        }
+
+        /// <summary>
+        /// Save scopes.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="sw">stream</param>
+        public static void SaveScopes(StructuredGrid g, StreamWriter sw)
+        {
+            sw.WriteLine(g.ScopesCount.ToString());
+
+            for (int i = 0; i < g.ScopesCount; i++)
+            {
+                Scope s = g.Scopes[i];
+
+                sw.WriteLine(String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10}",
+                                           s.Id, s.B.Id + 1,
+                                           s.I0 + 1, s.I1 + 1,
+                                           s.J0 + 1, s.J1 + 1,
+                                           s.K0 + 1, s.K1 + 1,
+                                           s.Label.Type, s.Label.Subtype, s.Label.Name));
+            }
         }
     }
 }
