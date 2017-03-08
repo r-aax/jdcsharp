@@ -142,6 +142,7 @@
     <Compile Include="Maths\Geometry\Segm.cs" />
     <Compile Include="Maths\Geometry\Triangle.cs" />
     <Compile Include="Maths\Geometry\Vector.cs" />
+    <Compile Include="Maths\Numbers\Constants.cs" />
     <Compile Include="Maths\Numbers\NumbersArrays.cs" />
     <Compile Include="Maths\Numbers\CyclicArithmetic.cs" />
     <Compile Include="Maths\Numbers\Naturals.cs" />

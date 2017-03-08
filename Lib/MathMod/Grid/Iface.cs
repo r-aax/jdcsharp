@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.Maths.Geometry;
+using Lib.Maths.Geometry.Geometry3D;
+using Lib.Maths.Numbers;
 
 namespace Lib.MathMod.Grid
 {
@@ -23,6 +25,15 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Matrix of neighbour directions.
+        /// </summary>
+        public Dir[] NDirs
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="id">identifier</param>
@@ -35,6 +46,7 @@ namespace Lib.MathMod.Grid
             : base(id, b, i, j, k)
         {
             NB = nb;
+            NDirs = new Dir[(int)Dir.Num.Count];
         }
 
         /// <summary>
@@ -53,6 +65,91 @@ namespace Lib.MathMod.Grid
         public override bool IsBCond()
         {
             return false;
+        }
+
+        /// <summary>
+        /// Reset neighbour directions.
+        /// </summary>
+        public void ResetNDirs()
+        {
+            NDirs = new Dir[Dir.Count];
+        }
+
+        /// <summary>
+        /// Set neighbour direction.
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <param name="nd">neighbour direction</param>
+        public void SetNDir(Dir d, Dir nd)
+        {
+            NDirs[d.NI] = nd;
+        }
+
+        /// <summary>
+        /// Set neighbour direction.
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <param name="i">interface</param>
+        /// <param name="nd">neighbour direction</param>
+        public void SetNDirs(Dir d, Iface i, Dir nd)
+        {
+            SetNDir(d, nd);
+            i.SetNDir(nd, d);
+        }
+
+        /// <summary>
+        /// Set relation between pairs of directions.
+        /// </summary>
+        /// <param name="d1">first direction</param>
+        /// <param name="d2">second direction</param>
+        /// <param name="i">interface</param>
+        /// <param name="nd1">first neighbour interface</param>
+        /// <param name="nd2">second neighbour interface</param>
+        public void SetNDirs(Dir d1, Dir d2, Iface i, Dir nd1, Dir nd2)
+        {
+            SetNDirs(d1, i, nd1);
+            SetNDirs(d2, i, nd2);
+        }
+
+        /// <summary>
+        /// Check if all NDirs are correct.
+        /// </summary>
+        /// <returns><c>true</c> - if all dirs are correct, <c>false</c> - otherwise</returns>
+        public bool IsNDirsCorrect()
+        {
+            for (int i = 0; i < Dir.Count; i++)
+            {
+                if (!NDirs[i].IsCorrect)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Check match of two ifaces with directions.
+        /// </summary>
+        /// <param name="i1">first interface</param>
+        /// <param name="od11">first direction of first interface</param>
+        /// <param name="od12">second direction of first interface</param>
+        /// <param name="i2">second interface</param>
+        /// <param name="od21">first direction of second interface</param>
+        /// <param name="od22">second direction of second interface</param>
+        /// <returns><c>true</c> - if interfaces match, <c>false</c> - otherwise</returns>
+        public static bool IsMatch(Iface i1, Dir od11, Dir od12,
+                                   Iface i2, Dir od21, Dir od22)
+        {
+            Point p1 = i1.CornerNode(od11, od12);
+            Point p2 = i2.CornerNode(od21, od22);
+
+            if ((p1 == null) || (p2 == null))
+            {
+                return false;
+            }
+
+            return (p1 - p2).Mod2 < Constants.Eps;
         }
     }
 }

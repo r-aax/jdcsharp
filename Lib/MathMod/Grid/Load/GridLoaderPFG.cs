@@ -334,6 +334,7 @@ namespace Lib.MathMod.Grid.Load
                         g.Clear();
                         LoadBlocks(g, pfg_sr, is_iblank);
                         LoadIfacesBCondsScopes(g, ibc_sr);
+                        g.SetIfacesNDirs();
                     }
                 }
             }

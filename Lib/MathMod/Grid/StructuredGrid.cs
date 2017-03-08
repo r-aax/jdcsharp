@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Lib.Maths.Numbers;
+
 namespace Lib.MathMod.Grid
 {
     /// <summary>
@@ -136,6 +138,56 @@ namespace Lib.MathMod.Grid
             int nc = NodesCount();
 
             return String.Format("[Grid: {0}b, {1}n]", bc, nc);
+        }
+
+        /// <summary>
+        /// Set neighbour directions for all interfaces.
+        /// </summary>
+        public void SetIfacesNDirs()
+        {
+            for (int i = 0; i < IfacesCount; i += 2)
+            {
+                Iface i1 = Ifaces[i];
+                Iface i2 = Ifaces[i + 1];
+
+                // Reset all.
+                i1.ResetNDirs();
+                i2.ResetNDirs();
+
+                // General directions.
+                Dir d1 = i1.D;
+                Dir d2 = i2.D;
+                i1.SetNDirs(d1, i2, !d2);
+
+                // Rest two directions.
+                Dir od11, od12, od21, od22;
+                d1.GetPairOfOrthogonalDirs(out od11, out od12);
+                d2.GetPairOfOrthogonalDirs(out od21, out od22);
+
+                // Check 4 quarters.
+                for (int j = 0; j < 4; j++)
+                {
+                    if (Iface.IsMatch(i1, od11, od12, i2, od21, od22))
+                    {
+                        if (Iface.IsMatch(i1, !od11, od12, i2, !od21, od22))
+                        {
+                            i1.SetNDirs(od11, od12, i2, od21, od22);
+                        }
+                        else
+                        {
+                            i1.SetNDirs(od11, od12, i2, od22, od21);
+                        }
+                    }
+
+                    Dir.OrthogonalRot(ref od21, ref od22);
+                }
+
+                if (!(i1.IsNDirsCorrect()
+                      && i2.IsNDirsCorrect()))
+                {
+                    throw new Exception("error while detecting interfaces pair orientation");
+                }
+            }
         }
     }
 }

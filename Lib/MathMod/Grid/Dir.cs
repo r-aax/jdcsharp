@@ -97,6 +97,33 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Number in integer form.
+        /// </summary>
+        public int NI
+        {
+            get
+            {
+                return (int)N;
+            }
+
+            set
+            {
+                N = (Num)value;
+            }
+        }
+
+        /// <summary>
+        /// Count of directions.
+        /// </summary>
+        public static int Count
+        {
+            get
+            {
+                return (int)Num.Count;
+            }
+        }
+
+        /// <summary>
         /// Default constructor.
         /// </summary>
         public Dir()
@@ -120,67 +147,6 @@ namespace Lib.MathMod.Grid
         public Dir(Dir d)
         {
             N = d.N;
-        }
-
-        /// <summary>
-        /// Name of direction.
-        /// </summary>
-        /// <returns>name</returns>
-        public string Name()
-        {
-            string[] str = { "I+", "J+", "K+", "I-", "J-", "K-" };
-
-            return str[(int)N];
-        }
-
-        /// <summary>
-        /// General direction.
-        /// </summary>
-        /// <returns>general direction</returns>
-        public Dir Gen()
-        {
-            return new Dir((Num)((int)N % (int)Num.GenCount));
-        }
-
-        /// <summary>
-        /// Comparison.
-        /// </summary>
-        /// <param name="d1">first direction</param>
-        /// <param name="d2">second direction</param>
-        /// <returns>true - if equal, false - if not equal</returns>
-        public static bool operator ==(Dir d1, Dir d2)
-        {
-            return d1.N == d2.N;
-        }
-
-        /// <summary>
-        /// Comparison for not equal.
-        /// </summary>
-        /// <param name="d1">first direction</param>
-        /// <param name="d2">second direction</param>
-        /// <returns>true - if not equal, false - if equal</returns>
-        public static bool operator !=(Dir d1, Dir d2)
-        {
-            return !(d1 == d2);
-        }
-
-        /// <summary>
-        /// Check equal of two directions.
-        /// </summary>
-        /// <param name="obj">other direction</param>
-        /// <returns><c>true</c> - if objects are equal, <c>false</c> - otherwise</returns>
-        public override bool Equals(object obj)
-        {
-            return (obj is Dir) && ((obj as Dir).N == N);
-        }
-
-        /// <summary>
-        /// Override of get hash code.
-        /// </summary>
-        /// <returns>hash code</returns>
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
 
         /// <summary>
@@ -229,6 +195,82 @@ namespace Lib.MathMod.Grid
         public static Dir K0 = new Dir(Num.K0);
 
         /// <summary>
+        /// Directions array.
+        /// </summary>
+        public static Dir[] Dirs = new Dir[] { I1, J1, K1, I0, J0, K0 };
+
+        /// <summary>
+        /// Name of direction.
+        /// </summary>
+        /// <returns>name</returns>
+        public string Name()
+        {
+            string[] str = { "I+", "J+", "K+", "I-", "J-", "K-" };
+
+            return str[(int)N];
+        }
+
+        /// <summary>
+        /// General direction.
+        /// </summary>
+        /// <returns>general direction</returns>
+        public Dir Gen()
+        {
+            return new Dir((Num)(NI % (int)Num.GenCount));
+        }
+
+        /// <summary>
+        /// Comparison.
+        /// </summary>
+        /// <param name="d1">first direction</param>
+        /// <param name="d2">second direction</param>
+        /// <returns>true - if equal, false - if not equal</returns>
+        public static bool operator ==(Dir d1, Dir d2)
+        {
+            return d1.N == d2.N;
+        }
+
+        /// <summary>
+        /// Comparison for not equal.
+        /// </summary>
+        /// <param name="d1">first direction</param>
+        /// <param name="d2">second direction</param>
+        /// <returns>true - if not equal, false - if equal</returns>
+        public static bool operator !=(Dir d1, Dir d2)
+        {
+            return !(d1 == d2);
+        }
+
+        /// <summary>
+        /// Reverse direction.
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns></returns>
+        public static Dir operator !(Dir d)
+        {
+            return Dirs[(d.NI + (int)Num.GenCount) % Count];
+        }
+
+        /// <summary>
+        /// Check equal of two directions.
+        /// </summary>
+        /// <param name="obj">other direction</param>
+        /// <returns><c>true</c> - if objects are equal, <c>false</c> - otherwise</returns>
+        public override bool Equals(object obj)
+        {
+            return (obj is Dir) && ((obj as Dir).N == N);
+        }
+
+        /// <summary>
+        /// Override of get hash code.
+        /// </summary>
+        /// <returns>hash code</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        /// <summary>
         /// Check if is I direction.
         /// </summary>
         /// <returns>true - if I direction, false - othercase</returns>
@@ -256,6 +298,17 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Check if direction correct.
+        /// </summary>
+        public bool IsCorrect
+        {
+            get
+            {
+                return (N >= Num.First) && (N <= Num.Last);
+            }
+        }
+
+        /// <summary>
         /// Check if three directions produce the basis.
         /// </summary>
         /// <param name="d1">first direction</param>
@@ -268,6 +321,34 @@ namespace Lib.MathMod.Grid
             Dir gd3 = d3.Gen();
 
             return ((1 << (int)gd1.N) | (1 << (int)gd2.N) | (1 << (int)gd3.N)) == 0x7;
+        }
+
+        /// <summary>
+        /// Pair of orthogonal directions.
+        /// </summary>
+        /// <param name="d1">first direction</param>
+        /// <param name="d2">second direction</param>
+        public void GetPairOfOrthogonalDirs(out Dir d1, out Dir d2)
+        {
+            int n = Gen().NI;
+            int[] d1nums = new int[] { (int)Num.J1, (int)Num.I1, (int)Num.I1 };
+            int[] d2nums = new int[] { (int)Num.K1, (int)Num.K1, (int)Num.J1 };
+
+            d1 = Dir.Dirs[d1nums[n]];
+            d2 = Dir.Dirs[d2nums[n]];
+        }
+
+        /// <summary>
+        /// Orthogonal rotation.
+        /// </summary>
+        /// <param name="d1">first direction</param>
+        /// <param name="d2">second direction</param>
+        public static void OrthogonalRot(ref Dir d1, ref Dir d2)
+        {
+            Dir oldd1 = d1;
+
+            d1 = d2;
+            d2 = !oldd1;
         }
     }
 }

@@ -4,6 +4,7 @@ using System;
 
 using Lib.Physics.MeasUnits;
 using Lib.Maths.Numbers;
+using Cnst = Lib.Physics.MeasUnits.Constants;
 
 namespace Lib.Utils.Time
 {
@@ -36,11 +37,11 @@ namespace Lib.Utils.Time
         public UTC(int hours, int minutes, int seconds)
         {
             if ((hours < 0)
-                || (hours >= (int)Constants.DayHours)
+                || (hours >= (int)Cnst.DayHours)
                 || (minutes < 0)
-                || (minutes >= (int)Constants.HourMinutes)
+                || (minutes >= (int)Cnst.HourMinutes)
                 || (seconds < 0)
-                || (seconds >= (int)Constants.MinuteSeconds))
+                || (seconds >= (int)Cnst.MinuteSeconds))
             {
                 throw new Exception();
             }
@@ -65,9 +66,9 @@ namespace Lib.Utils.Time
         /// <returns>random time</returns>
         public static UTC Random()
         {
-            return new UTC(Randoms.RandomInInterval(0, (int)Constants.DayHours - 1),
-                           Randoms.RandomInInterval(0, (int)Constants.HourMinutes - 1),
-                           Randoms.RandomInInterval(0, (int)Constants.MinuteSeconds - 1));
+            return new UTC(Randoms.RandomInInterval(0, (int)Cnst.DayHours - 1),
+                           Randoms.RandomInInterval(0, (int)Cnst.HourMinutes - 1),
+                           Randoms.RandomInInterval(0, (int)Cnst.MinuteSeconds - 1));
         }
     }
 }
