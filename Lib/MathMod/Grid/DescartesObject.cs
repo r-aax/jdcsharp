@@ -51,10 +51,10 @@ namespace Lib.MathMod.Grid
             I = new ISegm(i);
             J = new ISegm(j);
             K = new ISegm(k);
-            Coords = new ISegm[(int)Dir.Num.GenCount];
-            Coords[(int)Dir.Num.I] = I;
-            Coords[(int)Dir.Num.J] = J;
-            Coords[(int)Dir.Num.K] = K;
+            Coords = new ISegm[Dir.GenCount];
+            Coords[Dir.IN] = I;
+            Coords[Dir.JN] = J;
+            Coords[Dir.KN] = K;
         }
 
         /// <summary>

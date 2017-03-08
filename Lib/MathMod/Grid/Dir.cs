@@ -12,115 +12,82 @@ namespace Lib.MathMod.Grid
     public class Dir
     {
         /// <summary>
-        /// Direction number.
+        /// No number.
         /// </summary>
-        public enum Num
-        {
-            /// <summary>
-            /// No direction.
-            /// </summary>
-            None = -1,
+        public static readonly int NoN = -1;
 
-            /// <summary>
-            /// First value.
-            /// </summary>
-            First = 0,
+        /// <summary>
+        /// First direction number.
+        /// </summary>
+        public static readonly int FirstN = 0;
 
-            /// <summary>
-            /// Positive I direction.
-            /// </summary>
-            I1 = 0,
+        /// <summary>
+        /// Positive I direction number.
+        /// </summary>
+        public static readonly int I1N = 0;
 
-            /// <summary>
-            /// I direction.
-            /// </summary>
-            I = 0,
+        /// <summary>
+        /// I direction number.
+        /// </summary>
+        public static readonly int IN = 0;
 
-            /// <summary>
-            /// Positive J direction.
-            /// </summary>
-            J1 = 1,
+        /// <summary>
+        /// Positive J direction number.
+        /// </summary>
+        public static readonly int J1N = 1;
 
-            /// <summary>
-            /// J direction.
-            /// </summary>
-            J = 1,
+        /// <summary>
+        /// J direction number.
+        /// </summary>
+        public static readonly int JN = 1;
 
-            /// <summary>
-            /// Positive K direction.
-            /// </summary>
-            K1 = 2,
+        /// <summary>
+        /// Positive K direction number.
+        /// </summary>
+        public static readonly int K1N = 2;
 
-            /// <summary>
-            /// K direction.
-            /// </summary>
-            K = 2,
+        /// <summary>
+        /// K direction number.
+        /// </summary>
+        public static readonly int KN = 2;
 
-            /// <summary>
-            /// General directions count.
-            /// </summary>
-            GenCount = 3,
+        /// <summary>
+        /// Count of general directions (I, J, K).
+        /// </summary>
+        public static readonly int GenCount = 3;
 
-            /// <summary>
-            /// Negative I direction.
-            /// </summary>
-            I0 = 3,
+        /// <summary>
+        /// Negative I direction number.
+        /// </summary>
+        public static readonly int I0N = 3;
 
-            /// <summary>
-            /// Negative J direction.
-            /// </summary>
-            J0 = 4,
+        /// <summary>
+        /// Negative J direction number.
+        /// </summary>
+        public static readonly int J0N = 4;
 
-            /// <summary>
-            /// Negative K direction.
-            /// </summary>
-            K0 = 5,
+        /// <summary>
+        /// Negative K direction number.
+        /// </summary>
+        public static readonly int K0N = 5;
 
-            /// <summary>
-            /// Last direction.
-            /// </summary>
-            Last = 5,
+        /// <summary>
+        /// Last direction number.
+        /// </summary>
+        public static readonly int LastN = 5;
 
-            /// <summary>
-            /// Total directions count.
-            /// </summary>
-            Count = 6
-        }
+        /// <summary>
+        /// Directions count (I1, J1, K1, I0, J0, K0).
+        /// </summary>
+        public static readonly int Count = 6;
 
         /// <summary>
         /// Direction number.
         /// </summary>
-        public Num N
+        public int N
         {
             get;
             private set;
-        }
-
-        /// <summary>
-        /// Number in integer form.
-        /// </summary>
-        public int NI
-        {
-            get
-            {
-                return (int)N;
-            }
-
-            set
-            {
-                N = (Num)value;
-            }
-        }
-
-        /// <summary>
-        /// Count of directions.
-        /// </summary>
-        public static int Count
-        {
-            get
-            {
-                return (int)Num.Count;
-            }
         }
 
         /// <summary>
@@ -128,14 +95,14 @@ namespace Lib.MathMod.Grid
         /// </summary>
         public Dir()
         {
-            N = Num.None;
+            N = NoN;
         }
 
         /// <summary>
         /// Constructor by direction number.
         /// </summary>
         /// <param name="n">number</param>
-        public Dir(Num n)
+        public Dir(int n)
         {
             N = n;
         }
@@ -152,52 +119,52 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// General direction I.
         /// </summary>
-        public static Dir I = new Dir(Num.I);
+        public static readonly Dir I = new Dir(IN);
 
         /// <summary>
         /// General direction J.
         /// </summary>
-        public static Dir J = new Dir(Num.J);
+        public static readonly Dir J = new Dir(JN);
 
         /// <summary>
         /// General direction K.
         /// </summary>
-        public static Dir K = new Dir(Num.K);
+        public static readonly Dir K = new Dir(KN);
 
         /// <summary>
         /// Positive I direction.
         /// </summary>
-        public static Dir I1 = I;
+        public static readonly Dir I1 = I;
 
         /// <summary>
         /// Positive J direction.
         /// </summary>
-        public static Dir J1 = J;
+        public static readonly Dir J1 = J;
 
         /// <summary>
         /// Positive K direction.
         /// </summary>
-        public static Dir K1 = K;
+        public static readonly Dir K1 = K;
 
         /// <summary>
         /// Negative I direction.
         /// </summary>
-        public static Dir I0 = new Dir(Num.I0);
+        public static readonly Dir I0 = new Dir(I0N);
 
         /// <summary>
         /// Negative J direction.
         /// </summary>
-        public static Dir J0 = new Dir(Num.J0);
+        public static readonly Dir J0 = new Dir(J0N);
 
         /// <summary>
         /// Negative K direction.
         /// </summary>
-        public static Dir K0 = new Dir(Num.K0);
+        public static readonly Dir K0 = new Dir(K0N);
 
         /// <summary>
         /// Directions array.
         /// </summary>
-        public static Dir[] Dirs = new Dir[] { I1, J1, K1, I0, J0, K0 };
+        public static readonly Dir[] Dirs = new Dir[] { I1, J1, K1, I0, J0, K0 };
 
         /// <summary>
         /// Name of direction.
@@ -207,16 +174,18 @@ namespace Lib.MathMod.Grid
         {
             string[] str = { "I+", "J+", "K+", "I-", "J-", "K-" };
 
-            return str[(int)N];
+            return str[N];
         }
 
         /// <summary>
         /// General direction.
         /// </summary>
-        /// <returns>general direction</returns>
-        public Dir Gen()
+        public Dir Gen
         {
-            return new Dir((Num)(NI % (int)Num.GenCount));
+            get
+            {
+                return Dirs[N % GenCount];
+            }
         }
 
         /// <summary>
@@ -245,10 +214,10 @@ namespace Lib.MathMod.Grid
         /// Reverse direction.
         /// </summary>
         /// <param name="d"></param>
-        /// <returns></returns>
+        /// <returns>reversed direction</returns>
         public static Dir operator !(Dir d)
         {
-            return Dirs[(d.NI + (int)Num.GenCount) % Count];
+            return Dirs[(d.N + GenCount) % Count];
         }
 
         /// <summary>
@@ -276,7 +245,7 @@ namespace Lib.MathMod.Grid
         /// <returns>true - if I direction, false - othercase</returns>
         public bool IsI()
         {
-            return Gen() == I;
+            return Gen == I;
         }
 
         /// <summary>
@@ -285,7 +254,7 @@ namespace Lib.MathMod.Grid
         /// <returns>true - if J direction, false - othercase</returns>
         public bool IsJ()
         {
-            return Gen() == J;
+            return Gen == J;
         }
 
         /// <summary>
@@ -294,7 +263,7 @@ namespace Lib.MathMod.Grid
         /// <returns>true - if K direction, false - othercase</returns>
         public bool IsK()
         {
-            return Gen() == K;
+            return Gen == K;
         }
 
         /// <summary>
@@ -304,7 +273,7 @@ namespace Lib.MathMod.Grid
         {
             get
             {
-                return (N >= Num.First) && (N <= Num.Last);
+                return (N >= FirstN) && (N <= LastN);
             }
         }
 
@@ -316,11 +285,11 @@ namespace Lib.MathMod.Grid
         /// <param name="d3">third direction</param>
         public static bool IsBasis(Dir d1, Dir d2, Dir d3)
         {
-            Dir gd1 = d1.Gen();
-            Dir gd2 = d2.Gen();
-            Dir gd3 = d3.Gen();
+            Dir gd1 = d1.Gen;
+            Dir gd2 = d2.Gen;
+            Dir gd3 = d3.Gen;
 
-            return ((1 << (int)gd1.N) | (1 << (int)gd2.N) | (1 << (int)gd3.N)) == 0x7;
+            return ((1 << gd1.N) | (1 << gd2.N) | (1 << gd3.N)) == 0x7;
         }
 
         /// <summary>
@@ -330,9 +299,9 @@ namespace Lib.MathMod.Grid
         /// <param name="d2">second direction</param>
         public void GetPairOfOrthogonalDirs(out Dir d1, out Dir d2)
         {
-            int n = Gen().NI;
-            int[] d1nums = new int[] { (int)Num.J1, (int)Num.I1, (int)Num.I1 };
-            int[] d2nums = new int[] { (int)Num.K1, (int)Num.K1, (int)Num.J1 };
+            int n = Gen.N;
+            int[] d1nums = new int[] { J1N, I1N, I1N };
+            int[] d2nums = new int[] { K1N, K1N, J1N };
 
             d1 = Dir.Dirs[d1nums[n]];
             d2 = Dir.Dirs[d2nums[n]];

@@ -76,23 +76,23 @@ namespace Lib.MathMod.Grid
             }
 
             // Generate the mask.
-            int mask = (1 << (int)d1.N) | (1 << (int)d2.N) | (1 << (int)d3.N);
+            int mask = (1 << d1.N) | (1 << d2.N) | (1 << d3.N);
 
             int i = 0;
             int j = 0;
             int k = 0;
 
-            if ((mask & (1 << (int)Dir.Num.I1)) != 0)
+            if ((mask & (1 << Dir.I1N)) != 0)
             {
                 i = ISize;
             }
 
-            if ((mask & (1 << (int)Dir.Num.J1)) != 0)
+            if ((mask & (1 << Dir.J1N)) != 0)
             {
                 j = JSize;
             }
 
-            if ((mask & (1 << (int)Dir.Num.K1)) != 0)
+            if ((mask & (1 << Dir.K1N)) != 0)
             {
                 k = KSize;
             }

@@ -72,33 +72,33 @@ namespace Lib.MathMod.Grid
                 return null;
             }
 
-            int s1 = (int)d1.N;
-            int s2 = (int)d2.N;
+            int s1 = d1.N;
+            int s2 = d2.N;
 
-            if (d1.Gen().N > d2.Gen().N)
+            if (d1.Gen.N > d2.Gen.N)
             {
-                s1 = (int)d2.N;
-                s2 = (int)d1.N;
+                s1 = d2.N;
+                s2 = d1.N;
             }
 
             int i = I0;
             int j = J0;
             int k = K0;
 
-            if (s1 == (int)Dir.Num.I1)
+            if (s1 == Dir.I1N)
             {
                 i = I1;
             }
-            else if (s1 == (int)Dir.Num.J1)
+            else if (s1 == Dir.J1N)
             {
                 j = J1;
             }
 
-            if (s2 == (int)Dir.Num.J1)
+            if (s2 == Dir.J1N)
             {
                 j = J1;
             }
-            else if (s2 == (int)Dir.Num.K1)
+            else if (s2 == Dir.K1N)
             {
                 k = K1;
             }

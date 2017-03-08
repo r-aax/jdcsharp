@@ -46,7 +46,7 @@ namespace Lib.MathMod.Grid
             : base(id, b, i, j, k)
         {
             NB = nb;
-            NDirs = new Dir[(int)Dir.Num.Count];
+            NDirs = new Dir[Dir.Count];
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Lib.MathMod.Grid
         /// <param name="nd">neighbour direction</param>
         public void SetNDir(Dir d, Dir nd)
         {
-            NDirs[d.NI] = nd;
+            NDirs[d.N] = nd;
         }
 
         /// <summary>
