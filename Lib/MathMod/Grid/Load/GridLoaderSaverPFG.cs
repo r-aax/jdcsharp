@@ -16,7 +16,7 @@ namespace Lib.MathMod.Grid.Load
     /// <summary>
     /// Grid loader from PFG/IBC format.
     /// </summary>
-    public class GridLoaderPFG
+    public class GridLoaderSaverPFG
     {
         /// <summary>
         /// Conversion.

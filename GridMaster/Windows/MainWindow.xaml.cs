@@ -32,7 +32,7 @@ namespace GridMaster
         /// <summary>
         /// Properties of PFG load.
         /// </summary>
-        private GridLoadPFGProperties LoadPFGProps;
+        private GridLoadSavePFGProperties LoadPFGProps;
 
         /// <summary>
         /// Init components.
@@ -85,7 +85,7 @@ namespace GridMaster
                 {
                     string extension_ibc;
 
-                    LoadPFGProps = new GridLoadPFGProperties();
+                    LoadPFGProps = new GridLoadSavePFGProperties();
 
                     if (extension == ".pfg")
                     {
@@ -100,7 +100,7 @@ namespace GridMaster
 
                     string filename_ibc = filename.Replace(extension, extension_ibc);
 
-                    GridLoaderPFG.Load(Grid, filename, filename_ibc, false);
+                    GridLoaderSaverPFG.Load(Grid, filename, filename_ibc, false);
                     UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is loaded.");
                     UpdateBriefGridStatistic();
                 }
@@ -128,7 +128,7 @@ namespace GridMaster
                 string extension_ibc = LoadPFGProps.IsExtensionUppercase ? ".IBC" : ".ibc";
                 string filename_ibc = filename.Replace(extension, extension_ibc);
 
-                GridLoaderPFG.Save(Grid, filename, filename_ibc, false);
+                GridLoaderSaverPFG.Save(Grid, filename, filename_ibc, false);
                 UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is saved.");
             }
         }
