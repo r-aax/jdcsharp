@@ -67,7 +67,9 @@ namespace Lib.MathMod.Grid.Load
                 // Add all blocks and allocate memory for them
                 for (int i = 0; i < bc; i++)
                 {
-                    Block b = new Block(i, ii[i], jj[i], kk[i]);
+                    // We read nodes count, but have to pass to block constructor cells count.
+                    Block b = new Block(i, ii[i] - 1, jj[i] - 1, kk[i] - 1);
+
                     b.Allocate();
                     g.Blocks.Add(b);
                 }
@@ -137,7 +139,10 @@ namespace Lib.MathMod.Grid.Load
                                         }
                                         else
                                         {
-                                            iblank_data_left = cur_block.NodesCount;
+                                            if (is_blank)
+                                            {
+                                                iblank_data_left = cur_block.NodesCount;
+                                            }
                                         }
 
                                         cur_block = g.Blocks[cur_block_num];

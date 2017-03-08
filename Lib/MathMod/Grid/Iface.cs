@@ -38,9 +38,9 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="id">identifier</param>
         /// <param name="b">block</param>
-        /// <param name="i">nodes count in I direction</param>
-        /// <param name="j">nodes count in J direction</param>
-        /// <param name="k">nodes count in K direction</param>
+        /// <param name="i">nodes interval in I direction</param>
+        /// <param name="j">nodes interval in J direction</param>
+        /// <param name="k">nodes interval in K direction</param>
         /// <param name="nb">neighbour block</param>
         public Iface(int id, Block b, ISegm i, ISegm j, ISegm k, Block nb)
             : base(id, b, i, j, k)
@@ -83,6 +83,7 @@ namespace Lib.MathMod.Grid
         public void SetNDir(Dir d, Dir nd)
         {
             NDirs[d.N] = nd;
+            NDirs[(!d).N] = !nd;
         }
 
         /// <summary>

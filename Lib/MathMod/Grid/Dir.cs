@@ -196,7 +196,7 @@ namespace Lib.MathMod.Grid
         /// <returns>true - if equal, false - if not equal</returns>
         public static bool operator ==(Dir d1, Dir d2)
         {
-            if (ReferenceEquals(d1, null) || ReferenceEquals(d1, null))
+            if (ReferenceEquals(d1, null) || ReferenceEquals(d2, null))
             {
                 return ReferenceEquals(d1, d2);
             }

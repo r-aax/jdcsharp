@@ -37,9 +37,9 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="id">identifier</param>
         /// <param name="b">block</param>
-        /// <param name="i">count of nodes in I direction</param>
-        /// <param name="j">count of nodes in J direction</param>
-        /// <param name="k">count of noded in K direction</param>
+        /// <param name="i">I direction nodes interval</param>
+        /// <param name="j">J direction nodes interval</param>
+        /// <param name="k">K direction nodes interval </param>
         public Border(int id, Block b, ISegm i, ISegm j, ISegm k)
             : base(i, j, k)
         {

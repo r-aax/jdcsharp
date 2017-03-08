@@ -113,6 +113,22 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Get cells count of the grid.
+        /// </summary>
+        /// <returns>cells count</returns>
+        public int CellsCount()
+        {
+            int cc = 0;
+
+            foreach (Block b in Blocks)
+            {
+                cc += b.CellsCount;
+            }
+
+            return cc;
+        }
+
+        /// <summary>
         /// Count of nods.
         /// </summary>
         /// <returns>nodes count</returns>
@@ -177,6 +193,8 @@ namespace Lib.MathMod.Grid
                         {
                             i1.SetNDirs(od11, od12, i2, od22, od21);
                         }
+
+                        break;
                     }
 
                     Dir.OrthogonalRot(ref od21, ref od22);
