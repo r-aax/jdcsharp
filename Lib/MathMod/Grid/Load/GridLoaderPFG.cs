@@ -348,11 +348,63 @@ namespace Lib.MathMod.Grid.Load
             catch (Exception e)
             {
                 MessageBox.Show(ExeDebug.ReportError(e.Message));
-
                 is_succ = false;
             }
 
             return is_succ;
+        }
+
+        /// <summary>
+        /// Save grid to PFG/IBC files.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="pfg_file_name">PFG file name</param>
+        /// <param name="ibc_file_name">IBC file name</param>
+        /// <param name="is_blank">iblank flag</param>
+        /// <returns><c>true</c> - if grid is saved, <c>false</c> - otherwise</returns>
+        public static bool Save(StructuredGrid g, 
+                                string pfg_file_name, string ibc_file_name,
+                                bool is_blank)
+        {
+            bool is_succ = true;
+
+            try
+            {
+                using (StreamWriter pfg_sw = new StreamWriter(pfg_file_name))
+                {
+                    using (StreamWriter ibc_sw = new StreamWriter(ibc_file_name))
+                    {
+                        SaveBlocks(g, pfg_sw, is_blank);
+                        SaveIfacesBCondsScopes(g, ibc_sw);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(ExeDebug.ReportError(e.Message));
+                is_succ = false;
+            }
+
+            return is_succ;
+        }
+
+        /// <summary>
+        /// Save blocks.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="sw">stream</param>
+        /// <param name="is_blank">iblank data flag</param>
+        public static void SaveBlocks(StructuredGrid g, StreamWriter sw, bool is_blank)
+        {
+        }
+
+        /// <summary>
+        /// Save interfaces, border conditions, scopes.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="sw">stream</param>
+        public static void SaveIfacesBCondsScopes(StructuredGrid g, StreamWriter sw)
+        {
         }
     }
 }

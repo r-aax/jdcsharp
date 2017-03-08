@@ -10,11 +10,11 @@
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
             <MenuItem Header="Grid">
                 <MenuItem x:Name="GridLoadMI" Header="Load" Click="GridLoadMI_Click"/>
-                <MenuItem x:Name="GridSaveMI" Header="Save"/>
+                <MenuItem x:Name="GridSaveMI" Header="Save" Click="GridSaveMI_Click"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
-            <TextBlock Name="BriefGridStatisticTB" Width="150" Foreground="IndianRed" Text="No text yet"/>
+            <TextBlock Name="BriefGridStatisticTB" Width="250" Foreground="IndianRed" Text="No text yet"/>
             <TextBlock Name="LastActionTB" Foreground="SteelBlue" Text="No text yet 2"/>
         </StatusBar>
         <Grid>

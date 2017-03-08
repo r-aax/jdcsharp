@@ -30,6 +30,11 @@ namespace GridMaster
         private StructuredGrid Grid;
 
         /// <summary>
+        /// Properties of PFG load.
+        /// </summary>
+        private GridLoadPFGProperties LoadPFGProps;
+
+        /// <summary>
         /// Init components.
         /// </summary>
         public MainWindow()
@@ -38,6 +43,7 @@ namespace GridMaster
 
             // Create empty grid.
             Grid = new StructuredGrid();
+            LoadPFGProps = null;
         }
 
         /// <summary>
@@ -46,7 +52,7 @@ namespace GridMaster
         /// <param name="stat">statistic string</param>
         public void UpdateBriefGridStatistic()
         {
-            BriefGridStatisticTB.Text = Grid.BriefStatistic();
+            BriefGridStatisticTB.Text = Grid.ToString();
         }
 
         /// <summary>
@@ -68,7 +74,7 @@ namespace GridMaster
             OpenFileDialog ofd = new OpenFileDialog();
             string filename, extension;
 
-            ofd.Filter = "PFG (*.pfg)|*.pfg";
+            ofd.Filter = "PFG (*.PFG, *.pfg)|*.pfg";
 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -77,17 +83,53 @@ namespace GridMaster
 
                 if ((extension == ".pfg") || (extension == ".PFG"))
                 {
-                    string extension_ibc = ((extension == ".pfg") ? ".ibc" : ".IBC");
+                    string extension_ibc;
+
+                    LoadPFGProps = new GridLoadPFGProperties();
+
+                    if (extension == ".pfg")
+                    {
+                        extension_ibc = ".ibc";
+                        LoadPFGProps.IsExtensionUppercase = false;
+                    }
+                    else
+                    {
+                        extension_ibc = ".IBC";
+                        LoadPFGProps.IsExtensionUppercase = true;
+                    }
+
                     string filename_ibc = filename.Replace(extension, extension_ibc);
 
                     GridLoaderPFG.Load(Grid, filename, filename_ibc, false);
-                    UpdateLastAction("Grid " + filename + " is loaded.");
+                    UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is loaded.");
                     UpdateBriefGridStatistic();
                 }
                 else
                 {
                     System.Windows.MessageBox.Show("unknown grid extension");
                 }
+            }
+        }
+
+        /// <summary>
+        /// Save grid.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void GridSaveMI_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = LoadPFGProps.IsExtensionUppercase ? "PFG (*.PFG)|*.PFG" : "PFG (*.pfg)|*.pfg";
+
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string filename = sfd.FileName;
+                string extension = System.IO.Path.GetExtension(filename);
+                string extension_ibc = LoadPFGProps.IsExtensionUppercase ? ".IBC" : ".ibc";
+                string filename_ibc = filename.Replace(extension, extension_ibc);
+
+                GridLoaderPFG.Save(Grid, filename, filename_ibc, false);
+                UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is saved.");
             }
         }
     }

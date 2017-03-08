@@ -148,12 +148,15 @@ namespace Lib.MathMod.Grid
         /// Brief statistic of the grid.
         /// </summary>
         /// <returns>brief statistic</returns>
-        public string BriefStatistic()
+        public override string ToString()
         {
             int bc = BlocksCount;
-            int nc = NodesCount();
+            int ic = IfacesCount;
+            int bcc = BCondsCount;
+            int sc = ScopesCount;
+            int cc = CellsCount();
 
-            return String.Format("[Grid: {0}b, {1}n]", bc, nc);
+            return String.Format("[Grid: {0}b, {1}i, {2}bc, {3}s: {4}c]", bc, ic, bcc, sc, cc);
         }
 
         /// <summary>
