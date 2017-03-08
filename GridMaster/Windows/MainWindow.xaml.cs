@@ -100,7 +100,8 @@ namespace GridMaster
 
                     string filename_ibc = filename.Replace(extension, extension_ibc);
 
-                    GridLoaderSaverPFG.Load(Grid, filename, filename_ibc, false);
+                    GridLoaderSaverPFG.Load(Grid, filename, filename_ibc,
+                                            GridLoadSaveIBlankMI.IsChecked);
                     UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is loaded.");
                     UpdateBriefGridStatistic();
                 }
@@ -128,7 +129,8 @@ namespace GridMaster
                 string extension_ibc = LoadPFGProps.IsExtensionUppercase ? ".IBC" : ".ibc";
                 string filename_ibc = filename.Replace(extension, extension_ibc);
 
-                GridLoaderSaverPFG.Save(Grid, filename, filename_ibc, false);
+                GridLoaderSaverPFG.Save(Grid, filename, filename_ibc,
+                                        GridLoadSaveIBlankMI.IsChecked);
                 UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is saved.");
             }
         }

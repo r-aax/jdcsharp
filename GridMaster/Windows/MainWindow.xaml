@@ -9,8 +9,10 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
             <MenuItem Header="Grid">
-                <MenuItem x:Name="GridLoadMI" Header="Load" Click="GridLoadMI_Click"/>
-                <MenuItem x:Name="GridSaveMI" Header="Save" Click="GridSaveMI_Click"/>
+                <MenuItem Name="GridLoadMI" Header="Load" Click="GridLoadMI_Click"/>
+                <MenuItem Name="GridSaveMI" Header="Save" Click="GridSaveMI_Click"/>
+                <Separator/>
+                <MenuItem Name="GridLoadSaveIBlankMI" IsCheckable="True" Header="Use iblank data"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
