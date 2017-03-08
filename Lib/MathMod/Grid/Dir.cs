@@ -170,7 +170,7 @@ namespace Lib.MathMod.Grid
         /// Name of direction.
         /// </summary>
         /// <returns>name</returns>
-        public string Name()
+        public override string ToString()
         {
             string[] str = { "I+", "J+", "K+", "I-", "J-", "K-" };
 
@@ -196,7 +196,14 @@ namespace Lib.MathMod.Grid
         /// <returns>true - if equal, false - if not equal</returns>
         public static bool operator ==(Dir d1, Dir d2)
         {
-            return d1.N == d2.N;
+            if (ReferenceEquals(d1, null) || ReferenceEquals(d1, null))
+            {
+                return ReferenceEquals(d1, d2);
+            }
+            else
+            { 
+                return d1.N == d2.N;
+            }
         }
 
         /// <summary>

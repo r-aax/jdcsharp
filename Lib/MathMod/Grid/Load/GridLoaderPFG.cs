@@ -5,9 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
+using System.Windows.Forms;
 
 using Lib.DataFormats;
 using Lib.Maths.Geometry;
+using Lib.Utils;
 
 namespace Lib.MathMod.Grid.Load
 {
@@ -214,7 +216,7 @@ namespace Lib.MathMod.Grid.Load
 
                         if (cur_iface.Id == iface.Id)
                         {
-                            g.Ifaces.Insert(j, iface);
+                            g.Ifaces.Insert(j + 1, iface);
                             iface = null;
 
                             break;
@@ -338,8 +340,10 @@ namespace Lib.MathMod.Grid.Load
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                MessageBox.Show(ExeDebug.ReportError(e.Message));
+
                 is_succ = false;
             }
 

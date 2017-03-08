@@ -119,7 +119,14 @@ namespace Lib.MathMod.Grid
         {
             for (int i = 0; i < Dir.Count; i++)
             {
-                if (!NDirs[i].IsCorrect)
+                Dir d = NDirs[i];
+
+                if (d == null) 
+                {
+                    return false;
+                }
+
+                if (!d.IsCorrect)
                 {
                     return false;
                 }
@@ -150,6 +157,18 @@ namespace Lib.MathMod.Grid
             }
 
             return (p1 - p2).Mod2 < Constants.Eps;
+        }
+
+        /// <summary>
+        /// Cast to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("{0}: {1} [{2}, {3}, {4}] -> {5} ({6})",
+                                 Id.ToString(), B.Id.ToString(),
+                                 I.ToString(), J.ToString(), K.ToString(),
+                                 NB.Id.ToString(), D.ToString());
         }
     }
 }

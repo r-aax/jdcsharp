@@ -96,5 +96,14 @@ namespace Lib.Maths.Geometry
                 V[i] = value;
             }
         }
+
+        /// <summary>
+        /// Cast to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return L.ToString() + "-" + H.ToString();
+        }
     }
 }
