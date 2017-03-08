@@ -277,6 +277,38 @@ namespace Lib.MathMod.Grid.Load
         /// <param name="sr">stream reader</param>
         private static void LoadScopes(StructuredGrid g, StreamReader sr)
         {
+            string line;
+
+            if ((line = sr.ReadLine()) != null)
+            {
+                int sc = Int32.Parse(line);
+
+                // Read all interfaces.
+                for (int i = 0; i < sc; i++)
+                {
+                    line = sr.ReadLine();
+                    string[] s = line.Split(' ');
+                    int id = Int32.Parse(s[0]);
+                    int bi = Int32.Parse(s[1]);
+                    int i0 = Int32.Parse(s[2]);
+                    int i1 = Int32.Parse(s[3]);
+                    int j0 = Int32.Parse(s[4]);
+                    int j1 = Int32.Parse(s[5]);
+                    int k0 = Int32.Parse(s[6]);
+                    int k1 = Int32.Parse(s[7]);
+                    string type = s[8];
+                    string subtype = s[9];
+                    string name = s[10];
+
+                    // Create border condition.
+                    Scope scope = new Scope(id, g.Blocks[bi - 1],
+                                            new ISegm(i0 - 1, i1 - 1),
+                                            new ISegm(j0 - 1, j1 - 1),
+                                            new ISegm(k0 - 1, k1 - 1),
+                                            type, subtype, name);
+                    g.Scopes.Add(scope);
+                }
+            }
         }
 
         /// <summary>

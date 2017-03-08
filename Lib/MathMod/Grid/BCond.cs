@@ -23,9 +23,9 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="id">identifier</param>
         /// <param name="b">block</param>
-        /// <param name="i">nodes count in I direction</param>
-        /// <param name="j">nodes count in J direction</param>
-        /// <param name="k">nodes count in K direction</param>
+        /// <param name="i">I sizes</param>
+        /// <param name="j">J sizes</param>
+        /// <param name="k">K sizes</param>
         /// <param name="type">type</param>
         /// <param name="subtype">subtype</param>
         /// <param name="name">name</param>

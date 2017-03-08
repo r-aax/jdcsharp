@@ -72,6 +72,26 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Scopes list.
+        /// </summary>
+        public List<Scope> Scopes
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Count of scopes.
+        /// </summary>
+        public int ScopesCount
+        {
+            get
+            {
+                return Scopes.Count;
+            }
+        }
+
+        /// <summary>
         /// Clear all objects.
         /// </summary>
         public void Clear()
@@ -79,6 +99,7 @@ namespace Lib.MathMod.Grid
             Blocks = new List<Block>();
             Ifaces = new List<Iface>();
             BConds = new List<BCond>();
+            Scopes = new List<Scope>();
         }
 
         /// <summary>
