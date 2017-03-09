@@ -60,5 +60,14 @@ namespace Lib.Maths.Geometry
             L -= v;
             H -= v;
         }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>copy</returns>
+        public new object Clone()
+        {
+            return new ISegm(L, H);
+        }
     }
 }

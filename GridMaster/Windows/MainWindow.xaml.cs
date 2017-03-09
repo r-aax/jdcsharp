@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using Lib.MathMod.Grid;
 using Lib.MathMod.Grid.Load;
 using Lib.MathMod.Grid.Cut;
+using Lib.Maths.Geometry;
 
 namespace GridMaster
 {
