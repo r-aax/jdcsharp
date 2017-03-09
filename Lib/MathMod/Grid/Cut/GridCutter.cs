@@ -42,6 +42,12 @@ namespace Lib.MathMod.Grid.Cut
                 throw new Exception("undefined cut direction");
             }
 
+            if (new_b != null)
+            {
+                CutObjects(b, d, new_b);
+                b.Grid.SetIfacesNDirs();
+            }
+
             return new_b;
         }
 
@@ -225,6 +231,119 @@ namespace Lib.MathMod.Grid.Cut
             g.Ifaces.Add(ifc2);
 
             return new_b;
+        }
+
+        /// <summary>
+        /// Cut other objects (interfaces, borders conditions, scopes).
+        /// </summary>
+        /// <param name="b">cutted block</param>
+        /// <param name="d">direction</param>
+        /// <param name="new_b">new block</param>
+        public static void CutObjects(Block b, Dir d, Block new_b)
+        {
+            CutIfaces(b, d, new_b);
+            CutBConds(b, d, new_b);
+            CutScopes(b, d, new_b);
+        }
+
+        /// <summary>
+        /// Cut interfaces.
+        /// </summary>
+        /// <param name="b">cutted block</param>
+        /// <param name="d">direction</param>
+        /// <param name="new_b">new block</param>
+        public static void CutIfaces(Block b, Dir d, Block new_b)
+        {
+            StructuredGrid g = b.Grid;
+
+            // We do not cut last two interfaces, because they have just came out.
+            int ic = g.IfacesCount - 2;
+
+            for (int i = 0; i < ic; i++)
+            {
+                Iface i1 = g.Ifaces[i];
+                Iface i2 = g.Ifaces[i + 1];
+
+                if (b == i1.B)
+                {
+                    Cut(i1, i2, b, d, new_b);
+                }
+                else if (b == i2.B)
+                {
+                    Cut(i2, i1, b, d, new_b);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Cut border conditions.
+        /// </summary>
+        /// <param name="b">cutted block</param>
+        /// <param name="d">direction</param>
+        /// <param name="new_b">new block</param>
+        public static void CutBConds(Block b, Dir d, Block new_b)
+        {
+            StructuredGrid g = b.Grid;
+            int bc = g.BCondsCount;
+
+            for (int i = 0; i < bc; i++)
+            {
+                Cut(g.BConds[i], b, d, new_b);
+            }
+        }
+
+        /// <summary>
+        /// Cut scopes.
+        /// </summary>
+        /// <param name="b">cutted block</param>
+        /// <param name="d">direction</param>
+        /// <param name="new_b">new block</param>
+        public static void CutScopes(Block b, Dir d, Block new_b)
+        {
+            StructuredGrid g = b.Grid;
+            int sc = g.ScopesCount;
+
+            for (int i = 0; i < sc; i++)
+            {
+                Cut(g.Scopes[i], b, d, new_b);
+            }
+        }
+
+        /// <summary>
+        /// Cut pair of interfaces.
+        /// </summary>
+        /// <param name="i1">first interface</param>
+        /// <param name="i2">second (adjacent) interface</param>
+        /// <param name="b">cutted block</param>
+        /// <param name="d">direction</param>
+        /// <param name="new_b">new block</param>
+        public static void Cut(Iface i1, Iface i2, Block b, Dir d, Block new_b)
+        {
+            // TODO
+        }
+
+        /// <summary>
+        /// Cut border condition.
+        /// </summary>
+        /// <param name="bc">border condition</param>
+        /// <param name="b">cutted block</param>
+        /// <param name="d">direction</param>
+        /// <param name="new_b">new block</param>
+        public static void Cut(BCond bc, Block b, Dir d, Block new_b)
+        {
+            // TODO
+        }
+
+        /// <summary>
+        /// Cut scope.
+        /// </summary>
+        /// <param name="s">scope</param>
+        /// <param name="b">cutted block</param>
+        /// <param name="d">direction</param>
+        /// <param name="new_b">new block</param>
+        public static void Cut(Scope s, Block b, Dir d, Block new_b)
+        {
+            // TODO
         }
     }
 }
