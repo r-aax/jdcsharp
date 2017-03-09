@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GridMaster"
         mc:Ignorable="d"
-        Title="GridMaster" Height="350" Width="525">
+        Title="GridMaster" Height="350" Width="800">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
             <MenuItem Header="Grid">
@@ -21,8 +21,8 @@
         </StatusBar>
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*"/>
                 <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Canvas Grid.Column="0"
                     Name="DrawAreaC"
@@ -32,7 +32,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Header="Cut single block" Margin="10">
+                <GroupBox Grid.Row="0" Header="Cut single block" Margin="5" Width="Auto" HorizontalAlignment="Left">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -45,7 +45,7 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Block number" Margin="10,2"/>
-                        <TextBox x:Name="CutSingleBlockBlockIdTB" Grid.Row="0" Grid.Column="1" Width="110" Margin="10,2"/>
+                        <TextBox x:Name="CutSingleBlockBlockIdTB" Grid.Row="0" Grid.Column="1" Width="110" Margin="10,2" Text="0"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Direction" Margin="10,2"/>
                         <ComboBox x:Name="CutSingleBlockDirectionCB" Grid.Row="1" Grid.Column="1" Width="110" Margin="10,2" SelectedIndex="0">
                             <TextBlock Text="I direction" FontFamily="Lucida Console"/>
@@ -53,8 +53,8 @@
                             <TextBlock Text="K direction" FontFamily="Lucida Console"/>
                         </ComboBox>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Position" Margin="10,2"/>
-                        <TextBox x:Name="CutSingleBlockPositionTB" Grid.Row="2" Grid.Column="1" Width="110" Margin="10,2"/>
-                        <Button Grid.Row="3" Grid.Column="1" Content="Cut" Margin="10,2"/>
+                        <TextBox x:Name="CutSingleBlockPositionTB" Grid.Row="2" Grid.Column="1" Width="110" Margin="10,2" Text="1"/>
+                        <Button x:Name="CutSingleBlockB" Grid.Row="3" Grid.Column="1" Content="Cut" Margin="10,2" Click="CutSingleBlockB_Click"/>
                     </Grid>
                 </GroupBox>
             </Grid>

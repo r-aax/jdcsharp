@@ -105,7 +105,6 @@ namespace GridMaster
                                             GridLoadSaveIBlankMI.IsChecked);
                     UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is loaded.");
                     UpdateBriefGridStatistic();
-                    GridCutter.Cut(Grid.Blocks[0], Dir.I, 1);
                 }
                 else
                 {
@@ -135,6 +134,25 @@ namespace GridMaster
                                         GridLoadSaveIBlankMI.IsChecked);
                 UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is saved.");
             }
+        }
+
+        /// <summary>
+        /// Click on button cut single block.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">arguments</param>
+        private void CutSingleBlockB_Click(object sender, RoutedEventArgs e)
+        {
+            int bid = Int32.Parse(CutSingleBlockBlockIdTB.Text);
+            Dir d = Dir.Dirs[CutSingleBlockDirectionCB.SelectedIndex];
+            int pos = Int32.Parse(CutSingleBlockPositionTB.Text);
+
+            GridCutter.Cut(Grid.Blocks[bid], d, pos);
+
+            // Update information.
+            UpdateBriefGridStatistic();
+            UpdateLastAction(String.Format("Cut is done: block id {0}, direction {1}, position {2}.",
+                                           bid, d, pos));
         }
     }
 }
