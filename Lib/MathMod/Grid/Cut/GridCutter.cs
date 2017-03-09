@@ -440,9 +440,40 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="b">cutted block</param>
         /// <param name="d">direction</param>
         /// <param name="new_b">new block</param>
-        public static void Cut(BCond bc, Block b, Dir d, Block new_b)
+        public static void Cut(BCond bcond, Block b, Dir d, Block new_b)
         {
-            // TODO
+            if (bcond.B != b)
+            {
+                // Do not cut if bcond does not touch the block.
+                return;
+            }
+
+            if (!d.IsGen)
+            {
+                throw new Exception("unknown direction");
+            }
+
+            // Get coordinates of border condition and block.
+            ISegm c = bcond.Coords[d.N];
+            ISegm bc = b.Coords[d.N];
+
+            if (c[0] >= bc[1])
+            {
+                // Border condition touches only new block.
+                bcond.B = new_b;
+                c.Dec(bc[1]);
+            }
+            else if (c[1] > bc[1])
+            {
+                // Have to cut.
+                StructuredGrid g = b.Grid;
+                BCond new_bcond = bcond.Clone() as BCond;
+                new_bcond.Id = g.MaxBCondId() + 1;
+                new_bcond.B = new_b;
+                new_bcond.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
+                g.BConds.Add(new_bcond);
+                c[1] = bc[1];
+            }
         }
 
         /// <summary>
@@ -454,7 +485,38 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void Cut(Scope s, Block b, Dir d, Block new_b)
         {
-            // TODO
+            if (s.B != b)
+            {
+                // If scope does not belong to block - do not cut it.
+                return;
+            }
+
+            if (!d.IsGen)
+            {
+                throw new Exception("unknown direction");
+            }
+
+            // Get coordinates of scope and block.
+            ISegm c = s.Coords[d.N];
+            ISegm bc = b.Coords[d.N];
+
+            if (c[0] >= bc[1])
+            {
+                // This scope belongs to new block.
+                s.B = new_b;
+                c.Dec(bc[1]);
+            }
+            else if (c[1] > bc[1])
+            {
+                // Have to cut.
+                StructuredGrid g = b.Grid;
+                Scope scope = s.Clone() as Scope;
+                scope.Id = g.MaxScopeId() + 1;
+                scope.B = new_b;
+                scope.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
+                g.Scopes.Add(scope);
+                c[1] = bc[1];
+            }
         }
     }
 }

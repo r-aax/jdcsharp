@@ -11,7 +11,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Border condition.
     /// </summary>
-    public class BCond : Border
+    public class BCond : Border, ICloneable
     {
         /// <summary>
         /// Label (set of names).
@@ -52,6 +52,19 @@ namespace Lib.MathMod.Grid
         public override bool IsBCond()
         {
             return true;
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>copy</returns>
+        public object Clone()
+        {
+            return new BCond(Id, B,
+                             I.Clone() as ISegm,
+                             J.Clone() as ISegm,
+                             K.Clone() as ISegm,
+                             Label.Type, Label.Subtype, Label.Name);
         }
     }
 }

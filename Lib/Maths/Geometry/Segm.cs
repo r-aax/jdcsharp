@@ -9,7 +9,7 @@ namespace Lib.Maths.Geometry
     /// <summary>
     /// Segment with two ends.
     /// </summary>
-    public class Segm<T>
+    public class Segm<T> : ICloneable
     {
         /// <summary>
         /// Values.
@@ -104,6 +104,15 @@ namespace Lib.Maths.Geometry
         public override string ToString()
         {
             return L.ToString() + "-" + H.ToString();
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>copy</returns>
+        public object Clone()
+        {
+            return new Segm<T>(L, H);
         }
     }
 }

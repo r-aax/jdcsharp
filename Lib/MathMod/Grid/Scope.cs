@@ -11,7 +11,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Block scope.
     /// </summary>
-    public class Scope : DescartesObject
+    public class Scope : DescartesObject, ICloneable
     {
         /// <summary>
         /// Identifier.
@@ -19,7 +19,7 @@ namespace Lib.MathMod.Grid
         public int Id
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Lib.MathMod.Grid
         public Block B
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -54,6 +54,19 @@ namespace Lib.MathMod.Grid
             Id = id;
             B = b;
             Label = new NamedObject(type, subtype, name);
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>copy</returns>
+        public object Clone()
+        {
+            return new Scope(Id, B,
+                             I.Clone() as ISegm,
+                             J.Clone() as ISegm,
+                             K.Clone() as ISegm,
+                             Label.Type, Label.Subtype, Label.Name);
         }
     }
 }

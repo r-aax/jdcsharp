@@ -178,7 +178,10 @@ namespace Lib.MathMod.Grid
         /// <returns>new cloned interface</returns>
         public object Clone()
         {
-            return new Iface(Id, B, I, J, K, NB);
+            return new Iface(Id, B,
+                             I.Clone() as ISegm,
+                             J.Clone() as ISegm,
+                             K.Clone() as ISegm, NB);
         }
     }
 }

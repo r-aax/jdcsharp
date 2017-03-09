@@ -226,5 +226,37 @@ namespace Lib.MathMod.Grid
 
             return max_id;
         }
+
+        /// <summary>
+        /// Get maximum border condition identifier.
+        /// </summary>
+        /// <returns>maximum border condition identifier or -1 if there is no border conditions at all</returns>
+        public int MaxBCondId()
+        {
+            int max_id = -1;
+
+            foreach (BCond bcond in BConds)
+            {
+                max_id = Math.Max(max_id, bcond.Id);
+            }
+
+            return max_id;
+        }
+
+        /// <summary>
+        /// Get maximum scope identifier.
+        /// </summary>
+        /// <returns>maximum scope identifier or -1 if there is no scopes at all</returns>
+        public int MaxScopeId()
+        {
+            int max_id = -1;
+
+            foreach (Scope s in Scopes)
+            {
+                max_id = Math.Max(max_id, s.Id);
+            }
+
+            return max_id;
+        }
     }
 }
