@@ -29,6 +29,34 @@
                     Background="White"/>
             <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
             <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <GroupBox Grid.Row="0" Header="Cut single block" Margin="10">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Block number" Margin="10,2"/>
+                        <TextBox x:Name="CutSingleBlockBlockIdTB" Grid.Row="0" Grid.Column="1" Width="110" Margin="10,2"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Direction" Margin="10,2"/>
+                        <ComboBox x:Name="CutSingleBlockDirectionCB" Grid.Row="1" Grid.Column="1" Width="110" Margin="10,2" SelectedIndex="0">
+                            <TextBlock Text="I direction" FontFamily="Lucida Console"/>
+                            <TextBlock Text="J direction" FontFamily="Lucida Console"/>
+                            <TextBlock Text="K direction" FontFamily="Lucida Console"/>
+                        </ComboBox>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Position" Margin="10,2"/>
+                        <TextBox x:Name="CutSingleBlockPositionTB" Grid.Row="2" Grid.Column="1" Width="110" Margin="10,2"/>
+                        <Button Grid.Row="3" Grid.Column="1" Content="Cut" Margin="10,2"/>
+                    </Grid>
+                </GroupBox>
             </Grid>
         </Grid>
     </DockPanel>
