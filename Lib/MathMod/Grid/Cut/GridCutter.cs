@@ -366,7 +366,7 @@ namespace Lib.MathMod.Grid.Cut
                 ifc.Coords[g][0] = v;
             }
 
-            return null;
+            return ifcc;
         }
 
         /// <summary>
