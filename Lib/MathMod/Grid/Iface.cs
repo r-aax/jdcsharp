@@ -21,7 +21,7 @@ namespace Lib.MathMod.Grid
         public Block NB
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>

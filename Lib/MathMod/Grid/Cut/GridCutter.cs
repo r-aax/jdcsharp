@@ -379,7 +379,58 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void Cut(Iface i1, Iface i2, Block b, Dir d, Block new_b)
         {
-            // TODO
+            if (!d.IsGen)
+            {
+                throw new Exception("unknown direction");
+            }
+
+            if (b != i1.B)
+            {
+                throw new Exception("trying to cut wrong interface");
+            }
+
+            if (b == i1.NB)
+            {
+                throw new Exception("trying to cut self-intersected block");
+            }
+
+            ISegm c = i1.Coords[d.N];
+            ISegm bc = b.Coords[d.N];
+
+            if (c[0] >= bc[1])
+            {
+                // Interface touches only new block.
+                i1.B = new_b;
+                c.Dec(bc[1]);
+                i2.NB = new_b;
+            }
+            else if (c[1] > bc[1])
+            {
+                // Interface splits.
+                StructuredGrid g = b.Grid;
+                int id = g.MaxIfaceId() + 1;
+                Iface ifc = i1.Clone() as Iface;
+                ifc.Id = id;
+                ifc.NB = new_b;
+                ifc.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
+                g.Ifaces.Add(ifc);
+                c[1] = bc[1];
+
+                // Adjacent interface truncated on bc[1] - c[0].
+                //
+                //  bc[0] = 0           bc[1]  <- block
+                //     *-----*------------*
+                //           |   trunc    |  <- trunc - trunc size
+                //           *------------*----------------*  <- interface
+                //          c[0]             ^            c[1]
+                //                           |
+                //               mirror      v
+                //           *------------*----------------*
+                ifc = Trunc(i2, i1.NDirs[d.N], bc[1] - c[0]);
+                ifc.NB = new_b;
+                ifc.Id = id;
+                g.Ifaces.Add(ifc);
+            }
         }
 
         /// <summary>

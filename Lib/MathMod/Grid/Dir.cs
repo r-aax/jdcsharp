@@ -313,6 +313,17 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Check if it genera direction.
+        /// </summary>
+        public bool IsGen
+        {
+            get
+            {
+                return IsPos;
+            }
+        }
+
+        /// <summary>
         /// Check if three directions produce the basis.
         /// </summary>
         /// <param name="d1">first direction</param>

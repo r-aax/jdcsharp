@@ -20,7 +20,7 @@ namespace Lib.MathMod.Grid
         public int Id
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Lib.MathMod.Grid
         public Block B
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>

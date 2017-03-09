@@ -50,5 +50,15 @@ namespace Lib.Maths.Geometry
         {
             return (v >= L) && (v <= H);
         }
+
+        /// <summary>
+        /// Segment decrement.
+        /// </summary>
+        /// <param name="v">value</param>
+        public void Dec(int v)
+        {
+            L -= v;
+            H -= v;
+        }
     }
 }
