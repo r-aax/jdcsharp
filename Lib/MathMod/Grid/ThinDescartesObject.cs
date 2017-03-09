@@ -64,7 +64,7 @@ namespace Lib.MathMod.Grid
         {
             get
             {
-                return D.IsI();
+                return D.IsI;
             }
         }
 
@@ -75,7 +75,7 @@ namespace Lib.MathMod.Grid
         {
             get
             {
-                return D.IsJ();
+                return D.IsJ;
             }
         }
 
@@ -86,7 +86,7 @@ namespace Lib.MathMod.Grid
         {
             get
             {
-                return D.IsK();
+                return D.IsK;
             }
         }
     }

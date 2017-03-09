@@ -210,5 +210,21 @@ namespace Lib.MathMod.Grid
                 }
             }
         }
+
+        /// <summary>
+        /// Get maximum interface identifier.
+        /// </summary>
+        /// <returns>maximum interface identifier or -1 if there is no interfaces at all</returns>
+        public int MaxIfaceId()
+        {
+            int max_id = -1;
+
+            foreach (Iface ifc in Ifaces)
+            {
+                max_id = Math.Max(max_id, ifc.Id);
+            }
+
+            return max_id;
+        }
     }
 }

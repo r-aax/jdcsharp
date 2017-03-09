@@ -21,17 +21,17 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// I coordinates segment.
         /// </summary>
-        protected ISegm I;
+        public ISegm I;
 
         /// <summary>
         /// J coordinates segment.
         /// </summary>
-        protected ISegm J;
+        public ISegm J;
 
         /// <summary>
         /// K coordinates segment
         /// </summary>
-        protected ISegm K;
+        public ISegm K;
 
         /// <summary>
         /// Empty constructor.

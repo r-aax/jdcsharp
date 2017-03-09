@@ -15,6 +15,11 @@ namespace Lib.MathMod.Grid
     public class Block : DescartesObject
     {
         /// <summary>
+        /// Grid.
+        /// </summary>
+        public StructuredGrid Grid;
+
+        /// <summary>
         /// Identifier.
         /// </summary>
         public int Id
@@ -31,14 +36,30 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Constructor from identifier and sizes.
         /// </summary>
+        /// <param name="g">grid</param>
         /// <param name="id">identifier</param>
         /// <param name="isize">count of cells in I direction</param>
         /// <param name="jsize">count of cells in J direction</param>
         /// <param name="ksize">count of cells in K direction</param>
-        public Block(int id, int isize, int jsize, int ksize)
+        public Block(StructuredGrid g, int id, int isize, int jsize, int ksize)
             : base(new ISegm(0, isize), new ISegm(0, jsize), new ISegm(0, ksize))
         {
+            Grid = g;
             Id = id;
+        }
+
+        /// <summary>
+        /// Reshape block.
+        /// </summary>
+        /// <param name="isize">new block size in I direction</param>
+        /// <param name="jsize">new block size in J direction</param>
+        /// <param name="ksize">new block size in K direction</param>
+        public void Reshape(int isize, int jsize, int ksize)
+        {
+            I.H = isize;
+            J.H = jsize;
+            K.H = ksize;
+            Nodes = null;
         }
 
         /// <summary>

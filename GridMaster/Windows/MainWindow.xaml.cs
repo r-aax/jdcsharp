@@ -16,6 +16,7 @@ using System.Windows.Forms;
 
 using Lib.MathMod.Grid;
 using Lib.MathMod.Grid.Load;
+using Lib.MathMod.Grid.Cut;
 
 namespace GridMaster
 {
@@ -104,6 +105,7 @@ namespace GridMaster
                                             GridLoadSaveIBlankMI.IsChecked);
                     UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is loaded.");
                     UpdateBriefGridStatistic();
+                    GridCutter.Cut(Grid.Blocks[0], Dir.I, 1);
                 }
                 else
                 {

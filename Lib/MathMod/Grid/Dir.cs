@@ -249,28 +249,34 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Check if is I direction.
         /// </summary>
-        /// <returns>true - if I direction, false - othercase</returns>
-        public bool IsI()
+        public bool IsI
         {
-            return Gen == I;
+            get
+            {
+                return Gen == I;
+            }
         }
 
         /// <summary>
         /// Check if is J direction.
         /// </summary>
-        /// <returns>true - if J direction, false - othercase</returns>
-        public bool IsJ()
+        public bool IsJ
         {
-            return Gen == J;
+            get
+            {
+                return Gen == J;
+            }
         }
 
         /// <summary>
         /// Check if is K direction.
         /// </summary>
-        /// <returns>true - if K direction, false - othercase</returns>
-        public bool IsK()
+        public bool IsK
         {
-            return Gen == K;
+            get
+            {
+                return Gen == K;
+            }
         }
 
         /// <summary>

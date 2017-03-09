@@ -40,5 +40,15 @@ namespace Lib.Maths.Geometry
                 return H - L;
             }
         }
+
+        /// <summary>
+        /// Check if segment contains value.
+        /// </summary>
+        /// <param name="v">value</param>
+        /// <returns><c>true</c> - if segment contains value, <c>false</c> - otherwise</returns>
+        public bool Contains(int v)
+        {
+            return (v >= L) && (v <= H);
+        }
     }
 }

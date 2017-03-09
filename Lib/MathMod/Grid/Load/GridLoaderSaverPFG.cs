@@ -68,7 +68,7 @@ namespace Lib.MathMod.Grid.Load
                 for (int i = 0; i < bc; i++)
                 {
                     // We read nodes count, but have to pass to block constructor cells count.
-                    Block b = new Block(i, ii[i] - 1, jj[i] - 1, kk[i] - 1);
+                    Block b = new Block(g, i, ii[i] - 1, jj[i] - 1, kk[i] - 1);
 
                     b.Allocate();
                     g.Blocks.Add(b);
