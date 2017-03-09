@@ -13,7 +13,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Interface between two blocks.
     /// </summary>
-    public class Iface : Border
+    public class Iface : Border, ICloneable
     {
         /// <summary>
         /// Neighbour block.
@@ -170,6 +170,15 @@ namespace Lib.MathMod.Grid
                                  Id.ToString(), B.Id.ToString(),
                                  I.ToString(), J.ToString(), K.ToString(),
                                  NB.Id.ToString(), D.ToString());
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>new cloned interface</returns>
+        public object Clone()
+        {
+            return new Iface(Id, B, I, J, K, NB);
         }
     }
 }

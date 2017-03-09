@@ -291,6 +291,28 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Check if positive direction.
+        /// </summary>
+        public bool IsPos
+        {
+            get
+            {
+                return (N >= I1N) && (N <= K1N);
+            }
+        }
+
+        /// <summary>
+        /// Check if negative direction.
+        /// </summary>
+        public bool IsNeg
+        {
+            get
+            {
+                return (N >= I0N) && (N <= K0N);
+            }
+        }
+
+        /// <summary>
         /// Check if three directions produce the basis.
         /// </summary>
         /// <param name="d1">first direction</param>

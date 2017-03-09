@@ -16,7 +16,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Array of coordinates segments.
         /// </summary>
-        ISegm[] Coords;
+        public ISegm[] Coords;
 
         /// <summary>
         /// I coordinates segment.

@@ -310,6 +310,66 @@ namespace Lib.MathMod.Grid.Cut
         }
 
         /// <summary>
+        /// Trunc interface in given direction.
+        /// </summary>
+        /// <param name="ifc">interface</param>
+        /// <param name="d">direction</param>
+        /// <param name="width">band width</param>
+        /// <returns>new interface</returns>
+        public static Iface Trunc(Iface ifc, Dir d, int width)
+        {
+            if (!d.IsCorrect)
+            {
+                throw new Exception("unknown direction");
+            }
+
+            int g = d.Gen.N;
+
+            // Check iface is big enough.
+            if (!(ifc.Coords[g].Length > width))
+            {
+                throw new Exception("iface is not big enough to trunc");
+            }
+
+            Iface ifcc = ifc.Clone() as Iface;
+
+            if (d.IsPos)
+            {
+                // Cut in positive direction.
+                //
+                //     0                           size
+                //     *----------*----------------->
+                //     |  width   |
+                //
+                //  0        width   0            size - width
+                //  *---------->     *----------------->
+                //  cutted iface     new iface
+
+                int v = ifc.Coords[g][0] + width;
+                ifcc.Coords[g] = new ISegm(v, ifc.Coords[g][1]);
+                ifc.Coords[g][1] = v;
+            }
+            else
+            {
+                // Cut in negative direction.
+                //
+                //     0                           size
+                //     *-----------------*---------->
+                //                       |  width   |
+                //
+                //  0        size - width   0        width
+                //  *----------------->     *---------->
+                //  new iface               cutted iface
+
+                int v = ifc.Coords[g][1] - width;
+                ifcc.Coords[g] = new ISegm(ifc.Coords[g][0], v);
+                ifc.Coords[g][0] = v;
+            }
+
+            return null;
+        }
+
+        /// <summary>
         /// Cut pair of interfaces.
         /// </summary>
         /// <param name="i1">first interface</param>
