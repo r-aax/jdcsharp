@@ -18,6 +18,9 @@ using Lib.MathMod.Grid;
 using Lib.MathMod.Grid.Load;
 using Lib.MathMod.Grid.Cut;
 using Lib.Maths.Geometry;
+using Lib.Draw.WPF;
+using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
+using GridMaster.Tools;
 
 namespace GridMaster.Windows
 {
@@ -35,6 +38,21 @@ namespace GridMaster.Windows
         /// Properties of PFG load.
         /// </summary>
         private GridLoadSavePFGProperties LoadPFGProps;
+
+        /// <summary>
+        /// Rect drawer.
+        /// </summary>
+        private RectDrawer Drawer = null;
+
+        /// <summary>
+        /// Logical area of painting.
+        /// </summary>
+        private static readonly Rect2D RelDrawRect = new Rect2D(100.0, 100.0);
+
+        /// <summary>
+        /// Histogram.
+        /// </summary>
+        private Histogram Hist = null;
 
         /// <summary>
         /// Init components.
@@ -68,7 +86,55 @@ namespace GridMaster.Windows
         {
             LastActionTB.Text = last_action;
         }
-        
+
+        /// <summary>
+        /// Paint.
+        /// </summary>
+        private void Paint()
+        {
+            // If draw master is not created then create it.
+            if (Drawer == null)
+            {
+                Drawer = new RectDrawer(RelDrawRect, DrawAreaC, false, true);
+            }
+
+            // Drawing.
+            Drawer.BeginDraw();
+            PaintInner();
+            Drawer.EndDraw();
+        }
+
+        /// <summary>
+        /// Inner paint.
+        /// </summary>
+        private void PaintInner()
+        {
+            if (Hist != null)
+            {
+                Hist.Draw(Drawer);
+            }
+        }
+
+        /// <summary>
+        /// Event when window is loaded.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Paint();
+        }
+
+        /// <summary>
+        /// Change size.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Paint();
+        }
+
         /// <summary>
         /// Load grid.
         /// </summary>
@@ -207,6 +273,22 @@ namespace GridMaster.Windows
                           ? "common termination"
                           : GridCutter.CutRejectedString;
             UpdateLastAction(String.Format("Cut: {0} blocks have been cutted ({1}).", i, diag));
+        }
+
+        /// <summary>
+        /// Draw blocks distribution histogram.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void DrawBlocksDistributionHistMI_Click(object sender, RoutedEventArgs e)
+        {
+            Hist = new Histogram(5);
+            Hist.V[0] = 10.0;
+            Hist.V[1] = 50.0;
+            Hist.V[2] = 30.0;
+            Hist.V[3] = 90.0;
+            Hist.V[4] = 20.0;
+            Paint();
         }
     }
 }

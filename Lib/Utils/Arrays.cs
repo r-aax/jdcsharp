@@ -49,5 +49,30 @@ namespace Lib.Utils
 
             return j;
         }
+
+        /// <summary>
+        /// Max index.
+        /// </summary>
+        /// <param name="d">array</param>
+        /// <returns>max index</returns>
+        public static int MaxIndex(double[] d)
+        {
+            if (d.Length == 0)
+            {
+                return -1;
+            }
+
+            int j = 0;
+
+            for (int i = 1; i < d.Length; i++)
+            {
+                if (d[i] > d[j])
+                {
+                    j = i;
+                }
+            }
+
+            return j;
+        }
     }
 }
