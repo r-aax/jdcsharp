@@ -160,6 +160,26 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Grid description.
+        /// </summary>
+        /// <returns>description</returns>
+        public string[] Description()
+        {
+            int bc = BlocksCount;
+            int ic = IfacesCount;
+            int bcc = BCondsCount;
+            int sc = ScopesCount;
+            int cc = CellsCount();
+
+            string[] str = new string[2];
+
+            str[0] = String.Format("Grid: {0} blocks, {1} ifaces, {2} bconds, {3} scopes]", bc, ic, bcc, sc);
+            str[1] = String.Format("Grid: {0} cells", cc);
+
+            return str;
+        }
+
+        /// <summary>
         /// Set neighbour directions for all interfaces.
         /// </summary>
         public void SetIfacesNDirs()

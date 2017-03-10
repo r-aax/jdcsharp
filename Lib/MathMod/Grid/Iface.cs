@@ -166,10 +166,8 @@ namespace Lib.MathMod.Grid
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("{0}: {1} [{2}, {3}, {4}] -> {5} ({6})",
-                                 Id.ToString(), B.Id.ToString(),
-                                 I.ToString(), J.ToString(), K.ToString(),
-                                 NB.Id.ToString(), D.ToString());
+            return String.Format("{0,4}: {1,4} [{2,3} - {3,3}, {4,3} - {5,3}, {6,3} - {7,3}] -> {8,4} ({9})",
+                                 Id, B.Id, I0, I1, J0, J1, K0, K1, NB.Id, D.ToString());
         }
 
         /// <summary>

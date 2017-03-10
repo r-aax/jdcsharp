@@ -120,5 +120,14 @@ namespace Lib.MathMod.Grid
 
             return Nodes[i, j, k];
         }
+
+        /// <summary>
+        /// Cast to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("{0,4}: {1,8} cells ({2,3}, {3,3}, {4,3})", Id, CellsCount, ISize, JSize, KSize);
+        }
     }
 }

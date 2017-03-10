@@ -19,7 +19,7 @@ using Lib.MathMod.Grid.Load;
 using Lib.MathMod.Grid.Cut;
 using Lib.Maths.Geometry;
 
-namespace GridMaster
+namespace GridMaster.Windows
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -154,6 +154,18 @@ namespace GridMaster
             UpdateBriefGridStatistic();
             UpdateLastAction(String.Format("Cut is done: block id {0}, direction {1}, position {2}.",
                                            bid, d, pos));
+        }
+
+        /// <summary>
+        /// Call grid description information.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void InfoGridMI_Click(object sender, RoutedEventArgs e)
+        {
+            InfoWindow w = new InfoWindow("Grid description");
+            w.AddGridInfo(Grid);
+            w.Show();        
         }
     }
 }
