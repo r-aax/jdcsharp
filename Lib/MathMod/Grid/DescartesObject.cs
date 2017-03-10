@@ -15,23 +15,57 @@ namespace Lib.MathMod.Grid
     {
         /// <summary>
         /// Array of coordinates segments.
+        /// Only this array contains real data.
         /// </summary>
         public ISegm[] Coords;
 
         /// <summary>
         /// I coordinates segment.
         /// </summary>
-        public ISegm I;
+        public ISegm I
+        {
+            get
+            {
+                return Coords[0];
+            }
+
+            set
+            {
+                Coords[0] = value;
+            }
+        }
 
         /// <summary>
         /// J coordinates segment.
         /// </summary>
-        public ISegm J;
+        public ISegm J
+        {
+            get
+            {
+                return Coords[1];
+            }
+
+            set
+            {
+                Coords[1] = value;
+            }
+        }
 
         /// <summary>
         /// K coordinates segment
         /// </summary>
-        public ISegm K;
+        public ISegm K
+        {
+            get
+            {
+                return Coords[2];
+            }
+
+            set
+            {
+                Coords[2] = value;
+            }
+        }
 
         /// <summary>
         /// Empty constructor.
@@ -48,13 +82,7 @@ namespace Lib.MathMod.Grid
         /// <param name="k"></param>
         public DescartesObject(ISegm i, ISegm j, ISegm k)
         {
-            I = new ISegm(i);
-            J = new ISegm(j);
-            K = new ISegm(k);
-            Coords = new ISegm[Dir.GenCount];
-            Coords[Dir.IN] = I;
-            Coords[Dir.JN] = J;
-            Coords[Dir.KN] = K;
+            Coords = new ISegm[] { new ISegm(i), new ISegm(j), new ISegm(k) };
         }
 
         /// <summary>
