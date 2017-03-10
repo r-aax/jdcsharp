@@ -518,5 +518,52 @@ namespace Lib.MathMod.Grid.Cut
                 c[1] = bc[1];
             }
         }
+
+        /// <summary>
+        /// Half block.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <param name="d">direction</param>
+        /// <returns>new block</returns>
+        public static Block CutHalf(Block b, Dir d)
+        {
+            if (b == null)
+            {
+                return null;
+            }
+
+            return Cut(b, d, b.Size(d) / 2);
+        }
+
+        /// <summary>
+        /// Half block in max size direction.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <returns>new block</returns>
+        public static Block CutHalf(Block b)
+        {
+            return CutHalf(b, b.MaxSizeDir());
+        }
+
+        /// <summary>
+        /// Cut half max block in given direction.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="d">direction</param>
+        /// <returns></returns>
+        public static Block CutHalfMaxBlock(StructuredGrid g, Dir d)
+        {
+            return CutHalf(g.MaxBlock(), d);
+        }
+
+        /// <summary>
+        /// Cut half max block in maximum direction.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <returns>new block</returns>
+        public static Block CutHalfMaxBlock(StructuredGrid g)
+        {
+            return CutHalf(g.MaxBlock());
+        }
     }
 }

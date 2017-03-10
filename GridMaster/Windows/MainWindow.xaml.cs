@@ -167,5 +167,21 @@ namespace GridMaster.Windows
             w.AddGridInfo(Grid);
             w.Show();        
         }
+
+        /// <summary>
+        /// Start cut half max block.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void CutHalfMaxBlockB_Click(object sender, RoutedEventArgs e)
+        {
+            int margin = Int32.Parse(CutHalfMaxBlockMarginTB.Text);
+            int iters = Int32.Parse(CutHalfMaxBlockItersTB.Text);
+
+            for (int i = 0; i < iters; i++)
+            {
+                GridCutter.CutHalfMaxBlock(Grid);
+            }
+        }
     }
 }

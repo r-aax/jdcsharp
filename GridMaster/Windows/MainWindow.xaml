@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GridMaster"
         mc:Ignorable="d"
-        Title="GridMaster" Height="350" Width="800">
+        Title="GridMaster" Height="350" Width="840">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
             <MenuItem Header="Grid">
@@ -34,8 +34,27 @@
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Header="Cut single block" Margin="5" Width="Auto" HorizontalAlignment="Left">
+                <GroupBox Grid.Row="0" Header="Cut half max block" Margin="10,5" Width="Auto" HorizontalAlignment="Left">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Min margin" Margin="10,2"/>
+                        <TextBox Name="CutHalfMaxBlockMarginTB" Grid.Row="0" Grid.Column="1" Text="1" Margin="10,2"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Max iters" Width="70" Margin="10,2"/>
+                        <TextBox Name="CutHalfMaxBlockItersTB" Grid.Row="1" Grid.Column="1" Width="110" Text="1" Margin="10,2"/>
+                        <Button x:Name="CutHalfMaxBlockB" Grid.Row="2" Grid.Column="1" Content="Cut" Margin="10,2" Click="CutHalfMaxBlockB_Click"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="Cut single block" Margin="10,5" Width="Auto" HorizontalAlignment="Left">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -47,7 +66,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Block number" Margin="10,2"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Block Id" Width="70" Margin="10,2"/>
                         <TextBox x:Name="CutSingleBlockBlockIdTB" Grid.Row="0" Grid.Column="1" Width="110" Margin="10,2" Text="0"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Direction" Margin="10,2"/>
                         <ComboBox x:Name="CutSingleBlockDirectionCB" Grid.Row="1" Grid.Column="1" Width="110" Margin="10,2" SelectedIndex="0" FontFamily="Courier New">
