@@ -63,28 +63,29 @@ namespace GridMaster.Windows
             LinesLB.Items.Add("Blocks:");
             for (int i = 0; i < g.BlocksCount; i++)
             {
-                LinesLB.Items.Add(g.Blocks[i].ToString());
+                LinesLB.Items.Add(" " + g.Blocks[i].ToString());
             }
 
             // Ifaces descriptions.
             LinesLB.Items.Add("Ifaces:");
-            for (int i = 0; i < g.IfacesCount; i++)
+            for (int i = 0; i < g.IfacesCount; i += 2)
             {
-                LinesLB.Items.Add(g.Ifaces[i].ToString());
+                LinesLB.Items.Add("!" + g.Ifaces[i].ToString());
+                LinesLB.Items.Add(" " + g.Ifaces[i + 1].ToString());
             }
 
             // Border conditions descriptions.
             LinesLB.Items.Add("BConds:");
             for (int i = 0; i < g.BCondsCount; i++)
             {
-                LinesLB.Items.Add(g.BConds[i].ToString());
+                LinesLB.Items.Add(" " + g.BConds[i].ToString());
             }
 
             // Scopes descriptions.
             LinesLB.Items.Add("Scopes:");
             for (int i = 0; i < g.ScopesCount; i++)
             {
-                LinesLB.Items.Add(g.Scopes[i].ToString());
+                LinesLB.Items.Add(" " + g.Scopes[i].ToString());
             }
         }
     }

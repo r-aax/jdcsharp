@@ -173,7 +173,7 @@ namespace Lib.MathMod.Grid
 
             string[] str = new string[2];
 
-            str[0] = String.Format("Grid: {0} blocks, {1} ifaces, {2} bconds, {3} scopes]", bc, ic, bcc, sc);
+            str[0] = String.Format("Grid: {0} blocks, {1} ifaces, {2} bconds, {3} scopes", bc, ic, bcc, sc);
             str[1] = String.Format("Grid: {0} cells", cc);
 
             return str;
