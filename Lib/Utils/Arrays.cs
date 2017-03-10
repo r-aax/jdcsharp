@@ -24,5 +24,30 @@ namespace Lib.Utils
 
             return range;
         }
+
+        /// <summary>
+        /// Min index.
+        /// </summary>
+        /// <param name="d">array</param>
+        /// <returns>min index</returns>
+        public static int MinIndex(double[] d)
+        {
+            if (d.Length == 0)
+            {
+                return -1;
+            }
+
+            int j = 0;
+
+            for (int i = 1; i < d.Length; i++)
+            {
+                if (d[i] < d[j])
+                {
+                    j = i;
+                }
+            }
+
+            return j;
+        }
     }
 }

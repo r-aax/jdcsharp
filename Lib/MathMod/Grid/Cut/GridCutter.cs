@@ -12,7 +12,7 @@ namespace Lib.MathMod.Grid.Cut
     /// <summary>
     /// Class that performs grid cutting.
     /// </summary>
-    public class GridCutter
+    public static class GridCutter
     {
         /// <summary>
         /// Minimum margin from block edges for cutting.
