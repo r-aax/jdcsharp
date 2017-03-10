@@ -46,6 +46,9 @@ namespace GridMaster.Windows
             // Create empty grid.
             Grid = new StructuredGrid();
             LoadPFGProps = null;
+
+            // Initial statistics.
+            UpdateBriefGridStatistic();
         }
 
         /// <summary>
@@ -146,14 +149,22 @@ namespace GridMaster.Windows
         {
             int bid = Int32.Parse(CutSingleBlockBlockIdTB.Text);
             Dir d = Dir.Dirs[CutSingleBlockDirectionCB.SelectedIndex];
-            int pos = Int32.Parse(CutSingleBlockPositionTB.Text);
+            int pos = Int32.Parse(CutSingleBlockPositionTB.Text);        
+            Lib.MathMod.Grid.Block b = ((bid >= 0) && (bid < Grid.BlocksCount)) ? Grid.Blocks[bid] : null;
 
-            GridCutter.Cut(Grid.Blocks[bid], d, pos);
+            GridCutter.Cut(b, d, pos);
 
             // Update information.
             UpdateBriefGridStatistic();
-            UpdateLastAction(String.Format("Cut is done: block id {0}, direction {1}, position {2}.",
-                                           bid, d, pos));
+            if (GridCutter.CutRejectedString == null)
+            {
+                UpdateLastAction(String.Format("Cut: block id {0}, direction {1}, position {2} is cutted.",
+                                               bid, d, pos));
+            }
+            else
+            {
+                UpdateLastAction(String.Format("Cut: the cutting is impossible ({0})", GridCutter.CutRejectedString));
+            }
         }
 
         /// <summary>
@@ -177,8 +188,10 @@ namespace GridMaster.Windows
         {
             int margin = Int32.Parse(CutHalfMaxBlockMarginTB.Text);
             int iters = Int32.Parse(CutHalfMaxBlockItersTB.Text);
+            int min_margin_old = GridCutter.MinMargin;
             int i = 0;
 
+            GridCutter.MinMargin = margin;
             for (; i < iters; i++)
             {
                 if (GridCutter.CutHalfMaxBlock(Grid) == null)
@@ -187,8 +200,13 @@ namespace GridMaster.Windows
                 }
             }
 
+            GridCutter.MinMargin = min_margin_old;
+
             UpdateBriefGridStatistic();
-            UpdateLastAction(String.Format("Cut is done: {0} blocks have been cutted.", i));
+            string diag = (GridCutter.CutRejectedString == null)
+                          ? "common termination"
+                          : GridCutter.CutRejectedString;
+            UpdateLastAction(String.Format("Cut: {0} blocks have been cutted ({1}).", i, diag));
         }
     }
 }

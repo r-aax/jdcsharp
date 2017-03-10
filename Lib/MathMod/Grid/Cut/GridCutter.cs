@@ -15,6 +15,16 @@ namespace Lib.MathMod.Grid.Cut
     public class GridCutter
     {
         /// <summary>
+        /// Minimum margin from block edges for cutting.
+        /// </summary>
+        public static int MinMargin = 1;
+
+        /// <summary>
+        /// Description of cut rejecting.
+        /// </summary>
+        public static string CutRejectedString = null;
+
+        /// <summary>
         /// Cur block int given direction on given position.
         /// </summary>
         /// <param name="b">block</param>
@@ -23,6 +33,13 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         public static Block Cut(Block b, Dir d, int pos)
         {
+            if (b == null)
+            {
+                CutRejectedString = "null block";
+
+                return null;
+            }
+
             Block new_b = null;
 
             if (d.IsI)
@@ -47,6 +64,8 @@ namespace Lib.MathMod.Grid.Cut
                 CutObjects(b, d, new_b);
                 b.Grid.SetIfacesNDirs();
             }
+
+            CutRejectedString = null;
 
             return new_b;
         }
@@ -89,10 +108,12 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="b">block</param>
         /// <param name="pos">position</param>
         /// <returns>new block</returns>
-        public static Block CutI(Block b, int pos)
+        private static Block CutI(Block b, int pos)
         {
-            if (!((new ISegm(1, b.INodes - 2)).Contains(pos)))
+            if (!((new ISegm(MinMargin, b.INodes - 1 - MinMargin)).Contains(pos)))
             {
+                CutRejectedString = "margin violation";
+
                 return null;
             }
 
@@ -139,10 +160,12 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="b">block</param>
         /// <param name="pos">position</param>
         /// <returns>new block</returns>
-        public static Block CutJ(Block b, int pos)
+        private static Block CutJ(Block b, int pos)
         {
-            if (!((new ISegm(1, b.JNodes - 2)).Contains(pos)))
+            if (!((new ISegm(MinMargin, b.JNodes - 1 - MinMargin)).Contains(pos)))
             {
+                CutRejectedString = "margin violation";
+
                 return null;
             }
 
@@ -189,10 +212,12 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="b">block</param>
         /// <param name="pos">position</param>
         /// <returns>new block</returns>
-        public static Block CutK(Block b, int pos)
+        private static Block CutK(Block b, int pos)
         {
-            if (!((new ISegm(1, b.KNodes - 2)).Contains(pos)))
+            if (!((new ISegm(MinMargin, b.KNodes - 1 - MinMargin)).Contains(pos)))
             {
+                CutRejectedString = "margin violation";
+
                 return null;
             }
 
@@ -527,12 +552,9 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         public static Block CutHalf(Block b, Dir d)
         {
-            if (b == null)
-            {
-                return null;
-            }
+            int pos = (b == null) ? 0 : (b.Size(d) / 2);
 
-            return Cut(b, d, b.Size(d) / 2);
+            return Cut(b, d, pos);
         }
 
         /// <summary>
@@ -542,7 +564,11 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         public static Block CutHalf(Block b)
         {
-            return CutHalf(b, b.MaxSizeDir());
+            // If b is null block we call CutHalf,
+            // because we want to get full diagnostics.
+            Dir d = (b == null) ? Dir.I : b.MaxSizeDir();
+
+            return CutHalf(b, d);
         }
 
         /// <summary>
@@ -553,6 +579,20 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns></returns>
         public static Block CutHalfMaxBlock(StructuredGrid g, Dir d)
         {
+            if (g == null)
+            {
+                CutRejectedString = "no grid";
+
+                return null;
+            }
+
+            if (g.BlocksCount == 0)
+            {
+                CutRejectedString = "no blocks";
+
+                return null;
+            }
+
             return CutHalf(g.MaxBlock(), d);
         }
 
@@ -563,6 +603,20 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         public static Block CutHalfMaxBlock(StructuredGrid g)
         {
+            if (g == null)
+            {
+                CutRejectedString = "no grid";
+
+                return null;
+            }
+
+            if (g.BlocksCount == 0)
+            {
+                CutRejectedString = "no blocks";
+
+                return null;
+            }
+
             return CutHalf(g.MaxBlock());
         }
     }
