@@ -221,7 +221,7 @@ namespace Lib.MathMod.Grid
             {
                 return Dir.I;
             }
-            else if (JSize > KSize)
+            else if (JSize >= KSize)
             {
                 return Dir.J;
             }

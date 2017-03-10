@@ -177,11 +177,18 @@ namespace GridMaster.Windows
         {
             int margin = Int32.Parse(CutHalfMaxBlockMarginTB.Text);
             int iters = Int32.Parse(CutHalfMaxBlockItersTB.Text);
+            int i = 0;
 
-            for (int i = 0; i < iters; i++)
+            for (; i < iters; i++)
             {
-                GridCutter.CutHalfMaxBlock(Grid);
+                if (GridCutter.CutHalfMaxBlock(Grid) == null)
+                {
+                    break;
+                }
             }
+
+            UpdateBriefGridStatistic();
+            UpdateLastAction(String.Format("Cut is done: {0} blocks have been cutted.", i));
         }
     }
 }

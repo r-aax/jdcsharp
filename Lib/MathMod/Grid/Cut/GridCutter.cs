@@ -259,7 +259,7 @@ namespace Lib.MathMod.Grid.Cut
             // We do not cut last two interfaces, because they have just came out.
             int ic = g.IfacesCount - 2;
 
-            for (int i = 0; i < ic; i++)
+            for (int i = 0; i < ic; i += 2)
             {
                 Iface i1 = g.Ifaces[i];
                 Iface i2 = g.Ifaces[i + 1];
@@ -411,7 +411,7 @@ namespace Lib.MathMod.Grid.Cut
                 int id = g.MaxIfaceId() + 1;
                 Iface ifc = i1.Clone() as Iface;
                 ifc.Id = id;
-                ifc.NB = new_b;
+                ifc.B = new_b;
                 ifc.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
                 g.Ifaces.Add(ifc);
                 c[1] = bc[1];
