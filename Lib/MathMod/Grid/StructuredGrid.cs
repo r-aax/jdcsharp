@@ -278,5 +278,51 @@ namespace Lib.MathMod.Grid
 
             return max_id;
         }
+
+        /// <summary>
+        /// Get maximum block (according to given direction size).
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <returns>maximum block</returns>
+        public Block MaxBlock(Dir d)
+        {
+            if (BlocksCount == 0)
+            {
+                return null;
+            }
+
+            Block max = Blocks[0];
+
+            for (int i = 1; i < BlocksCount; i++)
+            {
+                Block b = Blocks[i];
+
+                if (d == null)
+                {
+                    if (b.CellsCount > max.CellsCount)
+                    {
+                        max = b;
+                    }
+                }
+                else
+                {
+                    if (b.Size(d) > max.Size(d))
+                    {
+                        max = b;
+                    }
+                }
+            }
+
+            return max;
+        }
+
+        /// <summary>
+        /// Get maximum block (according to cells count).
+        /// </summary>
+        /// <returns>maximum block</returns>
+        public Block MaxBlock()
+        {
+            return MaxBlock(null);
+        }
     }
 }

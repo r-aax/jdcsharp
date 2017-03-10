@@ -185,6 +185,23 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Size in given direction.
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <returns>size</returns>
+        public int Size(Dir d)
+        {
+            if (d.IsGen)
+            {
+                return Coords[d.N].Length;
+            }
+            else
+            {
+                throw new Exception("wrong direction for getting descartes object size");
+            }
+        }
+
+        /// <summary>
         /// Size in given direction (in cells).
         /// </summary>
         /// <param name="dir">direction</param>
