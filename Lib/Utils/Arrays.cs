@@ -149,7 +149,51 @@ namespace Lib.Utils
                 return 0.0;
             }
 
-            return AbsDeviation(d) / Math.Abs(Sum(d));
+            double abs_dev = AbsDeviation(d);
+            double abs_mid = Math.Abs(Sum(d) / d.Length);
+
+            return abs_dev / abs_mid;
+        }
+
+        /// <summary>
+        /// Over deviation from middle value.
+        /// </summary>
+        /// <param name="d">positive values array</param>
+        /// <returns>over deviation</returns>
+        public static double AbsOverDeviationOfPositives(double[] d)
+        {
+            if (d.Length <= 1)
+            {
+                return 0.0;
+            }
+
+            double mid = Sum(d) / d.Length;
+            double[] r = new double[d.Length];
+
+            for (int i = 0; i < d.Length; i++)
+            {
+                r[i] = Math.Max(d[i] - mid, 0.0);
+            }
+
+            return Max(r);
+        }
+
+        /// <summary>
+        /// Relative over deviation from middle values.
+        /// </summary>
+        /// <param name="d">positive values array</param>
+        /// <returns>relative over deviation</returns>
+        public static double RelOverDeviationOfPositives(double[] d)
+        {
+            if (d.Length <= 1)
+            {
+                return 0.0;
+            }
+
+            double abs_dev = AbsOverDeviationOfPositives(d);
+            double abs_mid = Sum(d) / d.Length;
+
+            return abs_dev / abs_mid;
         }
     }
 }

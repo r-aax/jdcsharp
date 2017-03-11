@@ -324,5 +324,22 @@ namespace Lib.MathMod.Grid
         {
             return MaxBlock(null);
         }
+
+        /// <summary>
+        /// Set partitions numbers for blocks.
+        /// </summary>
+        /// <param name="pn">partitions numbers array</param>
+        public void SetBlocksPartitionsNumbers(int[] pn)
+        {
+            if (pn.Length != BlocksCount)
+            {
+                throw new Exception("wrong blocks partitions numbers");
+            }
+
+            for (int i = 0; i < BlocksCount; i++)
+            {
+                Blocks[i].PartitionNumber = pn[i];
+            }
+        }
     }
 }

@@ -332,7 +332,7 @@ namespace GridMaster.Windows
                 // Distribute.
                 WeightsDistribution.GreedyDistribution(weights, partitions,
                                                        partitions_weights, weights_to_partitions);
-                cur_dev = Arrays.RelDeviation(partitions_weights);
+                cur_dev = Arrays.RelOverDeviationOfPositives(partitions_weights);
 
                 // Check post conditions.
                 if (cur_dev <= dev)
@@ -363,6 +363,7 @@ namespace GridMaster.Windows
             }
             while (true);
 
+            Grid.SetBlocksPartitionsNumbers(weights_to_partitions);
             UpdateBriefGridStatistic();
             UpdateLastAction(String.Format("GU distr: {0} iters, {1}% deviation ({2}).",
                                            total_ites, cur_dev * 100.0, diag));

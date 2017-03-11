@@ -29,6 +29,15 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Partition number.
+        /// </summary>
+        public int PartitionNumber
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Nodes.
         /// </summary>
         public Point[,,] Nodes = null;
@@ -46,6 +55,7 @@ namespace Lib.MathMod.Grid
         {
             Grid = g;
             Id = id;
+            PartitionNumber = 0;
         }
 
         /// <summary>
@@ -127,7 +137,8 @@ namespace Lib.MathMod.Grid
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("{0,4}: {1,8} cells ({2,3}, {3,3}, {4,3})", Id, CellsCount, ISize, JSize, KSize);
+            return String.Format("{0,4} ({1,3}): {2,8} cells ({3,3}, {4,3}, {5,3})",
+                                 Id, PartitionNumber, CellsCount, ISize, JSize, KSize);
         }
     }
 }
