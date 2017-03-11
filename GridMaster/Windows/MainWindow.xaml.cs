@@ -21,6 +21,8 @@ using Lib.Maths.Geometry;
 using Lib.Draw.WPF;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 using GridMaster.Tools;
+using Lib.Maths;
+using Lib.Utils;
 
 namespace GridMaster.Windows
 {
@@ -218,6 +220,7 @@ namespace GridMaster.Windows
             int pos = Int32.Parse(CutSingleBlockPositionTB.Text);        
             Lib.MathMod.Grid.Block b = ((bid >= 0) && (bid < Grid.BlocksCount)) ? Grid.Blocks[bid] : null;
 
+            GridCutter.MinMargin = 1;
             GridCutter.Cut(b, d, pos);
 
             // Update information.
@@ -289,6 +292,80 @@ namespace GridMaster.Windows
             Hist.V[3] = 90.0;
             Hist.V[4] = 20.0;
             Paint();
+        }
+
+        /// <summary>
+        /// Start greedy uniform blocks distribution with cut half max blocks.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void GUBlocksDistrB_Click(object sender, RoutedEventArgs e)
+        {
+            int partitions = Int32.Parse(GUBlocksDistrPartitionsTB.Text);
+            int margin = Int32.Parse(GUBlocksDistrMarginTB.Text);
+            int iters = Int32.Parse(GUBlocksDistrItersTB.Text);
+            double dev = Double.Parse(GUBlocksDistrDeviationTB.Text) / 100.0;
+            int total_ites = 0;
+            double cur_dev = 0.0;
+            string diag = null;
+
+            GridCutter.MinMargin = margin;
+
+            double[] weights;
+            double[] partitions_weights;
+            int[] weights_to_partitions;
+
+            do
+            {
+                // Distribution parameters.
+                int bc = Grid.BlocksCount;
+                weights = new double[bc];
+                partitions_weights = new double[partitions];
+                weights_to_partitions = new int[bc];
+
+                // Init weights.
+                for (int i = 0; i < bc; i++)
+                {
+                    weights[i] = Grid.Blocks[i].CellsCount;
+                }
+
+                // Distribute.
+                WeightsDistribution.GreedyDistribution(weights, partitions,
+                                                       partitions_weights, weights_to_partitions);
+                cur_dev = Arrays.RelDeviation(partitions_weights);
+
+                // Check post conditions.
+                if (cur_dev <= dev)
+                {
+                    diag = "deviation is reached";
+
+                    break;
+                }
+                else if (total_ites >= iters)
+                {
+                    diag = "max iters count is reached";
+
+                    break;
+                }
+
+                // Cut next.
+                GridCutter.CutHalfMaxBlock(Grid);
+                if (GridCutter.CutRejectedString == null)
+                {
+                    total_ites++;
+                }
+                else
+                {
+                    diag = GridCutter.CutRejectedString;
+
+                    break;
+                }
+            }
+            while (true);
+
+            UpdateBriefGridStatistic();
+            UpdateLastAction(String.Format("GU distr: {0} iters, {1}% deviation ({2}).",
+                                           total_ites, cur_dev * 100.0, diag));
         }
     }
 }

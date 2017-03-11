@@ -1,5 +1,7 @@
 ﻿// Author: Alexey Rybakov
 
+using System;
+
 namespace Lib.Utils
 {
     /// <summary>
@@ -51,6 +53,16 @@ namespace Lib.Utils
         }
 
         /// <summary>
+        /// Minimum value of array.
+        /// </summary>
+        /// <param name="d">array</param>
+        /// <returns>minimum value</returns>
+        public static double Min(double[] d)
+        {
+            return d[MinIndex(d)];
+        }
+
+        /// <summary>
         /// Max index.
         /// </summary>
         /// <param name="d">array</param>
@@ -73,6 +85,71 @@ namespace Lib.Utils
             }
 
             return j;
+        }
+
+        /// <summary>
+        /// Maximum value of array.
+        /// </summary>
+        /// <param name="d">array</param>
+        /// <returns>maximum value</returns>
+        public static double Max(double[] d)
+        {
+            return d[MaxIndex(d)];
+        }
+
+        /// <summary>
+        /// Sum of array.
+        /// </summary>
+        /// <param name="d">array</param>
+        /// <returns>sum</returns>
+        public static double Sum(double[] d)
+        {
+            double s = 0.0;
+
+            for (int i = 0; i < d.Length; i++)
+            {
+                s += d[i];
+            }
+
+            return s;
+        }
+
+        /// <summary>
+        /// Deviation from middle value.
+        /// </summary>
+        /// <param name="d">values array</param>
+        /// <returns>deviation</returns>
+        public static double AbsDeviation(double[] d)
+        {
+            if (d.Length <= 1)
+            {
+                return 0.0;
+            }
+
+            double mid = Sum(d) / d.Length;
+            double[] r = new double[d.Length];
+
+            for (int i = 0; i < d.Length; i++)
+            {
+                r[i] = Math.Abs(mid - d[i]);
+            }
+
+            return Max(r);
+        }
+
+        /// <summary>
+        /// Relative deviation.
+        /// </summary>
+        /// <param name="d">array</param>
+        /// <returns>relative deviation</returns>
+        public static double RelDeviation(double[] d)
+        {
+            if (d.Length <= 1)
+            {
+                return 0.0;
+            }
+
+            return AbsDeviation(d) / Math.Abs(Sum(d));
         }
     }
 }
