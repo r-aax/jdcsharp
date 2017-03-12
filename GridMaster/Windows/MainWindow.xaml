@@ -21,6 +21,7 @@
             -->
             <MenuItem Header="Info">
                 <MenuItem Name="InfoGridMI" Header="Grid description" Click="InfoGridMI_Click"/>
+                <MenuItem Name="InfoBlocksDistrMI" Header="Blocks distribution" Click="InfoBlocksDistrMI_Click"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">

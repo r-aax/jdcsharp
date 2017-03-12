@@ -261,6 +261,18 @@ namespace GridMaster.Windows
         }
 
         /// <summary>
+        /// Call grid blocks distribution information.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void InfoBlocksDistrMI_Click(object sender, RoutedEventArgs e)
+        {
+            InfoWindow w = new InfoWindow("Blocks distribution");
+            w.AddBlocksDistribution(Grid);
+            w.Show();
+        }
+
+        /// <summary>
         /// Start cut half max block.
         /// </summary>
         /// <param name="sender">object</param>

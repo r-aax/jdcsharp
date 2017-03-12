@@ -88,5 +88,28 @@ namespace GridMaster.Windows
                 LinesLB.Items.Add(" " + g.Scopes[i].ToString());
             }
         }
+
+        /// <summary>
+        /// Add blocks distribution to information window.
+        /// </summary>
+        /// <param name="g">grid</param>
+        public void AddBlocksDistribution(StructuredGrid g)
+        {
+            if (g == null)
+            {
+                LinesLB.Items.Add("No grid");
+
+                return;
+            }
+
+            LinesLB.Items.Add("  Id PId");
+
+            // Partition number for each block.
+            for (int i = 0; i < g.BlocksCount; i++)
+            {
+                Lib.MathMod.Grid.Block b = g.Blocks[i];
+                LinesLB.Items.Add(String.Format("{0,4} {1,3}", b.Id, b.PartitionNumber));
+            }
+        }
     }
 }
