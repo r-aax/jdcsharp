@@ -221,6 +221,24 @@ namespace GridMaster.Windows
         }
 
         /// <summary>
+        /// Export blocks distribution to *dis/*DIS file.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+
+        private void GridExportBlocksDistribution_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = LoadPFGProps.IsExtensionUppercase ? "DIS (*.DIS)|*.DIS" : "DIS (*.dis)|*.dis";
+
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                GridLoaderSaverPFG.ExportBlocksDistribution(Grid, sfd.FileName);
+                UpdateLastAction("Grid blocks distributions is exported to " + sfd.FileName);
+            }
+        }
+
+        /// <summary>
         /// Click on button cut single block.
         /// </summary>
         /// <param name="sender">sender</param>

@@ -566,5 +566,35 @@ namespace Lib.MathMod.Grid.Load
                                            s.Label.Type, s.Label.Subtype, s.Label.Name));
             }
         }
+
+        /// <summary>
+        /// Export grid blocks distribution to *DIS/*dis file.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="file_name">PFG file name</param>
+        /// <returns><c>true</c> - if grid is saved, <c>false</c> - otherwise</returns>
+        public static bool ExportBlocksDistribution(StructuredGrid g, string file_name)
+        {
+            bool is_succ = true;
+
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(file_name))
+                {
+                    for (int i = 0; i < g.BlocksCount; i++)
+                    {
+                        Block b = g.Blocks[i];
+                        sw.WriteLine(String.Format("{0}\t{1}", b.Id, b.PartitionNumber));
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(ExeDebug.ReportError(e.Message));
+                is_succ = false;
+            }
+
+            return is_succ;
+        }
     }
 }
