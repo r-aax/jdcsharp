@@ -54,7 +54,7 @@ namespace GridMaster.Windows
         /// <summary>
         /// Histogram.
         /// </summary>
-        private Histogram Hist = null;
+        private HistogramExt Hist = null;
 
         /// <summary>
         /// Init components.
@@ -77,9 +77,29 @@ namespace GridMaster.Windows
         /// <param name="partitions_count">count of partitions</param>
         private void InitHistogram(int partitions_count)
         {
+            /*
             double[] partition_weights = Grid.PartitionsWeights(partitions_count);
             Hist = new Histogram(partition_weights.Length);
             Hist.V = partition_weights;
+            Paint();
+            */
+        }
+
+        /// <summary>
+        /// Init histogram extended.
+        /// </summary>
+        /// <param name="partitions_count">count of partitions</param>
+        private void InitHistogramExt(int partitions_count)
+        {
+            Hist = new HistogramExt(partitions_count);
+
+            for (int i = 0; i < Grid.BlocksCount; i++)
+            {
+                Lib.MathMod.Grid.Block b = Grid.Blocks[i];
+                Hist.W[b.PartitionNumber].Add(b.CellsCount);
+            }
+
+            Hist.FormV();
             Paint();
         }
 
@@ -327,6 +347,7 @@ namespace GridMaster.Windows
         /// <param name="e">parameters</param>
         private void DrawBlocksDistributionHistMI_Click(object sender, RoutedEventArgs e)
         {
+            /*
             Hist = new Histogram(5);
             Hist.V[0] = 10.0;
             Hist.V[1] = 50.0;
@@ -334,6 +355,7 @@ namespace GridMaster.Windows
             Hist.V[3] = 90.0;
             Hist.V[4] = 20.0;
             Paint();
+            */
         }
 
         /// <summary>
@@ -409,7 +431,7 @@ namespace GridMaster.Windows
             UpdateBriefGridStatistic();
             UpdateLastAction(String.Format("GU distr: {0} iters, {1}% deviation ({2}).",
                                            total_ites, cur_dev * 100.0, diag));
-            InitHistogram(partitions);
+            InitHistogramExt(partitions);
         }
     }
 }
