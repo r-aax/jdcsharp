@@ -33,6 +33,8 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         public static Block Cut(Block b, Dir d, int pos)
         {
+            CutRejectedString = null;
+
             if (b == null)
             {
                 CutRejectedString = "null block";
@@ -63,9 +65,8 @@ namespace Lib.MathMod.Grid.Cut
             {
                 CutObjects(b, d, new_b);
                 b.Grid.SetIfacesNDirs();
+                CutRejectedString = null;
             }
-
-            CutRejectedString = null;
 
             return new_b;
         }

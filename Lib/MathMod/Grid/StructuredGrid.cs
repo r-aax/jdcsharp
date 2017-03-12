@@ -341,5 +341,49 @@ namespace Lib.MathMod.Grid
                 Blocks[i].PartitionNumber = pn[i];
             }
         }
+
+        /// <summary>
+        /// Get maximum partition id.
+        /// </summary>
+        /// <returns>max partition id</returns>
+        public int GetMaxPartitionId()
+        {
+            int m = 0;
+
+            foreach (Block b in Blocks)
+            {
+                m = Math.Max(m, b.PartitionNumber);
+            }
+
+            return m;
+        }
+
+        /// <summary>
+        /// Get partitions weights.
+        /// </summary>
+        /// <param name="partitions_count">count of partitions</param>
+        /// <returns>array of partitions weights</returns>
+        public double[] PartitionsWeights(int partitions_count)
+        {
+            if (partitions_count < GetMaxPartitionId() + 1)
+            {
+                throw new Exception("not enough partitions");
+            }
+
+            double[] w = new double[partitions_count];
+
+            for (int i = 0; i < w.Length; i++)
+            {
+                w[i] = 0.0;
+            }
+
+            for (int i = 0; i < BlocksCount; i++)
+            {
+                Block b = Blocks[i];
+                w[b.PartitionNumber] += (double)b.CellsCount;
+            }
+
+            return w;
+        }
     }
 }

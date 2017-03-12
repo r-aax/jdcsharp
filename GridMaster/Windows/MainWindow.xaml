@@ -14,9 +14,11 @@
                 <Separator/>
                 <MenuItem Name="GridLoadSaveIBlankMI" IsCheckable="True" Header="Use iblank data"/>
             </MenuItem>
+            <!--
             <MenuItem Header="Draw">
                 <MenuItem Name="DrawBlocksDistributionHistMI" Header="Blocks distribution histogram" Click="DrawBlocksDistributionHistMI_Click" />
             </MenuItem>
+            -->
             <MenuItem Header="Info">
                 <MenuItem Name="InfoGridMI" Header="Grid description" Click="InfoGridMI_Click"/>
             </MenuItem>

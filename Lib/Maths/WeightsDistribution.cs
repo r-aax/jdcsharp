@@ -41,14 +41,13 @@ namespace Lib.Maths
                 weights_to_bags[0] = 0;
             }
 
-            // Sort.
-            Array.Sort(weights);
-
             for (int i = 0; i < weights.Length; i++)
             {
                 int min_ind = Arrays.MinIndex(bags_weights);
-                weights_to_bags[i] = min_ind;
-                bags_weights[min_ind] += weights[i];
+                int max_weight_ind = Arrays.MaxIndex(weights);
+                weights_to_bags[max_weight_ind] = min_ind;
+                bags_weights[min_ind] += weights[max_weight_ind];
+                weights[max_weight_ind] = 0.0;
             }
         }
     }

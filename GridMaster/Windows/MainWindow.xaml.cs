@@ -72,6 +72,18 @@ namespace GridMaster.Windows
         }
 
         /// <summary>
+        /// Init histogram.
+        /// </summary>
+        /// <param name="partitions_count">count of partitions</param>
+        private void InitHistogram(int partitions_count)
+        {
+            double[] partition_weights = Grid.PartitionsWeights(partitions_count);
+            Hist = new Histogram(partition_weights.Length);
+            Hist.V = partition_weights;
+            Paint();
+        }
+
+        /// <summary>
         /// Set brief grid statistic.
         /// </summary>
         /// <param name="stat">statistic string</param>
@@ -367,6 +379,7 @@ namespace GridMaster.Windows
             UpdateBriefGridStatistic();
             UpdateLastAction(String.Format("GU distr: {0} iters, {1}% deviation ({2}).",
                                            total_ites, cur_dev * 100.0, diag));
+            InitHistogram(partitions);
         }
     }
 }
