@@ -156,7 +156,7 @@ namespace Lib.Maths.Geometry
         /// Get clone copy.
         /// </summary>
         /// <returns>clone copy</returns>
-        public object Clone()
+        public new object Clone()
         {
             return new Interval(L, H);
         }
