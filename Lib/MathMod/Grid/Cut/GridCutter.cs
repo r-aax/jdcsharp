@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry3D;
@@ -309,12 +310,12 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void CutBConds(Block b, Dir d, Block new_b)
         {
-            StructuredGrid g = b.Grid;
-            int bc = g.BCondsCount;
-
-            for (int i = 0; i < bc; i++)
+            foreach (BCond bcond in b.Grid.BConds)
             {
-                Cut(g.BConds[i], b, d, new_b);
+                if (bcond.B == b)
+                {
+                    Cut(bcond, b, d, new_b);
+                }
             }
         }
 
@@ -326,12 +327,12 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void CutScopes(Block b, Dir d, Block new_b)
         {
-            StructuredGrid g = b.Grid;
-            int sc = g.ScopesCount;
-
-            for (int i = 0; i < sc; i++)
+            foreach (Scope scope in b.Grid.Scopes)
             {
-                Cut(g.Scopes[i], b, d, new_b);
+                if (scope.B == b)
+                {
+                    Cut(scope, b, d, new_b);
+                }
             }
         }
 
@@ -344,18 +345,12 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new interface</returns>
         public static Iface Trunc(Iface ifc, Dir d, int width)
         {
-            if (!d.IsCorrect)
-            {
-                throw new Exception("unknown direction");
-            }
+            Debug.Assert(d.IsCorrect, "unknown direction");
 
             int g = d.Gen.N;
 
             // Check iface is big enough.
-            if (!(ifc.Coords[g].Length > width))
-            {
-                throw new Exception("iface is not big enough to trunc");
-            }
+            Debug.Assert(ifc.Coords[g].Length > width, "iface is not big enough to trunc");
 
             Iface ifcc = ifc.Clone() as Iface;
 
@@ -405,20 +400,9 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void Cut(Iface i1, Iface i2, Block b, Dir d, Block new_b)
         {
-            if (!d.IsGen)
-            {
-                throw new Exception("unknown direction");
-            }
-
-            if (b != i1.B)
-            {
-                throw new Exception("trying to cut wrong interface");
-            }
-
-            if (b == i1.NB)
-            {
-                throw new Exception("trying to cut self-intersected block");
-            }
+            Debug.Assert(d.IsGen, "wrong direction");
+            Debug.Assert(b == i1.B, "trying to cut wrong interface");
+            Debug.Assert(b != i1.NB, "trying to cut self-intersected block");
 
             ISegm c = i1.Coords[d.N];
             ISegm bc = b.Coords[d.N];
@@ -468,16 +452,8 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void Cut(BCond bcond, Block b, Dir d, Block new_b)
         {
-            if (bcond.B != b)
-            {
-                // Do not cut if bcond does not touch the block.
-                return;
-            }
-
-            if (!d.IsGen)
-            {
-                throw new Exception("unknown direction");
-            }
+            Debug.Assert(d.IsGen, "wrong direction");
+            Debug.Assert(bcond.B == b, "trying to cut wrong border condition");
 
             // Get coordinates of border condition and block.
             ISegm c = bcond.Coords[d.N];
@@ -511,16 +487,8 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void Cut(Scope s, Block b, Dir d, Block new_b)
         {
-            if (s.B != b)
-            {
-                // If scope does not belong to block - do not cut it.
-                return;
-            }
-
-            if (!d.IsGen)
-            {
-                throw new Exception("unknown direction");
-            }
+            Debug.Assert(d.IsGen, "wrong direction");
+            Debug.Assert(s.B == b, "trying to cut wrong scope");
 
             // Get coordinates of scope and block.
             ISegm c = s.Coords[d.N];
