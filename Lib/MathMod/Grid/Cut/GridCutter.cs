@@ -423,9 +423,7 @@ namespace Lib.MathMod.Grid.Cut
                 // Interface splits.
                 StructuredGrid g = b.Grid;
                 int id = g.MaxIfaceId() + 1;
-                Iface ifc = i1.Clone() as Iface;
-                ifc.Id = id;
-                ifc.B = new_b;
+                Iface ifc = i1.Clone(id, new_b);
                 ifc.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
                 g.Ifaces.Add(ifc);
                 c[1] = bc[1];
@@ -473,9 +471,7 @@ namespace Lib.MathMod.Grid.Cut
             {
                 // Have to cut.
                 StructuredGrid g = b.Grid;
-                BCond new_bcond = bcond.Clone() as BCond;
-                new_bcond.Id = g.MaxBCondId() + 1;
-                new_bcond.B = new_b;
+                BCond new_bcond = bcond.Clone(g.MaxBCondId() + 1, new_b);
                 new_bcond.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
                 g.BConds.Add(new_bcond);
                 c[1] = bc[1];
@@ -508,9 +504,7 @@ namespace Lib.MathMod.Grid.Cut
             {
                 // Have to cut.
                 StructuredGrid g = b.Grid;
-                Scope scope = s.Clone() as Scope;
-                scope.Id = g.MaxScopeId() + 1;
-                scope.B = new_b;
+                Scope scope = s.Clone(g.MaxScopeId() + 1, new_b);
                 scope.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
                 g.Scopes.Add(scope);
                 c[1] = bc[1];
