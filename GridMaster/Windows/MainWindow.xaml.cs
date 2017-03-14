@@ -72,20 +72,6 @@ namespace GridMaster.Windows
         }
 
         /// <summary>
-        /// Init histogram.
-        /// </summary>
-        /// <param name="partitions_count">count of partitions</param>
-        private void InitHistogram(int partitions_count)
-        {
-            /*
-            double[] partition_weights = Grid.PartitionsWeights(partitions_count);
-            Hist = new Histogram(partition_weights.Length);
-            Hist.V = partition_weights;
-            Paint();
-            */
-        }
-
-        /// <summary>
         /// Init histogram extended.
         /// </summary>
         /// <param name="partitions_count">count of partitions</param>
@@ -205,9 +191,17 @@ namespace GridMaster.Windows
 
                     string filename_ibc = filename.Replace(extension, extension_ibc);
 
-                    GridLoaderSaverPFG.Load(Grid, filename, filename_ibc,
-                                            GridLoadSaveIBlankMI.IsChecked);
-                    UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is loaded.");
+                    if (GridLoaderSaverPFG.Load(Grid, filename, filename_ibc,
+                                                GridLoadSaveIBlankMI.IsChecked))
+                    {
+                        UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is loaded.");
+                    }
+                    else
+                    {
+                        UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") loading error.");
+                        Grid = new StructuredGrid();
+                    }
+
                     UpdateBriefGridStatistic();
                 }
                 else
@@ -338,24 +332,6 @@ namespace GridMaster.Windows
                           ? "common termination"
                           : GridCutter.CutRejectedString;
             UpdateLastAction(String.Format("Cut: {0} blocks have been cutted ({1}).", i, diag));
-        }
-
-        /// <summary>
-        /// Draw blocks distribution histogram.
-        /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">parameters</param>
-        private void DrawBlocksDistributionHistMI_Click(object sender, RoutedEventArgs e)
-        {
-            /*
-            Hist = new Histogram(5);
-            Hist.V[0] = 10.0;
-            Hist.V[1] = 50.0;
-            Hist.V[2] = 30.0;
-            Hist.V[3] = 90.0;
-            Hist.V[4] = 20.0;
-            Paint();
-            */
         }
 
         /// <summary>
