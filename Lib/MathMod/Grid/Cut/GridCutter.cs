@@ -86,9 +86,9 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="leni">length in I direction</param>
         /// <param name="lenj">length in J direction</param>
         /// <param name="lenk">length in K direction</param>
-        public static void CopyPointsBetween3DArrays(Point[,,] src,
+        public static void CopyPointsBetween3DArrays(double[,,,] src,
                                                      int srci, int srcj, int srck,
-                                                     Point[,,] dst,
+                                                     double[,,,] dst,
                                                      int dsti, int dstj, int dstk,
                                                      int leni, int lenj, int lenk)
         {
@@ -98,7 +98,9 @@ namespace Lib.MathMod.Grid.Cut
                 {
                     for (int k = 0; k < lenk; k++)
                     {
-                        dst[dsti + i, dstj + j, dstk + k] = src[srci + i, srcj + j, srck + k];
+                        dst[dsti + i, dstj + j, dstk + k, 0] = src[srci + i, srcj + j, srck + k, 0];
+                        dst[dsti + i, dstj + j, dstk + k, 1] = src[srci + i, srcj + j, srck + k, 1];
+                        dst[dsti + i, dstj + j, dstk + k, 2] = src[srci + i, srcj + j, srck + k, 2];
                     }
                 }
             }            
@@ -131,20 +133,20 @@ namespace Lib.MathMod.Grid.Cut
             //
 
             // Copy high part of the block to the new block.
-            CopyPointsBetween3DArrays(b.Nodes, pos, 0, 0, new_b.Nodes, 0, 0, 0, b.INodes - pos, b.JNodes, b.KNodes);
+            CopyPointsBetween3DArrays(b.C, pos, 0, 0, new_b.C, 0, 0, 0, b.INodes - pos, b.JNodes, b.KNodes);
 
             // Insert into blocks list.
             g.Blocks.Add(new_b);
 
             // Define duplicate of block nodes.
-            Point[,,] OldNodes = b.Nodes;
+            double[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
             b.Reshape(pos, b.J.H, b.K.H);
             b.Allocate();
 
             // Copy lower part of node to reallocated block nodes.
-            CopyPointsBetween3DArrays(OldNodes, 0, 0, 0, b.Nodes, 0, 0, 0, b.INodes, b.JNodes, b.KNodes);
+            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.INodes, b.JNodes, b.KNodes);
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
@@ -183,20 +185,20 @@ namespace Lib.MathMod.Grid.Cut
             //
 
             // Copy high part of the block to the new block.
-            CopyPointsBetween3DArrays(b.Nodes, 0, pos, 0, new_b.Nodes, 0, 0, 0, b.INodes, b.JNodes - pos, b.KNodes);
+            CopyPointsBetween3DArrays(b.C, 0, pos, 0, new_b.C, 0, 0, 0, b.INodes, b.JNodes - pos, b.KNodes);
 
             // Insert into blocks list.
             g.Blocks.Add(new_b);
 
             // Define duplicate of block nodes.
-            Point[,,] OldNodes = b.Nodes;
+            double[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
             b.Reshape(b.I.H, pos, b.K.H);
             b.Allocate();
 
             // Copy lower part of node to reallocated block nodes.
-            CopyPointsBetween3DArrays(OldNodes, 0, 0, 0, b.Nodes, 0, 0, 0, b.INodes, b.JNodes, b.KNodes);
+            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.INodes, b.JNodes, b.KNodes);
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
@@ -235,20 +237,20 @@ namespace Lib.MathMod.Grid.Cut
             //
 
             // Copy high part of the block to the new block.
-            CopyPointsBetween3DArrays(b.Nodes, 0, 0, pos, new_b.Nodes, 0, 0, 0, b.INodes, b.JNodes, b.KNodes - pos);
+            CopyPointsBetween3DArrays(b.C, 0, 0, pos, new_b.C, 0, 0, 0, b.INodes, b.JNodes, b.KNodes - pos);
 
             // Insert into blocks list.
             g.Blocks.Add(new_b);
 
             // Define duplicate of block nodes.
-            Point[,,] OldNodes = b.Nodes;
+            double[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
             b.Reshape(b.I.H, b.J.H, pos);
             b.Allocate();
 
             // Copy lower part of node to reallocated block nodes.
-            CopyPointsBetween3DArrays(OldNodes, 0, 0, 0, b.Nodes, 0, 0, 0, b.INodes, b.JNodes, b.KNodes);
+            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.INodes, b.JNodes, b.KNodes);
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();

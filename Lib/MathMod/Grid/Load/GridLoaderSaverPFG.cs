@@ -107,7 +107,7 @@ namespace Lib.MathMod.Grid.Load
 
                         // Load value.
                         double val = Double.Parse(Conv(s[i], sep));
-                        cur_block.Nodes[cur_i, cur_j, cur_k][cur_coord] = val;
+                        cur_block.C[cur_i, cur_j, cur_k, cur_coord] = val;
 
                         cur_i++;
 
@@ -436,7 +436,7 @@ namespace Lib.MathMod.Grid.Load
                                     line += " ";
                                 }
 
-                                line += String.Format("{0:0.00000000e+00}", b.Nodes[i, j, k][coord_num]);
+                                line += String.Format("{0:0.00000000e+00}", b.C[i, j, k, coord_num]);
                                 items_count++;
 
                                 if (items_count == max_items_count)

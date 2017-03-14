@@ -38,9 +38,9 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Nodes.
+        /// X coordinates of nodes.
         /// </summary>
-        public Point[,,] Nodes = null;
+        public double[,,,] C;
 
         /// <summary>
         /// Constructor from identifier and sizes.
@@ -69,7 +69,7 @@ namespace Lib.MathMod.Grid
             I.H = isize;
             J.H = jsize;
             K.H = ksize;
-            Nodes = null;
+            C = null;
         }
 
         /// <summary>
@@ -78,18 +78,7 @@ namespace Lib.MathMod.Grid
         public void Allocate()
         {
             // Allocate nodes.
-            Nodes = new Point[INodes, JNodes, KNodes];
-
-            for (int i = 0; i < INodes; i++)
-            {
-                for (int j = 0; j < JNodes; j++)
-                {
-                    for (int k = 0; k < KNodes; k++)
-                    {
-                        Nodes[i, j, k] = new Point();
-                    }
-                }
-            }
+            C = new double[INodes, JNodes, KNodes, 3];
         }
 
         /// <summary>
@@ -128,7 +117,7 @@ namespace Lib.MathMod.Grid
                 k = KSize;
             }
 
-            return Nodes[i, j, k];
+            return new Point(C[i, j, k, 0], C[i, j, k, 1], C[i, j, k, 2]);
         }
 
         /// <summary>

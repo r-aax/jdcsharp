@@ -103,7 +103,7 @@ namespace Lib.MathMod.Grid
                 k = K1;
             }
 
-            return B.Nodes[i, j, k];
+            return new Point(B.C[i, j, k, 0], B.C[i, j, k, 1], B.C[i, j, k, 2]);
         }
     }
 }
