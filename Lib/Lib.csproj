@@ -110,6 +110,7 @@
     <Compile Include="MathMod\Grid\Dir.cs" />
     <Compile Include="MathMod\Grid\Grid.cs" />
     <Compile Include="MathMod\Grid\Iface.cs" />
+    <Compile Include="MathMod\Grid\IfacesPair.cs" />
     <Compile Include="MathMod\Grid\Load\GridLoaderSaverPFG.cs" />
     <Compile Include="MathMod\Grid\Load\GridLoadSavePFGProperties.cs" />
     <Compile Include="MathMod\Grid\NamedObject.cs" />

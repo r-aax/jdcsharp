@@ -70,6 +70,22 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Clone scope with given identifier and block.
+        /// </summary>
+        /// <param name="id">new identifier</param>
+        /// <param name="b">new block</param>
+        /// <returns>new scope</returns>
+        public Scope Clone(int id, Block b)
+        {
+            Scope scope = Clone() as Scope;
+
+            scope.Id = id;
+            scope.B = b;
+
+            return scope;
+        }
+
+        /// <summary>
         /// Cast to string.
         /// </summary>
         /// <returns>string</returns>

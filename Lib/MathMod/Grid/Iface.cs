@@ -181,5 +181,21 @@ namespace Lib.MathMod.Grid
                              J.Clone() as ISegm,
                              K.Clone() as ISegm, NB);
         }
+
+        /// <summary>
+        /// Clone with identifier and block.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <param name="b">block</param>
+        /// <returns>new interface</returns>
+        public Iface Clone(int id, Block b)
+        {
+            Iface iface = Clone() as Iface;
+
+            iface.Id = id;
+            iface.B = b;
+
+            return iface;
+        }
     }
 }

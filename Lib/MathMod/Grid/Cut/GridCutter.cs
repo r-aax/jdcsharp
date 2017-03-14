@@ -310,8 +310,10 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void CutBConds(Block b, Dir d, Block new_b)
         {
-            foreach (BCond bcond in b.Grid.BConds)
+            for (int i = 0; i < b.Grid.BCondsCount; i++)
             {
+                BCond bcond = b.Grid.BConds[i];
+
                 if (bcond.B == b)
                 {
                     Cut(bcond, b, d, new_b);
@@ -327,8 +329,10 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void CutScopes(Block b, Dir d, Block new_b)
         {
-            foreach (Scope scope in b.Grid.Scopes)
+            for (int i = 0; i < b.Grid.ScopesCount; i++)
             {
+                Scope scope = b.Grid.Scopes[i];
+
                 if (scope.B == b)
                 {
                     Cut(scope, b, d, new_b);
