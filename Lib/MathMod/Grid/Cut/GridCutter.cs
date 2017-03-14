@@ -86,9 +86,9 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="leni">length in I direction</param>
         /// <param name="lenj">length in J direction</param>
         /// <param name="lenk">length in K direction</param>
-        public static void CopyPointsBetween3DArrays(double[,,,] src,
+        public static void CopyPointsBetween3DArrays(float[,,,] src,
                                                      int srci, int srcj, int srck,
-                                                     double[,,,] dst,
+                                                     float[,,,] dst,
                                                      int dsti, int dstj, int dstk,
                                                      int leni, int lenj, int lenk)
         {
@@ -139,7 +139,7 @@ namespace Lib.MathMod.Grid.Cut
             g.Blocks.Add(new_b);
 
             // Define duplicate of block nodes.
-            double[,,,] old_c = b.C;
+            float[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
             b.Reshape(pos, b.J.H, b.K.H);
@@ -191,7 +191,7 @@ namespace Lib.MathMod.Grid.Cut
             g.Blocks.Add(new_b);
 
             // Define duplicate of block nodes.
-            double[,,,] old_c = b.C;
+            float[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
             b.Reshape(b.I.H, pos, b.K.H);
@@ -243,7 +243,7 @@ namespace Lib.MathMod.Grid.Cut
             g.Blocks.Add(new_b);
 
             // Define duplicate of block nodes.
-            double[,,,] old_c = b.C;
+            float[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
             b.Reshape(b.I.H, b.J.H, pos);

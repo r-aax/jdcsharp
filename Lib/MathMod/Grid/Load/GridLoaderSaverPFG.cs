@@ -107,7 +107,7 @@ namespace Lib.MathMod.Grid.Load
 
                         // Load value.
                         double val = Double.Parse(Conv(s[i], sep));
-                        cur_block.C[cur_i, cur_j, cur_k, cur_coord] = val;
+                        cur_block.C[cur_i, cur_j, cur_k, cur_coord] = (float)val;
 
                         cur_i++;
 

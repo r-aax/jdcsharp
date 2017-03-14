@@ -40,7 +40,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// X coordinates of nodes.
         /// </summary>
-        public double[,,,] C;
+        public float[,,,] C;
 
         /// <summary>
         /// Constructor from identifier and sizes.
@@ -78,7 +78,7 @@ namespace Lib.MathMod.Grid
         public void Allocate()
         {
             // Allocate nodes.
-            C = new double[INodes, JNodes, KNodes, 3];
+            C = new float[INodes, JNodes, KNodes, 3];
         }
 
         /// <summary>
