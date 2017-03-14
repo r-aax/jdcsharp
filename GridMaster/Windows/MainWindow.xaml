@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GridMaster"
         mc:Ignorable="d"
-        Title="GridMaster" Height="450" Width="840" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
+        Title="GridMaster 2017-03-14" Height="450" Width="840" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
             <MenuItem Header="Grid">
@@ -62,7 +62,7 @@
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Min margin" Margin="10,2"/>
                         <TextBox Name="GUBlocksDistrMarginTB" Grid.Row="1" Grid.Column="1" Text="1" Margin="10,2"/>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Max iters" Width="70" Margin="10,2"/>
-                        <TextBox Name="GUBlocksDistrItersTB" Grid.Row="2" Grid.Column="1" Width="110" Text="1" Margin="10,2"/>
+                        <TextBox Name="GUBlocksDistrItersTB" Grid.Row="2" Grid.Column="1" Width="110" Text="0" Margin="10,2"/>
                         <TextBlock Grid.Row="3" Grid.Column="0" Text="Deviation %" Margin="10,2"/>
                         <TextBox Name="GUBlocksDistrDeviationTB" Grid.Row="3" Grid.Column="1" Text="10.0" Margin="10,2"/>
                         <Button Name="GUBlocksDistrB" Grid.Row="4" Grid.Column="1" Content="Go" Margin="10,2" Click="GUBlocksDistrB_Click"/>
