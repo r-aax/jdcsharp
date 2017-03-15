@@ -9,7 +9,6 @@ using System;
 using Lib.DataStruct;
 using Sea.Tools;
 using Sea.Core.Authors;
-using Sea.Core.Publishers;
 using Sea.Core.Categories;
 
 namespace Sea.Core.Books
@@ -142,10 +141,9 @@ namespace Sea.Core.Books
         /// </summary>
         /// <param name="file_name">name of file</param>
         /// <param name="authors">global authors list</param>
-        /// <param name="publishers">global publishers list</param>
         /// <param name="category_root">root of categories tree</param>
         /// <returns>data items collection</returns>
-        static public BooksList XmlDeserialize(string file_name, AuthorsList authors, PublishersList publishers, MPTTTree category_root)
+        static public BooksList XmlDeserialize(string file_name, AuthorsList authors, MPTTTree category_root)
         {
             try
             {
@@ -157,7 +155,7 @@ namespace Sea.Core.Books
 
                 foreach (Book book in books.Items)
                 {
-                    book.CorrectAfterDeserialization(authors, publishers, category_root);
+                    book.CorrectAfterDeserialization(authors, category_root);
                 }
 
                 return books;

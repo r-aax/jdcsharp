@@ -39,9 +39,6 @@ namespace Sea.Forms
         {
             // Can delete author if it is selected.
             DeleteAuthorB.Enabled = AuthorsLB.SelectedIndex > -1;
-
-            // Can delete publisher if it is selected.
-            DeletePublisherB.Enabled = PublishersLB.SelectedIndex > -1;
         }
 
         /// <summary>
@@ -196,38 +193,6 @@ namespace Sea.Forms
         }
 
         /// <summary>
-        /// Add publisher button click.
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">parameter</param>
-        private void AddPublisherB_Click(object sender, EventArgs e)
-        {
-            SelectPublisherForm form = new SelectPublisherForm();
-
-            form.ShowDialog();
-
-            if (form.IsAccepted)
-            {
-                Book.Publishers.Add(form.Publisher);
-            }
-
-            Book.Publishers.ToListBox(PublishersLB);
-            SetControlsEnable();
-        }
-
-        /// <summary>
-        /// Delete publisher button click.
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">parameter</param>
-        private void DeletePublisherB_Click(object sender, EventArgs e)
-        {
-            Book.Publishers.RemoveAt(PublishersLB.SelectedIndex);
-            Book.Publishers.ToListBox(PublishersLB);
-            SetControlsEnable();
-        }
-
-        /// <summary>
         /// Change categories button click.
         /// </summary>
         /// <param name="sender">sender</param>
@@ -275,7 +240,6 @@ namespace Sea.Forms
 
                 // Lists.
                 Book.Authors.ToListBox(AuthorsLB);
-                Book.Publishers.ToListBox(PublishersLB);
                 Book.Categories.ToListBox(CategoriesLB);
 
                 // Controls.

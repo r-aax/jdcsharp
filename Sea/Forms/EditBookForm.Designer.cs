@@ -30,11 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.DeletePublisherB = new System.Windows.Forms.Button();
             this.DeleteAuthorB = new System.Windows.Forms.Button();
-            this.AddPublisherB = new System.Windows.Forms.Button();
             this.AddAuthorB = new System.Windows.Forms.Button();
-            this.PublishersLB = new System.Windows.Forms.ListBox();
             this.AuthorsLB = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ChangeCategoriesB = new System.Windows.Forms.Button();
@@ -73,11 +70,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.DeletePublisherB);
             this.tabPage1.Controls.Add(this.DeleteAuthorB);
-            this.tabPage1.Controls.Add(this.AddPublisherB);
             this.tabPage1.Controls.Add(this.AddAuthorB);
-            this.tabPage1.Controls.Add(this.PublishersLB);
             this.tabPage1.Controls.Add(this.AuthorsLB);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -86,16 +80,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "General information";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // DeletePublisherB
-            // 
-            this.DeletePublisherB.Location = new System.Drawing.Point(648, 263);
-            this.DeletePublisherB.Name = "DeletePublisherB";
-            this.DeletePublisherB.Size = new System.Drawing.Size(100, 23);
-            this.DeletePublisherB.TabIndex = 21;
-            this.DeletePublisherB.Text = "Delete publisher";
-            this.DeletePublisherB.UseVisualStyleBackColor = true;
-            this.DeletePublisherB.Click += new System.EventHandler(this.DeletePublisherB_Click);
             // 
             // DeleteAuthorB
             // 
@@ -107,16 +91,6 @@
             this.DeleteAuthorB.UseVisualStyleBackColor = true;
             this.DeleteAuthorB.Click += new System.EventHandler(this.DeleteAuthorB_Click);
             // 
-            // AddPublisherB
-            // 
-            this.AddPublisherB.Location = new System.Drawing.Point(542, 263);
-            this.AddPublisherB.Name = "AddPublisherB";
-            this.AddPublisherB.Size = new System.Drawing.Size(100, 23);
-            this.AddPublisherB.TabIndex = 20;
-            this.AddPublisherB.Text = "Add publisher";
-            this.AddPublisherB.UseVisualStyleBackColor = true;
-            this.AddPublisherB.Click += new System.EventHandler(this.AddPublisherB_Click);
-            // 
             // AddAuthorB
             // 
             this.AddAuthorB.Location = new System.Drawing.Point(114, 263);
@@ -126,15 +100,6 @@
             this.AddAuthorB.Text = "Add author";
             this.AddAuthorB.UseVisualStyleBackColor = true;
             this.AddAuthorB.Click += new System.EventHandler(this.AddAuthorB_Click);
-            // 
-            // PublishersLB
-            // 
-            this.PublishersLB.FormattingEnabled = true;
-            this.PublishersLB.Location = new System.Drawing.Point(437, 6);
-            this.PublishersLB.Name = "PublishersLB";
-            this.PublishersLB.Size = new System.Drawing.Size(412, 251);
-            this.PublishersLB.TabIndex = 15;
-            this.PublishersLB.SelectedIndexChanged += new System.EventHandler(this.PublishersLB_SelectedIndexChanged);
             // 
             // AuthorsLB
             // 
@@ -365,7 +330,6 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button ChangeCategoriesB;
         private System.Windows.Forms.ListBox CategoriesLB;
-        private System.Windows.Forms.ListBox PublishersLB;
         private System.Windows.Forms.ListBox AuthorsLB;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -378,8 +342,6 @@
         private System.Windows.Forms.ComboBox TypeCB;
         private System.Windows.Forms.TextBox NameTB;
         private System.Windows.Forms.TextBox IdTB;
-        private System.Windows.Forms.Button DeletePublisherB;
-        private System.Windows.Forms.Button AddPublisherB;
         private System.Windows.Forms.Button DeleteAuthorB;
         private System.Windows.Forms.Button AddAuthorB;
         private System.Windows.Forms.TextBox BookFileTB;

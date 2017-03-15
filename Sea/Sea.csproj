@@ -67,10 +67,6 @@
     <Compile Include="Core\Books\BookSpecial.cs" />
     <Compile Include="Core\Books\BookType.cs" />
     <Compile Include="Core\Categories\CategoriesList.cs" />
-    <Compile Include="Core\Publishers\Publisher.cs" />
-    <Compile Include="Core\Publishers\PublishersList.cs" />
-    <Compile Include="Core\Publishers\PublishersListSpecial.cs" />
-    <Compile Include="Core\Publishers\PublisherSpecial.cs" />
     <Compile Include="Core\Sea.cs" />
     <Compile Include="Forms\EditAuthorForm.cs">
       <SubType>Form</SubType>
@@ -102,18 +98,6 @@
     <Compile Include="Forms\EditCategoriesTreeForm.Designer.cs">
       <DependentUpon>EditCategoriesTreeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\EditPublisherForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EditPublisherForm.Designer.cs">
-      <DependentUpon>EditPublisherForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\EditPublishersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\EditPublishersForm.Designer.cs">
-      <DependentUpon>EditPublishersForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -131,12 +115,6 @@
     </Compile>
     <Compile Include="Forms\SelectCategoriesForm.Designer.cs">
       <DependentUpon>SelectCategoriesForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\SelectPublisherForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SelectPublisherForm.Designer.cs">
-      <DependentUpon>SelectPublisherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -157,12 +135,6 @@
     <EmbeddedResource Include="Forms\EditCategoriesTreeForm.resx">
       <DependentUpon>EditCategoriesTreeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditPublisherForm.resx">
-      <DependentUpon>EditPublisherForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EditPublishersForm.resx">
-      <DependentUpon>EditPublishersForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -171,9 +143,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SelectCategoriesForm.resx">
       <DependentUpon>SelectCategoriesForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SelectPublisherForm.resx">
-      <DependentUpon>SelectPublisherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

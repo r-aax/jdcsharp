@@ -10,7 +10,6 @@ using System.Diagnostics;
 
 using Lib.DataStruct;
 using Sea.Core.Authors;
-using Sea.Core.Publishers;
 using Sea.Core.Categories;
 using Sea.Core.Books;
 using Sea.Tools;
@@ -26,11 +25,6 @@ namespace Sea.Core
         /// Authors list.
         /// </summary>
         public AuthorsList Authors;
-
-        /// <summary>
-        /// Publishers list.
-        /// </summary>
-        public PublishersList Publishers;
 
         /// <summary>
         /// Category root.
@@ -67,7 +61,6 @@ namespace Sea.Core
         public void Serialize()
         {
             SerializeAuthors();
-            SerializePublishers();
             SerializeCategories();
             SerializeBooks();
         }
@@ -78,14 +71,6 @@ namespace Sea.Core
         public void SerializeAuthors()
         {
             Authors.XmlSerialize(Parameters.AuthorsXMLFullFilename);
-        }
-
-        /// <summary>
-        /// Serialize publishers.
-        /// </summary>
-        public void SerializePublishers()
-        {
-            Publishers.XmlSerialize(Parameters.PublishersXMLFullFilename);
         }
 
         /// <summary>
@@ -110,7 +95,6 @@ namespace Sea.Core
         public void Deserialize()
         {
             DeserializeAuthors();
-            DeserializePublishers();
             DeserializeCategories();
             DeserializeBooks();
         }
@@ -125,19 +109,6 @@ namespace Sea.Core
             if (Authors == null)
             {
                 Authors = new AuthorsList();
-            }
-        }
-
-        /// <summary>
-        /// Deserialize publishers.
-        /// </summary>
-        public void DeserializePublishers()
-        {
-            Publishers = PublishersList.XmlDeserialize(Parameters.PublishersXMLFullFilename);
-
-            if (Publishers == null)
-            {
-                Publishers = new PublishersList();
             }
         }
 
@@ -160,7 +131,7 @@ namespace Sea.Core
         /// </summary>
         public void DeserializeBooks()
         {
-            Books = BooksList.XmlDeserialize(Parameters.BooksXMLFullFilename, Authors, Publishers, CategoryRoot);
+            Books = BooksList.XmlDeserialize(Parameters.BooksXMLFullFilename, Authors, CategoryRoot);
 
             if (Books == null)
             {
@@ -181,22 +152,6 @@ namespace Sea.Core
             else
             {
                 DeserializeAuthors();
-            }
-        }
-
-        /// <summary>
-        /// Publishers fixing.
-        /// </summary>
-        /// <param name="is_approved">approve flag</param>
-        public void FixPublishers(bool is_approved)
-        {
-            if (is_approved)
-            {
-                SerializePublishers();
-            }
-            else
-            {
-                DeserializePublishers();
             }
         }
 
@@ -333,8 +288,7 @@ namespace Sea.Core
 
                 // Check names.
                 if (!b.Name.ToLower().Contains(name_substr)
-                    || !b.Authors.Contains(author_substr, true)
-                    || !b.Publishers.Contains(publisher_substr, true))
+                    || !b.Authors.Contains(author_substr, true))
                 {
                     continue;
                 }

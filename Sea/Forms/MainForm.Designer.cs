@@ -38,7 +38,6 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.DataCategoriesMI = new System.Windows.Forms.ToolStripMenuItem();
             this.DataAuthorsMI = new System.Windows.Forms.ToolStripMenuItem();
-            this.DataPublishersMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsArchiveMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolArchiveMI = new System.Windows.Forms.ToolStripMenuItem();
             this.ToolsDearchiveMI = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,8 +111,7 @@
             this.DataBooksMI,
             this.toolStripSeparator1,
             this.DataCategoriesMI,
-            this.DataAuthorsMI,
-            this.DataPublishersMI});
+            this.DataAuthorsMI});
             this.данныеToolStripMenuItem.Name = "данныеToolStripMenuItem";
             this.данныеToolStripMenuItem.Size = new System.Drawing.Size(43, 20);
             this.данныеToolStripMenuItem.Text = "Data";
@@ -121,35 +119,28 @@
             // DataBooksMI
             // 
             this.DataBooksMI.Name = "DataBooksMI";
-            this.DataBooksMI.Size = new System.Drawing.Size(130, 22);
+            this.DataBooksMI.Size = new System.Drawing.Size(152, 22);
             this.DataBooksMI.Text = "Books";
             this.DataBooksMI.Click += new System.EventHandler(this.DataBooksMI_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // DataCategoriesMI
             // 
             this.DataCategoriesMI.Name = "DataCategoriesMI";
-            this.DataCategoriesMI.Size = new System.Drawing.Size(130, 22);
+            this.DataCategoriesMI.Size = new System.Drawing.Size(152, 22);
             this.DataCategoriesMI.Text = "Categories";
             this.DataCategoriesMI.Click += new System.EventHandler(this.DataCategoriesMI_Click);
             // 
             // DataAuthorsMI
             // 
             this.DataAuthorsMI.Name = "DataAuthorsMI";
-            this.DataAuthorsMI.Size = new System.Drawing.Size(130, 22);
+            this.DataAuthorsMI.Size = new System.Drawing.Size(152, 22);
             this.DataAuthorsMI.Text = "Authors";
             this.DataAuthorsMI.Click += new System.EventHandler(this.DataAuthorsMI_Click);
-            // 
-            // DataPublishersMI
-            // 
-            this.DataPublishersMI.Name = "DataPublishersMI";
-            this.DataPublishersMI.Size = new System.Drawing.Size(130, 22);
-            this.DataPublishersMI.Text = "Publishers";
-            this.DataPublishersMI.Click += new System.EventHandler(this.DataPublishersMI_Click);
             // 
             // ToolsArchiveMI
             // 
@@ -168,45 +159,45 @@
             // ToolArchiveMI
             // 
             this.ToolArchiveMI.Name = "ToolArchiveMI";
-            this.ToolArchiveMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolArchiveMI.Size = new System.Drawing.Size(126, 22);
             this.ToolArchiveMI.Text = "Archive";
             this.ToolArchiveMI.Click += new System.EventHandler(this.ToolArchiveMI_Click);
             // 
             // ToolsDearchiveMI
             // 
             this.ToolsDearchiveMI.Name = "ToolsDearchiveMI";
-            this.ToolsDearchiveMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolsDearchiveMI.Size = new System.Drawing.Size(126, 22);
             this.ToolsDearchiveMI.Text = "Dearchive";
             this.ToolsDearchiveMI.Click += new System.EventHandler(this.ToolsDearchiveMI_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(123, 6);
             // 
             // ToolsBackupMI
             // 
             this.ToolsBackupMI.Name = "ToolsBackupMI";
-            this.ToolsBackupMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolsBackupMI.Size = new System.Drawing.Size(126, 22);
             this.ToolsBackupMI.Text = "Backup";
             this.ToolsBackupMI.Click += new System.EventHandler(this.ToolsBackupMI_Click);
             // 
             // ToolsRestoreMI
             // 
             this.ToolsRestoreMI.Name = "ToolsRestoreMI";
-            this.ToolsRestoreMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolsRestoreMI.Size = new System.Drawing.Size(126, 22);
             this.ToolsRestoreMI.Text = "Restore";
             this.ToolsRestoreMI.Click += new System.EventHandler(this.ToolsRestoreMI_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(123, 6);
             // 
             // ToolConvertMI
             // 
             this.ToolConvertMI.Name = "ToolConvertMI";
-            this.ToolConvertMI.Size = new System.Drawing.Size(152, 22);
+            this.ToolConvertMI.Size = new System.Drawing.Size(126, 22);
             this.ToolConvertMI.Text = "Convert";
             this.ToolConvertMI.Click += new System.EventHandler(this.ToolConvertMI_Click);
             // 
@@ -417,7 +408,6 @@
         private System.Windows.Forms.MenuStrip MainMenu;
         private System.Windows.Forms.ToolStripMenuItem данныеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DataAuthorsMI;
-        private System.Windows.Forms.ToolStripMenuItem DataPublishersMI;
         private System.Windows.Forms.ToolStripMenuItem DataCategoriesMI;
         private System.Windows.Forms.ToolStripMenuItem DataBooksMI;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;

@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 
 using Lib.DataStruct;
 using Sea.Core.Authors;
-using Sea.Core.Publishers;
 using Sea.Core.Categories;
 
 namespace Sea.Core.Books
@@ -84,17 +83,6 @@ namespace Sea.Core.Books
         public List<int> AuthorsIds;
 
         /// <summary>
-        /// List of publishers.
-        /// </summary>
-        [XmlIgnore]
-        public PublishersList Publishers { get; set; }
-
-        /// <summary>
-        /// Publishers identifiers for serialization.
-        /// </summary>
-        public List<int> PublishersIds;
-
-        /// <summary>
         /// List of categories.
         /// </summary>
         [XmlIgnore]
@@ -125,7 +113,6 @@ namespace Sea.Core.Books
             Year = year;
             File = file;
             Authors = new AuthorsList();
-            Publishers = new PublishersList();
             Categories = new CategoriesList();
         }
 
@@ -191,7 +178,6 @@ namespace Sea.Core.Books
             book.Year = Year;
             book.File = File;
             book.Authors = Authors.Clone() as AuthorsList;
-            book.Publishers = Publishers.Clone() as PublishersList;
             book.Categories = Categories.Clone() as CategoriesList;
 
             return book;
@@ -286,7 +272,6 @@ namespace Sea.Core.Books
         public void PrepareToSerialization()
         {
             PrepareAuthorsIds();
-            PreparePublishersIds();
             PrepareCategoriesIds();
         }
 
@@ -300,19 +285,6 @@ namespace Sea.Core.Books
             foreach (Author author in Authors.Items)
             {
                 AuthorsIds.Add(author.Id);
-            }
-        }
-
-        /// <summary>
-        /// Prepare publishers identifiers.
-        /// </summary>
-        private void PreparePublishersIds()
-        {
-            PublishersIds = new List<int>();
-
-            foreach (Publisher publisher in Publishers.Items)
-            {
-                PublishersIds.Add(publisher.Id);
             }
         }
 
@@ -332,13 +304,11 @@ namespace Sea.Core.Books
         /// <summary>
         /// Corrects lists after deserialization.
         /// <param name="authors">global authors list</param>
-        /// <param name="publishers">global publishers list</param>
         /// <param name="category_root">global categories list</param>
         /// </summary>
-        public void CorrectAfterDeserialization(AuthorsList authors, PublishersList publishers, MPTTTree category_root)
+        public void CorrectAfterDeserialization(AuthorsList authors, MPTTTree category_root)
         {
             CorrectAuthors(authors);
-            CorrectPublishers(publishers);
             CorrectCategories(category_root);
         }
 
@@ -353,20 +323,6 @@ namespace Sea.Core.Books
             foreach (int id in AuthorsIds)
             {
                 Authors.Items.Add(authors.Find(id));
-            }
-        }
-
-        /// <summary>
-        /// Correct publishers after deserialization.
-        /// <param name="publishers">global publishers list</param>
-        /// </summary>
-        private void CorrectPublishers(PublishersList publishers)
-        {
-            Publishers = new PublishersList();
-
-            foreach (int id in PublishersIds)
-            {
-                Publishers.Items.Add(publishers.Find(id));
             }
         }
 

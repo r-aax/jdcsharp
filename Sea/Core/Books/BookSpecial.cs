@@ -5,7 +5,6 @@ using System.Xml.Serialization;
 
 using Lib.DataStruct;
 using Sea.Core.Authors;
-using Sea.Core.Publishers;
 using Sea.Core.Categories;
 
 namespace Sea.Core.Books
@@ -41,12 +40,6 @@ namespace Sea.Core.Books
         public string Keywords { get; set; }
 
         /// <summary>
-        /// Number (for magazine).
-        /// </summary>
-        [XmlIgnore]
-        public int Number { get; set; }
-
-        /// <summary>
         /// Edition number.
         /// If 0 - no edition information.
         /// </summary>
@@ -70,11 +63,6 @@ namespace Sea.Core.Books
         /// Authors identifiers for serialization.
         /// </summary>
         public List<int> AuthorsIds;
-
-        /// <summary>
-        /// Publishers identifiers for serialization.
-        /// </summary>
-        public List<int> PublishersIds;
 
         /// <summary>
         /// Categories identifiers for serialization.
@@ -102,7 +90,6 @@ namespace Sea.Core.Books
             Year = b.Year;
             File = b.File;
             AuthorsIds = b.AuthorsIds;
-            PublishersIds = b.PublishersIds;
             CategoriesIds = b.CategoriesIds;
         }
     }

@@ -11,7 +11,6 @@ using Lib.Utils;
 using Sea.Core;
 using Sea.Core.Books;
 using Sea.Core.Authors;
-using Sea.Core.Publishers;
 using Sea.Tools;
 using Sea.Core.Categories;
 
@@ -98,19 +97,6 @@ namespace Sea.Forms
         }
 
         /// <summary>
-        /// Open edit publishers form.
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">parameteres</param>
-        private void DataPublishersMI_Click(object sender, EventArgs e)
-        {
-            EditPublishersForm form = new EditPublishersForm(Sea.Publishers);
-
-            form.ShowDialog();
-            Sea.FixPublishers(form.IsAccepted);
-        }
-
-        /// <summary>
         /// Show last action.
         /// </summary>
         /// <param name="action">action description</param>
@@ -186,7 +172,6 @@ namespace Sea.Forms
         private void ToolConvertMI_Click(object sender, EventArgs e)
         {
             (new AuthorsListSpecial(Sea.Authors)).XmlSerialize(Parameters.AuthorsXMLFullFilename + ".converted");
-            (new PublishersListSpecial(Sea.Publishers)).XmlSerialize(Parameters.PublishersXMLFullFilename + ".converted");
 
             // Books serialization needs preparation.
             Sea.Books.PrepareToSerialization();

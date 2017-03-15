@@ -7,7 +7,6 @@ using System;
 using Lib.DataStruct;
 using Sea.Tools;
 using Sea.Core.Authors;
-using Sea.Core.Publishers;
 using Sea.Core.Categories;
 
 namespace Sea.Core.Books
