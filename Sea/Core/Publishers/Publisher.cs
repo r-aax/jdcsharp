@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Xml.Serialization;
 
 namespace Sea.Core.Publishers
 {
@@ -13,11 +14,13 @@ namespace Sea.Core.Publishers
         /// <summary>
         /// Identifier.
         /// </summary>
+        [XmlAttribute]
         public int Id { get; set; }
 
         /// <summary>
         /// Name of publisher.
         /// </summary>
+        [XmlAttribute]
         public string Name { get; set; }
 
         /// <summary>
