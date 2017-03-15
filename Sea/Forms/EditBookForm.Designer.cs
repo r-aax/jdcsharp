@@ -48,13 +48,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.TypeCB = new System.Windows.Forms.ComboBox();
-            this.ArticleSourceTB = new System.Windows.Forms.TextBox();
             this.NameTB = new System.Windows.Forms.TextBox();
             this.IdTB = new System.Windows.Forms.TextBox();
             this.AcceptB = new System.Windows.Forms.Button();
             this.CancelB = new System.Windows.Forms.Button();
             this.BookFileTB = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.KeywordsTB = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -188,7 +188,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 118);
+            this.label5.Location = new System.Drawing.Point(33, 119);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(29, 13);
             this.label5.TabIndex = 11;
@@ -196,14 +196,14 @@
             // 
             // EditionTB
             // 
-            this.EditionTB.Location = new System.Drawing.Point(730, 115);
+            this.EditionTB.Location = new System.Drawing.Point(730, 116);
             this.EditionTB.Name = "EditionTB";
             this.EditionTB.Size = new System.Drawing.Size(125, 20);
             this.EditionTB.TabIndex = 9;
             // 
             // YearTB
             // 
-            this.YearTB.Location = new System.Drawing.Point(58, 115);
+            this.YearTB.Location = new System.Drawing.Point(68, 116);
             this.YearTB.Name = "YearTB";
             this.YearTB.Size = new System.Drawing.Size(125, 20);
             this.YearTB.TabIndex = 8;
@@ -211,16 +211,16 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(11, 67);
+            this.label4.Location = new System.Drawing.Point(9, 68);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 13);
+            this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Source";
+            this.label4.Text = "Keywords";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 41);
+            this.label3.Location = new System.Drawing.Point(27, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 6;
@@ -238,7 +238,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 15);
+            this.label1.Location = new System.Drawing.Point(46, 16);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(16, 13);
             this.label1.TabIndex = 4;
@@ -258,24 +258,17 @@
             this.TypeCB.TabIndex = 3;
             this.TypeCB.SelectedIndexChanged += new System.EventHandler(this.TypeCB_SelectedIndexChanged);
             // 
-            // ArticleSourceTB
-            // 
-            this.ArticleSourceTB.Location = new System.Drawing.Point(58, 64);
-            this.ArticleSourceTB.Name = "ArticleSourceTB";
-            this.ArticleSourceTB.Size = new System.Drawing.Size(797, 20);
-            this.ArticleSourceTB.TabIndex = 2;
-            // 
             // NameTB
             // 
-            this.NameTB.Location = new System.Drawing.Point(58, 38);
+            this.NameTB.Location = new System.Drawing.Point(68, 38);
             this.NameTB.Name = "NameTB";
-            this.NameTB.Size = new System.Drawing.Size(797, 20);
+            this.NameTB.Size = new System.Drawing.Size(787, 20);
             this.NameTB.TabIndex = 1;
             // 
             // IdTB
             // 
             this.IdTB.Enabled = false;
-            this.IdTB.Location = new System.Drawing.Point(58, 12);
+            this.IdTB.Location = new System.Drawing.Point(68, 12);
             this.IdTB.Name = "IdTB";
             this.IdTB.Size = new System.Drawing.Size(125, 20);
             this.IdTB.TabIndex = 0;
@@ -306,20 +299,27 @@
             // 
             // BookFileTB
             // 
-            this.BookFileTB.Location = new System.Drawing.Point(58, 89);
+            this.BookFileTB.Location = new System.Drawing.Point(68, 90);
             this.BookFileTB.Name = "BookFileTB";
-            this.BookFileTB.Size = new System.Drawing.Size(797, 20);
+            this.BookFileTB.Size = new System.Drawing.Size(787, 20);
             this.BookFileTB.TabIndex = 24;
             this.BookFileTB.MouseClick += new System.Windows.Forms.MouseEventHandler(this.BookFileTB_MouseClick);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(29, 92);
+            this.label8.Location = new System.Drawing.Point(39, 93);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(23, 13);
             this.label8.TabIndex = 25;
             this.label8.Text = "File";
+            // 
+            // KeywordsTB
+            // 
+            this.KeywordsTB.Location = new System.Drawing.Point(68, 64);
+            this.KeywordsTB.Name = "KeywordsTB";
+            this.KeywordsTB.Size = new System.Drawing.Size(787, 20);
+            this.KeywordsTB.TabIndex = 26;
             // 
             // EditBookForm
             // 
@@ -327,6 +327,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(887, 513);
             this.ControlBox = false;
+            this.Controls.Add(this.KeywordsTB);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.BookFileTB);
             this.Controls.Add(this.tabControl1);
@@ -337,7 +338,6 @@
             this.Controls.Add(this.TypeCB);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.ArticleSourceTB);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.YearTB);
@@ -376,7 +376,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox TypeCB;
-        private System.Windows.Forms.TextBox ArticleSourceTB;
         private System.Windows.Forms.TextBox NameTB;
         private System.Windows.Forms.TextBox IdTB;
         private System.Windows.Forms.Button DeletePublisherB;
@@ -385,6 +384,6 @@
         private System.Windows.Forms.Button AddAuthorB;
         private System.Windows.Forms.TextBox BookFileTB;
         private System.Windows.Forms.Label label8;
-
+        private System.Windows.Forms.TextBox KeywordsTB;
     }
 }

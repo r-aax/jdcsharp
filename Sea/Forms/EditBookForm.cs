@@ -42,19 +42,6 @@ namespace Sea.Forms
 
             // Can delete publisher if it is selected.
             DeletePublisherB.Enabled = PublishersLB.SelectedIndex > -1;
-
-            // For different types of books controls enables may differ.
-            BookType book_type = IntToBookType(TypeCB.SelectedIndex);
-            bool is_magazine = book_type == BookType.Magazine;
-            bool is_article = book_type == BookType.Article;
-            ArticleSourceTB.Enabled = is_article;
-
-            // Clean not enable text boxes.
-
-            if (!ArticleSourceTB.Enabled)
-            {
-                ArticleSourceTB.Text = "";
-            }
         }
 
         /// <summary>
@@ -148,7 +135,7 @@ namespace Sea.Forms
             {
                 Book.Name = NameTB.Text;
                 Book.Type = IntToBookType(TypeCB.SelectedIndex);
-                Book.ArticleSource = ArticleSourceTB.Text;
+                Book.Keywords = KeywordsTB.Text;
                 Book.Edition = (EditionTB.Text == "") ? 0 : Convert.ToInt32(EditionTB.Text);
                 Book.Year = (YearTB.Text == "") ? 0 : Convert.ToInt32(YearTB.Text);
                 Book.File = BookFileTB.Text;
@@ -275,7 +262,7 @@ namespace Sea.Forms
                 IdTB.Text = Book.Id.ToString();
                 NameTB.Text = Book.Name;
                 TypeCB.SelectedIndex = BookTypeToInt(Book.Type);
-                ArticleSourceTB.Text = Book.ArticleSource;
+                KeywordsTB.Text = Book.Keywords;
 
                 // Year 0 is no year.
                 YearTB.Text = (Book.Year != 0) ? Book.Year.ToString() : "";

@@ -36,12 +36,10 @@ namespace Sea.Core.Books
         public BookType Type { get; set; }
 
         /// <summary>
-        /// Source of article.
-        /// (name of magazine or science conference).
+        /// Keywords.
         /// </summary>
-        [XmlIgnore]
-        public string ArticleSource { get; set; }
-
+        [XmlAttribute]
+        public string Keywords { get; set; }
 
         /// <summary>
         /// Edition number.
@@ -112,17 +110,17 @@ namespace Sea.Core.Books
         /// </summary>
         /// <param name="name">name</param>
         /// <param name="type">type</param>
-        /// <param name="article_source">source of article</param>
+        /// <param name="keywords">keywords</param>
         /// <param name="edition">edition number</param>
         /// <param name="year">year</param>
         /// <param name="file">file</param>
-        public Book(string name, BookType type, string article_source,
+        public Book(string name, BookType type, string keywords,
                     int edition, int year, string file)
         {
             Id = -1;
             Name = name;
             Type = type;
-            ArticleSource = article_source;
+            Keywords = keywords;
             Edition = edition;
             Year = year;
             File = file;
@@ -188,7 +186,7 @@ namespace Sea.Core.Books
             book.Id = Id;
             book.Name = Name;
             book.Type = Type;
-            book.ArticleSource = ArticleSource;
+            book.Keywords = Keywords;
             book.Edition = Edition;
             book.Year = Year;
             book.File = File;
