@@ -48,18 +48,12 @@ namespace Sea.Forms
             bool is_magazine = book_type == BookType.Magazine;
             bool is_article = book_type == BookType.Article;
             ArticleSourceTB.Enabled = is_article;
-            NumberTB.Enabled = is_article || is_magazine;
 
             // Clean not enable text boxes.
 
             if (!ArticleSourceTB.Enabled)
             {
                 ArticleSourceTB.Text = "";
-            }
-
-            if (!NumberTB.Enabled)
-            {
-                NumberTB.Text = "";
             }
         }
 
@@ -155,7 +149,6 @@ namespace Sea.Forms
                 Book.Name = NameTB.Text;
                 Book.Type = IntToBookType(TypeCB.SelectedIndex);
                 Book.ArticleSource = ArticleSourceTB.Text;
-                Book.Number = (NumberTB.Text == "") ? 0 : Convert.ToInt32(NumberTB.Text);
                 Book.Edition = (EditionTB.Text == "") ? 0 : Convert.ToInt32(EditionTB.Text);
                 Book.Year = (YearTB.Text == "") ? 0 : Convert.ToInt32(YearTB.Text);
                 Book.File = BookFileTB.Text;
@@ -283,7 +276,6 @@ namespace Sea.Forms
                 NameTB.Text = Book.Name;
                 TypeCB.SelectedIndex = BookTypeToInt(Book.Type);
                 ArticleSourceTB.Text = Book.ArticleSource;
-                NumberTB.Text = Book.Number.ToString();
 
                 // Year 0 is no year.
                 YearTB.Text = (Book.Year != 0) ? Book.Year.ToString() : "";

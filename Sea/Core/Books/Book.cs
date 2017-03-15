@@ -39,14 +39,9 @@ namespace Sea.Core.Books
         /// Source of article.
         /// (name of magazine or science conference).
         /// </summary>
-        [XmlAttribute]
+        [XmlIgnore]
         public string ArticleSource { get; set; }
 
-        /// <summary>
-        /// Number (for magazine).
-        /// </summary>
-        [XmlAttribute]
-        public int Number { get; set; }
 
         /// <summary>
         /// Edition number.
@@ -118,18 +113,16 @@ namespace Sea.Core.Books
         /// <param name="name">name</param>
         /// <param name="type">type</param>
         /// <param name="article_source">source of article</param>
-        /// <param name="number">number of magazie</param>
         /// <param name="edition">edition number</param>
         /// <param name="year">year</param>
         /// <param name="file">file</param>
         public Book(string name, BookType type, string article_source,
-                    int number, int edition, int year, string file)
+                    int edition, int year, string file)
         {
             Id = -1;
             Name = name;
             Type = type;
             ArticleSource = article_source;
-            Number = number;
             Edition = edition;
             Year = year;
             File = file;
@@ -142,7 +135,7 @@ namespace Sea.Core.Books
         /// Default constructor.
         /// </summary>
         public Book()
-            : this("", BookType.Book, "", 0, 0, 0, "")
+            : this("", BookType.Book, "", 0, 0, "")
         {
         }
 
@@ -196,7 +189,6 @@ namespace Sea.Core.Books
             book.Name = Name;
             book.Type = Type;
             book.ArticleSource = ArticleSource;
-            book.Number = Number;
             book.Edition = Edition;
             book.Year = Year;
             book.File = File;
@@ -246,12 +238,6 @@ namespace Sea.Core.Books
                     if (Edition > 0)
                     {
                         full_name += String.Format(" e{0}", Edition);
-                    }
-
-                    // Number of magazine.
-                    if (Type == BookType.Magazine)
-                    {
-                        full_name += String.Format(" n{0}", Number);
                     }
 
                     // Mark if is no file for book.

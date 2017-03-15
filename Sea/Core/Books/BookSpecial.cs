@@ -38,13 +38,13 @@ namespace Sea.Core.Books
         /// Source of article.
         /// (name of magazine or science conference).
         /// </summary>
-        [XmlAttribute]
+        [XmlIgnore]
         public string ArticleSource { get; set; }
 
         /// <summary>
         /// Number (for magazine).
         /// </summary>
-        [XmlAttribute]
+        [XmlIgnore]
         public int Number { get; set; }
 
         /// <summary>
@@ -99,7 +99,6 @@ namespace Sea.Core.Books
             Name = b.Name;
             Type = b.Type;
             ArticleSource = b.ArticleSource;
-            Number = b.Number;
             Edition = b.Edition;
             Year = b.Year;
             File = b.File;

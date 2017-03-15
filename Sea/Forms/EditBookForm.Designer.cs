@@ -39,8 +39,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.ChangeCategoriesB = new System.Windows.Forms.Button();
             this.CategoriesLB = new System.Windows.Forms.ListBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.NumberTB = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.EditionTB = new System.Windows.Forms.TextBox();
@@ -177,22 +175,6 @@
             this.CategoriesLB.Size = new System.Drawing.Size(865, 251);
             this.CategoriesLB.TabIndex = 0;
             this.CategoriesLB.SelectedIndexChanged += new System.EventHandler(this.CategoriesLB_SelectedIndexChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(339, 118);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(44, 13);
-            this.label7.TabIndex = 23;
-            this.label7.Text = "Number";
-            // 
-            // NumberTB
-            // 
-            this.NumberTB.Location = new System.Drawing.Point(389, 115);
-            this.NumberTB.Name = "NumberTB";
-            this.NumberTB.Size = new System.Drawing.Size(100, 20);
-            this.NumberTB.TabIndex = 22;
             // 
             // label6
             // 
@@ -348,9 +330,7 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.BookFileTB);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.CancelB);
-            this.Controls.Add(this.NumberTB);
             this.Controls.Add(this.AcceptB);
             this.Controls.Add(this.IdTB);
             this.Controls.Add(this.label1);
@@ -403,8 +383,6 @@
         private System.Windows.Forms.Button AddPublisherB;
         private System.Windows.Forms.Button DeleteAuthorB;
         private System.Windows.Forms.Button AddAuthorB;
-        private System.Windows.Forms.TextBox NumberTB;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox BookFileTB;
         private System.Windows.Forms.Label label8;
 
