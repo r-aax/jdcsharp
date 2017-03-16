@@ -1911,7 +1911,7 @@ namespace GraphMaster.Windows
                     Graph = Graph.XmlDeserialize(filename);
                     Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));
                 }
-                else if (extension.ToLower() == ".pfg")
+                else if ((extension == ".pfg") || (extension == ".PFG"))
                 {
                     LoadGraphPFGTypeSelectWindow w = new LoadGraphPFGTypeSelectWindow();
                     w.ShowDialog();
@@ -1950,9 +1950,13 @@ namespace GraphMaster.Windows
                         }
                         else if (w.IsBlocksAdjacency)
                         {
+                            string extension_ibc = (extension == ".pfg") ? ".ibc" : ".IBC";
+
                             Graph new_graph = new Graph();
 
-                            if (GraphLoaderPFG.LoadBlocksAdjacency(new_graph, filename,  filename.Replace(".pfg", ".ibc"), w.IsIBlank))
+                            if (GraphLoaderPFG.LoadBlocksAdjacency(new_graph, filename, 
+                                                                   filename.Replace(extension, extension_ibc),
+                                                                   w.IsIBlank))
                             {
                                 Graph = new_graph;
                                 Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));
