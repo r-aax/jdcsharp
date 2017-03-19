@@ -596,12 +596,13 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="b">block</param>
         /// <param name="weight">weight</param>
         /// <param name="margin">margin</param>
+        /// <param name="max_deviation">maximum deviation</param>
         /// <param name="is_full">flag if full block may to be used</param>
         /// <param name="is_cut">flag if only not null cuts are considered</param>
         /// <param name="dev">deviation</param>
         /// <returns>cut</returns>
         /// <remarks>we consider only blocks without partition  number</remarks>
-        public static Cut NearestCutOverflow(Block b, double weight, int margin,
+        public static Cut NearestCutOverflow(Block b, double weight, int margin, double max_deviation,
                                              bool is_full, bool is_cut, out double dev)
         {
             Debug.Assert(b.IsNoPartition, "block already has a partition number");
@@ -637,6 +638,14 @@ namespace Lib.MathMod.Grid.Cut
                         {
                             double cur_dev = cells_count - weight;
 
+                            if (cur_c.IsCut && (cur_dev < max_deviation))
+                            {
+                                if (!((c != null) && c.IsCut))
+                                {
+                                    continue;
+                                }
+                            }
+
                             if ((c == null) || (cur_dev < dev))
                             {
                                 c = cur_c;
@@ -657,12 +666,13 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="b">block</param>
         /// <param name="weight">weight</param>
         /// <param name="margin">margin</param>
+        /// <param name="max_deviation">maximum deviation</param>
         /// <param name="is_full">flag if full block may to be used</param>
         /// <param name="is_cut">flag if not null cuts are considered</param>
         /// <param name="dev">deviation</param>
         /// <returns>cut</returns>
         /// <remarks>we consider only blocks without partition  number</remarks>
-        public static Cut NearestCutUnderflow(Block b, double weight, int margin,
+        public static Cut NearestCutUnderflow(Block b, double weight, int margin, double max_deviation,
                                               bool is_full, bool is_cut, out double dev)
         {
             Debug.Assert(b.IsNoPartition, "block already has a partition number");
@@ -698,6 +708,14 @@ namespace Lib.MathMod.Grid.Cut
                         {
                             double cur_dev = weight - cells_count;
 
+                            if (cur_c.IsCut && (cur_dev < max_deviation))
+                            {
+                                if (!((c != null) && c.IsCut))
+                                {
+                                    continue;
+                                }
+                            }
+
                             if ((c == null) || (cur_dev < dev))
                             {
                                 c = cur_c;
@@ -717,17 +735,18 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="b">block</param>
         /// <param name="weight">weight</param>
         /// <param name="margin">margin</param>
+        /// <param name="max_deviation">maximum deviation</param>
         /// <param name="is_full">check is full blocks are used</param>
         /// <param name="is_cut">check is cuts are used</param>
         /// <param name="is_overflow">overflow flag</param>
         /// <param name="dev">deviation</param>
         /// <returns>cut</returns>
-        public static Cut NearestCut(Block b, double weight, int margin,
+        public static Cut NearestCut(Block b, double weight, int margin, double max_deviation,
                                      bool is_full, bool is_cut, bool is_overflow, out double dev)
         {
             return is_overflow
-                   ? NearestCutOverflow(b, weight, margin, is_full, is_cut, out dev)
-                   : NearestCutUnderflow(b, weight, margin, is_full, is_cut, out dev);
+                   ? NearestCutOverflow(b, weight, margin, max_deviation, is_full, is_cut, out dev)
+                   : NearestCutUnderflow(b, weight, margin, max_deviation, is_full, is_cut, out dev);
         }
 
         /// <summary>
@@ -736,12 +755,13 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="g">grid</param>
         /// <param name="weight">weight</param>
         /// <param name="margin">margin</param>
+        /// <<param name="max_deviaiton">maximum deviation</param>
         /// <param name="is_full">check if full blocks are used</param>
         /// <param name="is_cut">check if cuts are used</param>
         /// <param name="is_overflow">overflow flag</param>
         /// <param name="dev">deviation</param>
         /// <returns>cut</returns>
-        public static Cut NearestCut(StructuredGrid g, double weight, int margin,
+        public static Cut NearestCut(StructuredGrid g, double weight, int margin, double max_deviaiton,
                                      bool is_full, bool is_cut, bool is_overflow, out double dev)
         {
             Cut c = null;
@@ -750,7 +770,7 @@ namespace Lib.MathMod.Grid.Cut
             foreach (Block b in g.NoPartitionBlocks)
             {
                 double cur_dev;
-                Cut cur_c = NearestCut(b, weight, margin, is_full, is_cut, is_overflow, out cur_dev);
+                Cut cur_c = NearestCut(b, weight, margin, max_deviaiton, is_full, is_cut, is_overflow, out cur_dev);
 
                 if (cur_c != null)
                 {
@@ -771,13 +791,14 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="g">grid</param>
         /// <param name="weights">weighs</param>
         /// <param name="margin">margin</param>
+        /// <param name="max_deviation">maximum deviation</param>
         /// <param name="is_full">check if full blocks are used</param>
         /// <param name="is_cut">check if cuts are used</param>
         /// <param name="is_overflow">overflow flag</param>
         /// <param name="weight_num">number of weight</param>
         /// <param name="dev">deviation</param>
         /// <returns>cut</returns>
-        public static Cut NearestCut(StructuredGrid g, double[] weights, int margin,
+        public static Cut NearestCut(StructuredGrid g, double[] weights, int margin, double max_deviation,
                                      bool is_full, bool is_cut, bool is_overflow,
                                      out int weight_num, out double dev)
         {
@@ -788,7 +809,7 @@ namespace Lib.MathMod.Grid.Cut
             for (int i = 0; i < weights.Length; i++)
             {
                 double cur_dev;
-                Cut cur_c = NearestCut(g, weights[i], margin, is_full, is_cut, is_overflow, out cur_dev);
+                Cut cur_c = NearestCut(g, weights[i], margin, max_deviation, is_full, is_cut, is_overflow, out cur_dev);
 
                 if (cur_c != null)
                 {

@@ -420,11 +420,12 @@ namespace GridMaster.Windows
         {
             int partitions = Int32.Parse(MCCBlocksDistrPartitionsTB.Text);
             int margin = Int32.Parse(MCCBlocksDistrMarginTB.Text);
+            double max_deviation = Double.Parse(MCCBlocksDistrDeviationTB.Text) / 100.0;
 
             // Partition.
             MinimalCutsPartitioner partitioner = new MinimalCutsPartitioner(Grid);
             int blocks_before = Grid.BlocksCount;
-            partitioner.Partition(partitions, margin);
+            partitioner.Partition(partitions, margin, max_deviation);
             int blocks_after = Grid.BlocksCount;
 
             // Upfdate information.

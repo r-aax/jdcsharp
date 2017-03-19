@@ -31,6 +31,17 @@ namespace Lib.MathMod.Grid.Cut
         }
 
         /// <summary>
+        /// Check if there is a cut.
+        /// </summary>
+        public bool IsCut
+        {
+            get
+            {
+                return D != null;
+            }
+        }
+
+        /// <summary>
         /// Check if there is no cut.
         /// </summary>
         public bool IsNoCut
