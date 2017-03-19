@@ -73,6 +73,7 @@ namespace Lib.MathMod.Grid.Partitioning
                     if (c == null)
                     {
                         c = GridCutter.NearestCut(Grid, weights, margin, true, true, true, out partition, out dev);
+                        is_overflow = false;
                     }
                 }
 

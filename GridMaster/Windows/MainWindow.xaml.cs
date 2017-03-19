@@ -423,12 +423,15 @@ namespace GridMaster.Windows
 
             // Partition.
             MinimalCutsPartitioner partitioner = new MinimalCutsPartitioner(Grid);
+            int blocks_before = Grid.BlocksCount;
             partitioner.Partition(partitions, margin);
+            int blocks_after = Grid.BlocksCount;
 
             // Upfdate information.
             UpdateBriefGridStatistic();
-            UpdateLastAction(String.Format("MCC distr: TODO"));
             InitHistogramExt(partitions);
+            UpdateLastAction(String.Format("MCC distr: {0} cuts, {1}% deviation",
+                             blocks_after - blocks_before, Hist.Dev));
         }
     }
 }

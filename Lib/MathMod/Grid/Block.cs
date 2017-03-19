@@ -66,7 +66,7 @@ namespace Lib.MathMod.Grid
         {
             Grid = g;
             Id = id;
-            PartitionNumber = 0;
+            PartitionNumber = -1;
         }
 
         /// <summary>

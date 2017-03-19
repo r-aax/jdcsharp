@@ -41,6 +41,17 @@ namespace GridMaster.Tools
         }
 
         /// <summary>
+        /// Deviation.
+        /// </summary>
+        public double Dev
+        {
+            get
+            {
+                return Arrays.RelOverDeviationOfPositives(V) * 100.0;
+            }
+        }
+
+        /// <summary>
         /// Form V array from W.
         /// </summary>
         public void FormV()
@@ -123,7 +134,7 @@ namespace GridMaster.Tools
             rd.DrawLine(new Point(5.0, mh + k * mid), new Point(95.0, mh + k * mid));
             rd.DrawText(new Point(5.0, mh + k * mid + 4.0), String.Format("mid: {0}", mid), 12.0, "Courier New");
             rd.DrawText(new Point(5.0, mh + k * mid),
-                        String.Format("dev: {0}%", Arrays.RelOverDeviationOfPositives(V) * 100.0),
+                        String.Format("dev: {0}%", Dev),
                         12.0, "Courier New");
         }
     }

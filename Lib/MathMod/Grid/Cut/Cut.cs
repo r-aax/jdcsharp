@@ -92,5 +92,16 @@ namespace Lib.MathMod.Grid.Cut
                 }
             }
         }
+
+        /// <summary>
+        /// Cast to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return (D == null)
+                   ? B.ToString()
+                   : String.Format("{0}, {1}, {2}", B, D, Pos);
+        }
     }
 }
