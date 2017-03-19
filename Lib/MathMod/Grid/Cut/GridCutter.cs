@@ -588,5 +588,220 @@ namespace Lib.MathMod.Grid.Cut
 
             return CutHalf(g.MaxBlock());
         }
+
+        /// <summary>
+        /// Find nearest cut for given weight with overflow.
+        /// Weight may be not integer.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <param name="weight">weight</param>
+        /// <param name="margin">margin</param>
+        /// <param name="is_full">flag if full block may to be used</param>
+        /// <param name="is_cut">flag if only not null cuts are considered</param>
+        /// <param name="dev">deviation</param>
+        /// <returns>cut</returns>
+        /// <remarks>we consider only blocks without partition  number</remarks>
+        public static Cut NearestCutOverflow(Block b, double weight, int margin,
+                                             bool is_full, bool is_cut, out double dev)
+        {
+            Debug.Assert(b.IsNoPartition, "block already has a partition number");
+
+            Cut c = null;
+            dev = 0.0;
+
+            if (is_full)
+            {
+                Cut cur_c = new Cut(b, null, 0);
+                int cells_count = cur_c.OldBlockCellsCount;
+
+                if (cells_count > weight)
+                {
+                    // It is first cut, so we don't need checks.
+                    c = cur_c;
+                    dev = cells_count - weight;
+                }
+            }
+
+            if (is_cut)
+            {
+                for (int di = 0; di < Dir.GenCount; di++)
+                {
+                    Dir d = new Dir(di);
+
+                    for (int i = margin; i < b.Nodes(d) - margin; i++)
+                    {
+                        Cut cur_c = new Cut(b, d, i);
+                        int cells_count = cur_c.OldBlockCellsCount;
+
+                        if (cells_count > weight)
+                        {
+                            double cur_dev = cells_count - weight;
+
+                            if ((c == null) || (cur_dev < dev))
+                            {
+                                c = cur_c;
+                                dev = cur_dev;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return c;
+        }
+
+        /// <summary>
+        /// Find nearest cut for given weight with underflow.
+        /// Weight may be not integer.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <param name="weight">weight</param>
+        /// <param name="margin">margin</param>
+        /// <param name="is_full">flag if full block may to be used</param>
+        /// <param name="is_cut">flag if not null cuts are considered</param>
+        /// <param name="dev">deviation</param>
+        /// <returns>cut</returns>
+        /// <remarks>we consider only blocks without partition  number</remarks>
+        public static Cut NearestCutUnderflow(Block b, double weight, int margin,
+                                              bool is_full, bool is_cut, out double dev)
+        {
+            Debug.Assert(b.IsNoPartition, "block already has a partition number");
+
+            Cut c = null;
+            dev = 0.0;
+
+            if (is_full)
+            {
+                Cut cur_c = new Cut(b, null, 0);
+                int cells_count = cur_c.OldBlockCellsCount;
+
+                if (cells_count <= weight)
+                {
+                    // It is first cut, so we don't need checks.
+                    c = cur_c;
+                    dev = weight - cells_count;
+                }
+            }
+
+            if (is_cut)
+            {
+                for (int di = 0; di < Dir.GenCount; di++)
+                {
+                    Dir d = new Dir(di);
+
+                    for (int i = margin; i < b.Nodes(d) - margin; i++)
+                    {
+                        Cut cur_c = new Cut(b, d, i);
+                        int cells_count = cur_c.OldBlockCellsCount;
+
+                        if (cells_count <= weight)
+                        {
+                            double cur_dev = weight - cells_count;
+
+                            if ((c == null) || (cur_dev < dev))
+                            {
+                                c = cur_c;
+                                dev = cur_dev;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return c;
+        }
+
+        /// <summary>
+        /// Find nearest cut.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <param name="weight">weight</param>
+        /// <param name="margin">margin</param>
+        /// <param name="is_full">check is full blocks are used</param>
+        /// <param name="is_cut">check is cuts are used</param>
+        /// <param name="is_overflow">overflow flag</param>
+        /// <param name="dev">deviation</param>
+        /// <returns>cut</returns>
+        public static Cut NearestCut(Block b, double weight, int margin,
+                                     bool is_full, bool is_cut, bool is_overflow, out double dev)
+        {
+            return is_overflow
+                   ? NearestCutOverflow(b, weight, margin, is_full, is_cut, out dev)
+                   : NearestCutUnderflow(b, weight, margin, is_full, is_cut, out dev);
+        }
+
+        /// <summary>
+        /// Find nearest cut for grid with overflow.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="weight">weight</param>
+        /// <param name="margin">margin</param>
+        /// <param name="is_full">check if full blocks are used</param>
+        /// <param name="is_cut">check if cuts are used</param>
+        /// <param name="is_overflow">overflow flag</param>
+        /// <param name="dev">deviation</param>
+        /// <returns>cut</returns>
+        public static Cut NearestCut(StructuredGrid g, double weight, int margin,
+                                     bool is_full, bool is_cut, bool is_overflow, out double dev)
+        {
+            Cut c = null;
+            dev = 0.0;
+
+            foreach (Block b in g.NoPartitionBlocks)
+            {
+                double cur_dev;
+                Cut cur_c = NearestCut(b, weight, margin, is_full, is_cut, is_overflow, out cur_dev);
+
+                if (cur_c != null)
+                {
+                    if ((c == null) || (cur_dev < dev))
+                    {
+                        c = cur_c;
+                        dev = cur_dev;
+                    }
+                }
+            }
+
+            return c;
+        }
+
+        /// <summary>
+        /// Find cut for grid and array of weights.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="weights">weighs</param>
+        /// <param name="margin">margin</param>
+        /// <param name="is_full">check if full blocks are used</param>
+        /// <param name="is_cut">check if cuts are used</param>
+        /// <param name="is_overflow">overflow flag</param>
+        /// <param name="weight_num">number of weight</param>
+        /// <param name="dev">deviation</param>
+        /// <returns>cut</returns>
+        public static Cut NearestCut(StructuredGrid g, double[] weights, int margin,
+                                     bool is_full, bool is_cut, bool is_overflow,
+                                     out int weight_num, out double dev)
+        {
+            Cut c = null;
+            dev = 0.0;
+            weight_num = 0;
+
+            for (int i = 0; i < weights.Length; i++)
+            {
+                double cur_dev;
+                Cut cur_c = NearestCut(g, weights[i], margin, is_full, is_cut, is_overflow, out cur_dev);
+
+                if (cur_c != null)
+                {
+                    if ((c == null) || (cur_dev < dev))
+                    {
+                        c = cur_c;
+                        dev = cur_dev;
+                        weight_num = i;
+                    }
+                }
+            }
+
+            return c;
+        }
     }
 }

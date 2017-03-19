@@ -265,6 +265,16 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Nodes count in given direction.
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <returns>nodes count</returns>
+        public int Nodes(Dir d)
+        {
+            return Size(d) + 1;
+        }
+
+        /// <summary>
         /// Count of cells.
         /// </summary>
         public int CellsCount

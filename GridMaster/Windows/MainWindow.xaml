@@ -38,8 +38,27 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <GroupBox Grid.Row="0" Header="Greedy uniform blocks distribution" Margin="10,5" Width="Auto" HorizontalAlignment="Left">
+                <GroupBox Grid.Row="0" Header="Min cuts count blocks distribution" Margin="10,5" Width="Auto" HorizontalAlignment="Left">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Partitions" Margin="10,2" Width="70"/>
+                        <TextBox Name="MCCBlocksDistrPartitionsTB" Grid.Row="0" Grid.Column="1" Text="1" Margin="10,2" Width="110"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Min margin" Margin="10,2"/>
+                        <TextBox Name="MCCBlocksDistrMarginTB" Grid.Row="1" Grid.Column="1" Text="1" Margin="10,2"/>
+                        <Button Name="MCCBlocksDistrB" Grid.Row="2" Grid.Column="1" Content="Go" Margin="10,2" Click="MCCBlocksDistrB_Click"/>
+                    </Grid>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="Greedy uniform blocks distribution" Margin="10,5" Width="Auto" HorizontalAlignment="Left">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -63,7 +82,7 @@
                         <Button Name="GUBlocksDistrB" Grid.Row="4" Grid.Column="1" Content="Go" Margin="10,2" Click="GUBlocksDistrB_Click"/>
                     </Grid>
                 </GroupBox>
-                <GroupBox Grid.Row="1" Header="Cut half max block" Margin="10,5" Width="Auto" HorizontalAlignment="Left">
+                <GroupBox Grid.Row="2" Header="Cut half max block" Margin="10,5" Width="Auto" HorizontalAlignment="Left">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
@@ -81,7 +100,7 @@
                         <Button x:Name="CutHalfMaxBlockB" Grid.Row="2" Grid.Column="1" Content="Cut" Margin="10,2" Click="CutHalfMaxBlockB_Click"/>
                     </Grid>
                 </GroupBox>
-                <GroupBox Grid.Row="2" Header="Cut single block" Margin="10,5" Width="Auto" HorizontalAlignment="Left">
+                <GroupBox Grid.Row="3" Header="Cut single block" Margin="10,5" Width="Auto" HorizontalAlignment="Left">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>

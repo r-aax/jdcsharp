@@ -23,6 +23,7 @@ using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 using GridMaster.Tools;
 using Lib.Maths;
 using Lib.Utils;
+using Lib.MathMod.Grid.Partitioning;
 
 namespace GridMaster.Windows
 {
@@ -407,6 +408,26 @@ namespace GridMaster.Windows
             UpdateBriefGridStatistic();
             UpdateLastAction(String.Format("GU distr: {0} iters, {1}% deviation ({2}).",
                                            total_ites, cur_dev * 100.0, diag));
+            InitHistogramExt(partitions);
+        }
+
+        /// <summary>
+        /// Minimal cuts count blocks distribution.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void MCCBlocksDistrB_Click(object sender, RoutedEventArgs e)
+        {
+            int partitions = Int32.Parse(MCCBlocksDistrPartitionsTB.Text);
+            int margin = Int32.Parse(MCCBlocksDistrMarginTB.Text);
+
+            // Partition.
+            MinimalCutsPartitioner partitioner = new MinimalCutsPartitioner(Grid);
+            partitioner.Partition(partitions, margin);
+
+            // Upfdate information.
+            UpdateBriefGridStatistic();
+            UpdateLastAction(String.Format("MCC distr: TODO"));
             InitHistogramExt(partitions);
         }
     }

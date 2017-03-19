@@ -23,6 +23,17 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// List of blocks without partitions.
+        /// </summary>
+        public List<Block> NoPartitionBlocks
+        {
+            get
+            {
+                return Blocks.FindAll(b => b.IsNoPartition);
+            }
+        }
+
+        /// <summary>
         /// Count of blocks.
         /// </summary>
         public int BlocksCount

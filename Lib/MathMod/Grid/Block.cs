@@ -38,6 +38,17 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Check if there is no partition.
+        /// </summary>
+        public bool IsNoPartition
+        {
+            get
+            {
+                return PartitionNumber < 0;
+            }
+        }
+
+        /// <summary>
         /// X coordinates of nodes.
         /// </summary>
         public float[,,,] C;
