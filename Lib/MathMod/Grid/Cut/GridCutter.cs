@@ -610,21 +610,16 @@ namespace Lib.MathMod.Grid.Cut
             Cut c = null;
             dev = 0.0;
 
-            if (is_full)
+            if (is_full && (b.CellsCount > weight))
             {
-                Cut cur_c = new Cut(b, null, 0);
-                int cells_count = cur_c.OldBlockCellsCount;
-
-                if (cells_count > weight)
-                {
-                    // It is first cut, so we don't need checks.
-                    c = cur_c;
-                    dev = cells_count - weight;
-                }
+                c = new Cut(b, null, 0);
+                dev = b.CellsCount - weight;
             }
 
             if (is_cut)
             {
+                bool is_allow_small_deviation_cut = false;
+
                 for (int di = 0; di < Dir.GenCount; di++)
                 {
                     Dir d = new Dir(di);
@@ -638,18 +633,16 @@ namespace Lib.MathMod.Grid.Cut
                         {
                             double cur_dev = cells_count - weight;
 
-                            if (cur_c.IsCut && (cur_dev < max_deviation))
+                            if ((cur_dev < max_deviation) && !is_allow_small_deviation_cut)
                             {
-                                if (!((c != null) && c.IsCut))
-                                {
-                                    continue;
-                                }
+                                continue;
                             }
 
                             if ((c == null) || (cur_dev < dev))
                             {
                                 c = cur_c;
                                 dev = cur_dev;
+                                is_allow_small_deviation_cut = true;
                             }
                         }
                     }
@@ -680,21 +673,16 @@ namespace Lib.MathMod.Grid.Cut
             Cut c = null;
             dev = 0.0;
 
-            if (is_full)
+            if (is_full && (b.CellsCount <= weight))
             {
-                Cut cur_c = new Cut(b, null, 0);
-                int cells_count = cur_c.OldBlockCellsCount;
-
-                if (cells_count <= weight)
-                {
-                    // It is first cut, so we don't need checks.
-                    c = cur_c;
-                    dev = weight - cells_count;
-                }
+                c = new Cut(b, null, 0);
+                dev = weight - b.CellsCount;
             }
 
             if (is_cut)
             {
+                bool is_allow_small_deviation_cut = false;
+
                 for (int di = 0; di < Dir.GenCount; di++)
                 {
                     Dir d = new Dir(di);
@@ -708,18 +696,16 @@ namespace Lib.MathMod.Grid.Cut
                         {
                             double cur_dev = weight - cells_count;
 
-                            if (cur_c.IsCut && (cur_dev < max_deviation))
+                            if ((cur_dev < max_deviation) && !is_allow_small_deviation_cut)
                             {
-                                if (!((c != null) && c.IsCut))
-                                {
-                                    continue;
-                                }
+                                continue;
                             }
 
                             if ((c == null) || (cur_dev < dev))
                             {
                                 c = cur_c;
                                 dev = cur_dev;
+                                is_allow_small_deviation_cut = true;
                             }
                         }
                     }
