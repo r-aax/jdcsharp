@@ -425,15 +425,17 @@ namespace Lib.MathMod.Grid
         /// <returns>border condition</returns>
         public BCond FindBCond(int id)
         {
-            foreach (BCond bcond in BConds)
-            {
-                if (bcond.Id == id)
-                {
-                    return bcond;
-                }
-            }
+            return BConds.Find(bc => (bc.Id == id));
+        }
 
-            return null;
+        /// <summary>
+        /// Find border condition link.
+        /// </summary>
+        /// <param name="bcond">border condition</param>
+        /// <returns>border condition link</returns>
+        public BCondsLink FindBCondLink(BCond bcond)
+        {
+            return BCondsLinks.Find(bcl => ((bcl.BCond1 == bcond) || (bcl.BCond2 == bcond)));
         }
     }
 }

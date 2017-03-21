@@ -477,6 +477,16 @@ namespace Lib.MathMod.Grid.Cut
                 new_bcond.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
                 g.BConds.Add(new_bcond);
                 c[1] = bc[1];
+
+                // Now we have to correct bconds if just cutted border condition
+                // is in some border condition link.
+
+                BCondsLink bcl = g.FindBCondLink(bcond);
+
+                if (bcl != null)
+                {
+                    bcl.CutLinkedBCond(bcond, d, c[1] - c[0]);
+                }
             }
         }
 

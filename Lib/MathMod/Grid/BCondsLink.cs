@@ -84,5 +84,56 @@ namespace Lib.MathMod.Grid
                 LDirs21[LDirs12[n].N] = Dir.Dirs[n];
             }
         }
+
+        /// <summary>
+        /// Cut linked border condition.
+        /// </summary>
+        /// <param name="bcond">border condition</param>
+        /// <param name="d">direction</param>
+        /// <param name="pos">position</param>
+        public void CutLinkedBCond(BCond bcond, Dir d, int pos)
+        {
+            StructuredGrid g = bcond.B.Grid;
+            BCond link;
+            Dir link_d;
+
+            if (bcond == BCond1)
+            {
+                link = BCond2;
+                link_d = LDirs12[d.N];
+            }
+            else if (bcond == BCond2)
+            {
+                link = BCond1;
+                link_d = LDirs21[d.N];
+            }
+            else
+            {
+                throw new Exception("border condition is not found in BCondsLink");
+            }
+
+            // Cut link in link_d direction in pos position.
+            BCond new_bcond = link.Clone(g.MaxBCondId() + 1, link.B);
+
+            // Coordinates change.
+            // link: [d0 : d1] --> [d0 : d0 + pos]
+            // new_bcond : [d0 + pos :  d1]
+            int d0 = link.Coords[link_d.N][0];
+            int d1 = link.Coords[link_d.N][1];
+            link.Coords[link_d.N] = new Maths.Geometry.ISegm(d0, d0 + pos);
+            new_bcond.Coords[link_d.N] = new Maths.Geometry.ISegm(d0 + pos, d1);
+            g.BConds.Add(new_bcond);
+        }
+
+        /// <summary>
+        /// Cast to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("    : {0, 4} -- {1, 4} [{2}, {3}, {4}, {5}, {6}, {7}]",
+                                 BCond1.Id, BCond2.Id,
+                                 LDirs12[0], LDirs12[1], LDirs12[2], LDirs12[3], LDirs12[4], LDirs12[5]);
+        }
     }
 }

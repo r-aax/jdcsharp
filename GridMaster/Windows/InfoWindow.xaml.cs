@@ -87,6 +87,13 @@ namespace GridMaster.Windows
             {
                 LinesLB.Items.Add(" " + g.Scopes[i].ToString());
             }
+
+            // Border conditions links descriptions.
+            LinesLB.Items.Add("BCondsLinks:");
+            for (int i = 0; i < g.BCondsLinksCount; i++)
+            {
+                LinesLB.Items.Add(" " + g.BCondsLinks[i].ToString());
+            }
         }
 
         /// <summary>
