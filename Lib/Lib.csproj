@@ -102,6 +102,7 @@
     <Compile Include="GUI\WPF\EditIntIntWindow.xaml.cs">
       <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IO\File.cs" />
     <Compile Include="MathMod\Grid\BCond.cs" />
     <Compile Include="MathMod\Grid\Block.cs" />
     <Compile Include="MathMod\Grid\Border.cs" />

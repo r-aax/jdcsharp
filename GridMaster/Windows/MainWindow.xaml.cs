@@ -25,6 +25,7 @@ using Lib.Maths;
 using Lib.Utils;
 using Lib.MathMod.Grid.Partitioning;
 using Lib.DataStruct;
+using Lib.IO;
 
 namespace GridMaster.Windows
 {
@@ -172,22 +173,20 @@ namespace GridMaster.Windows
         private void GridLoadMI_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
-            string filename, extension;
 
             ofd.Filter = "PFG (*.PFG, *.pfg)|*.pfg";
 
             if (ofd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                filename = ofd.FileName;
-                extension = System.IO.Path.GetExtension(filename);
+                File f = new File(ofd);
 
-                if ((extension == ".pfg") || (extension == ".PFG"))
+                if ((f.Ext == ".pfg") || (f.Ext == ".PFG"))
                 {
                     string extension_ibc;
 
                     LoadPFGProps = new GridLoadSavePFGProperties();
 
-                    if (extension == ".pfg")
+                    if (f.Ext == ".pfg")
                     {
                         extension_ibc = ".ibc";
                         LoadPFGProps.IsExtensionUppercase = false;
@@ -198,16 +197,16 @@ namespace GridMaster.Windows
                         LoadPFGProps.IsExtensionUppercase = true;
                     }
 
-                    string filename_ibc = filename.Replace(extension, extension_ibc);
+                    string filename_ibc = f.Name.Replace(f.Ext, extension_ibc);
 
-                    if (GridLoaderSaverPFG.Load(Grid, filename, filename_ibc,
+                    if (GridLoaderSaverPFG.Load(Grid, f.Name, filename_ibc,
                                                 GridLoadSaveIBlankMI.IsChecked))
                     {
-                        UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is loaded.");
+                        UpdateLastAction("Grid " + f.Name + " (and *" + extension_ibc + ") is loaded.");
                     }
                     else
                     {
-                        UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") loading error.");
+                        UpdateLastAction("Grid " + f.Name + " (and *" + extension_ibc + ") loading error.");
                         Grid = new StructuredGrid();
                     }
 
