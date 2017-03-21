@@ -24,6 +24,7 @@ using GridMaster.Tools;
 using Lib.Maths;
 using Lib.Utils;
 using Lib.MathMod.Grid.Partitioning;
+using Lib.DataStruct;
 
 namespace GridMaster.Windows
 {
@@ -58,6 +59,11 @@ namespace GridMaster.Windows
         private HistogramExt Hist = null;
 
         /// <summary>
+        /// Log.
+        /// </summary>
+        private StringsList Log = null;
+
+        /// <summary>
         /// Init components.
         /// </summary>
         public MainWindow()
@@ -67,6 +73,7 @@ namespace GridMaster.Windows
             // Create empty grid.
             Grid = new StructuredGrid();
             LoadPFGProps = null;
+            Log = new StringsList();
 
             // Initial statistics.
             UpdateBriefGridStatistic();
@@ -106,6 +113,7 @@ namespace GridMaster.Windows
         public void UpdateLastAction(string last_action)
         {
             LastActionTB.Text = last_action;
+            Log.Add(last_action);
         }
 
         /// <summary>
@@ -433,6 +441,18 @@ namespace GridMaster.Windows
             InitHistogramExt(partitions);
             UpdateLastAction(String.Format("MCC distr: {0} cuts, {1}% deviation",
                              blocks_after - blocks_before, Hist.Dev));
+        }
+
+        /// <summary>
+        /// Show information click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void InfoLogMI_Click(object sender, RoutedEventArgs e)
+        {
+            InfoWindow w = new InfoWindow("Log");
+            Log.FillListBox(w.LinesLB);
+            w.ShowDialog();
         }
     }
 }

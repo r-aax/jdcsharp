@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using System.Xml.Serialization;
 using System.Windows.Forms;
+using System.Windows.Controls;
 
 namespace Lib.DataStruct
 {
@@ -27,16 +28,29 @@ namespace Lib.DataStruct
         }
 
         /// <summary>
-        /// Create from ListBox.
+        /// Create from <c>ListBox</c>.
         /// </summary>
-        /// <param name="list_box"><c>ListBox object</c></param>
-        public StringsList(ListBox list_box)
+        /// <param name="list_box"><c>ListBox</c> object</param>
+        public StringsList(System.Windows.Forms.ListBox list_box)
             : this()
         {
             for (int i = 0; i < list_box.Items.Count; i++)
             {
                 Add(list_box.Items[i] as string);
             }
+        }
+
+        /// <summary>
+        /// Create from <c>ListBox</c>.
+        /// </summary>
+        /// <param name="list_box"><c>ListBox</c> object</param>
+        public StringsList(System.Windows.Controls.ListBox list_box)
+            : this()
+        {
+            for (int i = 0; i < list_box.Items.Count; i++)
+            {
+                Add(list_box.Items[i] as string);
+            }       
         }
 
         /// <summary>
@@ -81,7 +95,21 @@ namespace Lib.DataStruct
         /// Fill <c>ListBox</c> with strings elements.
         /// </summary>
         /// <param name="list_box"><c>ListBox</c></param>
-        public void FillListBox(ListBox list_box)
+        public void FillListBox(System.Windows.Forms.ListBox list_box)
+        {
+            list_box.Items.Clear();
+
+            for (int i = 0; i < Count; i++)
+            {
+                list_box.Items.Add(Items[i]);
+            }
+        }
+
+        /// <summary>
+        /// Fill <c>ListBox</c> with strings elements.
+        /// </summary>
+        /// <param name="list_box"><c>ListBox</c></param>
+        public void FillListBox(System.Windows.Controls.ListBox list_box)
         {
             list_box.Items.Clear();
 
