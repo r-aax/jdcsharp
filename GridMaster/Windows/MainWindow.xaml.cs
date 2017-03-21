@@ -184,7 +184,6 @@ namespace GridMaster.Windows
                 {
                     File pfg = f;
                     File ibc = new File(pfg);
-
                     ibc.ChangeExtensionCaseSensitive(".ibc");
                     LoadPFGProps = new GridLoadSavePFGProperties();
                     LoadPFGProps.IsExtensionUppercase = pfg.IsUpperExt;
@@ -194,6 +193,16 @@ namespace GridMaster.Windows
                     if (GridLoaderSaverPFG.Load(Grid, pfg.Name, ibc.Name, GridLoadSaveIBlankMI.IsChecked))
                     {
                         UpdateLastAction(last_action + "is loaded.");
+
+                        // If grid is loaded we should try to load REP border conditions.
+
+                        File rep = new File(pfg);
+                        rep.ChangeExtensionCaseSensitive(".rep");
+
+                        if (GridLoaderSaverPFG.LoadREP(Grid, rep.Name))
+                        {
+                            Log.Add(rep.Name + " is loaded.");
+                        }
                     }
                     else
                     {

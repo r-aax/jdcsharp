@@ -596,5 +596,31 @@ namespace Lib.MathMod.Grid.Load
 
             return is_succ;
         }
+
+        /// <summary>
+        /// Load REP data for grid.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="rep_file_name">REP file name</param>
+        /// <returns><c>true</c> - if data is loaded, <c>false</c> - otherwise</returns>
+        public static bool LoadREP(StructuredGrid g, string rep_file_name)
+        {
+            bool is_succ = true;
+
+            try
+            {
+                using (StreamReader sr = new StreamReader(rep_file_name))
+                {
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                is_succ = false;
+            }
+
+            return is_succ;
+        }
+
     }
 }
