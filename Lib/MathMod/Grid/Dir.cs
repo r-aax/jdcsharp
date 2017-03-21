@@ -117,6 +117,42 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Constructor from string.
+        /// </summary>
+        /// <param name="s">direction string representation</param>
+        public Dir(string s)
+        {
+            if (s == "I+")
+            {
+                N = I1N;
+            }
+            else if (s == "J+")
+            {
+                N = J1N;
+            }
+            else if (s == "K+")
+            {
+                N = K1N;
+            }
+            else if (s == "I-")
+            {
+                N = I0N;
+            }
+            else if (s == "J-")
+            {
+                N = J0N;
+            }
+            else if (s == "K-")
+            {
+                N = K0N;
+            }
+            else
+            {
+                throw new Exception("wrong direction string representation");
+            }
+        }
+
+        /// <summary>
         /// General direction I.
         /// </summary>
         public static readonly Dir I = new Dir(IN);

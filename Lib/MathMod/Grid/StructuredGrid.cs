@@ -85,6 +85,26 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// List of border conditions links.
+        /// </summary>
+        public List<BCondsLink> BCondsLinks
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Count of border conditions links.
+        /// </summary>
+        public int BCondsLinksCount
+        {
+            get
+            {
+                return BCondsLinks.Count;
+            }
+        }
+
+        /// <summary>
         /// Scopes list.
         /// </summary>
         public List<Scope> Scopes
@@ -112,6 +132,7 @@ namespace Lib.MathMod.Grid
             Blocks = new List<Block>();
             Ifaces = new List<Iface>();
             BConds = new List<BCond>();
+            BCondsLinks = new List<BCondsLink>();
             Scopes = new List<Scope>();
         }
 
@@ -395,6 +416,24 @@ namespace Lib.MathMod.Grid
             }
 
             return w;
+        }
+
+        /// <summary>
+        /// Find border condition by identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>border condition</returns>
+        public BCond FindBCond(int id)
+        {
+            foreach (BCond bcond in BConds)
+            {
+                if (bcond.Id == id)
+                {
+                    return bcond;
+                }
+            }
+
+            return null;
         }
     }
 }

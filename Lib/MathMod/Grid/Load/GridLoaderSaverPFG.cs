@@ -611,10 +611,37 @@ namespace Lib.MathMod.Grid.Load
             {
                 using (StreamReader sr = new StreamReader(rep_file_name))
                 {
-                    return true;
+                    string line = sr.ReadLine();
+
+                    while (line != null)
+                    {
+                        string[] s = line.Split(' ');
+
+                        int bcid1 = Int32.Parse(s[0]);
+                        int bcid2 = Int32.Parse(s[1]);
+                        string i1s = s[2];
+                        string j1s = s[3];
+                        string k1s = s[4];
+                        string i0s = s[5];
+                        string j0s = s[6];
+                        string k0s = s[7];
+
+                        BCond bc1 = g.FindBCond(bcid1);
+                        BCond bc2 = g.FindBCond(bcid2);
+                        BCondsLink link = new BCondsLink(bc1, bc2,
+                                                         new Dir(i1s),
+                                                         new Dir(j1s),
+                                                         new Dir(k1s),
+                                                         new Dir(i0s),
+                                                         new Dir(j0s),
+                                                         new Dir(k0s));
+                        g.BCondsLinks.Add(link);
+
+                        line = sr.ReadLine();
+                    }
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 is_succ = false;
             }

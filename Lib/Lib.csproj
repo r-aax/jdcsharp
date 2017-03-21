@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="IO\File.cs" />
     <Compile Include="MathMod\Grid\BCond.cs" />
+    <Compile Include="MathMod\Grid\BCondsLink.cs" />
     <Compile Include="MathMod\Grid\Block.cs" />
     <Compile Include="MathMod\Grid\Border.cs" />
     <Compile Include="MathMod\Grid\Cut\Cut.cs" />
