@@ -182,31 +182,22 @@ namespace GridMaster.Windows
 
                 if ((f.Ext == ".pfg") || (f.Ext == ".PFG"))
                 {
-                    string extension_ibc;
+                    File pfg = f;
+                    File ibc = new File(pfg);
 
+                    ibc.ChangeExtensionCaseSensitive(".ibc");
                     LoadPFGProps = new GridLoadSavePFGProperties();
+                    LoadPFGProps.IsExtensionUppercase = pfg.IsUpperExt;
 
-                    if (f.Ext == ".pfg")
+                    string last_action = "Grid " + pfg.Name + " (and *" + ibc.Ext + ") ";
+
+                    if (GridLoaderSaverPFG.Load(Grid, pfg.Name, ibc.Name, GridLoadSaveIBlankMI.IsChecked))
                     {
-                        extension_ibc = ".ibc";
-                        LoadPFGProps.IsExtensionUppercase = false;
+                        UpdateLastAction(last_action + "is loaded.");
                     }
                     else
                     {
-                        extension_ibc = ".IBC";
-                        LoadPFGProps.IsExtensionUppercase = true;
-                    }
-
-                    string filename_ibc = f.Name.Replace(f.Ext, extension_ibc);
-
-                    if (GridLoaderSaverPFG.Load(Grid, f.Name, filename_ibc,
-                                                GridLoadSaveIBlankMI.IsChecked))
-                    {
-                        UpdateLastAction("Grid " + f.Name + " (and *" + extension_ibc + ") is loaded.");
-                    }
-                    else
-                    {
-                        UpdateLastAction("Grid " + f.Name + " (and *" + extension_ibc + ") loading error.");
+                        UpdateLastAction(last_action + "loading error.");
                         Grid = new StructuredGrid();
                     }
 

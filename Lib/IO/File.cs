@@ -56,5 +56,47 @@ namespace Lib.IO
             : this(fd.FileName)
         {
         }
+
+        /// <summary>
+        /// Copy constructor.
+        /// </summary>
+        /// <param name="f">file</param>
+        public File(File f)
+            : this(f.Name)
+        {
+        }
+
+        /// <summary>
+        /// Check if extension lowercase.
+        /// Really we check only first letter.
+        /// </summary>
+        public bool IsLowerExt
+        {
+            get
+            {
+                return Char.IsLower(Ext[1]);
+            }
+        }
+
+        /// <summary>
+        /// Check if extension uppercase.
+        /// Really we check only first letter.
+        /// </summary>
+        public bool IsUpperExt
+        {
+            get
+            {
+                return Char.IsUpper(Ext[1]);
+            }
+        }      
+
+        /// <summary>
+        /// Change extension.
+        /// </summary>
+        /// <param name="ext">extension</param>
+        public void ChangeExtensionCaseSensitive(string ext)
+        {
+            Name = Name.Replace(Ext, IsUpperExt ? ext.ToUpper() : ext.ToLower());
+        }
     }
 }
