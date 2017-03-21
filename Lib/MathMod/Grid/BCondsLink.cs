@@ -123,6 +123,26 @@ namespace Lib.MathMod.Grid
             link.Coords[link_d.N] = new Maths.Geometry.ISegm(d0, d0 + pos);
             new_bcond.Coords[link_d.N] = new Maths.Geometry.ISegm(d0 + pos, d1);
             g.BConds.Add(new_bcond);
+
+            // Add two last border conditions to BCondsLinks list.
+            if (bcond == BCond1)
+            {
+                int ind = g.BCondsCount;
+                BCondsLink bcl = new BCondsLink(g.BConds[ind - 2], g.BConds[ind - 1],
+                                                LDirs12[0], LDirs12[1], LDirs12[2], LDirs12[3], LDirs12[4], LDirs12[5]);
+                g.BCondsLinks.Add(bcl);
+            }
+            else if (bcond == BCond2)
+            {
+                int ind = g.BCondsCount;
+                BCondsLink bcl = new BCondsLink(g.BConds[ind - 1], g.BConds[ind - 2],
+                                                LDirs12[0], LDirs12[1], LDirs12[2], LDirs12[3], LDirs12[4], LDirs12[5]);
+                g.BCondsLinks.Add(bcl);
+            }
+            else
+            {
+                throw new Exception("border condition is not found in BCondsLink");
+            }
         }
 
         /// <summary>
