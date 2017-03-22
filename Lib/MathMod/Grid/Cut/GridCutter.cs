@@ -473,10 +473,10 @@ namespace Lib.MathMod.Grid.Cut
             {
                 // Have to cut.
                 StructuredGrid g = b.Grid;
-                BCond new_bcond = bcond.Clone(g.MaxBCondId() + 1, new_b);
-                new_bcond.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
+                BCond new_bcond = BCondCutter.Cut(bcond, d, bc[1]);
+                new_bcond.B = new_b;
+                new_bcond.Coords[d.N].DecTo0();
                 g.BConds.Add(new_bcond);
-                c[1] = bc[1];
 
                 // Now we have to correct bconds if just cutted border condition
                 // is in some border condition link.
@@ -485,7 +485,7 @@ namespace Lib.MathMod.Grid.Cut
 
                 if (bcl != null)
                 {
-                    bcl.CutLinkedBCond(bcond, d, c[1] - c[0]);
+                    bcl.TruncLinkedBCond(bcond, d, bcond.Size(d));
                 }
             }
         }

@@ -68,6 +68,16 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Clone border condition with given identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>new border condition</returns>
+        public BCond Clone(int id)
+        {
+            return Clone(id, B);
+        }
+
+        /// <summary>
         /// Clone border condition with given identifier and block.
         /// </summary>
         /// <param name="id">new identifier</param>

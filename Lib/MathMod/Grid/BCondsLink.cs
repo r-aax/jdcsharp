@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Lib.MathMod.Grid.Cut;
+
 namespace Lib.MathMod.Grid
 {
     /// <summary>
@@ -90,8 +92,8 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="bcond">border condition</param>
         /// <param name="d">direction</param>
-        /// <param name="pos">position</param>
-        public void CutLinkedBCond(BCond bcond, Dir d, int pos)
+        /// <param name="width">position</param>
+        public void TruncLinkedBCond(BCond bcond, Dir d, int width)
         {
             StructuredGrid g = bcond.B.Grid;
             BCond link;
@@ -112,16 +114,7 @@ namespace Lib.MathMod.Grid
                 throw new Exception("border condition is not found in BCondsLink");
             }
 
-            // Cut link in link_d direction in pos position.
-            BCond new_bcond = link.Clone(g.MaxBCondId() + 1, link.B);
-
-            // Coordinates change.
-            // link: [d0 : d1] --> [d0 : d0 + pos]
-            // new_bcond : [d0 + pos :  d1]
-            int d0 = link.Coords[link_d.N][0];
-            int d1 = link.Coords[link_d.N][1];
-            link.Coords[link_d.N] = new Maths.Geometry.ISegm(d0, d0 + pos);
-            new_bcond.Coords[link_d.N] = new Maths.Geometry.ISegm(d0 + pos, d1);
+            BCond new_bcond = BCondCutter.Trunc(link, link_d, width);
             g.BConds.Add(new_bcond);
 
             // Add two last border conditions to BCondsLinks list.

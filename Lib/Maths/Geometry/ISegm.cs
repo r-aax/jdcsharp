@@ -62,6 +62,14 @@ namespace Lib.Maths.Geometry
         }
 
         /// <summary>
+        /// Decrement to zero lower value.
+        /// </summary>
+        public void DecTo0()
+        {
+            Dec(L);
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>copy</returns>
