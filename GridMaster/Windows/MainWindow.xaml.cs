@@ -463,5 +463,45 @@ namespace GridMaster.Windows
             Log.FillListBox(w.LinesLB);
             w.ShowDialog();
         }
+
+        /// <summary>
+        /// Save picture click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ToolsSavePictireMI_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            string filename = null;
+
+            sfd.Filter = "Pictures (*.png)|*.png";
+
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                filename = sfd.FileName;
+
+                Transform transform = DrawAreaC.LayoutTransform;
+                DrawAreaC.LayoutTransform = null;
+                Size size = new Size(DrawAreaC.ActualWidth, DrawAreaC.ActualHeight);
+                DrawAreaC.Measure(size);
+                DrawAreaC.Arrange(new System.Windows.Rect(size));
+                RenderTargetBitmap bitmap = new RenderTargetBitmap((int)size.Width,
+                                                                   (int)size.Height,
+                                                                   96d,
+                                                                   96d,
+                                                                   PixelFormats.Pbgra32);
+                bitmap.Render(DrawAreaC);
+
+                using (System.IO.FileStream out_stream = new System.IO.FileStream(filename, System.IO.FileMode.Create))
+                {
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+
+                    encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                    encoder.Save(out_stream);
+                }
+
+                DrawAreaC.LayoutTransform = transform;
+            }
+        }
     }
 }

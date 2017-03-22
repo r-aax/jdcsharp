@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GridMaster"
         mc:Ignorable="d"
-        Title="GridMaster 2017-03-14" Height="450" Width="840" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
+        Title="GridMaster 2017-03-22" Height="450" Width="840" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
             <MenuItem Header="Grid">
@@ -19,6 +19,9 @@
                 <MenuItem Name="InfoGridMI" Header="Grid description" Click="InfoGridMI_Click"/>
                 <MenuItem Name="InfoBlocksDistrMI" Header="Blocks distribution" Click="InfoBlocksDistrMI_Click"/>
                 <MenuItem Name="InfoLogMI" Header="Log" Click="InfoLogMI_Click"/>
+            </MenuItem>
+            <MenuItem Header="Tools">
+                <MenuItem Name="ToolsSavePictireMI" Header="Save picture" Click="ToolsSavePictireMI_Click"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
