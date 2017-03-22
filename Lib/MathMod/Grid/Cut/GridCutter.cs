@@ -620,7 +620,7 @@ namespace Lib.MathMod.Grid.Cut
             Cut c = null;
             dev = 0.0;
 
-            if (is_full && (b.CellsCount > weight))
+            if (is_full && (b.CellsCount >= weight))
             {
                 c = new Cut(b, null, 0);
                 dev = b.CellsCount - weight;
@@ -628,8 +628,6 @@ namespace Lib.MathMod.Grid.Cut
 
             if (is_cut)
             {
-                bool is_allow_small_deviation_cut = false;
-
                 for (int di = 0; di < Dir.GenCount; di++)
                 {
                     Dir d = new Dir(di);
@@ -639,11 +637,11 @@ namespace Lib.MathMod.Grid.Cut
                         Cut cur_c = new Cut(b, d, i);
                         int cells_count = cur_c.OldBlockCellsCount;
 
-                        if (cells_count > weight)
+                        if (cells_count >= weight)
                         {
                             double cur_dev = cells_count - weight;
 
-                            if ((cur_dev < max_deviation) && !is_allow_small_deviation_cut)
+                            if (cur_c.MinPartCellsCount < max_deviation)
                             {
                                 continue;
                             }
@@ -652,7 +650,6 @@ namespace Lib.MathMod.Grid.Cut
                             {
                                 c = cur_c;
                                 dev = cur_dev;
-                                is_allow_small_deviation_cut = true;
                             }
                         }
                     }
@@ -691,8 +688,6 @@ namespace Lib.MathMod.Grid.Cut
 
             if (is_cut)
             {
-                bool is_allow_small_deviation_cut = false;
-
                 for (int di = 0; di < Dir.GenCount; di++)
                 {
                     Dir d = new Dir(di);
@@ -706,7 +701,7 @@ namespace Lib.MathMod.Grid.Cut
                         {
                             double cur_dev = weight - cells_count;
 
-                            if ((cur_dev < max_deviation) && !is_allow_small_deviation_cut)
+                            if (cur_c.MinPartCellsCount < max_deviation)
                             {
                                 continue;
                             }
@@ -715,7 +710,6 @@ namespace Lib.MathMod.Grid.Cut
                             {
                                 c = cur_c;
                                 dev = cur_dev;
-                                is_allow_small_deviation_cut = true;
                             }
                         }
                     }

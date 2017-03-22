@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
+using Lib.Maths.Geometry;
+
 namespace Lib.MathMod.Grid.Cut
 {
     /// <summary>
@@ -71,6 +73,9 @@ namespace Lib.MathMod.Grid.Cut
         {
             B = b;
             D = d;
+
+            Debug.Assert((D == null) || (new ISegm(1, B.Size(d) - 1)).Contains(pos), "wrong position");
+
             Pos = pos;
         }
 
@@ -100,6 +105,36 @@ namespace Lib.MathMod.Grid.Cut
                 else // if (D.IsK)
                 {
                     return B.ISize * B.JSize * Pos;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Minimal part cells count.
+        /// </summary>
+        public int MinPartCellsCount
+        {
+            get
+            {
+                if (D == null)
+                {
+                    // Special case. D == null means it is no cut.
+                    return B.CellsCount;
+                }
+
+                Debug.Assert(D.IsGen, "wrong direction");
+
+                if (D.IsI)
+                {
+                    return Math.Min(Pos, B.ISize - Pos) * B.JSize * B.KSize;
+                }
+                else if (D.IsJ)
+                {
+                    return B.ISize * Math.Min(Pos, B.JSize - Pos) * B.KSize;
+                }
+                else // if (D.IsK)
+                {
+                    return B.ISize * B.JSize * Math.Min(Pos, B.KSize - Pos);
                 }
             }
         }
