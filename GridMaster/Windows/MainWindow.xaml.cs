@@ -231,14 +231,24 @@ namespace GridMaster.Windows
 
             if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string filename = sfd.FileName;
-                string extension = System.IO.Path.GetExtension(filename);
-                string extension_ibc = LoadPFGProps.IsExtensionUppercase ? ".IBC" : ".ibc";
-                string filename_ibc = filename.Replace(extension, extension_ibc);
+                File pfg = new File(sfd);
+                File ibc = new File(pfg);
+                ibc.ChangeExtensionCaseSensitive(".ibc");
 
-                GridLoaderSaverPFG.Save(Grid, filename, filename_ibc,
-                                        GridLoadSaveIBlankMI.IsChecked);
-                UpdateLastAction("Grid " + filename + " (and *" + extension_ibc + ") is saved.");
+                GridLoaderSaverPFG.Save(Grid, pfg.Name, ibc.Name, GridLoadSaveIBlankMI.IsChecked);
+                UpdateLastAction("Grid " + pfg.Name + " (and *" + ibc.Ext + ") is saved.");
+
+                // If there are border conditions links then save them.
+                if (Grid.BCondsLinksCount > 0)
+                {
+                    File rep = new File(pfg);
+                    rep.ChangeExtensionCaseSensitive(".rep");
+
+                    if (GridLoaderSaverPFG.SaveREP(Grid, rep.Name))
+                    {
+                        Log.Add(rep.Name + " is saved.");
+                    }
+                }
             }
         }
 

@@ -643,5 +643,32 @@ namespace Lib.MathMod.Grid.Load
             return is_succ;
         }
 
+        public static bool SaveREP(StructuredGrid g, string rep_file_name)
+        {
+            bool is_succ = true;
+
+            try
+            {
+                using (StreamWriter sw = new StreamWriter(rep_file_name))
+                {
+                    for (int i = 0; i < g.BCondsLinksCount; i++)
+                    {
+                        BCondsLink bcl = g.BCondsLinks[i];
+
+                        sw.WriteLine(String.Format("{0} {1} {2} {3} {4}",
+                                     bcl.BCond1.Id, bcl.BCond2.Id,
+                                     bcl.LDirs12[0].ToString(),
+                                     bcl.LDirs12[1].ToString(),
+                                     bcl.LDirs12[2].ToString()));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                is_succ = false;
+            }
+
+            return is_succ;
+        }
     }
 }
