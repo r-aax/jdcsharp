@@ -60,11 +60,8 @@ namespace Lib.MathMod.Grid
         /// <param name="i1"><c>I1</c> direction</param>
         /// <param name="j1"><c>J1</c> direction</param>
         /// <param name="k1"><c>K1</c> direction</param>
-        /// <param name="i0"><c>I0</c> direction</param>
-        /// <param name="j0"><c>J0</c> direction</param>
-        /// <param name="k0"><c>K0</c> direction</param>
         public BCondsLink(BCond bcond1, BCond bcond2,
-                          Dir i1, Dir j1, Dir k1, Dir i0, Dir j0, Dir k0)
+                          Dir i1, Dir j1, Dir k1)
         {
             BCond1 = bcond1;
             BCond2 = bcond2;
@@ -76,9 +73,9 @@ namespace Lib.MathMod.Grid
             LDirs12[Dir.I1N] = i1;
             LDirs12[Dir.J1N] = j1;
             LDirs12[Dir.K1N] = k1;
-            LDirs12[Dir.I0N] = i0;
-            LDirs12[Dir.J0N] = j0;
-            LDirs12[Dir.K0N] = k0;
+            LDirs12[Dir.I0N] = !i1;
+            LDirs12[Dir.J0N] = !j1;
+            LDirs12[Dir.K0N] = !k1;
 
             // LDir21
             for (int n = 0; n < Dir.Count; n++)
@@ -122,14 +119,14 @@ namespace Lib.MathMod.Grid
             {
                 int ind = g.BCondsCount;
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 2], g.BConds[ind - 1],
-                                                LDirs12[0], LDirs12[1], LDirs12[2], LDirs12[3], LDirs12[4], LDirs12[5]);
+                                                LDirs12[0], LDirs12[1], LDirs12[2]);
                 g.BCondsLinks.Add(bcl);
             }
             else if (bcond == BCond2)
             {
                 int ind = g.BCondsCount;
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 1], g.BConds[ind - 2],
-                                                LDirs12[0], LDirs12[1], LDirs12[2], LDirs12[3], LDirs12[4], LDirs12[5]);
+                                                LDirs12[0], LDirs12[1], LDirs12[2]);
                 g.BCondsLinks.Add(bcl);
             }
             else
@@ -144,9 +141,9 @@ namespace Lib.MathMod.Grid
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("    : {0, 4} -- {1, 4} [{2}, {3}, {4}, {5}, {6}, {7}]",
+            return String.Format("    : {0, 4} -- {1, 4} [{2}, {3}, {4}]",
                                  BCond1.Id, BCond2.Id,
-                                 LDirs12[0], LDirs12[1], LDirs12[2], LDirs12[3], LDirs12[4], LDirs12[5]);
+                                 LDirs12[0], LDirs12[1], LDirs12[2]);
         }
     }
 }
