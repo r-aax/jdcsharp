@@ -196,12 +196,12 @@ namespace GridMaster.Windows
 
                         // If grid is loaded we should try to load REP border conditions.
 
-                        File rep = new File(pfg);
-                        rep.ChangeExtensionCaseSensitive(".rep");
+                        File peri = new File(pfg);
+                        peri.ChangeExtensionCaseSensitive(".peri");
 
-                        if (GridLoaderSaverPFG.LoadREP(Grid, rep.Name))
+                        if (GridLoaderSaverPFG.LoadPERI(Grid, peri.Name))
                         {
-                            Log.Add(rep.Name + " is loaded.");
+                            Log.Add(peri.Name + " is loaded.");
                         }
                     }
                     else
@@ -241,12 +241,12 @@ namespace GridMaster.Windows
                 // If there are border conditions links then save them.
                 if (Grid.BCondsLinksCount > 0)
                 {
-                    File rep = new File(pfg);
-                    rep.ChangeExtensionCaseSensitive(".rep");
+                    File peri = new File(pfg);
+                    peri.ChangeExtensionCaseSensitive(".peri");
 
-                    if (GridLoaderSaverPFG.SaveREP(Grid, rep.Name))
+                    if (GridLoaderSaverPFG.SavePERI(Grid, peri.Name))
                     {
-                        Log.Add(rep.Name + " is saved.");
+                        Log.Add(peri.Name + " is saved.");
                     }
                 }
             }

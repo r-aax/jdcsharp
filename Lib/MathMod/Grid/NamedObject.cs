@@ -30,7 +30,7 @@ namespace Lib.MathMod.Grid
         public string Type
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Lib.MathMod.Grid
         public string Subtype
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Lib.MathMod.Grid
         public string Name
         {
             get;
-            private set;
+            set;
         }
     }
 }

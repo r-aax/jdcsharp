@@ -598,18 +598,18 @@ namespace Lib.MathMod.Grid.Load
         }
 
         /// <summary>
-        /// Load REP data for grid.
+        /// Load PERI data for grid.
         /// </summary>
         /// <param name="g">grid</param>
         /// <param name="rep_file_name">REP file name</param>
         /// <returns><c>true</c> - if data is loaded, <c>false</c> - otherwise</returns>
-        public static bool LoadREP(StructuredGrid g, string rep_file_name)
+        public static bool LoadPERI(StructuredGrid g, string peri_file_name)
         {
             bool is_succ = true;
 
             try
             {
-                using (StreamReader sr = new StreamReader(rep_file_name))
+                using (StreamReader sr = new StreamReader(peri_file_name))
                 {
                     string line = sr.ReadLine();
 
@@ -643,13 +643,19 @@ namespace Lib.MathMod.Grid.Load
             return is_succ;
         }
 
-        public static bool SaveREP(StructuredGrid g, string rep_file_name)
+        /// <summary>
+        /// Save PERI information.
+        /// </summary>
+        /// <param name="g">gris</param>
+        /// <param name="peri_file_name">PERI file name</param>
+        /// <returns><c>true</c> if no errors occured, <c>false</c> - otherwise</returns>
+        public static bool SavePERI(StructuredGrid g, string peri_file_name)
         {
             bool is_succ = true;
 
             try
             {
-                using (StreamWriter sw = new StreamWriter(rep_file_name))
+                using (StreamWriter sw = new StreamWriter(peri_file_name))
                 {
                     for (int i = 0; i < g.BCondsLinksCount; i++)
                     {
