@@ -28,8 +28,8 @@ namespace Lib.MathMod.Grid.Partitioning
         /// </summary>
         /// <param name="pc">partitions count</param>
         /// <param name="margin">margin</param>
-        /// <param name="max_deviation">maximum deviation</param>
-        public void Partition(int pc, int margin, double max_deviation)
+        /// <param name="min_cut">min cut cells count</param>
+        public void Partition(int pc, int margin, double min_cut)
         {
             Prepare(pc);
 
@@ -51,7 +51,7 @@ namespace Lib.MathMod.Grid.Partitioning
                 {
                     weights[i] = MaxWeight - PartitionsWeights[i];
                 }
-                double abs_max_deviation = max_deviation * MaxWeight;
+                double abs_min_cut = min_cut * MaxWeight;
             
                 Cut.Cut c = null;
                 double dev;
@@ -63,21 +63,21 @@ namespace Lib.MathMod.Grid.Partitioning
                 // 3) try underflow
                 // 4) try any overflow
 
-                c = GridCutter.NearestCut(Grid, weights, margin,
-                                          abs_max_deviation, true, false, false, out partition, out dev);
+                c = GridCutter.NearestCut(Grid, weights,
+                                          abs_min_cut, true, false, false, out partition, out dev);
 
                 if (c == null)
                 {
                     if (!is_overflow)
                     {
-                        c = GridCutter.NearestCut(Grid, weights, margin,
-                                                  abs_max_deviation, true, true, false, out partition, out dev);
+                        c = GridCutter.NearestCut(Grid, weights,
+                                                  abs_min_cut, true, true, false, out partition, out dev);
                     }
 
                     if (c == null)
                     {
-                        c = GridCutter.NearestCut(Grid, weights, margin,
-                                                  abs_max_deviation, true, true, true, out partition, out dev);
+                        c = GridCutter.NearestCut(Grid, weights,
+                                                  abs_min_cut, true, true, true, out partition, out dev);
                         is_overflow = false;
                     }
                 }

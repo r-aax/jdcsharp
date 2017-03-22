@@ -60,8 +60,8 @@
                         <TextBox Name="MCCBlocksDistrPartitionsTB" Grid.Row="0" Grid.Column="1" Text="1" Margin="10,2" Width="110"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Min margin" Margin="10,2"/>
                         <TextBox Name="MCCBlocksDistrMarginTB" Grid.Row="1" Grid.Column="1" Text="1" Margin="10,2"/>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Deviation %" Margin="10,2"/>
-                        <TextBox Name="MCCBlocksDistrDeviationTB" Grid.Row="2" Grid.Column="1" Text="10.0" Margin="10,2"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Min cut %" Margin="10,2"/>
+                        <TextBox Name="MCCBlocksDistrMinCutTB" Grid.Row="2" Grid.Column="1" Text="10.0" Margin="10,2"/>
                         <Button Name="MCCBlocksDistrB" Grid.Row="3" Grid.Column="1" Content="Go" Margin="10,2" Click="MCCBlocksDistrB_Click"/>
                     </Grid>
                 </GroupBox>
