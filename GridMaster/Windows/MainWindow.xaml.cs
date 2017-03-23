@@ -329,12 +329,9 @@ namespace GridMaster.Windows
         /// <param name="e">parameters</param>
         private void CutHalfMaxBlockB_Click(object sender, RoutedEventArgs e)
         {
-            int margin = Int32.Parse(CutHalfMaxBlockMarginTB.Text);
             int iters = Int32.Parse(CutHalfMaxBlockItersTB.Text);
-            int min_margin_old = GridCutter.MinMargin;
             int i = 0;
 
-            GridCutter.MinMargin = margin;
             for (; i < iters; i++)
             {
                 if (GridCutter.CutHalfMaxBlock(Grid) == null)
@@ -342,8 +339,6 @@ namespace GridMaster.Windows
                     break;
                 }
             }
-
-            GridCutter.MinMargin = min_margin_old;
 
             UpdateBriefGridStatistic();
             string diag = (GridCutter.CutRejectedString == null)
@@ -360,14 +355,11 @@ namespace GridMaster.Windows
         private void GUBlocksDistrB_Click(object sender, RoutedEventArgs e)
         {
             int partitions = Int32.Parse(GUBlocksDistrPartitionsTB.Text);
-            int margin = Int32.Parse(GUBlocksDistrMarginTB.Text);
             int iters = Int32.Parse(GUBlocksDistrItersTB.Text);
             double dev = Double.Parse(GUBlocksDistrDeviationTB.Text) / 100.0;
             int total_ites = 0;
             double cur_dev = 0.0;
             string diag = null;
-
-            GridCutter.MinMargin = margin;
 
             double[] weights;
             double[] partitions_weights;
@@ -436,14 +428,12 @@ namespace GridMaster.Windows
         private void MCCBlocksDistrB_Click(object sender, RoutedEventArgs e)
         {
             int partitions = Int32.Parse(MCCBlocksDistrPartitionsTB.Text);
-            int margin = Int32.Parse(MCCBlocksDistrMarginTB.Text);
             double min_cut = Double.Parse(MCCBlocksDistrMinCutTB.Text) / 100.0;
 
             // Partition.
-            GridCutter.MinMargin = margin;
             MinimalCutsPartitioner partitioner = new MinimalCutsPartitioner(Grid);
             int blocks_before = Grid.BlocksCount;
-            partitioner.Partition(partitions, margin, min_cut);
+            partitioner.Partition(partitions, min_cut);
             int blocks_after = Grid.BlocksCount;
 
             // Upfdate information.
@@ -502,6 +492,23 @@ namespace GridMaster.Windows
                 }
 
                 DrawAreaC.LayoutTransform = transform;
+            }
+        }
+
+        /// <summary>
+        /// Change margin value.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OptionsMarginTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            try
+            {
+                GridCutter.MinMargin = Int32.Parse(OptionsMarginTB.Text);
+            }
+            catch (Exception)
+            {
+                GridCutter.MinMargin = 1;
             }
         }
     }

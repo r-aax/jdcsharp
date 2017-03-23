@@ -27,9 +27,8 @@ namespace Lib.MathMod.Grid.Partitioning
         /// Partiton the grid.
         /// </summary>
         /// <param name="pc">partitions count</param>
-        /// <param name="margin">margin</param>
         /// <param name="min_cut">min cut cells count</param>
-        public void Partition(int pc, int margin, double min_cut)
+        public void Partition(int pc, double min_cut)
         {
             Prepare(pc);
 
