@@ -63,6 +63,11 @@ namespace Lib.MathMod.Grid
         public BCondsLink(BCond bcond1, BCond bcond2,
                           Dir i1, Dir j1, Dir k1)
         {
+            if ((bcond1 == null) || (bcond2 == null))
+            {
+                throw new Exception("null border condition in BCondsLink constructor");
+            }
+
             BCond1 = bcond1;
             BCond2 = bcond2;
 
@@ -121,7 +126,7 @@ namespace Lib.MathMod.Grid
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 2], g.BConds[ind - 1],
                                                 LDirs12[0], LDirs12[1], LDirs12[2]);
                 g.BCondsLinks.Add(bcl);
-                bcl.AddNameSuffixIfPERI();
+                //bcl.AddNameSuffixIfPERI();
             }
             else if (bcond == BCond2)
             {
@@ -129,14 +134,14 @@ namespace Lib.MathMod.Grid
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 1], g.BConds[ind - 2],
                                                 LDirs12[0], LDirs12[1], LDirs12[2]);
                 g.BCondsLinks.Add(bcl);
-                bcl.AddNameSuffixIfPERI();
+                //bcl.AddNameSuffixIfPERI();
             }
             else
             {
                 throw new Exception("border condition is not found in BCondsLink");
             }
 
-            AddNameSuffixIfPERI();
+            //AddNameSuffixIfPERI();
         }
 
         /// <summary>

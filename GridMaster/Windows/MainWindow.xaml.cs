@@ -194,15 +194,18 @@ namespace GridMaster.Windows
                     {
                         UpdateLastAction(last_action + "is loaded.");
 
-                        // If grid is loaded we should try to load REP border conditions.
+                        // If grid is loaded we should try to load PERI border conditions.
 
+                        // No PERI file used now.
+                        /*
                         File peri = new File(pfg);
                         peri.ChangeExtensionCaseSensitive(".peri");
-
+                        
                         if (GridLoaderSaverPFG.LoadPERI(Grid, peri.Name))
                         {
                             Log.Add(peri.Name + " is loaded.");
                         }
+                        */
                     }
                     else
                     {
@@ -238,17 +241,20 @@ namespace GridMaster.Windows
                 GridLoaderSaverPFG.Save(Grid, pfg.Name, ibc.Name, GridLoadSaveIBlankMI.IsChecked);
                 UpdateLastAction("Grid " + pfg.Name + " (and *" + ibc.Ext + ") is saved.");
 
+                // No PERI file used now.
                 // If there are border conditions links then save them.
+                /*
                 if (Grid.BCondsLinksCount > 0)
                 {
                     File peri = new File(pfg);
                     peri.ChangeExtensionCaseSensitive(".peri");
-
+                
                     if (GridLoaderSaverPFG.SavePERI(Grid, peri.Name))
                     {
                         Log.Add(peri.Name + " is saved.");
                     }
                 }
+                */
             }
         }
 
