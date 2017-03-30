@@ -40,11 +40,6 @@ namespace GridMaster.Windows
         private StructuredGrid Grid;
 
         /// <summary>
-        /// Properties of PFG load.
-        /// </summary>
-        private GridLoadSavePFGProperties LoadPFGProps;
-
-        /// <summary>
         /// Rect drawer.
         /// </summary>
         private RectDrawer Drawer = null;
@@ -73,7 +68,6 @@ namespace GridMaster.Windows
 
             // Create empty grid.
             Grid = new StructuredGrid();
-            LoadPFGProps = null;
             Log = new StringsList();
 
             // Initial statistics.
@@ -185,8 +179,7 @@ namespace GridMaster.Windows
                     File pfg = f;
                     File ibc = new File(pfg);
                     ibc.ChangeExtensionCaseSensitive(".ibc");
-                    LoadPFGProps = new GridLoadSavePFGProperties();
-                    LoadPFGProps.IsExtensionUppercase = pfg.IsUpperExt;
+                    GridLoadSavePFGProperties.IsExtensionUppercase = pfg.IsUpperExt;
 
                     string last_action = "Grid " + pfg.Name + " (and *" + ibc.Ext + ") ";
 
@@ -230,7 +223,9 @@ namespace GridMaster.Windows
         private void GridSaveMI_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = LoadPFGProps.IsExtensionUppercase ? "PFG (*.PFG)|*.PFG" : "PFG (*.pfg)|*.pfg";
+            sfd.Filter = GridLoadSavePFGProperties.IsExtensionUppercase
+                         ? "PFG (*.PFG)|*.PFG"
+                         : "PFG (*.pfg)|*.pfg";
 
             if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -267,7 +262,9 @@ namespace GridMaster.Windows
         private void GridExportBlocksDistribution_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = LoadPFGProps.IsExtensionUppercase ? "DIS (*.DIS)|*.DIS" : "DIS (*.dis)|*.dis";
+            sfd.Filter = GridLoadSavePFGProperties.IsExtensionUppercase
+                         ? "DIS (*.DIS)|*.DIS" 
+                         : "DIS (*.dis)|*.dis";
 
             if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {

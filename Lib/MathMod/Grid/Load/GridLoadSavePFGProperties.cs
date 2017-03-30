@@ -9,11 +9,11 @@ namespace Lib.MathMod.Grid.Load
     /// <summary>
     /// Properties of PFG load/save.
     /// </summary>
-    public class GridLoadSavePFGProperties
+    public static class GridLoadSavePFGProperties
     {
         /// <summary>
         /// Uppercase extension.
         /// </summary>
-        public bool IsExtensionUppercase = true;
+        public static bool IsExtensionUppercase = true;
     }
 }
