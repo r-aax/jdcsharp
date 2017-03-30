@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Lib.Draw;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Utils;
+using SWMColor = System.Windows.Media.Color;
 
 namespace GridMaster.Tools
 {
@@ -15,6 +16,16 @@ namespace GridMaster.Tools
     /// </summary>
     public class HistogramExt
     {
+        /// <summary>
+        /// First color.
+        /// </summary>
+        public static SWMColor FirstColor = System.Windows.Media.Colors.Orange;
+
+        /// <summary>
+        /// Second color.
+        /// </summary>
+        public static SWMColor SecondColor = System.Windows.Media.Colors.LightSteelBlue;
+
         /// <summary>
         /// Full values.
         /// </summary>
@@ -101,12 +112,7 @@ namespace GridMaster.Tools
             double k = 60.0 / V[max_index];
 
             // Set colors.
-            Color[] colors =
-                new Color[2]
-                {
-                    new Color(System.Windows.Media.Colors.Orange),
-                    new Color(System.Windows.Media.Colors.LightSteelBlue)
-                };
+            Color[] colors = new Color[2]{ new Color(FirstColor), new Color(SecondColor) };
 
             // Draw all data items.
             for (int i = 0; i < V.Length; i++)
