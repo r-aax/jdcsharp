@@ -140,5 +140,63 @@ namespace Lib.MathMod.Grid
             return String.Format("{0,4} ({1,3}): {2,8} cells ({3,3}, {4,3}, {5,3})",
                                  Id, PartitionNumber, CellsCount, ISize, JSize, KSize);
         }
+
+        /// <summary>
+        /// Inner cells count.
+        /// </summary>
+        /// <returns>count of inner cells</returns>
+        public int InnerCellsCount()
+        {
+            return InnerCellsCount(GridProperties.ShadowDepth);
+        }
+
+        /// <summary>
+        /// Border cells count.
+        /// </summary>
+        /// <returns>count of border cells</returns>
+        public int BorderCellsCount()
+        {
+            return BorderCellsCount(GridProperties.ShadowDepth);
+        }
+
+        /// <summary>
+        /// Count of interface cells (with multiple).
+        /// </summary>
+        /// <returns>interface cells with multiple</returns>
+        public int IfaceCellsCountMultiple(bool is_only_cross_partition)
+        {
+            int iccm = 0;
+
+            foreach (Iface iface in Grid.Ifaces)
+            {
+                if (iface.B == this)
+                {
+                    if (!is_only_cross_partition || iface.IsCross)
+                    {
+                        iccm += iface.Measure;
+                    }
+                }
+            }
+
+            return iccm * GridProperties.ShadowDepth;
+        }
+
+        /// <summary>
+        /// Count of interface cells multipe only for cross partitions exchange.
+        /// </summary>
+        /// <returns>cells count</returns>
+        public int IfaceCellsCountCrossMultiple()
+        {
+            return IfaceCellsCountMultiple(true);
+        }
+
+        /// <summary>
+        /// Count of all interface cells.
+        /// </summary>
+        /// <returns>cells count</returns>
+        public int IfaceCellsCountMultiple()
+        {
+            return IfaceCellsCountMultiple(false);
+        }
     }
 }

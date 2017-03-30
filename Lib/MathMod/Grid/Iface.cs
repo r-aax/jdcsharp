@@ -68,6 +68,17 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Check if interface is cross partition.
+        /// </summary>
+        public bool IsCross
+        {
+            get
+            {
+                return B.PartitionNumber != NB.PartitionNumber;
+            }
+        }
+
+        /// <summary>
         /// Reset neighbour directions.
         /// </summary>
         public void ResetNDirs()

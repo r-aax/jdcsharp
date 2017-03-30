@@ -135,6 +135,9 @@ namespace GridMaster.Windows
         {
             if (Hist != null)
             {
+                Hist.Cells = Grid.CellsCount();
+                Hist.IfaceCells = Grid.IfaceCellsCountMultiple();
+                Hist.CrossCells = Grid.IfaceCellsCountCrossMultiple();
                 Hist.Draw(Drawer);
             }
         }

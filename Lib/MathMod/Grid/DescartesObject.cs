@@ -202,16 +202,6 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Size in given direction (in cells).
-        /// </summary>
-        /// <param name="dir">direction</param>
-        /// <returns>size in given direction</returns>
-        public int DirSize(Dir dir)
-        {
-            return Coords[(int)dir.N].Length;
-        }
-
-        /// <summary>
         /// Direction of maximum size.
         /// </summary>
         /// <returns></returns>
@@ -286,6 +276,31 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Count of inner cells.
+        /// </summary>
+        /// <param name="border_depth">border depth</param>
+        /// <returns>count of inner cells</returns>
+        public int InnerCellsCount(int border_depth)
+        {
+            int d2 = 2 * border_depth;
+            int isize = ISize - d2;
+            int jsize = JSize - d2;
+            int ksize = KSize - d2;
+
+            return ((isize > 0) && (jsize > 0) && (ksize > 0)) ? (isize * jsize * ksize) : 0;
+        }
+
+        /// <summary>
+        /// Border cells count.
+        /// </summary>
+        /// <param name="border_depth">border depth</param>
+        /// <returns>count of border cells</returns>
+        public int BorderCellsCount(int border_depth)
+        {
+            return CellsCount - InnerCellsCount(border_depth);
+        }
+
+        /// <summary>
         /// Surface area.
         /// </summary>
         public int SurfaceArea
@@ -304,6 +319,17 @@ namespace Lib.MathMod.Grid
             get
             {
                 return INodes * JNodes * KNodes;
+            }
+        }
+
+        /// <summary>
+        /// Measure object.
+        /// </summary>
+        public virtual int Measure
+        {
+            get
+            {
+                return CellsCount;
             }
         }
     }

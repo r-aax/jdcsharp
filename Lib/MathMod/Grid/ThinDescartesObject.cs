@@ -89,5 +89,16 @@ namespace Lib.MathMod.Grid
                 return D.IsK;
             }
         }
+
+        /// <summary>
+        /// Measure of border.
+        /// </summary>
+        public override int Measure
+        {
+            get
+            {
+                return SurfaceArea / 2;
+            }
+        }
     }
 }

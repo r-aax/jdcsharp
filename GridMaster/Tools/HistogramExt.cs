@@ -37,6 +37,21 @@ namespace GridMaster.Tools
         public List<double>[] W;
 
         /// <summary>
+        /// Cells count.
+        /// </summary>
+        public int Cells = 0;
+
+        /// <summary>
+        /// Cells count.
+        /// </summary>
+        public int IfaceCells = 0;
+
+        /// <summary>
+        /// Cross cells count.
+        /// </summary>
+        public int CrossCells = 0;
+
+        /// <summary>
         /// Extended histogram.
         /// </summary>
         /// <param name="n"></param>
@@ -141,12 +156,18 @@ namespace GridMaster.Tools
 
             // Text.
             double text_size = 12.0;
-            rd.DrawText(new Point(5.0, mh + k * mid), new Vector(0.0, -(text_size + 1.0)),
-                        String.Format("mid: {0}", mid),
-                        text_size, "Courier New");
-            rd.DrawText(new Point(5.0, mh + k * mid),
-                        String.Format("dev: {0}%", Dev),
-                        text_size, "Courier New");
+            Vector upv = new Vector(0.0, -(text_size + 1.0));
+            Point xp1 = new Point(5.0, /* mh + k * mid */ mh);
+            //
+            rd.DrawText(xp1, String.Format("mid: {0}", mid), text_size, "Courier New");
+            rd.DrawText(xp1, -upv, String.Format("dev: {0:0.000}%", Dev), text_size, "Courier New");
+            //
+            string cells_str = String.Format("iface cells: {0:0.000}", 100.0 * ((double)IfaceCells / (double)Cells));
+            string cross_str = String.Format("cross cells: {0:0.000}", 100.0 * ((double)CrossCells / (double)Cells));
+            Vector v2 = new Vector(-cells_str.Length * 7.0 - 3.0, 0.0);
+            Point xp2 = new Point(95.0, /* mh + k * mid */ mh);
+            rd.DrawText(xp2, v2, cells_str, text_size, "Courier New");
+            rd.DrawText(xp2, -upv  + v2, cross_str, text_size, "Courier New");
         }
     }
 }

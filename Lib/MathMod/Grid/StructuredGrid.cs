@@ -161,6 +161,73 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Get inner cells count.
+        /// </summary>
+        /// <returns>inner cells count</returns>
+        public int InnerCellsCount()
+        {
+            int icc = 0;
+
+            foreach (Block b in Blocks)
+            {
+                icc += b.InnerCellsCount();
+            }
+
+            return icc;
+        }
+
+        /// <summary>
+        /// Border cells count.
+        /// </summary>
+        /// <returns>count of border cells</returns>
+        public int BorderCellsCount()
+        {
+            int bcc = 0;
+
+            foreach (Block b in Blocks)
+            {
+                bcc += b.BorderCellsCount();
+            }
+
+            return bcc;
+        }
+
+        /// <summary>
+        /// Iface cells count multiple.
+        /// </summary>
+        /// <param name="is_only_cross_partition">is only cross partition flag</param>
+        /// <returns>cells count</returns>
+        public int IfaceCellsCountMultiple(bool is_only_cross_partition)
+        {
+            int iccm = 0;
+
+            foreach (Block b in Blocks)
+            {
+                iccm += b.IfaceCellsCountMultiple(is_only_cross_partition);
+            }
+
+            return iccm;
+        }
+
+        /// <summary>
+        /// Iface multiple cells count (only cross partition).
+        /// </summary>
+        /// <returns>cells count</returns>
+        public int IfaceCellsCountCrossMultiple()
+        {
+            return IfaceCellsCountMultiple(true);
+        }
+
+        /// <summary>
+        /// Iface multiple cells count.
+        /// </summary>
+        /// <returns>cells count</returns>
+        public int IfaceCellsCountMultiple()
+        {
+            return IfaceCellsCountMultiple(false);
+        }
+
+        /// <summary>
         /// Count of nods.
         /// </summary>
         /// <returns>nodes count</returns>

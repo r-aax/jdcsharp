@@ -177,6 +177,7 @@
     <Compile Include="Utils\ExeDebug.cs" />
     <Compile Include="Utils\SimplexMethod.cs" />
     <Compile Include="Utils\SqlConnector.cs" />
+    <Compile Include="Utils\Strings.cs" />
     <Compile Include="Utils\Time\Date.cs" />
     <Compile Include="Utils\Time\Month.cs" />
     <Compile Include="Utils\Time\Time.cs" />
