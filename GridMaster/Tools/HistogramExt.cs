@@ -148,7 +148,7 @@ namespace GridMaster.Tools
             rd.SetPenColor(new Color(System.Windows.Media.Colors.Black));
             rd.DrawLine(new Point(5.0, mh), new Point(95.0, mh));
 
-            double mid = V.Sum() / (double)V.Length;
+            int mid = (int)(V.Sum() / (double)V.Length);
 
             rd.SetPenThickness(1.0);
             rd.SetPenColor(new Color(System.Windows.Media.Colors.Silver));
@@ -162,8 +162,8 @@ namespace GridMaster.Tools
             rd.DrawText(xp1, String.Format("mid: {0}", mid), text_size, "Courier New");
             rd.DrawText(xp1, -upv, String.Format("dev: {0:0.000}%", Dev), text_size, "Courier New");
             //
-            string cells_str = String.Format("iface cells: {0:0.000}", 100.0 * ((double)IfaceCells / (double)Cells));
-            string cross_str = String.Format("cross cells: {0:0.000}", 100.0 * ((double)CrossCells / (double)Cells));
+            string cells_str = String.Format("iface cells: {0:0.000}%", 100.0 * ((double)IfaceCells / (double)Cells));
+            string cross_str = String.Format("cross cells: {0:0.000}%", 100.0 * ((double)CrossCells / (double)Cells));
             Vector v2 = new Vector(-cells_str.Length * 7.0 - 3.0, 0.0);
             Point xp2 = new Point(95.0, /* mh + k * mid */ mh);
             rd.DrawText(xp2, v2, cells_str, text_size, "Courier New");
