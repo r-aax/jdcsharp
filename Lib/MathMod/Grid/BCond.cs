@@ -139,5 +139,26 @@ namespace Lib.MathMod.Grid
 
             return Math.Abs(r1 - r2) < Constants.Eps2;
         }
+
+        /// <summary>
+        /// Check if border condition is linked.
+        /// </summary>
+        /// <returns><c>true</c> - if it is linked, <c>false</c> - otherwise</returns>
+        public bool IsLinked()
+        {
+            StructuredGrid g = B.Grid;
+
+            for (int i = 0; i < g.BCondsLinksCount; i++)
+            {
+                BCondsLink bcl = g.BCondsLinks[i];
+
+                if ((bcl.BCond1 == this) || (bcl.BCond2 == this))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

@@ -23,17 +23,6 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// List of blocks without partitions.
-        /// </summary>
-        public List<Block> NoPartitionBlocks
-        {
-            get
-            {
-                return Blocks.FindAll(b => b.IsNoPartition);
-            }
-        }
-
-        /// <summary>
         /// Count of blocks.
         /// </summary>
         public int BlocksCount
@@ -41,6 +30,17 @@ namespace Lib.MathMod.Grid
             get
             {
                 return Blocks.Count;
+            }
+        }
+
+        /// <summary>
+        /// List of blocks without partitions.
+        /// </summary>
+        public List<Block> NoPartitionBlocks
+        {
+            get
+            {
+                return Blocks.FindAll(b => b.IsNoPartition);
             }
         }
 
@@ -439,26 +439,6 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Check if border conditions links contain given border condition.
-        /// </summary>
-        /// <param name="bc">border condition</param>
-        /// <returns><c>true</c> - if border condition is already linked, <c>false</c> - otherwise</returns>
-        public bool IsBCondInBCondsLinks(BCond bc)
-        {
-            for (int i = 0; i < BCondsLinksCount; i++)
-            {
-                BCondsLink bcl = BCondsLinks[i];
-
-                if ((bcl.BCond1 == bc) || (bcl.BCond2 == bc))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        /// <summary>
         /// Init BConds links.
         /// </summary>
         public void InitBCondsLinks()
@@ -475,7 +455,7 @@ namespace Lib.MathMod.Grid
                     continue;
                 }
 
-                if (IsBCondInBCondsLinks(bcondi))
+                if (bcondi.IsLinked())
                 {
                     continue;
                 }
@@ -489,12 +469,12 @@ namespace Lib.MathMod.Grid
                         continue;
                     }
 
-                    if (IsBCondInBCondsLinks(bcondi))
+                    if (bcondi.IsLinked())
                     {
                         break;
                     }
 
-                    if (IsBCondInBCondsLinks(bcondj))
+                    if (bcondj.IsLinked())
                     {
                         continue;
                     }

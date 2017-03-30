@@ -19,12 +19,12 @@ namespace GridMaster.Tools
         /// <summary>
         /// First color.
         /// </summary>
-        public static SWMColor FirstColor = System.Windows.Media.Colors.Orange;
+        public static SWMColor FirstColor = System.Windows.Media.Colors.Silver; //Orange;
 
         /// <summary>
         /// Second color.
         /// </summary>
-        public static SWMColor SecondColor = System.Windows.Media.Colors.LightSteelBlue;
+        public static SWMColor SecondColor = System.Windows.Media.Colors.Gray; //LightSteelBlue;
 
         /// <summary>
         /// Full values.
@@ -138,10 +138,15 @@ namespace GridMaster.Tools
             rd.SetPenThickness(1.0);
             rd.SetPenColor(new Color(System.Windows.Media.Colors.Silver));
             rd.DrawLine(new Point(5.0, mh + k * mid), new Point(95.0, mh + k * mid));
-            rd.DrawText(new Point(5.0, mh + k * mid + 4.0), String.Format("mid: {0}", mid), 12.0, "Courier New");
+
+            // Text.
+            double text_size = 12.0;
+            rd.DrawText(new Point(5.0, mh + k * mid), new Vector(0.0, -(text_size + 1.0)),
+                        String.Format("mid: {0}", mid),
+                        text_size, "Courier New");
             rd.DrawText(new Point(5.0, mh + k * mid),
                         String.Format("dev: {0}%", Dev),
-                        12.0, "Courier New");
+                        text_size, "Courier New");
         }
     }
 }
