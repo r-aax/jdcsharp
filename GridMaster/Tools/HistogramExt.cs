@@ -52,6 +52,11 @@ namespace GridMaster.Tools
         public int CrossCells = 0;
 
         /// <summary>
+        /// Cuts count.
+        /// </summary>
+        public int Cuts = 0;
+
+        /// <summary>
         /// Extended histogram.
         /// </summary>
         /// <param name="n"></param>
@@ -168,6 +173,17 @@ namespace GridMaster.Tools
             Point xp2 = new Point(95.0, /* mh + k * mid */ mh);
             rd.DrawText(xp2, v2, cells_str, text_size, "Courier New");
             rd.DrawText(xp2, -upv  + v2, cross_str, text_size, "Courier New");
+            //
+            string proc_str = String.Format("{0,12}", V.Length);
+            string cuts_str = String.Format("{0,12}", Cuts);
+            int min = Math.Min(Strings.LeadingSymbolsCount(proc_str, ' '),
+                               Strings.LeadingSymbolsCount(cuts_str, ' '));
+            proc_str = "proc: " + proc_str.Substring(min);
+            cuts_str = "cuts: " + cuts_str.Substring(min);
+            rd.DrawText(new Point(50.0, mh), new Vector(-8 * 7.0 - 3.0, 0.0),
+                        proc_str, text_size, "Courier New");
+            rd.DrawText(new Point(50.0, mh), new Vector(-8 * 7.0 - 3.0, 0.0) - upv,
+                        cuts_str, text_size, "Courier New");
         }
     }
 }

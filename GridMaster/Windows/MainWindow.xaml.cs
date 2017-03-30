@@ -55,6 +55,11 @@ namespace GridMaster.Windows
         private HistogramExt Hist = null;
 
         /// <summary>
+        /// Last cuts count.
+        /// </summary>
+        private int LastCuts = 0;
+
+        /// <summary>
         /// Log.
         /// </summary>
         private StringsList Log = null;
@@ -138,6 +143,7 @@ namespace GridMaster.Windows
                 Hist.Cells = Grid.CellsCount();
                 Hist.IfaceCells = Grid.IfaceCellsCountMultiple();
                 Hist.CrossCells = Grid.IfaceCellsCountCrossMultiple();
+                Hist.Cuts = LastCuts;
                 Hist.Draw(Drawer);
             }
         }
@@ -423,6 +429,7 @@ namespace GridMaster.Windows
             UpdateBriefGridStatistic();
             UpdateLastAction(String.Format("GU distr: {0} iters, {1}% deviation ({2}).",
                                            total_ites, cur_dev * 100.0, diag));
+            LastCuts = total_ites;
             InitHistogramExt(partitions);
         }
 
@@ -441,12 +448,13 @@ namespace GridMaster.Windows
             int blocks_before = Grid.BlocksCount;
             partitioner.Partition(partitions, min_cut);
             int blocks_after = Grid.BlocksCount;
+            int cuts = blocks_after - blocks_before;
 
             // Upfdate information.
             UpdateBriefGridStatistic();
+            LastCuts = cuts;
             InitHistogramExt(partitions);
-            UpdateLastAction(String.Format("MCC distr: {0} cuts, {1}% deviation",
-                             blocks_after - blocks_before, Hist.Dev));
+            UpdateLastAction(String.Format("MCC distr: {0} cuts, {1}% deviation", cuts, Hist.Dev));
         }
 
         /// <summary>
