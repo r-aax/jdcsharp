@@ -60,14 +60,14 @@ namespace GridMaster.Windows
             }
 
             // Blocks descriptions.
-            LinesLB.Items.Add("Blocks:");
+            LinesLB.Items.Add(String.Format("Blocks ({0}):", g.BlocksCount));
             for (int i = 0; i < g.BlocksCount; i++)
             {
                 LinesLB.Items.Add(" " + g.Blocks[i].ToString());
             }
 
             // Ifaces descriptions.
-            LinesLB.Items.Add("Ifaces:");
+            LinesLB.Items.Add(String.Format("Ifaces ({0}):", g.IfacesCount));
             for (int i = 0; i < g.IfacesCount; i += 2)
             {
                 LinesLB.Items.Add("!" + g.Ifaces[i].ToString());
@@ -75,21 +75,21 @@ namespace GridMaster.Windows
             }
 
             // Border conditions descriptions.
-            LinesLB.Items.Add("BConds:");
+            LinesLB.Items.Add(String.Format("BConds ({0}):", g.BCondsCount));
             for (int i = 0; i < g.BCondsCount; i++)
             {
                 LinesLB.Items.Add(" " + g.BConds[i].ToString());
             }
 
             // Scopes descriptions.
-            LinesLB.Items.Add("Scopes:");
+            LinesLB.Items.Add(String.Format("Scopes ({0}):", g.ScopesCount));
             for (int i = 0; i < g.ScopesCount; i++)
             {
                 LinesLB.Items.Add(" " + g.Scopes[i].ToString());
             }
 
             // Border conditions links descriptions.
-            LinesLB.Items.Add("BCondsLinks:");
+            LinesLB.Items.Add(String.Format("BCondsLinks ({0}):", g.BCondsLinksCount));
             for (int i = 0; i < g.BCondsLinksCount; i++)
             {
                 LinesLB.Items.Add(" " + g.BCondsLinks[i].ToString());

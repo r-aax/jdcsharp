@@ -230,7 +230,7 @@ namespace Lib.MathMod.Grid
                 Dir d2 = i2.D;
                 i1.SetNDirs(d1, i2, !d2);
 
-                // Rest two directions.
+                // Reset two directions.
                 Dir od11, od12, od21, od22;
                 d1.GetPairOfOrthogonalDirs(out od11, out od12);
                 d2.GetPairOfOrthogonalDirs(out od21, out od22);
@@ -436,6 +436,109 @@ namespace Lib.MathMod.Grid
         public BCondsLink FindBCondLink(BCond bcond)
         {
             return BCondsLinks.Find(bcl => ((bcl.BCond1 == bcond) || (bcl.BCond2 == bcond)));
+        }
+
+        /// <summary>
+        /// Check if border conditions links contain given border condition.
+        /// </summary>
+        /// <param name="bc">border condition</param>
+        /// <returns><c>true</c> - if border condition is already linked, <c>false</c> - otherwise</returns>
+        public bool IsBCondInBCondsLinks(BCond bc)
+        {
+            for (int i = 0; i < BCondsLinksCount; i++)
+            {
+                BCondsLink bcl = BCondsLinks[i];
+
+                if ((bcl.BCond1 == bc) || (bcl.BCond2 == bc))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Init BConds links.
+        /// </summary>
+        public void InitBCondsLinks()
+        {
+            // Now we support only RotX border conditions links.
+
+            // Check each pair of border conditions.
+            for (int bci = 0; bci < BCondsCount; bci++)
+            {
+                BCond bcondi = BConds[bci];
+
+                if (bcondi.Label.Name != "PERI")
+                {
+                    continue;
+                }
+
+                if (IsBCondInBCondsLinks(bcondi))
+                {
+                    continue;
+                }
+
+                for (int bcj = bci + 1; bcj < BCondsCount; bcj++)
+                {
+                    BCond bcondj = BConds[bcj];
+
+                    if (bcondj.Label.Name != "PERI")
+                    {
+                        continue;
+                    }
+
+                    if (IsBCondInBCondsLinks(bcondi))
+                    {
+                        break;
+                    }
+
+                    if (IsBCondInBCondsLinks(bcondj))
+                    {
+                        continue;
+                    }
+
+                    BCond bc1 = bcondi;
+                    BCond bc2 = bcondj;
+
+                    Dir d1 = bc1.D;
+                    Dir d2 = bc2.D;
+
+                    // Get first pair of orthogonal directions.
+                    Dir od11, od12, od21, od22;
+                    d1.GetPairOfOrthogonalDirs(out od11, out od12);
+                    d2.GetPairOfOrthogonalDirs(out od21, out od22);
+
+                    // Check 4 quarters.
+                    for (int j = 0; j < 4; j++)
+                    {
+                        if (BCond.IsMatchRotX(bc1, od11, od12, bc2, od21, od22))
+                        {
+                            BCondsLink bcl = new BCondsLink(bc1, bc2);
+
+                            bcl.SetNDir(d1, d2);
+
+                            if (BCond.IsMatchRotX(bc1, !od11, od12, bc2, !od21, od22))
+                            {
+                                bcl.SetNDir(od11, od21);
+                                bcl.SetNDir(od12, od22);
+                            }
+                            else
+                            {
+                                bcl.SetNDir(od11, od22);
+                                bcl.SetNDir(od12, od21);
+                            }
+
+                            BCondsLinks.Add(bcl);
+
+                            break;
+                        }
+
+                        Dir.OrthogonalRot(ref od21, ref od22);
+                    }
+                }
+            }
         }
     }
 }

@@ -57,11 +57,7 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="bcond1">first border condition</param>
         /// <param name="bcond2">second border condition</param>
-        /// <param name="i1"><c>I1</c> direction</param>
-        /// <param name="j1"><c>J1</c> direction</param>
-        /// <param name="k1"><c>K1</c> direction</param>
-        public BCondsLink(BCond bcond1, BCond bcond2,
-                          Dir i1, Dir j1, Dir k1)
+        public BCondsLink(BCond bcond1, BCond bcond2)
         {
             if ((bcond1 == null) || (bcond2 == null))
             {
@@ -73,7 +69,20 @@ namespace Lib.MathMod.Grid
 
             LDirs12 = new Dir[Dir.Count];
             LDirs21 = new Dir[Dir.Count];
+        }
 
+        /// <summary>
+        /// Border condition links.
+        /// </summary>
+        /// <param name="bcond1">first border condition</param>
+        /// <param name="bcond2">second border condition</param>
+        /// <param name="i1"><c>I1</c> direction</param>
+        /// <param name="j1"><c>J1</c> direction</param>
+        /// <param name="k1"><c>K1</c> direction</param>
+        public BCondsLink(BCond bcond1, BCond bcond2,
+                          Dir i1, Dir j1, Dir k1)
+            : this(bcond1, bcond2)
+        {
             // LDirs12
             LDirs12[Dir.I1N] = i1;
             LDirs12[Dir.J1N] = j1;
@@ -176,6 +185,19 @@ namespace Lib.MathMod.Grid
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Set pair of directions.
+        /// </summary>
+        /// <param name="d">first border condition direction</param>
+        /// <param name="nd">second border condition direction</param>
+        public void SetNDir(Dir d, Dir nd)
+        {
+            LDirs12[d.N] = nd;
+            LDirs12[(!d).N] = !nd;
+            LDirs21[nd.N] = d;
+            LDirs21[(!nd).N] = !d;
         }
     }
 }

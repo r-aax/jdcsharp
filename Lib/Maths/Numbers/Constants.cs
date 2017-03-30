@@ -12,8 +12,13 @@ namespace Lib.Maths.Numbers
     public class Constants
     {
         /// <summary>
+        /// Small value with order 3.
+        /// </summary>
+        public static readonly double Eps2 = 1e-2;
+
+        /// <summary>
         /// Small value.
         /// </summary>
-        public static readonly double Eps = 1e-8;
+        public static readonly double Eps = 1e-2;
     }
 }

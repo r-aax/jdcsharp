@@ -342,6 +342,7 @@ namespace Lib.MathMod.Grid.Load
                         LoadBlocks(g, pfg_sr, is_iblank);
                         LoadIfacesBCondsScopes(g, ibc_sr);
                         g.SetIfacesNDirs();
+                        g.InitBCondsLinks();
                     }
                 }
             }
