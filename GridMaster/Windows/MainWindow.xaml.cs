@@ -534,5 +534,25 @@ namespace GridMaster.Windows
         {
             GridLoadSavePFGProperties.IsIBlank = false;
         }
+
+        /// <summary>
+        /// Check use border conditions links property.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void GridUseBCondsLinksMI_Checked(object sender, RoutedEventArgs e)
+        {
+            GridProperties.IsBcondsLinks = true;
+        }
+
+        /// <summary>
+        /// Uncheck use border conditions links property.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void GridUseBCondsLinksMI_Unchecked(object sender, RoutedEventArgs e)
+        {
+            GridProperties.IsBcondsLinks = false;
+        }
     }
 }

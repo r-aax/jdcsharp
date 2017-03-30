@@ -113,6 +113,7 @@
     <Compile Include="MathMod\Grid\DescartesObject.cs" />
     <Compile Include="MathMod\Grid\Dir.cs" />
     <Compile Include="MathMod\Grid\Grid.cs" />
+    <Compile Include="MathMod\Grid\GridProperties.cs" />
     <Compile Include="MathMod\Grid\Iface.cs" />
     <Compile Include="MathMod\Grid\IfacesPair.cs" />
     <Compile Include="MathMod\Grid\Load\GridLoaderSaverPFG.cs" />

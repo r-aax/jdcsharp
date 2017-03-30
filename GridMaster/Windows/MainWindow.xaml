@@ -13,6 +13,7 @@
                 <MenuItem Name="GridSaveMI" Header="Save" Click="GridSaveMI_Click"/>
                 <MenuItem Name="GridExportBlocksDistribution" Header="Export blocks distribution" Click="GridExportBlocksDistribution_Click"/>
                 <Separator/>
+                <MenuItem Name="GridUseBCondsLinksMI" IsCheckable="True" Header="Use border conditions links" IsChecked="True" Checked="GridUseBCondsLinksMI_Checked" Unchecked="GridUseBCondsLinksMI_Unchecked"/>
                 <MenuItem Name="GridLoadSaveIBlankMI" IsCheckable="True" Header="Use iblank data" Checked="GridLoadSaveIBlankMI_Checked" Unchecked="GridLoadSaveIBlankMI_Unchecked"/>
             </MenuItem>
             <MenuItem Header="Info">
