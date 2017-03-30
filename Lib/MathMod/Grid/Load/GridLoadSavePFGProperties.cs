@@ -15,5 +15,10 @@ namespace Lib.MathMod.Grid.Load
         /// Uppercase extension.
         /// </summary>
         public static bool IsExtensionUppercase = true;
+
+        /// <summary>
+        /// Use iblank data.
+        /// </summary>
+        public static bool IsIBlank = false;
     }
 }

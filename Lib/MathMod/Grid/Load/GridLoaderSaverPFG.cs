@@ -44,8 +44,7 @@ namespace Lib.MathMod.Grid.Load
         /// </summary>
         /// <param name="g">grid</param>
         /// <param name="sr">stream reader</param>
-        /// <param name="is_blank">isblank feature</param>
-        private static void LoadBlocks(StructuredGrid g, StreamReader sr, bool is_blank)
+        private static void LoadBlocks(StructuredGrid g, StreamReader sr)
         {
             string line;
 
@@ -139,7 +138,7 @@ namespace Lib.MathMod.Grid.Load
                                         }
                                         else
                                         {
-                                            if (is_blank)
+                                            if (GridLoadSavePFGProperties.IsIBlank)
                                             {
                                                 iblank_data_left = cur_block.NodesCount;
                                             }
@@ -324,11 +323,9 @@ namespace Lib.MathMod.Grid.Load
         /// <param name="g">grid</param>
         /// <param name="pfg_file_name">PFG file name</param>
         /// <param name="ibc_file_name">IBC file name</param>
-        /// <param name="is_iblank">isblank feature</param>
         /// <returns><c>true</c> - if grid is loaded, <c>false</c> - otherwise</returns>
         public static bool Load(StructuredGrid g,
-                                string pfg_file_name, string ibc_file_name,
-                                bool is_iblank)
+                                string pfg_file_name, string ibc_file_name)
         {
             bool is_succ = true;
 
@@ -339,7 +336,7 @@ namespace Lib.MathMod.Grid.Load
                     using (StreamReader ibc_sr = new StreamReader(ibc_file_name))
                     {
                         g.Clear();
-                        LoadBlocks(g, pfg_sr, is_iblank);
+                        LoadBlocks(g, pfg_sr);
                         LoadIfacesBCondsScopes(g, ibc_sr);
                         g.SetIfacesNDirs();
                         g.InitBCondsLinks();
@@ -361,11 +358,9 @@ namespace Lib.MathMod.Grid.Load
         /// <param name="g">grid</param>
         /// <param name="pfg_file_name">PFG file name</param>
         /// <param name="ibc_file_name">IBC file name</param>
-        /// <param name="is_blank">iblank flag</param>
         /// <returns><c>true</c> - if grid is saved, <c>false</c> - otherwise</returns>
         public static bool Save(StructuredGrid g, 
-                                string pfg_file_name, string ibc_file_name,
-                                bool is_blank)
+                                string pfg_file_name, string ibc_file_name)
         {
             bool is_succ = true;
 
@@ -375,7 +370,7 @@ namespace Lib.MathMod.Grid.Load
                 {
                     using (StreamWriter ibc_sw = new StreamWriter(ibc_file_name))
                     {
-                        SaveBlocks(g, pfg_sw, is_blank);
+                        SaveBlocks(g, pfg_sw);
                         SaveIfacesBCondsScopes(g, ibc_sw);
                     }
                 }
@@ -394,8 +389,7 @@ namespace Lib.MathMod.Grid.Load
         /// </summary>
         /// <param name="g">grid</param>
         /// <param name="sw">stream</param>
-        /// <param name="is_blank">iblank data flag</param>
-        public static void SaveBlocks(StructuredGrid g, StreamWriter sw, bool is_blank)
+        public static void SaveBlocks(StructuredGrid g, StreamWriter sw)
         {
             int bc = g.BlocksCount;
             const int max_items_count = 5;
@@ -457,7 +451,7 @@ namespace Lib.MathMod.Grid.Load
                 }
 
                 // Write blank data to the end of file.
-                if (is_blank)
+                if (GridLoadSavePFGProperties.IsIBlank)
                 {
                     line = "";
                     items_count = 0;

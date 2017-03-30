@@ -13,7 +13,7 @@
                 <MenuItem Name="GridSaveMI" Header="Save" Click="GridSaveMI_Click"/>
                 <MenuItem Name="GridExportBlocksDistribution" Header="Export blocks distribution" Click="GridExportBlocksDistribution_Click"/>
                 <Separator/>
-                <MenuItem Name="GridLoadSaveIBlankMI" IsCheckable="True" Header="Use iblank data"/>
+                <MenuItem Name="GridLoadSaveIBlankMI" IsCheckable="True" Header="Use iblank data" Checked="GridLoadSaveIBlankMI_Checked" Unchecked="GridLoadSaveIBlankMI_Unchecked"/>
             </MenuItem>
             <MenuItem Header="Info">
                 <MenuItem Name="InfoGridMI" Header="Grid description" Click="InfoGridMI_Click"/>

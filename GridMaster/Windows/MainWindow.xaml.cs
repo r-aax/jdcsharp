@@ -183,7 +183,7 @@ namespace GridMaster.Windows
 
                     string last_action = "Grid " + pfg.Name + " (and *" + ibc.Ext + ") ";
 
-                    if (GridLoaderSaverPFG.Load(Grid, pfg.Name, ibc.Name, GridLoadSaveIBlankMI.IsChecked))
+                    if (GridLoaderSaverPFG.Load(Grid, pfg.Name, ibc.Name))
                     {
                         UpdateLastAction(last_action + "is loaded.");
 
@@ -233,7 +233,7 @@ namespace GridMaster.Windows
                 File ibc = new File(pfg);
                 ibc.ChangeExtensionCaseSensitive(".ibc");
 
-                GridLoaderSaverPFG.Save(Grid, pfg.Name, ibc.Name, GridLoadSaveIBlankMI.IsChecked);
+                GridLoaderSaverPFG.Save(Grid, pfg.Name, ibc.Name);
                 UpdateLastAction("Grid " + pfg.Name + " (and *" + ibc.Ext + ") is saved.");
 
                 // No PERI file used now.
@@ -513,6 +513,26 @@ namespace GridMaster.Windows
             {
                 GridCutter.MinMargin = 1;
             }
+        }
+
+        /// <summary>
+        /// Check iblank data using.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void GridLoadSaveIBlankMI_Checked(object sender, RoutedEventArgs e)
+        {
+            GridLoadSavePFGProperties.IsIBlank = true;
+        }
+
+        /// <summary>
+        /// Uncheck iblank data using.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void GridLoadSaveIBlankMI_Unchecked(object sender, RoutedEventArgs e)
+        {
+            GridLoadSavePFGProperties.IsIBlank = false;
         }
     }
 }
