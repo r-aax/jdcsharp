@@ -627,9 +627,9 @@ namespace Lib.MathMod.Grid.Cut
 
             if (is_cut)
             {
-                for (int di = 0; di < Dir.GenCount; di++)
+                // for (int di = 0; di < Dir.GenCount; di++)
                 {
-                    Dir d = new Dir(di);
+                    Dir d = b.MaxSizeDir(); //new Dir(di);
 
                     for (int i = MinMargin; i < b.Nodes(d) - MinMargin; i++)
                     {
@@ -686,9 +686,9 @@ namespace Lib.MathMod.Grid.Cut
 
             if (is_cut)
             {
-                for (int di = 0; di < Dir.GenCount; di++)
+                // for (int di = 0; di < Dir.GenCount; di++)
                 {
-                    Dir d = new Dir(di);
+                    Dir d = b.MaxSizeDir(); // new Dir(di);
 
                     for (int i = MinMargin; i < b.Nodes(d) - MinMargin; i++)
                     {
