@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Lib.Maths.Numbers;
 using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry3D;
 
@@ -104,6 +105,88 @@ namespace Lib.MathMod.Grid
             }
 
             return new Point(B.C[i, j, k, 0], B.C[i, j, k, 1], B.C[i, j, k, 2]);
+        }
+
+        /// <summary>
+        /// Check match of two borders with directions.
+        /// </summary>
+        /// <param name="b1">first border</param>
+        /// <param name="od11">first direction of first border</param>
+        /// <param name="od12">second direction of first border</param>
+        /// <param name="b2">second border</param>
+        /// <param name="od21">first direction of second border</param>
+        /// <param name="od22">second direction of second border</param>
+        /// <returns><c>true</c> - if objects match, <c>false</c> - otherwise</returns>
+        public static bool IsMatch(Border b1, Dir od11, Dir od12,
+                                   Border b2, Dir od21, Dir od22)
+        {
+            Point p1 = b1.CornerNode(od11, od12);
+            Point p2 = b2.CornerNode(od21, od22);
+
+            if ((p1 == null) || (p2 == null))
+            {
+                return false;
+            }
+
+            return (p1 - p2).Mod2 < Constants.Eps;
+        }
+
+        /// <summary>
+        /// Find directions match for other thin descartes object.
+        /// </summary>
+        /// <param name="tdo">second object</param>
+        /// <param name="is_codirectional">codirectional flag</param>
+        /// <returns>directions - if objects math, null - otherwise</returns>
+        public Dirs3 DirectionsMatchFixed(Border b, bool is_codirectional)
+        {
+            //      codirectional      not codirectional
+            //        *     *             *         *
+            //        |     |             |         |
+            //        |---> |--->         |---> <---|
+            //        |     |             |         |
+            //        *     *             *         *
+
+            // Get general directions.
+            Dir d1 = D;
+            Dir d2 = b.D;
+
+            // Process codirectional flag.
+            if (!is_codirectional)
+            {
+                d2 = !d2;
+            }
+
+            Dirs3 dirs = new Dirs3();
+            dirs.Set(d1, d2);
+
+            // Detect two pairs of orthogonal directions.
+            Dir od11, od12, od21, od22;
+            d1.GetPairOfOrthogonalDirs(out od11, out od12);
+            d2.GetPairOfOrthogonalDirs(out od21, out od22);
+
+            // Check 4 quarters.
+            for (int j = 0; j < 4; j++)
+            {
+                if (IsMatch(this, od11, od12, b, od21, od22))
+                {
+                    if (IsMatch(this, !od11, od12, b, !od21, od22))
+                    {
+                        dirs.Set(od11, od21);
+                        dirs.Set(od12, od22);
+                    }
+                    else
+                    {
+                        dirs.Set(od11, od22);
+                        dirs.Set(od12, od21);
+                    }
+
+                    return dirs;
+                }
+
+                Dir.OrthogonalRot(ref od21, ref od22);
+            }
+
+            return null;
         }
     }
 }

@@ -292,40 +292,15 @@ namespace Lib.MathMod.Grid
                 i1.ResetNDirs();
                 i2.ResetNDirs();
 
-                // General directions.
-                Dir d1 = i1.D;
-                Dir d2 = i2.D;
-                i1.SetNDirs(d1, i2, !d2);
+                Dirs3 dirs = i1.DirectionsMatchFixed(i2, false);
 
-                // Reset two directions.
-                Dir od11, od12, od21, od22;
-                d1.GetPairOfOrthogonalDirs(out od11, out od12);
-                d2.GetPairOfOrthogonalDirs(out od21, out od22);
-
-                // Check 4 quarters.
-                for (int j = 0; j < 4; j++)
-                {
-                    if (Iface.IsMatch(i1, od11, od12, i2, od21, od22))
-                    {
-                        if (Iface.IsMatch(i1, !od11, od12, i2, !od21, od22))
-                        {
-                            i1.SetNDirs(od11, od12, i2, od21, od22);
-                        }
-                        else
-                        {
-                            i1.SetNDirs(od11, od12, i2, od22, od21);
-                        }
-
-                        break;
-                    }
-
-                    Dir.OrthogonalRot(ref od21, ref od22);
-                }
-
-                if (!(i1.IsNDirsCorrect()
-                      && i2.IsNDirsCorrect()))
+                if (dirs == null)
                 {
                     throw new Exception("error while detecting interfaces pair orientation");
+                }
+                else
+                {
+                    i1.SetNDirs(i2, dirs);
                 }
             }
         }

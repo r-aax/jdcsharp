@@ -115,12 +115,39 @@ namespace Lib.MathMod.Grid
         /// <param name="d1">first direction</param>
         /// <param name="d2">second direction</param>
         /// <param name="i">interface</param>
-        /// <param name="nd1">first neighbour interface</param>
-        /// <param name="nd2">second neighbour interface</param>
+        /// <param name="nd1">first neighbour interface direction</param>
+        /// <param name="nd2">second neighbour interface direction</param>
         public void SetNDirs(Dir d1, Dir d2, Iface i, Dir nd1, Dir nd2)
         {
             SetNDirs(d1, i, nd1);
             SetNDirs(d2, i, nd2);
+        }
+
+        /// <summary>
+        /// Set relation between pairs of directions.
+        /// </summary>
+        /// <param name="d1">first direction</param>
+        /// <param name="d2">second direction</param>
+        /// <param name="d3">third direction</param>
+        /// <param name="i">interface</param>
+        /// <param name="nd1">first neighbour interface direction</param>
+        /// <param name="nd2">second neighbour interface direction</param>
+        /// <param name="nd3">third neightbour interface direction</param>
+        public void SetNDirs(Dir d1, Dir d2, Dir d3, Iface i, Dir nd1, Dir nd2, Dir nd3)
+        {
+            SetNDirs(d1, i, nd1);
+            SetNDirs(d2, i, nd2);
+            SetNDirs(d3, i, nd3);
+        }
+
+        /// <summary>
+        /// Set neighbour directions.
+        /// </summary>
+        /// <param name="i">interface</param>
+        /// <param name="dirs">directions</param>
+        public void SetNDirs(Iface i, Dirs3 dirs)
+        {
+            SetNDirs(Dir.I, Dir.J, Dir.K, i, dirs.I, dirs.J, dirs.K);
         }
 
         /// <summary>
@@ -145,30 +172,6 @@ namespace Lib.MathMod.Grid
             }
 
             return true;
-        }
-
-        /// <summary>
-        /// Check match of two ifaces with directions.
-        /// </summary>
-        /// <param name="i1">first interface</param>
-        /// <param name="od11">first direction of first interface</param>
-        /// <param name="od12">second direction of first interface</param>
-        /// <param name="i2">second interface</param>
-        /// <param name="od21">first direction of second interface</param>
-        /// <param name="od22">second direction of second interface</param>
-        /// <returns><c>true</c> - if interfaces match, <c>false</c> - otherwise</returns>
-        public static bool IsMatch(Iface i1, Dir od11, Dir od12,
-                                   Iface i2, Dir od21, Dir od22)
-        {
-            Point p1 = i1.CornerNode(od11, od12);
-            Point p2 = i2.CornerNode(od21, od22);
-
-            if ((p1 == null) || (p2 == null))
-            {
-                return false;
-            }
-
-            return (p1 - p2).Mod2 < Constants.Eps;
         }
 
         /// <summary>
