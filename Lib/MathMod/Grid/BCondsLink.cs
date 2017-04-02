@@ -14,6 +14,15 @@ namespace Lib.MathMod.Grid
     public class BCondsLink
     {
         /// <summary>
+        /// Kind of link.
+        /// </summary>
+        public string Kind
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// First border condition.
         /// </summary>
         public BCond BCond1
@@ -159,9 +168,9 @@ namespace Lib.MathMod.Grid
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("    : {0, 4} -- {1, 4} [{2}, {3}, {4}]",
+            return String.Format("    : {0, 4} -- {1, 4} [{2}, {3}, {4}], {5}",
                                  BCond1.Id, BCond2.Id,
-                                 LDirs12[0], LDirs12[1], LDirs12[2]);
+                                 LDirs12[0], LDirs12[1], LDirs12[2], Kind);
         }
 
         /// <summary>
@@ -177,7 +186,7 @@ namespace Lib.MathMod.Grid
                 {
                     nm = nm.Substring(0, 6);
 
-                    if ((nm == "PERI_C") || (nm == "PERI_R"))
+                    if (nm == "PERI_C")
                     {
                         nm = String.Format("{0}-{1}", nm, BCond1.Id);
                         BCond1.Label.Name = nm;

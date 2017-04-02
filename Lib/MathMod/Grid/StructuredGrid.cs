@@ -485,79 +485,72 @@ namespace Lib.MathMod.Grid
         /// </summary>
         public void InitBCondsLinks()
         {
-            // Now we support only RotX border conditions links.
-
             // Check each pair of border conditions.
-            for (int bci = 0; bci < BCondsCount; bci++)
+            for (int i = 0; i < BCondsCount; i++)
             {
-                BCond bcondi = BConds[bci];
+                BCond bci = BConds[i];
 
-                if (bcondi.Label.Name != "PERI")
+                if (!bci.IsPeri)
                 {
                     continue;
                 }
 
-                if (bcondi.IsLinked())
+                if (bci.IsLinked())
                 {
                     continue;
                 }
 
-                for (int bcj = bci + 1; bcj < BCondsCount; bcj++)
+                for (int j = i + 1; j < BCondsCount; j++)
                 {
-                    BCond bcondj = BConds[bcj];
+                    BCond bcj = BConds[j];
 
-                    if (bcondj.Label.Name != "PERI")
+                    if (!bcj.IsPeri)
                     {
                         continue;
                     }
 
-                    if (bcondi.IsLinked())
-                    {
-                        break;
-                    }
-
-                    if (bcondj.IsLinked())
+                    if (bcj.IsLinked())
                     {
                         continue;
                     }
 
-                    BCond bc1 = bcondi;
-                    BCond bc2 = bcondj;
+                    Dirs3 dirs = null;
+                    string kind = "";
 
-                    Dir d1 = bc1.D;
-                    Dir d2 = bc2.D;
-
-                    // Get first pair of orthogonal directions.
-                    Dir od11, od12, od21, od22;
-                    d1.GetPairOfOrthogonalDirs(out od11, out od12);
-                    d2.GetPairOfOrthogonalDirs(out od21, out od22);
-
-                    // Check 4 quarters.
-                    for (int j = 0; j < 4; j++)
+                    // Check pair of not linked PERI border conditions.
+                    if (bci.Label.Name.StartsWith("PERI_RX")
+                        && bcj.Label.Name.StartsWith("PERI_RX"))
                     {
-                        if (BCond.IsMatchRotX(bc1, od11, od12, bc2, od21, od22))
-                        {
-                            BCondsLink bcl = new BCondsLink(bc1, bc2);
+                        // Two rotation RX border conditions.
+                        dirs = bci.DirectionsMatchRotX(bcj, true);
+                        kind = "Rot X";
+                    }
+                    else if ((bci.Label.Name == "PERI_C")
+                             && (bcj.Label.Name == "PERI_C"))
+                    {
+                        // Main pair of parallel move PERI conditions.
+                        dirs = bci.DirectionsMatchParallelMove(bcj, true);
+                        kind = "Parallel move";
+                    }
+                    else if (bci.Label.Name.StartsWith("PERI_C-")
+                             && bcj.Label.Name.StartsWith("PERI_C-"))
+                    {
+                        // Other pairs of parallel move PERI conditions.
+                        dirs = bci.DirectionsMatchParallelMove(bcj, true);
+                        kind = "Parallel move";
+                    }
+                    else
+                    {
+                        // No variants any more.
+                        ;
+                    }
 
-                            bcl.SetNDir(d1, d2);
-
-                            if (BCond.IsMatchRotX(bc1, !od11, od12, bc2, !od21, od22))
-                            {
-                                bcl.SetNDir(od11, od21);
-                                bcl.SetNDir(od12, od22);
-                            }
-                            else
-                            {
-                                bcl.SetNDir(od11, od22);
-                                bcl.SetNDir(od12, od21);
-                            }
-
-                            BCondsLinks.Add(bcl);
-
-                            break;
-                        }
-
-                        Dir.OrthogonalRot(ref od21, ref od22);
+                    // Coordination match is detected.
+                    if (dirs != null)
+                    {
+                        BCondsLink bcl = new BCondsLink(bci, bcj, dirs.I, dirs.J, dirs.K);
+                        bcl.Kind = kind;
+                        BCondsLinks.Add(bcl);
                     }
                 }
             }

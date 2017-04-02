@@ -160,5 +160,16 @@ namespace Lib.MathMod.Grid
 
             return false;
         }
+
+        /// <summary>
+        /// Check if it is PERI corder condition.
+        /// </summary>
+        public bool IsPeri
+        {
+            get
+            {
+                return Label.Name.StartsWith("PERI");
+            }
+        }
     }
 }

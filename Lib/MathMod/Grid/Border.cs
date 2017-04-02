@@ -144,5 +144,33 @@ namespace Lib.MathMod.Grid
 
             return bc_this.DirectionsMatchFixed(bc, is_codirectional);
         }
+
+        /// <summary>
+        /// Find directions match with parallel move.
+        /// </summary>
+        /// <param name="b">second object</param>
+        /// <param name="is_codirectional">codirectional flag</param>
+        /// <returns>directions - if objects match, null - otherwise</returns>
+        public Dirs3 DirectionsMatchParallelMove(Border b, bool is_codirectional)
+        {
+            BorderCorners bc_this = new BorderCorners(this);
+            BorderCorners bc = new BorderCorners(b);
+
+            return bc_this.DirectionsMatchParallelMove(bc, is_codirectional);
+        }
+
+        /// <summary>
+        /// Find directions match with RotX.
+        /// </summary>
+        /// <param name="b">second object</param>
+        /// <param name="is_codirectional">codirectional flag</param>
+        /// <returns>directions - if objects match, null - otherwise</returns>
+        public Dirs3 DirectionsMatchRotX(Border b, bool is_codirectional)
+        {
+            BorderCorners bc_this = new BorderCorners(this);
+            BorderCorners bc = new BorderCorners(b);
+
+            return bc_this.DirectionsMatchRotX(bc, is_codirectional);
+        }
     }
 }
