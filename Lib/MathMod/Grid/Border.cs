@@ -132,61 +132,17 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Find directions match for other thin descartes object.
+        /// Find directions match for other border.
         /// </summary>
-        /// <param name="tdo">second object</param>
+        /// <param name="b">second object</param>
         /// <param name="is_codirectional">codirectional flag</param>
         /// <returns>directions - if objects math, null - otherwise</returns>
         public Dirs3 DirectionsMatchFixed(Border b, bool is_codirectional)
         {
-            //      codirectional      not codirectional
-            //        *     *             *         *
-            //        |     |             |         |
-            //        |---> |--->         |---> <---|
-            //        |     |             |         |
-            //        *     *             *         *
+            BorderCorners bc_this = new BorderCorners(this);
+            BorderCorners bc = new BorderCorners(b);
 
-            // Get general directions.
-            Dir d1 = D;
-            Dir d2 = b.D;
-
-            // Process codirectional flag.
-            if (!is_codirectional)
-            {
-                d2 = !d2;
-            }
-
-            Dirs3 dirs = new Dirs3();
-            dirs.Set(d1, d2);
-
-            // Detect two pairs of orthogonal directions.
-            Dir od11, od12, od21, od22;
-            d1.GetPairOfOrthogonalDirs(out od11, out od12);
-            d2.GetPairOfOrthogonalDirs(out od21, out od22);
-
-            // Check 4 quarters.
-            for (int j = 0; j < 4; j++)
-            {
-                if (IsMatch(this, od11, od12, b, od21, od22))
-                {
-                    if (IsMatch(this, !od11, od12, b, !od21, od22))
-                    {
-                        dirs.Set(od11, od21);
-                        dirs.Set(od12, od22);
-                    }
-                    else
-                    {
-                        dirs.Set(od11, od22);
-                        dirs.Set(od12, od21);
-                    }
-
-                    return dirs;
-                }
-
-                Dir.OrthogonalRot(ref od21, ref od22);
-            }
-
-            return null;
+            return bc_this.DirectionsMatchFixed(bc, is_codirectional);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Lib.Maths.Geometry.Geometry3D
     /// <summary>
     /// 3D point.
     /// </summary>
-    public class Point : Vector
+    public class Point : Vector, ICloneable
     {
         /// <summary>
         /// Default constructor.
@@ -322,6 +322,15 @@ namespace Lib.Maths.Geometry.Geometry3D
             }
 
             Debug.Assert(IsIn(par), "Too big shift for toroid operation.");
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>point</returns>
+        public object Clone()
+        {
+            return new Point(X, Y, Z);
         }
     }
 }
