@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 using Lib.Maths.Numbers;
+using Lib.Maths;
 using Vector = Lib.Maths.Geometry.Geometry3D.Vector;
 using Point = Lib.Maths.Geometry.Geometry3D.Point;
 
@@ -226,6 +227,27 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Rotation around X axis.
+        /// </summary>
+        /// <param name="s">sine</param>
+        /// <param name="c">cosine</param>
+        public void RotX(double s, double c)
+        {
+            for (int i = 0; i < Dir.Count; i++)
+            {
+                for (int j = i + 1; j < Dir.Count; j++)
+                {
+                    Point p = Points[i, j];
+
+                    if (p != null)
+                    {
+                        p.RotX(s, c);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Check matching.
         /// </summary>
         /// <param name="bc1">first border corners</param>
@@ -320,6 +342,30 @@ namespace Lib.MathMod.Grid
             move.Move(bc.Center() - move.Center());
 
             return move.DirectionsMatchFixed(bc, is_codirectional);
+        }
+
+        /// <summary>
+        /// Find match with OX rotation.
+        /// </summary>
+        /// <param name="bc">second object</param>
+        /// <param name="is_codirectional">codirectional flag</param>
+        /// <returns>directions - if objects math, null - otherwise</returns>
+        public Dirs3 DirectionsMatchRotX(BorderCorners bc, bool is_codirectional)
+        {
+            // First rotate two borders to Y = 0.
+            BorderCorners bc1 = Clone() as BorderCorners;
+            BorderCorners bc2 = bc.Clone() as BorderCorners;
+            Point c1 = bc1.Center();
+            Point c2 = bc2.Center();
+            double h1 = Maths.Maths.Hypot(c1.Y, c1.Z);
+            double h2 = Maths.Maths.Hypot(c2.Y, c2.Z);
+
+            Debug.Assert((h1 != 0.0) && (h2 != 0.0), "wrong coordinates for borders corners while RotX matching");
+
+            bc1.RotX(-c1.Z / h1, c1.Y / h1);
+            bc2.RotX(-c2.Z / h2, c2.Y / h2);
+
+            return bc1.DirectionsMatchFixed(bc2, is_codirectional);
         }
     }
 }

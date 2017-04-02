@@ -238,22 +238,30 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Rotate <c>x</c> contraclockwise.
+        /// Rorate <c>x</c> contraclockwise.
         /// </summary>
-        /// <param name="a">angle</param>
-        public void RotX(double a)
+        /// <param name="s">angle sine</param>
+        /// <param name="c">angle cosine</param>
+        public void RotX(double s, double c)
         {
             double y = Y;
             double z = Z;
-            double s = Math.Sin(a);
-            double c = Math.Cos(a);
 
             Y = y * c - z * s;
             Z = y * s + z * c;
         }
 
         /// <summary>
-        /// Rotate <c>x</c> around given vector.
+        /// Rotate <c>x</c> contraclckwise.
+        /// </summary>
+        /// <param name="a">angle</param>
+        public void RotX(double a)
+        {
+            RotX(Math.Sin(a), Math.Cos(a));
+        }
+
+        /// <summary>
+        /// Rotate <c>x</c> with given vector.
         /// </summary>
         /// <param name="v">vector</param>
         /// <param name="a">angle</param>
@@ -280,7 +288,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Rotate <c>y</c> around given vector.
+        /// Rotate <c>y</c> with given vector.
         /// </summary>
         /// <param name="v">vector</param>
         /// <param name="a">angle</param>
@@ -307,7 +315,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Rotate <c>z</c> around given vector.
+        /// Rotate <c>z</c> with given vector.
         /// </summary>
         /// <param name="v">vector</param>
         /// <param name="a">angle</param>
@@ -346,7 +354,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Rotate with given axis around given vector.
+        /// Rotate with given axis with given vector.
         /// </summary>
         /// <param name="v">vector</param>
         /// <param name="a">angle</param>

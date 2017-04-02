@@ -21,5 +21,16 @@ namespace Lib.Maths
         {
             return a * a + b * b;
         }
+
+        /// <summary>
+        /// Hypot function.
+        /// </summary>
+        /// <param name="a">first cathet</param>
+        /// <param name="b">second cathet</param>
+        /// <returns>hypotenuse in double power</returns>
+        public static double Hypot(double a, double b)
+        {
+            return Math.Sqrt(Hypot2(a, b));
+        }
     }
 }
