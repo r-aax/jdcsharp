@@ -144,17 +144,6 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Get corner node.
-        /// </summary>
-        /// <param name="d1">first direction</param>
-        /// <param name="d2">second direction</param>
-        /// <returns>corner point</returns>
-        public Point CornerNode(Dir d1, Dir d2)
-        {
-            return Points[d1.N, d2.N];
-        }
-
-        /// <summary>
         /// Get center of border corners.
         /// </summary>
         /// <returns>center</returns>
@@ -260,8 +249,8 @@ namespace Lib.MathMod.Grid
         public static bool IsMatch(BorderCorners bc1, Dir od11, Dir od12,
                                    BorderCorners bc2, Dir od21, Dir od22)
         {
-            Point p1 = bc1.CornerNode(od11, od12);
-            Point p2 = bc2.CornerNode(od21, od22);
+            Point p1 = bc1.Get(od11, od12);
+            Point p2 = bc2.Get(od21, od22);
 
             if ((p1 == null) || (p2 == null))
             {
