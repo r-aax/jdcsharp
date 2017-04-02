@@ -132,6 +132,19 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Check sizes match of two borders.
+        /// </summary>
+        /// <param name="b">border to check with</param>
+        /// <param name="dirs">dirs relations</param>
+        /// <returns><c>true</c> - if sizes match, <c>false</c> - otherwise</returns>
+        public bool IsSizesMatch(Border b, Dirs3 dirs)
+        {
+            return (Size(Dir.I) == b.Size(dirs.I.Gen))
+                   && (Size(Dir.J) == b.Size(dirs.J.Gen))
+                   && (Size(Dir.K) == b.Size(dirs.K.Gen));
+        }
+
+        /// <summary>
         /// Find directions match for other border.
         /// </summary>
         /// <param name="b">second object</param>
@@ -141,8 +154,14 @@ namespace Lib.MathMod.Grid
         {
             BorderCorners bc_this = new BorderCorners(this);
             BorderCorners bc = new BorderCorners(b);
+            Dirs3 dirs = bc_this.DirectionsMatchFixed(bc, is_codirectional);
 
-            return bc_this.DirectionsMatchFixed(bc, is_codirectional);
+            if (dirs == null)
+            {
+                return null;
+            }
+
+            return IsSizesMatch(b, dirs) ? dirs : null;
         }
 
         /// <summary>
@@ -155,8 +174,14 @@ namespace Lib.MathMod.Grid
         {
             BorderCorners bc_this = new BorderCorners(this);
             BorderCorners bc = new BorderCorners(b);
+            Dirs3 dirs = bc_this.DirectionsMatchParallelMove(bc, is_codirectional);
 
-            return bc_this.DirectionsMatchParallelMove(bc, is_codirectional);
+            if (dirs == null)
+            {
+                return null;
+            }
+
+            return IsSizesMatch(b, dirs) ? dirs : null;
         }
 
         /// <summary>
@@ -169,8 +194,14 @@ namespace Lib.MathMod.Grid
         {
             BorderCorners bc_this = new BorderCorners(this);
             BorderCorners bc = new BorderCorners(b);
+            Dirs3 dirs = bc_this.DirectionsMatchRotX(bc, is_codirectional);
 
-            return bc_this.DirectionsMatchRotX(bc, is_codirectional);
+            if (dirs == null)
+            {
+                return null;
+            }
+
+            return IsSizesMatch(b, dirs) ? dirs : null;
         }
     }
 }

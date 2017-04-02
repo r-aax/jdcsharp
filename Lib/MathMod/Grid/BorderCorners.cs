@@ -294,19 +294,56 @@ namespace Lib.MathMod.Grid
             d2.GetPairOfOrthogonalDirs(out od21, out od22);
 
             // Check 4 quarters.
+            //      ^  B *----* A     B' *----* A'
+            //   d2 |    |    |    ~     |    |
+            //      |  C *----* D     C' *----* D'
+            //             d1              d1
+            //           ----->          ----->
             for (int j = 0; j < 4; j++)
             {
                 if (IsMatch(this, od11, od12, bc, od21, od22))
                 {
+                    // A = A'
+
+                    if (!IsMatch(this, !od11, !od12, bc, !od21, !od22))
+                    {
+                        // A = A', but C != C'. There is no relations between this pair of borders.
+                        break;
+                    }
+
+                    // A = A', C = C'
+
                     if (IsMatch(this, !od11, od12, bc, !od21, od22))
                     {
+                        // A = A', C = C'
+                        // B = B'
+
+                        if (!IsMatch(this, od11, !od12, bc, od21, !od22))
+                        {
+                            // D != D'
+                            break;
+                        }
+
                         dirs.Set(od11, od21);
                         dirs.Set(od12, od22);
                     }
-                    else
+                    else if (IsMatch(this, !od11, od12, bc, od21, !od22))
                     {
+                        // A = A', C = C'
+                        // B = D'
+
+                        if (!IsMatch(this, od11, !od12, bc, !od21, od22))
+                        {
+                            // D != B'
+                            break;
+                        }
+
                         dirs.Set(od11, od22);
                         dirs.Set(od12, od21);
+                    }
+                    else
+                    {
+                        break;
                     }
 
                     return dirs;
@@ -314,6 +351,8 @@ namespace Lib.MathMod.Grid
 
                 Dir.OrthogonalRot(ref od21, ref od22);
             }
+
+            // No one corner match detected.
 
             return null;
         }
