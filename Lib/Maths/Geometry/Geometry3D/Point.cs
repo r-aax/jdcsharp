@@ -128,6 +128,28 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
+        /// Multiply on double.
+        /// </summary>
+        /// <param name="p">point</param>
+        /// <param name="d">value</param>
+        /// <returns>new point</returns>
+        public static Point operator *(Point p, double d)
+        {
+            return new Point((p as Vector) * 0.25);
+        }
+
+        /// <summary>
+        /// Multiply on double.
+        /// </summary>
+        /// <param name="d">value</param>
+        /// <param name="p">point</param>
+        /// <returns>new point</returns>
+        public static Point operator *(double d, Point p)
+        {
+            return p * d;
+        }
+
+        /// <summary>
         /// Random point.
         /// </summary>
         /// <param name="par">parallelepiped</param>

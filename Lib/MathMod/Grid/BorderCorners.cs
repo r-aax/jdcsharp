@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using Lib.Maths.Numbers;
+using Vector = Lib.Maths.Geometry.Geometry3D.Vector;
 using Point = Lib.Maths.Geometry.Geometry3D.Point;
 
 namespace Lib.MathMod.Grid
@@ -12,7 +14,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Corners of border.
     /// </summary>
-    public class BorderCorners
+    public class BorderCorners : ICloneable
     {
         /// <summary>
         /// Direction.
@@ -25,12 +27,98 @@ namespace Lib.MathMod.Grid
         private Point[,] Points;
 
         /// <summary>
-        /// Constructor.
+        /// Set corner point.
+        /// </summary>
+        /// <param name="d1">first direction</param>
+        /// <param name="d2">second direction</param>
+        /// <param name="p">point</param>
+        public void Set(Dir d1, Dir d2, Point p)
+        {
+            Debug.Assert(!d1.IsCollinear(d2), "wrong directions pair in border corners setter");
+
+            if (d1.N < d2.N)
+            {
+                Points[d1.N, d2.N] = p;
+            }
+            else
+            {
+                Points[d2.N, d1.N] = p;
+            }
+        }
+
+        /// <summary>
+        /// Get corner.
+        /// </summary>
+        /// <param name="d1">first direction</param>
+        /// <param name="d2">second direction</param>
+        /// <returns>corner point</returns>
+        public Point Get(Dir d1, Dir d2)
+        {
+            return (d1.N < d2.N) ? Points[d1.N, d2.N] : Points[d2.N, d1.N];
+        }
+
+        /// <summary>
+        /// Set all corners from border.
         /// </summary>
         /// <param name="b">border</param>
-        public BorderCorners(Border b)
+        public void SetPoints(Border b)
         {
-            D = b.D;
+            //       Border corners matrix example (IJ directions).
+            //         *------*------*------*------*------*------*
+            //         |  I+  |  J+  |  K+  |  I-  |  J-  |  K-  |
+            //    *----*------*------*------*------*------*------*
+            //    | I+ |   c  | I+J+ | null |   c  | I+J- | null |
+            //    | J+ |   o  |   c  | null | I-J+ |   c  | null |
+            //    | K+ |   o  |   o  |   c  | null | null |   c  |
+            //    | I- |   c  |   o  |   o  |   c  | I-J- | null |
+            //    | J- |   o  |   c  |   o  |   o  |   c  | null |
+            //    | K- |   o  |   o  |   c  |   o  |   o  |   c  |
+            //    *----*------*------*------*------*------*------*
+            //
+            //       Border corners matrix example (IK directions).
+            //         *------*------*------*------*------*------*
+            //         |  I+  |  J+  |  K+  |  I-  |  J-  |  K-  |
+            //    *----*------*------*------*------*------*------*
+            //    | I+ |   c  | null | I+K+ |   c  | null | I+K- |
+            //    | J+ |   o  |   c  | null | null |   c  | null |
+            //    | K+ |   o  |   o  |   c  | I-K+ | null |   c  |
+            //    | I- |   c  |   o  |   o  |   c  | null | I-K- |
+            //    | J- |   o  |   c  |   o  |   o  |   c  | null |
+            //    | K- |   o  |   o  |   c  |   o  |   o  |   c  |
+            //    *----*------*------*------*------*------*------*
+            //
+            //       Border corners matrix example (JK directions).
+            //         *------*------*------*------*------*------*
+            //         |  I+  |  J+  |  K+  |  I-  |  J-  |  K-  |
+            //    *----*------*------*------*------*------*------*
+            //    | I+ |   c  | null | null |   c  | null | null |
+            //    | J+ |   o  |   c  | J+K+ | null |   c  | J+K- |
+            //    | K+ |   o  |   o  |   c  | null | J-K+ |   c  |
+            //    | I- |   c  |   o  |   o  |   c  | null | null |
+            //    | J- |   o  |   c  |   o  |   o  |   c  | J-K- |
+            //    | K- |   o  |   o  |   c  |   o  |   o  |   c  |
+            //    *----*------*------*------*------*------*------*
+            //
+            //         c - collinear directions
+            //         o - order violation
+            //         null - if wrong directions is used
+
+            Dir od1, od2;
+
+            D.GetPairOfOrthogonalDirs(out od1, out od2);
+
+            // Set to matrix.
+            Set(od1, od2, b.CornerNode(od1, od2).Clone() as Point);
+            Set(od1, !od2, b.CornerNode(od1, !od2).Clone() as Point);
+            Set(!od1, od2, b.CornerNode(!od1, od2).Clone() as Point);
+            Set(!od1, !od2, b.CornerNode(!od1, !od2).Clone() as Point);
+        }
+
+        /// <summary>
+        /// Empty constructor.
+        /// </summary>
+        public BorderCorners()
+        {
             Points = new Point[Dir.Count, Dir.Count];
 
             // Set all corners to null.
@@ -41,13 +129,17 @@ namespace Lib.MathMod.Grid
                     Points[i, j] = null;
                 }
             }
+        }
 
-            Dir od1, od2;
-            b.D.GetPairOfOrthogonalDirs(out od1, out od2);
-            Points[od1.N, od2.N] = b.CornerNode(od1, od2).Clone() as Point;
-            Points[od1.N, (!od2).N] = b.CornerNode(od1, !od2).Clone() as Point;
-            Points[(!od1).N, od2.N] = b.CornerNode(!od1, od2).Clone() as Point;
-            Points[(!od1).N, (!od2).N] = b.CornerNode(!od1, !od2).Clone() as Point;
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="b">border</param>
+        public BorderCorners(Border b)
+            : this()
+        {
+            D = b.D;
+            SetPoints(b);
         }
 
         /// <summary>
@@ -59,6 +151,78 @@ namespace Lib.MathMod.Grid
         public Point CornerNode(Dir d1, Dir d2)
         {
             return Points[d1.N, d2.N];
+        }
+
+        /// <summary>
+        /// Get center of border corners.
+        /// </summary>
+        /// <returns>center</returns>
+        public Point Center()
+        {
+            Point p = new Point();
+
+            for (int i = 0; i < Dir.Count; i++)
+            {
+                for (int j = i + 1; j < Dir.Count; j++)
+                {
+                    Point add = Points[i, j];
+
+                    if (add != null)
+                    {
+                        p = p + add;
+                    }
+                }
+            }
+
+            p = 0.25 * p;
+
+            return p;
+        }
+
+        /// <summary>
+        /// Clone border corners.
+        /// </summary>
+        /// <returns>copy</returns>
+        public object Clone()
+        {
+            BorderCorners bc = new BorderCorners();
+
+            bc.D = D.Clone() as Dir;
+
+            for (int i = 0; i < Dir.Count; i++)
+            {
+                for (int j = 0; j < Dir.Count; j++)
+                {
+                    Point p = Points[i, j];
+
+                    if (p != null)
+                    {
+                        bc.Points[i, j] = p.Clone() as Point;
+                    }
+                }
+            }
+
+            return bc;
+        }
+
+        /// <summary>
+        /// Move.
+        /// </summary>
+        /// <param name="v">vector</param>
+        public void Move(Vector v)
+        {
+            for (int i = 0; i < Dir.Count; i++)
+            {
+                for (int j = i + 1; j < Dir.Count; j++)
+                {
+                    Point p = Points[i, j];
+
+                    if (p != null)
+                    {
+                        Points[i, j] = p + v;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -141,6 +305,21 @@ namespace Lib.MathMod.Grid
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Find match with parallel move.
+        /// </summary>
+        /// <param name="bc">second object</param>
+        /// <param name="is_codirectional">codirectional flag</param>
+        /// <returns>directions - if objects math, null - otherwise</returns>
+        public Dirs3 DirectionsMatchParallelMove(BorderCorners bc, bool is_codirectional)
+        {
+            // First move to another border (vector than connects centers of borders).
+            BorderCorners move = Clone() as BorderCorners;
+            move.Move(bc.Center() - move.Center());
+
+            return move.DirectionsMatchFixed(bc, is_codirectional);
         }
     }
 }

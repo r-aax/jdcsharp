@@ -9,7 +9,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Grid direction.
     /// </summary>
-    public class Dir
+    public class Dir : ICloneable
     {
         /// <summary>
         /// No number.
@@ -360,6 +360,16 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Check if direction collinear to another direction.
+        /// </summary>
+        /// <param name="d">another direction</param>
+        /// <returns><c>true</c> - if collinear, <c>false</c> - otherwise</returns>
+        public bool IsCollinear(Dir d)
+        {
+            return Gen == d.Gen;
+        }
+
+        /// <summary>
         /// Check if three directions produce the basis.
         /// </summary>
         /// <param name="d1">first direction</param>
@@ -400,6 +410,15 @@ namespace Lib.MathMod.Grid
 
             d1 = d2;
             d2 = !oldd1;
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>copy</returns>
+        public object Clone()
+        {
+            return new Dir(N);
         }
     }
 }
