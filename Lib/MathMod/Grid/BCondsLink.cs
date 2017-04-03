@@ -144,7 +144,7 @@ namespace Lib.MathMod.Grid
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 2], g.BConds[ind - 1],
                                                 LDirs12[0], LDirs12[1], LDirs12[2]);
                 g.BCondsLinks.Add(bcl);
-                //bcl.AddNameSuffixIfPERI();
+                bcl.AddNameSuffixIfPERI();
             }
             else if (bcond == BCond2)
             {
@@ -152,14 +152,14 @@ namespace Lib.MathMod.Grid
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 1], g.BConds[ind - 2],
                                                 LDirs12[0], LDirs12[1], LDirs12[2]);
                 g.BCondsLinks.Add(bcl);
-                //bcl.AddNameSuffixIfPERI();
+                bcl.AddNameSuffixIfPERI();
             }
             else
             {
                 throw new Exception("border condition is not found in BCondsLink");
             }
 
-            //AddNameSuffixIfPERI();
+            AddNameSuffixIfPERI();
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// If name of border condition is PERI_C* or PERI_R* add suffix.
+        /// If name of border condition is PERI_C* add suffix.
         /// </summary>
         public void AddNameSuffixIfPERI()
         {
