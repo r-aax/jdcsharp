@@ -530,14 +530,14 @@ namespace Lib.MathMod.Grid
                     {
                         // Main pair of parallel move PERI conditions.
                         dirs = bci.DirectionsMatchParallelMove(bcj, true);
-                        kind = "Parallel move";
+                        kind = "Parallel mv";
                     }
                     else if (bci.Label.Name.StartsWith("PERI_C-")
                              && bcj.Label.Name.StartsWith("PERI_C-"))
                     {
                         // Other pairs of parallel move PERI conditions.
                         dirs = bci.DirectionsMatchParallelMove(bcj, true);
-                        kind = "Parallel move";
+                        kind = "Parallel mv";
                     }
                     else
                     {

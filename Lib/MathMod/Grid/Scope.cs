@@ -91,7 +91,7 @@ namespace Lib.MathMod.Grid
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("{0,4}: {1,4} [{2,3} - {3,3}, {4,3} - {5,3}, {6,3} - {7,3}] {8,12} {9,12} {10,12}",
+            return String.Format("{0,4}: {1,4} [{2,3} - {3,3}, {4,3} - {5,3}, {6,3} - {7,3}] {8,-12} {9,-12} {10,-12}",
                                  Id, B.Id, I0, I1, J0, J1, K0, K1,
                                  Label.Type, Label.Subtype, Label.Name);
         }

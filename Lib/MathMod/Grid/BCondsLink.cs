@@ -143,6 +143,7 @@ namespace Lib.MathMod.Grid
                 int ind = g.BCondsCount;
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 2], g.BConds[ind - 1],
                                                 LDirs12[0], LDirs12[1], LDirs12[2]);
+                bcl.Kind = Kind;
                 g.BCondsLinks.Add(bcl);
                 bcl.AddNameSuffixIfPERI();
             }
@@ -151,6 +152,7 @@ namespace Lib.MathMod.Grid
                 int ind = g.BCondsCount;
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 1], g.BConds[ind - 2],
                                                 LDirs12[0], LDirs12[1], LDirs12[2]);
+                bcl.Kind = Kind;
                 g.BCondsLinks.Add(bcl);
                 bcl.AddNameSuffixIfPERI();
             }
@@ -168,9 +170,9 @@ namespace Lib.MathMod.Grid
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("    : {0, 4} -- {1, 4} [{2}, {3}, {4}], {5}",
+            return String.Format("    : {0, 4} -- {1, 4} [{2}, {3}, {4}] {5, -12} {6, -12}",
                                  BCond1.Id, BCond2.Id,
-                                 LDirs12[0], LDirs12[1], LDirs12[2], Kind);
+                                 LDirs12[0], LDirs12[1], LDirs12[2], Kind, BCond1.Label.Name);
         }
 
         /// <summary>
