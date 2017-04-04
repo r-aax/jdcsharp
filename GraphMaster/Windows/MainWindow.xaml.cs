@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Collections.Generic;
+using System.Threading;
 
 using Lib.Maths.Numbers;
 using Lib.Draw;
@@ -2319,44 +2320,71 @@ namespace GraphMaster.Windows
         /// <param name="e">parameters</param>
         private void TestPartitioning_MI_Click(object sender, RoutedEventArgs e)
         {
-            int n = 0;
+            LB.Items.Clear();
 
-            TB.Clear();
+            int pc = 32;
+            double eps1 = 0.5;
+            double eps2 = 0.01;
 
-            n = 2;
-            TB.Text += "UG\n";
-            while (n <= 64)
+            // Get processes count.
+            EditIntWindow w = new EditIntWindow(pc, "Enter points count");
+            w.ShowDialog();
+            if (!w.IsAccepted)
             {
-                UniformGreedyPartitioner.Partition(Graph, n);
-                TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
-                n *= 2;
+                return;
+            }
+            pc = w.Result;
+
+            // Title.
+            LB.Items.Add(String.Format("RVPEP pc = {0}", pc));
+
+            // Partition.
+            Point3D[] points = RandomVolumePointsPartitioner.RandomPoints(Graph, pc);
+            double alpha = 1.0;
+            while (alpha >= 0.0)
+            {
+                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, points, pc, alpha);
+                LB.Items.Add(PartitioningStatistics.InterpartitionEdgesFactor(Graph));
+                alpha -= eps1;
             }
 
-            n = 2;
-            TB.Text += "RVPNP\n";
-            while (n <= 64)
+            DialogResult res = System.Windows.Forms.MessageBox.Show("Continue with eps = 0.01?", "Long eps confirm",
+                                                                    MessageBoxButtons.YesNo);
+            if (res == System.Windows.Forms.DialogResult.Yes)
             {
-                RandomVolumePointsPartitioner.PartitionToNearestPropagation(Graph, n);
-                TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
-                n *= 2;
+                // Partition (second wave).
+                alpha = 1.0;
+                LB.Items.Add("---");
+                while (alpha >= 0.0)
+                {
+                    RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, points, pc, alpha);
+                    LB.Items.Add(PartitioningStatistics.InterpartitionEdgesFactor(Graph));
+                    alpha -= eps2;
+                }
             }
+        }
 
-            n = 2;
-            TB.Text += "RVPEP/NM\n";
-            while (n <= 64)
-            {
-                RandomVolumePointsPartitioner.PartitionEdgesPropagationNodesMetric(Graph, n);
-                TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
-                n *= 2;
-            }
+        /// <summary>
+        /// Save text.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TextSave_MI_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Text (*.txt)|*.txt";
 
-            n = 2;
-            TB.Text += "RVPEP/EM\n";
-            while (n <= 64)
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                RandomVolumePointsPartitioner.PartitionEdgesPropagationEdgesMetric(Graph, n);
-                TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
-                n *= 2;
+                using (StreamWriter sw = new StreamWriter(sfd.FileName))
+                {
+                    for (int i = 0; i < LB.Items.Count; i++)
+                    {
+                        sw.Write(LB.Items[i] + "\n");
+                    }
+
+                    sw.Close();
+                }
             }
         }
     }

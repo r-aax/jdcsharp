@@ -25,7 +25,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <param name="g">graph</param>
         /// <param name="pc">partitions count</param>
         /// <returns>random points</returns>
-        private static Point[] RandomPoints(Graph g, int pc)
+        public static Point[] RandomPoints(Graph g, int pc)
         {
             return Generator.UniformPointsInParallelepiped(pc, g.WraparoundParallelepiped());
         }
@@ -110,10 +110,21 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <param name="alpha">parameter for nodes and edges metric prefer</param>
         public static void PartitionEdgesPropagation(Graph g, int pc, double alpha)
         {
+            PartitionEdgesPropagation(g, RandomPoints(g, pc), pc, alpha);
+        }
+
+        /// <summary>
+        /// Partitioning with propagation by edges.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="rp">random points</param>
+        /// <param name="pc">partitions count</param>
+        /// <param name="alpha">parameter for nodes and edges metric prefer</param>
+        public static void PartitionEdgesPropagation(Graph g, Point[] points, int pc, double alpha)
+        {
             Debug.Assert((new Interval(0.0, 1.0)).Contains(alpha),
                          "alpha is out of range in RandomVolumePointsPartitioner.PartitionEdgesPropagation");
 
-            Point[] points = RandomPoints(g, pc);
             InitPartitionsWeigths(pc);
             EraseNodesPartitions(g);
 
