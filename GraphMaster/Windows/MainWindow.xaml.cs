@@ -2252,7 +2252,7 @@ namespace GraphMaster.Windows
 
             if (w.IsAccepted)
             {
-                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, w.Result, true);
+                RandomVolumePointsPartitioner.PartitionEdgesPropagationNodesMetric(Graph, w.Result);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
                 PictureName = "RVPEP/NM : " + PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
@@ -2273,7 +2273,7 @@ namespace GraphMaster.Windows
 
             if (w.IsAccepted)
             {
-                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, w.Result, false);
+                RandomVolumePointsPartitioner.PartitionEdgesPropagationEdgesMetric(Graph, w.Result);
                 DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, w.Result);
                 PictureName = "RVPEP/EM : " + PartitioningStatistics.PartitioningQualityDescription(Graph);
                 Paint();
@@ -2345,7 +2345,7 @@ namespace GraphMaster.Windows
             TB.Text += "RVPEP/NM\n";
             while (n <= 64)
             {
-                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, n, true);
+                RandomVolumePointsPartitioner.PartitionEdgesPropagationNodesMetric(Graph, n);
                 TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
                 n *= 2;
             }
@@ -2354,7 +2354,7 @@ namespace GraphMaster.Windows
             TB.Text += "RVPEP/EM\n";
             while (n <= 64)
             {
-                RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, n, false);
+                RandomVolumePointsPartitioner.PartitionEdgesPropagationEdgesMetric(Graph, n);
                 TB.Text += PartitioningStatistics.PartitioningQualityDescription(Graph) + "\n";
                 n *= 2;
             }

@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 using Lib.Maths.Geometry.Geometry3D;
 using Lib.Maths.Numbers;
+using Lib.Maths.Geometry;
 
 namespace Lib.DataStruct.Graph.Partitioning
 {
@@ -106,8 +107,12 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// </summary>
         /// <param name="g">graph</param>
         /// <param name="pc">partitions count</param>
-        public static void PartitionEdgesPropagation(Graph g, int pc, bool is_nodes_metric)
+        /// <param name="alpha">parameter for nodes and edges metric prefer</param>
+        public static void PartitionEdgesPropagation(Graph g, int pc, double alpha)
         {
+            Debug.Assert((new Interval(0.0, 1.0)).Contains(alpha),
+                         "alpha is out of range in RandomVolumePointsPartitioner.PartitionEdgesPropagation");
+
             Point[] points = RandomPoints(g, pc);
             InitPartitionsWeigths(pc);
             EraseNodesPartitions(g);
@@ -152,25 +157,28 @@ namespace Lib.DataStruct.Graph.Partitioning
 
                     for (int i = 0; i < ms.Count(); i++)
                     {
-                        if (is_nodes_metric)
-                        {
-                            // I. Weight metric.
-                            ms[i] = no_partition_neighbourhood[i].Weight;
-                        }
-                        else
-                        {
-                            // II. Sum of edges weighs metric.
-                            Node _n = no_partition_neighbourhood[i];
-                            foreach (Edge _e in _n.Edges)
-                            {
-                                Node _nn = _n.Neighbour(_e);
+                        double nm_val = 0.0;
+                        double em_val = 0.0;
 
-                                if (_nn.Partition == min_partition_index)
-                                {
-                                    ms[i] += _e.Weight;
-                                }
+                        // I. Weight metric.
+                        nm_val = no_partition_neighbourhood[i].Weight;
+
+                        // II. Sum of edges weighs metric.
+                        Node _n = no_partition_neighbourhood[i];
+                        foreach (Edge _e in _n.Edges)
+                        {
+                            Node _nn = _n.Neighbour(_e);
+
+                            if (_nn.Partition == min_partition_index)
+                            {
+                                em_val += _e.Weight;
                             }
                         }
+
+                        // Total metric.
+                        nm_val = Math.Pow(nm_val, 1.0 / 3.0);
+                        em_val = Math.Sqrt(em_val);
+                        ms[i] = alpha * nm_val + (1.0 - alpha) * em_val;
                     }
 
                     n = no_partition_neighbourhood[NumbersArrays.MaxIndex(ms)];
@@ -180,6 +188,26 @@ namespace Lib.DataStruct.Graph.Partitioning
                 n.Partition = min_partition_index;
                 PartitionsWeights[min_partition_index] += n.Weight;
             }
+        }
+
+        /// <summary>
+        /// Partitioning with propagation by edges (nodes metric).
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="pc">partitions count</param>
+        public static void PartitionEdgesPropagationNodesMetric(Graph g, int pc)
+        {
+            PartitionEdgesPropagation(g, pc, 1.0);
+        }
+
+        /// <summary>
+        /// Partitioning with propagation by edges (edges metric).
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="pc">partitions count</param>
+        public static void PartitionEdgesPropagationEdgesMetric(Graph g, int pc)
+        {
+            PartitionEdgesPropagation(g, pc, 0.0);
         }
     }
 }
