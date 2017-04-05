@@ -126,6 +126,10 @@
     <Compile Include="MathMod\Grid\Scope.cs" />
     <Compile Include="MathMod\Grid\StructuredGrid.cs" />
     <Compile Include="MathMod\Grid\ThinDescartesObject.cs" />
+    <Compile Include="MathMod\SolidGrid\Cell.cs" />
+    <Compile Include="MathMod\SolidGrid\SolidGrid.cs" />
+    <Compile Include="MathMod\Solver\Riemann.cs" />
+    <Compile Include="MathMod\U.cs" />
     <Compile Include="Maths\Bits\Bits.cs" />
     <Compile Include="Maths\Bits\Bits32.cs" />
     <Compile Include="Maths\Bits\Bits8.cs" />
@@ -208,6 +212,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -11,7 +11,7 @@ namespace Lib.Maths.Geometry.Geometry3D
     /// <summary>
     /// 3D vector.
     /// </summary>
-    public class Vector : Lib.Maths.Geometry.Vector
+    public class Vector : Lib.Maths.Geometry.Vector, ICloneable
     {
         /// <summary>
         /// Coordinate <c>x</c>.
@@ -501,6 +501,15 @@ namespace Lib.Maths.Geometry.Geometry3D
                                   Randoms.RandomInInterval(par.YInterval),
                                   Randoms.RandomBool() ? par.Front : par.Back);
             }
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>copy</returns>
+        public object Clone()
+        {
+            return new Vector(X, Y, Z);
         }
     }
 }
