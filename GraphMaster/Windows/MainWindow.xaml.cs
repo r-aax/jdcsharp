@@ -2344,7 +2344,7 @@ namespace GraphMaster.Windows
             while (alpha >= 0.0)
             {
                 RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, points, pc, alpha);
-                LB.Items.Add(PartitioningStatistics.InterpartitionEdgesFactor(Graph));
+                LB.Items.Add(PartitioningStatistics.PartitioningQualityDescription(Graph));
                 alpha -= eps1;
             }
 
@@ -2352,6 +2352,8 @@ namespace GraphMaster.Windows
                                                                     MessageBoxButtons.YesNo);
             if (res == System.Windows.Forms.DialogResult.Yes)
             {
+                List<string> list = new List<string>();
+
                 // Partition (second wave).
                 alpha = 1.0;
                 LB.Items.Add("---");
@@ -2359,7 +2361,14 @@ namespace GraphMaster.Windows
                 {
                     RandomVolumePointsPartitioner.PartitionEdgesPropagation(Graph, points, pc, alpha);
                     LB.Items.Add(PartitioningStatistics.InterpartitionEdgesFactor(Graph));
+                    list.Add(PartitioningStatistics.DeviationMaxPartitionWeightFromAvg(Graph).ToString());
                     alpha -= eps2;
+                }
+
+                LB.Items.Add("===");
+                for (int i = 0; i < list.Count; i++)
+                {
+                    LB.Items.Add(list[i]);
                 }
             }
         }
