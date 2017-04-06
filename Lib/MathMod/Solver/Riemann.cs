@@ -24,6 +24,7 @@ namespace Lib.MathMod.Solver
                          0.5 * (U1.v + U2.v),
                          0.5 * (U1.w + U2.w),
                          0.5 * (U1.eps + U2.eps));
+        }
       
     }
 }

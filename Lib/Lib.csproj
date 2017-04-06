@@ -103,6 +103,7 @@
       <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="IO\File.cs" />
+    <Compile Include="MathMod\D.cs" />
     <Compile Include="MathMod\Grid\BCond.cs" />
     <Compile Include="MathMod\Grid\BCondsLink.cs" />
     <Compile Include="MathMod\Grid\Block.cs" />
@@ -126,8 +127,10 @@
     <Compile Include="MathMod\Grid\Scope.cs" />
     <Compile Include="MathMod\Grid\StructuredGrid.cs" />
     <Compile Include="MathMod\Grid\ThinDescartesObject.cs" />
+    <Compile Include="MathMod\Q.cs" />
     <Compile Include="MathMod\SolidGrid\Cell.cs" />
     <Compile Include="MathMod\SolidGrid\SolidGrid.cs" />
+    <Compile Include="MathMod\Solver\Godunov1.cs" />
     <Compile Include="MathMod\Solver\Riemann.cs" />
     <Compile Include="MathMod\U.cs" />
     <Compile Include="Maths\Bits\Bits.cs" />

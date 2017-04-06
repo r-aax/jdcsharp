@@ -43,7 +43,7 @@ namespace Lib.MathMod.SolidGrid
         /// <summary>
         /// Cells.
         /// </summary>
-        Cell[,,] Cells;
+        public Cell[,,] Cells;
 
         /// <summary>
         /// Cell facet square.

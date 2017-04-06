@@ -21,6 +21,7 @@
             <Canvas Grid.Column="0" Name="DrawAreaC" Background="White"/>
             <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
             <Grid Grid.Column="1">
+                <Button Name="StartB" Content="Button" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" Width="75" Click="StartB_Click"/>
             </Grid>                  
         </Grid>
     </DockPanel>
