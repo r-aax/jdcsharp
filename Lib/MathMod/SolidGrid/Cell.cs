@@ -62,5 +62,14 @@ namespace Lib.MathMod.SolidGrid
             U.vz = vz;
             U.eps = D.I / m - 0.5 * (vx * vx + vy * vy + vz * vz);
         }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return U.ToString() + " " + D.ToString();
+        }
     }
 }

@@ -103,5 +103,14 @@ namespace Lib.MathMod
 
             return copy;
         }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("U: {0}, {1}, {2}, {3}, {4}", rho, vx, vy, vz, eps);
+        }
     }
 }

@@ -86,5 +86,14 @@ namespace Lib.MathMod
             Pz -= q.vz;
             I -= q.E;
         }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("D: {0}, {1}, {2}, {3}, {4}", m, Px, Py, Pz, I);
+        }
     }
 }
