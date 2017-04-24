@@ -16,7 +16,7 @@ namespace Lib.MathMod.Solver
         /// <summary>
         /// Gamma parameter.
         /// </summary>
-        public static double gamma = 1.0;
+        public static double gamma = 1.66;
 
         /// <summary>
         /// Flow in X direction.
@@ -125,7 +125,7 @@ namespace Lib.MathMod.Solver
                     }
                 }
             }
-
+            
             // Calculate flows in Z direction.
             for (int i = 0; i < g.XISize; i++)
             {
@@ -144,7 +144,7 @@ namespace Lib.MathMod.Solver
                     }
                 }
             }
-
+            
             // All borders are hard.
             // Do not calc anything.
 

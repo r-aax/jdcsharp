@@ -27,6 +27,7 @@ namespace Lib.MathMod.SolidGrid
         public Cell()
         {
             U = new U();
+            D = new D();
         }
 
         /// <summary>
