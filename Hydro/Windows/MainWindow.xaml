@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hydro"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525" SizeChanged="Window_SizeChanged">
     <DockPanel>
-        <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
+        <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Foreground="SteelBlue">
             <MenuItem Header="Info"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
-            <TextBlock Text="No text"/>
+            <TextBlock Foreground="SteelBlue" Text="No text"/>
         </StatusBar>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -22,7 +22,7 @@
             <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
             <Grid Grid.Column="1">
                 <Button Name="StartB" Content="Button" HorizontalAlignment="Center" Margin="10" VerticalAlignment="Top" Width="75" Click="StartB_Click"/>
-            </Grid>                  
+            </Grid>
         </Grid>
     </DockPanel>
 </Window>

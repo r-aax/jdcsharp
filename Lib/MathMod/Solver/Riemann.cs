@@ -20,9 +20,9 @@ namespace Lib.MathMod.Solver
         public static U Stub(U U1, U U2)
         {
             return new U(0.5 * (U1.rho + U2.rho),
-                         0.5 * (U1.u + U2.u),
-                         0.5 * (U1.v + U2.v),
-                         0.5 * (U1.w + U2.w),
+                         0.5 * (U1.vx + U2.vx),
+                         0.5 * (U1.vy + U2.vy),
+                         0.5 * (U1.vz + U2.vz),
                          0.5 * (U1.eps + U2.eps));
         }
       

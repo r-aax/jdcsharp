@@ -56,9 +56,9 @@ namespace Lib.MathMod.SolidGrid
             double vz = D.Pz / m;
 
             U.rho = m / V;
-            U.vx = u;
-            U.vy = v;
-            U.vz = w;
+            U.vx = vx;
+            U.vy = vy;
+            U.vz = vz;
             U.eps = D.I / m - 0.5 * (vx * vx + vy * vy + vz * vz);
         }
     }

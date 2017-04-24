@@ -94,6 +94,36 @@ namespace Lib.Draw
         public abstract void DrawLine(Point a, Point b);
 
         /// <summary>
+        /// Draw line by coordinates.
+        /// </summary>
+        /// <param name="x1"><c>X</c> coordinate of the first point</param>
+        /// <param name="y1"><c>Y</c> coordinate of the first point</param>
+        /// <param name="x2"><c>X</c> coordinate of the second point</param>
+        /// <param name="y2"><c>Y</c> coordinate of the second point</param>
+        public void DrawLine(double x1, double y1, double x2, double y2)
+        {
+            DrawLine(new Point(x1, y1), new Point(x2, y2));
+        }
+
+        /// <summary>
+        /// Draw vertical line.
+        /// </summary>
+        /// <param name="x"><c>X</c> coordinate</param>
+        public void DrawVLine(double x)
+        {
+            DrawLine(x, Rect.YInterval.L, x, Rect.YInterval.H);
+        }
+
+        /// <summary>
+        /// Draw horizontal line.
+        /// </summary>
+        /// <param name="y"><c>Y</c> coordinate</param>
+        public void DrawHLine(double y)
+        {
+            DrawLine(Rect.XInterval.L, y, Rect.XInterval.H, y);
+        }
+
+        /// <summary>
         /// Draw line with margins.
         /// </summary>
         /// <param name="a">begin</param>

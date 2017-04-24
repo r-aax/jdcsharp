@@ -145,6 +145,9 @@ namespace Lib.MathMod.Solver
                 }
             }
 
+            // All borders are hard.
+            // Do not calc anything.
+
             // Calculate D to U for all.
             for (int i = 0; i < g.XISize; i++)
             {

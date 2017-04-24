@@ -77,6 +77,7 @@
     <Compile Include="DataStruct\StringsList.cs" />
     <Compile Include="Draw\Color.cs" />
     <Compile Include="Draw\GraphRectDrawer.cs" />
+    <Compile Include="Draw\HydroRectDrawer.cs" />
     <Compile Include="Draw\RectDrawer.cs" />
     <Compile Include="Draw\RectDrawerType.cs" />
     <Compile Include="Draw\WindowsForms\RectDrawer.cs" />
