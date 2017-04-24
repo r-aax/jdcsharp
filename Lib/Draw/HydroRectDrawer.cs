@@ -64,6 +64,8 @@ namespace Lib.Draw
         /// <param name="hi">higher bound</param>
         public void DrawField(SolidGrid grid, double lo, double hi)
         {
+            double d = grid.Dl / 100.0;
+
             // Now we use rho value.
 
             for (int i = 0; i < grid.XISize; i++)
@@ -72,7 +74,10 @@ namespace Lib.Draw
                 {
                     Color c = Color.Gray(grid.Cells[i, j, 0].U.rho, lo, hi);
                     Drawer.SetBrush(c);
-                    Drawer.FillRect(grid.Dl * i, grid.Dl * j, grid.Dl * (i + 1), grid.Dl * (j + 1));   
+                    Drawer.FillRect(grid.Dl * i - d,
+                                    grid.Dl * j - d,
+                                    grid.Dl * (i + 1) + d,
+                                    grid.Dl * (j + 1) + d);   
                 }
             }
         }
