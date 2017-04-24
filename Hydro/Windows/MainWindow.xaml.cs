@@ -71,7 +71,9 @@ namespace Hydro
             // Begin draw.
             Drawer.BeginDraw();
 
-            HydroDrawer.DrawHydro(Grid);
+            double lo = Double.Parse(UComponentRangeL.Text);
+            double hi = Double.Parse(UComponentRangeH.Text);
+            HydroDrawer.DrawField(Grid, lo, hi);
 
             // End draw.
             Drawer.EndDraw();
@@ -85,6 +87,18 @@ namespace Hydro
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
             Grid = new SolidGrid(new Vector3D(1.0, 1.0, 0.1), 0.1);
+
+            for (int i = 0; i < Grid.XISize; i++)
+            {
+                for (int j = 0; j < Grid.YISize; j++)
+                {
+                    for (int k = 0; k < Grid.ZISize; k++)
+                    {
+                        Grid.Cells[i, j, k].U.rho = (double)i + (double)j + (double)k;
+                    }
+                }
+            }
+
             Paint();
         }
 

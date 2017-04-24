@@ -76,6 +76,18 @@ namespace Lib.MathMod.SolidGrid
             // Other data.
             CellFacetS = Dl * Dl;
             CellV = CellFacetS * Dl;
+
+            //  Create cells.
+            for (int i = 0; i < XISize; i++)
+            {
+                for (int j = 0; j < YISize; j++)
+                {
+                    for (int k = 0; k < ZISize; k++)
+                    {
+                        Cells[i, j, k] = new Cell();
+                    }
+                }
+            }
         }
     }
 }

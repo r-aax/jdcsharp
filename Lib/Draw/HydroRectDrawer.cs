@@ -55,5 +55,26 @@ namespace Lib.Draw
                 Drawer.DrawHLine(grid.Dl * i);
             }
         }
+
+        /// <summary>
+        /// Draw field of some physical value.
+        /// </summary>
+        /// <param name="grid">grid</param>
+        /// <param name="lo">lower bound</param>
+        /// <param name="hi">higher bound</param>
+        public void DrawField(SolidGrid grid, double lo, double hi)
+        {
+            // Now we use rho value.
+
+            for (int i = 0; i < grid.XISize; i++)
+            {
+                for (int j = 0; j < grid.YISize; j++)
+                {
+                    Color c = Color.Gray(grid.Cells[i, j, 0].U.rho, lo, hi);
+                    Drawer.SetBrush(c);
+                    Drawer.FillRect(grid.Dl * i, grid.Dl * j, grid.Dl * (i + 1), grid.Dl * (j + 1));   
+                }
+            }
+        }
     }
 }

@@ -158,6 +158,28 @@ namespace Lib.Draw
         public abstract void FillRect(Rect r);
 
         /// <summary>
+        /// Fill rect by two points.
+        /// </summary>
+        /// <param name="p1">first point</param>
+        /// <param name="p2">second point</param>
+        public void FillRect(Point p1, Point p2)
+        {
+            FillRect(new Rect(p1, p2));
+        }
+
+        /// <summary>
+        /// Fill rect by coordinates.
+        /// </summary>
+        /// <param name="x1"><c>X</c> coordinate of the first point</param>
+        /// <param name="y1"><c>Y</c> coordinate of the first point</param>
+        /// <param name="x2"><c>X</c> coordinate of the second point</param>
+        /// <param name="y2"><c>Y</c> coordinate of the second point</param>
+        public void FillRect(double x1, double y1, double x2, double y2)
+        {
+            FillRect(new Point(x1, y1), new Point(x2, y2));
+        }
+
+        /// <summary>
         /// Draw ellipse.
         /// </summary>
         /// <param name="p">center</param>

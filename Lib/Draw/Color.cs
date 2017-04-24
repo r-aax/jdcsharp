@@ -183,6 +183,41 @@ namespace Lib.Draw
         }
 
         /// <summary>
+        /// Create gray color.
+        /// </summary>
+        /// <param name="b">grey value</param>
+        /// <returns>new color</returns>
+        public static Color Gray(byte b)
+        {
+            return new Color(255, b, b, b);
+        }
+
+        /// <summary>
+        /// Create gray color in interval.
+        /// </summary>
+        /// <param name="value">value</param>
+        /// <param name="lo">lower bound</param>
+        /// <param name="hi">higher bound</param>
+        /// <returns>gray color</returns>
+        public static Color Gray(double value, double lo, double hi)
+        {
+            double rel_value = 255 * ((value - lo) / (hi - lo));
+            int int_rel_value = (int)rel_value;
+
+            if (int_rel_value < 0)
+            {
+                int_rel_value = 0;
+            }
+
+            if (int_rel_value > 255)
+            {
+                int_rel_value = 255;
+            }
+
+            return Gray((byte)(255 - int_rel_value));
+        }
+
+        /// <summary>
         /// Get array of random colors.
         /// </summary>
         /// <param name="n">count of colors</param>
