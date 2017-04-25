@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Vector3D = Lib.Maths.Geometry.Geometry3D.Vector;
+
 namespace Lib.MathMod
 {
     /// <summary>
@@ -17,19 +19,9 @@ namespace Lib.MathMod
         public double rho;
 
         /// <summary>
-        /// Flow u.
+        /// Velocity.
         /// </summary>
-        public double vx;
-
-        /// <summary>
-        /// Flow v.
-        /// </summary>
-        public double vy;
-
-        /// <summary>
-        /// Flow w.
-        /// </summary>
-        public double vz;
+        public Vector3D v;
 
         /// <summary>
         /// Flow E.
@@ -47,9 +39,7 @@ namespace Lib.MathMod
         public Q(double rho_, double vx_, double vy_, double vz_, double e)
         {
             rho = rho_;
-            vx = vx_;
-            vy = vy_;
-            vz = vz_;
+            v = new Vector3D(vx_, vy_, vz_);
             E = e;
         }
 
@@ -68,9 +58,7 @@ namespace Lib.MathMod
         public void Mul(double k)
         {
             rho *= k;
-            vx *= k;
-            vy *= k;
-            vz *= k;
+            v *= k;
             E *= k;
         }
 
@@ -80,7 +68,7 @@ namespace Lib.MathMod
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("Q: {0}, {1}, {2}, {3}, {4}", rho, vx, vy, vz, E);
+            return String.Format("Q: {0}, {1}, {2}", rho, v, E);
         }
     }
 }

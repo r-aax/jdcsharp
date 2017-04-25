@@ -58,9 +58,7 @@ namespace Lib.MathMod
         public void AddQ(Q q)
         {
             m += q.rho;
-            P.X += q.vx;
-            P.Y += q.vy;
-            P.Z += q.vz;
+            P += q.v;
             I += q.E;
         }
 
@@ -71,9 +69,7 @@ namespace Lib.MathMod
         public void SubQ(Q q)
         {
             m -= q.rho;
-            P.X -= q.vx;
-            P.Y -= q.vy;
-            P.Z -= q.vz;
+            P -= q.v;
             I -= q.E;
         }
 
