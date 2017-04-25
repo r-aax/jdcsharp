@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Vector3D = Lib.Maths.Geometry.Geometry3D.Vector;
+
 namespace Lib.MathMod
 {
     /// <summary>
@@ -17,19 +19,9 @@ namespace Lib.MathMod
         public double m;
 
         /// <summary>
-        /// X component of impulse.
+        /// Impulse.
         /// </summary>
-        public double Px;
-
-        /// <summary>
-        /// Y component of impulse.
-        /// </summary>
-        public double Py;
-
-        /// <summary>
-        /// Z componnent of impulse.
-        /// </summary>
-        public double Pz;
+        public Vector3D P;
 
         /// <summary>
         /// Full energy.
@@ -47,9 +39,7 @@ namespace Lib.MathMod
         public D(double m_, double px, double py, double pz, double i)
         {
             m = m_;
-            Px = px;
-            Py = py;
-            Pz = pz;
+            P = new Vector3D(px, py, pz);
             I = i;
         }
 
@@ -68,9 +58,9 @@ namespace Lib.MathMod
         public void AddQ(Q q)
         {
             m += q.rho;
-            Px += q.vx;
-            Py += q.vy;
-            Pz += q.vz;
+            P.X += q.vx;
+            P.Y += q.vy;
+            P.Z += q.vz;
             I += q.E;
         }
 
@@ -81,9 +71,9 @@ namespace Lib.MathMod
         public void SubQ(Q q)
         {
             m -= q.rho;
-            Px -= q.vx;
-            Py -= q.vy;
-            Pz -= q.vz;
+            P.X -= q.vx;
+            P.Y -= q.vy;
+            P.Z -= q.vz;
             I -= q.E;
         }
 
@@ -93,7 +83,7 @@ namespace Lib.MathMod
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("D: {0}, {1}, {2}, {3}, {4}", m, Px, Py, Pz, I);
+            return String.Format("D: {0}, {1}, {2}", m, P, I);
         }
     }
 }

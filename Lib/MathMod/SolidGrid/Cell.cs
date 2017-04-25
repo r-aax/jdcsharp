@@ -39,9 +39,7 @@ namespace Lib.MathMod.SolidGrid
             double m = U.rho * V;
 
             D.m = m;
-            D.Px = m * U.v.X;
-            D.Py = m * U.v.Y;
-            D.Pz = m * U.v.Z;
+            D.P = m * U.v;
             D.I = m * (U.eps + 0.5 * U.v.Mod2);
         }
 
@@ -52,15 +50,10 @@ namespace Lib.MathMod.SolidGrid
         public void DtoU(double V)
         {
             double m = D.m;
-            double vx = D.Px / m;
-            double vy = D.Py / m;
-            double vz = D.Pz / m;
 
             U.rho = m / V;
-            U.v.X = vx;
-            U.v.Y = vy;
-            U.v.Z = vz;
-            U.eps = D.I / m - 0.5 * (vx * vx + vy * vy + vz * vz);
+            U.v = D.P / m;
+            U.eps = D.I / m - 0.5 * U.v.Mod2;
         }
 
         /// <summary>
