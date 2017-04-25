@@ -70,6 +70,20 @@ namespace Lib.MathMod.Solver
         }
 
         /// <summary>
+        /// Sub and add flow.
+        /// </summary>
+        /// <param name="d_sub">D vector for subtraction</param>
+        /// <param name="d_add">D vector for addition</param>
+        /// <param name="q">flow</param>
+        /// <param name="dv">volume (delta)</param>
+        public static void SubAddQ(D d_sub, D d_add, Q q, double dv)
+        {
+            q.Mul(dv);
+            d_sub.SubQ(q);
+            d_add.AddQ(q);
+        }
+
+        /// <summary>
         /// One iteration of the method.
         /// </summary>
         /// <param name="g">grid</param>
@@ -100,9 +114,7 @@ namespace Lib.MathMod.Solver
                         U u = Riemann.Stub(c1.U, c2.U);
                         Q q = FlowX(u, (gamma - 1.0) * u.rho * u.eps);
 
-                        q.Mul(g.CellFacetS * dt);
-                        c1.D.SubQ(q);
-                        c2.D.AddQ(q);
+                        SubAddQ(c1.D, c2.D, q, g.CellFacetS * dt);
                     }
                 }
             }
@@ -119,9 +131,7 @@ namespace Lib.MathMod.Solver
                         U u = Riemann.Stub(c1.U, c2.U);
                         Q q = FlowY(u, (gamma - 1.0) * u.rho * u.eps);
 
-                        q.Mul(g.CellFacetS * dt);
-                        c1.D.SubQ(q);
-                        c2.D.AddQ(q);
+                        SubAddQ(c1.D, c2.D, q, g.CellFacetS * dt);
                     }
                 }
             }
@@ -138,9 +148,7 @@ namespace Lib.MathMod.Solver
                         U u = Riemann.Stub(c1.U, c2.U);
                         Q q = FlowZ(u, (gamma - 1.0) * u.rho * u.eps);
 
-                        q.Mul(g.CellFacetS * dt);
-                        c1.D.SubQ(q);
-                        c2.D.AddQ(q);
+                        SubAddQ(c1.D, c2.D, q, g.CellFacetS * dt);
                     }
                 }
             }
