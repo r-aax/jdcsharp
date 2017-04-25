@@ -89,5 +89,39 @@ namespace Lib.MathMod.SolidGrid
                 }
             }
         }
+
+        /// <summary>
+        /// U to D convert.
+        /// </summary>
+        public void UtoD()
+        {
+            for (int i = 0; i < XISize; i++)
+            {
+                for (int j = 0; j < YISize; j++)
+                {
+                    for (int k = 0; k < ZISize; k++)
+                    {
+                        Cells[i, j, k].UtoD(CellV);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// D to U convert.
+        /// </summary>
+        public void DtoU()
+        {
+            for (int i = 0; i < XISize; i++)
+            {
+                for (int j = 0; j < YISize; j++)
+                {
+                    for (int k = 0; k < ZISize; k++)
+                    {
+                        Cells[i, j, k].DtoU(CellV);
+                    }
+                }
+            }
+        }
     }
 }

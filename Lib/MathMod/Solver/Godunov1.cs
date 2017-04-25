@@ -90,17 +90,7 @@ namespace Lib.MathMod.Solver
         /// <param name="dt">time step</param>
         public static void Iter(SolidGrid.SolidGrid g, double dt)
         {
-            // Calculate U to D for all.
-            for (int i = 0; i < g.XISize; i++)
-            {
-                for (int j = 0; j < g.YISize; j++)
-                {
-                    for (int k = 0; k < g.ZISize; k++)
-                    {
-                        g.Cells[i, j, k].UtoD(g.CellV);
-                    }
-                }
-            }
+            g.UtoD();
 
             // Calculate flows in X direction.
             for (int i = 0; i < g.XISize - 1; i++)
@@ -152,21 +142,11 @@ namespace Lib.MathMod.Solver
                     }
                 }
             }
-            
+
             // All borders are hard.
             // Do not calc anything.
 
-            // Calculate D to U for all.
-            for (int i = 0; i < g.XISize; i++)
-            {
-                for (int j = 0; j < g.YISize; j++)
-                {
-                    for (int k = 0; k < g.ZISize; k++)
-                    {
-                        g.Cells[i, j, k].DtoU(g.CellV);
-                    }
-                }
-            }
+            g.DtoU();
         }
     }
 }
