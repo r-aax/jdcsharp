@@ -126,9 +126,9 @@ namespace Sea.Forms
 
             SetButtonsEnable();
 
-            if (CategoriesTreeTV.Nodes.Count > 0)
+            for (int i = 0; i < CategoriesTreeTV.Nodes.Count; i++)
             {
-                CategoriesTreeTV.Nodes[0].ExpandAll();
+                CategoriesTreeTV.Nodes[i].ExpandAll();
             }
         }
 
@@ -581,9 +581,9 @@ namespace Sea.Forms
                 Root.ToTreeView(CategoriesTreeTV);
                 SetButtonsEnable();
 
-                if (CategoriesTreeTV.Nodes.Count > 0)
+                for (int i = 0; i < CategoriesTreeTV.Nodes.Count; i++)
                 {
-                    CategoriesTreeTV.Nodes[0].ExpandAll();
+                    CategoriesTreeTV.Nodes[i].ExpandAll();
                 }
             }
         }
@@ -602,9 +602,9 @@ namespace Sea.Forms
                 Root.ToTreeView(CategoriesTreeTV);
                 SetButtonsEnable();
 
-                if (CategoriesTreeTV.Nodes.Count > 0)
+                for (int i = 0; i < CategoriesTreeTV.Nodes.Count; i++)
                 {
-                    CategoriesTreeTV.Nodes[0].ExpandAll();
+                    CategoriesTreeTV.Nodes[i].ExpandAll();
                 }
             }
         }

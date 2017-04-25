@@ -151,9 +151,9 @@ namespace Sea.Forms
 
             SelectGivenCategories(Categories);
 
-            if (CategoriesTreeTV.Nodes.Count > 0)
+            for (int i = 0; i < CategoriesTreeTV.Nodes.Count; i++)
             {
-                CategoriesTreeTV.Nodes[0].ExpandAll();
+                CategoriesTreeTV.Nodes[i].ExpandAll();
             }
         }
 
