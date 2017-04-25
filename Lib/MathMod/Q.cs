@@ -73,5 +73,14 @@ namespace Lib.MathMod
             vz *= k;
             E *= k;
         }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("Q: {0}, {1}, {2}, {3}, {4}", rho, vx, vy, vz, E);
+        }
     }
 }

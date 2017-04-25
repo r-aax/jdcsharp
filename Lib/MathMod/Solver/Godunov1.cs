@@ -26,11 +26,11 @@ namespace Lib.MathMod.Solver
         /// <returns>flow in X direction</returns>
         public static Q FlowX(U u, double p)
         {
-            double q_rho = u.rho * u.vx;
-            double q_vx = u.rho * u.vx * u.vx + p;
-            double q_vy = u.rho * u.vx * u.vy;
-            double q_vz = u.rho * u.vx * u.vz;
-            double q_E = u.rho * u.vx * (u.eps + 0.5 * (u.vx * u.vx + u.vy * u.vy + u.vz * u.vz)) + p * u.vx;
+            double q_rho = u.rho * u.v.X;
+            double q_vx = u.rho * u.v.X * u.v.X + p;
+            double q_vy = u.rho * u.v.X * u.v.Y;
+            double q_vz = u.rho * u.v.X * u.v.Z;
+            double q_E = u.rho * u.v.X * (u.eps + 0.5 * u.v.Mod2) + p * u.v.X;
 
             return new Q(q_rho, q_vx, q_vy, q_vz, q_E);
         }
@@ -43,11 +43,11 @@ namespace Lib.MathMod.Solver
         /// <returns>flow in Y direction</returns>
         public static Q FlowY(U u, double p)
         {
-            double q_rho = u.rho * u.vy;
-            double q_vx = u.rho * u.vy * u.vx;
-            double q_vy = u.rho * u.vy * u.vy + p;
-            double q_vz = u.rho * u.vy * u.vz;
-            double q_E = u.rho * u.vy * (u.eps + 0.5 * (u.vx * u.vx + u.vy * u.vy + u.vz * u.vz)) + p * u.vy;
+            double q_rho = u.rho * u.v.Y;
+            double q_vx = u.rho * u.v.Y * u.v.X;
+            double q_vy = u.rho * u.v.Y * u.v.Y + p;
+            double q_vz = u.rho * u.v.Y * u.v.Z;
+            double q_E = u.rho * u.v.Y * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Y;
 
             return new Q(q_rho, q_vx, q_vy, q_vz, q_E);
         }
@@ -60,11 +60,11 @@ namespace Lib.MathMod.Solver
         /// <returns>flow in Z direction</returns>
         public static Q FlowZ(U u, double p)
         {
-            double q_rho = u.rho * u.vz;
-            double q_vx = u.rho * u.vz * u.vx;
-            double q_vy = u.rho * u.vz * u.vy;
-            double q_vz = u.rho * u.vz * u.vz + p;
-            double q_E = u.rho * u.vz * (u.eps + 0.5 * (u.vx * u.vx + u.vy * u.vy + u.vz * u.vz)) + p * u.vz;
+            double q_rho = u.rho * u.v.Z;
+            double q_vx = u.rho * u.v.Z * u.v.X;
+            double q_vy = u.rho * u.v.Z * u.v.Y;
+            double q_vz = u.rho * u.v.Z * u.v.Z + p;
+            double q_E = u.rho * u.v.Z * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Z;
 
             return new Q(q_rho, q_vx, q_vy, q_vz, q_E);
         }

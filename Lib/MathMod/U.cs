@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 using Lib.Maths.Geometry;
+using Lib.Maths.Geometry.Geometry3D;
+using Vector3D = Lib.Maths.Geometry.Geometry3D.Vector;
 
 namespace Lib.MathMod
 {
@@ -20,19 +22,9 @@ namespace Lib.MathMod
         public double rho;
 
         /// <summary>
-        /// u - speed x component
+        /// Velocity.
         /// </summary>
-        public double vx;
-
-        /// <summary>
-        /// v - speed y component
-        /// </summary>
-        public double vy;
-
-        /// <summary>
-        /// w - speed z component
-        /// </summary>
-        public double vz;
+        public Vector3D v;
 
         /// <summary>
         /// eps - inner energy density
@@ -50,9 +42,7 @@ namespace Lib.MathMod
         public U(double rho_, double vx_, double vy_, double vz_, double eps_)
         {
             rho = rho_;
-            vx = vx_;
-            vy = vy_;
-            vz = vz_;
+            v = new Vector3D(vx_, vy_, vz_);
             eps = eps_;
         }
 
@@ -70,7 +60,7 @@ namespace Lib.MathMod
         /// <returns>copy</returns>
         public object Clone()
         {
-            return new U(rho, vx, vy, vz, eps);
+            return new U(rho, v.X, v.Y, v.Z, eps);
         }
 
         /// <summary>
@@ -85,15 +75,15 @@ namespace Lib.MathMod
             switch (at)
             {
                 case AxisType.X:
-                    copy.vx *= -1.0;
+                    copy.v.X *= -1.0;
                     break;
 
                 case AxisType.Y:
-                    copy.vy *= -1.0;
+                    copy.v.Y *= -1.0;
                     break;
 
                 case AxisType.Z:
-                    copy.vz *= -1.0;
+                    copy.v.Z *= -1.0;
                     break;
 
                 default:
@@ -110,7 +100,7 @@ namespace Lib.MathMod
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("U: {0}, {1}, {2}, {3}, {4}", rho, vx, vy, vz, eps);
+            return String.Format("U: {0}, {1}, {2}", rho, v, eps);
         }
     }
 }

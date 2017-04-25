@@ -87,7 +87,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
-            Grid = new SolidGrid(new Vector3D(3.0, 1.0, 1.1), 1.0);
+            Grid = new SolidGrid(new Vector3D(2.0, 1.0, 1.1), 1.0);
 
             for (int i = 0; i < Grid.XISize; i++)
             {
@@ -99,9 +99,9 @@ namespace Hydro
                     }
                 }
             }
-            Grid.Cells[0, 0, 0].U.rho = 10.0;
-            Grid.Cells[1, 0, 0].U.rho = 100.0;
-            Grid.Cells[0, 0, 0].U.rho = 10.0;
+            Grid.Cells[0, 0, 0].U.rho = 100.0;
+            Grid.Cells[1, 0, 0].U.rho = 10.0;
+            //Grid.Cells[2, 0, 0].U.rho = 100.0;
 
             Paint();
         }
