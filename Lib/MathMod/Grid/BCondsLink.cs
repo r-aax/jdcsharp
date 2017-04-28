@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using Lib.MathMod.Grid.Cut;
 
@@ -182,18 +183,26 @@ namespace Lib.MathMod.Grid
         {
             string nm = BCond1.Label.Name;
 
-            if (nm == BCond2.Label.Name)
-            {
-                if (nm.Length > 5)
-                {
-                    nm = nm.Substring(0, 6);
+            Debug.Assert(nm == BCond2.Label.Name, "both bconds of bconds link must have the same name");
 
-                    if (nm == "PERI_C")
-                    {
-                        nm = String.Format("{0}-{1}", nm, BCond1.Id);
-                        BCond1.Label.Name = nm;
-                        BCond2.Label.Name = nm;
-                    }
+            if (nm == "PERI_C")
+            {
+                // Do not rename if it is bcond of one block.
+                if (BCond1.B == BCond2.B)
+                {
+                    return;
+                }
+            }
+
+            if (nm.Length > 5)
+            {
+                nm = nm.Substring(0, 6);
+
+                if (nm == "PERI_C")
+                {
+                    nm = String.Format("{0}-{1}", nm, BCond1.Id);
+                    BCond1.Label.Name = nm;
+                    BCond2.Label.Name = nm;
                 }
             }
         }
