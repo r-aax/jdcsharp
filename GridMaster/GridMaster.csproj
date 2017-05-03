@@ -61,6 +61,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Windows\ChangesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\InfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -78,6 +82,9 @@
     <Compile Include="Tools\AdditionalParameters.cs" />
     <Compile Include="Windows\AdditionalParametersWindow.xaml.cs">
       <DependentUpon>AdditionalParametersWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ChangesWindow.xaml.cs">
+      <DependentUpon>ChangesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>

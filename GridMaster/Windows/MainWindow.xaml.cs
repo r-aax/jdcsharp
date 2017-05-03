@@ -578,5 +578,15 @@ namespace GridMaster.Windows
         {
             (new AdditionalParametersWindow()).ShowDialog();
         }
+
+        /// <summary>
+        /// Changes window open.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ChangesMI_Click(object sender, RoutedEventArgs e)
+        {
+            (new ChangesWindow()).ShowDialog();
+        }
     }
 }

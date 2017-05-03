@@ -20,6 +20,7 @@
                 <MenuItem Name="InfoGridMI" Header="Grid description" Click="InfoGridMI_Click"/>
                 <MenuItem Name="InfoBlocksDistrMI" Header="Blocks distribution" Click="InfoBlocksDistrMI_Click"/>
                 <MenuItem Name="InfoLogMI" Header="Log" Click="InfoLogMI_Click"/>
+                <MenuItem Name="ChangesMI" Header="Changes" Click="ChangesMI_Click"/>
             </MenuItem>
             <MenuItem Header="Tools">
                 <MenuItem Name="ToolsSavePictireMI" Header="Save picture" Click="ToolsSavePictireMI_Click"/>

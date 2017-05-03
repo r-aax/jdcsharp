@@ -86,16 +86,10 @@ namespace Lib.MathMod.Grid.Load
 
                 while ((line = PFG.ReadLine(sr)) != null)
                 {
-                    string[] s = line.Split(' ');
+                    List<string> s = line.Split(' ').ToList().FindAll(x => !Strings.IsEmpty(x));
 
                     for (int i = 0; i < s.Count(); i++)
                     {
-                        if (s[i] == "")
-                        {
-                            // If element if empty this is the end of the line.
-                            break;
-                        }
-
                         if (iblank_data_left > 0)
                         {
                             // If we use iblank data, we must read it out.
@@ -209,9 +203,7 @@ namespace Lib.MathMod.Grid.Load
                         IfacesPair pair = g.IfacesPairs[j];
                         Iface cur_iface = pair.If;
 
-                        // TODO:
-                        // Implement correct interfaces links.
-                        if (cur_iface.Id == iface.Id)
+                        if (iface.DirectionsMatchFixed(cur_iface, true, 1e-6) != null)
                         {
                             Debug.Assert(pair.Mirror == null, "interfaces pair mirror double initialization");
 
