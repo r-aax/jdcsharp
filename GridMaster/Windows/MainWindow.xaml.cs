@@ -565,5 +565,15 @@ namespace GridMaster.Windows
         {
             GridProperties.IsBcondsLinks = false;
         }
+
+        /// <summary>
+        /// Additional parameters window open.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void AddittionalParametersMI_Click(object sender, RoutedEventArgs e)
+        {
+            (new AdditionalParametersWindow()).ShowDialog();
+        }
     }
 }

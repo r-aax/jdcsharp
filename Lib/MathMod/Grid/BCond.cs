@@ -108,39 +108,6 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Check if two border conditions match through rotation X.
-        /// </summary>
-        /// <param name="bc1">first border condition</param>
-        /// <param name="od11">first direction for first border condition</param>
-        /// <param name="od12">second direction for first border condition</param>
-        /// <param name="bc2">second border conndition</param>
-        /// <param name="od21">first direction for second border condition</param>
-        /// <param name="od22">second direction for second border condition</param>
-        /// <returns></returns>
-        public static bool IsMatchRotX(BCond bc1, Dir od11, Dir od12,
-                                       BCond bc2, Dir od21, Dir od22)
-        {
-            Point p1 = bc1.CornerNode(od11, od12);
-            Point p2 = bc2.CornerNode(od21, od22);
-
-            if ((p1 == null) || (p2 == null))
-            {
-                return false;
-            }
-
-            // X coordinates must be equal.
-            if (p1.DistX(p2) > Constants.Eps2)
-            {
-                return false;
-            }
-
-            double r1 = Maths.Maths.Hypot2(p1.Y, p1.Z);
-            double r2 = Maths.Maths.Hypot2(p2.Y, p2.Z);
-
-            return Math.Abs(r1 - r2) < Constants.Eps2;
-        }
-
-        /// <summary>
         /// Check if border condition is linked.
         /// </summary>
         /// <returns><c>true</c> - if it is linked, <c>false</c> - otherwise</returns>

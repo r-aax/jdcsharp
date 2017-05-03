@@ -245,9 +245,11 @@ namespace Lib.MathMod.Grid
         /// <param name="bc2">second border corners</param>
         /// <param name="od21">first direction of second border corners</param>
         /// <param name="od22">second direction of second border corners</param>
-        /// <returns></returns>
+        /// <param name="eps">epsilon</param>
+        /// <returns><c>true</c> - if two corners match, <c>false</c> - otherwise</returns>
         public static bool IsMatch(BorderCorners bc1, Dir od11, Dir od12,
-                                   BorderCorners bc2, Dir od21, Dir od22)
+                                   BorderCorners bc2, Dir od21, Dir od22,
+                                   double eps)
         {
             Point p1 = bc1.Get(od11, od12);
             Point p2 = bc2.Get(od21, od22);
@@ -257,7 +259,7 @@ namespace Lib.MathMod.Grid
                 return false;
             }
 
-            return (p1 - p2).Mod2 < Constants.Eps;
+            return (p1 - p2).Mod2 < eps;
         }
 
         /// <summary>
@@ -265,8 +267,9 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="bc">second object</param>
         /// <param name="is_codirectional">codirectional flag</param>
+        /// <param name="eps">epsilon</param>
         /// <returns>directions - if objects math, null - otherwise</returns>
-        public Dirs3 DirectionsMatchFixed(BorderCorners bc, bool is_codirectional)
+        public Dirs3 DirectionsMatchFixed(BorderCorners bc, bool is_codirectional, double eps)
         {
             //      codirectional      not codirectional
             //        *     *             *         *
@@ -301,11 +304,11 @@ namespace Lib.MathMod.Grid
             //           ----->          ----->
             for (int j = 0; j < 4; j++)
             {
-                if (IsMatch(this, od11, od12, bc, od21, od22))
+                if (IsMatch(this, od11, od12, bc, od21, od22, eps))
                 {
                     // A = A'
 
-                    if (!IsMatch(this, !od11, !od12, bc, !od21, !od22))
+                    if (!IsMatch(this, !od11, !od12, bc, !od21, !od22, eps))
                     {
                         // A = A', but C != C'. There is no relations between this pair of borders.
                         break;
@@ -313,12 +316,12 @@ namespace Lib.MathMod.Grid
 
                     // A = A', C = C'
 
-                    if (IsMatch(this, !od11, od12, bc, !od21, od22))
+                    if (IsMatch(this, !od11, od12, bc, !od21, od22, eps))
                     {
                         // A = A', C = C'
                         // B = B'
 
-                        if (!IsMatch(this, od11, !od12, bc, od21, !od22))
+                        if (!IsMatch(this, od11, !od12, bc, od21, !od22, eps))
                         {
                             // D != D'
                             break;
@@ -327,12 +330,12 @@ namespace Lib.MathMod.Grid
                         dirs.Set(od11, od21);
                         dirs.Set(od12, od22);
                     }
-                    else if (IsMatch(this, !od11, od12, bc, od21, !od22))
+                    else if (IsMatch(this, !od11, od12, bc, od21, !od22, eps))
                     {
                         // A = A', C = C'
                         // B = D'
 
-                        if (!IsMatch(this, od11, !od12, bc, !od21, od22))
+                        if (!IsMatch(this, od11, !od12, bc, !od21, od22, eps))
                         {
                             // D != B'
                             break;
@@ -362,14 +365,15 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="bc">second object</param>
         /// <param name="is_codirectional">codirectional flag</param>
+        /// <param name="eps">epsilon</param>
         /// <returns>directions - if objects math, null - otherwise</returns>
-        public Dirs3 DirectionsMatchParallelMove(BorderCorners bc, bool is_codirectional)
+        public Dirs3 DirectionsMatchParallelMove(BorderCorners bc, bool is_codirectional, double eps)
         {
             // First move to another border (vector than connects centers of borders).
             BorderCorners move = Clone() as BorderCorners;
             move.Move(bc.Center() - move.Center());
 
-            return move.DirectionsMatchFixed(bc, is_codirectional);
+            return move.DirectionsMatchFixed(bc, is_codirectional, eps);
         }
 
         /// <summary>
@@ -377,8 +381,9 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="bc">second object</param>
         /// <param name="is_codirectional">codirectional flag</param>
+        /// <param name="eps">epsilon</param>
         /// <returns>directions - if objects math, null - otherwise</returns>
-        public Dirs3 DirectionsMatchRotX(BorderCorners bc, bool is_codirectional)
+        public Dirs3 DirectionsMatchRotX(BorderCorners bc, bool is_codirectional, double eps)
         {
             // First rotate two borders to Y = 0.
             BorderCorners bc1 = Clone() as BorderCorners;
@@ -393,7 +398,7 @@ namespace Lib.MathMod.Grid
             bc1.RotX(-c1.Z / h1, c1.Y / h1);
             bc2.RotX(-c2.Z / h2, c2.Y / h2);
 
-            return bc1.DirectionsMatchFixed(bc2, is_codirectional);
+            return bc1.DirectionsMatchFixed(bc2, is_codirectional, eps);
         }
     }
 }

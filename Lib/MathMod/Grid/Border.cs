@@ -149,12 +149,13 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="b">second object</param>
         /// <param name="is_codirectional">codirectional flag</param>
+        /// <param name="eps">epsilon</param>
         /// <returns>directions - if objects math, null - otherwise</returns>
-        public Dirs3 DirectionsMatchFixed(Border b, bool is_codirectional)
+        public Dirs3 DirectionsMatchFixed(Border b, bool is_codirectional, double eps)
         {
             BorderCorners bc_this = new BorderCorners(this);
             BorderCorners bc = new BorderCorners(b);
-            Dirs3 dirs = bc_this.DirectionsMatchFixed(bc, is_codirectional);
+            Dirs3 dirs = bc_this.DirectionsMatchFixed(bc, is_codirectional, eps);
 
             if (dirs == null)
             {
@@ -169,12 +170,13 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="b">second object</param>
         /// <param name="is_codirectional">codirectional flag</param>
+        /// <param name="eps">epsilon</param>
         /// <returns>directions - if objects match, null - otherwise</returns>
-        public Dirs3 DirectionsMatchParallelMove(Border b, bool is_codirectional)
+        public Dirs3 DirectionsMatchParallelMove(Border b, bool is_codirectional, double eps)
         {
             BorderCorners bc_this = new BorderCorners(this);
             BorderCorners bc = new BorderCorners(b);
-            Dirs3 dirs = bc_this.DirectionsMatchParallelMove(bc, is_codirectional);
+            Dirs3 dirs = bc_this.DirectionsMatchParallelMove(bc, is_codirectional, eps);
 
             if (dirs == null)
             {
@@ -189,12 +191,13 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="b">second object</param>
         /// <param name="is_codirectional">codirectional flag</param>
+        /// <param name="eps">epsilon</param>
         /// <returns>directions - if objects match, null - otherwise</returns>
-        public Dirs3 DirectionsMatchRotX(Border b, bool is_codirectional)
+        public Dirs3 DirectionsMatchRotX(Border b, bool is_codirectional, double eps)
         {
             BorderCorners bc_this = new BorderCorners(this);
             BorderCorners bc = new BorderCorners(b);
-            Dirs3 dirs = bc_this.DirectionsMatchRotX(bc, is_codirectional);
+            Dirs3 dirs = bc_this.DirectionsMatchRotX(bc, is_codirectional, eps);
 
             if (dirs == null)
             {

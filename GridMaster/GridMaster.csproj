@@ -57,6 +57,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Windows\AdditionalParametersWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Windows\InfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -71,6 +75,10 @@
     </Compile>
     <Compile Include="Tools\Histogram.cs" />
     <Compile Include="Tools\HistogramExt.cs" />
+    <Compile Include="Tools\AdditionalParameters.cs" />
+    <Compile Include="Windows\AdditionalParametersWindow.xaml.cs">
+      <DependentUpon>AdditionalParametersWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\InfoWindow.xaml.cs">
       <DependentUpon>InfoWindow.xaml</DependentUpon>
     </Compile>

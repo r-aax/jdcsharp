@@ -23,6 +23,7 @@
             </MenuItem>
             <MenuItem Header="Tools">
                 <MenuItem Name="ToolsSavePictireMI" Header="Save picture" Click="ToolsSavePictireMI_Click"/>
+                <MenuItem Name="AddittionalParametersMI" Header="Additional parameters" Click="AddittionalParametersMI_Click"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">

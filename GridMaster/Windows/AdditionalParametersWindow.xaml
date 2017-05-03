@@ -1,0 +1,33 @@
+﻿<Window x:Class="GridMaster.Windows.AdditionalParametersWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GridMaster.Windows"
+        mc:Ignorable="d"
+        Title="Additional Parameters" SizeToContent="WidthAndHeight">
+    <StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Eps for bconds match parallel move" Margin="10"/>
+            <TextBox x:Name="EpsBCondsMatchParallelMove" Grid.Row="0" Grid.Column="1" Text="0.01" Margin="10"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Eps for bconds match rotation" Margin="10"/>
+            <TextBox x:Name="EpsBCondsMatchRotation" Grid.Row="1" Grid.Column="1" Text="0.01" Margin="10"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Row="0" Grid.Column="0" Name="CancelB" Content="Cancel" Width="75" HorizontalAlignment="Right" Margin="5" Click="CancelB_Click" />
+            <Button Grid.Row="0" Grid.Column="1" Name="OK_B" Content="OK" Width="75" HorizontalAlignment="Left" Margin="5" Click="OK_B_Click"/>
+        </Grid>
+    </StackPanel>
+</Window>
