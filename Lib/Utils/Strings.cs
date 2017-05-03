@@ -31,5 +31,38 @@ namespace Lib.Utils
 
             return r;
         }
+
+        /// <summary>
+        /// Check if string contains digits.
+        /// </summary>
+        /// <param name="str">string</param>
+        /// <returns><c>true</c> - if string contains only digits, <c>false</c> - otherwise</returns>
+        public static bool IsDigits(string str)
+        {
+            if (str.Length == 0)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (!Char.IsDigit(str[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Check empty string.
+        /// </summary>
+        /// <param name="str">string</param>
+        /// <returns><c>truc</c> - if it is empty, <c>fasle</c> - otherwise</returns>
+        public static bool IsEmpty(string str)
+        {
+            return (str == "") || (str == "\n");
+        }
     }
 }

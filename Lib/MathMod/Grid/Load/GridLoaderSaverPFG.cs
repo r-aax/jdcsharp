@@ -194,7 +194,7 @@ namespace Lib.MathMod.Grid.Load
                 for (int i = 0; i < ic; i++)
                 {
                     line = sr.ReadLine();
-                    string[] s = line.Split(' ');
+                    List<string> s = line.Split(' ').ToList().FindAll(x => !Strings.IsEmpty(x));
                     int id = Int32.Parse(s[0]);
                     int bi = Int32.Parse(s[1]);
                     int i0 = Int32.Parse(s[2]);
@@ -252,7 +252,7 @@ namespace Lib.MathMod.Grid.Load
                 for (int i = 0; i < bcc; i++)
                 {
                     line = sr.ReadLine();
-                    string[] s = line.Split(' ');
+                    List<string> s = line.Split(' ').ToList().FindAll(x => !Strings.IsEmpty(x));
                     int id = Int32.Parse(s[0]);
                     int bi = Int32.Parse(s[1]);
                     int i0 = Int32.Parse(s[2]);
@@ -293,7 +293,7 @@ namespace Lib.MathMod.Grid.Load
                 for (int i = 0; i < sc; i++)
                 {
                     line = sr.ReadLine();
-                    string[] s = line.Split(' ');
+                    List<string> s = line.Split(' ').ToList().FindAll(x => !Strings.IsEmpty(x));
                     int id = Int32.Parse(s[0]);
                     int bi = Int32.Parse(s[1]);
                     int i0 = Int32.Parse(s[2]);

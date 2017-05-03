@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+using Lib.Utils;
+
 namespace Lib.DataFormats
 {
     /// <summary>
@@ -54,14 +56,40 @@ namespace Lib.DataFormats
         /// <param name="kk">array of nodes counts in K direction</param>
         public static void ReadBlocksSizes(StreamReader sr, int bc, int[] ii, int[] jj, int[] kk)
         {
-            for (int i = 0; i < bc; i++)
+            // The mode blocks sizes can be written is not fixed.
+            // It may be 1 number per line or all numbers in the single line.
+            // It does not matter at all.
+            // After all numbers are written there must be \n symbol.
+
+            if (bc <= 0)
+            {
+                // No blocks - no to read.
+                return;
+            }
+
+            // Read all 3 * bc numbers.
+            int[] nn = new int[3 * bc];
+            int nn_index = 0;
+            while (nn_index < 3 * bc)
             {
                 string line = sr.ReadLine();
                 string[] s = line.Split(' ');
 
-                ii[i] = Int32.Parse(s[0]);
-                jj[i] = Int32.Parse(s[1]);
-                kk[i] = Int32.Parse(s[2]);
+                for (int i = 0; i < s.Length; i++)
+                {
+                    if (Strings.IsDigits(s[i]))
+                    {
+                        nn[nn_index++] = Int32.Parse(s[i]);
+                    }
+                }
+            }
+
+            // Now read sizes.
+            for (int i = 0; i < bc; i++)
+            {
+                ii[i] = nn[3 * i];
+                jj[i] = nn[3 * i + 1];
+                kk[i] = nn[3 * i + 2];
             }
         }
     }
