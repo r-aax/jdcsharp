@@ -22,51 +22,72 @@ namespace Lib.MathMod.Solver
         public static double gamma = 1.66;
 
         /// <summary>
+        /// Pressure from density and epsilon.
+        /// </summary>
+        /// <param name="rho">density</param>
+        /// <param name="eps">epsilon</param>
+        /// <returns>pressure</returns>
+        public static double Pressure(double rho, double eps)
+        {
+            return (gamma - 1.0) * rho * eps;
+        }
+
+        /// <summary>
+        /// Pressure from U vector.
+        /// </summary>
+        /// <param name="u">U vector</param>
+        /// <returns>pressure</returns>
+        public static double Pressure(U u)
+        {
+            return Pressure(u.rho, u.eps);
+        }
+
+        /// <summary>
         /// Flow in X direction.
         /// </summary>
         /// <param name="u">U</param>
-        /// <param name="p">pressure</param>
         /// <returns>flow in X direction</returns>
-        public static Q FlowX(U u, double p)
+        public static Q FlowX(U u)
         {
+            double p = Pressure(u);
             double q_rho = u.rho * u.v.X;
-            Vector3D q_v = (u.rho * u.v.X) * u.v;
+            Vector3D q_v = q_rho * u.v;
             q_v.X += p;
-            double q_E = u.rho * u.v.X * (u.eps + 0.5 * u.v.Mod2) + p * u.v.X;
+            double q_E = q_rho * (u.eps + 0.5 * u.v.Mod2) + p * u.v.X;
 
-            return new Q(q_rho, q_v.X, q_v.Y, q_v.Z, q_E);
+            return new Q(q_rho, q_v, q_E);
         }
 
         /// <summary>
         /// Flow in Y direction.
         /// </summary>
         /// <param name="u">U</param>
-        /// <param name="p">pressure</param>
         /// <returns>flow in Y direction</returns>
-        public static Q FlowY(U u, double p)
+        public static Q FlowY(U u)
         {
+            double p = Pressure(u);
             double q_rho = u.rho * u.v.Y;
-            Vector3D q_v = (u.rho * u.v.Y) * u.v;
+            Vector3D q_v = q_rho * u.v;
             q_v.Y += p;
-            double q_E = u.rho * u.v.Y * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Y;
+            double q_E = q_rho * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Y;
 
-            return new Q(q_rho, q_v.X, q_v.Y, q_v.Z, q_E);
+            return new Q(q_rho, q_v, q_E);
         }
 
         /// <summary>
         /// Flow in Z direction.
         /// </summary>
         /// <param name="u">U</param>
-        /// <param name="p">pressure</param>
         /// <returns>flow in Z direction</returns>
-        public static Q FlowZ(U u, double p)
+        public static Q FlowZ(U u)
         {
+            double p = Pressure(u);
             double q_rho = u.rho * u.v.Z;
-            Vector3D q_v = (u.rho * u.v.Z) * u.v;
+            Vector3D q_v = q_rho * u.v;
             q_v.Z += p;
-            double q_E = u.rho * u.v.Z * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Z;
+            double q_E = q_rho * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Z;
 
-            return new Q(q_rho, q_vx, q_vy, q_vz, q_E);
+            return new Q(q_rho, q_v, q_E);
         }
 
         /// <summary>
@@ -102,7 +123,7 @@ namespace Lib.MathMod.Solver
                         Cell c1 = g.Cells[i, j, k];
                         Cell c2 = g.Cells[i + 1, j, k];
                         U u = Riemann.Stub(c1.U, c2.U);
-                        Q q = FlowX(u, (gamma - 1.0) * u.rho * u.eps);
+                        Q q = FlowX(u);
 
                         SubAddQ(c1.D, c2.D, q, g.CellFacetS * dt);
                     }
@@ -119,7 +140,7 @@ namespace Lib.MathMod.Solver
                         Cell c1 = g.Cells[i, j, k];
                         Cell c2 = g.Cells[i, j + 1, k];
                         U u = Riemann.Stub(c1.U, c2.U);
-                        Q q = FlowY(u, (gamma - 1.0) * u.rho * u.eps);
+                        Q q = FlowY(u);
 
                         SubAddQ(c1.D, c2.D, q, g.CellFacetS * dt);
                     }
@@ -136,7 +157,7 @@ namespace Lib.MathMod.Solver
                         Cell c1 = g.Cells[i, j, k];
                         Cell c2 = g.Cells[i, j, k + 1];
                         U u = Riemann.Stub(c1.U, c2.U);
-                        Q q = FlowZ(u, (gamma - 1.0) * u.rho * u.eps);
+                        Q q = FlowZ(u);
 
                         SubAddQ(c1.D, c2.D, q, g.CellFacetS * dt);
                     }

@@ -32,14 +32,12 @@ namespace Lib.MathMod
         /// Constructor.
         /// </summary>
         /// <param name="rho_">flow rho</param>
-        /// <param name="vx_">flow vx</param>
-        /// <param name="vy_">flow vy</param>
-        /// <param name="vz_">flow vz</param>
+        /// <param name="v_">velocity</param>
         /// <param name="e">flow W</param>
-        public Q(double rho_, double vx_, double vy_, double vz_, double e)
+        public Q(double rho_, Vector3D v_, double e)
         {
             rho = rho_;
-            v = new Vector3D(vx_, vy_, vz_);
+            v = new Vector3D(v_);
             E = e;
         }
 
@@ -47,7 +45,7 @@ namespace Lib.MathMod
         /// Empty constructor.
         /// </summary>
         public Q()
-            : this(0.0, 0.0, 0.0, 0.0, 0.0)
+            : this(0.0, new Vector3D(0.0, 0.0, 0.0), 0.0)
         {
         }
 

@@ -50,6 +50,15 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
+        /// Vector copy constructor.
+        /// </summary>
+        /// <param name="v">vector</param>
+        public Vector(Vector v)
+            : this(v.X, v.Y, v.Z)
+        {
+        }
+
+        /// <summary>
         /// Cast to string.
         /// </summary>
         /// <returns>string</returns>
