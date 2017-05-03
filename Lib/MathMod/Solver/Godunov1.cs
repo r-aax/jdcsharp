@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.MathMod.SolidGrid;
+using Lib.Maths.Geometry;
+using Lib.Maths.Geometry.Geometry3D;
+using Vector3D = Lib.Maths.Geometry.Geometry3D.Vector;
 
 namespace Lib.MathMod.Solver
 {
@@ -27,12 +30,11 @@ namespace Lib.MathMod.Solver
         public static Q FlowX(U u, double p)
         {
             double q_rho = u.rho * u.v.X;
-            double q_vx = u.rho * u.v.X * u.v.X + p;
-            double q_vy = u.rho * u.v.X * u.v.Y;
-            double q_vz = u.rho * u.v.X * u.v.Z;
+            Vector3D q_v = (u.rho * u.v.X) * u.v;
+            q_v.X += p;
             double q_E = u.rho * u.v.X * (u.eps + 0.5 * u.v.Mod2) + p * u.v.X;
 
-            return new Q(q_rho, q_vx, q_vy, q_vz, q_E);
+            return new Q(q_rho, q_v.X, q_v.Y, q_v.Z, q_E);
         }
 
         /// <summary>
@@ -44,12 +46,11 @@ namespace Lib.MathMod.Solver
         public static Q FlowY(U u, double p)
         {
             double q_rho = u.rho * u.v.Y;
-            double q_vx = u.rho * u.v.Y * u.v.X;
-            double q_vy = u.rho * u.v.Y * u.v.Y + p;
-            double q_vz = u.rho * u.v.Y * u.v.Z;
+            Vector3D q_v = (u.rho * u.v.Y) * u.v;
+            q_v.Y += p;
             double q_E = u.rho * u.v.Y * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Y;
 
-            return new Q(q_rho, q_vx, q_vy, q_vz, q_E);
+            return new Q(q_rho, q_v.X, q_v.Y, q_v.Z, q_E);
         }
 
         /// <summary>
@@ -61,9 +62,8 @@ namespace Lib.MathMod.Solver
         public static Q FlowZ(U u, double p)
         {
             double q_rho = u.rho * u.v.Z;
-            double q_vx = u.rho * u.v.Z * u.v.X;
-            double q_vy = u.rho * u.v.Z * u.v.Y;
-            double q_vz = u.rho * u.v.Z * u.v.Z + p;
+            Vector3D q_v = (u.rho * u.v.Z) * u.v;
+            q_v.Z += p;
             double q_E = u.rho * u.v.Z * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Z;
 
             return new Q(q_rho, q_vx, q_vy, q_vz, q_E);

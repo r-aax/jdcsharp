@@ -32,7 +32,7 @@
                     <TextBox Name="UComponentRangeL_TB" Text="10.0" Margin="10"/>
                     <TextBox Name="UComponentRangeH_TB" Text="100.0" Margin="10"/>
                     <Button Name="StartB" Content="Start" Margin="10" Width="75" Height="20" Click="StartB_Click"/>
-                    <TextBox Name="ItersCountTB" Text="1" Margin="10"/>
+                    <TextBox Name="ItersCountTB" Text="100" Margin="10"/>
                     <Button Name="IterB" Content="Iteration" Margin="10" Width="75" Height="20" Click="IterB_Click"/>
                 </StackPanel>
             </Grid>

@@ -101,7 +101,7 @@ namespace Hydro
             }
             Grid.Cells[0, 0, 0].U.rho = 100.0;
             Grid.Cells[1, 0, 0].U.rho = 10.0;
-            //Grid.Cells[2, 0, 0].U.rho = 100.0;
+            //Grid.Cells[2, 0, 0].U.rho = 10.0;
 
             Paint();
         }
