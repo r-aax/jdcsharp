@@ -152,8 +152,8 @@ namespace Lib.MathMod.Grid.Cut
             int max_iface_id = g.MaxIfaceId();
             Iface ifc1 = new Iface(max_iface_id + 1, b, new ISegm(b.I1, b.I1), b.J, b.K, new_b);
             Iface ifc2 = new Iface(max_iface_id + 1, new_b, new ISegm(b.I0, b.I0), b.J, b.K, b);
-            g.Ifaces.Add(ifc1);
-            g.Ifaces.Add(ifc2);
+            IfacesPair pair = new IfacesPair(ifc1, ifc2);
+            g.IfacesPairs.Add(pair);
 
             return new_b;
         }
@@ -204,8 +204,8 @@ namespace Lib.MathMod.Grid.Cut
             int max_iface_id = g.MaxIfaceId();
             Iface ifc1 = new Iface(max_iface_id + 1, b, b.I, new ISegm(b.J1, b.J1), b.K, new_b);
             Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.I, new ISegm(b.J0, b.J0), b.K, b);
-            g.Ifaces.Add(ifc1);
-            g.Ifaces.Add(ifc2);
+            IfacesPair pair = new IfacesPair(ifc1, ifc2);
+            g.IfacesPairs.Add(pair);
 
             return new_b;
         }
@@ -256,8 +256,8 @@ namespace Lib.MathMod.Grid.Cut
             int max_iface_id = g.MaxIfaceId();
             Iface ifc1 = new Iface(max_iface_id + 1, b, b.I, b.J, new ISegm(b.K1, b.K1), new_b);
             Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.I, b.J, new ISegm(b.K0, b.K0), b);
-            g.Ifaces.Add(ifc1);
-            g.Ifaces.Add(ifc2);
+            IfacesPair pair = new IfacesPair(ifc1, ifc2);
+            g.IfacesPairs.Add(pair);
 
             return new_b;
         }
@@ -285,13 +285,13 @@ namespace Lib.MathMod.Grid.Cut
         {
             StructuredGrid g = b.Grid;
 
-            // We do not cut last two interfaces, because they have just came out.
-            int ic = g.IfacesCount - 2;
+            // We do not cut last interfaces pair, because it has just came out.
+            int ic = g.IfacesPairsCount - 1;
 
-            for (int i = 0; i < ic; i += 2)
+            for (int i = 0; i < ic; i++)
             {
-                Iface i1 = g.Ifaces[i];
-                Iface i2 = g.Ifaces[i + 1];
+                Iface i1 = g.IfacesPairs[i].If;
+                Iface i2 = g.IfacesPairs[i].Mirror;
 
                 if (b == i1.B)
                 {
@@ -427,7 +427,7 @@ namespace Lib.MathMod.Grid.Cut
                 int id = g.MaxIfaceId() + 1;
                 Iface ifc = i1.Clone(id, new_b);
                 ifc.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
-                g.Ifaces.Add(ifc);
+                Iface ifc1 = ifc;
                 c[1] = bc[1];
 
                 // Adjacent interface truncated on bc[1] - c[0].
@@ -443,7 +443,8 @@ namespace Lib.MathMod.Grid.Cut
                 ifc = Trunc(i2, i1.NDirs[d.N], bc[1] - c[0]);
                 ifc.NB = new_b;
                 ifc.Id = id;
-                g.Ifaces.Add(ifc);
+                Iface ifc2 = ifc;
+                g.IfacesPairs.Add(new IfacesPair(ifc1, ifc2));
             }
         }
 

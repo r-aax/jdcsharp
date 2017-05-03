@@ -68,10 +68,10 @@ namespace GridMaster.Windows
 
             // Ifaces descriptions.
             LinesLB.Items.Add(String.Format("Ifaces ({0}):", g.IfacesCount));
-            for (int i = 0; i < g.IfacesCount; i += 2)
+            for (int i = 0; i < g.IfacesPairsCount; i++)
             {
-                LinesLB.Items.Add("!" + g.Ifaces[i].ToString());
-                LinesLB.Items.Add(" " + g.Ifaces[i + 1].ToString());
+                LinesLB.Items.Add("!" + g.IfacesPairs[i].If.ToString());
+                LinesLB.Items.Add(" " + g.IfacesPairs[i].Mirror.ToString());
             }
 
             // Border conditions descriptions.

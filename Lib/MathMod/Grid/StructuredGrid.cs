@@ -45,12 +45,23 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// List of interfaces.
+        /// List of interfaces pairs.
         /// </summary>
-        public List<Iface> Ifaces
+        public List<IfacesPair> IfacesPairs
         {
             get;
             private set;
+        }
+
+        /// <summary>
+        /// Count of interfaces pairs.
+        /// </summary>
+        public int IfacesPairsCount
+        {
+            get
+            {
+                return IfacesPairs.Count;
+            }
         }
 
         /// <summary>
@@ -60,7 +71,7 @@ namespace Lib.MathMod.Grid
         {
             get
             {
-                return Ifaces.Count;
+                return IfacesPairsCount * 2;
             }
         }
 
@@ -130,7 +141,7 @@ namespace Lib.MathMod.Grid
         public void Clear()
         {
             Blocks = new List<Block>();
-            Ifaces = new List<Iface>();
+            IfacesPairs = new List<IfacesPair>();
             BConds = new List<BCond>();
             BCondsLinks = new List<BCondsLink>();
             Scopes = new List<Scope>();
@@ -283,10 +294,10 @@ namespace Lib.MathMod.Grid
         /// </summary>
         public void SetIfacesNDirs()
         {
-            for (int i = 0; i < IfacesCount; i += 2)
+            for (int i = 0; i < IfacesCount; i++)
             {
-                Iface i1 = Ifaces[i];
-                Iface i2 = Ifaces[i + 1];
+                Iface i1 = IfacesPairs[i].If;
+                Iface i2 = IfacesPairs[i].Mirror;
 
                 // Reset all.
                 i1.ResetNDirs();
@@ -313,9 +324,9 @@ namespace Lib.MathMod.Grid
         {
             int max_id = -1;
 
-            foreach (Iface ifc in Ifaces)
+            foreach (IfacesPair pair in IfacesPairs)
             {
-                max_id = Math.Max(max_id, ifc.Id);
+                max_id = Math.Max(max_id, pair.MaxIfaceId);
             }
 
             return max_id;

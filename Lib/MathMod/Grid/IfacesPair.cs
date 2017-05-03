@@ -52,5 +52,37 @@ namespace Lib.MathMod.Grid
             If.B = b;
             Mirror.NB = b;
         }
+
+        /// <summary>
+        /// Maximum interface identifier.
+        /// </summary>
+        public int MaxIfaceId
+        {
+            get
+            {
+                return Math.Max(If.Id, Mirror.Id);
+            }
+        }
+
+        /// <summary>
+        /// Check incident.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <returns><c>true</c> - if incident, <c>false</c> - otherwise</returns>
+        public bool IsIncident(Block b)
+        {
+            return (b == If.B) || (b == Mirror.B);
+        }
+
+        /// <summary>
+        /// Check cross interface pair.
+        /// </summary>
+        public bool IsCross
+        {
+            get
+            {
+                return If.IsCross;
+            }
+        }
     }
 }

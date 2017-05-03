@@ -185,6 +185,16 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Iface string representation for save.
+        /// </summary>
+        /// <returns>string</returns>
+        public string SaveString()
+        {
+            return String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8}",
+                                 Id, B.Id + 1, I0 + 1, I1 + 1, J0 + 1, J1 + 1, K0 + 1, K1 + 1, NB.Id + 1);
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>new cloned interface</returns>

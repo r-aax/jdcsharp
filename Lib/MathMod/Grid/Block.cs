@@ -167,13 +167,13 @@ namespace Lib.MathMod.Grid
         {
             int iccm = 0;
 
-            foreach (Iface iface in Grid.Ifaces)
+            foreach (IfacesPair pair in Grid.IfacesPairs)
             {
-                if (iface.B == this)
+                if (pair.IsIncident(this))
                 {
-                    if (!is_only_cross_partition || iface.IsCross)
+                    if (!is_only_cross_partition || pair.IsCross)
                     {
-                        iccm += iface.Measure;
+                        iccm += pair.If.Measure;
                     }
                 }
             }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 using Lib.DataFormats;
 using Lib.Maths.Geometry;
@@ -203,13 +204,18 @@ namespace Lib.MathMod.Grid.Load
 
                     // Paste into interfaces list.
 
-                    for (int j = 0; j < g.IfacesCount; j++)
+                    for (int j = 0; j < g.IfacesPairsCount; j++)
                     {
-                        Iface cur_iface = g.Ifaces[j];
+                        IfacesPair pair = g.IfacesPairs[j];
+                        Iface cur_iface = pair.If;
 
+                        // TODO:
+                        // Implement correct interfaces links.
                         if (cur_iface.Id == iface.Id)
                         {
-                            g.Ifaces.Insert(j + 1, iface);
+                            Debug.Assert(pair.Mirror == null, "interfaces pair mirror double initialization");
+
+                            pair.Mirror = iface;
                             iface = null;
 
                             break;
@@ -218,7 +224,8 @@ namespace Lib.MathMod.Grid.Load
 
                     if (iface != null)
                     {
-                        g.Ifaces.Add(iface);
+                        IfacesPair pair = new IfacesPair(iface, null);
+                        g.IfacesPairs.Add(pair);
                     }
                 }
             }
@@ -501,16 +508,10 @@ namespace Lib.MathMod.Grid.Load
         {
             sw.WriteLine(g.IfacesCount.ToString());
 
-            for (int i = 0; i < g.IfacesCount; i++)
+            for (int i = 0; i < g.IfacesPairsCount; i++)
             {
-                Iface iface = g.Ifaces[i];
-
-                sw.WriteLine(String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8}",
-                                           iface.Id, iface.B.Id + 1,
-                                           iface.I0 + 1, iface.I1 + 1,
-                                           iface.J0 + 1, iface.J1 + 1,
-                                           iface.K0 + 1, iface.K1 + 1,
-                                           iface.NB.Id + 1));
+                sw.WriteLine(g.IfacesPairs[i].If.SaveString());
+                sw.WriteLine(g.IfacesPairs[i].Mirror.SaveString());
             }
         }
 
