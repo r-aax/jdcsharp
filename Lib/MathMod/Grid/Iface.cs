@@ -185,6 +185,16 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Get strong string of interface.
+        /// </summary>
+        /// <param name="iface">interface</param>
+        /// <returns>strong string</returns>
+        public static string StrongString(Iface iface)
+        {
+            return (iface != null) ? iface.ToString() : "null";
+        }
+
+        /// <summary>
         /// Iface string representation for save.
         /// </summary>
         /// <returns>string</returns>

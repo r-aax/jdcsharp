@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 using Lib.Maths.Numbers;
+using Lib.Utils;
 
 namespace Lib.MathMod.Grid
 {
@@ -292,28 +294,46 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Set neighbour directions for all interfaces.
         /// </summary>
-        public void SetIfacesNDirs()
+        /// <returns><c>true</c> - in success case, <c>false</c> - otherwise</returns>
+        public bool SetIfacesNDirs()
         {
-            for (int i = 0; i < IfacesCount; i++)
+            bool is_succ = true;
+
+            try
             {
-                Iface i1 = IfacesPairs[i].If;
-                Iface i2 = IfacesPairs[i].Mirror;
-
-                // Reset all.
-                i1.ResetNDirs();
-                i2.ResetNDirs();
-
-                Dirs3 dirs = i1.DirectionsMatchFixed(i2, false, 1e-6);
-
-                if (dirs == null)
+                for (int i = 0; i < IfacesPairsCount; i++)
                 {
-                    throw new Exception("error while detecting interfaces pair orientation");
-                }
-                else
-                {
-                    i1.SetNDirs(i2, dirs);
+                    Iface i1 = IfacesPairs[i].If;
+                    Iface i2 = IfacesPairs[i].Mirror;
+
+                    if ((i1 == null) || (i2 == null))
+                    {
+                        throw new Exception("null interface in interfaces pair");
+                    }
+
+                    // Reset all.
+                    i1.ResetNDirs();
+                    i2.ResetNDirs();
+
+                    Dirs3 dirs = i1.DirectionsMatchFixed(i2, false, 1e-6);
+
+                    if (dirs == null)
+                    {
+                        throw new Exception("error while detecting interfaces pair orientation");
+                    }
+                    else
+                    {
+                        i1.SetNDirs(i2, dirs);
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                MessageBox.Show(ExeDebug.ReportError(e.Message));
+                is_succ = false;
+            }
+
+            return is_succ;
         }
 
         /// <summary>
