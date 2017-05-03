@@ -53,6 +53,7 @@ namespace GridMaster.Windows
         {
             AdditionalParameters.EpsForBCondsMatchParallelMove = Double.Parse(EpsBCondsMatchParallelMove.Text);
             AdditionalParameters.EpsForBCondsMatchRotation = Double.Parse(EpsBCondsMatchRotation.Text);
+            Close();
         }
     }
 }

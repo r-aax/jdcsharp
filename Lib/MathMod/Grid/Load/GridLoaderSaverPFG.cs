@@ -323,9 +323,12 @@ namespace Lib.MathMod.Grid.Load
         /// <param name="g">grid</param>
         /// <param name="pfg_file_name">PFG file name</param>
         /// <param name="ibc_file_name">IBC file name</param>
+        /// <param name="eps_par_move">epsilon for parallel move</param>
+        /// <param name="eps_rot">epsilon for rotation</param>
         /// <returns><c>true</c> - if grid is loaded, <c>false</c> - otherwise</returns>
         public static bool Load(StructuredGrid g,
-                                string pfg_file_name, string ibc_file_name)
+                                string pfg_file_name, string ibc_file_name,
+                                double eps_par_move, double eps_rot)
         {
             bool is_succ = true;
 
@@ -342,7 +345,7 @@ namespace Lib.MathMod.Grid.Load
 
                         if (GridProperties.IsBcondsLinks)
                         {
-                            g.InitBCondsLinks();
+                            g.InitBCondsLinks(eps_par_move, eps_rot);
                         }
                     }
                 }

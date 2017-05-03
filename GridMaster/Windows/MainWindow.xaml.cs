@@ -26,6 +26,7 @@ using Lib.Utils;
 using Lib.MathMod.Grid.Partitioning;
 using Lib.DataStruct;
 using Lib.IO;
+using GridMaster.Tools;
 
 namespace GridMaster.Windows
 {
@@ -192,7 +193,9 @@ namespace GridMaster.Windows
 
                     string last_action = "Grid " + pfg.Name + " (and *" + ibc.Ext + ") ";
 
-                    if (GridLoaderSaverPFG.Load(Grid, pfg.Name, ibc.Name))
+                    if (GridLoaderSaverPFG.Load(Grid, pfg.Name, ibc.Name,
+                                                AdditionalParameters.EpsForBCondsMatchParallelMove,
+                                                AdditionalParameters.EpsForBCondsMatchRotation))
                     {
                         UpdateLastAction(last_action + "is loaded.");
 

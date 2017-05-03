@@ -292,7 +292,7 @@ namespace Lib.MathMod.Grid
                 i1.ResetNDirs();
                 i2.ResetNDirs();
 
-                Dirs3 dirs = i1.DirectionsMatchFixed(i2, false);
+                Dirs3 dirs = i1.DirectionsMatchFixed(i2, false, 1e-6);
 
                 if (dirs == null)
                 {
@@ -483,7 +483,9 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Init BConds links.
         /// </summary>
-        public void InitBCondsLinks()
+        /// <param name="eps_par_move">epsilon for parallel move</param>
+        /// <param name="eps_rot">epsilon for rotation</param>
+        public void InitBCondsLinks(double eps_par_move, double eps_rot)
         {
             // Check each pair of border conditions.
             for (int i = 0; i < BCondsCount; i++)
@@ -522,21 +524,21 @@ namespace Lib.MathMod.Grid
                         && bcj.Label.Name.StartsWith("PERI_RX"))
                     {
                         // Two rotation RX border conditions.
-                        dirs = bci.DirectionsMatchRotX(bcj, true);
+                        dirs = bci.DirectionsMatchRotX(bcj, true, eps_rot);
                         kind = "Rot X";
                     }
                     else if ((bci.Label.Name == "PERI_C")
                              && (bcj.Label.Name == "PERI_C"))
                     {
                         // Main pair of parallel move PERI conditions.
-                        dirs = bci.DirectionsMatchParallelMove(bcj, true);
+                        dirs = bci.DirectionsMatchParallelMove(bcj, true, eps_par_move);
                         kind = "Parallel mv";
                     }
                     else if (bci.Label.Name.StartsWith("PERI_C-")
                              && bcj.Label.Name.StartsWith("PERI_C-"))
                     {
                         // Other pairs of parallel move PERI conditions.
-                        dirs = bci.DirectionsMatchParallelMove(bcj, true);
+                        dirs = bci.DirectionsMatchParallelMove(bcj, true, eps_par_move);
                         kind = "Parallel mv";
                     }
                     else
