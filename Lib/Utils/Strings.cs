@@ -62,7 +62,20 @@ namespace Lib.Utils
         /// <returns><c>truc</c> - if it is empty, <c>fasle</c> - otherwise</returns>
         public static bool IsEmpty(string str)
         {
-            return (str == "") || (str == "\n");
+            if (str == "")
+            {
+                return true;
+            }
+
+            for (int i = 0; i < str.Length; i++)
+            {
+                if (!Char.IsWhiteSpace(str[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

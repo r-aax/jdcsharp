@@ -47,6 +47,49 @@ namespace Lib.DataFormats
         }
 
         /// <summary>
+        /// Check if string is comment.
+        /// </summary>
+        /// <param name="str">string</param>
+        /// <returns><c>true</c> - if string is comment, <c>false</c> - otherwise</returns>
+        public static bool IsComment(string str)
+        {
+            if (str != "")
+            {
+                List<string> s = str.Split(' ').ToList().FindAll(x => !Strings.IsEmpty(x));
+
+                if (s.Count != 0)
+                {
+                    return s[0][0] == '!';
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Read next line from stream.
+        /// </summary>
+        /// <param name="sr">stream</param>
+        /// <returns>string</returns>
+        public static string ReadLine(StreamReader sr)
+        {
+            string line = sr.ReadLine();
+
+            if (line == null)
+            {
+                return line;
+            }
+
+            // Re-read if line is empty or comment.
+            while (Strings.IsEmpty(line) || IsComment(line))
+            {
+                line = sr.ReadLine();
+            }
+
+            return line;
+        }
+
+        /// <summary>
         /// Read blocks sizes from stream.
         /// </summary>
         /// <param name="sr">stream reader</param>
@@ -72,7 +115,7 @@ namespace Lib.DataFormats
             int nn_index = 0;
             while (nn_index < 3 * bc)
             {
-                string line = sr.ReadLine();
+                string line = ReadLine(sr);
                 string[] s = line.Split(' ');
 
                 for (int i = 0; i < s.Length; i++)

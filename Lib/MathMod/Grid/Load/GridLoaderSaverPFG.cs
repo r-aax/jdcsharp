@@ -51,7 +51,7 @@ namespace Lib.MathMod.Grid.Load
             // Get separator for read real numbers.
             string sep = NumberFormatInfo.CurrentInfo.NumberDecimalSeparator;
 
-            if ((line = sr.ReadLine()) != null)
+            if ((line = PFG.ReadLine(sr)) != null)
             {
                 int bc = Int32.Parse(line);
 
@@ -83,7 +83,7 @@ namespace Lib.MathMod.Grid.Load
                 int cur_k = 0;
                 int iblank_data_left = 0;
 
-                while ((line = sr.ReadLine()) != null)
+                while ((line = PFG.ReadLine(sr)) != null)
                 {
                     string[] s = line.Split(' ');
 
@@ -161,17 +161,6 @@ namespace Lib.MathMod.Grid.Load
         /// <param name="sr">stream</param>
         private static void LoadIfacesBCondsScopes(StructuredGrid g, StreamReader sr)
         {
-            // Ignore two lines.
-            for (int i = 0; i < 2; i++)
-            {
-                string line = sr.ReadLine();
-
-                if (line == null)
-                {
-                    return;
-                }
-            }
-
             LoadIfaces(g, sr);
             LoadBConds(g, sr);
             LoadScopes(g, sr);
@@ -186,14 +175,14 @@ namespace Lib.MathMod.Grid.Load
         {
             string line;
 
-            if ((line = sr.ReadLine()) != null)
+            if ((line = PFG.ReadLine(sr)) != null)
             {
                 int ic = Int32.Parse(line);
 
                 // Read all interfaces.
                 for (int i = 0; i < ic; i++)
                 {
-                    line = sr.ReadLine();
+                    line = PFG.ReadLine(sr);
                     List<string> s = line.Split(' ').ToList().FindAll(x => !Strings.IsEmpty(x));
                     int id = Int32.Parse(s[0]);
                     int bi = Int32.Parse(s[1]);
@@ -244,14 +233,14 @@ namespace Lib.MathMod.Grid.Load
         {
             string line;
 
-            if ((line = sr.ReadLine()) != null)
+            if ((line = PFG.ReadLine(sr)) != null)
             {
                 int bcc = Int32.Parse(line);
 
                 // Read all interfaces.
                 for (int i = 0; i < bcc; i++)
                 {
-                    line = sr.ReadLine();
+                    line = PFG.ReadLine(sr);
                     List<string> s = line.Split(' ').ToList().FindAll(x => !Strings.IsEmpty(x));
                     int id = Int32.Parse(s[0]);
                     int bi = Int32.Parse(s[1]);
@@ -285,14 +274,14 @@ namespace Lib.MathMod.Grid.Load
         {
             string line;
 
-            if ((line = sr.ReadLine()) != null)
+            if ((line = PFG.ReadLine(sr)) != null)
             {
                 int sc = Int32.Parse(line);
 
                 // Read all interfaces.
                 for (int i = 0; i < sc; i++)
                 {
-                    line = sr.ReadLine();
+                    line = PFG.ReadLine(sr);
                     List<string> s = line.Split(' ').ToList().FindAll(x => !Strings.IsEmpty(x));
                     int id = Int32.Parse(s[0]);
                     int bi = Int32.Parse(s[1]);
@@ -613,7 +602,7 @@ namespace Lib.MathMod.Grid.Load
             {
                 using (StreamReader sr = new StreamReader(peri_file_name))
                 {
-                    string line = sr.ReadLine();
+                    string line = PFG.ReadLine(sr);
 
                     while (line != null)
                     {
@@ -633,7 +622,7 @@ namespace Lib.MathMod.Grid.Load
                                                          new Dir(k1s));
                         g.BCondsLinks.Add(link);
 
-                        line = sr.ReadLine();
+                        line = PFG.ReadLine(sr);
                     }
                 }
             }
