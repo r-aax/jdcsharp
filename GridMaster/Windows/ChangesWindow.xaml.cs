@@ -42,6 +42,7 @@ namespace GridMaster.Windows
         {
             Ch("Changes:");
             Ch("2017-05-03: min: Information about functionality changes has been added.");
+            Ch("            maj: The indentifiers of adjacent interfaces don't need to be the same.");
         }
     }
 }
