@@ -65,7 +65,7 @@ namespace Hydro
                     return;
                 }
 
-                Drawer = new RectDrawerWPF(new Rect2D(Grid.Size.X, Grid.Size.Y), DrawAreaC, true, false);
+                //Drawer = new RectDrawerWPF(new Rect2D(Grid.Size.X, Grid.Size.Y), DrawAreaC, true, false);
                 HydroDrawer = new HydroRectDrawer(Drawer);
             }
 
@@ -87,6 +87,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
+            /*
             Grid = new SolidGrid(new Vector3D(10.0, 1.0, 1.1), 1.0);
 
             for (int i = 0; i < Grid.XISize; i++)
@@ -103,6 +104,7 @@ namespace Hydro
 
             Grid.Cells[0, 0, 0].U.rho = 100.0;
             Grid.Cells[9, 0, 0].U.rho = 100.0;
+            */
 
             Paint();
         }
@@ -128,7 +130,7 @@ namespace Hydro
 
             for (int i = 0; i < iters_count; i++)
             {
-                Godunov1.Iter(Grid, 0.0001);
+                //Godunov1.Iter(Grid, 0.0001);
             }
 
             Paint();

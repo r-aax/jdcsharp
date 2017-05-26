@@ -42,6 +42,7 @@ namespace Lib.Draw
         /// <param name="grid">grid</param>
         public void DrawCellsCanvas(SolidGrid grid)
         {
+            /*
             // x - dl step
             // y - dl step
 
@@ -54,6 +55,7 @@ namespace Lib.Draw
             {
                 Drawer.DrawHLine(grid.Dl * i);
             }
+            */
         }
 
         /// <summary>
@@ -64,6 +66,7 @@ namespace Lib.Draw
         /// <param name="hi">higher bound</param>
         public void DrawField(SolidGrid grid, double lo, double hi)
         {
+            /*
             double d = grid.Dl / 100.0;
 
             // Now we use rho value.
@@ -80,6 +83,7 @@ namespace Lib.Draw
                                     grid.Dl * (j + 1) + d);   
                 }
             }
+            */
         }
     }
 }
