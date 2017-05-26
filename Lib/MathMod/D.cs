@@ -4,30 +4,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lib.MathMod.SolidGrid
+using Lib.Maths.Geometry.Geometry3D;
+
+namespace Lib.MathMod
 {
     /// <summary>
-    /// Cell.
+    /// Data of cell.
     /// </summary>
-    public class Cell
+    public class D
     {
         /// <summary>
-        /// General data.
+        /// Mass.
         /// </summary>
-        public U U;
+        public double m;
 
         /// <summary>
-        /// Conservative data.
+        /// Impulse.
         /// </summary>
-        public D D;
+        public Vector P;
 
         /// <summary>
-        /// Constructor.
+        /// Full energy.
         /// </summary>
-        public Cell()
-        {
-            U = new U();
-            D = new D();
-        }
+        public double E;
     }
 }

@@ -65,7 +65,7 @@ namespace Hydro
                     return;
                 }
 
-                //Drawer = new RectDrawerWPF(new Rect2D(Grid.Size.X, Grid.Size.Y), DrawAreaC, true, false);
+                Drawer = new RectDrawerWPF(new Rect2D(Grid.XSize, Grid.YSize), DrawAreaC, true, false);
                 HydroDrawer = new HydroRectDrawer(Drawer);
             }
 
@@ -87,14 +87,13 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            Grid = new SolidGrid(new Vector3D(10.0, 1.0, 1.1), 1.0);
+            Grid = new SolidGrid(10, 1, 1, 0.1);
 
-            for (int i = 0; i < Grid.XISize; i++)
+            for (int i = 0; i < Grid.NX; i++)
             {
-                for (int j = 0; j < Grid.YISize; j++)
+                for (int j = 0; j < Grid.NY; j++)
                 {
-                    for (int k = 0; k < Grid.ZISize; k++)
+                    for (int k = 0; k < Grid.NZ; k++)
                     {
                         Grid.Cells[i, j, k].U.rho = 10.0;
                         Grid.Cells[i, j, k].U.eps = 1.0;
@@ -104,7 +103,6 @@ namespace Hydro
 
             Grid.Cells[0, 0, 0].U.rho = 100.0;
             Grid.Cells[9, 0, 0].U.rho = 100.0;
-            */
 
             Paint();
         }
@@ -134,10 +132,6 @@ namespace Hydro
             }
 
             Paint();
-
-           // tb0.Text = Grid.Cells[0, 0, 0].U.ToString();
-           // tb1.Text = Grid.Cells[1, 0, 0].U.ToString();
-           // tb2.Text = Grid.Cells[2, 0, 0].U.ToString();
         }
     }
 }

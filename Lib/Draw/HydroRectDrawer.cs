@@ -42,20 +42,18 @@ namespace Lib.Draw
         /// <param name="grid">grid</param>
         public void DrawCellsCanvas(SolidGrid grid)
         {
-            /*
             // x - dl step
             // y - dl step
 
-            for (int i = 0; i <= grid.XISize; i++)
+            for (int i = 0; i <= grid.NX; i++)
             {
-                Drawer.DrawVLine(grid.Dl * i);
+                Drawer.DrawVLine(grid.CellL * i);
             }
 
-            for (int i = 0; i <= grid.YISize; i++)
+            for (int i = 0; i <= grid.NY; i++)
             {
-                Drawer.DrawHLine(grid.Dl * i);
+                Drawer.DrawHLine(grid.CellL * i);
             }
-            */
         }
 
         /// <summary>
@@ -66,24 +64,22 @@ namespace Lib.Draw
         /// <param name="hi">higher bound</param>
         public void DrawField(SolidGrid grid, double lo, double hi)
         {
-            /*
-            double d = grid.Dl / 100.0;
+            double d = grid.CellL / 100.0;
 
             // Now we use rho value.
 
-            for (int i = 0; i < grid.XISize; i++)
+            for (int i = 0; i < grid.NX; i++)
             {
-                for (int j = 0; j < grid.YISize; j++)
+                for (int j = 0; j < grid.NY; j++)
                 {
                     Color c = Color.Gray(grid.Cells[i, j, 0].U.rho, lo, hi);
                     Drawer.SetBrush(c);
-                    Drawer.FillRect(grid.Dl * i - d,
-                                    grid.Dl * j - d,
-                                    grid.Dl * (i + 1) + d,
-                                    grid.Dl * (j + 1) + d);   
+                    Drawer.FillRect(grid.CellL * i - d,
+                                    grid.CellL * j - d,
+                                    grid.CellL * (i + 1) + d,
+                                    grid.CellL * (j + 1) + d);   
                 }
             }
-            */
         }
     }
 }

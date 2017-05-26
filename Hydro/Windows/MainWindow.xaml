@@ -34,9 +34,6 @@
                     <Button Name="StartB" Content="Start" Margin="10" Width="75" Height="20" Click="StartB_Click"/>
                     <TextBox Name="ItersCountTB" Text="100" Margin="10"/>
                     <Button Name="IterB" Content="Iteration" Margin="10" Width="75" Height="20" Click="IterB_Click"/>
-                    <TextBox Name="tb0"></TextBox>
-                    <TextBox Name="tb1"></TextBox>
-                    <TextBox Name="tb2"></TextBox>
                 </StackPanel>
             </Grid>
         </Grid>
