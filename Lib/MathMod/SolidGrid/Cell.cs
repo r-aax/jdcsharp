@@ -29,5 +29,27 @@ namespace Lib.MathMod.SolidGrid
             U = new U();
             D = new D();
         }
+
+        /// <summary>
+        /// Convert U data to D data.
+        /// </summary>
+        /// <param name="V">volume</param>
+        public void UtoD(double V)
+        {
+            D.m = U.rho * V;
+            D.P = U.v * D.m;
+            D.E = U.e * V;
+        }
+
+        /// <summary>
+        /// Convert D data to U data.
+        /// </summary>
+        /// <param name="V"></param>
+        public void DtoU(double V)
+        {
+            U.rho = D.m / V;
+            U.v = D.P / D.m;
+            U.eps = D.E / D.m - 0.5 * U.v.Mod2;
+        }
     }
 }
