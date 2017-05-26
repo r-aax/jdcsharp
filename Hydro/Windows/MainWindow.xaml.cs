@@ -87,7 +87,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
-            Grid = new SolidGrid(new Vector3D(3.0, 1.0, 1.1), 1.0);
+            Grid = new SolidGrid(new Vector3D(10.0, 1.0, 1.1), 1.0);
 
             for (int i = 0; i < Grid.XISize; i++)
             {
@@ -95,13 +95,14 @@ namespace Hydro
                 {
                     for (int k = 0; k < Grid.ZISize; k++)
                     {
+                        Grid.Cells[i, j, k].U.rho = 10.0;
                         Grid.Cells[i, j, k].U.eps = 1.0;
                     }
                 }
             }
-            Grid.Cells[0, 0, 0].U.rho = 10.0;
-            Grid.Cells[1, 0, 0].U.rho = 100.0;
-            Grid.Cells[2, 0, 0].U.rho = 10.0;
+
+            Grid.Cells[0, 0, 0].U.rho = 100.0;
+            Grid.Cells[9, 0, 0].U.rho = 100.0;
 
             Paint();
         }
@@ -127,14 +128,14 @@ namespace Hydro
 
             for (int i = 0; i < iters_count; i++)
             {
-                Godunov1.Iter(Grid, 0.01);
+                Godunov1.Iter(Grid, 0.0001);
             }
 
             Paint();
 
-            tb0.Text = Grid.Cells[0, 0, 0].U.ToString();
-            tb1.Text = Grid.Cells[1, 0, 0].U.ToString();
-            tb2.Text = Grid.Cells[2, 0, 0].U.ToString();
+           // tb0.Text = Grid.Cells[0, 0, 0].U.ToString();
+           // tb1.Text = Grid.Cells[1, 0, 0].U.ToString();
+           // tb2.Text = Grid.Cells[2, 0, 0].U.ToString();
         }
     }
 }

@@ -55,6 +55,17 @@ namespace Lib.MathMod
         }
 
         /// <summary>
+        /// Energy.
+        /// </summary>
+        public double E
+        {
+            get
+            {
+                return eps + 0.5 * v.Mod2;
+            }
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>copy</returns>

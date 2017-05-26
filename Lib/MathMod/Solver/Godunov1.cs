@@ -53,7 +53,7 @@ namespace Lib.MathMod.Solver
             double q_rho = u.rho * u.v.X;
             Vector3D q_v = q_rho * u.v;
             q_v.X += p;
-            double q_E = q_rho * (u.eps + 0.5 * u.v.Mod2) + p * u.v.X;
+            double q_E = q_rho * u.E + p * u.v.X;
 
             return new Q(q_rho, q_v, q_E);
         }
@@ -69,7 +69,7 @@ namespace Lib.MathMod.Solver
             double q_rho = u.rho * u.v.Y;
             Vector3D q_v = q_rho * u.v;
             q_v.Y += p;
-            double q_E = q_rho * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Y;
+            double q_E = q_rho * u.E + p * u.v.Y;
 
             return new Q(q_rho, q_v, q_E);
         }
@@ -85,7 +85,7 @@ namespace Lib.MathMod.Solver
             double q_rho = u.rho * u.v.Z;
             Vector3D q_v = q_rho * u.v;
             q_v.Z += p;
-            double q_E = q_rho * (u.eps + 0.5 * u.v.Mod2) + p * u.v.Z;
+            double q_E = q_rho * u.E + p * u.v.Z;
 
             return new Q(q_rho, q_v, q_E);
         }
@@ -165,7 +165,31 @@ namespace Lib.MathMod.Solver
             }
 
             // All borders are hard.
-            // Do not calc anything.
+
+            // X borders.
+            for (int j = 0; j < g.YISize; j++)
+            {
+                for (int k = 0; k < g.ZISize; k++)
+                {
+                    Cell c;
+                    U u;
+                    Q q;
+
+                    // Left border.
+                    c = g.Cells[0, j, k];
+                    u = Riemann.Stub(c.U.Mirror(AxisType.X), c.U);
+                    q = FlowX(u);
+                    q.Mul(g.CellFacetS * dt);
+                    c.D.AddQ(q);
+
+                    // Right border.
+                    c = g.Cells[g.XISize - 1, j, k];
+                    u = Riemann.Stub(c.U, c.U.Mirror(AxisType.X));
+                    q = FlowX(u);
+                    q.Mul(g.CellFacetS * dt);
+                    c.D.SubQ(q);
+                }
+            }
 
             g.DtoU();
         }
