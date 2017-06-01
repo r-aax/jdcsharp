@@ -51,5 +51,14 @@ namespace Lib.MathMod.SolidGrid
             U.v = D.P / D.m;
             U.eps = D.E / D.m - 0.5 * U.v.Mod2;
         }
+
+        /// <summary>
+        /// To string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("{0} {1}", U, D);
+        }
     }
 }

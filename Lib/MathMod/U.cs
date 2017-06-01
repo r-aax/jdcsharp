@@ -68,5 +68,92 @@ namespace Lib.MathMod
                 return rho * (eps + 0.5 * v.Mod2);
             }
         }
+
+        /// <summary>
+        /// Mirror of X axis.
+        /// </summary>
+        public U MirrorX
+        {
+            get
+            {
+                return new U(rho, new Vector(-v.X, v.Y, v.Z), eps);
+            }
+        }
+
+        /// <summary>
+        /// Mirror of Y axis.
+        /// </summary>
+        public U MirrorY
+        {
+            get
+            {
+                return new U(rho, new Vector(v.X, -v.Y, v.Z), eps);
+            }
+        }
+
+        /// <summary>
+        /// Mirror of Z axis.
+        /// </summary>
+        public U MirrorZ
+        {
+            get
+            {
+                return new U(rho, new Vector(v.X, v.Y, -v.Z), eps);
+            }
+        }
+
+        /// <summary>
+        /// Flow in X direction.
+        /// </summary>
+        public D FlowX
+        {
+            get
+            {
+                return new D(rho * v.X,
+                             rho * v.X * v.X + p,
+                             rho * v.X * v.Y,
+                             rho * v.X * v.Z,
+                             rho * v.X * e + p * v.X);
+            }
+        }
+
+        /// <summary>
+        /// Flow in Y direction.
+        /// </summary>
+        public D FlowY
+        {
+            get
+            {
+                return new D(rho * v.Y,
+                             rho * v.X * v.Y,
+                             rho * v.Y * v.Y + p,
+                             rho * v.Y * v.Z,
+                             rho * v.Y * e + p * v.Y);
+            }
+        }
+
+        /// <summary>
+        /// Flow in Z direction.
+        /// </summary>
+        public D FlowZ
+        {
+            get
+            {
+                return new D(rho * v.Z,
+                             rho * v.X * v.Z,
+                             rho * v.Y * v.Y,
+                             rho * v.Z * v.Z + p,
+                             rho * v.Z * e + p * v.Z);
+            }
+        }
+
+        /// <summary>
+        /// To string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("U: {0}, {1}, {2}", rho, v, eps);
+        }
     }
 }

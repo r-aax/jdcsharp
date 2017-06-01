@@ -14,6 +14,6 @@ namespace Lib.MathMod
         /// <summary>
         /// Gamma.
         /// </summary>
-        public static double Gamma = 1.66;
+        public static double Gamma = 1.4;
     }
 }

@@ -110,5 +110,123 @@ namespace Lib.MathMod.SolidGrid
                 return NZ * CellL;
             }
         }
+
+        /// <summary>
+        /// Convert U to D for all cells.
+        /// </summary>
+        public void UtoD()
+        {
+            for (int xi = 0; xi < NX; xi++)
+            {
+                for (int yi = 0; yi < NY; yi++)
+                {
+                    for (int zi = 0; zi < NZ; zi++)
+                    {
+                        Cells[xi, yi, zi].UtoD(CellV);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Convert D to U for all cells.
+        /// </summary>
+        public void DtoU()
+        {
+            for (int xi = 0; xi < NX; xi++)
+            {
+                for (int yi = 0; yi < NY; yi++)
+                {
+                    for (int zi = 0; zi < NZ; zi++)
+                    {
+                        Cells[xi, yi, zi].DtoU(CellV);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// X next U data.
+        /// </summary>
+        /// <param name="xi">X direction index</param>
+        /// <param name="yi">Y direction index</param>
+        /// <param name="zi">Z direction index</param>
+        /// <returns></returns>
+        public U XNextU(int xi, int yi, int zi)
+        {
+            return (xi < NX - 1)
+                   ? Cells[xi + 1, yi, zi].U
+                   : Cells[xi, yi, zi].U.MirrorX;
+        }
+
+        /// <summary>
+        /// X prev U data.
+        /// </summary>
+        /// <param name="xi">X direction index</param>
+        /// <param name="yi">Y direction index</param>
+        /// <param name="zi">Z direction index</param>
+        /// <returns></returns>
+        public U XPrevU(int xi, int yi, int zi)
+        {
+            return (xi > 0)
+                   ? Cells[xi - 1, yi, zi].U
+                   : Cells[xi, yi, zi].U.MirrorX;
+        }
+
+        /// <summary>
+        /// Y next U data.
+        /// </summary>
+        /// <param name="xi">X direction index</param>
+        /// <param name="yi">Y direction index</param>
+        /// <param name="zi">Z direction index</param>
+        /// <returns></returns>
+        public U YNextU(int xi, int yi, int zi)
+        {
+            return (yi < NY - 1)
+                   ? Cells[xi, yi + 1, zi].U
+                   : Cells[xi, yi, zi].U.MirrorY;
+        }
+
+        /// <summary>
+        /// Y prev U data.
+        /// </summary>
+        /// <param name="xi">X direction index</param>
+        /// <param name="yi">Y direction index</param>
+        /// <param name="zi">Z direction index</param>
+        /// <returns></returns>
+        public U YPrevU(int xi, int yi, int zi)
+        {
+            return (yi > 0)
+                   ? Cells[xi, yi - 1, zi].U
+                   : Cells[xi, yi, zi].U.MirrorY;
+        }
+
+        /// <summary>
+        /// Z next U data.
+        /// </summary>
+        /// <param name="xi">X direction index</param>
+        /// <param name="yi">Y direction index</param>
+        /// <param name="zi">Z direction index</param>
+        /// <returns></returns>
+        public U ZNextU(int xi, int yi, int zi)
+        {
+            return (zi < NZ - 1)
+                   ? Cells[xi, yi, zi + 1].U
+                   : Cells[xi, yi, zi].U.MirrorZ;
+        }
+
+        /// <summary>
+        /// Z prev U data.
+        /// </summary>
+        /// <param name="xi">X direction index</param>
+        /// <param name="yi">Y direction index</param>
+        /// <param name="zi">Z direction index</param>
+        /// <returns></returns>
+        public U ZPrevU(int xi, int yi, int zi)
+        {
+            return (zi > 0)
+                   ? Cells[xi, yi, zi - 1].U
+                   : Cells[xi, yi, zi].U.MirrorZ;
+        }
     }
 }

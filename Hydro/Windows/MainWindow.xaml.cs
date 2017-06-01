@@ -102,7 +102,7 @@ namespace Hydro
             }
 
             Grid.Cells[0, 0, 0].U.rho = 100.0;
-            Grid.Cells[9, 0, 0].U.rho = 100.0;
+            //Grid.Cells[9, 0, 0].U.rho = 100.0;
 
             Paint();
         }
@@ -128,7 +128,7 @@ namespace Hydro
 
             for (int i = 0; i < iters_count; i++)
             {
-                //Godunov1.Iter(Grid, 0.0001);
+                Godunov1.Iter(Grid, 0.001);
             }
 
             Paint();
