@@ -95,13 +95,13 @@ namespace Hydro
                 {
                     for (int k = 0; k < Grid.NZ; k++)
                     {
-                        Grid.Cells[i, j, k].U.rho = 10.0;
-                        Grid.Cells[i, j, k].U.eps = 1.0;
+                        Grid.Cells[i, j, k].U.rho = 1.0;
+                        Grid.Cells[i, j, k].U.eps = 0.5;
                     }
                 }
             }
 
-            Grid.Cells[0, 0, 0].U.rho = 100.0;
+            Grid.Cells[0, 0, 0].U.rho = 2.0;
             //Grid.Cells[9, 0, 0].U.rho = 100.0;
 
             Paint();

@@ -29,8 +29,8 @@
                         <TextBlock Text="vz"/>
                         <TextBlock Text="eps"/>
                     </ComboBox>
-                    <TextBox Name="UComponentRangeL_TB" Text="10.0" Margin="10"/>
-                    <TextBox Name="UComponentRangeH_TB" Text="100.0" Margin="10"/>
+                    <TextBox Name="UComponentRangeL_TB" Text="0.0" Margin="10"/>
+                    <TextBox Name="UComponentRangeH_TB" Text="3.0" Margin="10"/>
                     <Button Name="StartB" Content="Start" Margin="10" Width="75" Height="20" Click="StartB_Click"/>
                     <TextBox Name="ItersCountTB" Text="100" Margin="10"/>
                     <Button Name="IterB" Content="Iteration" Margin="10" Width="75" Height="20" Click="IterB_Click"/>
