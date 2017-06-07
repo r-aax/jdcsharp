@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry3D;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.MathMod.SolidGrid;
@@ -77,20 +78,48 @@ namespace Hydro
 
                 Drawer = new RectDrawerWPF(new Rect2D(Grid.XSize, Grid.YSize), DrawAreaC, true, false);
                 HydroDrawer = new HydroRectDrawer(Drawer);
+            }
 
-                Drawer = new RectDrawerWPF(new Rect2D(Grid.XSize, 100.0), DrawArea2C, true, false);
+            if (Drawer2 == null)
+            { 
+                if (Grid == null)
+                {
+                    // No grid - no picture.
+                    return;
+                }
+
+                Drawer2 = new RectDrawerWPF(new Rect2D(Grid.XSize, 5.0), DrawArea2C, true, false);
                 GraphicDrawer = new GraphicRectDrawer(Drawer2);
             }
 
             // Begin draw.
             Drawer.BeginDraw();
-
+            //
             double lo = Double.Parse(UComponentRangeL_TB.Text);
             double hi = Double.Parse(UComponentRangeH_TB.Text);
             HydroDrawer.DrawField(Grid, lo, hi);
-
             // End draw.
             Drawer.EndDraw();
+
+            // Begin draw.
+            Drawer2.BeginDraw();
+            //
+            GraphicDrawer.DrawAllX(Grid, 0.05, 0.05,
+                                   (bool)IsGraphic_rho_Used.IsChecked,
+                                   new Interval(Double.Parse(Graphic_rho_L_TB.Text), Double.Parse(Graphic_rho_H_TB.Text)),
+                                   (bool)IsGraphic_vX_Used.IsChecked,
+                                   new Interval(Double.Parse(Graphic_vX_L_TB.Text), Double.Parse(Graphic_vX_H_TB.Text)),
+                                   (bool)IsGraphic_vY_Used.IsChecked,
+                                   new Interval(Double.Parse(Graphic_vY_L_TB.Text), Double.Parse(Graphic_vY_H_TB.Text)),
+                                   (bool)IsGraphic_vZ_Used.IsChecked,
+                                   new Interval(Double.Parse(Graphic_vZ_L_TB.Text), Double.Parse(Graphic_vZ_H_TB.Text)),
+                                   (bool)IsGraphic_eps_Used.IsChecked,
+                                   new Interval(Double.Parse(Graphic_eps_L_TB.Text), Double.Parse(Graphic_eps_H_TB.Text)),
+                                   (bool)IsGraphic_p_Used.IsChecked,
+                                   new Interval(Double.Parse(Graphic_p_L_TB.Text), Double.Parse(Graphic_p_H_TB.Text)));
+
+            // End draw.
+            Drawer2.EndDraw();
         }
 
         /// <summary>

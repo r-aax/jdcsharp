@@ -151,7 +151,7 @@ namespace Lib.MathMod.SolidGrid
         /// <param name="xi">X direction index</param>
         /// <param name="yi">Y direction index</param>
         /// <param name="zi">Z direction index</param>
-        /// <returns></returns>
+        /// <returns>U data</returns>
         public U XNextU(int xi, int yi, int zi)
         {
             return (xi < NX - 1)
@@ -165,7 +165,7 @@ namespace Lib.MathMod.SolidGrid
         /// <param name="xi">X direction index</param>
         /// <param name="yi">Y direction index</param>
         /// <param name="zi">Z direction index</param>
-        /// <returns></returns>
+        /// <returns>U data</returns>
         public U XPrevU(int xi, int yi, int zi)
         {
             return (xi > 0)
@@ -179,7 +179,7 @@ namespace Lib.MathMod.SolidGrid
         /// <param name="xi">X direction index</param>
         /// <param name="yi">Y direction index</param>
         /// <param name="zi">Z direction index</param>
-        /// <returns></returns>
+        /// <returns>U data</returns>
         public U YNextU(int xi, int yi, int zi)
         {
             return (yi < NY - 1)
@@ -193,7 +193,7 @@ namespace Lib.MathMod.SolidGrid
         /// <param name="xi">X direction index</param>
         /// <param name="yi">Y direction index</param>
         /// <param name="zi">Z direction index</param>
-        /// <returns></returns>
+        /// <returns>U data</returns>
         public U YPrevU(int xi, int yi, int zi)
         {
             return (yi > 0)
@@ -207,7 +207,7 @@ namespace Lib.MathMod.SolidGrid
         /// <param name="xi">X direction index</param>
         /// <param name="yi">Y direction index</param>
         /// <param name="zi">Z direction index</param>
-        /// <returns></returns>
+        /// <returns>U data</returns>
         public U ZNextU(int xi, int yi, int zi)
         {
             return (zi < NZ - 1)
@@ -221,7 +221,7 @@ namespace Lib.MathMod.SolidGrid
         /// <param name="xi">X direction index</param>
         /// <param name="yi">Y direction index</param>
         /// <param name="zi">Z direction index</param>
-        /// <returns></returns>
+        /// <returns>U data</returns>
         public U ZPrevU(int xi, int yi, int zi)
         {
             return (zi > 0)
