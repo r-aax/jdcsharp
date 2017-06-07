@@ -40,9 +40,19 @@ namespace Hydro
         private RectDrawer Drawer = null;
 
         /// <summary>
+        /// Second drawer.
+        /// </summary>
+        private RectDrawer Drawer2 = null;
+
+        /// <summary>
         /// Hydro rect drawer.
         /// </summary>
         private HydroRectDrawer HydroDrawer = null;
+
+        /// <summary>
+        /// Drawer for graphic.
+        /// </summary>
+        private GraphicRectDrawer GraphicDrawer = null;
 
         /// <summary>
         /// Constructor.
@@ -67,6 +77,9 @@ namespace Hydro
 
                 Drawer = new RectDrawerWPF(new Rect2D(Grid.XSize, Grid.YSize), DrawAreaC, true, false);
                 HydroDrawer = new HydroRectDrawer(Drawer);
+
+                Drawer = new RectDrawerWPF(new Rect2D(Grid.XSize, 100.0), DrawArea2C, true, false);
+                GraphicDrawer = new GraphicRectDrawer(Drawer2);
             }
 
             // Begin draw.
