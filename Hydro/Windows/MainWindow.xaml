@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hydro"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" SizeChanged="Window_SizeChanged">
+        Title="MainWindow" Height="600" Width="1300" SizeChanged="Window_SizeChanged" ResizeMode="NoResize">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Foreground="SteelBlue">
             <MenuItem Header="Info"/>
@@ -13,28 +13,111 @@
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
             <TextBlock Foreground="SteelBlue" Text="No text"/>
         </StatusBar>
-        <Grid>
+        <Grid Background="AliceBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Canvas Grid.Column="0" Name="DrawAreaC" Background="White"/>
-            <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
-            <Grid Grid.Column="1">
-                <StackPanel>
-                    <ComboBox Name="SelectUComponentCB" Margin="10" SelectedIndex="0" IsEnabled="False">
+            <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="0" Grid.Column="0">
+                <Canvas Name="DrawAreaC" Background="White"/>
+            </Border>
+            <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="0" Grid.Column="1">
+                <Canvas Name="DrawArea2C" Background="White"/>
+            </Border>
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <ComboBox Grid.Row="0" Grid.Column="0" Name="SelectUComponentCB" Margin="10" SelectedIndex="0" IsEnabled="False">
                         <TextBlock Text="rho"/>
                         <TextBlock Text="vx"/>
                         <TextBlock Text="vy"/>
                         <TextBlock Text="vz"/>
                         <TextBlock Text="eps"/>
                     </ComboBox>
-                    <TextBox Name="UComponentRangeL_TB" Text="0.0" Margin="10"/>
-                    <TextBox Name="UComponentRangeH_TB" Text="3.0" Margin="10"/>
-                    <Button Name="StartB" Content="Start" Margin="10" Width="75" Height="20" Click="StartB_Click"/>
-                    <TextBox Name="ItersCountTB" Text="100" Margin="10"/>
-                    <Button Name="IterB" Content="Iteration" Margin="10" Width="75" Height="20" Click="IterB_Click"/>
-                </StackPanel>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="UComponentRangeL_TB" Text="0.0" Margin="10"/>
+                    <TextBox Grid.Row="0" Grid.Column="2" Name="UComponentRangeH_TB" Text="3.0" Margin="10"/>
+                </Grid>
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" Name="StartB" Content="Start" Margin="10" Width="75" Height="20" Click="StartB_Click"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="ItersCountTB" Text="100" Margin="10"/>
+                    <Button Grid.Row="0" Grid.Column="2" Name="IterB" Content="Iteration" Margin="10" Width="75" Height="20" Click="IterB_Click"/>
+                </Grid>
+            </Grid>
+            
+            <!-- Graphics -->
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!-- ??? -->
+                <Grid Grid.Row="0" Grid.Column="0">
+                    
+                </Grid>
+
+                <!-- Select components for draw graphics: rho, v.X, v.Y, v.Z, eps, p -->
+                <Grid Grid.Row="1" Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <CheckBox Grid.Row="0" Grid.Column="0" Content="rho" HorizontalAlignment="Center"/>
+                    <CheckBox Grid.Row="0" Grid.Column="1" Content="v.X" HorizontalAlignment="Center"/>
+                    <CheckBox Grid.Row="0" Grid.Column="2" Content="v.Y" HorizontalAlignment="Center"/>
+                    <CheckBox Grid.Row="0" Grid.Column="3" Content="v.Z" HorizontalAlignment="Center"/>
+                    <CheckBox Grid.Row="0" Grid.Column="4" Content="eps" HorizontalAlignment="Center"/>
+                    <CheckBox Grid.Row="0" Grid.Column="5" Content="p" HorizontalAlignment="Center"/>
+                    <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox Width="50" Margin="0,0,2,0"></TextBox>
+                        <TextBox Width="50"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox Width="50" Margin="0,0,2,0"></TextBox>
+                        <TextBox Width="50"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox Width="50" Margin="0,0,2,0"></TextBox>
+                        <TextBox Width="50"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox Width="50" Margin="0,0,2,0"></TextBox>
+                        <TextBox Width="50"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox Width="50" Margin="0,0,2,0"></TextBox>
+                        <TextBox Width="50"></TextBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Grid.Column="5" Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox Width="50" Margin="0,0,2,0"></TextBox>
+                        <TextBox Width="50"></TextBox>
+                    </StackPanel>
+                </Grid>
             </Grid>
         </Grid>
     </DockPanel>
