@@ -53,7 +53,7 @@ namespace Hydro
         /// <summary>
         /// Drawer for graphic.
         /// </summary>
-        private GraphicRectDrawer GraphicDrawer = null;
+        private HydroGraphicsRectDrawer GraphicDrawer = null;
 
         /// <summary>
         /// Interval of rho values.
@@ -163,7 +163,7 @@ namespace Hydro
                 // We create drawer for fix rectangle because we have to draw coordinate axis
                 // and other misc objects. For each graphic we have to implement its own scaler.
                 Drawer2 = new RectDrawerWPF(new Rect2D(100.0, 100.0), DrawArea2C, true, false);
-                GraphicDrawer = new GraphicRectDrawer(Drawer2);
+                GraphicDrawer = new HydroGraphicsRectDrawer(Drawer2);
             }
 
             // Begin draw.

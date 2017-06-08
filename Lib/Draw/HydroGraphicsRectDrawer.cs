@@ -14,7 +14,7 @@ namespace Lib.Draw
     /// <summary>
     /// Drawer for graphic.
     /// </summary>
-    public class GraphicRectDrawer
+    public class HydroGraphicsRectDrawer
     {
         /// <summary>
         /// Drawer.
@@ -35,7 +35,7 @@ namespace Lib.Draw
         /// Default constructor.
         /// </summary>
         /// <param name="drawer">drawer</param>
-        public GraphicRectDrawer(RectDrawer drawer)
+        public HydroGraphicsRectDrawer(RectDrawer drawer)
         {
             Debug.Assert(drawer != null);
             Drawer = drawer;
