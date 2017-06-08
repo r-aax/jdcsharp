@@ -8,6 +8,8 @@ using System.Diagnostics;
 using Lib.Maths.Geometry;
 using Lib.MathMod.SolidGrid;
 using Lib.Maths.Geometry.Geometry2D;
+using SColor = System.Windows.Media.Color;
+using SColors = System.Windows.Media.Colors;
 
 namespace Lib.Draw
 {
@@ -24,12 +26,77 @@ namespace Lib.Draw
         /// <summary>
         /// Axis color.
         /// </summary>
-        private Color AxisColor = new Color(System.Windows.Media.Colors.Black);
+        private static Color AxisColor = new Color(System.Windows.Media.Colors.Black);
 
         /// <summary>
         /// Color of grid cells borders.
         /// </summary>
-        private Color CellcBordersColor = Color.Gray(220);
+        private static Color CellcBordersColor = Color.Gray(220);
+
+        /// <summary>
+        /// rho inner color.
+        /// </summary>
+        public static SColor SColor_rho = SColors.Black;
+
+        /// <summary>
+        /// v.X inner color.
+        /// </summary>
+        public static SColor SColor_vx = SColors.LightBlue;
+
+        /// <summary>
+        /// v.Y inner color.
+        /// </summary>
+        public static SColor SColor_vy = SColors.LightGreen;
+
+        /// <summary>
+        /// v.Z inner color.
+        /// </summary>
+        public static SColor SColor_vz = SColors.LightCoral;
+
+        /// <summary>
+        /// eps inner color.
+        /// </summary>
+        public static SColor SColor_eps = SColors.Green;
+
+        /// <summary>
+        /// p inner color.
+        /// </summary>
+        public static SColor SColor_p = SColors.Red;
+
+        /// <summary>
+        /// Rho color.
+        /// </summary>
+        private static Color Color_rho = new Color(SColor_rho);
+
+        /// <summary>
+        /// v.X color.
+        /// </summary>
+        private static Color Color_vx = new Color(SColor_vx);
+
+        /// <summary>
+        /// v.Y color.
+        /// </summary>
+        private static Color Color_vy = new Color(SColor_vy);
+
+        /// <summary>
+        /// v.Z color.
+        /// </summary>
+        private static Color Color_vz = new Color(SColor_vz);
+
+        /// <summary>
+        /// eps color.
+        /// </summary>
+        private static Color Color_eps = new Color(SColor_eps);
+
+        /// <summary>
+        /// p color.
+        /// </summary>
+        private static Color Color_p = new Color(SColor_p);
+
+        /// <summary>
+        /// Thickness.
+        /// </summary>
+        private static double GraphicPenThickness = 2.0;
 
         /// <summary>
         /// Default constructor.
@@ -51,7 +118,7 @@ namespace Lib.Draw
             double h = Drawer.Rect.Height;
 
             // Cells borders.
-            Drawer.SetPenColor(CellcBordersColor);
+            Drawer.SetPen(CellcBordersColor, 1.0);
             for (int xi = 0; xi <= g.NX; xi++)
             {
                 Drawer.DrawVLine(0.05 * w + 0.9 * w * ((double)xi / (double)g.NX));
@@ -59,7 +126,7 @@ namespace Lib.Draw
 
             // Axis.
             double zero = 0.0;
-            Drawer.SetPenColor(AxisColor);
+            Drawer.SetPen(AxisColor, 1.0);
             Drawer.DrawLine(0.04 * w, 0.05 * h, 0.96 * w, 0.05 * h);
             Drawer.DrawLine(0.05 * w, 0.06 * h, 0.05 * w, 0.04 * h);
             Drawer.DrawLine(0.95 * w, 0.06 * h, 0.95 * w, 0.04 * h);
@@ -99,76 +166,79 @@ namespace Lib.Draw
             int zi = (int)(z / g.CellL);
             double w = Drawer.Rect.Width;
             double h = Drawer.Rect.Height;
-            IntervalScaler scx, scy;
+            Interval inner_w = new Interval(0.05 * w, 0.95 * w);
+            Interval inner_h = new Interval(0.05 * h, 0.95 * h);
+            Interval xint = new Interval(0.0, g.XSize);
+            Rect inner_rect = new Rect(inner_w, inner_h);
             RectScaler rc;
 
             // Misc.
             DrawMiscX(g);
 
-            Drawer.SetPenColor(new Color(System.Windows.Media.Colors.Black));
-            scx = new IntervalScaler(new Interval(0.0, g.XSize), new Interval(0.05 * w, 0.95 * w), false);
-            scy = new IntervalScaler(new Interval(0.0, 5.0), new Interval(0.05 * h, 0.95 * w), false);
-            rc = new RectScaler(new Rect(new Interval(0.0, g.XSize), new Interval(0.0, 5.0)),
-                                new Rect(new Interval(0.05 * w, 0.95 * w), new Interval(0.05 * h, 0.95 * w)), false, false);
-            for (int xi = 0; xi < g.NX; xi++)
+            if (is_rho)
             {
-                double rho = g.Cells[xi, yi, zi].U.rho;
-                Drawer.DrawLine(rc.T(new Point(xi * g.CellL, rho)), rc.T(new Point((xi + 1) * g.CellL, rho)));
+                Drawer.SetPen(Color_rho, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, rho_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX; xi++)
+                {
+                    double rho = g.Cells[xi, yi, zi].U.rho;
+                    Drawer.DrawLine(rc.T(new Point(xi * g.CellL, rho)), rc.T(new Point((xi + 1) * g.CellL, rho)));
+                }
             }
 
-            Drawer.SetPenColor(new Color(System.Windows.Media.Colors.Blue));
-            scx = new IntervalScaler(new Interval(0.0, g.XSize), new Interval(0.05 * w, 0.95 * w), false);
-            scy = new IntervalScaler(new Interval(0.0, 5.0), new Interval(0.05 * h, 0.95 * w), false);
-            rc = new RectScaler(new Rect(new Interval(0.0, g.XSize), new Interval(0.0, 5.0)),
-                                new Rect(new Interval(0.05 * w, 0.95 * w), new Interval(0.05 * h, 0.95 * w)), false, false);
-            for (int xi = 0; xi < g.NX; xi++)
+            if (is_vx)
             {
-                double vx = g.Cells[xi, yi, zi].U.v.X;
-                Drawer.DrawLine(rc.T(new Point(xi * g.CellL, vx)), rc.T(new Point((xi + 1) * g.CellL, vx)));
+                Drawer.SetPen(Color_vx, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, vx_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX; xi++)
+                {
+                    double vx = g.Cells[xi, yi, zi].U.v.X;
+                    Drawer.DrawLine(rc.T(new Point(xi * g.CellL, vx)), rc.T(new Point((xi + 1) * g.CellL, vx)));
+                }
             }
 
-            Drawer.SetPenColor(new Color(System.Windows.Media.Colors.Green));
-            scx = new IntervalScaler(new Interval(0.0, g.XSize), new Interval(0.05 * w, 0.95 * w), false);
-            scy = new IntervalScaler(new Interval(0.0, 5.0), new Interval(0.05 * h, 0.95 * w), false);
-            rc = new RectScaler(new Rect(new Interval(0.0, g.XSize), new Interval(0.0, 5.0)),
-                                new Rect(new Interval(0.05 * w, 0.95 * w), new Interval(0.05 * h, 0.95 * w)), false, false);
-            for (int xi = 0; xi < g.NX; xi++)
+            if (is_vy)
             {
-                double vy = g.Cells[xi, yi, zi].U.v.Y;
-                Drawer.DrawLine(rc.T(new Point(xi * g.CellL, vy)), rc.T(new Point((xi + 1) * g.CellL, vy)));
+                Drawer.SetPen(Color_vy, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, vy_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX; xi++)
+                {
+                    double vy = g.Cells[xi, yi, zi].U.v.Y;
+                    Drawer.DrawLine(rc.T(new Point(xi * g.CellL, vy)), rc.T(new Point((xi + 1) * g.CellL, vy)));
+                }
             }
 
-            Drawer.SetPenColor(new Color(System.Windows.Media.Colors.Red));
-            scx = new IntervalScaler(new Interval(0.0, g.XSize), new Interval(0.05 * w, 0.95 * w), false);
-            scy = new IntervalScaler(new Interval(0.0, 5.0), new Interval(0.05 * h, 0.95 * w), false);
-            rc = new RectScaler(new Rect(new Interval(0.0, g.XSize), new Interval(0.0, 5.0)),
-                                new Rect(new Interval(0.05 * w, 0.95 * w), new Interval(0.05 * h, 0.95 * w)), false, false);
-            for (int xi = 0; xi < g.NX; xi++)
+            if (is_vz)
             {
-                double vz = g.Cells[xi, yi, zi].U.v.Z;
-                Drawer.DrawLine(rc.T(new Point(xi * g.CellL, vz)), rc.T(new Point((xi + 1) * g.CellL, vz)));
+                Drawer.SetPen(Color_vz, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, vz_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX; xi++)
+                {
+                    double vz = g.Cells[xi, yi, zi].U.v.Z;
+                    Drawer.DrawLine(rc.T(new Point(xi * g.CellL, vz)), rc.T(new Point((xi + 1) * g.CellL, vz)));
+                }
             }
 
-            Drawer.SetPenColor(new Color(System.Windows.Media.Colors.Orange));
-            scx = new IntervalScaler(new Interval(0.0, g.XSize), new Interval(0.05 * w, 0.95 * w), false);
-            scy = new IntervalScaler(new Interval(0.0, 5.0), new Interval(0.05 * h, 0.95 * w), false);
-            rc = new RectScaler(new Rect(new Interval(0.0, g.XSize), new Interval(0.0, 5.0)),
-                                new Rect(new Interval(0.05 * w, 0.95 * w), new Interval(0.05 * h, 0.95 * w)), false, false);
-            for (int xi = 0; xi < g.NX; xi++)
+            if (is_eps)
             {
-                double eps = g.Cells[xi, yi, zi].U.eps;
-                Drawer.DrawLine(rc.T(new Point(xi * g.CellL, eps)), rc.T(new Point((xi + 1) * g.CellL, eps)));
+                Drawer.SetPen(Color_eps, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, eps_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX; xi++)
+                {
+                    double eps = g.Cells[xi, yi, zi].U.eps;
+                    Drawer.DrawLine(rc.T(new Point(xi * g.CellL, eps)), rc.T(new Point((xi + 1) * g.CellL, eps)));
+                }
             }
 
-            Drawer.SetPenColor(new Color(System.Windows.Media.Colors.IndianRed));
-            scx = new IntervalScaler(new Interval(0.0, g.XSize), new Interval(0.05 * w, 0.95 * w), false);
-            scy = new IntervalScaler(new Interval(0.0, 5.0), new Interval(0.05 * h, 0.95 * w), false);
-            rc = new RectScaler(new Rect(new Interval(0.0, g.XSize), new Interval(0.0, 5.0)),
-                                new Rect(new Interval(0.05 * w, 0.95 * w), new Interval(0.05 * h, 0.95 * w)), false, false);
-            for (int xi = 0; xi < g.NX; xi++)
+            if (is_p)
             {
-                double p = g.Cells[xi, yi, zi].U.p;
-                Drawer.DrawLine(rc.T(new Point(xi * g.CellL, p)), rc.T(new Point((xi + 1) * g.CellL, p)));
+                Drawer.SetPen(Color_p, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, p_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX; xi++)
+                {
+                    double p = g.Cells[xi, yi, zi].U.p;
+                    Drawer.DrawLine(rc.T(new Point(xi * g.CellL, p)), rc.T(new Point((xi + 1) * g.CellL, p)));
+                }
             }
         }
     }
