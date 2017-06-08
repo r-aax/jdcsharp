@@ -56,6 +56,78 @@ namespace Hydro
         private GraphicRectDrawer GraphicDrawer = null;
 
         /// <summary>
+        /// Interval of rho values.
+        /// </summary>
+        private Interval Graphic_rho_Interval
+        {
+            get
+            {
+                return new Interval(Double.Parse(Graphic_rho_L_TB.Text),
+                                    Double.Parse(Graphic_rho_H_TB.Text));
+            }
+        }
+
+        /// <summary>
+        /// Interval of v.X values.
+        /// </summary>
+        private Interval Graphic_vX_Interval
+        {
+            get
+            {
+                return new Interval(Double.Parse(Graphic_vX_L_TB.Text),
+                                    Double.Parse(Graphic_vX_H_TB.Text));
+            }
+        }
+
+        /// <summary>
+        /// Interval of v.Y values.
+        /// </summary>
+        private Interval Graphic_vY_Interval
+        {
+            get
+            {
+                return new Interval(Double.Parse(Graphic_vY_L_TB.Text),
+                                    Double.Parse(Graphic_vY_H_TB.Text));
+            }
+        }
+
+        /// <summary>
+        /// Interval of v.Z values.
+        /// </summary>
+        private Interval Graphic_vZ_Interval
+        {
+            get
+            {
+                return new Interval(Double.Parse(Graphic_vZ_L_TB.Text),
+                                    Double.Parse(Graphic_vZ_H_TB.Text));
+            }
+        }
+
+        /// <summary>
+        /// Interval of eps values.
+        /// </summary>
+        private Interval Graphic_eps_Interval
+        {
+            get
+            {
+                return new Interval(Double.Parse(Graphic_eps_L_TB.Text),
+                                    Double.Parse(Graphic_eps_H_TB.Text));
+            }
+        }
+
+        /// <summary>
+        /// Interval of p values.
+        /// </summary>
+        private Interval Graphic_p_Interval
+        {
+            get
+            {
+                return new Interval(Double.Parse(Graphic_p_L_TB.Text),
+                                    Double.Parse(Graphic_p_H_TB.Text));
+            }
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public MainWindow()
@@ -88,7 +160,9 @@ namespace Hydro
                     return;
                 }
 
-                Drawer2 = new RectDrawerWPF(new Rect2D(Grid.XSize, 5.0), DrawArea2C, true, false);
+                // We create drawer for fix rectangle because we have to draw coordinate axis
+                // and other misc objects. For each graphic we have to implement its own scaler.
+                Drawer2 = new RectDrawerWPF(new Rect2D(100.0, 100.0), DrawArea2C, true, false);
                 GraphicDrawer = new GraphicRectDrawer(Drawer2);
             }
 
@@ -105,18 +179,12 @@ namespace Hydro
             Drawer2.BeginDraw();
             //
             GraphicDrawer.DrawAllX(Grid, 0.05, 0.05,
-                                   (bool)IsGraphic_rho_Used.IsChecked,
-                                   new Interval(Double.Parse(Graphic_rho_L_TB.Text), Double.Parse(Graphic_rho_H_TB.Text)),
-                                   (bool)IsGraphic_vX_Used.IsChecked,
-                                   new Interval(Double.Parse(Graphic_vX_L_TB.Text), Double.Parse(Graphic_vX_H_TB.Text)),
-                                   (bool)IsGraphic_vY_Used.IsChecked,
-                                   new Interval(Double.Parse(Graphic_vY_L_TB.Text), Double.Parse(Graphic_vY_H_TB.Text)),
-                                   (bool)IsGraphic_vZ_Used.IsChecked,
-                                   new Interval(Double.Parse(Graphic_vZ_L_TB.Text), Double.Parse(Graphic_vZ_H_TB.Text)),
-                                   (bool)IsGraphic_eps_Used.IsChecked,
-                                   new Interval(Double.Parse(Graphic_eps_L_TB.Text), Double.Parse(Graphic_eps_H_TB.Text)),
-                                   (bool)IsGraphic_p_Used.IsChecked,
-                                   new Interval(Double.Parse(Graphic_p_L_TB.Text), Double.Parse(Graphic_p_H_TB.Text)));
+                                   (bool)IsGraphic_rho_Used.IsChecked, Graphic_rho_Interval,
+                                   (bool)IsGraphic_vX_Used.IsChecked, Graphic_vX_Interval,
+                                   (bool)IsGraphic_vY_Used.IsChecked, Graphic_vY_Interval,
+                                   (bool)IsGraphic_vZ_Used.IsChecked, Graphic_vZ_Interval,
+                                   (bool)IsGraphic_eps_Used.IsChecked, Graphic_eps_Interval,
+                                   (bool)IsGraphic_p_Used.IsChecked, Graphic_p_Interval);
 
             // End draw.
             Drawer2.EndDraw();
