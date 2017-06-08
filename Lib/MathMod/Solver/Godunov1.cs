@@ -73,7 +73,7 @@ namespace Lib.MathMod.Solver
             ru = Riemann.Stub(u, g.XNextU(xi, yi, zi));
             flow = ru.FlowX;
             d -= flow * k;
-
+            
             // X-
             ru = Riemann.Stub(g.XPrevU(xi, yi, zi), u);
             flow = ru.FlowX;

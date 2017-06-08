@@ -141,7 +141,7 @@ namespace Lib.MathMod
             {
                 return new D(rho * v.Z,
                              rho * v.X * v.Z,
-                             rho * v.Y * v.Y,
+                             rho * v.Y * v.Z,
                              rho * v.Z * v.Z + p,
                              rho * v.Z * e + p * v.Z);
             }

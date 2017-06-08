@@ -205,7 +205,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
-            Grid = new SolidGrid(10, 1, 1, 0.1);
+            Grid = new SolidGrid(20, 1, 1, 0.1);
 
             for (int i = 0; i < Grid.NX; i++)
             {
@@ -219,7 +219,7 @@ namespace Hydro
                 }
             }
 
-            Grid.Cells[0, 0, 0].U.rho = 2.0;
+            Grid.Cells[0, 0, 0].U.rho = 4.0;
             //Grid.Cells[9, 0, 0].U.rho = 100.0;
 
             Paint();
@@ -246,7 +246,7 @@ namespace Hydro
 
             for (int i = 0; i < iters_count; i++)
             {
-                Godunov1.Iter(Grid, 0.001);
+                Godunov1.Iter(Grid, 0.01);
             }
 
             Paint();
