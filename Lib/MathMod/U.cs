@@ -56,6 +56,11 @@ namespace Lib.MathMod
             {
                 return (MathModConstants.Gamma - 1.0) * rho * eps;
             }
+
+            set
+            {
+                eps = value / ((MathModConstants.Gamma - 1.0) * rho);
+            }
         }
 
         /// <summary>
