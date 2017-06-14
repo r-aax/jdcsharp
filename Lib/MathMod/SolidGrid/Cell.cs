@@ -49,7 +49,7 @@ namespace Lib.MathMod.SolidGrid
         {
             U.rho = D.m / V;
             U.v = D.P / D.m;
-            U.eps = D.E / D.m - 0.5 * U.v.Mod2;
+            U.e = D.E / V;
         }
 
         /// <summary>

@@ -72,6 +72,11 @@ namespace Lib.MathMod
             {
                 return rho * (eps + 0.5 * v.Mod2);
             }
+
+            set
+            {
+                eps = value / rho - 0.5 * v.Mod2;
+            }
         }
 
         /// <summary>
