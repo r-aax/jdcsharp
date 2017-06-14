@@ -79,6 +79,72 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
+        /// Square of <c>X</c>.
+        /// </summary>
+        public double X2
+        {
+            get
+            {
+                return X * X;
+            }
+        }
+
+        /// <summary>
+        /// Square of <c>Y</c>.
+        /// </summary>
+        public double Y2
+        {
+            get
+            {
+                return Y * Y;
+            }
+        }
+
+        /// <summary>
+        /// Square of <c>Z</c>.
+        /// </summary>
+        public double Z2
+        {
+            get
+            {
+                return Z * Z;
+            }
+        }
+
+        /// <summary>
+        /// <c>X</c> and <c>Y</c> multiplication.
+        /// </summary>
+        public double XY
+        {
+            get
+            {
+                return X * Y;
+            }
+        }
+
+        /// <summary>
+        /// <c>X</c> and <c>Z</c> multiplication.
+        /// </summary>
+        public double XZ
+        {
+            get
+            {
+                return X * Z;
+            }
+        }
+
+        /// <summary>
+        /// <c>Y</c> and <c>Z</c> multiplication.
+        /// </summary>
+        public double YZ
+        {
+            get
+            {
+                return Y * Z;
+            }
+        }
+
+        /// <summary>
         /// Sum of vectors.
         /// </summary>
         /// <param name="a">first vector</param>

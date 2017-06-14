@@ -110,9 +110,9 @@ namespace Lib.MathMod
             get
             {
                 return new D(rho * v.X,
-                             rho * v.X * v.X + p,
-                             rho * v.X * v.Y,
-                             rho * v.X * v.Z,
+                             rho * v.X2 + p,
+                             rho * v.XY,
+                             rho * v.XZ,
                              rho * v.X * e + p * v.X);
             }
         }
@@ -125,9 +125,9 @@ namespace Lib.MathMod
             get
             {
                 return new D(rho * v.Y,
-                             rho * v.X * v.Y,
-                             rho * v.Y * v.Y + p,
-                             rho * v.Y * v.Z,
+                             rho * v.XY,
+                             rho * v.Y2 + p,
+                             rho * v.YZ,
                              rho * v.Y * e + p * v.Y);
             }
         }
@@ -140,9 +140,9 @@ namespace Lib.MathMod
             get
             {
                 return new D(rho * v.Z,
-                             rho * v.X * v.Z,
-                             rho * v.Y * v.Z,
-                             rho * v.Z * v.Z + p,
+                             rho * v.XZ,
+                             rho * v.YZ,
+                             rho * v.Z2 + p,
                              rho * v.Z * e + p * v.Z);
             }
         }
