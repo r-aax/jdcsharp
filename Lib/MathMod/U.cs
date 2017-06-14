@@ -118,7 +118,7 @@ namespace Lib.MathMod
                              rho * v.X2 + p,
                              rho * v.XY,
                              rho * v.XZ,
-                             rho * v.X * e + p * v.X);
+                             (e + p) * v.X);
             }
         }
 
@@ -133,7 +133,7 @@ namespace Lib.MathMod
                              rho * v.XY,
                              rho * v.Y2 + p,
                              rho * v.YZ,
-                             rho * v.Y * e + p * v.Y);
+                             (e + p) * v.Y);
             }
         }
 
@@ -148,7 +148,7 @@ namespace Lib.MathMod
                              rho * v.XZ,
                              rho * v.YZ,
                              rho * v.Z2 + p,
-                             rho * v.Z * e + p * v.Z);
+                             (e + p) * v.Z);
             }
         }
 

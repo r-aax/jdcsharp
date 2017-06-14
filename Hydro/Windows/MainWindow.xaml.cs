@@ -205,7 +205,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
-            Grid = new SolidGrid(100, 1, 1, 0.1);
+            Grid = new SolidGrid(11, 1, 1, 1.0);
 
             for (int i = 0; i < Grid.NX; i++)
             {
@@ -215,17 +215,17 @@ namespace Hydro
                     {
                         Grid.Cells[i, j, k].U.v = new Vector3D(0.0, 0.0, 0.0);
 
-                        if (i <= 49)
+                        if ((i == 0) || (i == 10))
                         {
                             // Left side.
-                            Grid.Cells[i, j, k].U.rho = 1.0;
-                            Grid.Cells[i, j, k].U.p = 1.0;
+                            Grid.Cells[i, j, k].U.rho = 2.0;
+                            Grid.Cells[i, j, k].U.eps = 0.525;
                         }
                         else
                         {
                             // Right side.
-                            Grid.Cells[i, j, k].U.rho = 0.125;
-                            Grid.Cells[i, j, k].U.p = 0.1;
+                            Grid.Cells[i, j, k].U.rho = 1.0;
+                            Grid.Cells[i, j, k].U.eps = 0.525;
                         }
                     }
                 }
@@ -255,7 +255,7 @@ namespace Hydro
 
             for (int i = 0; i < iters_count; i++)
             {
-                Godunov1.Iter(Grid, 0.001);
+                Godunov1.Iter(Grid, 0.01);
             }
 
             Paint();

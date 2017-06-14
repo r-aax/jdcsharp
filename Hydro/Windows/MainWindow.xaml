@@ -47,7 +47,7 @@
                         <TextBlock Text="eps"/>
                     </ComboBox>
                     <TextBox Grid.Row="0" Grid.Column="1" Name="UComponentRangeL_TB" Text="0.0" Margin="10"/>
-                    <TextBox Grid.Row="0" Grid.Column="2" Name="UComponentRangeH_TB" Text="3.0" Margin="10"/>
+                    <TextBox Grid.Row="0" Grid.Column="2" Name="UComponentRangeH_TB" Text="5.0" Margin="10"/>
                 </Grid>
                 <Grid Grid.Row="1" Grid.Column="0">
                     <Grid.ColumnDefinitions>

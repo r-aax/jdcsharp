@@ -19,9 +19,13 @@ namespace Lib.MathMod.Solver
         /// <returns><c>U</c> data (simple case)</returns>
         public static U Stub(U u1, U u2)
         {
-            return new U(0.5 * (u1.rho + u2.rho),
-                         0.5 * (u1.v + u2.v),
-                         0.5 * (u1.eps + u2.eps));
-        }
+            U ru = new U();
+
+            ru.rho = 0.5 * (u1.rho + u2.rho);
+            ru.v = 0.5 * (u1.v + u2.v);
+            ru.p = 0.5 * (u1.p + u2.p);
+
+            return ru;
+        }  
     }
 }
