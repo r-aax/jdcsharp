@@ -186,13 +186,13 @@ namespace Hydro
             // Begin draw.
             Drawer2.BeginDraw();
             //
-            GraphicDrawer.DrawAllX(Grid, 0.05, 0.05,
-                                   (bool)IsGraphic_rho_Used.IsChecked, Graphic_rho_Interval,
-                                   (bool)IsGraphic_vX_Used.IsChecked, Graphic_vX_Interval,
-                                   (bool)IsGraphic_vY_Used.IsChecked, Graphic_vY_Interval,
-                                   (bool)IsGraphic_vZ_Used.IsChecked, Graphic_vZ_Interval,
-                                   (bool)IsGraphic_eps_Used.IsChecked, Graphic_eps_Interval,
-                                   (bool)IsGraphic_p_Used.IsChecked, Graphic_p_Interval);
+            GraphicDrawer.DrawAllX_Line(Grid, 0.05, 0.05,
+                                        (bool)IsGraphic_rho_Used.IsChecked, Graphic_rho_Interval,
+                                        (bool)IsGraphic_vX_Used.IsChecked, Graphic_vX_Interval,
+                                        (bool)IsGraphic_vY_Used.IsChecked, Graphic_vY_Interval,
+                                        (bool)IsGraphic_vZ_Used.IsChecked, Graphic_vZ_Interval,
+                                        (bool)IsGraphic_eps_Used.IsChecked, Graphic_eps_Interval,
+                                        (bool)IsGraphic_p_Used.IsChecked, Graphic_p_Interval);
 
             // End draw.
             Drawer2.EndDraw();
@@ -205,7 +205,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
-            Grid = new SolidGrid(11, 1, 1, 1.0);
+            Grid = new SolidGrid(101, 1, 1, 1.0);
 
             for (int i = 0; i < Grid.NX; i++)
             {
@@ -215,7 +215,7 @@ namespace Hydro
                     {
                         Grid.Cells[i, j, k].U.v = new Vector3D(0.0, 0.0, 0.0);
 
-                        if ((i == 0) || (i == 10))
+                        if ((i == 0) || (i == 100))
                         {
                             // Left side.
                             Grid.Cells[i, j, k].U.rho = 2.0;

@@ -135,7 +135,7 @@ namespace Lib.Draw
         }
 
         /// <summary>
-        /// Draw all graphics.
+        /// Draw all graphics (with const segments).
         /// </summary>
         /// <param name="g">grid</param>
         /// <param name="y"><c>y</c> coordinate</param>
@@ -152,13 +152,13 @@ namespace Lib.Draw
         /// <param name="eps_int"><c>eps</c> interval</param>
         /// <param name="is_p">is <c>p</c> used</param>
         /// <param name="p_int"><c>p</c> interval</param>
-        public void DrawAllX(SolidGrid g, double y, double z,
-                             bool is_rho, Interval rho_int,
-                             bool is_vx, Interval vx_int,
-                             bool is_vy, Interval vy_int,
-                             bool is_vz, Interval vz_int,
-                             bool is_eps, Interval eps_int,
-                             bool is_p, Interval p_int)
+        public void DrawAllX_Const(SolidGrid g, double y, double z,
+                                   bool is_rho, Interval rho_int,
+                                   bool is_vx, Interval vx_int,
+                                   bool is_vy, Interval vy_int,
+                                   bool is_vz, Interval vz_int,
+                                   bool is_eps, Interval eps_int,
+                                   bool is_p, Interval p_int)
         {
             Debug.Assert((y < g.YSize) && (z < g.ZSize), "wrong y,z coordinates while drawing the rho graphic");
 
@@ -238,6 +238,126 @@ namespace Lib.Draw
                 {
                     double p = g.Cells[xi, yi, zi].U.p;
                     Drawer.DrawLine(rc.T(new Point(xi * g.CellL, p)), rc.T(new Point((xi + 1) * g.CellL, p)));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draw all graphics (with linear segments).
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="y"><c>y</c> coordinate</param>
+        /// <param name="z"><c>z</c> coordinate</param>
+        /// <param name="is_rho">is <c>rho</c> used</param>
+        /// <param name="rho_int"><c>rho</c> interval</param>
+        /// <param name="is_vx">is <c>v.X</c> used</param>
+        /// <param name="vx_int"><c>v.X</c> interval</param>
+        /// <param name="is_vy">is <c>v.Y</c> used</param>
+        /// <param name="vy_int"><c>v.Y</c> interval</param>
+        /// <param name="is_vz">is <c>v.Z</c> used</param>
+        /// <param name="vz_int"><c>v.Z</c> interval</param>
+        /// <param name="is_eps">is <c>eps</c> used</param>
+        /// <param name="eps_int"><c>eps</c> interval</param>
+        /// <param name="is_p">is <c>p</c> used</param>
+        /// <param name="p_int"><c>p</c> interval</param>
+        public void DrawAllX_Line(SolidGrid g, double y, double z,
+                                  bool is_rho, Interval rho_int,
+                                  bool is_vx, Interval vx_int,
+                                  bool is_vy, Interval vy_int,
+                                  bool is_vz, Interval vz_int,
+                                  bool is_eps, Interval eps_int,
+                                  bool is_p, Interval p_int)
+        {
+            Debug.Assert((y < g.YSize) && (z < g.ZSize), "wrong y,z coordinates while drawing the rho graphic");
+
+            int yi = (int)(y / g.CellL);
+            int zi = (int)(z / g.CellL);
+            double w = Drawer.Rect.Width;
+            double h = Drawer.Rect.Height;
+            Interval inner_w = new Interval(0.05 * w, 0.95 * w);
+            Interval inner_h = new Interval(0.05 * h, 0.95 * h);
+            Interval xint = new Interval(0.0, g.XSize);
+            Rect inner_rect = new Rect(inner_w, inner_h);
+            RectScaler rc;
+
+            // Misc.
+            DrawMiscX(g);
+
+            if (is_rho)
+            {
+                Drawer.SetPen(Color_rho, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, rho_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX - 1; xi++)
+                {
+                    double rho1 = g.Cells[xi, yi, zi].U.rho;
+                    double rho2 = g.Cells[xi + 1, yi, zi].U.rho;
+                    Drawer.DrawLine(rc.T(new Point((xi + 0.5) * g.CellL, rho1)),
+                                    rc.T(new Point((xi + 1.5) * g.CellL, rho2)));
+                }
+            }
+
+            if (is_vx)
+            {
+                Drawer.SetPen(Color_vx, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, vx_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX - 1; xi++)
+                {
+                    double vx1 = g.Cells[xi, yi, zi].U.v.X;
+                    double vx2 = g.Cells[xi + 1, yi, zi].U.v.X;
+                    Drawer.DrawLine(rc.T(new Point((xi + 0.5) * g.CellL, vx1)),
+                                    rc.T(new Point((xi + 1.5) * g.CellL, vx2)));
+                }
+            }
+
+            if (is_vy)
+            {
+                Drawer.SetPen(Color_vy, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, vy_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX - 1; xi++)
+                {
+                    double vy1 = g.Cells[xi, yi, zi].U.v.Y;
+                    double vy2 = g.Cells[xi + 1, yi, zi].U.v.Y;
+                    Drawer.DrawLine(rc.T(new Point((xi + 0.5) * g.CellL, vy1)),
+                                    rc.T(new Point((xi + 1.5) * g.CellL, vy2)));
+                }
+            }
+
+            if (is_vz)
+            {
+                Drawer.SetPen(Color_vz, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, vz_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX - 1; xi++)
+                {
+                    double vz1 = g.Cells[xi, yi, zi].U.v.Z;
+                    double vz2 = g.Cells[xi + 1, yi, zi].U.v.Z;
+                    Drawer.DrawLine(rc.T(new Point((xi + 0.5) * g.CellL, vz1)),
+                                    rc.T(new Point((xi + 1.5) * g.CellL, vz2)));
+                }
+            }
+
+            if (is_eps)
+            {
+                Drawer.SetPen(Color_eps, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, eps_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX - 1; xi++)
+                {
+                    double eps1 = g.Cells[xi, yi, zi].U.eps;
+                    double eps2 = g.Cells[xi + 1, yi, zi].U.eps;
+                    Drawer.DrawLine(rc.T(new Point((xi + 0.5) * g.CellL, eps1)),
+                                    rc.T(new Point((xi + 1.5) * g.CellL, eps2)));
+                }
+            }
+
+            if (is_p)
+            {
+                Drawer.SetPen(Color_p, GraphicPenThickness);
+                rc = new RectScaler(new Rect(xint, p_int), inner_rect, false, false);
+                for (int xi = 0; xi < g.NX - 1; xi++)
+                {
+                    double p1 = g.Cells[xi, yi, zi].U.p;
+                    double p2 = g.Cells[xi + 1, yi, zi].U.p;
+                    Drawer.DrawLine(rc.T(new Point((xi + 0.5) * g.CellL, p1)),
+                                    rc.T(new Point((xi + 1.5) * g.CellL, p2)));
                 }
             }
         }
