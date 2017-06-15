@@ -64,7 +64,7 @@ namespace Lib.Draw
         /// <param name="hi">higher bound</param>
         public void DrawField(SolidGrid grid, double lo, double hi)
         {
-            double d = grid.CellL / 100.0;
+            double d = grid.CellL / 10.0;
 
             // Now we use rho value.
 
