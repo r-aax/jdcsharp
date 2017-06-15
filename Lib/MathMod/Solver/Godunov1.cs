@@ -70,12 +70,12 @@ namespace Lib.MathMod.Solver
             double k = g.CellS * dt;
 
             // X+
-            ru = Riemann.Stub(u, g.XNextU(xi, yi, zi));
+            ru = Riemann.X_Toro(u, g.XNextU(xi, yi, zi));
             flow = ru.FlowX;
             d -= flow * k;
             
             // X-
-            ru = Riemann.Stub(g.XPrevU(xi, yi, zi), u);
+            ru = Riemann.X_Toro(g.XPrevU(xi, yi, zi), u);
             flow = ru.FlowX;
             d += flow * k;
 

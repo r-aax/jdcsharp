@@ -205,6 +205,11 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void StartB_Click(object sender, RoutedEventArgs e)
         {
+            double dl = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
+            double epsl = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
+            double dr = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
+            double epsr = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
+
             Grid = new SolidGrid(101, 1, 1, 1.0);
 
             for (int i = 0; i < Grid.NX; i++)
@@ -215,17 +220,15 @@ namespace Hydro
                     {
                         Grid.Cells[i, j, k].U.v = new Vector3D(0.0, 0.0, 0.0);
 
-                        if ((i == 0) || (i == 100))
+                        if (i < 50)
                         {
-                            // Left side.
-                            Grid.Cells[i, j, k].U.rho = 2.0;
-                            Grid.Cells[i, j, k].U.eps = 0.525;
+                            Grid.Cells[i, j, k].U.rho = dl;
+                            Grid.Cells[i, j, k].U.eps = epsl;
                         }
                         else
                         {
-                            // Right side.
-                            Grid.Cells[i, j, k].U.rho = 1.0;
-                            Grid.Cells[i, j, k].U.eps = 0.525;
+                            Grid.Cells[i, j, k].U.rho = dr;
+                            Grid.Cells[i, j, k].U.eps = epsr;
                         }
                     }
                 }
