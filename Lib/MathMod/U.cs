@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.Maths.Geometry.Geometry3D;
+using Lib.MathMod.Solver;
 
 namespace Lib.MathMod
 {
@@ -54,12 +55,12 @@ namespace Lib.MathMod
         {
             get
             {
-                return (MathModConstants.Gamma - 1.0) * rho * eps;
+                return (Riemann.gama - 1.0) * rho * eps;
             }
 
             set
             {
-                eps = value / ((MathModConstants.Gamma - 1.0) * rho);
+                eps = value / ((Riemann.gama - 1.0) * rho);
             }
         }
 

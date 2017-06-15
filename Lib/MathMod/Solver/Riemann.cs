@@ -12,6 +12,51 @@ namespace Lib.MathMod.Solver
     public class Riemann
     {
         /// <summary>
+        /// Gamma value.
+        /// </summary>
+        public const double gama = 1.4;
+
+        /// <summary>
+        /// g1
+        /// </summary>
+        public const double g1 = (gama - 1.0) / (2.0 * gama);
+
+        /// <summary>
+        /// g2
+        /// </summary>
+        public const double g2 = (gama + 1.0) / (2.0 * gama);
+
+        /// <summary>
+        /// g3
+        /// </summary>
+        public const double g3 = 2.0 * gama / (gama - 1.0);
+
+        /// <summary>
+        /// g4
+        /// </summary>
+        public const double g4 = 2.0 / (gama - 1.0);
+        
+        /// <summary>
+        /// g5
+        /// </summary>
+        public const double g5 = 2.0 / (gama + 1.0);
+
+        /// <summary>
+        /// g6
+        /// </summary>
+        public const double g6 = (gama - 1.0) / (gama + 1.0);
+
+        /// <summary>
+        /// g7
+        /// </summary>
+        public const double g7 = (gama - 1.0) / 2.0;
+
+        /// <summary>
+        /// g8
+        /// </summary>
+        public const double g8 = gama - 1.0;
+
+        /// <summary>
         /// Stub for Riemann task.
         /// </summary>
         /// <param name="u1">left side of Riemann task</param>

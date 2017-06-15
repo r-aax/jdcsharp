@@ -105,7 +105,6 @@
       <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="IO\File.cs" />
-    <Compile Include="MathMod\MathModConstants.cs" />
     <Compile Include="MathMod\D.cs" />
     <Compile Include="MathMod\Grid\BCond.cs" />
     <Compile Include="MathMod\Grid\BCondsLink.cs" />

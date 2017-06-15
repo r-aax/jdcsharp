@@ -350,7 +350,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// Clone.
         /// </summary>
         /// <returns>point</returns>
-        public object Clone()
+        new public object Clone()
         {
             return new Point(X, Y, Z);
         }
