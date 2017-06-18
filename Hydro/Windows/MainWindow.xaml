@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Hydro"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="1300" SizeChanged="Window_SizeChanged" ResizeMode="NoResize">
+        Title="MainWindow" Height="650" Width="1300" SizeChanged="Window_SizeChanged" ResizeMode="NoResize">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Foreground="SteelBlue">
             <MenuItem Header="Tests">
@@ -24,6 +24,7 @@
         </StatusBar>
         <Grid Background="AliceBlue">
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -31,13 +32,29 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="0" Grid.Column="0">
+            <Grid Grid.Row="0" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <CheckBox x:Name="IsUseItersCountCB" Grid.Row="0" Grid.Column="0" Content="use iters count" IsChecked="True" VerticalAlignment="Center" Margin="5"></CheckBox>
+                <TextBox x:Name="ItersCountTB" Grid.Row="0" Grid.Column="1" Text="100" Height="20" Margin="5"></TextBox>
+                <CheckBox x:Name="IsUseRunToTimeCB" Grid.Row="0" Grid.Column="2" Content="use run to time" VerticalAlignment="Center" Margin="5"></CheckBox>
+                <TextBox x:Name="TimeToRunTB" Grid.Row="0" Grid.Column="3" Text="1.0" Height="20" Margin="5"></TextBox>
+                <Button x:Name="RunB" Grid.Row="0" Grid.Column="4" Content="Run" Height="20" Margin="5" Click="RunB_Click"></Button>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="1">
+            </Grid>
+            <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="1" Grid.Column="0">
                 <Canvas Name="DrawAreaC" Background="White" ClipToBounds="True"/>
             </Border>
-            <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="0" Grid.Column="1">
+            <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="1" Grid.Column="1">
                 <Canvas Name="DrawArea2C" Background="White" ClipToBounds="True"/>
             </Border>
-            <Grid Grid.Row="1" Grid.Column="0">
+            <Grid Grid.Row="2" Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -64,14 +81,11 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" Name="StartB" Content="Start" Margin="10" Width="75" Height="20" Click="StartB_Click"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Name="ItersCountTB" Text="100" Margin="10"/>
-                    <Button Grid.Row="0" Grid.Column="2" Name="IterB" Content="Iteration" Margin="10" Width="75" Height="20" Click="IterB_Click"/>
                 </Grid>
             </Grid>
             
             <!-- Graphics -->
-            <Grid Grid.Row="1" Grid.Column="1">
+            <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>

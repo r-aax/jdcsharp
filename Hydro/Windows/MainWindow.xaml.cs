@@ -262,72 +262,12 @@ namespace Hydro
         }
 
         /// <summary>
-        /// Start button click.
-        /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">parameters</param>
-        private void StartB_Click(object sender, RoutedEventArgs e)
-        {
-            double dl = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
-            double epsl = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
-            double dr = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
-            double epsr = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
-
-            Grid = new SolidGrid(50, 50, 1, 1.0);
-
-            for (int i = 0; i < Grid.NX; i++)
-            {
-                for (int j = 0; j < Grid.NY; j++)
-                {
-                    for (int k = 0; k < Grid.NZ; k++)
-                    {
-                        Grid.Cells[i, j, k].U.v = new Vector2D(0.0, 0.0);
-
-                        if ((i - 25) * (i - 25) + (j - 25) * (j - 25) < 49)
-                        {
-                            Grid.Cells[i, j, k].U.rho = 20.0;
-                            Grid.Cells[i, j, k].U.v.X = 0.0;
-                            Grid.Cells[i, j, k].U.p = 20.0;
-                        }
-                        else
-                        {
-                            Grid.Cells[i, j, k].U.rho = 1.0;
-                            Grid.Cells[i, j, k].U.v.X = 0.0;
-                            Grid.Cells[i, j, k].U.p = 1.0;
-                        }
-                    }
-                }
-            }
-
-            RefreshVisual();
-        }
-
-        /// <summary>
         /// Change size of window event.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">parameters</param>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            RefreshVisual();
-        }
-
-        /// <summary>
-        /// Do one iteration.
-        /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">parameters</param>
-        private void IterB_Click(object sender, RoutedEventArgs e)
-        {
-            int iters_count = Int32.Parse(ItersCountTB.Text);
-
-            for (int i = 0; i < iters_count; i++)
-            {
-                Godunov1.Iter(Grid, 0.00001);
-            }
-
-            T += (0.00001) * iters_count;
-
             RefreshVisual();
         }
 
@@ -384,6 +324,41 @@ namespace Hydro
         {
             RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Collella_Collision(1.0, 100);
             SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// Run.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void RunB_Click(object sender, RoutedEventArgs e)
+        {
+            double dt = 0.0001;
+
+            if (IsUseItersCountCB.IsChecked ?? true)
+            {
+                int iters_count = Int32.Parse(ItersCountTB.Text);
+                Godunov1.Iters(Grid, dt, iters_count);
+                T += iters_count * dt;
+            }
+            else if (IsUseRunToTimeCB.IsChecked ?? true)
+            {
+                double to_time = Double.Parse(TimeToRunTB.Text);
+
+                while (T < to_time)
+                {
+                    Godunov1.Iter(Grid, dt);
+                    T += dt;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Select way to run (iters count or run to time).");
+
+                return;
+            }
+
+            RefreshVisual();
         }
     }
 }
