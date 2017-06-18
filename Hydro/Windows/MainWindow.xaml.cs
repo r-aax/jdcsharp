@@ -18,6 +18,7 @@ using Lib.Maths.Geometry.Geometry3D;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.MathMod.SolidGrid;
 using Lib.Draw;
+using Lib.MathMod;
 using Lib.MathMod.Solver;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
@@ -34,6 +35,11 @@ namespace Hydro
         /// Grid.
         /// </summary>
         private SolidGrid Grid = null;
+
+        /// <summary>
+        /// Time.
+        /// </summary>
+        private double T = 0;
 
         /// <summary>
         /// Rect drawer.
@@ -144,6 +150,63 @@ namespace Hydro
         }
 
         /// <summary>
+        /// Set 1D test.
+        /// </summary>
+        /// <param name="test">test</param>
+        private void SetRiemannProblem1DTest(RiemannProblem1DTest test)
+        {
+            // Create grid.
+            Grid = new SolidGrid(test.CellsCount, 1, 1, test.XLength / test.CellsCount);
+
+            // Fill cells data.
+            for (int i = 0; i < Grid.NX; i++)
+            {
+                for (int j = 0; j < Grid.NY; j++)
+                {
+                    for (int k = 0; k < Grid.NZ; k++)
+                    {
+                        if (i < test.CellsCount / 2)
+                        {
+                            Grid.Cells[i, j, k].U = new U(test.rho_l, test.vX_l, 0.0, test.p_l);
+                        }
+                        else
+                        {
+                            Grid.Cells[i, j, k].U = new U(test.rho_r, test.vX_r, 0.0, test.p_r);
+                        }
+                    }
+                }
+            }
+
+            // Set up graphhics intervals.
+            Graphic_rho_L_TB.Text = test.rho_int.L.ToString();
+            Graphic_rho_H_TB.Text = test.rho_int.H.ToString();
+            //
+            Graphic_vX_L_TB.Text = test.vX_int.L.ToString();
+            Graphic_vX_H_TB.Text = test.vX_int.H.ToString();
+            //
+            Graphic_eps_L_TB.Text = test.eps_int.L.ToString();
+            Graphic_eps_H_TB.Text = test.eps_int.H.ToString();
+            //
+            Graphic_p_L_TB.Text = test.p_int.L.ToString();
+            Graphic_p_H_TB.Text = test.p_int.H.ToString();
+
+            // Time.
+            T = 0.0;
+
+            // Paint.
+            RefreshVisual();
+        }
+
+        /// <summary>
+        /// Refresh visual.
+        /// </summary>
+        private void RefreshVisual()
+        {
+            Paint();
+            StatusTB.Text = String.Format("T = {0}", T);
+        }
+
+        /// <summary>
         /// Paint action.
         /// </summary>
         private void Paint()
@@ -186,7 +249,7 @@ namespace Hydro
             // Begin draw.
             Drawer2.BeginDraw();
             //
-            GraphicDrawer.DrawAllX_Line(Grid, 0.05, 0.05,
+            GraphicDrawer.DrawAllX_Line(Grid, Grid.YSize / 2.0, Grid.ZSize / 2.0,
                                         (bool)IsGraphic_rho_Used.IsChecked, Graphic_rho_Interval,
                                         (bool)IsGraphic_vX_Used.IsChecked, Graphic_vX_Interval,
                                         (bool)IsGraphic_vY_Used.IsChecked, Graphic_vY_Interval,
@@ -236,7 +299,7 @@ namespace Hydro
                 }
             }
 
-            Paint();
+            RefreshVisual();
         }
 
         /// <summary>
@@ -246,7 +309,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void Window_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Paint();
+            RefreshVisual();
         }
 
         /// <summary>
@@ -260,10 +323,67 @@ namespace Hydro
 
             for (int i = 0; i < iters_count; i++)
             {
-                Godunov1.Iter(Grid, 0.01);
+                Godunov1.Iter(Grid, 0.00001);
             }
 
-            Paint();
+            T += (0.00001) * iters_count;
+
+            RefreshVisual();
+        }
+
+        /// <summary>
+        /// Test 1D Sod.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DSodMI_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.Sod(1.0, 100);
+            SetRiemannProblem1DTest(test);
+        }       
+
+        /// <summary>
+        /// Test 1D 123.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1D123_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.Problem123(1.0, 100);
+            SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// Test 1D Woodward & Collella left.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DWoodwardCollelaLeft_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Colella_Left(1.0, 100);
+            SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// Test 1D Woodward & Collela right.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DWoodwardCollelaRight_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Collela_Right(1.0, 100);
+            SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// Test 1D Woodward & Collela collision.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DWoodwardCollelaCollision_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Collella_Collision(1.0, 100);
+            SetRiemannProblem1DTest(test);
         }
     }
 }

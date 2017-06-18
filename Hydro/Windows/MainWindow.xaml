@@ -8,10 +8,19 @@
         Title="MainWindow" Height="600" Width="1300" SizeChanged="Window_SizeChanged" ResizeMode="NoResize">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Foreground="SteelBlue">
+            <MenuItem Header="Tests">
+                <MenuItem Header="1D">
+                    <MenuItem x:Name="Tests1DSodMI" Header="Sod" Click="Tests1DSodMI_Click"/>
+                    <MenuItem x:Name="Tests1D123" Header="123" Click="Tests1D123_Click"/>
+                    <MenuItem x:Name="Tests1DWoodwardCollelaLeft" Header="Woodward and Collela left" Click="Tests1DWoodwardCollelaLeft_Click"/>
+                    <MenuItem x:Name="Tests1DWoodwardCollelaRight" Header="Woodward and Collela right" Click="Tests1DWoodwardCollelaRight_Click"/>
+                    <MenuItem x:Name="Tests1DWoodwardCollelaCollision" Header="Woodward and Collela collision" Click="Tests1DWoodwardCollelaCollision_Click"/>
+                </MenuItem>
+            </MenuItem>
             <MenuItem Header="Info"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
-            <TextBlock Foreground="SteelBlue" Text="No text"/>
+            <TextBlock x:Name="StatusTB" Foreground="SteelBlue" Text="No text"/>
         </StatusBar>
         <Grid Background="AliceBlue">
             <Grid.RowDefinitions>
