@@ -210,7 +210,7 @@ namespace Hydro
             double dr = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
             double epsr = Lib.Maths.Numbers.Randoms.RandomInInterval(0.0, 5.0);
 
-            Grid = new SolidGrid(101, 1, 1, 1.0);
+            Grid = new SolidGrid(50, 50, 1, 1.0);
 
             for (int i = 0; i < Grid.NX; i++)
             {
@@ -220,15 +220,17 @@ namespace Hydro
                     {
                         Grid.Cells[i, j, k].U.v = new Vector3D(0.0, 0.0, 0.0);
 
-                        if (i < 50)
+                        if ((i - 25) * (i - 25) + (j - 25) * (j - 25) < 49)
                         {
-                            Grid.Cells[i, j, k].U.rho = dl;
-                            Grid.Cells[i, j, k].U.eps = epsl;
+                            Grid.Cells[i, j, k].U.rho = 20.0;
+                            Grid.Cells[i, j, k].U.v.X = 0.0;
+                            Grid.Cells[i, j, k].U.p = 20.0;
                         }
                         else
                         {
-                            Grid.Cells[i, j, k].U.rho = dr;
-                            Grid.Cells[i, j, k].U.eps = epsr;
+                            Grid.Cells[i, j, k].U.rho = 1.0;
+                            Grid.Cells[i, j, k].U.v.X = 0.0;
+                            Grid.Cells[i, j, k].U.p = 1.0;
                         }
                     }
                 }

@@ -23,10 +23,10 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="0" Grid.Column="0">
-                <Canvas Name="DrawAreaC" Background="White"/>
+                <Canvas Name="DrawAreaC" Background="White" ClipToBounds="True"/>
             </Border>
             <Border BorderThickness="2" BorderBrush="LightGray" Grid.Row="0" Grid.Column="1">
-                <Canvas Name="DrawArea2C" Background="White"/>
+                <Canvas Name="DrawArea2C" Background="White" ClipToBounds="True"/>
             </Border>
             <Grid Grid.Row="1" Grid.Column="0">
                 <Grid.RowDefinitions>

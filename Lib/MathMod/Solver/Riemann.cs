@@ -221,14 +221,17 @@ namespace Lib.MathMod.Solver
         /// <param name="d"></param>
         /// <param name="u"></param>
         /// <param name="p"></param>
-        public static void sample(double dl, double ul, double pl, double cl,
-                                  double dr, double ur, double pr, double cr,
-                                  double pm, double um, out double d, out double u, out double p)
+        public static void sample(double dl, double ul, double vl, double wl, double pl, double cl,
+                                  double dr, double ur, double vr, double wr, double pr, double cr,
+                                  double pm, double um, out double d, out double u, out double v, out double w, out double p)
         {
             double c, cml, cmr, pml, pmr, shl, shr, sl, sr, stl, str;
 
             if (um >= 0.0)
             {
+                v = vl;
+                w = wl;
+
                 // sampling point lies to the left of the contact discontinuity
                 if (pm <= pl)
                 {
@@ -288,6 +291,9 @@ namespace Lib.MathMod.Solver
             }
             else
             {
+                v = vr;
+                w = wr;
+
                 // sampling point lies to the right of the contact discontinuity
                 if (pm > pr)
                 {
@@ -359,9 +365,9 @@ namespace Lib.MathMod.Solver
         /// <param name="d"></param>
         /// <param name="u"></param>
         /// <param name="p"></param>
-        public static void riemann(double dl, double ul, double pl,
-                                   double dr, double ur, double pr,
-                                   out double d, out double u, out double p)
+        public static void riemann(double dl, double ul, double vl, double wl, double pl,
+                                   double dr, double ur, double vr, double wr, double pr,
+                                   out double d, out double u, out double v, out double w, out double p)
         {
             double pm, um, cl, cr;
 
@@ -379,7 +385,7 @@ namespace Lib.MathMod.Solver
 
             // exact solution for pressure and velocity in star region is found
             starpu(dl, ul, pl, cl, dr, ur, pr, cr, ref pm, out um);
-            sample(dl, ul, pl, cl, dr, ur, pr, cr, pm, um, out d, out u, out p);
+            sample(dl, ul, vl, wl, pl, cl, dr, ur, vr, wr, pr, cr, pm, um, out d, out u, out v, out w, out p);
         }
 
         /// <summary>
@@ -400,22 +406,65 @@ namespace Lib.MathMod.Solver
         }
 
         /// <summary>
-        /// One-dimensiona E. F. Toro solution.
+        /// One-dimensiona E. F. Toro solution for X.
         /// </summary>
-        /// <param name="ul">left side U</param>
-        /// <param name="ur">right side U</param>
+        /// <param name="u_lo">low side U</param>
+        /// <param name="u_hi">hight side U</param>
         /// <returns>U on the cells common border</returns>
-        public static U X_Toro(U ul, U ur)
+        public static U X_Toro(U u_lo, U u_hi)
         {
-            double d, u, p;
+            double d, u, v, w, p;
             U ru = new U();
 
-            riemann(ul.rho, ul.v.X, ul.p, ur.rho, ur.v.X, ur.p, out d, out u, out p);
+            riemann(u_lo.rho, u_lo.v.X, u_lo.v.Y, u_lo.v.Z, u_lo.p,
+                    u_hi.rho, u_hi.v.X, u_hi.v.Y, u_hi.v.Z, u_hi.p, out d, out u, out v, out w, out p);
 
             ru.rho = d;
-            ru.v = new Maths.Geometry.Geometry3D.Vector(u, 0.0, 0.0);
+            ru.v = new Maths.Geometry.Geometry3D.Vector(u, v, w);
             ru.p = p;
 
+            return ru;
+        }
+
+        /// <summary>
+        /// One-dimensiona E. F. Toro solution for Y.
+        /// </summary>
+        /// <param name="u_lo">low side U</param>
+        /// <param name="u_hi">hight side U</param>
+        /// <returns>U on the cells common border</returns>
+        public static U Y_Toro(U u_lo, U u_hi)
+        {
+            double d, u, v, w, p;
+            U ru = new U();
+
+            riemann(u_lo.rho, u_lo.v.Y, u_lo.v.X, u_lo.v.Z, u_lo.p,
+                    u_hi.rho, u_hi.v.Y, u_hi.v.X, u_hi.v.Z, u_hi.p, out d, out v, out u, out w, out p);
+
+            ru.rho = d;
+            ru.v = new Maths.Geometry.Geometry3D.Vector(u, v, w);
+            ru.p = p;
+
+            return ru;
+        }
+
+        /// <summary>
+        /// One-dimensiona E. F. Toro solution for Z.
+        /// </summary>
+        /// <param name="u_lo">low side U</param>
+        /// <param name="u_hi">hight side U</param>
+        /// <returns>U on the cells common border</returns>
+        public static U Z_Toro(U u_lo, U u_hi)
+        {
+            double d, u, v, w, p;
+            U ru = new U();
+
+            riemann(u_lo.rho, u_lo.v.Z, u_lo.v.X, u_lo.v.Y, u_lo.p,
+                    u_hi.rho, u_hi.v.Z, u_hi.v.X, u_hi.v.Y, u_hi.p, out d, out w, out u, out v, out p);
+
+            ru.rho = d;
+            ru.v = new Maths.Geometry.Geometry3D.Vector(u, v, w);
+            ru.p = p;
+             
             return ru;
         }
     }

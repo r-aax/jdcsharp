@@ -80,24 +80,24 @@ namespace Lib.MathMod.Solver
             d += flow * k;
 
             // Y+
-            //ru = Riemann.Stub(u, g.YNextU(xi, yi, zi));
-            //flow = ru.FlowY;
-            //d -= flow * k;
+            ru = Riemann.Y_Toro(u, g.YNextU(xi, yi, zi));
+            flow = ru.FlowY;
+            d -= flow * k;
 
             // Y-
-            //ru = Riemann.Stub(g.YPrevU(xi, yi, zi), u);
-            //flow = ru.FlowY;
-            //d += flow * k;
+            ru = Riemann.Y_Toro(g.YPrevU(xi, yi, zi), u);
+            flow = ru.FlowY;
+            d += flow * k;
 
             // Z+
-            //ru = Riemann.Stub(u, g.ZNextU(xi, yi, zi));
-            //flow = ru.FlowZ;
-            //d -= flow * k;
+            ru = Riemann.Z_Toro(u, g.ZNextU(xi, yi, zi));
+            flow = ru.FlowZ;
+            d -= flow * k;
 
             // Z-
-            //ru = Riemann.Stub(g.ZNextU(xi, yi, zi), u);
-            //flow = ru.FlowZ;
-            //d += flow * k;
+            ru = Riemann.Z_Toro(g.ZNextU(xi, yi, zi), u);
+            flow = ru.FlowZ;
+            d += flow * k;
 
             g.Cells[xi, yi, zi].D = d;
         }
