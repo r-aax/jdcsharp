@@ -16,6 +16,9 @@
                     <MenuItem x:Name="Tests1DWoodwardCollelaRight" Header="Woodward and Collela right" Click="Tests1DWoodwardCollelaRight_Click"/>
                     <MenuItem x:Name="Tests1DWoodwardCollelaCollision" Header="Woodward and Collela collision" Click="Tests1DWoodwardCollelaCollision_Click"/>
                 </MenuItem>
+                <MenuItem Header="2D">
+                    <MenuItem x:Name="Tests2D100x100TwoCirclesMI" Header="100 x 100 two circles" Click="Tests2D100x100TwoCirclesMI_Click"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Info"/>
         </Menu>
@@ -34,17 +37,21 @@
             </Grid.ColumnDefinitions>
             <Grid Grid.Row="0" Grid.Column="0">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="70"/>
                     <ColumnDefinition/>
+                    <ColumnDefinition Width="70"/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="70"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <CheckBox x:Name="IsUseItersCountCB" Grid.Row="0" Grid.Column="0" Content="use iters count" IsChecked="True" VerticalAlignment="Center" Margin="5"></CheckBox>
-                <TextBox x:Name="ItersCountTB" Grid.Row="0" Grid.Column="1" Text="100" Height="20" Margin="5"></TextBox>
-                <CheckBox x:Name="IsUseRunToTimeCB" Grid.Row="0" Grid.Column="2" Content="use run to time" VerticalAlignment="Center" Margin="5"></CheckBox>
-                <TextBox x:Name="TimeToRunTB" Grid.Row="0" Grid.Column="3" Text="1.0" Height="20" Margin="5"></TextBox>
-                <Button x:Name="RunB" Grid.Row="0" Grid.Column="4" Content="Run" Height="20" Margin="5" Click="RunB_Click"></Button>
+                <TextBlock Grid.Row="0" Grid.Column="0" Height="20" Text="dt = " Margin="5"></TextBlock>
+                <TextBox x:Name="DtTB" Grid.Row="0" Grid.Column="1" Height="20" Text="0.01" Margin="5"></TextBox>
+                <CheckBox x:Name="IsUseItersCountCB" Grid.Row="0" Grid.Column="2" Content="use iters count" IsChecked="True" VerticalAlignment="Center" Margin="5"></CheckBox>
+                <TextBox x:Name="ItersCountTB" Grid.Row="0" Grid.Column="3" Text="100" Height="20" Margin="5"></TextBox>
+                <CheckBox x:Name="IsUseRunToTimeCB" Grid.Row="0" Grid.Column="4" Content="use run to time" VerticalAlignment="Center" Margin="5"></CheckBox>
+                <TextBox x:Name="TimeToRunTB" Grid.Row="0" Grid.Column="5" Text="1.0" Height="20" Margin="5"></TextBox>
+                <Button x:Name="RunB" Grid.Row="0" Grid.Column="6" Content="Run" Height="20" Margin="5" Click="RunB_Click"></Button>
             </Grid>
             <Grid Grid.Row="0" Grid.Column="1">
             </Grid>

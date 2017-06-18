@@ -61,7 +61,7 @@ namespace Lib.Utils.Time
         /// <summary>
         /// Subscribe function.
         /// </summary>
-        /// <param name="fun"></param>
+        /// <param name="fun">function</param>
         public void Subscribe(SubscribeFun fun)
         {
             InnerTimer.Elapsed += new ElapsedEventHandler((sender, args) => fun());

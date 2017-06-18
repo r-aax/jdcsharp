@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry3D;
@@ -23,6 +24,7 @@ using Lib.MathMod.Solver;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
+using Lib.Utils.Time;
 
 namespace Hydro
 {
@@ -40,6 +42,11 @@ namespace Hydro
         /// Time.
         /// </summary>
         private double T = 0;
+
+        /// <summary>
+        /// String.
+        /// </summary>
+        private string StatusString = "";
 
         /// <summary>
         /// Rect drawer.
@@ -203,7 +210,7 @@ namespace Hydro
         private void RefreshVisual()
         {
             Paint();
-            StatusTB.Text = String.Format("T = {0}", T);
+            StatusTB.Text = StatusString;
         }
 
         /// <summary>
@@ -333,23 +340,34 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void RunB_Click(object sender, RoutedEventArgs e)
         {
-            double dt = 0.0001;
+            double dt = Double.Parse(DtTB.Text);
+            double total_time;
 
             if (IsUseItersCountCB.IsChecked ?? true)
             {
                 int iters_count = Int32.Parse(ItersCountTB.Text);
+
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
                 Godunov1.Iters(Grid, dt, iters_count);
+                sw.Stop();
+                total_time = sw.ElapsedMilliseconds;
+
                 T += iters_count * dt;
             }
             else if (IsUseRunToTimeCB.IsChecked ?? true)
             {
                 double to_time = Double.Parse(TimeToRunTB.Text);
 
+                Stopwatch sw = new Stopwatch();
+                sw.Start();
                 while (T < to_time)
                 {
                     Godunov1.Iter(Grid, dt);
                     T += dt;
                 }
+                sw.Stop();
+                total_time = sw.ElapsedMilliseconds;
             }
             else
             {
@@ -358,6 +376,62 @@ namespace Hydro
                 return;
             }
 
+            StatusString = String.Format("T = {0}, ellapsed time = {1} ms", T, total_time);
+            RefreshVisual();
+        }
+
+        /// <summary>
+        /// Test 2D 1000 x 1000 grid.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests2D100x100TwoCirclesMI_Click(object sender, RoutedEventArgs e)
+        {
+            // Grid.
+            Grid = new SolidGrid(100, 100, 1, 1.0);
+
+            // Cells.
+            for (int i = 0; i < Grid.NX; i++)
+            {
+                for (int j = 0; j < Grid.NY; j++)
+                {
+                    for (int k = 0; k < Grid.NZ; k++)
+                    {
+                        int dx1 = Math.Abs(i - 33);
+                        int dy1 = Math.Abs(j - 33);
+                        int dx2 = Math.Abs(i - 67);
+                        int dy2 = Math.Abs(j - 67);
+
+                        if ((dx1 * dx1 + dy1 * dy1 < 400) || (dx2 * dx2 + dy2 * dy2 < 400))
+                        {
+                            Grid.Cells[i, j, k].U = new U(5.0, 0.0, 0.0, 1.0);
+                        }
+                        else
+                        {
+                            Grid.Cells[i, j, k].U = new U(1.0, 0.0, 0.0, 0.5);
+                        }
+                    }
+                }
+            }
+
+            // Set up graphhics intervals.
+            Graphic_rho_L_TB.Text = "0.0";
+            Graphic_rho_H_TB.Text = "5.0";
+            //
+            Graphic_vX_L_TB.Text = "0.0";
+            Graphic_vX_H_TB.Text = "5.0";
+            //
+            Graphic_eps_L_TB.Text = "0.0";
+            Graphic_eps_H_TB.Text = "5.0";
+            //
+            Graphic_p_L_TB.Text = "0.0";
+            Graphic_p_H_TB.Text = "5.0";
+
+
+            // Time.
+            T = 0.0;
+
+            // Paint.
             RefreshVisual();
         }
     }
