@@ -303,7 +303,9 @@ namespace Lib.Draw.WindowsForms
         /// <param name="text">text</param>
         /// <param name="size">size</param>
         /// <param name="family">font</param>
-        public override void DrawText(LPoint p, LVector off, string text, double size, string family)
+        /// <param name="color">color</param>
+        public override void DrawText(LPoint p, LVector off, string text, double size,
+                                      string family, Color color)
         {
             throw new NotImplementedException();
         }

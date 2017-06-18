@@ -270,7 +270,9 @@ namespace Lib.Draw.WPF
         /// <param name="text">text</param>
         /// <param name="size">size</param>
         /// <param name="family">font</param>
-        public override void DrawText(LPoint p, LVector off, string text, double size, string family)
+        /// <param name="color">color</param>
+        public override void DrawText(LPoint p, LVector off, string text, double size,
+                                      string family, Color color)
         {
             LPoint tp = Scaler.T(p);
             FormattedText ftext = new FormattedText(text,
@@ -278,7 +280,7 @@ namespace Lib.Draw.WPF
                                                     FlowDirection.LeftToRight,
                                                     new Typeface(family),
                                                     size,
-                                                    Brushes.Black);
+                                                    new SolidColorBrush(color.ToSWMColor()));
 
             Context.DrawText(ftext, new SWPoint(tp.X + off.X, tp.Y + off.Y));
         }

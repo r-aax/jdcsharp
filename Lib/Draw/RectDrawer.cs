@@ -203,7 +203,22 @@ namespace Lib.Draw
         /// <param name="text">test</param>
         /// <param name="size">size</param>
         /// <param name="family">font</param>
-        public abstract void DrawText(Point p, Vector off, string text, double size, string family);
+        /// <param name="color">color</param>
+        public abstract void DrawText(Point p, Vector off, string text, double size,
+                                      string family, Color color);
+
+        /// <summary>
+        /// Draw text.
+        /// </summary>
+        /// <param name="p">point</param>
+        /// <param name="text">test</param>
+        /// <param name="size">size</param>
+        /// <param name="family">font</param>
+        /// <param name="color">color</param>
+        public void DrawText(Point p, string text, double size, string family, Color color)
+        {
+            DrawText(p, new Vector(0.0, 0.0), text, size, family, color);
+        }
 
         /// <summary>
         /// Draw text with zero offset.
@@ -214,7 +229,7 @@ namespace Lib.Draw
         /// <param name="family">font</param>
         public void DrawText(Point p, string text, double size, string family)
         {
-            DrawText(p, new Vector(0.0, 0.0), text, size, family);
+            DrawText(p, new Vector(0.0, 0.0), text, size, family, Color.Black);
         }
 
         /// <summary>
@@ -226,7 +241,7 @@ namespace Lib.Draw
         /// <param name="size">size</param>
         public void DrawVerdanaText(Point p, Vector off, string text, double size)
         {
-            DrawText(p, off, text, size, "Verdana");
+            DrawText(p, off, text, size, "Verdana", Color.Black);
         }
 
         /// <summary>
@@ -249,7 +264,7 @@ namespace Lib.Draw
         /// <param name="size"></param>
         public void DrawConsoleText(Point p, Vector off, string text, double size)
         {
-            DrawText(p, off, text, size, "Verdana");
+            DrawText(p, off, text, size, "Lucida Console", Color.Black);
         }
 
         /// <summary>

@@ -111,6 +111,11 @@ namespace Lib.Draw
         }
 
         /// <summary>
+        /// Black color.
+        /// </summary>
+        public static Color Black = new Color(0, 0, 0);
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>clone</returns>

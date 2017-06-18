@@ -121,7 +121,8 @@ namespace Lib.Draw
             Drawer.SetPen(CellcBordersColor, 1.0);
             for (int xi = 0; xi <= g.NX; xi++)
             {
-                Drawer.DrawVLine(0.05 * w + 0.9 * w * ((double)xi / (double)g.NX));
+                double x = 0.05 * w + 0.9 * w * ((double)xi / (double)g.NX);
+                Drawer.DrawLine(x, 0.03 * h, x, 0.97 * h);
             }
 
             // Axis.
@@ -132,6 +133,80 @@ namespace Lib.Draw
             Drawer.DrawLine(0.95 * w, 0.06 * h, 0.95 * w, 0.04 * h);
             Drawer.DrawText(new Point(0.045 * w, 0.03 * h), zero.ToString(), 12, "Arial");
             Drawer.DrawText(new Point(0.945 * w, 0.03 * h), g.XSize.ToString(), 12, "Arial");
+        }
+
+        /// <summary>
+        /// Draw value.
+        /// </summary>
+        /// <param name="w"><c>X</c> coordinate</param>
+        /// <param name="h"><c>Y</c> coordinate</param>
+        /// <param name="val">value</param>
+        /// <param name="color">color</param>
+        public void DrawValue(double w, double h, double val, Color color)
+        {
+            Drawer.DrawText(new Point(w, h), String.Format("[{0}]", val), 12, "Arial", color);
+        }
+
+        /// <summary>
+        /// Draw values of rho, vx, vy, vz, eps, p.
+        /// </summary>
+        /// <param name="is_rho">is <c>rho</c> used</param>
+        /// <param name="rho_int"><c>rho</c> interval</param>
+        /// <param name="is_vx">is <c>v.X</c> used</param>
+        /// <param name="vx_int"><c>v.X</c> interval</param>
+        /// <param name="is_vy">is <c>v.Y</c> used</param>
+        /// <param name="vy_int"><c>v.Y</c> interval</param>
+        /// <param name="is_vz">is <c>v.Z</c> used</param>
+        /// <param name="vz_int"><c>v.Z</c> interval</param>
+        /// <param name="is_eps">is <c>eps</c> used</param>
+        /// <param name="eps_int"><c>eps</c> interval</param>
+        /// <param name="is_p">is <c>p</c> used</param>
+        /// <param name="p_int"><c>p</c> interval</param>
+        public void DrawValues(bool is_rho, Interval rho_int,
+                               bool is_vx, Interval vx_int,
+                               bool is_vy, Interval vy_int,
+                               bool is_vz, Interval vz_int,
+                               bool is_eps, Interval eps_int,
+                               bool is_p, Interval p_int)
+        {
+            double w = Drawer.Rect.Width;
+            double h = Drawer.Rect.Height;
+
+            if (is_rho)
+            {
+                DrawValue(0.05 * w + 0.03 * w, 0.03 * h, rho_int.L, Color_rho);
+                DrawValue(0.05 * w + 0.03 * w, h, rho_int.H, Color_rho);
+            }
+
+            if (is_vx)
+            {
+                DrawValue(0.05 * w + 0.18 * w, 0.03 * h, vx_int.L, Color_vx);
+                DrawValue(0.05 * w + 0.18 * w, h, vx_int.H, Color_vx);
+            }
+
+            if (is_vy)
+            {
+                DrawValue(0.05 * w + 0.33 * w, 0.03 * h, vy_int.L, Color_vy);
+                DrawValue(0.05 * w + 0.33 * w, h, vy_int.H, Color_vy);
+            }
+
+            if (is_vz)
+            {
+                DrawValue(0.05 * w + 0.48 * w, 0.03 * h, vz_int.L, Color_vz);
+                DrawValue(0.05 * w + 0.48 * w, h, vz_int.H, Color_vz);
+            }
+
+            if (is_eps)
+            {
+                DrawValue(0.05 * w + 0.63 * w, 0.03 * h, eps_int.L, Color_eps);
+                DrawValue(0.05 * w + 0.63 * w, h, eps_int.H, Color_eps);
+            }
+
+            if (is_p)
+            {
+                DrawValue(0.05 * w + 0.78 * w, 0.03 * h, p_int.L, Color_p);
+                DrawValue(0.05 * w + 0.78 * w, h, p_int.H, Color_p);
+            }
         }
 
         /// <summary>
@@ -240,6 +315,8 @@ namespace Lib.Draw
                     Drawer.DrawLine(rc.T(new Point(xi * g.CellL, p)), rc.T(new Point((xi + 1) * g.CellL, p)));
                 }
             }
+
+            DrawValues(is_rho, rho_int, is_vx, vx_int, is_vy, vy_int, is_vz, vz_int, is_eps, eps_int, is_p, p_int);
         }
 
         /// <summary>
@@ -360,6 +437,8 @@ namespace Lib.Draw
                                     rc.T(new Point((xi + 1.5) * g.CellL, p2)));
                 }
             }
+
+            DrawValues(is_rho, rho_int, is_vx, vx_int, is_vy, vy_int, is_vz, vz_int, is_eps, eps_int, is_p, p_int);
         }
     }
 }
