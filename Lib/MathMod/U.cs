@@ -152,5 +152,31 @@ namespace Lib.MathMod
         {
             return String.Format("U: {0}, {1}, {2}", rho, v, eps);
         }
+        
+        /// <summary>
+        /// Get value of data item.
+        /// </summary>
+        /// <param name="di">data item</param>
+        /// <returns>value</returns>
+        public double Item(DataItem di)
+        {
+            switch (di)
+            {
+                case DataItem.rho:
+                    return rho;
+
+                case DataItem.vX:
+                    return v.X;
+
+                case DataItem.vY:
+                    return v.Y;
+
+                case DataItem.eps:
+                    return eps;
+
+                default:
+                    throw new Exception("wrong data item");
+            }
+        }
     }
 }

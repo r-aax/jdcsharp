@@ -106,6 +106,7 @@
     </Compile>
     <Compile Include="IO\File.cs" />
     <Compile Include="MathMod\D.cs" />
+    <Compile Include="MathMod\DataItem.cs" />
     <Compile Include="MathMod\Grid\BCond.cs" />
     <Compile Include="MathMod\Grid\BCondsLink.cs" />
     <Compile Include="MathMod\Grid\Block.cs" />

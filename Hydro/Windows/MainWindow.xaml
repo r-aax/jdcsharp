@@ -90,7 +90,7 @@
                     <CheckBox x:Name="IsGraphic_rho_Used" Grid.Row="0" Grid.Column="0" Content="rho" HorizontalAlignment="Center" IsChecked="True" FontWeight="Bold"/>
                     <CheckBox x:Name="IsGraphic_vX_Used" Grid.Row="0" Grid.Column="1" Content="v.X" HorizontalAlignment="Center" IsChecked="True" FontWeight="Bold"/>
                     <CheckBox x:Name="IsGraphic_vY_Used" Grid.Row="0" Grid.Column="2" Content="v.Y" HorizontalAlignment="Center" FontWeight="Bold"/>
-                    <CheckBox x:Name="IsGraphic_vZ_Used" Grid.Row="0" Grid.Column="3" Content="v.Z" HorizontalAlignment="Center" FontWeight="Bold"/>
+                    <CheckBox x:Name="IsGraphic_vZ_Used" Grid.Row="0" Grid.Column="3" Content="v.Z" HorizontalAlignment="Center" FontWeight="Bold" IsEnabled="False"/>
                     <CheckBox x:Name="IsGraphic_eps_Used" Grid.Row="0" Grid.Column="4" Content="eps" HorizontalAlignment="Center" IsChecked="True" FontWeight="Bold"/>
                     <CheckBox x:Name="IsGraphic_p_Used" Grid.Row="0" Grid.Column="5" Content="p" HorizontalAlignment="Center" IsChecked="True" FontWeight="Bold"/>
                     <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -106,8 +106,8 @@
                         <TextBox x:Name="Graphic_vY_H_TB" Width="50" Text="5.0"></TextBox>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="3" Orientation="Horizontal" HorizontalAlignment="Center">
-                        <TextBox x:Name="Graphic_vZ_L_TB" Width="50" Margin="0,0,2,0" Text="0.0"></TextBox>
-                        <TextBox x:Name="Graphic_vZ_H_TB" Width="50" Text="5.0"></TextBox>
+                        <TextBox x:Name="Graphic_vZ_L_TB" Width="50" Margin="0,0,2,0" Text="0.0" IsEnabled="False"></TextBox>
+                        <TextBox x:Name="Graphic_vZ_H_TB" Width="50" Text="5.0" IsEnabled="False"></TextBox>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Grid.Column="4" Orientation="Horizontal" HorizontalAlignment="Center">
                         <TextBox x:Name="Graphic_eps_L_TB" Width="50" Margin="0,0,2,0" Text="0.0"></TextBox>
