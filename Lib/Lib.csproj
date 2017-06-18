@@ -134,6 +134,7 @@
     <Compile Include="MathMod\SolidGrid\SolidGrid.cs" />
     <Compile Include="MathMod\Solver\Godunov1.cs" />
     <Compile Include="MathMod\Solver\Riemann.cs" />
+    <Compile Include="MathMod\Solver\RiemannProblem1DTest.cs" />
     <Compile Include="MathMod\U.cs" />
     <Compile Include="Maths\Bits\Bits.cs" />
     <Compile Include="Maths\Bits\Bits32.cs" />
