@@ -116,7 +116,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// Clone.
         /// </summary>
         /// <returns></returns>
-        public object Clone()
+        public override object Clone()
         {
             return new Point(X, Y);
         }

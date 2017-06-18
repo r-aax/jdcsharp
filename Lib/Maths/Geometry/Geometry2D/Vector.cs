@@ -10,7 +10,7 @@ namespace Lib.Maths.Geometry.Geometry2D
     /// <summary>
     /// 2D-vector.
     /// </summary>
-    public class Vector : Lib.Maths.Geometry.Vector
+    public class Vector : Lib.Maths.Geometry.Vector, ICloneable
     {
         /// <summary>
         /// Coordinate <c>x</c>.
@@ -42,6 +42,15 @@ namespace Lib.Maths.Geometry.Geometry2D
         }
 
         /// <summary>
+        /// Constructor from another vector.
+        /// </summary>
+        /// <param name="v">vector</param>
+        public Vector(Vector v)
+            : this(v.X, v.Y)
+        {
+        }
+
+        /// <summary>
         /// Cast to string.
         /// </summary>
         /// <returns>string</returns>
@@ -58,6 +67,39 @@ namespace Lib.Maths.Geometry.Geometry2D
             get
             {
                 return X * X + Y * Y;
+            }
+        }
+
+        /// <summary>
+        /// Get <c>X</c> in square.
+        /// </summary>
+        public double X2
+        {
+            get
+            {
+                return X * X;
+            }
+        }
+
+        /// <summary>
+        /// Get <c>Y</c> in square.
+        /// </summary>
+        public double Y2
+        {
+            get
+            {
+                return Y * Y;
+            }
+        }
+
+        /// <summary>
+        /// Get components product.
+        /// </summary>
+        public double XY
+        {
+            get
+            {
+                return X * Y;
             }
         }
 
@@ -285,6 +327,68 @@ namespace Lib.Maths.Geometry.Geometry2D
         {
             return new Vector(Randoms.RandomInInterval(rect.XInterval),
                               Randoms.RandomInInterval(rect.YInterval));
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>copy</returns>
+        public override object Clone()
+        {
+            return new Vector(X, Y);
+        }
+
+        /// <summary>
+        /// Get copy.
+        /// </summary>
+        public Vector Copy
+        {
+            get
+            {
+                return Clone() as Vector;
+            }
+        }
+
+        /// <summary>
+        /// Invert <c>X</c> direction.
+        /// </summary>
+        public override void InvertX()
+        {
+            X = -X;
+        }
+
+        /// <summary>
+        /// Invert <c>Y</c> direction.
+        /// </summary>
+        public override void InvertY()
+        {
+            Y = -Y;
+        }
+
+        /// <summary>
+        /// Inverted copy of vector around <c>X</c> axis.
+        /// </summary>
+        /// <returns>inverted vector</returns>
+        public Vector InvertedX()
+        {
+            Vector cv = Copy;
+
+            cv.InvertX();
+
+            return cv;
+        }             
+
+        /// <summary>
+        /// Inverted copy of vector around <c>Y</c> axis.
+        /// </summary>
+        /// <returns>inverted vector</returns>
+        public Vector InvertedY()
+        {
+            Vector cv = Copy;
+
+            cv.InvertY();
+
+            return cv;
         }
     }
 }

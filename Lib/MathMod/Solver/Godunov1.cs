@@ -89,16 +89,6 @@ namespace Lib.MathMod.Solver
             flow = ru.FlowY;
             d += flow * k;
 
-            // Z+
-            ru = Riemann.Z_Toro(u, g.ZNextU(xi, yi, zi));
-            flow = ru.FlowZ;
-            d -= flow * k;
-
-            // Z-
-            ru = Riemann.Z_Toro(g.ZNextU(xi, yi, zi), u);
-            flow = ru.FlowZ;
-            d += flow * k;
-
             g.Cells[xi, yi, zi].D = d;
         }
     }

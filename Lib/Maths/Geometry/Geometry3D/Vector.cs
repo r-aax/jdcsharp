@@ -582,9 +582,44 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// Clone.
         /// </summary>
         /// <returns>copy</returns>
-        public object Clone()
+        public override object Clone()
         {
             return new Vector(X, Y, Z);
+        }
+
+        /// <summary>
+        /// Get copy of vector.
+        /// </summary>
+        public Vector Copy
+        {
+            get
+            {
+                return Clone() as Vector;
+            }
+        }
+
+        /// <summary>
+        /// Invert <c>X</c> direction.
+        /// </summary>
+        public override void InvertX()
+        {
+            X = -X;
+        }
+
+        /// <summary>
+        /// Invert <c>Y</c> direction.
+        /// </summary>
+        public override void InvertY()
+        {
+            Y = -Y;
+        }
+
+        /// <summary>
+        /// Invert <c>Z</c> direction.
+        /// </summary>
+        public void InvertZ()
+        {
+            Z = -Z;
         }
     }
 }

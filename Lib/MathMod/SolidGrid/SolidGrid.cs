@@ -200,33 +200,5 @@ namespace Lib.MathMod.SolidGrid
                    ? Cells[xi, yi - 1, zi].U
                    : Cells[xi, yi, zi].U.MirrorY;
         }
-
-        /// <summary>
-        /// Z next U data.
-        /// </summary>
-        /// <param name="xi">X direction index</param>
-        /// <param name="yi">Y direction index</param>
-        /// <param name="zi">Z direction index</param>
-        /// <returns>U data</returns>
-        public U ZNextU(int xi, int yi, int zi)
-        {
-            return (zi < NZ - 1)
-                   ? Cells[xi, yi, zi + 1].U
-                   : Cells[xi, yi, zi].U.MirrorZ;
-        }
-
-        /// <summary>
-        /// Z prev U data.
-        /// </summary>
-        /// <param name="xi">X direction index</param>
-        /// <param name="yi">Y direction index</param>
-        /// <param name="zi">Z direction index</param>
-        /// <returns>U data</returns>
-        public U ZPrevU(int xi, int yi, int zi)
-        {
-            return (zi > 0)
-                   ? Cells[xi, yi, zi - 1].U
-                   : Cells[xi, yi, zi].U.MirrorZ;
-        }
     }
 }

@@ -7,7 +7,7 @@ namespace Lib.Maths.Geometry
     /// <summary>
     /// General vector.
     /// </summary>
-    public abstract class Vector
+    public abstract class Vector : ICloneable
     {
         /// <summary>
         /// Square of module.
@@ -39,5 +39,21 @@ namespace Lib.Maths.Geometry
         {
             Scale(k / Mod);
         }
+
+        /// <summary>
+        /// Get clone.
+        /// </summary>
+        /// <returns>cone</returns>
+        public abstract object Clone();
+
+        /// <summary>
+        /// Invert <c>X</c> direction.
+        /// </summary>
+        public abstract void InvertX();
+
+        /// <summary>
+        /// Invert <c>Y</c> direction.
+        /// </summary>
+        public abstract void InvertY();
     }
 }

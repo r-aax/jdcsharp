@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Lib.Maths.Geometry.Geometry3D;
+using Lib.Maths.Geometry.Geometry2D;
 
 namespace Lib.MathMod
 {
@@ -40,14 +40,12 @@ namespace Lib.MathMod
         /// Constructor.
         /// </summary>
         /// <param name="m_">mass</param>
-        /// <param name="px">impulse X component</param>
-        /// <param name="py">impulse Y component</param>
-        /// <param name="pz">impulse Z component</param>
-        /// <param name="e">full energy</param>
-        public D(double m_, double px, double py, double pz, double e)
+        /// <param name="p">impulse</param>
+        /// <param name="e">energy</param>
+        public D(double m_, Vector p, double e)
         {
             m = m_;
-            P = new Vector(px, py, pz);
+            P = new Vector(p);
             E = e;
         }
 
@@ -55,12 +53,13 @@ namespace Lib.MathMod
         /// Constructor.
         /// </summary>
         /// <param name="m_">mass</param>
-        /// <param name="p">impulse</param>
-        /// <param name="e">energy</param>
-        public D(double m_, Vector p, double e)
+        /// <param name="px">impulse X component</param>
+        /// <param name="py">impulse Y component</param>
+        /// <param name="e">full energy</param>
+        public D(double m_, double px, double py, double e)
         {
             m = m_;
-            P = new Vector(p);
+            P = new Vector(px, py);
             E = e;
         }
 

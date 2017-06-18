@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Lib.Maths.Geometry.Geometry3D;
+using Lib.Maths.Geometry.Geometry2D;
 using Lib.MathMod.Solver;
 
 namespace Lib.MathMod
@@ -23,9 +23,17 @@ namespace Lib.MathMod
         public Vector v;
 
         /// <summary>
-        /// Inner energy per mass.
+        /// In
         /// </summary>
         public double eps;
+
+        /// <summary>
+        /// Empty constructor.
+        /// </summary>
+        public U()
+        {
+            v = new Vector();
+        }
 
         /// <summary>
         /// Constructor.
@@ -36,16 +44,22 @@ namespace Lib.MathMod
         public U(double rho_, Vector v_, double eps_)
         {
             rho = rho_;
-            v = new Vector(v_);
+            v = v_.Copy;
             eps = eps_;
         }
 
         /// <summary>
-        /// Zero constructor.
+        /// Constructor from components of 2D velocity.
         /// </summary>
-        public U()
-            : this(0.0, new Vector(), 0.0)
+        /// <param name="rho_">density</param>
+        /// <param name="vx"><c>X</c> component of velocity</param>
+        /// <param name="vy"><c>Y</c> component of velocity</param>
+        /// <param name="eps_">inner energy per mass</param>
+        public U(double rho_, double vx, double vy, double eps_)
         {
+            rho = rho_;
+            v = new Vector(vx, vy);
+            eps = eps_;
         }
 
         /// <summary>
@@ -87,7 +101,7 @@ namespace Lib.MathMod
         {
             get
             {
-                return new U(rho, new Vector(-v.X, v.Y, v.Z), eps);
+                return new U(rho, v.InvertedX(), eps);
             }
         }
 
@@ -98,18 +112,7 @@ namespace Lib.MathMod
         {
             get
             {
-                return new U(rho, new Vector(v.X, -v.Y, v.Z), eps);
-            }
-        }
-
-        /// <summary>
-        /// Mirror of Z axis.
-        /// </summary>
-        public U MirrorZ
-        {
-            get
-            {
-                return new U(rho, new Vector(v.X, v.Y, -v.Z), eps);
+                return new U(rho, v.InvertedY(), eps);
             }
         }
 
@@ -123,7 +126,6 @@ namespace Lib.MathMod
                 return new D(rho * v.X,
                              rho * v.X2 + p,
                              rho * v.XY,
-                             rho * v.XZ,
                              (e + p) * v.X);
             }
         }
@@ -138,23 +140,7 @@ namespace Lib.MathMod
                 return new D(rho * v.Y,
                              rho * v.XY,
                              rho * v.Y2 + p,
-                             rho * v.YZ,
                              (e + p) * v.Y);
-            }
-        }
-
-        /// <summary>
-        /// Flow in Z direction.
-        /// </summary>
-        public D FlowZ
-        {
-            get
-            {
-                return new D(rho * v.Z,
-                             rho * v.XZ,
-                             rho * v.YZ,
-                             rho * v.Z2 + p,
-                             (e + p) * v.Z);
             }
         }
 

@@ -416,11 +416,11 @@ namespace Lib.MathMod.Solver
             double d, u, v, w, p;
             U ru = new U();
 
-            riemann(u_lo.rho, u_lo.v.X, u_lo.v.Y, u_lo.v.Z, u_lo.p,
-                    u_hi.rho, u_hi.v.X, u_hi.v.Y, u_hi.v.Z, u_hi.p, out d, out u, out v, out w, out p);
+            riemann(u_lo.rho, u_lo.v.X, u_lo.v.Y, 0.0, u_lo.p,
+                    u_hi.rho, u_hi.v.X, u_hi.v.Y, 0.0, u_hi.p, out d, out u, out v, out w, out p);
 
             ru.rho = d;
-            ru.v = new Maths.Geometry.Geometry3D.Vector(u, v, w);
+            ru.v = new Maths.Geometry.Geometry2D.Vector(u, v);
             ru.p = p;
 
             return ru;
@@ -437,34 +437,13 @@ namespace Lib.MathMod.Solver
             double d, u, v, w, p;
             U ru = new U();
 
-            riemann(u_lo.rho, u_lo.v.Y, u_lo.v.X, u_lo.v.Z, u_lo.p,
-                    u_hi.rho, u_hi.v.Y, u_hi.v.X, u_hi.v.Z, u_hi.p, out d, out v, out u, out w, out p);
+            riemann(u_lo.rho, u_lo.v.Y, u_lo.v.X, 0.0, u_lo.p,
+                    u_hi.rho, u_hi.v.Y, u_hi.v.X, 0.0, u_hi.p, out d, out v, out u, out w, out p);
 
             ru.rho = d;
-            ru.v = new Maths.Geometry.Geometry3D.Vector(u, v, w);
+            ru.v = new Maths.Geometry.Geometry2D.Vector(u, v);
             ru.p = p;
 
-            return ru;
-        }
-
-        /// <summary>
-        /// One-dimensiona E. F. Toro solution for Z.
-        /// </summary>
-        /// <param name="u_lo">low side U</param>
-        /// <param name="u_hi">hight side U</param>
-        /// <returns>U on the cells common border</returns>
-        public static U Z_Toro(U u_lo, U u_hi)
-        {
-            double d, u, v, w, p;
-            U ru = new U();
-
-            riemann(u_lo.rho, u_lo.v.Z, u_lo.v.X, u_lo.v.Y, u_lo.p,
-                    u_hi.rho, u_hi.v.Z, u_hi.v.X, u_hi.v.Y, u_hi.p, out d, out w, out u, out v, out p);
-
-            ru.rho = d;
-            ru.v = new Maths.Geometry.Geometry3D.Vector(u, v, w);
-            ru.p = p;
-             
             return ru;
         }
     }

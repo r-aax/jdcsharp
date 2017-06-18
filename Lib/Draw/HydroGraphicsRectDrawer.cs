@@ -214,7 +214,7 @@ namespace Lib.Draw
                 rc = new RectScaler(new Rect(xint, vz_int), inner_rect, false, false);
                 for (int xi = 0; xi < g.NX; xi++)
                 {
-                    double vz = g.Cells[xi, yi, zi].U.v.Z;
+                    double vz = 0.0;
                     Drawer.DrawLine(rc.T(new Point(xi * g.CellL, vz)), rc.T(new Point((xi + 1) * g.CellL, vz)));
                 }
             }
@@ -328,8 +328,8 @@ namespace Lib.Draw
                 rc = new RectScaler(new Rect(xint, vz_int), inner_rect, false, false);
                 for (int xi = 0; xi < g.NX - 1; xi++)
                 {
-                    double vz1 = g.Cells[xi, yi, zi].U.v.Z;
-                    double vz2 = g.Cells[xi + 1, yi, zi].U.v.Z;
+                    double vz1 = 0.0;
+                    double vz2 = 0.0;
                     Drawer.DrawLine(rc.T(new Point((xi + 0.5) * g.CellL, vz1)),
                                     rc.T(new Point((xi + 1.5) * g.CellL, vz2)));
                 }

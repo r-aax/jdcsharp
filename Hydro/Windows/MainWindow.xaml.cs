@@ -20,7 +20,7 @@ using Lib.MathMod.SolidGrid;
 using Lib.Draw;
 using Lib.MathMod.Solver;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
-using Vector3D = Lib.Maths.Geometry.Geometry3D.Vector;
+using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
 
 namespace Hydro
@@ -218,7 +218,7 @@ namespace Hydro
                 {
                     for (int k = 0; k < Grid.NZ; k++)
                     {
-                        Grid.Cells[i, j, k].U.v = new Vector3D(0.0, 0.0, 0.0);
+                        Grid.Cells[i, j, k].U.v = new Vector2D(0.0, 0.0);
 
                         if ((i - 25) * (i - 25) + (j - 25) * (j - 25) < 49)
                         {
