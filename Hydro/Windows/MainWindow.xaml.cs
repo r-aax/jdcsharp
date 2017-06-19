@@ -157,6 +157,26 @@ namespace Hydro
         }
 
         /// <summary>
+        /// Set checked data graphics.
+        /// </summary>
+        /// <param name="is_rho_ch">density</param>
+        /// <param name="is_vx_ch">X component of velocity</param>
+        /// <param name="is_vy_ch">Y component of velocity</param>
+        /// <param name="is_vz_ch">Z component of velocity</param>
+        /// <param name="is_eps_ch">inner energy</param>
+        /// <param name="is_p_ch">pressure</param>
+        private void SetGraphicsDataChecked(bool is_rho_ch, bool is_vx_ch, bool is_vy_ch, bool is_vz_ch,
+                                            bool is_eps_ch, bool is_p_ch)
+        {
+            IsGraphic_rho_Used.IsChecked = is_rho_ch;
+            IsGraphic_vX_Used.IsChecked = is_vx_ch;
+            IsGraphic_vY_Used.IsChecked = is_vy_ch;
+            IsGraphic_vZ_Used.IsChecked = is_vz_ch;
+            IsGraphic_eps_Used.IsChecked = is_eps_ch;
+            IsGraphic_p_Used.IsChecked = is_p_ch;
+        }
+
+        /// <summary>
         /// Set 1D test.
         /// </summary>
         /// <param name="test">test</param>
@@ -185,6 +205,8 @@ namespace Hydro
             }
 
             // Set up graphhics intervals.
+            SetGraphicsDataChecked(true, true, false, false, true, true);
+            //
             Graphic_rho_L_TB.Text = test.rho_int.L.ToString();
             Graphic_rho_H_TB.Text = test.rho_int.H.ToString();
             //
@@ -214,8 +236,10 @@ namespace Hydro
 
             if (Grid != null)
             {
-                StatusTB.Text = String.Format("T = {0}, time elapsed = {1}, sum of max Courant = {2}",
+                string grid_str = String.Format("Grid : {0} x {1} x {2} (dl = {3})", Grid.NX, Grid.NY, Grid.NZ, Grid.CellL);
+                string othr_str = String.Format("T = {0}, time elapsed = {1}, sum of max Courant = {2}",
                                               T, TimeElapsed, Grid.MaxCourantXYZ(Double.Parse(DtTB.Text)));
+                StatusTB.Text = grid_str + ", " + othr_str;
             }
         }
 
@@ -291,7 +315,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void Tests1DSodMI_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Sod(1.0, 100);
+            RiemannProblem1DTest test = RiemannProblem1DTest.Sod(1.0, 1000);
             SetRiemannProblem1DTest(test);
         }       
 
@@ -302,7 +326,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void Tests1D123_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Problem123(1.0, 100);
+            RiemannProblem1DTest test = RiemannProblem1DTest.Problem123(1.0, 1000);
             SetRiemannProblem1DTest(test);
         }
 
@@ -313,7 +337,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void Tests1DWoodwardCollelaLeft_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Colella_Left(1.0, 100);
+            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Colella_Left(1.0, 1000);
             SetRiemannProblem1DTest(test);
         }
 
@@ -324,7 +348,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void Tests1DWoodwardCollelaRight_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Collela_Right(1.0, 100);
+            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Collela_Right(1.0, 1000);
             SetRiemannProblem1DTest(test);
         }
 
@@ -335,8 +359,58 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void Tests1DWoodwardCollelaCollision_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Collella_Collision(1.0, 100);
+            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Collella_Collision(1.0, 1000);
             SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// Special case of Woodward-Collela
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tests1DWoodwardCollelaTwoShocks_Click(object sender, RoutedEventArgs e)
+        {
+            // Grid.
+            Grid = new SolidGrid(1000, 1, 1, 0.001);
+
+            // Cells.
+            for (int i = 0; i < Grid.NX; i++)
+            {
+                for (int j = 0; j < Grid.NY; j++)
+                {
+                    for (int k = 0; k < Grid.NZ; k++)
+                    {
+                        if (i < 100)
+                        {
+                            Grid.Cells[i, j, k].U = new U(1.0, 0.0, 0.0, 1000.0);
+                        }
+                        else if (i < 900)
+                        {
+                            Grid.Cells[i, j, k].U = new U(1.0, 0.0, 0.0, 0.01);
+                        }
+                        else
+                        {
+                            Grid.Cells[i, j, k].U = new U(1.0, 0.0, 0.0, 100.0);
+                        }
+                    }
+                }
+            }
+
+            // Set up graphhics intervals.
+            SetGraphicsDataChecked(true, true, false, false, false, false);
+            //
+            Graphic_rho_L_TB.Text = "0.0";
+            Graphic_rho_H_TB.Text = "20.0";
+            //
+            Graphic_vX_L_TB.Text = "-6.0";
+            Graphic_vX_H_TB.Text = "15.0";
+
+            // Time.
+            T = 0.0;
+            TimeElapsed = 0.0;
+
+            // Paint.
+            RefreshVisual();
         }
 
         /// <summary>
@@ -346,7 +420,7 @@ namespace Hydro
         /// <param name="e">parameters</param>
         private void Tests1DRandom_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Random(1.0, 100);
+            RiemannProblem1DTest test = RiemannProblem1DTest.Random(1.0, 1000);
             SetRiemannProblem1DTest(test);
         }
 
@@ -430,6 +504,8 @@ namespace Hydro
             }
 
             // Set up graphhics intervals.
+            SetGraphicsDataChecked(true, true, true, false, true, true);
+            //
             Graphic_rho_L_TB.Text = "0.0";
             Graphic_rho_H_TB.Text = "5.0";
             //
