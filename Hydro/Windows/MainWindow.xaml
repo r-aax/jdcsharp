@@ -15,6 +15,7 @@
                     <MenuItem x:Name="Tests1DWoodwardCollelaLeft" Header="Woodward and Collela left" Click="Tests1DWoodwardCollelaLeft_Click"/>
                     <MenuItem x:Name="Tests1DWoodwardCollelaRight" Header="Woodward and Collela right" Click="Tests1DWoodwardCollelaRight_Click"/>
                     <MenuItem x:Name="Tests1DWoodwardCollelaCollision" Header="Woodward and Collela collision" Click="Tests1DWoodwardCollelaCollision_Click"/>
+                    <MenuItem x:Name="Tests1DRandom" Header="Random" Click="Tests1DRandom_Click"/>
                 </MenuItem>
                 <MenuItem Header="2D">
                     <MenuItem x:Name="Tests2D100x100TwoCirclesMI" Header="100 x 100 two circles" Click="Tests2D100x100TwoCirclesMI_Click"/>

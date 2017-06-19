@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.Maths.Geometry;
+using Lib.Maths.Numbers;
 
 namespace Lib.MathMod.Solver
 {
@@ -192,6 +193,22 @@ namespace Lib.MathMod.Solver
                                             0.0, 25.0,
                                             0.0, 2000.0,
                                             0.0, 400.0);
+        }
+
+        /// <summary>
+        /// Random test.
+        /// </summary>
+        /// <param name="xlength">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest Random(double xlength, int cells_count)
+        {
+            Interval it = new Interval(0.0, 5.0);
+
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            Randoms.RandomInInterval(it), 0.0, Randoms.RandomInInterval(it),
+                                            Randoms.RandomInInterval(it), 0.0, Randoms.RandomInInterval(it),
+                                            it.L, it.H, it.L, it.H, it.L, it.H, it.L, it.H);
         }
     }
 }

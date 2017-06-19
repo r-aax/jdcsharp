@@ -334,6 +334,17 @@ namespace Hydro
         }
 
         /// <summary>
+        /// Random test click.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DRandom_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.Random(1.0, 100);
+            SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
         /// Run.
         /// </summary>
         /// <param name="sender">object</param>
