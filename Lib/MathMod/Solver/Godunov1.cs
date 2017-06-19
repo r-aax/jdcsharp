@@ -37,59 +37,85 @@ namespace Lib.MathMod.Solver
         /// <param name="dt">delta time</param>
         public static void Iter(SolidGrid.SolidGrid g, double dt)
         {
+            U ru;
+            D flow;
+            double k = g.CellS * dt;
+
             g.UtoD();
 
-            for (int xi = 0; xi < g.NX; xi++)
+            // X faces
+            for (int xi = 0; xi < g.NX - 1; xi++)
             {
                 for (int yi = 0; yi < g.NY; yi++)
                 {
                     for (int zi = 0; zi < g.NZ; zi++)
                     {
-                        Iter(g, xi, yi, zi, dt);
+                        Cell left = g.Cells[xi, yi, zi];
+                        Cell right = g.Cells[xi + 1, yi, zi];
+                        ru = Riemann.X_Toro(left.U, right.U);
+                        flow = ru.FlowX * k;
+                        left.D -= flow;
+                        right.D += flow;
                     }
                 }
             }
 
+            // X borders.
+            for (int yi = 0; yi < g.NY; yi++)
+            {
+                for (int zi = 0; zi < g.NZ; zi++)
+                {
+                    Cell cell;
+                        
+                    cell = g.Cells[0, yi, zi];
+                    ru = Riemann.X_Toro(cell.U.MirrorX, cell.U);
+                    flow = ru.FlowX * k;
+                    cell.D += flow;
+
+                    cell = g.Cells[g.NX - 1, yi, zi];
+                    ru = Riemann.X_Toro(cell.U, cell.U.MirrorX);
+                    flow = ru.FlowX * k;
+                    cell.D -= flow;
+                }
+            }
+
+            // Y faces.
+            for (int xi = 0; xi < g.NX; xi++)
+            {
+                for (int yi = 0; yi < g.NY - 1; yi++)
+                {
+                    for (int zi = 0; zi < g.NZ; zi++)
+                    {
+                        Cell left = g.Cells[xi, yi, zi];
+                        Cell right = g.Cells[xi, yi + 1, zi];
+                        ru = Riemann.Y_Toro(left.U, right.U);
+                        flow = ru.FlowY * k;
+                        left.D -= flow;
+                        right.D += flow;
+                    }
+                }
+            }
+
+            // Y borders.
+            for (int xi = 0; xi < g.NX; xi++)
+            {
+                for (int zi = 0; zi < g.NZ; zi++)
+                {
+                    Cell cell;
+
+                    cell = g.Cells[xi, 0, zi];
+                    ru = Riemann.Y_Toro(cell.U.MirrorY, cell.U);
+                    flow = ru.FlowY * k;
+                    cell.D += flow;
+
+                    cell = g.Cells[xi, g.NY - 1, zi];
+                    ru = Riemann.Y_Toro(cell.U, cell.U.MirrorY);
+                    flow = ru.FlowY * k;
+                    cell.D -= flow;
+                }
+            }
+
             g.DtoU();
-        }
-
-        /// <summary>
-        /// Iteration for one cell.
-        /// </summary>
-        /// <param name="g">grid</param>
-        /// <param name="xi">index in X direction</param>
-        /// <param name="yi">index in Y direction</param>
-        /// <param name="zi">index in Z direction</param>
-        /// <param name="dt">delta time</param>
-        public static void Iter(SolidGrid.SolidGrid g, int xi, int yi, int zi, double dt)
-        {
-            U u = g.Cells[xi, yi, zi].U;
-            D d = g.Cells[xi, yi, zi].D;
-            U ru;
-            D flow;
-            double k = g.CellS * dt;
-
-            // X+
-            ru = Riemann.X_Toro(u, g.XNextU(xi, yi, zi));
-            flow = ru.FlowX;
-            d -= flow * k;
-            
-            // X-
-            ru = Riemann.X_Toro(g.XPrevU(xi, yi, zi), u);
-            flow = ru.FlowX;
-            d += flow * k;
-
-            // Y+
-            ru = Riemann.Y_Toro(u, g.YNextU(xi, yi, zi));
-            flow = ru.FlowY;
-            d -= flow * k;
-
-            // Y-
-            ru = Riemann.Y_Toro(g.YPrevU(xi, yi, zi), u);
-            flow = ru.FlowY;
-            d += flow * k;
-
-            g.Cells[xi, yi, zi].D = d;
         }
     }
 }
