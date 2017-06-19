@@ -41,12 +41,12 @@ namespace Hydro
         /// <summary>
         /// Time.
         /// </summary>
-        private double T = 0;
+        private double T = 0.0;
 
         /// <summary>
-        /// String.
+        /// Time ellapsed.
         /// </summary>
-        private string StatusString = "";
+        private double TimeElapsed = 0.0;
 
         /// <summary>
         /// Rect drawer.
@@ -199,6 +199,7 @@ namespace Hydro
 
             // Time.
             T = 0.0;
+            TimeElapsed = 0.0;
 
             // Paint.
             RefreshVisual();
@@ -210,7 +211,12 @@ namespace Hydro
         private void RefreshVisual()
         {
             Paint();
-            StatusTB.Text = StatusString;
+
+            if (Grid != null)
+            {
+                StatusTB.Text = String.Format("T = {0}, time elapsed = {1}, sum of max Courant = {2}",
+                                              T, TimeElapsed, Grid.MaxCourantXYZ(Double.Parse(DtTB.Text)));
+            }
         }
 
         /// <summary>
@@ -352,7 +358,6 @@ namespace Hydro
         private void RunB_Click(object sender, RoutedEventArgs e)
         {
             double dt = Double.Parse(DtTB.Text);
-            double total_time;
 
             if (IsUseItersCountCB.IsChecked ?? true)
             {
@@ -362,7 +367,7 @@ namespace Hydro
                 sw.Start();
                 Godunov1.Iters(Grid, dt, iters_count);
                 sw.Stop();
-                total_time = sw.ElapsedMilliseconds;
+                TimeElapsed = sw.ElapsedMilliseconds;
 
                 T += iters_count * dt;
             }
@@ -378,7 +383,7 @@ namespace Hydro
                     T += dt;
                 }
                 sw.Stop();
-                total_time = sw.ElapsedMilliseconds;
+                TimeElapsed = sw.ElapsedMilliseconds;
             }
             else
             {
@@ -387,7 +392,6 @@ namespace Hydro
                 return;
             }
 
-            StatusString = String.Format("T = {0}, ellapsed time = {1} ms", T, total_time);
             RefreshVisual();
         }
 
@@ -441,6 +445,7 @@ namespace Hydro
 
             // Time.
             T = 0.0;
+            TimeElapsed = 0.0;
 
             // Paint.
             RefreshVisual();

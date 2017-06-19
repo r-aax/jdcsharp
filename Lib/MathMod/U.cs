@@ -95,6 +95,17 @@ namespace Lib.MathMod
         }
 
         /// <summary>
+        /// Sound speed.
+        /// </summary>
+        public double c
+        {
+            get
+            {
+                return Math.Sqrt(Riemann.gama * p / rho);
+            }
+        }
+
+        /// <summary>
         /// Mirror of X axis.
         /// </summary>
         public U MirrorX

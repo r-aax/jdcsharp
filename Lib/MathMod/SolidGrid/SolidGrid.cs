@@ -200,5 +200,34 @@ namespace Lib.MathMod.SolidGrid
                    ? Cells[xi, yi - 1, zi].U
                    : Cells[xi, yi, zi].U.MirrorY;
         }
+
+        /// <summary>
+        /// Sum of maximum Courant numbers (<c>X</c>, <c>Y</c>, <c>Z</c>).
+        /// </summary>
+        /// <param name="dt">delta <c>t</c></param>
+        /// <returns>sum of max Courant numbers</returns>
+        public double MaxCourantXYZ(double dt)
+        {
+            double mcx = 0.0;
+            double mcy = 0.0;
+
+            for (int i = 0; i < NX; i++)
+            {
+                for (int j = 0; j < NY; j++)
+                {
+                    for (int k = 0; k < NZ; k++)
+                    {
+                        Cell cell = Cells[i, j, k];
+                        double cx = cell.CourantX(CellL, dt);
+                        double cy = cell.CourantY(CellL, dt);
+
+                        mcx = Math.Max(mcx, cx);
+                        mcy = Math.Max(mcy, cy);
+                    }
+                }
+            }
+
+            return mcx + mcy;
+        }
     }
 }

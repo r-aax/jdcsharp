@@ -60,5 +60,27 @@ namespace Lib.MathMod.SolidGrid
         {
             return String.Format("{0} {1}", U, D);
         }
+
+        /// <summary>
+        /// Courant number for <c>X</c> direction.
+        /// </summary>
+        /// <param name="dx">delta <c>X</c></param>
+        /// <param name="dt">delta <c>t</c></param>
+        /// <returns>Courant number</returns>
+        public double CourantX(double dx, double dt)
+        {
+            return (dt / dx) * (Math.Abs(U.v.X) + U.c);
+        }
+
+        /// <summary>
+        /// Courant number for <c>Y</c> direction.
+        /// </summary>
+        /// <param name="dx">delta <c>X</c></param>
+        /// <param name="dt">delta <c>t</c></param>
+        /// <returns>Courant number</returns>
+        public double CourantY(double dx, double dt)
+        {
+            return (dt / dx) * (Math.Abs(U.v.Y) + U.c);
+        }
     }
 }
