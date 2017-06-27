@@ -257,10 +257,11 @@ namespace Sea.Forms
             for (int i = 0; i < b.Count; i++)
             {
                 DataGridViewRow row = g.Rows[i];
-                row.Cells[0].Value = b[i].FullName(BookFullNamePrintStyle.Wide);
-                row.Cells[1].Style.Alignment = DataGridViewContentAlignment.TopRight;
+                string Name = b[i].FullName(BookFullNamePrintStyle.Wide);
+                string Keywords = b[i].Keywords;
+                string cell_0_value = (Keywords == "") ? Name : (Name + " // keywords: " + Keywords);
+                row.Cells[0].Value = cell_0_value;
                 row.Cells[1].Value = b[i].Id.ToString();
-                row.Cells[2].Style.Alignment = DataGridViewContentAlignment.TopRight;
                 row.Cells[2].Value = b[i].TypeString;
             }
         }

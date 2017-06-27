@@ -332,7 +332,7 @@
             this.BooksDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.BooksDGV.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.BooksDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.TopLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11F);
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
