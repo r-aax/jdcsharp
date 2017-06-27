@@ -19,6 +19,7 @@
                     <MenuItem x:Name="Tests1DRandom" Header="Random" Click="Tests1DRandom_Click"/>
                 </MenuItem>
                 <MenuItem Header="2D">
+                    <MenuItem x:Name="Tests2DRichtmyerMeshkovInstability" Header="Richtmyer-Meshkov instability" Click="Tests2DRichtmyerMeshkovInstability_Click"/>
                     <MenuItem x:Name="Tests2D100x100TwoCirclesMI" Header="100 x 100 two circles" Click="Tests2D100x100TwoCirclesMI_Click"/>
                 </MenuItem>
             </MenuItem>

@@ -526,5 +526,64 @@ namespace Hydro
             // Paint.
             RefreshVisual();
         }
+
+        /// <summary>
+        /// Richtmeyer-Meshkov instability.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests2DRichtmyerMeshkovInstability_Click(object sender, RoutedEventArgs e)
+        {
+            // Grid.
+            Grid = new SolidGrid(3 * 100, 3 * 100, 1, 1.0);
+
+            // Cells.
+            for (int i = 0; i < Grid.NX; i++)
+            {
+                for (int j = 0; j < Grid.NY; j++)
+                {
+                    for (int k = 0; k < Grid.NZ; k++)
+                    {
+                        if (i < 3 * ( 70 + 10 * Math.Sin((double)j / 15.0)))
+                        {
+                            Grid.Cells[i, j, k].U = new U(5.0, 0.0, 0.0, 1.0);
+                            Grid.Cells[i, j, k].U.p = 1.0;
+                        }
+                        else if (i < 3 * 95)
+                        {
+                            Grid.Cells[i, j, k].U = new U(1.0, 0.0, 0.0, 1.0);
+                            Grid.Cells[i, j, k].U.p = 1.0;
+                        }
+                        else
+                        {
+                            Grid.Cells[i, j, k].U = new U(1.0, 0.0, 0.0, 20.0);
+                        }
+                    }
+                }
+            }
+
+            // Set up graphhics intervals.
+            SetGraphicsDataChecked(true, true, true, false, true, true);
+            //
+            Graphic_rho_L_TB.Text = "0.0";
+            Graphic_rho_H_TB.Text = "5.0";
+            //
+            Graphic_vX_L_TB.Text = "0.0";
+            Graphic_vX_H_TB.Text = "5.0";
+            //
+            Graphic_eps_L_TB.Text = "0.0";
+            Graphic_eps_H_TB.Text = "5.0";
+            //
+            Graphic_p_L_TB.Text = "0.0";
+            Graphic_p_H_TB.Text = "5.0";
+
+
+            // Time.
+            T = 0.0;
+            TimeElapsed = 0.0;
+
+            // Paint.
+            RefreshVisual();
+        }
     }
 }
