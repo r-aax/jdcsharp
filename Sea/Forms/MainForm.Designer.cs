@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StoragePathSSL = new System.Windows.Forms.ToolStripStatusLabel();
             this.LastActionSSL = new System.Windows.Forms.ToolStripStatusLabel();
@@ -226,7 +226,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 30);
+            this.label3.Location = new System.Drawing.Point(47, 43);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(92, 13);
             this.label3.TabIndex = 8;
@@ -234,7 +234,7 @@
             // 
             // NameKeywordsTB
             // 
-            this.NameKeywordsTB.Location = new System.Drawing.Point(110, 27);
+            this.NameKeywordsTB.Location = new System.Drawing.Point(145, 40);
             this.NameKeywordsTB.Name = "NameKeywordsTB";
             this.NameKeywordsTB.Size = new System.Drawing.Size(220, 20);
             this.NameKeywordsTB.TabIndex = 7;
@@ -243,7 +243,7 @@
             // 
             this.SearchB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SearchB.ForeColor = System.Drawing.Color.OliveDrab;
-            this.SearchB.Location = new System.Drawing.Point(687, 27);
+            this.SearchB.Location = new System.Drawing.Point(747, 48);
             this.SearchB.Name = "SearchB";
             this.SearchB.Size = new System.Drawing.Size(75, 23);
             this.SearchB.TabIndex = 9;
@@ -255,7 +255,7 @@
             // 
             this.CleanB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CleanB.ForeColor = System.Drawing.Color.OliveDrab;
-            this.CleanB.Location = new System.Drawing.Point(687, 73);
+            this.CleanB.Location = new System.Drawing.Point(747, 78);
             this.CleanB.Name = "CleanB";
             this.CleanB.Size = new System.Drawing.Size(75, 23);
             this.CleanB.TabIndex = 10;
@@ -265,7 +265,7 @@
             // 
             // AuthorTB
             // 
-            this.AuthorTB.Location = new System.Drawing.Point(110, 53);
+            this.AuthorTB.Location = new System.Drawing.Point(145, 66);
             this.AuthorTB.Name = "AuthorTB";
             this.AuthorTB.Size = new System.Drawing.Size(220, 20);
             this.AuthorTB.TabIndex = 12;
@@ -273,7 +273,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 56);
+            this.label1.Location = new System.Drawing.Point(47, 69);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 13;
@@ -282,7 +282,7 @@
             // CategoriesLB
             // 
             this.CategoriesLB.FormattingEnabled = true;
-            this.CategoriesLB.Location = new System.Drawing.Point(434, 27);
+            this.CategoriesLB.Location = new System.Drawing.Point(482, 40);
             this.CategoriesLB.Name = "CategoriesLB";
             this.CategoriesLB.Size = new System.Drawing.Size(220, 69);
             this.CategoriesLB.TabIndex = 16;
@@ -291,7 +291,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(371, 30);
+            this.label2.Location = new System.Drawing.Point(419, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 17;
@@ -299,14 +299,14 @@
             // 
             // YearFromTB
             // 
-            this.YearFromTB.Location = new System.Drawing.Point(110, 79);
+            this.YearFromTB.Location = new System.Drawing.Point(145, 93);
             this.YearFromTB.Name = "YearFromTB";
             this.YearFromTB.Size = new System.Drawing.Size(70, 20);
             this.YearFromTB.TabIndex = 18;
             // 
             // YearToTB
             // 
-            this.YearToTB.Location = new System.Drawing.Point(186, 79);
+            this.YearToTB.Location = new System.Drawing.Point(221, 92);
             this.YearToTB.Name = "YearToTB";
             this.YearToTB.Size = new System.Drawing.Size(70, 20);
             this.YearToTB.TabIndex = 19;
@@ -314,7 +314,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 79);
+            this.label4.Location = new System.Drawing.Point(47, 96);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 20;
@@ -332,19 +332,19 @@
             this.BooksDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.BooksDGV.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.BooksDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 11F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.BooksDGV.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11F);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BooksDGV.DefaultCellStyle = dataGridViewCellStyle1;
             this.BooksDGV.GridColor = System.Drawing.Color.Gainsboro;
-            this.BooksDGV.Location = new System.Drawing.Point(0, 105);
+            this.BooksDGV.Location = new System.Drawing.Point(0, 126);
             this.BooksDGV.Name = "BooksDGV";
-            this.BooksDGV.Size = new System.Drawing.Size(866, 359);
+            this.BooksDGV.Size = new System.Drawing.Size(866, 338);
             this.BooksDGV.TabIndex = 21;
             this.BooksDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BooksDGV_CellDoubleClick);
             // 
