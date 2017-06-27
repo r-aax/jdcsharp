@@ -285,10 +285,13 @@ namespace Sea.Core
             {
                 Book b = Books[i];
 
+                bool is_name_match = b.Name.ToLower().Contains(name_keywords_substr);
+                bool is_keywords_match = b.Keywords.ToLower().Contains(name_keywords_substr);
+                bool is_authors_match = b.Authors.Contains(author_substr, true);
+                bool is_complex_match = (is_name_match || is_keywords_match) && is_authors_match;
+
                 // Check names.
-                if (!b.Name.ToLower().Contains(name_keywords_substr)
-                    || !b.Keywords.ToLower().Contains(name_keywords_substr)
-                    || !b.Authors.Contains(author_substr, true))
+                if (!is_complex_match)
                 {
                     continue;
                 }
