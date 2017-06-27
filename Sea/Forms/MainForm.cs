@@ -205,9 +205,8 @@ namespace Sea.Forms
         /// <param name="e">parameters</param>
         private void SearchB_Click(object sender, EventArgs e)
         {
-            Sea.SearchBooks(NameTB.Text.ToLower(),
+            Sea.SearchBooks(NameKeywordsTB.Text.ToLower(),
                             AuthorTB.Text.ToLower(),
-                            PublisherTB.Text.ToLower(),
                             FilterCategories,
                             YearFromTB.Text,
                             YearToTB.Text);
@@ -224,9 +223,8 @@ namespace Sea.Forms
         private void CleanB_Click(object sender, EventArgs e)
         {
             // Clean search forms.
-            NameTB.Clear();
+            NameKeywordsTB.Clear();
             AuthorTB.Clear();
-            PublisherTB.Clear();
             YearFromTB.Clear();
             YearToTB.Clear();
             FilterCategories.Clear();

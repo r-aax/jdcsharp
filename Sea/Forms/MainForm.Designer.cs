@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.StoragePathSSL = new System.Windows.Forms.ToolStripStatusLabel();
             this.LastActionSSL = new System.Windows.Forms.ToolStripStatusLabel();
@@ -50,13 +50,11 @@
             this.deleteExtraCategoriesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteExtraBookFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
-            this.NameTB = new System.Windows.Forms.TextBox();
+            this.NameKeywordsTB = new System.Windows.Forms.TextBox();
             this.SearchB = new System.Windows.Forms.Button();
             this.CleanB = new System.Windows.Forms.Button();
             this.AuthorTB = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.PublisherTB = new System.Windows.Forms.TextBox();
-            this.PublisherL = new System.Windows.Forms.Label();
             this.CategoriesLB = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.YearFromTB = new System.Windows.Forms.TextBox();
@@ -95,6 +93,7 @@
             // 
             // MainMenu
             // 
+            this.MainMenu.BackColor = System.Drawing.Color.LightSteelBlue;
             this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.данныеToolStripMenuItem,
             this.ToolsArchiveMI,
@@ -119,26 +118,26 @@
             // DataBooksMI
             // 
             this.DataBooksMI.Name = "DataBooksMI";
-            this.DataBooksMI.Size = new System.Drawing.Size(152, 22);
+            this.DataBooksMI.Size = new System.Drawing.Size(130, 22);
             this.DataBooksMI.Text = "Books";
             this.DataBooksMI.Click += new System.EventHandler(this.DataBooksMI_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
             // 
             // DataCategoriesMI
             // 
             this.DataCategoriesMI.Name = "DataCategoriesMI";
-            this.DataCategoriesMI.Size = new System.Drawing.Size(152, 22);
+            this.DataCategoriesMI.Size = new System.Drawing.Size(130, 22);
             this.DataCategoriesMI.Text = "Categories";
             this.DataCategoriesMI.Click += new System.EventHandler(this.DataCategoriesMI_Click);
             // 
             // DataAuthorsMI
             // 
             this.DataAuthorsMI.Name = "DataAuthorsMI";
-            this.DataAuthorsMI.Size = new System.Drawing.Size(152, 22);
+            this.DataAuthorsMI.Size = new System.Drawing.Size(130, 22);
             this.DataAuthorsMI.Text = "Authors";
             this.DataAuthorsMI.Click += new System.EventHandler(this.DataAuthorsMI_Click);
             // 
@@ -227,24 +226,24 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 46);
+            this.label3.Location = new System.Drawing.Point(12, 30);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.Size = new System.Drawing.Size(92, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Name";
+            this.label3.Text = "Name / Keywords";
             // 
-            // NameTB
+            // NameKeywordsTB
             // 
-            this.NameTB.Location = new System.Drawing.Point(87, 43);
-            this.NameTB.Name = "NameTB";
-            this.NameTB.Size = new System.Drawing.Size(196, 20);
-            this.NameTB.TabIndex = 7;
+            this.NameKeywordsTB.Location = new System.Drawing.Point(110, 27);
+            this.NameKeywordsTB.Name = "NameKeywordsTB";
+            this.NameKeywordsTB.Size = new System.Drawing.Size(220, 20);
+            this.NameKeywordsTB.TabIndex = 7;
             // 
             // SearchB
             // 
             this.SearchB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.SearchB.ForeColor = System.Drawing.Color.OliveDrab;
-            this.SearchB.Location = new System.Drawing.Point(779, 62);
+            this.SearchB.Location = new System.Drawing.Point(687, 27);
             this.SearchB.Name = "SearchB";
             this.SearchB.Size = new System.Drawing.Size(75, 23);
             this.SearchB.TabIndex = 9;
@@ -256,7 +255,7 @@
             // 
             this.CleanB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.CleanB.ForeColor = System.Drawing.Color.OliveDrab;
-            this.CleanB.Location = new System.Drawing.Point(779, 91);
+            this.CleanB.Location = new System.Drawing.Point(687, 73);
             this.CleanB.Name = "CleanB";
             this.CleanB.Size = new System.Drawing.Size(75, 23);
             this.CleanB.TabIndex = 10;
@@ -266,49 +265,33 @@
             // 
             // AuthorTB
             // 
-            this.AuthorTB.Location = new System.Drawing.Point(87, 69);
+            this.AuthorTB.Location = new System.Drawing.Point(110, 53);
             this.AuthorTB.Name = "AuthorTB";
-            this.AuthorTB.Size = new System.Drawing.Size(196, 20);
+            this.AuthorTB.Size = new System.Drawing.Size(220, 20);
             this.AuthorTB.TabIndex = 12;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 72);
+            this.label1.Location = new System.Drawing.Point(12, 56);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 13;
             this.label1.Text = "Author";
             // 
-            // PublisherTB
-            // 
-            this.PublisherTB.Location = new System.Drawing.Point(87, 95);
-            this.PublisherTB.Name = "PublisherTB";
-            this.PublisherTB.Size = new System.Drawing.Size(196, 20);
-            this.PublisherTB.TabIndex = 14;
-            // 
-            // PublisherL
-            // 
-            this.PublisherL.AutoSize = true;
-            this.PublisherL.Location = new System.Drawing.Point(11, 98);
-            this.PublisherL.Name = "PublisherL";
-            this.PublisherL.Size = new System.Drawing.Size(50, 13);
-            this.PublisherL.TabIndex = 15;
-            this.PublisherL.Text = "Publisher";
-            // 
             // CategoriesLB
             // 
             this.CategoriesLB.FormattingEnabled = true;
-            this.CategoriesLB.Location = new System.Drawing.Point(462, 42);
+            this.CategoriesLB.Location = new System.Drawing.Point(434, 27);
             this.CategoriesLB.Name = "CategoriesLB";
-            this.CategoriesLB.Size = new System.Drawing.Size(291, 43);
+            this.CategoriesLB.Size = new System.Drawing.Size(220, 69);
             this.CategoriesLB.TabIndex = 16;
             this.CategoriesLB.Click += new System.EventHandler(this.CategoriesLB_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(394, 46);
+            this.label2.Location = new System.Drawing.Point(371, 30);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 17;
@@ -316,22 +299,22 @@
             // 
             // YearFromTB
             // 
-            this.YearFromTB.Location = new System.Drawing.Point(462, 95);
+            this.YearFromTB.Location = new System.Drawing.Point(110, 79);
             this.YearFromTB.Name = "YearFromTB";
-            this.YearFromTB.Size = new System.Drawing.Size(139, 20);
+            this.YearFromTB.Size = new System.Drawing.Size(70, 20);
             this.YearFromTB.TabIndex = 18;
             // 
             // YearToTB
             // 
-            this.YearToTB.Location = new System.Drawing.Point(614, 94);
+            this.YearToTB.Location = new System.Drawing.Point(186, 79);
             this.YearToTB.Name = "YearToTB";
-            this.YearToTB.Size = new System.Drawing.Size(139, 20);
+            this.YearToTB.Size = new System.Drawing.Size(70, 20);
             this.YearToTB.TabIndex = 19;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(394, 97);
+            this.label4.Location = new System.Drawing.Point(16, 79);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(34, 13);
             this.label4.TabIndex = 20;
@@ -349,19 +332,19 @@
             this.BooksDGV.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.BooksDGV.BackgroundColor = System.Drawing.Color.WhiteSmoke;
             this.BooksDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 11F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.Padding = new System.Windows.Forms.Padding(5);
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.BooksDGV.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 11F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(5);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.BooksDGV.DefaultCellStyle = dataGridViewCellStyle2;
             this.BooksDGV.GridColor = System.Drawing.Color.Gainsboro;
-            this.BooksDGV.Location = new System.Drawing.Point(0, 133);
+            this.BooksDGV.Location = new System.Drawing.Point(0, 105);
             this.BooksDGV.Name = "BooksDGV";
-            this.BooksDGV.Size = new System.Drawing.Size(866, 331);
+            this.BooksDGV.Size = new System.Drawing.Size(866, 359);
             this.BooksDGV.TabIndex = 21;
             this.BooksDGV.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.BooksDGV_CellDoubleClick);
             // 
@@ -369,6 +352,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(866, 486);
             this.Controls.Add(this.BooksDGV);
             this.Controls.Add(this.label4);
@@ -376,14 +360,12 @@
             this.Controls.Add(this.YearFromTB);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.CategoriesLB);
-            this.Controls.Add(this.PublisherL);
-            this.Controls.Add(this.PublisherTB);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.AuthorTB);
             this.Controls.Add(this.CleanB);
             this.Controls.Add(this.SearchB);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.NameTB);
+            this.Controls.Add(this.NameKeywordsTB);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.MainMenu);
             this.MainMenuStrip = this.MainMenu;
@@ -420,13 +402,11 @@
         private System.Windows.Forms.ToolStripMenuItem deleteExtraCategoriesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteExtraBookFilesToolStripMenuItem;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox NameTB;
+        private System.Windows.Forms.TextBox NameKeywordsTB;
         private System.Windows.Forms.Button SearchB;
         private System.Windows.Forms.Button CleanB;
         private System.Windows.Forms.TextBox AuthorTB;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox PublisherTB;
-        private System.Windows.Forms.Label PublisherL;
         private System.Windows.Forms.ListBox CategoriesLB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox YearFromTB;

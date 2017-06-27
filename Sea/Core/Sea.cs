@@ -268,13 +268,12 @@ namespace Sea.Core
         /// <summary>
         /// Search books.
         /// </summary>
-        /// <param name="name_substr">name substring</param>
+        /// <param name="name_keywords_substr">name substring</param>
         /// <param name="author_substr">author substring</param>
-        /// <param name="publisher_substr">publisher substring</param>
         /// <param name="filter_categories">filter categories</param>
         /// <param name="year_from">year from string</param>
         /// <param name="year_to">year to string</param>
-        public void SearchBooks(String name_substr, String author_substr, String publisher_substr,
+        public void SearchBooks(String name_keywords_substr, String author_substr,
                                 CategoriesList filter_categories, String year_from, String year_to)
         {
             // Deserialize all from files.
@@ -287,7 +286,8 @@ namespace Sea.Core
                 Book b = Books[i];
 
                 // Check names.
-                if (!b.Name.ToLower().Contains(name_substr)
+                if (!b.Name.ToLower().Contains(name_keywords_substr)
+                    || !b.Keywords.ToLower().Contains(name_keywords_substr)
                     || !b.Authors.Contains(author_substr, true))
                 {
                     continue;
