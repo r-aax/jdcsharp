@@ -69,12 +69,12 @@ namespace Lib.MathMod
         {
             get
             {
-                return (Riemann.gama - 1.0) * rho * eps;
+                return (RiemannToro.gama - 1.0) * rho * eps;
             }
 
             set
             {
-                eps = value / ((Riemann.gama - 1.0) * rho);
+                eps = value / ((RiemannToro.gama - 1.0) * rho);
             }
         }
 
@@ -101,7 +101,7 @@ namespace Lib.MathMod
         {
             get
             {
-                return Math.Sqrt(Riemann.gama * p / rho);
+                return Math.Sqrt(RiemannToro.gama * p / rho);
             }
         }
 

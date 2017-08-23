@@ -52,7 +52,7 @@ namespace Lib.MathMod.Solver
                     {
                         Cell left = g.Cells[xi, yi, zi];
                         Cell right = g.Cells[xi + 1, yi, zi];
-                        ru = Riemann.X_Toro(left.U, right.U);
+                        ru = RiemannToroOrig.X(left.U, right.U);
                         flow = ru.FlowX * k;
                         left.D -= flow;
                         right.D += flow;
@@ -68,12 +68,12 @@ namespace Lib.MathMod.Solver
                     Cell cell;
                         
                     cell = g.Cells[0, yi, zi];
-                    ru = Riemann.X_Toro(cell.U.MirrorX, cell.U);
+                    ru = RiemannToroOrig.X(cell.U.MirrorX, cell.U);
                     flow = ru.FlowX * k;
                     cell.D += flow;
 
                     cell = g.Cells[g.NX - 1, yi, zi];
-                    ru = Riemann.X_Toro(cell.U, cell.U.MirrorX);
+                    ru = RiemannToroOrig.X(cell.U, cell.U.MirrorX);
                     flow = ru.FlowX * k;
                     cell.D -= flow;
                 }
@@ -88,7 +88,7 @@ namespace Lib.MathMod.Solver
                     {
                         Cell left = g.Cells[xi, yi, zi];
                         Cell right = g.Cells[xi, yi + 1, zi];
-                        ru = Riemann.Y_Toro(left.U, right.U);
+                        ru = RiemannToroOrig.Y(left.U, right.U);
                         flow = ru.FlowY * k;
                         left.D -= flow;
                         right.D += flow;
@@ -104,12 +104,12 @@ namespace Lib.MathMod.Solver
                     Cell cell;
 
                     cell = g.Cells[xi, 0, zi];
-                    ru = Riemann.Y_Toro(cell.U.MirrorY, cell.U);
+                    ru = RiemannToroOrig.Y(cell.U.MirrorY, cell.U);
                     flow = ru.FlowY * k;
                     cell.D += flow;
 
                     cell = g.Cells[xi, g.NY - 1, zi];
-                    ru = Riemann.Y_Toro(cell.U, cell.U.MirrorY);
+                    ru = RiemannToroOrig.Y(cell.U, cell.U.MirrorY);
                     flow = ru.FlowY * k;
                     cell.D -= flow;
                 }

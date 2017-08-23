@@ -9,7 +9,7 @@ namespace Lib.MathMod.Solver
     /// <summary>
     /// Riemann solver.
     /// </summary>
-    public class Riemann
+    public class RiemannToro
     {
         /// <summary>
         /// Gamma value.
@@ -411,7 +411,7 @@ namespace Lib.MathMod.Solver
         /// <param name="u_lo">low side U</param>
         /// <param name="u_hi">hight side U</param>
         /// <returns>U on the cells common border</returns>
-        public static U X_Toro(U u_lo, U u_hi)
+        public static U X(U u_lo, U u_hi)
         {
             double d, u, v, w, p;
             U ru = new U();
@@ -432,7 +432,7 @@ namespace Lib.MathMod.Solver
         /// <param name="u_lo">low side U</param>
         /// <param name="u_hi">hight side U</param>
         /// <returns>U on the cells common border</returns>
-        public static U Y_Toro(U u_lo, U u_hi)
+        public static U Y(U u_lo, U u_hi)
         {
             double d, u, v, w, p;
             U ru = new U();
