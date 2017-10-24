@@ -132,6 +132,22 @@ namespace Lib.MathMod.Solver
         }
 
         /// <summary>
+        /// Modified Sod problem.
+        /// </summary>
+        /// <param name="xlength">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest ModifiedSod(double xlength, int cells_count)
+        {
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            1.0, 0.75, 1.0, 0.125, 0.0, 0.1,
+                                            0.0, 1.0,
+                                            0.0, 1.0,
+                                            0.0, 1.0,
+                                            0.0, 1.0);
+        }
+
+        /// <summary>
         /// 123 problem.
         /// </summary>
         /// <param name="x_length">scope length</param>

@@ -11,6 +11,7 @@
             <MenuItem Header="Tests">
                 <MenuItem Header="1D">
                     <MenuItem x:Name="Tests1DSodMI" Header="Sod" Click="Tests1DSodMI_Click"/>
+                    <MenuItem x:Name="Tests1DModifiedSodMI" Header="Modified Sod" Click="Tests1DModifiedSodMI_Click"/>
                     <MenuItem x:Name="Tests1D123" Header="123" Click="Tests1D123_Click"/>
                     <MenuItem x:Name="Tests1DWoodwardCollelaLeft" Header="Woodward-Collela left" Click="Tests1DWoodwardCollelaLeft_Click"/>
                     <MenuItem x:Name="Tests1DWoodwardCollelaRight" Header="Woodward-Collela right" Click="Tests1DWoodwardCollelaRight_Click"/>

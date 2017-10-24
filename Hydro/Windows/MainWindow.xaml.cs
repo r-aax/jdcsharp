@@ -317,7 +317,18 @@ namespace Hydro
         {
             RiemannProblem1DTest test = RiemannProblem1DTest.Sod(1.0, 1000);
             SetRiemannProblem1DTest(test);
-        }       
+        }
+
+        /// <summary>
+        /// Test 1D Modified Sod.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DModifiedSodMI_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.ModifiedSod(1.0, 1000);
+            SetRiemannProblem1DTest(test);
+        }
 
         /// <summary>
         /// Test 1D 123.
