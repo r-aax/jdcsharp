@@ -27,9 +27,9 @@ namespace Lib.MathMod
         vY,
 
         /// <summary>
-        /// Inner energy per mass.
+        /// Pressure.
         /// </summary>
-        eps,
+        p,
 
         /// <summary>
         /// Mass.

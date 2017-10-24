@@ -40,12 +40,12 @@ namespace Lib.MathMod
         /// </summary>
         /// <param name="rho_">density</param>
         /// <param name="v_">velocity</param>
-        /// <param name="eps_">inner energy per mass</param>
-        public U(double rho_, Vector v_, double eps_)
+        /// <param name="p_">pressure</param>
+        public U(double rho_, Vector v_, double p_)
         {
             rho = rho_;
             v = v_.Copy;
-            eps = eps_;
+            p = p_;
         }
 
         /// <summary>
@@ -54,12 +54,12 @@ namespace Lib.MathMod
         /// <param name="rho_">density</param>
         /// <param name="vx"><c>X</c> component of velocity</param>
         /// <param name="vy"><c>Y</c> component of velocity</param>
-        /// <param name="eps_">inner energy per mass</param>
-        public U(double rho_, double vx, double vy, double eps_)
+        /// <param name="p_">pressure</param>
+        public U(double rho_, double vx, double vy, double p_)
         {
             rho = rho_;
             v = new Vector(vx, vy);
-            eps = eps_;
+            p = p_;
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Lib.MathMod
         {
             get
             {
-                return new U(rho, v.InvertedX(), eps);
+                return new U(rho, v.InvertedX(), p);
             }
         }
 
@@ -123,7 +123,7 @@ namespace Lib.MathMod
         {
             get
             {
-                return new U(rho, v.InvertedY(), eps);
+                return new U(rho, v.InvertedY(), p);
             }
         }
 
@@ -161,7 +161,7 @@ namespace Lib.MathMod
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("U: {0}, {1}, {2}", rho, v, eps);
+            return String.Format("U: {0}, {1}, {2}", rho, v, p);
         }
         
         /// <summary>
@@ -182,8 +182,8 @@ namespace Lib.MathMod
                 case DataItem.vY:
                     return v.Y;
 
-                case DataItem.eps:
-                    return eps;
+                case DataItem.p:
+                    return p;
 
                 default:
                     throw new Exception("wrong data item");
