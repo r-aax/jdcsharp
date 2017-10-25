@@ -641,7 +641,7 @@ namespace Hydro
         }
 
         /// <summary>
-        /// Test 2D 1000 x 1000 grid.
+        /// Test 2D 100 x 100 grid.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">parameters</param>
@@ -708,7 +708,7 @@ namespace Hydro
         private void Tests2DRichtmyerMeshkovInstability_Click(object sender, RoutedEventArgs e)
         {
             // Grid.
-            Grid = new SolidGrid(3 * 100, 3 * 100, 1, 1.0);
+            Grid = new SolidGrid(1 * 100, 1 * 100, 1, 1.0);
 
             // Cells.
             for (int i = 0; i < Grid.NX; i++)
@@ -717,12 +717,12 @@ namespace Hydro
                 {
                     for (int k = 0; k < Grid.NZ; k++)
                     {
-                        if (i < 3 * ( 70 + 10 * Math.Sin((double)j / 15.0)))
+                        if (i < 1 * ( 70 + 10 * Math.Sin((double)j / 5.0)))
                         {
                             Grid.Cells[i, j, k].U = new U(5.0, 0.0, 0.0, 1.0);
                             Grid.Cells[i, j, k].U.p = 1.0;
                         }
-                        else if (i < 3 * 95)
+                        else if (i < 1 * 95)
                         {
                             Grid.Cells[i, j, k].U = new U(1.0, 0.0, 0.0, 1.0);
                             Grid.Cells[i, j, k].U.p = 1.0;
