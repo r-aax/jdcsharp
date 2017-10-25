@@ -577,6 +577,7 @@ namespace Hydro
         private void RunB_Click(object sender, RoutedEventArgs e)
         {
             double dt = Double.Parse(DtTB.Text);
+            Godunov1 solver = new Godunov1(Grid, dt);
 
             if (IsRunTypeIterationsCount())
             {
@@ -584,7 +585,7 @@ namespace Hydro
 
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
-                Godunov1.Iters(Grid, dt, iters_count);
+                solver.Iters(iters_count);
                 sw.Stop();
                 TimeElapsed = sw.ElapsedMilliseconds;
 
@@ -598,7 +599,7 @@ namespace Hydro
                 sw.Start();
                 while (T < to_time)
                 {
-                    Godunov1.Iter(Grid, dt);
+                    solver.Iter();
                     T += dt;
                 }
                 sw.Stop();

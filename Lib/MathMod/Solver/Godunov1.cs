@@ -17,41 +17,58 @@ namespace Lib.MathMod.Solver
     public class Godunov1
     {
         /// <summary>
+        /// Grid.
+        /// </summary>
+        private SolidGrid.SolidGrid Grid;
+
+        /// <summary>
+        /// Time step.
+        /// </summary>
+        private double Dt;
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="grid">grid</param>
+        /// <param name="dt">time step</param>
+        public Godunov1(SolidGrid.SolidGrid grid, double dt)
+        {
+            Grid = grid;
+            Dt = dt;            
+        }
+
+        /// <summary>
         /// Do several iterations of Godunov's method.
         /// </summary>
-        /// <param name="g">grid</param>
-        /// <param name="dt">delta time</param>
         /// <param name="n">iterations count</param>
-        public static void Iters(SolidGrid.SolidGrid g, double dt, int n)
+        public void Iters(int n)
         {
             for (int i = 0; i < n; i++)
             {
-                Iter(g, dt);
+                Iter();
             }
         }
 
         /// <summary>
         /// Solid grid iteration.
         /// </summary>
-        /// <param name="g">grid</param>
-        /// <param name="dt">delta time</param>
-        public static void Iter(SolidGrid.SolidGrid g, double dt)
+        public void Iter()
         {
             U ru;
             D flow;
-            double k = g.CellS * dt;
+            double k = Grid.CellS * Dt;
 
-            g.UtoD();
+            Grid.UtoD();
 
             // X faces
-            for (int xi = 0; xi < g.NX - 1; xi++)
+            for (int xi = 0; xi < Grid.NX - 1; xi++)
             {
-                for (int yi = 0; yi < g.NY; yi++)
+                for (int yi = 0; yi < Grid.NY; yi++)
                 {
-                    for (int zi = 0; zi < g.NZ; zi++)
+                    for (int zi = 0; zi < Grid.NZ; zi++)
                     {
-                        Cell left = g.Cells[xi, yi, zi];
-                        Cell right = g.Cells[xi + 1, yi, zi];
+                        Cell left = Grid.Cells[xi, yi, zi];
+                        Cell right = Grid.Cells[xi + 1, yi, zi];
                         ru = RiemannToro.X(left.U, right.U);
                         flow = ru.FlowX * k;
                         left.D -= flow;
@@ -61,18 +78,18 @@ namespace Lib.MathMod.Solver
             }
 
             // X borders.
-            for (int yi = 0; yi < g.NY; yi++)
+            for (int yi = 0; yi < Grid.NY; yi++)
             {
-                for (int zi = 0; zi < g.NZ; zi++)
+                for (int zi = 0; zi < Grid.NZ; zi++)
                 {
                     Cell cell;
                         
-                    cell = g.Cells[0, yi, zi];
+                    cell = Grid.Cells[0, yi, zi];
                     ru = RiemannToro.X(cell.U.MirrorX, cell.U);
                     flow = ru.FlowX * k;
                     cell.D += flow;
 
-                    cell = g.Cells[g.NX - 1, yi, zi];
+                    cell = Grid.Cells[Grid.NX - 1, yi, zi];
                     ru = RiemannToro.X(cell.U, cell.U.MirrorX);
                     flow = ru.FlowX * k;
                     cell.D -= flow;
@@ -80,14 +97,14 @@ namespace Lib.MathMod.Solver
             }
 
             // Y faces.
-            for (int xi = 0; xi < g.NX; xi++)
+            for (int xi = 0; xi < Grid.NX; xi++)
             {
-                for (int yi = 0; yi < g.NY - 1; yi++)
+                for (int yi = 0; yi < Grid.NY - 1; yi++)
                 {
-                    for (int zi = 0; zi < g.NZ; zi++)
+                    for (int zi = 0; zi < Grid.NZ; zi++)
                     {
-                        Cell left = g.Cells[xi, yi, zi];
-                        Cell right = g.Cells[xi, yi + 1, zi];
+                        Cell left = Grid.Cells[xi, yi, zi];
+                        Cell right = Grid.Cells[xi, yi + 1, zi];
                         ru = RiemannToro.Y(left.U, right.U);
                         flow = ru.FlowY * k;
                         left.D -= flow;
@@ -97,25 +114,25 @@ namespace Lib.MathMod.Solver
             }
 
             // Y borders.
-            for (int xi = 0; xi < g.NX; xi++)
+            for (int xi = 0; xi < Grid.NX; xi++)
             {
-                for (int zi = 0; zi < g.NZ; zi++)
+                for (int zi = 0; zi < Grid.NZ; zi++)
                 {
                     Cell cell;
 
-                    cell = g.Cells[xi, 0, zi];
+                    cell = Grid.Cells[xi, 0, zi];
                     ru = RiemannToro.Y(cell.U.MirrorY, cell.U);
                     flow = ru.FlowY * k;
                     cell.D += flow;
 
-                    cell = g.Cells[xi, g.NY - 1, zi];
+                    cell = Grid.Cells[xi, Grid.NY - 1, zi];
                     ru = RiemannToro.Y(cell.U, cell.U.MirrorY);
                     flow = ru.FlowY * k;
                     cell.D -= flow;
                 }
             }
 
-            g.DtoU();
+            Grid.DtoU();
         }
     }
 }
