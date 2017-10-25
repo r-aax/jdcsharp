@@ -506,6 +506,59 @@ namespace Hydro
         }
 
         /// <summary>
+        /// Shu-Osher problem.
+        /// Source:
+        /// Steven Brill.
+        /// Verification of the wavelet adaptive multiresolution
+        /// representation method to a prescibed error threshold.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Tests1DShuOsher_Click(object sender, RoutedEventArgs e)
+        {
+            // Grid.
+            Grid = new SolidGrid(1000, 1, 1, 0.001);
+
+            // Cells.
+            for (int i = 0; i < Grid.NX; i++)
+            {
+                for (int j = 0; j < Grid.NY; j++)
+                {
+                    for (int k = 0; k < Grid.NZ; k++)
+                    {
+                        if (i < 100)
+                        {
+                            Grid.Cells[i, j, k].U = new U(3.857143, 2.629369, 0.0, 10.33333);
+                        }
+                        else
+                        {
+                            Grid.Cells[i, j, k].U = new U(1.0 + 0.2 * Math.Sin(5.0 * ((i - 100.0)/100.0)), 0.0, 0.0, 1.0);
+                        }
+                    }
+                }
+            }
+
+            // Set up graphhics intervals.
+            SetGraphicsDataChecked(true, true, false, false, false, true);
+            //
+            Graphic_rho_L_TB.Text = "0.0";
+            Graphic_rho_H_TB.Text = "4.0";
+            //
+            Graphic_vX_L_TB.Text = "0.0";
+            Graphic_vX_H_TB.Text = "3.0";
+            //
+            Graphic_p_L_TB.Text = "0.0";
+            Graphic_p_H_TB.Text = "11.0";
+
+            // Time.
+            T = 0.0;
+            TimeElapsed = 0.0;
+
+            // Paint.
+            RefreshVisual();
+        }
+
+        /// <summary>
         /// Random test click.
         /// </summary>
         /// <param name="sender">object</param>

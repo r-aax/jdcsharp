@@ -22,6 +22,7 @@
                     <MenuItem x:Name="Tests1DHighMach" Header="High Mach" Click="Tests1DHighMach_Click"/>
                     <MenuItem x:Name="Tests1EinfeldtMI" Header="Einfeldt" Click="Tests1EinfeldtMI_Click"/>
                     <MenuItem x:Name="Tests1DWoodwardCollela" Header="Woodward-Collela" Click="Tests1DWoodwardCollela_Click"/>
+                    <MenuItem x:Name="Tests1DShuOsher" Header="Shu-Osher" Click="Tests1DShuOsher_Click"/>
                     <MenuItem x:Name="Tests1DRandom" Header="Random" Click="Tests1DRandom_Click"/>
                 </MenuItem>
                 <MenuItem Header="2D">
