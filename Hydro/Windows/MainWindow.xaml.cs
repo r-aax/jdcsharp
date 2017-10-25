@@ -157,6 +157,22 @@ namespace Hydro
         }
 
         /// <summary>
+        /// Set appropriate time step.
+        /// </summary>
+        /// <param name="tb">text box</param>
+        private void SetAppropriateDt(TextBox tb)
+        {
+            double dt = 1.0;
+
+            while (Grid.MaxCourantXYZ(dt) > 1.0)
+            {
+                dt /= 10.0;
+            }
+
+            tb.Text = dt.ToString();
+        }
+
+        /// <summary>
         /// Check if we run with given iterations count.
         /// </summary>
         /// <returns><c>true</c> - if we run with given iterations count, <c>false</c> - otherwise</returns>
@@ -240,6 +256,9 @@ namespace Hydro
             // Time.
             T = 0.0;
             TimeElapsed = 0.0;
+
+            // Set appropriate dt.
+            SetAppropriateDt(DtTB);
 
             // Paint.
             RefreshVisual();
@@ -501,6 +520,9 @@ namespace Hydro
             T = 0.0;
             TimeElapsed = 0.0;
 
+            // Set appropriate dt.
+            SetAppropriateDt(DtTB);
+
             // Paint.
             RefreshVisual();
         }
@@ -553,6 +575,9 @@ namespace Hydro
             // Time.
             T = 0.0;
             TimeElapsed = 0.0;
+
+            // Set appropriate dt.
+            SetAppropriateDt(DtTB);
 
             // Paint.
             RefreshVisual();
@@ -664,10 +689,12 @@ namespace Hydro
             Graphic_p_L_TB.Text = "0.0";
             Graphic_p_H_TB.Text = "5.0";
 
-
             // Time.
             T = 0.0;
             TimeElapsed = 0.0;
+
+            // Set appropriate dt.
+            SetAppropriateDt(DtTB);
 
             // Paint.
             RefreshVisual();
@@ -727,6 +754,9 @@ namespace Hydro
             // Time.
             T = 0.0;
             TimeElapsed = 0.0;
+
+            // Set appropriate dt.
+            SetAppropriateDt(DtTB);
 
             // Paint.
             RefreshVisual();
