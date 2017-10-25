@@ -157,6 +157,24 @@ namespace Hydro
         }
 
         /// <summary>
+        /// Check if we run with given iterations count.
+        /// </summary>
+        /// <returns><c>true</c> - if we run with given iterations count, <c>false</c> - otherwise</returns>
+        public bool IsRunTypeIterationsCount()
+        {
+            return RunTypeCB.SelectedIndex == 0;
+        }
+
+        /// <summary>
+        /// Check if we run to time.
+        /// </summary>
+        /// <returns><c>true</c> - if we run to time, <c>false</c> - otherwise</returns>
+        public bool IsRunTypeRunToTime()
+        {
+            return RunTypeCB.SelectedIndex == 1;
+        }
+
+        /// <summary>
         /// Set checked data graphics.
         /// </summary>
         /// <param name="is_rho_ch">density</param>
@@ -331,55 +349,115 @@ namespace Hydro
         }
 
         /// <summary>
-        /// Test 1D 123.
+        /// Test 1D Lax.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">parameters</param>
-        private void Tests1D123_Click(object sender, RoutedEventArgs e)
+
+        private void Tests1DLaxMI_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Problem123(1.0, 1000);
+            RiemannProblem1DTest test = RiemannProblem1DTest.Lax(1.0, 1000);
             SetRiemannProblem1DTest(test);
         }
 
         /// <summary>
-        /// Test 1D Woodward & Collella left.
+        /// Test 1D Supersonic shock tube.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">parameters</param>
-        private void Tests1DWoodwardCollelaLeft_Click(object sender, RoutedEventArgs e)
+        private void Tests1DSupersonicShockTube_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Colella_Left(1.0, 1000);
+            RiemannProblem1DTest test = RiemannProblem1DTest.SupersonicShockTube(1.0, 1000);
             SetRiemannProblem1DTest(test);
         }
 
         /// <summary>
-        /// Test 1D Woodward & Collela right.
+        /// 
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">parameters</param>
-        private void Tests1DWoodwardCollelaRight_Click(object sender, RoutedEventArgs e)
+        private void Tests1DMach3_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Collela_Right(1.0, 1000);
+            RiemannProblem1DTest test = RiemannProblem1DTest.Mach3(1.0, 1000);
             SetRiemannProblem1DTest(test);
         }
 
         /// <summary>
-        /// Test 1D Woodward & Collela collision.
+        /// 
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">parameters</param>
-        private void Tests1DWoodwardCollelaCollision_Click(object sender, RoutedEventArgs e)
+        private void Tests1DStationaryContactDiscontinuity_Click(object sender, RoutedEventArgs e)
         {
-            RiemannProblem1DTest test = RiemannProblem1DTest.Woodward_Collella_Collision(1.0, 1000);
+            RiemannProblem1DTest test = RiemannProblem1DTest.StationaryContactDiscontinuity(1.0, 1000);
             SetRiemannProblem1DTest(test);
         }
 
         /// <summary>
-        /// Special case of Woodward-Collela
+        /// 
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DSlowlyMovingContactDiscontinuity_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.SlowlyMovingContactDiscontinuity(1.0, 1000);
+            SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DSlowlyMovingWeakShock_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.SlowlyMovingWeakShock(1.0, 1000);
+            SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DStrongShock_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.StrongShock(1.0, 1000);
+            SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1DHighMach_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.HighMach(1.0, 1000);
+            SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// Test 1D Einfeldt.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Tests1EinfeldtMI_Click(object sender, RoutedEventArgs e)
+        {
+            RiemannProblem1DTest test = RiemannProblem1DTest.Einfeldt(1.0, 1000);
+            SetRiemannProblem1DTest(test);
+        }
+
+        /// <summary>
+        /// Woodward-Collela problem.
+        /// Source:
+        /// Steven Brill.
+        /// Verification of the wavelet adaptive multiresolution
+        /// representation method to a prescibed error threshold.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Tests1DWoodwardCollelaTwoShocks_Click(object sender, RoutedEventArgs e)
+        private void Tests1DWoodwardCollela_Click(object sender, RoutedEventArgs e)
         {
             // Grid.
             Grid = new SolidGrid(1000, 1, 1, 0.001);
@@ -411,10 +489,13 @@ namespace Hydro
             SetGraphicsDataChecked(true, true, false, false, false, false);
             //
             Graphic_rho_L_TB.Text = "0.0";
-            Graphic_rho_H_TB.Text = "20.0";
+            Graphic_rho_H_TB.Text = "7.0";
             //
-            Graphic_vX_L_TB.Text = "-6.0";
-            Graphic_vX_H_TB.Text = "15.0";
+            Graphic_vX_L_TB.Text = "0.0";
+            Graphic_vX_H_TB.Text = "20.0";
+            //
+            Graphic_p_L_TB.Text = "0.0";
+            Graphic_p_H_TB.Text = "450.0";
 
             // Time.
             T = 0.0;
@@ -444,9 +525,9 @@ namespace Hydro
         {
             double dt = Double.Parse(DtTB.Text);
 
-            if (IsUseItersCountCB.IsChecked ?? true)
+            if (IsRunTypeIterationsCount())
             {
-                int iters_count = Int32.Parse(ItersCountTB.Text);
+                int iters_count = Int32.Parse(RunTypeParTB.Text);
 
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
@@ -456,9 +537,9 @@ namespace Hydro
 
                 T += iters_count * dt;
             }
-            else if (IsUseRunToTimeCB.IsChecked ?? true)
+            else if (IsRunTypeRunToTime())
             {
-                double to_time = Double.Parse(TimeToRunTB.Text);
+                double to_time = Double.Parse(RunTypeParTB.Text);
 
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
@@ -595,6 +676,30 @@ namespace Hydro
 
             // Paint.
             RefreshVisual();
+        }
+
+        /// <summary>
+        /// Select type of run.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void RunTypeCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (RunTypeParTB == null)
+            {
+                return;
+            }
+
+            if (IsRunTypeIterationsCount())
+            {
+                // Iterations count by default.
+                RunTypeParTB.Text = "100";
+            }
+            else if (IsRunTypeRunToTime())
+            {
+                // Run time by default.
+                RunTypeParTB.Text = "0.5";
+            }
         }
     }
 }

@@ -117,6 +117,10 @@ namespace Lib.MathMod.Solver
 
         /// <summary>
         /// Sod problem.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
         /// </summary>
         /// <param name="x_length">scope length</param>
         /// <param name="cells_count">cells count</param>
@@ -128,7 +132,7 @@ namespace Lib.MathMod.Solver
                                             0.0, 1.0,
                                             0.0, 1.0,
                                             0.0, 1.0,
-                                            0.0, 1.0);
+                                            1.5, 3.0);
         }
 
         /// <summary>
@@ -148,67 +152,183 @@ namespace Lib.MathMod.Solver
         }
 
         /// <summary>
-        /// 123 problem.
+        /// Lax problem.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
         /// </summary>
         /// <param name="x_length">scope length</param>
         /// <param name="cells_count">cells count</param>
         /// <returns>test</returns>
-        public static RiemannProblem1DTest Problem123(double xlength, int cells_count)
+        public static RiemannProblem1DTest Lax(double xlength, int cells_count)
+        {
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            0.445, 0.698, 3.528, 0.5, 0.0, 0.571,
+                                            0.0, 1.5,
+                                            0.0, 1.6,
+                                            0.0, 4.0,
+                                            1.0, 30.0);
+        }
+
+        /// <summary>
+        /// Supersonic shock tube.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
+        /// </summary>
+        /// <param name="x_length">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest SupersonicShockTube(double xlength, int cells_count)
+        {
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            1.0, 0.0, 1.0, 0.02, 0.0, 0.02,
+                                            0.0, 1.0,
+                                            0.0, 2.0,
+                                            0.0, 1.0,
+                                            0.0, 7.0);
+        }
+
+        /// <summary>
+        /// Mach 3.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
+        /// </summary>
+        /// <param name="x_length">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest Mach3(double xlength, int cells_count)
+        {
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            3.857, 0.92, 10.333, 1.0, 3.55, 1.0,
+                                            0.0, 4.0,
+                                            0.0, 4.0,
+                                            0.0, 12.0,
+                                            0.0, 10.0);
+        }
+
+        /// <summary>
+        /// Stationary contact discontinuity.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
+        /// </summary>
+        /// <param name="x_length">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest StationaryContactDiscontinuity(double xlength, int cells_count)
+        {
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            1.0, 0.0, 0.5, 0.5, 0.0, 0.5,
+                                            0.0, 1.0,
+                                            -0.8, 1.0,
+                                            0.0, 4.0,
+                                            0.0, 4.0);
+        }
+
+        /// <summary>
+        /// Slowly moving contact discontinuity.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
+        /// </summary>
+        /// <param name="x_length">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest SlowlyMovingContactDiscontinuity(double xlength, int cells_count)
+        {
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            1.0, 0.5, 0.5, 0.5, 0.5, 0.5,
+                                            0.0, 1.0,
+                                            -0.8, 1.0,
+                                            0.0, 4.0,
+                                            0.0, 4.0);
+        }
+
+        /// <summary>
+        /// Slowly moving weak shock.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
+        /// </summary>
+        /// <param name="x_length">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest SlowlyMovingWeakShock(double xlength, int cells_count)
+        {
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            1.0, -1.0, 1.0, 0.9275, -1.0781, 0.9,
+                                            0.0, 1.0,
+                                            0.0, 1.0,
+                                            0.0, 1.0,
+                                            0.0, 1.0);
+        }
+
+        /// <summary>
+        /// Strong shock.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
+        /// </summary>
+        /// <param name="x_length">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest StrongShock(double xlength, int cells_count)
+        {
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            1.0, 0.0, 1000.0, 1.0, 0.0, 0.01,
+                                            0.0, 1.0,
+                                            0.0, 1.0,
+                                            0.0, 1.0,
+                                            0.0, 1.0);
+        }
+
+        /// <summary>
+        /// High Mach.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
+        /// </summary>
+        /// <param name="x_length">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest HighMach(double xlength, int cells_count)
+        {
+            return new RiemannProblem1DTest(xlength, cells_count,
+                                            10.0, 2000.0, 500.0, 20.0, 0.0, 500.0,
+                                            0.0, 1.0,
+                                            0.0, 1.0,
+                                            0.0, 1.0,
+                                            0.0, 1.0);
+        }
+
+        /// <summary>
+        /// Einfeldt problem.
+        /// Source:
+        /// П. В. Булат, К. Н. Волков.
+        /// Одномерные задачи газовой динамики и их решение при помощи
+        /// разностных схем высокой разрешающей способности.
+        /// </summary>
+        /// <param name="x_length">scope length</param>
+        /// <param name="cells_count">cells count</param>
+        /// <returns>test</returns>
+        public static RiemannProblem1DTest Einfeldt(double xlength, int cells_count)
         {
             return new RiemannProblem1DTest(xlength, cells_count,
                                             1.0, -2.0, 0.4, 1.0, 2.0, 0.4,
                                             0.0, 1.0,
                                             -2.0, 2.0,
                                             0.0, 0.4,
-                                            0.0, 1.0);
-        }
-
-        /// <summary>
-        /// Woodward & Collella left side.
-        /// </summary>
-        /// <param name="x_length">scope length</param>
-        /// <param name="cells_count">cells count</param>
-        /// <returns>test</returns>
-        public static RiemannProblem1DTest Woodward_Colella_Left(double xlength, int cells_count)
-        {
-            return new RiemannProblem1DTest(xlength, cells_count,
-                                            1.0, 0.0, 1000.0, 1.0, 0.0, 0.01,
-                                            0.0, 6.0,
-                                            0.0, 25.0,
-                                            0.0, 1000.0,
-                                            0.0, 2600.0);
-        }
-
-        /// <summary>
-        /// Woodward & Collella right side.
-        /// </summary>
-        /// <param name="x_length">scope length</param>
-        /// <param name="cells_count">cells count</param>
-        /// <returns>test</returns>
-        public static RiemannProblem1DTest Woodward_Collela_Right(double xlength, int cells_count)
-        {
-            return new RiemannProblem1DTest(xlength, cells_count,
-                                            1.0, 0.0, 0.01, 1.0, 0.0, 100.0,
-                                            0.0, 6.0,
-                                            -7.0, 0.0,
-                                            10.0, 100.0,
-                                            0.0, 260.0);
-        }
-
-        /// <summary>
-        /// Woodward & Collella collisio.
-        /// </summary>
-        /// <param name="x_length">scope length</param>
-        /// <param name="cells_count">cells count</param>
-        /// <returns>test</returns>
-        public static RiemannProblem1DTest Woodward_Collella_Collision(double xlength, int cells_count)
-        {
-            return new RiemannProblem1DTest(xlength, cells_count,
-                                            5.99924, 19.5975, 460.894, 5.99242, -6.19633, 46.0950,
-                                            0.0, 40.0,
-                                            0.0, 25.0,
-                                            0.0, 2000.0,
-                                            0.0, 400.0);
+                                            0.0, 10.0);
         }
 
         /// <summary>

@@ -12,11 +12,16 @@
                 <MenuItem Header="1D">
                     <MenuItem x:Name="Tests1DSodMI" Header="Sod" Click="Tests1DSodMI_Click"/>
                     <MenuItem x:Name="Tests1DModifiedSodMI" Header="Modified Sod" Click="Tests1DModifiedSodMI_Click"/>
-                    <MenuItem x:Name="Tests1D123" Header="123" Click="Tests1D123_Click"/>
-                    <MenuItem x:Name="Tests1DWoodwardCollelaLeft" Header="Woodward-Collela left" Click="Tests1DWoodwardCollelaLeft_Click"/>
-                    <MenuItem x:Name="Tests1DWoodwardCollelaRight" Header="Woodward-Collela right" Click="Tests1DWoodwardCollelaRight_Click"/>
-                    <MenuItem x:Name="Tests1DWoodwardCollelaCollision" Header="Woodward-Collela collision" Click="Tests1DWoodwardCollelaCollision_Click"/>
-                    <MenuItem x:Name="Tests1DWoodwardCollelaTwoShocks" Header="Woodward-Collela two shocks" Click="Tests1DWoodwardCollelaTwoShocks_Click"/>
+                    <MenuItem x:Name="Tests1DLaxMI" Header="Lax" Click="Tests1DLaxMI_Click"/>
+                    <MenuItem x:Name="Tests1DSupersonicShockTube" Header="Supersonic shock tube" Click="Tests1DSupersonicShockTube_Click"/>
+                    <MenuItem x:Name="Tests1DMach3" Header="Mach 3" Click="Tests1DMach3_Click"/>
+                    <MenuItem x:Name="Tests1DStationaryContactDiscontinuity" Header="Stationary contact discontinuity" Click="Tests1DStationaryContactDiscontinuity_Click"/>
+                    <MenuItem x:Name="Tests1DSlowlyMovingContactDiscontinuity" Header="Slowly moving contact discontinuity" Click="Tests1DSlowlyMovingContactDiscontinuity_Click"/>
+                    <MenuItem x:Name="Tests1DSlowlyMovingWeakShock" Header="Slowly moving weak shock" Click="Tests1DSlowlyMovingWeakShock_Click"/>
+                    <MenuItem x:Name="Tests1DStrongShock" Header="Strong shock" Click="Tests1DStrongShock_Click"/>
+                    <MenuItem x:Name="Tests1DHighMach" Header="High Mach" Click="Tests1DHighMach_Click"/>
+                    <MenuItem x:Name="Tests1EinfeldtMI" Header="Einfeldt" Click="Tests1EinfeldtMI_Click"/>
+                    <MenuItem x:Name="Tests1DWoodwardCollela" Header="Woodward-Collela" Click="Tests1DWoodwardCollela_Click"/>
                     <MenuItem x:Name="Tests1DRandom" Header="Random" Click="Tests1DRandom_Click"/>
                 </MenuItem>
                 <MenuItem Header="2D">
@@ -51,10 +56,13 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Height="20" Text="dt = " Margin="5"></TextBlock>
                 <TextBox x:Name="DtTB" Grid.Row="0" Grid.Column="1" Height="20" Text="0.01" Margin="5"></TextBox>
-                <CheckBox x:Name="IsUseItersCountCB" Grid.Row="0" Grid.Column="2" Content="use iters count" IsChecked="True" VerticalAlignment="Center" Margin="5"></CheckBox>
-                <TextBox x:Name="ItersCountTB" Grid.Row="0" Grid.Column="3" Text="100" Height="20" Margin="5"></TextBox>
-                <CheckBox x:Name="IsUseRunToTimeCB" Grid.Row="0" Grid.Column="4" Content="use run to time" VerticalAlignment="Center" Margin="5"></CheckBox>
-                <TextBox x:Name="TimeToRunTB" Grid.Row="0" Grid.Column="5" Text="1.0" Height="20" Margin="5"></TextBox>
+                <ComboBox Name="RunTypeCB" Height="20" Grid.Row="0" Grid.Column="2" SelectedIndex="0" SelectionChanged="RunTypeCB_SelectionChanged">
+                    <TextBlock>Iterations count</TextBlock>
+                    <TextBlock>Run to final time</TextBlock>
+                </ComboBox>
+                <TextBox x:Name="RunTypeParTB" Grid.Row="0" Grid.Column="3" Text="100" Height="20" Margin="5"></TextBox>
+                <TextBlock Grid.Row="0" Grid.Column="4"/>
+                <TextBlock Grid.Row="0" Grid.Column="5"/>
                 <Button x:Name="RunB" Grid.Row="0" Grid.Column="6" Content="Run" Height="20" Margin="5" Click="RunB_Click"></Button>
             </Grid>
             <Grid Grid.Row="0" Grid.Column="1">
