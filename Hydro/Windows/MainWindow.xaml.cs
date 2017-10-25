@@ -542,13 +542,13 @@ namespace Hydro
             SetGraphicsDataChecked(true, true, false, false, false, true);
             //
             Graphic_rho_L_TB.Text = "0.0";
-            Graphic_rho_H_TB.Text = "4.0";
+            Graphic_rho_H_TB.Text = "5.0";
             //
             Graphic_vX_L_TB.Text = "0.0";
             Graphic_vX_H_TB.Text = "3.0";
             //
             Graphic_p_L_TB.Text = "0.0";
-            Graphic_p_H_TB.Text = "11.0";
+            Graphic_p_H_TB.Text = "12.0";
 
             // Time.
             T = 0.0;
@@ -577,7 +577,7 @@ namespace Hydro
         private void RunB_Click(object sender, RoutedEventArgs e)
         {
             double dt = Double.Parse(DtTB.Text);
-            Godunov1 solver = new Godunov1(Grid, dt);
+            Godunov1 solver = new Godunov1(Grid, dt, BordersTB.Text);
 
             if (IsRunTypeIterationsCount())
             {

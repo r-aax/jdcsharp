@@ -117,6 +117,16 @@ namespace Lib.MathMod
         }
 
         /// <summary>
+        /// Get neighbour in <c>X</c> direction.
+        /// </summary>
+        /// <param name="t">border type</param>
+        /// <returns>neighbour</returns>
+        public U NeighbourX(BorderType t)
+        {
+            return (t == BorderType.Hard) ? MirrorX : this;
+        }
+
+        /// <summary>
         /// Mirror of Y axis.
         /// </summary>
         public U MirrorY
@@ -125,6 +135,16 @@ namespace Lib.MathMod
             {
                 return new U(rho, v.InvertedY(), p);
             }
+        }
+
+        /// <summary>
+        /// Get neighbout in <c>Y</c> direction.
+        /// </summary>
+        /// <param name="t">border type</param>
+        /// <returns>neighbour</returns>
+        public U NeighbourY(BorderType t)
+        {
+            return (t == BorderType.Hard) ? MirrorY : this;
         }
 
         /// <summary>

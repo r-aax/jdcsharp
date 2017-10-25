@@ -58,12 +58,12 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Height="20" Text="dt = " Margin="5"></TextBlock>
                 <TextBox x:Name="DtTB" Grid.Row="0" Grid.Column="1" Height="20" Text="0.01" Margin="5"></TextBox>
                 <ComboBox Name="RunTypeCB" Height="20" Grid.Row="0" Grid.Column="2" SelectedIndex="0" SelectionChanged="RunTypeCB_SelectionChanged">
-                    <TextBlock>Iterations count</TextBlock>
-                    <TextBlock>Run to final time</TextBlock>
+                    <TextBlock Text="Iterations count"/>
+                    <TextBlock Text="Run to final time"/>
                 </ComboBox>
                 <TextBox x:Name="RunTypeParTB" Grid.Row="0" Grid.Column="3" Text="100" Height="20" Margin="5"></TextBox>
-                <TextBlock Grid.Row="0" Grid.Column="4"/>
-                <TextBlock Grid.Row="0" Grid.Column="5"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text="Borders code (LRDU) = " Height="20"/>
+                <TextBox Name="BordersTB" Grid.Row="0" Grid.Column="5" Text="SSSS" Height="20"/>
                 <Button x:Name="RunB" Grid.Row="0" Grid.Column="6" Content="Run" Height="20" Margin="5" Click="RunB_Click"></Button>
             </Grid>
             <Grid Grid.Row="0" Grid.Column="1">
