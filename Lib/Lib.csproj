@@ -135,7 +135,6 @@
     <Compile Include="MathMod\Solver\Godunov1.cs" />
     <Compile Include="MathMod\Solver\RiemannToro.cs" />
     <Compile Include="MathMod\Solver\RiemannProblem1DTest.cs" />
-    <Compile Include="MathMod\Solver\RiemannToroOrig.cs" />
     <Compile Include="MathMod\U.cs" />
     <Compile Include="Maths\Bits\Bits.cs" />
     <Compile Include="Maths\Bits\Bits32.cs" />
