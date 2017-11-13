@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Lib.Draw;
+using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Utils;
 

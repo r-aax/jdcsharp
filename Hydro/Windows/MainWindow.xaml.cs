@@ -15,16 +15,12 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 
 using Lib.Maths.Geometry;
-using Lib.Maths.Geometry.Geometry3D;
-using Lib.Maths.Geometry.Geometry2D;
 using Lib.MathMod.SolidGrid;
 using Lib.Draw;
 using Lib.MathMod;
 using Lib.MathMod.Solver;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
-using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
-using Lib.Utils.Time;
 
 namespace Hydro
 {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.Draw;
+using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Utils;
 using SWMColor = System.Windows.Media.Color;
