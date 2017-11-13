@@ -1,11 +1,13 @@
 ﻿// Author: Alexey Rybakov
 
+using System;
+
 namespace Lib.Maths.Geometry.Geometry2D
 {
     /// <summary>
     /// Circle.
     /// </summary>
-    public class Circle
+    public class Circle : ICloneable
     {
         /// <summary>
         /// Center.
@@ -53,6 +55,26 @@ namespace Lib.Maths.Geometry.Geometry2D
         public Lib.Maths.Geometry.Geometry3D.Sphere Extended()
         {
             return new Geometry3D.Sphere(Center, Radius);
+        }
+
+        /// <summary>
+        /// Clone circle.
+        /// </summary>
+        /// <returns>copy</returns>
+        public object Clone()
+        {
+            return new Circle(Center.Clone() as Point, Radius);
+        }
+
+        /// <summary>
+        /// Copy of circle.
+        /// </summary>
+        public Circle Copy
+        {
+            get
+            {
+                return Clone() as Circle;
+            }
         }
     }
 }

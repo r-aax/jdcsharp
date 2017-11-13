@@ -1260,6 +1260,24 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
+        /// French windmill.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ExampleFrenchWindmill_Click(object sender, RoutedEventArgs e)
+        {
+            EditIntWindow w = new EditIntWindow(5, "Enter blades count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.FrenchWindmill(w.Result, Circle);
+            }
+
+            Paint();
+        }
+
+        /// <summary>
         /// Get point of event.
         /// </summary>
         /// <param name="e">parameters</param>

@@ -614,6 +614,39 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// French windmill.
+        /// </summary>
+        /// <param name="blades">blades count</param>
+        /// <param name="circle">outer circle</param>
+        /// <returns>french windmill</returns>
+        public static Graph FrenchWindmill(int blades, Circle circle)
+        {
+            Circle inner_circle = circle.Copy;
+            inner_circle.Radius /= 2.0;
+
+            Graph g = InitialGraph(GraphDimensionality.D2, 3 * blades + 1);
+            g.Nodes[0].P = circle.Center.Copy; 
+            GraphLayoutManager.SetLayoutCircle(g, 1, 2 * blades, inner_circle, 0.0);
+            GraphLayoutManager.SetLayoutCircle(g, 2 * blades + 1, 3 * blades, circle,
+                                               -0.5 * Math.PI / ((double)blades));
+
+            for (int i = 1; i <= 3 * blades; i++)
+            {
+                g.AddEdge(0, i);
+            }
+
+            for (int i = 0; i < blades; i++)
+            {
+                // Process each blade.
+                g.AddEdge(2 * blades + 1 + i, 2 * i + 1);
+                g.AddEdge(2 * blades + 1 + i, 2 * (i + 1));
+                g.AddEdge(2 * i + 1, 2 * (i + 1));
+            }
+
+            return g;
+        }
+
+        /// <summary>
         /// Tetrahedron.
         /// </summary>
         /// <param name="p">point</param>

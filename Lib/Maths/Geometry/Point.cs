@@ -206,6 +206,17 @@ namespace Lib.Maths.Geometry
         }
 
         /// <summary>
+        /// Copy of point.
+        /// </summary>
+        public new Point Copy
+        {
+            get
+            {
+                return Clone() as Point;
+            }
+        }
+
+        /// <summary>
         /// Return point to parallelepiped.
         /// </summary>
         /// <param name="par">parallelepiped</param>
