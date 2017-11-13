@@ -4,11 +4,7 @@ using System.Diagnostics;
 
 using Lib.DataStruct.Graph;
 using Lib.DataStruct.Graph.DrawProperties;
-using Lib.Maths.Geometry.Geometry3D;
-
-using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
-using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
+using Lib.Maths.Geometry;
 
 namespace Lib.Draw
 {
@@ -68,7 +64,7 @@ namespace Lib.Draw
             }
 
             Graph g = node.Parent;
-            Point2D p = node.Point2D;
+            Point p = node.Point2D;
             Color color = color = nprops.Color;
 
             if (g.Is2D)

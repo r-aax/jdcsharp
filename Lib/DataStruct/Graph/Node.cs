@@ -3,14 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Serialization;
-using System.IO;
 using System.Diagnostics;
 
 using Lib.DataStruct.Graph.DrawProperties;
 using Lib.DataStruct.Graph.Serialized;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
-using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
+using Lib.Maths.Geometry;
 
 namespace Lib.DataStruct.Graph
 {
@@ -61,9 +58,9 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
-        /// Position (2D or 3D point).
+        /// Position.
         /// </summary>
-        private object Position = null;
+        public Point Position = null;
 
         /// <summary>
         /// Draw properties.
@@ -109,82 +106,6 @@ namespace Lib.DataStruct.Graph
                 _DrawProperties = DrawProperties.Clone() as NodeDrawProperties;
             }
         }
-
-        /// <summary>
-        /// Check if position is 2D.
-        /// </summary>
-        /// <returns><c>true</c> - if position is 2D, <c>false</c> - otherwise.</returns>
-        public bool Is2D()
-        {
-            return Position is Point2D;
-        }
-
-        /// <summary>
-        /// Check if position is 3D.
-        /// </summary>
-        /// <returns><c>true</c> - if position is 3D, <c>false</c> - otherwise.</returns>
-        public bool Is3D()
-        {
-            return Position is Point3D;
-        }
-
-        /// <summary>
-        /// 2D point.
-        /// </summary>
-        public Point2D Point2D
-        {
-            get
-            {
-                if (Position is Point2D)
-                {
-                    return Position as Point2D;
-                }
-                else if (Position is Point3D)
-                {
-                    Point3D p3d = Position as Point3D;
-
-                    return new Point2D(p3d.X, p3d.Y);
-                }
-                else
-                {
-                    return null;
-                }
-            }
-
-            set
-            {
-                Position = value;
-            }
-        }
-
-        /// <summary>
-        /// 3D point.
-        /// </summary>
-        public Point3D Point3D
-        {
-            get
-            {
-                if (Position is Point3D)
-                {
-                    return Position as Point3D;
-                }
-                else if (Position is Point2D)
-                {
-                    Point2D p2d = Position as Point2D;
-
-                    return new Point3D(p2d.X, p2d.Y, 0.0);
-                }
-                else
-                {
-                    return null;
-                }
-            }
-
-            set
-            {
-                Position = value;
-            }
-        }
         
         /// <summary>
         /// X coordinate.
@@ -193,7 +114,7 @@ namespace Lib.DataStruct.Graph
         {
             get
             {
-                return Is2D() ? Point2D.X : Point3D.X;
+                return Position.X;
             }
         }
 
@@ -204,7 +125,7 @@ namespace Lib.DataStruct.Graph
         {
             get
             {
-                return Is2D() ? Point2D.Y : Point3D.Y;
+                return Position.Y;
             }
         }
 
@@ -215,7 +136,7 @@ namespace Lib.DataStruct.Graph
         {
             get
             {
-                return Is2D() ? 0.0 : Point3D.Z;
+                return Position.Z;
             }
         }
 
@@ -225,9 +146,7 @@ namespace Lib.DataStruct.Graph
         /// <returns>string</returns>
         public string PositionString()
         {
-            return (Position is Point2D)
-                   ? (Position as Point2D).ToString()
-                   : (Position as Point3D).ToString();
+            return Position.ToString();
         }
 
         /// <summary>
@@ -384,11 +303,11 @@ namespace Lib.DataStruct.Graph
             switch (n)
             {
                 case 4:
-                    Point2D = new Point2D(Double.Parse(s[1]), Double.Parse(s[2]));
+                    Position = new Point(Double.Parse(s[1]), Double.Parse(s[2]));
                     break;
 
                 case 5:
-                    Point3D = new Point3D(Double.Parse(s[1]), Double.Parse(s[2]), Double.Parse(s[3]));
+                    Position = new Point(Double.Parse(s[1]), Double.Parse(s[2]), Double.Parse(s[3]));
                     break;
 
                 default:

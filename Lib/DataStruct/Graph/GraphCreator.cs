@@ -4,15 +4,13 @@ using System;
 using System.Diagnostics;
 
 using Lib.Maths.Bits;
+using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Maths.Geometry.Geometry3D;
 using Lib.Maths.Numbers;
 using Lib.Utils;
 using Lib.Draw;
 using Lib.DataStruct.Graph.DrawProperties;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
-using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
-using Lib.Maths.Geometry;
 using Triangle3D = Lib.Maths.Geometry.Geometry3D.Triangle;
 using Line2D = Lib.Maths.Geometry.Geometry2D.Line;
 
@@ -603,7 +601,7 @@ namespace Lib.DataStruct.Graph
         /// <param name="p">point</param>
         /// <param name="r">escribed sphere radius</param>
         /// <returns>tetrahedron graph</returns>
-        public static Graph Tetrahedron(Point3D p, double r)
+        public static Graph Tetrahedron(Point p, double r)
         {
             const int order = 4;
             Graph g = InitialGraph(GraphDimensionality.D3, order);
@@ -612,12 +610,12 @@ namespace Lib.DataStruct.Graph
             double a = r * (4 / Math.Sqrt(6));
 
             // Projection of height on bottom plane.
-            Point3D hp = p - new Vector3D(0.0, Math.Sqrt(2.0 / 3.0) * a - r, 0.0);
+            Point hp = p - new Vector(0.0, Math.Sqrt(2.0 / 3.0) * a - r, 0.0);
 
             // Nodes coordinates.
             for (int i = 0; i < order; i++)
             {
-                g.Nodes[i].Point3D = p + new Vector3D(0.0, r, 0.0);
+                g.Nodes[i].Point3D = p + new Vector(0.0, r, 0.0);
             }
             for (int i = 1; i < order; i++)
             {
@@ -657,7 +655,7 @@ namespace Lib.DataStruct.Graph
         /// <param name="p">point</param>
         /// <param name="r">escribed sphere radius</param>
         /// <returns>cube graph</returns>
-        public static Graph Cube(Point3D p, double r)
+        public static Graph Cube(Point p, double r)
         {
             const int order = 8;
             Graph g = InitialGraph(GraphDimensionality.D3, order);
@@ -670,9 +668,9 @@ namespace Lib.DataStruct.Graph
             {
                 Bits32 bi = new Bits32((UInt32)i);
 
-                g.Nodes[i].Point3D = p + new Vector3D(bi.IsBitSet(0) ? rr : -rr,
-                                                      bi.IsBitSet(1) ? rr : -rr,
-                                                      bi.IsBitSet(2) ? rr : -rr);
+                g.Nodes[i].Point3D = p + new Vector(bi.IsBitSet(0) ? rr : -rr,
+                                                    bi.IsBitSet(1) ? rr : -rr,
+                                                    bi.IsBitSet(2) ? rr : -rr);
             }
 
             // Create edges.
@@ -708,18 +706,18 @@ namespace Lib.DataStruct.Graph
         /// <param name="p">point</param>
         /// <param name="r">escribed sphere radius</param>
         /// <returns>octahedron</returns>
-        public static Graph Octahedron(Point3D p, double r)
+        public static Graph Octahedron(Point p, double r)
         {
             const int order = 6;
             Graph g = InitialGraph(GraphDimensionality.D3, order);
 
             // Nodes coordinates.
-            g.Nodes[0].Point3D = p + new Vector3D(0.0, r, 0.0);
-            g.Nodes[1].Point3D = p + new Vector3D(r, 0.0, 0.0);
-            g.Nodes[2].Point3D = p + new Vector3D(0.0, 0.0, r);
-            g.Nodes[3].Point3D = p + new Vector3D(-r, 0.0, 0.0);
-            g.Nodes[4].Point3D = p + new Vector3D(0.0, 0.0, -r);
-            g.Nodes[5].Point3D = p + new Vector3D(0.0, -r, 0.0);
+            g.Nodes[0].Point3D = p + new Vector(0.0, r, 0.0);
+            g.Nodes[1].Point3D = p + new Vector(r, 0.0, 0.0);
+            g.Nodes[2].Point3D = p + new Vector(0.0, 0.0, r);
+            g.Nodes[3].Point3D = p + new Vector(-r, 0.0, 0.0);
+            g.Nodes[4].Point3D = p + new Vector(0.0, 0.0, -r);
+            g.Nodes[5].Point3D = p + new Vector(0.0, -r, 0.0);
 
             // Create edges.
             AddEdges(g, 0, 1, 4);
@@ -745,7 +743,7 @@ namespace Lib.DataStruct.Graph
         /// <param name="p">point</param>
         /// <param name="r">escribed sphere radius</param>
         /// <returns>dodecahedron</returns>
-        public static Graph Dodecahedron(Point3D p, double r)
+        public static Graph Dodecahedron(Point p, double r)
         {
             const int order = 20;
             Graph g = InitialGraph(GraphDimensionality.D3, order);
@@ -809,7 +807,7 @@ namespace Lib.DataStruct.Graph
         /// <param name="p">point</param>
         /// <param name="r">escribed sphere radius</param>
         /// <returns>icosahedron</returns>
-        public static Graph Icosahedron(Point3D p, double r)
+        public static Graph Icosahedron(Point p, double r)
         {
             const int order = 12;
             Graph g = InitialGraph(GraphDimensionality.D3, order);
@@ -818,18 +816,18 @@ namespace Lib.DataStruct.Graph
             double d = r * 2.0 / Math.Sqrt(5.0);
 
             // Nodes coordinates.
-            g.Nodes[0].Point3D = p + new Vector3D(0.0, d * Math.Sqrt(5.0) / 2.0, 0.0);
-            g.Nodes[11].Point3D = p - new Vector3D(0.0, d * Math.Sqrt(5.0) / 2.0, 0.0);
+            g.Nodes[0].Point3D = p + new Vector(0.0, d * Math.Sqrt(5.0) / 2.0, 0.0);
+            g.Nodes[11].Point3D = p - new Vector(0.0, d * Math.Sqrt(5.0) / 2.0, 0.0);
             for (int i = 1; i <= 5; i++)
             {
-                g.Nodes[i].Point3D = p + new Vector3D(0.0, 0.5 * d, 0.0);
-                g.Nodes[i].Point3D += new Vector3D(d, 0.0, 0.0);
+                g.Nodes[i].Point3D = p + new Vector(0.0, 0.5 * d, 0.0);
+                g.Nodes[i].Point3D += new Vector(d, 0.0, 0.0);
                 g.Nodes[i].Point3D.RotY(p, 2.0 * Math.PI / 5.0 * ((double)(i - 1)));
             }
             for (int i = 6; i <= 10; i++)
             {
-                g.Nodes[i].Point3D = p - new Vector3D(0.0, 0.5 * d, 0.0);
-                g.Nodes[i].Point3D += new Vector3D(d, 0.0, 0.0);
+                g.Nodes[i].Point3D = p - new Vector(0.0, 0.5 * d, 0.0);
+                g.Nodes[i].Point3D += new Vector(d, 0.0, 0.0);
                 g.Nodes[i].Point3D.RotY(p, 2.0 * Math.PI / 5.0 * ((double)(i - 1) + 0.5));
             }
 
@@ -1237,9 +1235,9 @@ namespace Lib.DataStruct.Graph
             Graph g = InitialGraph(GraphDimensionality.D2, n);
 
             GraphLayoutManager.SetLayoutLine2D(g,
-                                               new Line2D(new Point2D(rect.Left,
-                                                                      rect.Center.Y),
-                                                          new Vector2D(rect.Width, 0.0)));
+                                               new Line2D(new Point(rect.Left,
+                                                                    rect.Center.Y),
+                                                          new Vector(rect.Width, 0.0)));
             AddChain(g, 0, g.Order - 1);
 
             return g;

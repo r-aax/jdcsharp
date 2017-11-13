@@ -488,6 +488,25 @@ namespace Lib.Maths.Geometry
         }
 
         /// <summary>
+        /// Rotate <c>Z</c> contraclockwise.
+        /// </summary>
+        /// <param name="a">angle</param>
+        public void Rot(double a)
+        {
+            RotZ(a);
+        }
+
+        /// <summary>
+        /// Rotate <c>Z</c> with given vector.
+        /// </summary>
+        /// <param name="v">vector</param>
+        /// <param name="a">angle</param>
+        public void Rot(Vector v, double a)
+        {
+            RotZ(v, a);
+        }
+
+        /// <summary>
         /// Normalization to given size <c>k</c>.
         /// </summary>
         /// <param name="k">size</param>

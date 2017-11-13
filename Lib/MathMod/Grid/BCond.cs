@@ -1,13 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Lib.Maths.Geometry;
-using Lib.Maths.Geometry.Geometry3D;
-using Lib.Maths.Numbers;
-using Point = Lib.Maths.Geometry.Geometry3D.Point;
 
 namespace Lib.MathMod.Grid
 {

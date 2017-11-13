@@ -40,7 +40,7 @@ namespace Lib.DataStruct.Graph.DrawProperties
         /// <summary>
         /// Label offset.
         /// </summary>
-        public Vector2D LabelOffset;
+        public Vector LabelOffset;
 
         /// <summary>
         /// Size of font.

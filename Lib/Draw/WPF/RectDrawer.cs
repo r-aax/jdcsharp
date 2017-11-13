@@ -6,8 +6,8 @@ using System.Windows.Media;
 using System.Windows.Controls;
 
 using Lib.Maths.Geometry.Geometry2D;
-using LVector = Lib.Maths.Geometry.Geometry2D.Vector;
-using LPoint = Lib.Maths.Geometry.Geometry2D.Point;
+using LVector = Lib.Maths.Geometry.Vector;
+using LPoint = Lib.Maths.Geometry.Point;
 using LRect = Lib.Maths.Geometry.Geometry2D.Rect;
 using LColor = Lib.Draw.Color;
 using SWPoint = System.Windows.Point;

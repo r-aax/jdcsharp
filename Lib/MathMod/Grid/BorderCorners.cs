@@ -7,8 +7,7 @@ using System.Diagnostics;
 
 using Lib.Maths.Numbers;
 using Lib.Maths;
-using Vector = Lib.Maths.Geometry.Geometry3D.Vector;
-using Point = Lib.Maths.Geometry.Geometry3D.Point;
+using Lib.Maths.Geometry;
 
 namespace Lib.MathMod.Grid
 {

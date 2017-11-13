@@ -3,14 +3,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Xml.Serialization;
-using System.IO;
 
 using Lib.DataStruct.Graph.DrawProperties;
 using Lib.DataStruct.Graph.Serialized;
+using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry3D;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
-using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 
 namespace Lib.DataStruct.Graph
@@ -530,14 +527,14 @@ namespace Lib.DataStruct.Graph
 
             if (Is2D)
             {
-                return new Point2D(0.5 * (MinX() + MaxX()),
-                                   0.5 * (MinY() + MaxY()));
+                return new Point(0.5 * (MinX() + MaxX()),
+                                 0.5 * (MinY() + MaxY()));
             }
             else
             {
-                return new Point3D(0.5 * (MinX() + MaxX()),
-                                   0.5 * (MinY() + MaxY()),
-                                   0.5 * (MinZ() + MaxZ()));
+                return new Point(0.5 * (MinX() + MaxX()),
+                                 0.5 * (MinY() + MaxY()),
+                                 0.5 * (MinZ() + MaxZ()));
             }
         }
 
@@ -545,40 +542,22 @@ namespace Lib.DataStruct.Graph
         /// Barycenter.
         /// </summary>
         /// <returns>barycenter</returns>
-        public object Barycenter()
+        public Point Barycenter()
         {
             if (IsEmpty)
             {
-                if (Is2D)
-                {
-                    return new Point2D();
-                }
-                else
-                {
-                    return new Point3D();
-                }
-            }
-            if (Is2D)
-            {
-                Point2D[] p = new Point2D[Order];
-
-                for (int i = 0; i < Order; i++)
-                {
-                    p[i] = Nodes[i].Point2D;
-                }
-
-                return new Point2D(Point2D.Avg(p));
+                return new Point();
             }
             else
             {
-                Point3D[] p = new Point3D[Order];
+                Point[] p = new Point[Order];
 
                 for (int i = 0; i < Order; i++)
                 {
-                    p[i] = Nodes[i].Point3D;
+                    p[i] = Nodes[i].Position;
                 }
 
-                return new Point3D(Point3D.Avg(p));
+                return new Point(Point.Avg(p));
             }
         }
 
@@ -657,8 +636,8 @@ namespace Lib.DataStruct.Graph
         {
             Debug.Assert(Is3D);
 
-            Point3D bc = Barycenter() as Point3D;
-            Nodes.ForEach((Node n) => n.Point3D.RotX(bc, angle));
+            Point bc = Barycenter();
+            Nodes.ForEach((Node n) => n.Position.RotX(bc, angle));
         }
 
         /// <summary>
@@ -669,8 +648,8 @@ namespace Lib.DataStruct.Graph
         {
             Debug.Assert(Is3D);
 
-            Point3D bc = Barycenter() as Point3D;
-            Nodes.ForEach((Node n) => n.Point3D.RotY(bc, angle));
+            Point bc = Barycenter();
+            Nodes.ForEach((Node n) => n.Position.RotY(bc, angle));
         }
 
         /// <summary>
@@ -679,16 +658,8 @@ namespace Lib.DataStruct.Graph
         /// <param name="angle">angle</param>
         public void RotZ(double angle)
         {
-            if (Is2D)
-            {
-                Point2D bc = Barycenter() as Point2D;
-                Nodes.ForEach((Node n) => n.Point2D.Rot(bc, angle));
-            }
-            else
-            {
-                Point3D bc = Barycenter() as Point3D;
-                Nodes.ForEach((Node n) => n.Point3D.RotZ(bc, angle));
-            }
+            Point bc = Barycenter();
+            Nodes.ForEach((Node n) => n.Position.RotZ(bc, angle));
         }
 
         /// <summary>
@@ -703,9 +674,7 @@ namespace Lib.DataStruct.Graph
 
             foreach (Node n in Nodes)
             {
-                Point3D p3d = n.Point3D;
-
-                n.Point2D = new Point2D(p3d.X, p3d.Y);
+                n.Position.Z = 0.0;
             }
 
             Dimensionality = GraphDimensionality.D2;
@@ -716,18 +685,6 @@ namespace Lib.DataStruct.Graph
         /// </summary>
         public void TransformTo3D()
         {
-            if (Is3D)
-            {
-                return;
-            }
-
-            foreach (Node n in Nodes)
-            {
-                Point2D p2d = n.Point2D;
-
-                n.Point3D = new Point3D(p2d.X, p2d.Y, 0.0);
-            }
-
             Dimensionality = GraphDimensionality.D3;
         }
 
@@ -736,7 +693,7 @@ namespace Lib.DataStruct.Graph
         /// </summary>
         /// <param name="p">point</param>
         /// <returns>nearest node</returns>
-        public Node FindNearestNode(Point2D p)
+        public Node FindNearestNode(Point p)
         {
             if (Order == 0)
             {
@@ -747,9 +704,9 @@ namespace Lib.DataStruct.Graph
 
             for (int i = 1; i < Order; i++)
             {
-                Point2D p2 = Nodes[i].Point2D;
+                Point p2 = Nodes[i].Position;
 
-                if (p.Dist(p2) < p.Dist(n.Point2D))
+                if (p.Dist(p2) < p.Dist(n.Position))
                 {
                     n = Nodes[i];
                 }

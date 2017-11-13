@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 using Lib.Maths.Numbers;
 using Lib.Maths.Geometry;
-using Point = Lib.Maths.Geometry.Geometry3D.Point;
 
 namespace Lib.MathMod.Grid
 {

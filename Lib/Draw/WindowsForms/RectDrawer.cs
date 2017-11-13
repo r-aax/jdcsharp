@@ -6,9 +6,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Diagnostics;
 
+using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry2D;
-using LPoint = Lib.Maths.Geometry.Geometry2D.Point;
-using LVector = Lib.Maths.Geometry.Geometry2D.Vector;
+using LPoint = Lib.Maths.Geometry.Point;
+using LVector = Lib.Maths.Geometry.Vector;
 using LRect = Lib.Maths.Geometry.Geometry2D.Rect;
 using LColor = Lib.Draw.Color;
 using SDColor = System.Drawing.Color;

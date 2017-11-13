@@ -7,8 +7,6 @@ using System.Diagnostics;
 
 using Lib.MathMod.SolidGrid;
 using Lib.Maths.Geometry;
-using Lib.Maths.Geometry.Geometry3D;
-using Vector3D = Lib.Maths.Geometry.Geometry3D.Vector;
 
 namespace Lib.MathMod.Solver
 {

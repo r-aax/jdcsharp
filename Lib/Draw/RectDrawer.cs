@@ -2,7 +2,7 @@
 
 using System;
 
-using Lib.Maths.Geometry.Geometry2D;
+using Lib.Maths.Geometry;
 
 namespace Lib.Draw
 {
