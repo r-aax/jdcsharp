@@ -3,6 +3,7 @@
 using System;
 
 using Lib.Maths.Geometry;
+using Lib.Maths.Geometry.Geometry2D;
 
 namespace Lib.Draw
 {

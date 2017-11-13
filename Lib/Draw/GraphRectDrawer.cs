@@ -64,7 +64,7 @@ namespace Lib.Draw
             }
 
             Graph g = node.Parent;
-            Point p = node.Point2D;
+            Point p = node.P;
             Color color = color = nprops.Color;
 
             if (g.Is2D)
@@ -153,7 +153,7 @@ namespace Lib.Draw
             else
             {
                 Color color = eprops.Color;
-                Vector v = Vector.Mid(edge.A.Point3D, edge.B.Point3D);
+                Vector v = Vector.Mid(edge.A.P, edge.B.P);
                 double in_front_of_barycenter = v.Z - TmpBarycenter.Z;
 
                 if (in_front_of_barycenter < 0.0)
@@ -164,7 +164,7 @@ namespace Lib.Draw
                 Drawer.SetPen(color, eprops.Thickness);
             }
 
-            Drawer.DrawMarginedLine(edge.A.Point2D, edge.B.Point2D, eprops.NodesMargin);
+            Drawer.DrawMarginedLine(edge.A.P, edge.B.P, eprops.NodesMargin);
         }
 
         /// <summary>

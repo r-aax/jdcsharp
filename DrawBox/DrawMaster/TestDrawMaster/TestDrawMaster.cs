@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 using Lib.Draw.WPF;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
+using Lib.Maths.Geometry;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 
 namespace DrawBox.DrawMaster.TestDrawMaster
@@ -25,8 +20,8 @@ namespace DrawBox.DrawMaster.TestDrawMaster
             RectDrawer d = new RectDrawer(new Rect2D(100.0, 100.0), cnv, false, true);
             d.BeginDraw();
 
-            d.DrawLine(new Point2D(0.0, 0.0), new Point2D(100.0, 100.0));
-            d.DrawLine(new Point2D(0.0, 100.0), new Point2D(100.0, 0.0));
+            d.DrawLine(new Point(0.0, 0.0), new Point(100.0, 100.0));
+            d.DrawLine(new Point(0.0, 100.0), new Point(100.0, 0.0));
 
             d.EndDraw();
         }

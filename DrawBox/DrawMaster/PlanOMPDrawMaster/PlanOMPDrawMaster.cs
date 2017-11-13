@@ -9,7 +9,6 @@ using System.Diagnostics;
 
 using Lib.Draw.WPF;
 using Lib.Maths.Geometry;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 
 namespace DrawBox.DrawMaster.PlanOMPDrawMaster
@@ -1248,7 +1247,7 @@ namespace DrawBox.DrawMaster.PlanOMPDrawMaster
 
                         if (low > 0.0)
                         {
-                            d.DrawLine(new Point2D(pe.WTime, low), new Point2D(e.WTime, low));
+                            d.DrawLine(new Point(pe.WTime, low), new Point(e.WTime, low));
                         }
 
                         low += ths[j];
@@ -1262,7 +1261,7 @@ namespace DrawBox.DrawMaster.PlanOMPDrawMaster
             for (int i = 1; i < els.Count<ThreadsCountChangeElement>() - 1; i++)
             {
                 ThreadsCountChangeElement e = els[i];
-                d.DrawLine(new Point2D(e.WTime, 0.0), new Point2D(e.WTime, max_threads));
+                d.DrawLine(new Point(e.WTime, 0.0), new Point(e.WTime, max_threads));
             }
 
             d.EndDraw();

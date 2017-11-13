@@ -31,7 +31,7 @@ namespace Lib.DataStruct.Graph
 
             for (int i = index_from; i <= index_to; i++)
             {
-                g.Nodes[i].Position = Point.Random(rect);
+                g.Nodes[i].P = Point.Random(rect);
             }
         }
 
@@ -47,7 +47,7 @@ namespace Lib.DataStruct.Graph
 
             foreach (int i in indices)
             {
-                g.Nodes[indices[i]].Position = Point.Random(rect);
+                g.Nodes[indices[i]].P = Point.Random(rect);
             }
         }
 
@@ -74,7 +74,7 @@ namespace Lib.DataStruct.Graph
 
             for (int i = index_from; i <= index_to; i++)
             {
-                g.Nodes[i].Position = Point.Random(par);
+                g.Nodes[i].P = Point.Random(par);
             }
         }
 
@@ -90,7 +90,7 @@ namespace Lib.DataStruct.Graph
 
             foreach (int i in indices)
             {
-                g.Nodes[indices[i]].Position = Point.Random(par);
+                g.Nodes[indices[i]].P = Point.Random(par);
             }
         }
 
@@ -132,8 +132,8 @@ namespace Lib.DataStruct.Graph
 
                 angle += start_angle;
 
-                g.Nodes[i].Position = circle.Center + new Vector(circle.Radius, 0.0);
-                g.Nodes[i].Position.Rot(circle.Center, angle);
+                g.Nodes[i].P = circle.Center + new Vector(circle.Radius, 0.0);
+                g.Nodes[i].P.Rot(circle.Center, angle);
             }
         }
 
@@ -175,7 +175,7 @@ namespace Lib.DataStruct.Graph
 
             for (int i = 0; i < indices.Length; i++)
             {
-                g.Nodes[indices[i]].Position = line.P + line.V * ((double)i / (indices.Length - 1));
+                g.Nodes[indices[i]].P = line.P + line.V * ((double)i / (indices.Length - 1));
             }
         }
 
@@ -213,7 +213,7 @@ namespace Lib.DataStruct.Graph
 
             for (int i = 0; i < indices.Length; i++)
             {
-                g.Nodes[indices[i]].Position = line.P + line.V * ((double)i / (indices.Length - 1));
+                g.Nodes[indices[i]].P = line.P + line.V * ((double)i / (indices.Length - 1));
             }
         }
 
@@ -264,8 +264,8 @@ namespace Lib.DataStruct.Graph
 
                     n = indices[n];
 
-                    g.Nodes[n].Position = new Point(rect.Left + rect.Width * ((double)x / (xn - 1)),
-                                                    rect.Top - rect.Height * ((double)y / (yn - 1)));
+                    g.Nodes[n].P = new Point(rect.Left + rect.Width * ((double)x / (xn - 1)),
+                                             rect.Top - rect.Height * ((double)y / (yn - 1)));
                 }
             }
         }
@@ -327,9 +327,9 @@ namespace Lib.DataStruct.Graph
 
                         n = indices[n];
 
-                        g.Nodes[n].Position = new Point(par.Left + par.Width * ((double)x / (xn - 1)),
-                                                        par.Top - par.Height * ((double)y / (yn - 1)),
-                                                        par.Front - par.Depth * ((double)z / (zn - 1)));
+                        g.Nodes[n].P = new Point(par.Left + par.Width * ((double)x / (xn - 1)),
+                                                 par.Top - par.Height * ((double)y / (yn - 1)),
+                                                 par.Front - par.Depth * ((double)z / (zn - 1)));
                     }
                 }
             }

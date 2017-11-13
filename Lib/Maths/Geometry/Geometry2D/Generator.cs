@@ -58,7 +58,7 @@ namespace Lib.Maths.Geometry.Geometry2D
                         Vector d = ps[i].ToroidDir(ps[j], rect);
 
                         // Scale to 1.
-                        d.Scale(1.0 / rect.Width, 1.0 / rect.Height);
+                        d.Scale(1.0 / rect.Width, 1.0 / rect.Height, 1.0);
 
                         // Calculate force.
                         Vector f = d * (1 / (d.Mod * d.Mod2));

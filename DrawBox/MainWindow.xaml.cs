@@ -1,30 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
 using DrawBox.Draw;
-using DrawBox.DrawMaster;
 
-using Lib.Draw.WPF;
-using Lib.Maths.Geometry;
-using Lib.Maths.Geometry.Geometry2D;
 using SWRect = System.Windows.Rect;
-using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
-using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
-using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
 
 using DrawBox.DrawMaster.PlanOMPDrawMaster;
 using DrawBox.DrawMaster.UniformPointsDrawMaster;

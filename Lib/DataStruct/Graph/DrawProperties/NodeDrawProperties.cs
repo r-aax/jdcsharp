@@ -57,7 +57,7 @@ namespace Lib.DataStruct.Graph.DrawProperties
             Color = new Color(0xFF, 0xDD, 0xDD, 0xDD);
             BorderColor = new Color(0xFF, 0xAA, 0xAA, 0xAA);
             LabelVisibility = Visibility.Parent;
-            LabelOffset = new Vector2D(5.0, 5.0);
+            LabelOffset = new Vector(5.0, 5.0);
             FontSize = 10.0;
         }
 
@@ -90,7 +90,7 @@ namespace Lib.DataStruct.Graph.DrawProperties
             {
                 throw new ApplicationException();
             }
-            LabelOffset = new Vector2D(Double.Parse(s[12]), Double.Parse(s[13]));
+            LabelOffset = new Vector(Double.Parse(s[12]), Double.Parse(s[13]));
             FontSize = Double.Parse(s[16]);
         }
 

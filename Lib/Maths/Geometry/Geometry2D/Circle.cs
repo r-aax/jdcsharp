@@ -52,7 +52,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <returns>sphere</returns>
         public Lib.Maths.Geometry.Geometry3D.Sphere Extended()
         {
-            return new Geometry3D.Sphere(Center.Extended(), Radius);
+            return new Geometry3D.Sphere(Center, Radius);
         }
     }
 }

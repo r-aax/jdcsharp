@@ -570,7 +570,7 @@ namespace Lib.DataStruct.Graph
             Graph g = InitialGraph(GraphDimensionality.D2, n);
 
             GraphLayoutManager.SetLayoutCircle(g, 0, n - 2, circle, Math.PI / 2.0);
-            g.Nodes[n - 1].Point2D = circle.Center;
+            g.Nodes[n - 1].P = circle.Center;
 
             for (int i = 0; i < n - 1; i++)
             {
@@ -615,14 +615,14 @@ namespace Lib.DataStruct.Graph
             // Nodes coordinates.
             for (int i = 0; i < order; i++)
             {
-                g.Nodes[i].Point3D = p + new Vector(0.0, r, 0.0);
+                g.Nodes[i].P = p + new Vector(0.0, r, 0.0);
             }
             for (int i = 1; i < order; i++)
             {
-                g.Nodes[i].Point3D.RotZ(p, -Math.Acos(1.0 - 0.5 * ((a * a) / (r * r))));
+                g.Nodes[i].P.RotZ(p, -Math.Acos(1.0 - 0.5 * ((a * a) / (r * r))));
             }
-            g.Nodes[2].Point3D.RotY(hp, 2.0 * Math.PI / 3.0);
-            g.Nodes[3].Point3D.RotY(hp, -2.0 * Math.PI / 3.0);
+            g.Nodes[2].P.RotY(hp, 2.0 * Math.PI / 3.0);
+            g.Nodes[3].P.RotY(hp, -2.0 * Math.PI / 3.0);
 
             // Create edges.
             for (int i = 0; i < order; i++)
@@ -668,9 +668,9 @@ namespace Lib.DataStruct.Graph
             {
                 Bits32 bi = new Bits32((UInt32)i);
 
-                g.Nodes[i].Point3D = p + new Vector(bi.IsBitSet(0) ? rr : -rr,
-                                                    bi.IsBitSet(1) ? rr : -rr,
-                                                    bi.IsBitSet(2) ? rr : -rr);
+                g.Nodes[i].P = p + new Vector(bi.IsBitSet(0) ? rr : -rr,
+                                              bi.IsBitSet(1) ? rr : -rr,
+                                              bi.IsBitSet(2) ? rr : -rr);
             }
 
             // Create edges.
@@ -712,12 +712,12 @@ namespace Lib.DataStruct.Graph
             Graph g = InitialGraph(GraphDimensionality.D3, order);
 
             // Nodes coordinates.
-            g.Nodes[0].Point3D = p + new Vector(0.0, r, 0.0);
-            g.Nodes[1].Point3D = p + new Vector(r, 0.0, 0.0);
-            g.Nodes[2].Point3D = p + new Vector(0.0, 0.0, r);
-            g.Nodes[3].Point3D = p + new Vector(-r, 0.0, 0.0);
-            g.Nodes[4].Point3D = p + new Vector(0.0, 0.0, -r);
-            g.Nodes[5].Point3D = p + new Vector(0.0, -r, 0.0);
+            g.Nodes[0].P = p + new Vector(0.0, r, 0.0);
+            g.Nodes[1].P = p + new Vector(r, 0.0, 0.0);
+            g.Nodes[2].P = p + new Vector(0.0, 0.0, r);
+            g.Nodes[3].P = p + new Vector(-r, 0.0, 0.0);
+            g.Nodes[4].P = p + new Vector(0.0, 0.0, -r);
+            g.Nodes[5].P = p + new Vector(0.0, -r, 0.0);
 
             // Create edges.
             AddEdges(g, 0, 1, 4);
@@ -759,22 +759,22 @@ namespace Lib.DataStruct.Graph
             // Dodecahedron nodes.
             for (int i = 0; i < order; i++)
             {
-                g.Nodes[i].Point3D = p;
+                g.Nodes[i].P = p;
             }
             for (int i = 0; i < 5; i++)
             {
-                g.Nodes[i].Point3D = new Triangle3D(ico.Nodes[0].Point3D,
-                                                    ico.Nodes[i + 1].Point3D,
-                                                    ico.Nodes[(i + 1) % 5 + 1].Point3D).Barycenter();
-                g.Nodes[i + 5].Point3D = new Triangle3D(ico.Nodes[i + 1].Point3D,
-                                                        ico.Nodes[(i + 1) % 5 + 1].Point3D,
-                                                        ico.Nodes[i + 6].Point3D).Barycenter();
-                g.Nodes[i + 10].Point3D = new Triangle3D(ico.Nodes[(i + 1) % 5 + 1].Point3D,
-                                                         ico.Nodes[i + 6].Point3D,
-                                                         ico.Nodes[(i + 1) % 5 + 6].Point3D).Barycenter();
-                g.Nodes[i + 15].Point3D = new Triangle3D(ico.Nodes[i + 6].Point3D,
-                                                         ico.Nodes[(i + 1) % 5 + 6].Point3D,
-                                                         ico.Nodes[ico.Order - 1].Point3D).Barycenter();
+                g.Nodes[i].P = new Triangle3D(ico.Nodes[0].P,
+                                              ico.Nodes[i + 1].P,
+                                              ico.Nodes[(i + 1) % 5 + 1].P).Barycenter();
+                g.Nodes[i + 5].P = new Triangle3D(ico.Nodes[i + 1].P,
+                                                  ico.Nodes[(i + 1) % 5 + 1].P,
+                                                  ico.Nodes[i + 6].P).Barycenter();
+                g.Nodes[i + 10].P = new Triangle3D(ico.Nodes[(i + 1) % 5 + 1].P,
+                                                   ico.Nodes[i + 6].P,
+                                                   ico.Nodes[(i + 1) % 5 + 6].P).Barycenter();
+                g.Nodes[i + 15].P = new Triangle3D(ico.Nodes[i + 6].P,
+                                                   ico.Nodes[(i + 1) % 5 + 6].P,
+                                                   ico.Nodes[ico.Order - 1].P).Barycenter();
             }
 
             // Create edges.
@@ -816,19 +816,19 @@ namespace Lib.DataStruct.Graph
             double d = r * 2.0 / Math.Sqrt(5.0);
 
             // Nodes coordinates.
-            g.Nodes[0].Point3D = p + new Vector(0.0, d * Math.Sqrt(5.0) / 2.0, 0.0);
-            g.Nodes[11].Point3D = p - new Vector(0.0, d * Math.Sqrt(5.0) / 2.0, 0.0);
+            g.Nodes[0].P = p + new Vector(0.0, d * Math.Sqrt(5.0) / 2.0, 0.0);
+            g.Nodes[11].P = p - new Vector(0.0, d * Math.Sqrt(5.0) / 2.0, 0.0);
             for (int i = 1; i <= 5; i++)
             {
-                g.Nodes[i].Point3D = p + new Vector(0.0, 0.5 * d, 0.0);
-                g.Nodes[i].Point3D += new Vector(d, 0.0, 0.0);
-                g.Nodes[i].Point3D.RotY(p, 2.0 * Math.PI / 5.0 * ((double)(i - 1)));
+                g.Nodes[i].P = p + new Vector(0.0, 0.5 * d, 0.0);
+                g.Nodes[i].P += new Vector(d, 0.0, 0.0);
+                g.Nodes[i].P.RotY(p, 2.0 * Math.PI / 5.0 * ((double)(i - 1)));
             }
             for (int i = 6; i <= 10; i++)
             {
-                g.Nodes[i].Point3D = p - new Vector(0.0, 0.5 * d, 0.0);
-                g.Nodes[i].Point3D += new Vector(d, 0.0, 0.0);
-                g.Nodes[i].Point3D.RotY(p, 2.0 * Math.PI / 5.0 * ((double)(i - 1) + 0.5));
+                g.Nodes[i].P = p - new Vector(0.0, 0.5 * d, 0.0);
+                g.Nodes[i].P += new Vector(d, 0.0, 0.0);
+                g.Nodes[i].P.RotY(p, 2.0 * Math.PI / 5.0 * ((double)(i - 1) + 0.5));
             }
 
             // Create edges.
@@ -1337,7 +1337,7 @@ namespace Lib.DataStruct.Graph
                 int n = 1 + radiuses_count * (points_on_radius - 1);
                 Graph g = InitialGraph(GraphDimensionality.D2, n);
 
-                g.Nodes[0].Point2D = circle.Center;
+                g.Nodes[0].P = circle.Center;
 
                 // layout and circle edges
                 for (int i = 0; i < points_on_radius - 1; i++)

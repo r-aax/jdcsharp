@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lib.MathMod.Solver
 {
@@ -420,7 +416,7 @@ namespace Lib.MathMod.Solver
                     u_hi.rho, u_hi.v.X, u_hi.v.Y, 0.0, u_hi.p, out d, out u, out v, out w, out p);
 
             ru.rho = d;
-            ru.v = new Maths.Geometry.Geometry2D.Vector(u, v);
+            ru.v = new Maths.Geometry.Vector(u, v);
             ru.p = p;
 
             return ru;
@@ -441,7 +437,7 @@ namespace Lib.MathMod.Solver
                     u_hi.rho, u_hi.v.Y, u_hi.v.X, 0.0, u_hi.p, out d, out v, out u, out w, out p);
 
             ru.rho = d;
-            ru.v = new Maths.Geometry.Geometry2D.Vector(u, v);
+            ru.v = new Maths.Geometry.Vector(u, v);
             ru.p = p;
 
             return ru;

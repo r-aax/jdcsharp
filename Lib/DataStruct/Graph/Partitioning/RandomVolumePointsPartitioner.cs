@@ -48,10 +48,10 @@ namespace Lib.DataStruct.Graph.Partitioning
                 // Find nearest point.
                 for (int pi = 0; pi < pc; pi++)
                 {
-                    if ((nearest_point_index == -1) || (n.Point3D.Dist(points[pi]) < nearest_point_dist))
+                    if ((nearest_point_index == -1) || (n.P.Dist(points[pi]) < nearest_point_dist))
                     {
                         nearest_point_index = pi;
-                        nearest_point_dist = n.Point3D.Dist(points[nearest_point_index]);
+                        nearest_point_dist = n.P.Dist(points[nearest_point_index]);
                     }
                 }
 
@@ -89,7 +89,7 @@ namespace Lib.DataStruct.Graph.Partitioning
                 double[] ms = new double[no_partition_nodes.Count];
                 for (int i = 0; i < ms.Count(); i++)
                 {
-                    ms[i] = no_partition_nodes[i].Point3D.Dist(points[min_partition_index])
+                    ms[i] = no_partition_nodes[i].P.Dist(points[min_partition_index])
                             + DistFromNodeToNodes(no_partition_nodes[i], partition_nodes);
                 }
 
@@ -157,7 +157,7 @@ namespace Lib.DataStruct.Graph.Partitioning
                     // If partition is empty we take nearest node to random point.
                     for (int i = 0; i < ms.Count(); i++)
                     {
-                        ms[i] = no_partition_nodes[i].Point3D.Dist(points[min_partition_index]);
+                        ms[i] = no_partition_nodes[i].P.Dist(points[min_partition_index]);
                     }
 
                     n = no_partition_nodes[NumbersArrays.MinIndex(ms)];

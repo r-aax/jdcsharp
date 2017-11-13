@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows.Controls;
 
 using Lib.Draw.WPF;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
+using Lib.Maths.Geometry;
+using Lib.Maths.Geometry.Geometry2D;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 
 namespace DrawBox.DrawMaster.UniformPointsDrawMaster
@@ -30,7 +27,7 @@ namespace DrawBox.DrawMaster.UniformPointsDrawMaster
             d.SetBrush(new Lib.Draw.Color(System.Windows.Media.Colors.Silver));
             d.FillRect(rect);
 
-            Point2D[] ps = Lib.Maths.Geometry.Geometry2D.Generator.UniformPointsInRect(81, rect);
+            Point[] ps = Generator.UniformPointsInRect(81, rect);
 
             d.SetBrush(new Lib.Draw.Color(System.Windows.Media.Colors.Black));
 

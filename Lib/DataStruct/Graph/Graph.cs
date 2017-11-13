@@ -554,7 +554,7 @@ namespace Lib.DataStruct.Graph
 
                 for (int i = 0; i < Order; i++)
                 {
-                    p[i] = Nodes[i].Position;
+                    p[i] = Nodes[i].P;
                 }
 
                 return new Point(Point.Avg(p));
@@ -637,7 +637,7 @@ namespace Lib.DataStruct.Graph
             Debug.Assert(Is3D);
 
             Point bc = Barycenter();
-            Nodes.ForEach((Node n) => n.Position.RotX(bc, angle));
+            Nodes.ForEach((Node n) => n.P.RotX(bc, angle));
         }
 
         /// <summary>
@@ -649,7 +649,7 @@ namespace Lib.DataStruct.Graph
             Debug.Assert(Is3D);
 
             Point bc = Barycenter();
-            Nodes.ForEach((Node n) => n.Position.RotY(bc, angle));
+            Nodes.ForEach((Node n) => n.P.RotY(bc, angle));
         }
 
         /// <summary>
@@ -659,7 +659,7 @@ namespace Lib.DataStruct.Graph
         public void RotZ(double angle)
         {
             Point bc = Barycenter();
-            Nodes.ForEach((Node n) => n.Position.RotZ(bc, angle));
+            Nodes.ForEach((Node n) => n.P.RotZ(bc, angle));
         }
 
         /// <summary>
@@ -674,7 +674,7 @@ namespace Lib.DataStruct.Graph
 
             foreach (Node n in Nodes)
             {
-                n.Position.Z = 0.0;
+                n.P.Z = 0.0;
             }
 
             Dimensionality = GraphDimensionality.D2;
@@ -704,9 +704,9 @@ namespace Lib.DataStruct.Graph
 
             for (int i = 1; i < Order; i++)
             {
-                Point p2 = Nodes[i].Position;
+                Point p2 = Nodes[i].P;
 
-                if (p.Dist(p2) < p.Dist(n.Position))
+                if (p.Dist(p2) < p.Dist(n.P))
                 {
                     n = Nodes[i];
                 }

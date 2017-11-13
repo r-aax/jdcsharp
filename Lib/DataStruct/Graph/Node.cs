@@ -60,7 +60,7 @@ namespace Lib.DataStruct.Graph
         /// <summary>
         /// Position.
         /// </summary>
-        public Point Position = null;
+        public Point P = null;
 
         /// <summary>
         /// Draw properties.
@@ -114,7 +114,7 @@ namespace Lib.DataStruct.Graph
         {
             get
             {
-                return Position.X;
+                return P.X;
             }
         }
 
@@ -125,7 +125,7 @@ namespace Lib.DataStruct.Graph
         {
             get
             {
-                return Position.Y;
+                return P.Y;
             }
         }
 
@@ -136,7 +136,7 @@ namespace Lib.DataStruct.Graph
         {
             get
             {
-                return Position.Z;
+                return P.Z;
             }
         }
 
@@ -146,7 +146,7 @@ namespace Lib.DataStruct.Graph
         /// <returns>string</returns>
         public string PositionString()
         {
-            return Position.ToString();
+            return P.ToString();
         }
 
         /// <summary>
@@ -303,11 +303,11 @@ namespace Lib.DataStruct.Graph
             switch (n)
             {
                 case 4:
-                    Position = new Point(Double.Parse(s[1]), Double.Parse(s[2]));
+                    P = new Point(Double.Parse(s[1]), Double.Parse(s[2]));
                     break;
 
                 case 5:
-                    Position = new Point(Double.Parse(s[1]), Double.Parse(s[2]), Double.Parse(s[3]));
+                    P = new Point(Double.Parse(s[1]), Double.Parse(s[2]), Double.Parse(s[3]));
                     break;
 
                 default:

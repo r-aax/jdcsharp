@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Lib.DataStruct.Graph.Partitioning
 {
@@ -100,7 +96,7 @@ namespace Lib.DataStruct.Graph.Partitioning
 
             foreach (Node tn in ns)
             {
-                d += n.Point3D.Dist(tn.Point3D);
+                d += n.P.Dist(tn.P);
             }
 
             return d;

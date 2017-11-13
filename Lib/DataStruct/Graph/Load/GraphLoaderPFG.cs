@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Globalization;
-using System.Diagnostics;
 
-using Lib.DataStruct.Graph;
-using Lib.Maths.Geometry.Geometry3D;
+using Lib.Maths.Geometry;
 using Lib.DataFormats;
 
 namespace Lib.DataStruct.Graph.Load
@@ -385,7 +380,7 @@ namespace Lib.DataStruct.Graph.Load
             for (int i = 0; i < c; i++)
             {
                 Node node = g.AddNode();
-                node.Point3D = new Point(cs[start_index + i],
+                node.P = new Point(cs[start_index + i],
                                          cs[start_index + c + i],
                                          cs[start_index + 2 * c + i]);
             }
@@ -491,7 +486,7 @@ namespace Lib.DataStruct.Graph.Load
                 // Weight of block is count of cells (not nodes).
                 node.Weight = (ii[i] - 1) * (jj[i] - 1) * (kk[i] - 1);
 
-                node.Point3D = new Point(cs[3 * i], cs[3 * i + 1], cs[3 * i + 2]);
+                node.P = new Point(cs[3 * i], cs[3 * i + 1], cs[3 * i + 2]);
             }
         }
 
