@@ -211,6 +211,19 @@ namespace Lib.Draw
         /// Draw text.
         /// </summary>
         /// <param name="p">point</param>
+        /// <param name="off">offset</param>
+        /// <param name="text">text</param>
+        /// <param name="size">size</param>
+        /// <param name="family">font</param>
+        public void DrawText(Point p, Vector off, string text, double size, string family)
+        {
+            DrawText(p, off, text, size, family, Color.Black);
+        }
+
+        /// <summary>
+        /// Draw text.
+        /// </summary>
+        /// <param name="p">point</param>
         /// <param name="text">test</param>
         /// <param name="size">size</param>
         /// <param name="family">font</param>

@@ -26,7 +26,6 @@ using Lib.Utils;
 using Lib.MathMod.Grid.Partitioning;
 using Lib.DataStruct;
 using Lib.IO;
-using GridMaster.Tools;
 
 namespace GridMaster.Windows
 {

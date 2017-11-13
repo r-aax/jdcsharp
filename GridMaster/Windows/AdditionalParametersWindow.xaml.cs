@@ -22,11 +22,6 @@ namespace GridMaster.Windows
     public partial class AdditionalParametersWindow : Window
     {
         /// <summary>
-        /// Parameters.
-        /// </summary>
-        private AdditionalParameters Parameters;
-
-        /// <summary>
         /// Constructor.
         /// </summary>
         public AdditionalParametersWindow()
