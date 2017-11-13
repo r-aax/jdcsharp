@@ -2,11 +2,18 @@
 
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Lib.Maths.Geometry.Geometry3D
+using Lib.Maths.Geometry.Geometry2D;
+using Lib.Maths.Geometry.Geometry3D;
+
+namespace Lib.Maths.Geometry
 {
     /// <summary>
-    /// 3D point.
+    /// Point (2D or 3D).
     /// </summary>
     public class Point : Vector, ICloneable
     {
@@ -26,6 +33,16 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// <param name="z">coordinate <c>z</c></param>
         public Point(double x, double y, double z)
             : base(x, y, z)
+        {
+        }
+
+        /// <summary>
+        /// Constructor by coordinates.
+        /// </summary>
+        /// <param name="x">coordinate <c>x</c></param>
+        /// <param name="y">coordinate <c>y</c></param>
+        public Point(double x, double y)
+            : base(x, y)
         {
         }
 
@@ -51,7 +68,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Distance to point on axis <c>x</c>.
+        /// Distance to point on axis <c>X</c>.
         /// </summary>
         /// <param name="p">point</param>
         /// <returns>distance</returns>
@@ -61,7 +78,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Distance to point on axis <c>y</c>.
+        /// Distance to point on axis <c>Y</c>.
         /// </summary>
         /// <param name="p">point</param>
         /// <returns>distance</returns>
@@ -71,7 +88,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
-        /// Distance to point on axis <c>z</c>.
+        /// Distance to point on axis <c>Z</c>.
         /// </summary>
         /// <param name="p">point</param>
         /// <returns>distance</returns>
@@ -152,6 +169,16 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// <summary>
         /// Random point.
         /// </summary>
+        /// <param name="rect">rectangle</param>
+        /// <returns>random point</returns>
+        public static new Point Random(Rect rect)
+        {
+            return new Point(Vector.Random(rect));
+        }
+
+        /// <summary>
+        /// Random point.
+        /// </summary>
         /// <param name="par">parallelepiped</param>
         /// <returns>random point</returns>
         public static new Point Random(Parallelepiped par)
@@ -167,6 +194,15 @@ namespace Lib.Maths.Geometry.Geometry3D
         public static new Point RandomOnSurface(Parallelepiped par)
         {
             return new Point(Vector.RandomOnSurface(par));
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>clone</returns>
+        public override object Clone()
+        {
+            return new Point(X, Y, Z);
         }
 
         /// <summary>
@@ -207,6 +243,16 @@ namespace Lib.Maths.Geometry.Geometry3D
         }
 
         /// <summary>
+        /// Check if point is in rectangle.
+        /// </summary>
+        /// <param name="rect">rectangle</param>
+        /// <returns><c>true</c> - if point is in rectangle, <c>false</c> - otherwise</returns>
+        public bool IsIn(Rect rect)
+        {
+            return rect.XInterval.Contains(X) && rect.YInterval.Contains(Y);
+        }
+
+        /// <summary>
         /// Check if point is inside of parallelepiped.
         /// </summary>
         /// <param name="par">parallelepiped</param>
@@ -220,11 +266,80 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// Toroid distance.
         /// </summary>
         /// <param name="p">point</param>
+        /// <param name="rect">rectangle</param>
+        /// <returns>distance</returns>
+        public double ToroidDist(Point p, Rect rect)
+        {
+            return ToroidDir(p, rect).Mod;
+        }
+
+        /// <summary>
+        /// Toroid distance.
+        /// </summary>
+        /// <param name="p">point</param>
         /// <param name="par">parallelepiped</param>
         /// <returns>distance</returns>
         public double ToroidDist(Point p, Parallelepiped par)
         {
             return ToroidDir(p, par).Mod;
+        }
+
+        /// <summary>
+        /// Toroid direction to point.
+        /// </summary>
+        /// <param name="p">point</param>
+        /// <param name="rect">rectangle</param>
+        /// <returns>vector in direction to given point</returns>
+        public Vector ToroidDir(Point p, Rect rect)
+        {
+            Debug.Assert(IsIn(rect) && p.IsIn(rect), "Toroid direction is available only for inner points.");
+
+            // First find direction for X component.
+            double dx = DistX(p);
+            double edx = 0.0;
+            if (dx <= rect.Width - dx)
+            {
+                // Inner dist.
+                // |----- this =====> p -----|
+                edx = p.X - X;
+            }
+            else
+            {
+                // Outer toroid dist.
+                if (X > p.X)
+                {
+                    // Direction to the right.
+                    // |----- p ----- this =====>|
+                    edx = (rect.Right - X) + (p.X - rect.Left);
+                }
+                else
+                {
+                    // Direction to the left.
+                    // |<===== this ----- p -----|
+                    edx = (rect.Left - X) + (p.X - rect.Right);
+                }
+            }
+
+            // The same action for Y component.
+            double dy = DistY(p);
+            double edy = 0.0;
+            if (dy <= rect.Height - dy)
+            {
+                edy = p.Y - Y;
+            }
+            else
+            {
+                if (Y > p.Y)
+                {
+                    edy = (rect.Top - Y) + (p.Y - rect.Bottom);
+                }
+                else
+                {
+                    edy = (rect.Bottom - Y) + (p.Y - rect.Top);
+                }
+            }
+
+            return new Vector(edx, edy);
         }
 
         /// <summary>
@@ -308,6 +423,38 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// Move point in toroid.
         /// </summary>
         /// <param name="v">vector</param>
+        /// <param name="rect">rect</param>
+        public void ToroidMove(Vector v, Rect rect)
+        {
+            Debug.Assert(IsIn(rect), "Toroid operations are available only for inner points.");
+
+            X += v.X;
+            if (X > rect.Right)
+            {
+                X -= rect.Width;
+            }
+            else if (X < rect.Left)
+            {
+                X += rect.Width;
+            }
+
+            Y += v.Y;
+            if (Y > rect.Top)
+            {
+                Y -= rect.Height;
+            }
+            else if (Y < rect.Bottom)
+            {
+                Y += rect.Height;
+            }
+
+            Debug.Assert(IsIn(rect), "Too big shift for toroid operation.");
+        }
+
+        /// <summary>
+        /// Move point in toroid.
+        /// </summary>
+        /// <param name="v">vector</param>
         /// <param name="par">parallelepiped</param>
         public void ToroidMove(Vector v, Parallelepiped par)
         {
@@ -344,15 +491,6 @@ namespace Lib.Maths.Geometry.Geometry3D
             }
 
             Debug.Assert(IsIn(par), "Too big shift for toroid operation.");
-        }
-
-        /// <summary>
-        /// Clone.
-        /// </summary>
-        /// <returns>point</returns>
-        new public object Clone()
-        {
-            return new Point(X, Y, Z);
         }
     }
 }

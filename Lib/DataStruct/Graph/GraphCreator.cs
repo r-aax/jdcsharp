@@ -12,8 +12,7 @@ using Lib.Draw;
 using Lib.DataStruct.Graph.DrawProperties;
 using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
 using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
-using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
-using Vector3D = Lib.Maths.Geometry.Geometry3D.Vector;
+using Lib.Maths.Geometry;
 using Triangle3D = Lib.Maths.Geometry.Geometry3D.Triangle;
 using Line2D = Lib.Maths.Geometry.Geometry2D.Line;
 

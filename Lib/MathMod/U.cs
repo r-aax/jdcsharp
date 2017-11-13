@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Lib.Maths.Geometry.Geometry2D;
+using Lib.Maths.Geometry;
 using Lib.MathMod.Solver;
 
 namespace Lib.MathMod

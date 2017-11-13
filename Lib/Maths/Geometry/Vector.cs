@@ -624,7 +624,7 @@ namespace Lib.Maths.Geometry
         /// Clone.
         /// </summary>
         /// <returns>copy</returns>
-        public object Clone()
+        public virtual object Clone()
         {
             return new Vector(X, Y, Z);
         }

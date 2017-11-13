@@ -3,7 +3,7 @@
 using System;
 
 using Lib.Draw;
-using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
+using Lib.Maths.Geometry;
 
 namespace Lib.DataStruct.Graph.DrawProperties
 {
