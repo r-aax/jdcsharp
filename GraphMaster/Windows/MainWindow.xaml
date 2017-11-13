@@ -88,6 +88,7 @@
                     <MenuItem Name="ExampleCycle" Header="Cycle" Click="ExampleCycle_Click" />
                     <MenuItem Name="ExampleStar" Header="Star" Click="ExampleStar_Click" />
                     <MenuItem Name="ExampleWheel" Header="Wheel" Click="ExampleWheel_Click" />
+                    <MenuItem Name="ExampleDutchWindmill" Header="Dutch windmill" Click="ExampleDutchWindmill_Click"/>
                     <Separator/>
                     <MenuItem Name="ExampleCircular" Header="Circular graph" Click="ExampleCircular_Click" />
                     <MenuItem Name="ExampleHatch" Header="Hatch graph" Click="ExampleHatch_Click" />

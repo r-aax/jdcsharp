@@ -1227,7 +1227,7 @@ namespace GraphMaster.Windows
         /// Wheel.
         /// </summary>
         /// <param name="sender">object</param>
-        /// <param name="e">paremeters</param>
+        /// <param name="e">parameters</param>
         private void ExampleWheel_Click(object sender, RoutedEventArgs e)
         {
             EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
@@ -1236,6 +1236,24 @@ namespace GraphMaster.Windows
             if (w.IsAccepted)
             {
                 Graph = GraphCreator.Wheel(w.Result, Circle);
+            }
+
+            Paint();
+        }
+
+        /// <summary>
+        /// Dutch windmill.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ExampleDutchWindmill_Click(object sender, RoutedEventArgs e)
+        {
+            EditIntWindow w = new EditIntWindow(5, "Enter blades count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.DutchWindmill(w.Result, Circle);
             }
 
             Paint();

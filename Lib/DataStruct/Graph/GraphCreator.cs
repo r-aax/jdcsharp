@@ -569,12 +569,12 @@ namespace Lib.DataStruct.Graph
 
             Graph g = InitialGraph(GraphDimensionality.D2, n);
 
-            GraphLayoutManager.SetLayoutCircle(g, 0, n - 2, circle, Math.PI / 2.0);
-            g.Nodes[n - 1].P = circle.Center;
+            GraphLayoutManager.SetLayoutCircle(g, 1, n - 1, circle, Math.PI / 2.0);
+            g.Nodes[0].P = circle.Center;
 
-            for (int i = 0; i < n - 1; i++)
+            for (int i = 1; i < n; i++)
             {
-                g.AddEdge(i, n - 1);
+                g.AddEdge(0, i);
             }
 
             return g;
@@ -590,7 +590,25 @@ namespace Lib.DataStruct.Graph
         {
             Graph g = Star(n, circle);
 
-            AddCycle(g, 0, n - 2);
+            AddCycle(g, 1, n - 1);
+
+            return g;
+        }
+
+        /// <summary>
+        /// Dutch windmill.
+        /// </summary>
+        /// <param name="blades">blades count</param>
+        /// <param name="circle">outer circle</param>
+        /// <returns>dutch windmill</returns>
+        public static Graph DutchWindmill(int blades, Circle circle)
+        {
+            Graph g = Star(2 * blades + 1, circle);
+
+            for (int i = 0; i < blades; i++)
+            {
+                g.AddEdge(2 * i + 1, 2 * (i + 1));
+            }
 
             return g;
         }
