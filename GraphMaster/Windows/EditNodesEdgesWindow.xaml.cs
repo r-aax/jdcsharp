@@ -358,8 +358,8 @@ namespace GraphMaster.Windows
                 default:
                     throw new ApplicationException();
             }
-            dp.LabelOffset = new Lib.Maths.Geometry.Geometry2D.Vector(Lib.GUI.WPF.IO.GetDouble(NodeLabelOffsetX_TB),
-                                                                      Lib.GUI.WPF.IO.GetDouble(NodeLabelOffsetY_TB));
+            dp.LabelOffset = new Lib.Maths.Geometry.Vector(Lib.GUI.WPF.IO.GetDouble(NodeLabelOffsetX_TB),
+                                                           Lib.GUI.WPF.IO.GetDouble(NodeLabelOffsetY_TB));
             dp.FontSize = Lib.GUI.WPF.IO.GetDouble(NodeFontSizeTB);
 
             return dp;

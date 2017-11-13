@@ -3,8 +3,7 @@
 using System.Diagnostics;
 
 using Lib.DataStruct.Graph;
-using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
+using Lib.Maths.Geometry;
 
 namespace GraphMaster.Tools
 {
@@ -21,7 +20,7 @@ namespace GraphMaster.Tools
         /// <summary>
         /// Base point (click point).
         /// </summary>
-        private Point2D BasePoint = null;
+        private Point BasePoint = null;
 
         /// <summary>
         /// Captured node.
@@ -31,7 +30,7 @@ namespace GraphMaster.Tools
         /// <summary>
         /// Begin coordinates of captured node.
         /// </summary>
-        private Point2D NodePoint = null;
+        private Point NodePoint = null;
 
         /// <summary>
         /// Constructor.
@@ -70,7 +69,7 @@ namespace GraphMaster.Tools
         /// <c>true</c> - if node was captured, 
         /// <c>false</c> - otherwise
         /// </returns>
-        public bool TryToCaptureNode(Graph g, Point2D p)
+        public bool TryToCaptureNode(Graph g, Point p)
         {
             Debug.Assert((State == GUIState.Common)
                          && (BasePoint == null)
@@ -86,7 +85,7 @@ namespace GraphMaster.Tools
 
             BasePoint = p;
             Node = n;
-            NodePoint = n.Point2D.Clone() as Point2D;
+            NodePoint = n.P.Clone() as Point;
 
             return true;
         }
@@ -95,7 +94,7 @@ namespace GraphMaster.Tools
         /// Move captured node.
         /// </summary>
         /// <param name="p">current position</param>
-        public void MoveCapturedNode(Point2D p)
+        public void MoveCapturedNode(Point p)
         {
             if (!IsNodeCaptured)
             {
@@ -107,17 +106,17 @@ namespace GraphMaster.Tools
                          && (NodePoint != null));
 
             // Shift.
-            Vector2D v = p - BasePoint;
+            Vector v = p - BasePoint;
 
             // Move node.
-            Node.Point2D = NodePoint + v;
+            Node.P = NodePoint + v;
         }
 
         /// <summary>
         /// Node moving end.
         /// </summary>
         /// <param name="p">point</param>
-        public void FinishNodeDrag(Point2D p)
+        public void FinishNodeDrag(Point p)
         {
             if (!IsNodeCaptured)
             {
@@ -148,7 +147,7 @@ namespace GraphMaster.Tools
                          && (NodePoint != null));
 
             // Set old coordinates back.
-            Node.Point2D = NodePoint;
+            Node.P = NodePoint;
             BasePoint = null;
             Node = null;
             NodePoint = null;

@@ -22,9 +22,8 @@ using Lib.Maths.Geometry.Geometry3D;
 using SWPoint = System.Windows.Point;
 using SWRect = System.Windows.Rect;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
-using Vector2D = Lib.Maths.Geometry.Geometry2D.Vector;
-using Point2D = Lib.Maths.Geometry.Geometry2D.Point;
-using Point3D = Lib.Maths.Geometry.Geometry3D.Point;
+using LVector = Lib.Maths.Geometry.Vector;
+using LPoint = Lib.Maths.Geometry.Point;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
 using GraphMaster.Tools;
 using Lib.GUI.WPF;
@@ -186,7 +185,7 @@ namespace GraphMaster.Windows
                 GraphDrawer.DrawNode(GUIProcessor.Node, nprops);
                 nprops.Color = save_color;
             }
-            Drawer.DrawText(Drawer.Scaler.F(new Point2D(15.0, DrawAreaC.ActualHeight - 25.0)),
+            Drawer.DrawText(Drawer.Scaler.F(new LPoint(15.0, DrawAreaC.ActualHeight - 25.0)),
                             PictureName, 12.0, "Lucida Console");
             Drawer.EndDraw();
 
@@ -269,7 +268,7 @@ namespace GraphMaster.Windows
         /// </summary>
         private void AreaRight()
         {
-            Drawer.Rect.RelMove(new Vector2D(Parameters.AreaMoveCoefficient, 0.0));
+            Drawer.Rect.RelMove(new LVector(Parameters.AreaMoveCoefficient, 0.0));
             Paint();
         }
 
@@ -278,7 +277,7 @@ namespace GraphMaster.Windows
         /// </summary>
         private void AreaLeft()
         {
-            Drawer.Rect.RelMove(new Vector2D(-Parameters.AreaMoveCoefficient, 0.0));
+            Drawer.Rect.RelMove(new LVector(-Parameters.AreaMoveCoefficient, 0.0));
             Paint();
         }
 
@@ -287,7 +286,7 @@ namespace GraphMaster.Windows
         /// </summary>
         private void AreaUp()
         {
-            Drawer.Rect.RelMove(new Vector2D(0.0, Parameters.AreaMoveCoefficient));
+            Drawer.Rect.RelMove(new LVector(0.0, Parameters.AreaMoveCoefficient));
             Paint();
         }
 
@@ -296,7 +295,7 @@ namespace GraphMaster.Windows
         /// </summary>
         private void AreaDown()
         {
-            Drawer.Rect.RelMove(new Vector2D(0.0, -Parameters.AreaMoveCoefficient));
+            Drawer.Rect.RelMove(new LVector(0.0, -Parameters.AreaMoveCoefficient));
             Paint();
         }
 
@@ -1247,11 +1246,11 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="e">parameters</param>
         /// <returns>point</returns>
-        private Point2D GetEventPoint(System.Windows.Input.MouseEventArgs e)
+        private LPoint GetEventPoint(System.Windows.Input.MouseEventArgs e)
         {
             SWPoint p = e.GetPosition(DrawAreaC);
 
-            return Drawer.Scaler.F(new Point2D(p.X, p.Y));
+            return Drawer.Scaler.F(new LPoint(p.X, p.Y));
         }
 
         /// <summary>
@@ -1259,11 +1258,11 @@ namespace GraphMaster.Windows
         /// </summary>
         /// <param name="e">parameters</param>
         /// <returns>point</returns>
-        private Point2D GetEventPoint(MouseButtonEventArgs e)
+        private LPoint GetEventPoint(MouseButtonEventArgs e)
         {
             SWPoint p = e.GetPosition(DrawAreaC);
 
-            return Drawer.Scaler.F(new Point2D(p.X, p.Y));
+            return Drawer.Scaler.F(new LPoint(p.X, p.Y));
         }
 
         /// <summary>
@@ -1273,7 +1272,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void DrawAreaC_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Point2D fp = GetEventPoint(e);
+            LPoint fp = GetEventPoint(e);
 
             switch (GUIProcessor.State)
             {
@@ -1302,7 +1301,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void DrawAreaC_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point2D fp = GetEventPoint(e);
+            LPoint fp = GetEventPoint(e);
 
             switch (GUIProcessor.State)
             {
@@ -1344,7 +1343,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void DrawAreaC_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            Point2D fp = GetEventPoint(e);
+            LPoint fp = GetEventPoint(e);
 
             switch (GUIProcessor.State)
             {
@@ -1373,7 +1372,7 @@ namespace GraphMaster.Windows
         /// <param name="e">parameters</param>
         private void DrawAreaC_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point2D fp = GetEventPoint(e);
+            LPoint fp = GetEventPoint(e);
 
             switch (GUIProcessor.State)
             {
@@ -1437,7 +1436,7 @@ namespace GraphMaster.Windows
         /// <param name="e">paremeters</param>
         private void DrawAreaC_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Point2D fp = GetEventPoint(e);
+            LPoint fp = GetEventPoint(e);
 
             switch (GUIProcessor.State)
             {
@@ -2297,12 +2296,12 @@ namespace GraphMaster.Windows
             {
                 Parallelepiped par = Graph.WraparoundParallelepiped();
 
-                Point3D[] ps = Lib.Maths.Geometry.Geometry3D.Generator.UniformPointsInParallelepiped(w.Result, par); 
+                LPoint[] ps = Lib.Maths.Geometry.Geometry3D.Generator.UniformPointsInParallelepiped(w.Result, par); 
 
                 for (int i = 0; i < w.Result; i++)
                 {
                     Node n = Graph.AddNode();
-                    n.Point3D = ps[i];
+                    n.P = ps[i];
                     n.CreateOwnDrawProperties();
                     n.DrawProperties.BorderRadius = 8.0;
                     n.DrawProperties.InnerRadius = 8.0;
@@ -2339,7 +2338,7 @@ namespace GraphMaster.Windows
             LB.Items.Add(String.Format("RVPEP pc = {0}", pc));
 
             // Partition.
-            Point3D[] points = RandomVolumePointsPartitioner.RandomPoints(Graph, pc);
+            LPoint[] points = RandomVolumePointsPartitioner.RandomPoints(Graph, pc);
             double alpha = 1.0;
             while (alpha >= 0.0)
             {
