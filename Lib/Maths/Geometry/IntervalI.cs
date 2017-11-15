@@ -9,7 +9,7 @@ namespace Lib.Maths.Geometry
     /// <summary>
     /// Segment with integer points.
     /// </summary>
-    public class IntervalI : Segm<int>
+    public class IntervalI : Interval<int>
     {
         /// <summary>
         /// Constructor from low and high ends.

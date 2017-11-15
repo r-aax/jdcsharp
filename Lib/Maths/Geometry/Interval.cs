@@ -9,7 +9,7 @@ namespace Lib.Maths.Geometry
     /// <summary>
     /// Segment with two ends.
     /// </summary>
-    public class Segm<T> : ICloneable
+    public class Interval<T> : ICloneable
     {
         /// <summary>
         /// Values.
@@ -19,7 +19,7 @@ namespace Lib.Maths.Geometry
         /// <summary>
         /// Constructor.
         /// </summary>
-        public Segm()
+        public Interval()
         {
             V = new T[2];
         }
@@ -61,7 +61,7 @@ namespace Lib.Maths.Geometry
         /// </summary>
         /// <param name="l">low value</param>
         /// <param name="h">high value</param>
-        public Segm(T l, T h)
+        public Interval(T l, T h)
             : this()
         {
             L = l;
@@ -72,7 +72,7 @@ namespace Lib.Maths.Geometry
         /// Constructor by other segment.
         /// </summary>
         /// <param name="s">segment</param>
-        public Segm(Segm<T> s)
+        public Interval(Interval<T> s)
             : this()
         {
             L = s.L;
@@ -112,7 +112,7 @@ namespace Lib.Maths.Geometry
         /// <returns>copy</returns>
         public object Clone()
         {
-            return new Segm<T>(L, H);
+            return new Interval<T>(L, H);
         }
     }
 }

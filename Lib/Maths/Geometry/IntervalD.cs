@@ -8,7 +8,7 @@ namespace Lib.Maths.Geometry
     /// <summary>
     /// Interval <c>(L, H)</c>.
     /// </summary>
-    public class IntervalD : Segm<double>, ICloneable
+    public class IntervalD : Interval<double>, ICloneable
     {
         /// <summary>
         /// Constructor.
