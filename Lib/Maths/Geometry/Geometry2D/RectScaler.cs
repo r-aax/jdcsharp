@@ -1,6 +1,6 @@
 ﻿// Author: Alexey Rybakov
 
-using Scaler1D = Lib.Maths.Geometry.IntervalScaler;
+using Scaler1D = Lib.Maths.Geometry.IntervalDScaler;
 
 namespace Lib.Maths.Geometry.Geometry2D
 {

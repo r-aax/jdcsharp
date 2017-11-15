@@ -12,7 +12,7 @@ namespace Lib.Maths.Geometry
     /// General task of this class is to find image of point from interval <c>From</c> to
     /// interval <c>To</c> and vice versa.
     /// </summary>
-    public class IntervalScaler
+    public class IntervalDScaler
     {
         /// <summary>
         /// Initial interval.
@@ -62,7 +62,7 @@ namespace Lib.Maths.Geometry
         /// <param name="from">initial interval</param>
         /// <param name="to">target interval</param>
         /// <param name="is_invert">inversion flag</param>
-        public IntervalScaler(IntervalD from, IntervalD to, bool is_invert)
+        public IntervalDScaler(IntervalD from, IntervalD to, bool is_invert)
         {
             From = from;
             To = to;
