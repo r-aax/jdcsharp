@@ -511,6 +511,37 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Random planar graph.
+        /// </summary>
+        /// <param name="n">graph order</param>
+        /// <param name="rect">outer rectangle</param>
+        /// <returns>graph</returns>
+        public static Graph RandomPlanarGraph(int n, Rect rect)
+        {
+            Graph g = InitialGraph(GraphDimensionality.D2, 0);
+
+            // Add points, random in rectangle.
+            for (int i = 0; i < n; i++)
+            {
+                Node node = g.AddNode();
+
+                node.P = Point.Random(rect);
+            }
+
+            // Add all possible edges.
+            // TODO:
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    g.AddEdge(i, j);
+                }
+            }
+
+            return g;
+        }
+
+        /// <summary>
         /// Empty graph.
         /// </summary>
         /// <param name="n">order</param>

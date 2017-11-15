@@ -115,6 +115,24 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
+        /// Random planar graph.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ExampleRandomPlanar_Click(object sender, RoutedEventArgs e)
+        {
+            EditIntWindow w = new EditIntWindow(RandomOrder, "Enter order");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.RandomPlanarGraph(w.Result, Rect);
+            }
+
+            Paint();
+        }
+
+        /// <summary>
         /// Cycle.
         /// </summary>
         /// <param name="sender">object</param>
