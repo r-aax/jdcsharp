@@ -33,6 +33,17 @@ namespace Lib.Maths.Geometry
         }
 
         /// <summary>
+        /// Set from two values.
+        /// </summary>
+        /// <param name="v1">first value</param>
+        /// <param name="v2">second value</param>
+        /// <returns>interval</returns>
+        public static IntervalD SetFrom(double v1, double v2)
+        {
+            return (v1 < v2) ? new IntervalD(v1, v2) : new IntervalD(v2, v1);
+        }
+
+        /// <summary>
         /// Convert to string.
         /// </summary>
         /// <returns>string</returns>
@@ -159,6 +170,17 @@ namespace Lib.Maths.Geometry
         public new object Clone()
         {
             return new IntervalD(L, H);
+        }
+
+        /// <summary>
+        /// Check if intervals intersect.
+        /// </summary>
+        /// <param name="i1">first interval</param>
+        /// <param name="i2">second interval</param>
+        /// <returns><c>true</c> - if intervals intersect, <c>false</c> - otherwise</returns>
+        public static bool IsIntersect(IntervalD i1, IntervalD i2)
+        {
+            return i1.H >= i2.L;
         }
     }
 }

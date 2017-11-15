@@ -529,12 +529,43 @@ namespace Lib.DataStruct.Graph
             }
 
             // Add all possible edges.
-            // TODO:
             for (int i = 0; i < n; i++)
             {
                 for (int j = i + 1; j < n; j++)
                 {
-                    g.AddEdge(i, j);
+                    bool is_intersect = false;
+                    Segment s = new Segment(g.Nodes[i].P, g.Nodes[j].P);
+
+                    for (int k = 0; k <= i; k++)
+                    {
+                        for (int m = 0; m < n; m++)
+                        {
+                            if (g.IsEdge(k, m))
+                            {
+                                Segment s2 = new Segment(g.Nodes[k].P, g.Nodes[m].P);
+
+                                if (Segment.IsIntersect(s, s2))
+                                {
+                                    if (!Segment.IsCommonPoint(s, s2))
+                                    {
+                                        is_intersect = true;
+
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (is_intersect)
+                        {
+                            break;
+                        }
+                    }
+
+                    if (!is_intersect)
+                    {
+                        g.AddEdge(i, j);
+                    }
                 }
             }
 

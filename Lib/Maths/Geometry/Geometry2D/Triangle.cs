@@ -78,5 +78,40 @@ namespace Lib.Maths.Geometry.Geometry2D
 
             return new Point(Point.Mean(A, bcm, 2.0 / 3.0));
         }
+
+        /// <summary>
+        /// Oriented area.
+        /// </summary>
+        public double OrientedArea
+        {
+            get
+            {
+                return (B.X - A.X) * (C.Y - A.Y) - (B.Y - A.Y) * (C.X - A.X);
+            }
+        }
+
+        /// <summary>
+        /// Sign of oriented area.
+        /// </summary>
+        public double OrientedAreaSign
+        {
+            get
+            {
+                double a = OrientedArea;
+
+                if (a > 0.0)
+                {
+                    return 1.0;
+                }
+                else if (a < 0.0)
+                {
+                    return -1.0;
+                }
+                else
+                {
+                    return 0.0;
+                }
+            }
+        }
     }
 }

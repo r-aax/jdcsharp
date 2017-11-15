@@ -721,5 +721,16 @@ namespace Lib.Maths.Geometry
 
             return cv;
         }
+
+        /// <summary>
+        /// Angle in <c>XY</c> plane.
+        /// </summary>
+        public double AngleXY
+        {
+            get
+            {
+                return Math.Atan2(Y, X);
+            }
+        }
     }
 }

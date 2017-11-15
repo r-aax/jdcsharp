@@ -12,6 +12,11 @@ namespace Lib.Maths
     public class Maths
     {
         /// <summary>
+        /// Small value.
+        /// </summary>
+        public static double Eps = 1e-9;
+
+        /// <summary>
         /// Hypot 2 function.
         /// </summary>
         /// <param name="a">first cathet</param>

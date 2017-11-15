@@ -503,5 +503,15 @@ namespace Lib.Maths.Geometry
 
             Debug.Assert(IsIn(par), "Too big shift for toroid operation.");
         }
+
+        /// <summary>
+        /// Check if points are equal.
+        /// </summary>
+        /// <param name="p">point</param>
+        /// <returns><c>true</c> - if points are equal, <c>false</c> - otherwise</returns>
+        public bool IsEq(Point p)
+        {
+            return (Math.Abs(X - p.X) + Math.Abs(Y - p.Y) + Math.Abs(Z - p.Z) < Maths.Eps);
+        }
     }
 }
