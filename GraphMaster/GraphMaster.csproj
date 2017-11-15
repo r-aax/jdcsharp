@@ -90,6 +90,7 @@
     <Compile Include="Windows\LoadGraphPFGTypeSelectWindow.xaml.cs">
       <DependentUpon>LoadGraphPFGTypeSelectWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\MainWindowExamplesClicks.cs" />
     <Compile Include="Windows\OrderAndIntsWindow.xaml.cs">
       <DependentUpon>OrderAndIntsWindow.xaml</DependentUpon>
     </Compile>
