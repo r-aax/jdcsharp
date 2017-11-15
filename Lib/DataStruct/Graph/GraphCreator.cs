@@ -528,7 +528,55 @@ namespace Lib.DataStruct.Graph
                 node.P = Point.Random(rect);
             }
 
-            // Add all possible edges.
+            // Not optimal! Very slow.
+
+            // Phase I. Add random possible edges.
+            for (int t = 0; t < n * n * n; t++)
+            {
+                int i = Randoms.RandomInInterval(0, n - 1);
+                int j = Randoms.RandomInInterval(i + 1, n - 1);
+
+                if (g.IsEdge(i, j))
+                {
+                    continue;
+                }
+
+                bool is_intersect = false;
+                Segment s = new Segment(g.Nodes[i].P, g.Nodes[j].P);
+
+                for (int k = 0; k < n; k++)
+                {
+                    for (int m = 0; m < n; m++)
+                    {
+                        if (g.IsEdge(k, m))
+                        {
+                            Segment s2 = new Segment(g.Nodes[k].P, g.Nodes[m].P);
+
+                            if (Segment.IsIntersect(s, s2))
+                            {
+                                if (!Segment.IsCommonPoint(s, s2))
+                                {
+                                    is_intersect = true;
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (is_intersect)
+                    {
+                        break;
+                    }
+                }
+
+                if (!is_intersect)
+                {
+                    g.AddEdge(i, j);
+                }
+            }
+
+            // Phase II. Add all possible edges.
             for (int i = 0; i < n; i++)
             {
                 for (int j = i + 1; j < n; j++)
@@ -536,7 +584,7 @@ namespace Lib.DataStruct.Graph
                     bool is_intersect = false;
                     Segment s = new Segment(g.Nodes[i].P, g.Nodes[j].P);
 
-                    for (int k = 0; k <= i; k++)
+                    for (int k = 0; k < n; k++)
                     {
                         for (int m = 0; m < n; m++)
                         {
