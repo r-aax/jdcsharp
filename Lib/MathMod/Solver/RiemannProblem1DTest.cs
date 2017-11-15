@@ -57,22 +57,22 @@ namespace Lib.MathMod.Solver
         /// <summary>
         /// Interval for density.
         /// </summary>
-        public Interval rho_int;
+        public IntervalD rho_int;
 
         /// <summary>
         /// Interval for <c>X</c> component of velocity.
         /// </summary>
-        public Interval vX_int;
+        public IntervalD vX_int;
 
         /// <summary>
         /// Interval for pressure.
         /// </summary>
-        public Interval p_int;
+        public IntervalD p_int;
 
         /// <summary>
         /// Interval for inner energy.
         /// </summary>
-        public Interval eps_int;
+        public IntervalD eps_int;
 
         /// <summary>
         /// Constructor.
@@ -109,10 +109,10 @@ namespace Lib.MathMod.Solver
             rho_r = rho_r_;
             vX_r = vX_r_;
             p_r = p_r_;
-            rho_int = new Interval(rho_int_lo, rho_int_hi);
-            vX_int = new Interval(vX_int_lo, vX_int_hi);
-            p_int = new Interval(p_int_lo, p_int_hi);
-            eps_int = new Interval(eps_int_lo, eps_int_hi);
+            rho_int = new IntervalD(rho_int_lo, rho_int_hi);
+            vX_int = new IntervalD(vX_int_lo, vX_int_hi);
+            p_int = new IntervalD(p_int_lo, p_int_hi);
+            eps_int = new IntervalD(eps_int_lo, eps_int_hi);
         }
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace Lib.MathMod.Solver
         /// <returns>test</returns>
         public static RiemannProblem1DTest Random(double xlength, int cells_count)
         {
-            Interval it = new Interval(0.0, 5.0);
+            IntervalD it = new IntervalD(0.0, 5.0);
 
             return new RiemannProblem1DTest(xlength, cells_count,
                                             Randoms.RandomInInterval(it), 0.0, Randoms.RandomInInterval(it),

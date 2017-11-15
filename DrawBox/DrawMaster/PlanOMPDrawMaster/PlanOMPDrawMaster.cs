@@ -1051,7 +1051,7 @@ namespace DrawBox.DrawMaster.PlanOMPDrawMaster
             double beg_time = els.First<ThreadsCountChangeElement>().WTime;
             double end_time = els.Last<ThreadsCountChangeElement>().WTime;
 
-            RectDrawer d = new RectDrawer(new Rect2D(new Interval(beg_time, end_time), new Interval(max_threads)),
+            RectDrawer d = new RectDrawer(new Rect2D(new IntervalD(beg_time, end_time), new IntervalD(max_threads)),
                                           cnv, false, true);
 
             d.BeginDraw();
@@ -1242,8 +1242,8 @@ namespace DrawBox.DrawMaster.PlanOMPDrawMaster
                             d.SetBrush(new Lib.Draw.Color(Colors.LightGray));
                         }
 
-                        d.FillRect(new Rect2D(new Interval(pe.WTime, e.WTime),
-                                              new Interval(low, low + ths[j])));
+                        d.FillRect(new Rect2D(new IntervalD(pe.WTime, e.WTime),
+                                              new IntervalD(low, low + ths[j])));
 
                         if (low > 0.0)
                         {

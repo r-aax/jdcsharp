@@ -44,7 +44,7 @@ namespace Lib.Maths.Numbers
         /// </summary>
         /// <param name="interval">interval</param>
         /// <returns>random float</returns>
-        public static double RandomInInterval(Interval interval)
+        public static double RandomInInterval(IntervalD interval)
         {
             return RandomInInterval(interval.L, interval.H);
         }

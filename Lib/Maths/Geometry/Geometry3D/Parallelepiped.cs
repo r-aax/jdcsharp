@@ -12,17 +12,17 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// <summary>
         /// Interval <c>x</c>.
         /// </summary>
-        public Interval XInterval;
+        public IntervalD XInterval;
 
         /// <summary>
         /// Interval <c>y</c>.
         /// </summary>
-        public Interval YInterval;
+        public IntervalD YInterval;
 
         /// <summary>
         /// Interval <c>z</c>.
         /// </summary>
-        public Interval ZInterval;
+        public IntervalD ZInterval;
 
         /// <summary>
         /// Constructor from intervals.
@@ -30,7 +30,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// <param name="xi">interval <c>x</c></param>
         /// <param name="yi">interval <c>y</c></param>
         /// <param name="zi">interval <c>z</c></param>
-        public Parallelepiped(Interval xi, Interval yi, Interval zi)
+        public Parallelepiped(IntervalD xi, IntervalD yi, IntervalD zi)
         {
             XInterval = xi;
             YInterval = yi;
@@ -44,7 +44,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         /// <param name="ysize">size <c>y</c></param>
         /// <param name="zsize">size <c>z</c></param>
         public Parallelepiped(double xsize, double ysize, double zsize)
-            : this(new Interval(xsize), new Interval(ysize), new Interval(zsize))
+            : this(new IntervalD(xsize), new IntervalD(ysize), new IntervalD(zsize))
         {
         }
 
@@ -60,7 +60,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         public Parallelepiped(double x_min, double x_max,
                               double y_min, double y_max,
                               double z_min, double z_max)
-            : this(new Interval(x_min, x_max), new Interval(y_min, y_max), new Interval(z_min, z_max))
+            : this(new IntervalD(x_min, x_max), new IntervalD(y_min, y_max), new IntervalD(z_min, z_max))
         {
         }
 

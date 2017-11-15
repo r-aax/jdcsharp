@@ -162,12 +162,12 @@ namespace Lib.Draw
         /// <param name="eps_int"><c>eps</c> interval</param>
         /// <param name="is_p">is <c>p</c> used</param>
         /// <param name="p_int"><c>p</c> interval</param>
-        public void DrawValues(bool is_rho, Interval rho_int,
-                               bool is_vx, Interval vx_int,
-                               bool is_vy, Interval vy_int,
-                               bool is_vz, Interval vz_int,
-                               bool is_eps, Interval eps_int,
-                               bool is_p, Interval p_int)
+        public void DrawValues(bool is_rho, IntervalD rho_int,
+                               bool is_vx, IntervalD vx_int,
+                               bool is_vy, IntervalD vy_int,
+                               bool is_vz, IntervalD vz_int,
+                               bool is_eps, IntervalD eps_int,
+                               bool is_p, IntervalD p_int)
         {
             double w = Drawer.Rect.Width;
             double h = Drawer.Rect.Height;
@@ -228,12 +228,12 @@ namespace Lib.Draw
         /// <param name="is_p">is <c>p</c> used</param>
         /// <param name="p_int"><c>p</c> interval</param>
         public void DrawAllX_Const(SolidGrid g, double y, double z,
-                                   bool is_rho, Interval rho_int,
-                                   bool is_vx, Interval vx_int,
-                                   bool is_vy, Interval vy_int,
-                                   bool is_vz, Interval vz_int,
-                                   bool is_eps, Interval eps_int,
-                                   bool is_p, Interval p_int)
+                                   bool is_rho, IntervalD rho_int,
+                                   bool is_vx, IntervalD vx_int,
+                                   bool is_vy, IntervalD vy_int,
+                                   bool is_vz, IntervalD vz_int,
+                                   bool is_eps, IntervalD eps_int,
+                                   bool is_p, IntervalD p_int)
         {
             Debug.Assert((y < g.YSize) && (z < g.ZSize), "wrong y,z coordinates while drawing the rho graphic");
 
@@ -241,9 +241,9 @@ namespace Lib.Draw
             int zi = (int)(z / g.CellL);
             double w = Drawer.Rect.Width;
             double h = Drawer.Rect.Height;
-            Interval inner_w = new Interval(0.05 * w, 0.95 * w);
-            Interval inner_h = new Interval(0.05 * h, 0.95 * h);
-            Interval xint = new Interval(0.0, g.XSize);
+            IntervalD inner_w = new IntervalD(0.05 * w, 0.95 * w);
+            IntervalD inner_h = new IntervalD(0.05 * h, 0.95 * h);
+            IntervalD xint = new IntervalD(0.0, g.XSize);
             Rect inner_rect = new Rect(inner_w, inner_h);
             RectScaler rc;
 
@@ -338,12 +338,12 @@ namespace Lib.Draw
         /// <param name="is_p">is <c>p</c> used</param>
         /// <param name="p_int"><c>p</c> interval</param>
         public void DrawAllX_Line(SolidGrid g, double y, double z,
-                                  bool is_rho, Interval rho_int,
-                                  bool is_vx, Interval vx_int,
-                                  bool is_vy, Interval vy_int,
-                                  bool is_vz, Interval vz_int,
-                                  bool is_eps, Interval eps_int,
-                                  bool is_p, Interval p_int)
+                                  bool is_rho, IntervalD rho_int,
+                                  bool is_vx, IntervalD vx_int,
+                                  bool is_vy, IntervalD vy_int,
+                                  bool is_vz, IntervalD vz_int,
+                                  bool is_eps, IntervalD eps_int,
+                                  bool is_p, IntervalD p_int)
         {
             Debug.Assert((y < g.YSize) && (z < g.ZSize), "wrong y,z coordinates while drawing the rho graphic");
 
@@ -351,9 +351,9 @@ namespace Lib.Draw
             int zi = (int)(z / g.CellL);
             double w = Drawer.Rect.Width;
             double h = Drawer.Rect.Height;
-            Interval inner_w = new Interval(0.05 * w, 0.95 * w);
-            Interval inner_h = new Interval(0.05 * h, 0.95 * h);
-            Interval xint = new Interval(0.0, g.XSize);
+            IntervalD inner_w = new IntervalD(0.05 * w, 0.95 * w);
+            IntervalD inner_h = new IntervalD(0.05 * h, 0.95 * h);
+            IntervalD xint = new IntervalD(0.0, g.XSize);
             Rect inner_rect = new Rect(inner_w, inner_h);
             RectScaler rc;
 

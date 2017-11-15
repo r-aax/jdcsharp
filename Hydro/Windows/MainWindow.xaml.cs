@@ -67,11 +67,11 @@ namespace Hydro
         /// <summary>
         /// Interval of rho values.
         /// </summary>
-        private Interval Graphic_rho_Interval
+        private IntervalD Graphic_rho_Interval
         {
             get
             {
-                return new Interval(Double.Parse(Graphic_rho_L_TB.Text),
+                return new IntervalD(Double.Parse(Graphic_rho_L_TB.Text),
                                     Double.Parse(Graphic_rho_H_TB.Text));
             }
         }
@@ -79,11 +79,11 @@ namespace Hydro
         /// <summary>
         /// Interval of v.X values.
         /// </summary>
-        private Interval Graphic_vX_Interval
+        private IntervalD Graphic_vX_Interval
         {
             get
             {
-                return new Interval(Double.Parse(Graphic_vX_L_TB.Text),
+                return new IntervalD(Double.Parse(Graphic_vX_L_TB.Text),
                                     Double.Parse(Graphic_vX_H_TB.Text));
             }
         }
@@ -91,11 +91,11 @@ namespace Hydro
         /// <summary>
         /// Interval of v.Y values.
         /// </summary>
-        private Interval Graphic_vY_Interval
+        private IntervalD Graphic_vY_Interval
         {
             get
             {
-                return new Interval(Double.Parse(Graphic_vY_L_TB.Text),
+                return new IntervalD(Double.Parse(Graphic_vY_L_TB.Text),
                                     Double.Parse(Graphic_vY_H_TB.Text));
             }
         }
@@ -103,11 +103,11 @@ namespace Hydro
         /// <summary>
         /// Interval of v.Z values.
         /// </summary>
-        private Interval Graphic_vZ_Interval
+        private IntervalD Graphic_vZ_Interval
         {
             get
             {
-                return new Interval(Double.Parse(Graphic_vZ_L_TB.Text),
+                return new IntervalD(Double.Parse(Graphic_vZ_L_TB.Text),
                                     Double.Parse(Graphic_vZ_H_TB.Text));
             }
         }
@@ -115,11 +115,11 @@ namespace Hydro
         /// <summary>
         /// Interval of eps values.
         /// </summary>
-        private Interval Graphic_eps_Interval
+        private IntervalD Graphic_eps_Interval
         {
             get
             {
-                return new Interval(Double.Parse(Graphic_eps_L_TB.Text),
+                return new IntervalD(Double.Parse(Graphic_eps_L_TB.Text),
                                     Double.Parse(Graphic_eps_H_TB.Text));
             }
         }
@@ -127,11 +127,11 @@ namespace Hydro
         /// <summary>
         /// Interval of p values.
         /// </summary>
-        private Interval Graphic_p_Interval
+        private IntervalD Graphic_p_Interval
         {
             get
             {
-                return new Interval(Double.Parse(Graphic_p_L_TB.Text),
+                return new IntervalD(Double.Parse(Graphic_p_L_TB.Text),
                                     Double.Parse(Graphic_p_H_TB.Text));
             }
         }

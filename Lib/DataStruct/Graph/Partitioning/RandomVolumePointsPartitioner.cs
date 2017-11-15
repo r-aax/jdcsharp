@@ -122,7 +122,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <param name="alpha">parameter for nodes and edges metric prefer</param>
         public static void PartitionEdgesPropagation(Graph g, Point[] points, int pc, double alpha)
         {
-            Debug.Assert((new Interval(0.0, 1.0)).Contains(alpha),
+            Debug.Assert((new IntervalD(0.0, 1.0)).Contains(alpha),
                          "alpha is out of range in RandomVolumePointsPartitioner.PartitionEdgesPropagation");
 
             InitPartitionsWeigths(pc);

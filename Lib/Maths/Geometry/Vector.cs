@@ -607,9 +607,9 @@ namespace Lib.Maths.Geometry
         /// <returns>random vector</returns>
         public static Vector RandomOnSurface(Parallelepiped par)
         {
-            Interval xi = par.XInterval;
-            Interval yi = par.YInterval;
-            Interval zi = par.ZInterval;
+            IntervalD xi = par.XInterval;
+            IntervalD yi = par.YInterval;
+            IntervalD zi = par.ZInterval;
             double sx = yi.Length * zi.Length;
             double sy = xi.Length * zi.Length;
             double sz = xi.Length * yi.Length;

@@ -13,12 +13,12 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <summary>
         /// Interval <c>x</c>.
         /// </summary>
-        public Interval XInterval { get; private set; }
+        public IntervalD XInterval { get; private set; }
 
         /// <summary>
         /// Interval <c>y</c>.
         /// </summary>
-        public Interval YInterval { get; private set; }
+        public IntervalD YInterval { get; private set; }
 
         /// <summary>
         /// Change event.
@@ -41,7 +41,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// </summary>
         /// <param name="xi">first interval</param>
         /// <param name="yi">second interval</param>
-        public Rect(Interval xi, Interval yi)
+        public Rect(IntervalD xi, IntervalD yi)
         {
             XInterval = xi;
             YInterval = yi;
@@ -53,7 +53,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <param name="width">width</param>
         /// <param name="height">height</param>
         public Rect(double width, double height)
-            : this(new Interval(width), new Interval(height))
+            : this(new IntervalD(width), new IntervalD(height))
         {
         }
 
@@ -65,7 +65,7 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <param name="min_y"></param>
         /// <param name="max_y"></param>
         public Rect(double min_x, double max_x, double min_y, double max_y)
-            : this(new Interval(min_x, max_x), new Interval(min_y, max_y))
+            : this(new IntervalD(min_x, max_x), new IntervalD(min_y, max_y))
         {
         }
 
@@ -75,8 +75,8 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <param name="p1"></param>
         /// <param name="p2"></param>
         public Rect(Point p1, Point p2)
-            : this(new Interval(Math.Min(p1.X, p2.X), Math.Max(p1.X, p2.X)),
-                   new Interval(Math.Min(p1.Y, p2.Y), Math.Max(p1.Y, p2.Y)))
+            : this(new IntervalD(Math.Min(p1.X, p2.X), Math.Max(p1.X, p2.X)),
+                   new IntervalD(Math.Min(p1.Y, p2.Y), Math.Max(p1.Y, p2.Y)))
         {
         }
 
@@ -378,8 +378,8 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// <returns>clone</returns>
         public object Clone()
         {
-            return new Rect(XInterval.Clone() as Interval,
-                            YInterval.Clone() as Interval);
+            return new Rect(XInterval.Clone() as IntervalD,
+                            YInterval.Clone() as IntervalD);
         }
 
         /// <summary>
@@ -387,11 +387,11 @@ namespace Lib.Maths.Geometry.Geometry2D
         /// </summary>
         /// <param name="z_interval">interval <c>z</c></param>
         /// <returns>parallelepiped</returns>
-        public Lib.Maths.Geometry.Geometry3D.Parallelepiped Extended(Interval z_interval)
+        public Lib.Maths.Geometry.Geometry3D.Parallelepiped Extended(IntervalD z_interval)
         {
-            return new Geometry3D.Parallelepiped(XInterval.Clone() as Interval,
-                                                 YInterval.Clone() as Interval,
-                                                 z_interval.Clone() as Interval);
+            return new Geometry3D.Parallelepiped(XInterval.Clone() as IntervalD,
+                                                 YInterval.Clone() as IntervalD,
+                                                 z_interval.Clone() as IntervalD);
         }
     }
 }

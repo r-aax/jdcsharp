@@ -17,12 +17,12 @@ namespace Lib.Maths.Geometry
         /// <summary>
         /// Initial interval.
         /// </summary>
-        public Interval From;
+        public IntervalD From;
 
         /// <summary>
         /// Target interval.
         /// </summary>
-        public Interval To;
+        public IntervalD To;
 
         /// <summary>
         /// Inversion bijection flag.
@@ -62,7 +62,7 @@ namespace Lib.Maths.Geometry
         /// <param name="from">initial interval</param>
         /// <param name="to">target interval</param>
         /// <param name="is_invert">inversion flag</param>
-        public IntervalScaler(Interval from, Interval to, bool is_invert)
+        public IntervalScaler(IntervalD from, IntervalD to, bool is_invert)
         {
             From = from;
             To = to;

@@ -8,14 +8,14 @@ namespace Lib.Maths.Geometry
     /// <summary>
     /// Interval <c>(L, H)</c>.
     /// </summary>
-    public class Interval : Segm<double>, ICloneable
+    public class IntervalD : Segm<double>, ICloneable
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="l">begin</param>
         /// <param name="h">end</param>
-        public Interval(double l, double h)
+        public IntervalD(double l, double h)
         {
             Debug.Assert(l <= h);
 
@@ -27,7 +27,7 @@ namespace Lib.Maths.Geometry
         /// Constructor by length.
         /// </summary>
         /// <param name="len">length</param>
-        public Interval(double len)
+        public IntervalD(double len)
             : this(0.0, len)
         {
         }
@@ -124,9 +124,9 @@ namespace Lib.Maths.Geometry
         /// <param name="p">point of scaling</param>
         /// <param name="k">coefficient of scaling</param>
         /// <returns>scaled interval</returns>
-        public Interval Scaled(double p, double k)
+        public IntervalD Scaled(double p, double k)
         {
-            Interval interval = Clone() as Interval;
+            IntervalD interval = Clone() as IntervalD;
 
             interval.Scale(p, k);
 
@@ -147,7 +147,7 @@ namespace Lib.Maths.Geometry
         /// </summary>
         /// <param name="k">coefficient of scaling</param>
         /// <returns>center scaled interval</returns>
-        public Interval CenterScaled(double k)
+        public IntervalD CenterScaled(double k)
         {
             return Scaled(Mid, k);
         }
@@ -158,7 +158,7 @@ namespace Lib.Maths.Geometry
         /// <returns>clone copy</returns>
         public new object Clone()
         {
-            return new Interval(L, H);
+            return new IntervalD(L, H);
         }
     }
 }
