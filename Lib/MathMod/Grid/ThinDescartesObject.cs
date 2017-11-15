@@ -29,7 +29,7 @@ namespace Lib.MathMod.Grid
         /// <param name="i">nodes count in I direction</param>
         /// <param name="j">nodes count in J direction</param>
         /// <param name="k">nodes count in K direction</param>
-        public ThinDescartesObject(ISegm i, ISegm j, ISegm k)
+        public ThinDescartesObject(IntervalI i, IntervalI j, IntervalI k)
             : base (i, j, k)
         {
             SetD();

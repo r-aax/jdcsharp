@@ -74,7 +74,7 @@ namespace Lib.MathMod.Grid.Cut
             B = b;
             D = d;
 
-            Debug.Assert((D == null) || (new ISegm(1, B.Size(d) - 1)).Contains(pos), "wrong position");
+            Debug.Assert((D == null) || (new IntervalI(1, B.Size(d) - 1)).Contains(pos), "wrong position");
 
             Pos = pos;
         }

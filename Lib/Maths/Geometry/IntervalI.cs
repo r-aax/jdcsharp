@@ -9,14 +9,14 @@ namespace Lib.Maths.Geometry
     /// <summary>
     /// Segment with integer points.
     /// </summary>
-    public class ISegm : Segm<int>
+    public class IntervalI : Segm<int>
     {
         /// <summary>
         /// Constructor from low and high ends.
         /// </summary>
         /// <param name="l"></param>
         /// <param name="h"></param>
-        public ISegm(int l, int h)
+        public IntervalI(int l, int h)
             : base(l, h)
         {
         }
@@ -25,7 +25,7 @@ namespace Lib.Maths.Geometry
         /// Copy constructor.
         /// </summary>
         /// <param name="s"></param>
-        public ISegm(ISegm s)
+        public IntervalI(IntervalI s)
             : this(s.L, s.H)
         {
         }
@@ -75,7 +75,7 @@ namespace Lib.Maths.Geometry
         /// <returns>copy</returns>
         public new object Clone()
         {
-            return new ISegm(L, H);
+            return new IntervalI(L, H);
         }
     }
 }

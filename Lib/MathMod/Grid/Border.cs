@@ -41,7 +41,7 @@ namespace Lib.MathMod.Grid
         /// <param name="i">I direction nodes interval</param>
         /// <param name="j">J direction nodes interval</param>
         /// <param name="k">K direction nodes interval </param>
-        public Border(int id, Block b, ISegm i, ISegm j, ISegm k)
+        public Border(int id, Block b, IntervalI i, IntervalI j, IntervalI k)
             : base(i, j, k)
         {
             Id = id;

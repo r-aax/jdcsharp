@@ -42,7 +42,7 @@ namespace Lib.MathMod.Grid
         /// <param name="j">nodes interval in J direction</param>
         /// <param name="k">nodes interval in K direction</param>
         /// <param name="nb">neighbour block</param>
-        public Iface(int id, Block b, ISegm i, ISegm j, ISegm k, Block nb)
+        public Iface(int id, Block b, IntervalI i, IntervalI j, IntervalI k, Block nb)
             : base(id, b, i, j, k)
         {
             NB = nb;
@@ -211,9 +211,9 @@ namespace Lib.MathMod.Grid
         public object Clone()
         {
             return new Iface(Id, B,
-                             I.Clone() as ISegm,
-                             J.Clone() as ISegm,
-                             K.Clone() as ISegm, NB);
+                             I.Clone() as IntervalI,
+                             J.Clone() as IntervalI,
+                             K.Clone() as IntervalI, NB);
         }
 
         /// <summary>

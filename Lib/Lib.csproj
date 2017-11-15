@@ -157,7 +157,7 @@
     <Compile Include="Maths\Geometry\Geometry3D\Triangle.cs" />
     <Compile Include="Maths\Geometry\IntervalD.cs" />
     <Compile Include="Maths\Geometry\IntervalDScaler.cs" />
-    <Compile Include="Maths\Geometry\ISegm.cs" />
+    <Compile Include="Maths\Geometry\IntervalI.cs" />
     <Compile Include="Maths\Geometry\Point.cs" />
     <Compile Include="Maths\Geometry\Segm.cs" />
     <Compile Include="Maths\Geometry\Triangle.cs" />

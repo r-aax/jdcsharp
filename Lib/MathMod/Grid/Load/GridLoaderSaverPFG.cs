@@ -191,9 +191,9 @@ namespace Lib.MathMod.Grid.Load
 
                     // Create interface.
                     Iface iface = new Iface(id, g.Blocks[bi - 1],
-                                            new ISegm(i0 - 1, i1 - 1),
-                                            new ISegm(j0 - 1, j1 - 1),
-                                            new ISegm(k0 - 1, k1 - 1),
+                                            new IntervalI(i0 - 1, i1 - 1),
+                                            new IntervalI(j0 - 1, j1 - 1),
+                                            new IntervalI(k0 - 1, k1 - 1),
                                             g.Blocks[nbi - 1]);
 
                     // Paste into interfaces list.
@@ -255,9 +255,9 @@ namespace Lib.MathMod.Grid.Load
 
                     // Create border condition.
                     BCond bcond = new BCond(id, g.Blocks[bi - 1],
-                                            new ISegm(i0 - 1, i1 - 1),
-                                            new ISegm(j0 - 1, j1 - 1),
-                                            new ISegm(k0 - 1, k1 - 1),
+                                            new IntervalI(i0 - 1, i1 - 1),
+                                            new IntervalI(j0 - 1, j1 - 1),
+                                            new IntervalI(k0 - 1, k1 - 1),
                                             type, subtype, name);
                     g.BConds.Add(bcond);
                 }
@@ -296,9 +296,9 @@ namespace Lib.MathMod.Grid.Load
 
                     // Create border condition.
                     Scope scope = new Scope(id, g.Blocks[bi - 1],
-                                            new ISegm(i0 - 1, i1 - 1),
-                                            new ISegm(j0 - 1, j1 - 1),
-                                            new ISegm(k0 - 1, k1 - 1),
+                                            new IntervalI(i0 - 1, i1 - 1),
+                                            new IntervalI(j0 - 1, j1 - 1),
+                                            new IntervalI(k0 - 1, k1 - 1),
                                             type, subtype, name);
                     g.Scopes.Add(scope);
                 }

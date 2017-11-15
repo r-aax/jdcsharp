@@ -47,7 +47,7 @@ namespace Lib.MathMod.Grid
         /// <param name="type">type</param>
         /// <param name="subtype">subtype</param>
         /// <param name="name">name</param>
-        public Scope(int id, Block b, ISegm i, ISegm j, ISegm k,
+        public Scope(int id, Block b, IntervalI i, IntervalI j, IntervalI k,
                      string type, string subtype, string name)
             : base(i, j, k)
         {
@@ -63,9 +63,9 @@ namespace Lib.MathMod.Grid
         public object Clone()
         {
             return new Scope(Id, B,
-                             I.Clone() as ISegm,
-                             J.Clone() as ISegm,
-                             K.Clone() as ISegm,
+                             I.Clone() as IntervalI,
+                             J.Clone() as IntervalI,
+                             K.Clone() as IntervalI,
                              Label.Type, Label.Subtype, Label.Name);
         }
 

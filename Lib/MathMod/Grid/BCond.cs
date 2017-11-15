@@ -25,7 +25,7 @@ namespace Lib.MathMod.Grid
         /// <param name="type">type</param>
         /// <param name="subtype">subtype</param>
         /// <param name="name">name</param>
-        public BCond(int id, Block b, ISegm i, ISegm j, ISegm k,
+        public BCond(int id, Block b, IntervalI i, IntervalI j, IntervalI k,
                      string type, string subtype, string name)
             : base(id, b, i, j, k)
         {
@@ -57,9 +57,9 @@ namespace Lib.MathMod.Grid
         public object Clone()
         {
             return new BCond(Id, B,
-                             I.Clone() as ISegm,
-                             J.Clone() as ISegm,
-                             K.Clone() as ISegm,
+                             I.Clone() as IntervalI,
+                             J.Clone() as IntervalI,
+                             K.Clone() as IntervalI,
                              Label.Type, Label.Subtype, Label.Name);
         }
 

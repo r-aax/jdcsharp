@@ -17,12 +17,12 @@ namespace Lib.MathMod.Grid
         /// Array of coordinates segments.
         /// Only this array contains real data.
         /// </summary>
-        public ISegm[] Coords;
+        public IntervalI[] Coords;
 
         /// <summary>
         /// I coordinates segment.
         /// </summary>
-        public ISegm I
+        public IntervalI I
         {
             get
             {
@@ -38,7 +38,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// J coordinates segment.
         /// </summary>
-        public ISegm J
+        public IntervalI J
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// K coordinates segment
         /// </summary>
-        public ISegm K
+        public IntervalI K
         {
             get
             {
@@ -80,9 +80,9 @@ namespace Lib.MathMod.Grid
         /// <param name="i"></param>
         /// <param name="j"></param>
         /// <param name="k"></param>
-        public DescartesObject(ISegm i, ISegm j, ISegm k)
+        public DescartesObject(IntervalI i, IntervalI j, IntervalI k)
         {
-            Coords = new ISegm[] { new ISegm(i), new ISegm(j), new ISegm(k) };
+            Coords = new IntervalI[] { new IntervalI(i), new IntervalI(j), new IntervalI(k) };
         }
 
         /// <summary>

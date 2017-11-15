@@ -114,7 +114,7 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         private static Block CutI(Block b, int pos)
         {
-            if (!((new ISegm(MinMargin, b.INodes - 1 - MinMargin)).Contains(pos)))
+            if (!((new IntervalI(MinMargin, b.INodes - 1 - MinMargin)).Contains(pos)))
             {
                 CutRejectedString = "margin violation";
 
@@ -150,8 +150,8 @@ namespace Lib.MathMod.Grid.Cut
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, new ISegm(b.I1, b.I1), b.J, b.K, new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, new ISegm(b.I0, b.I0), b.J, b.K, b);
+            Iface ifc1 = new Iface(max_iface_id + 1, b, new IntervalI(b.I1, b.I1), b.J, b.K, new_b);
+            Iface ifc2 = new Iface(max_iface_id + 1, new_b, new IntervalI(b.I0, b.I0), b.J, b.K, b);
             IfacesPair pair = new IfacesPair(ifc1, ifc2);
             g.IfacesPairs.Add(pair);
 
@@ -166,7 +166,7 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         private static Block CutJ(Block b, int pos)
         {
-            if (!((new ISegm(MinMargin, b.JNodes - 1 - MinMargin)).Contains(pos)))
+            if (!((new IntervalI(MinMargin, b.JNodes - 1 - MinMargin)).Contains(pos)))
             {
                 CutRejectedString = "margin violation";
 
@@ -202,8 +202,8 @@ namespace Lib.MathMod.Grid.Cut
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, b.I, new ISegm(b.J1, b.J1), b.K, new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.I, new ISegm(b.J0, b.J0), b.K, b);
+            Iface ifc1 = new Iface(max_iface_id + 1, b, b.I, new IntervalI(b.J1, b.J1), b.K, new_b);
+            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.I, new IntervalI(b.J0, b.J0), b.K, b);
             IfacesPair pair = new IfacesPair(ifc1, ifc2);
             g.IfacesPairs.Add(pair);
 
@@ -218,7 +218,7 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         private static Block CutK(Block b, int pos)
         {
-            if (!((new ISegm(MinMargin, b.KNodes - 1 - MinMargin)).Contains(pos)))
+            if (!((new IntervalI(MinMargin, b.KNodes - 1 - MinMargin)).Contains(pos)))
             {
                 CutRejectedString = "margin violation";
 
@@ -254,8 +254,8 @@ namespace Lib.MathMod.Grid.Cut
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, b.I, b.J, new ISegm(b.K1, b.K1), new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.I, b.J, new ISegm(b.K0, b.K0), b);
+            Iface ifc1 = new Iface(max_iface_id + 1, b, b.I, b.J, new IntervalI(b.K1, b.K1), new_b);
+            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.I, b.J, new IntervalI(b.K0, b.K0), b);
             IfacesPair pair = new IfacesPair(ifc1, ifc2);
             g.IfacesPairs.Add(pair);
 
@@ -373,7 +373,7 @@ namespace Lib.MathMod.Grid.Cut
                 //  cutted iface     new iface
 
                 int v = ifc.Coords[g][0] + width;
-                ifcc.Coords[g] = new ISegm(v, ifc.Coords[g][1]);
+                ifcc.Coords[g] = new IntervalI(v, ifc.Coords[g][1]);
                 ifc.Coords[g][1] = v;
             }
             else
@@ -389,7 +389,7 @@ namespace Lib.MathMod.Grid.Cut
                 //  new iface               cutted iface
 
                 int v = ifc.Coords[g][1] - width;
-                ifcc.Coords[g] = new ISegm(ifc.Coords[g][0], v);
+                ifcc.Coords[g] = new IntervalI(ifc.Coords[g][0], v);
                 ifc.Coords[g][0] = v;
             }
 
@@ -410,8 +410,8 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(b == i1.B, "trying to cut wrong interface");
             Debug.Assert(b != i1.NB, "trying to cut self-intersected block");
 
-            ISegm c = i1.Coords[d.N];
-            ISegm bc = b.Coords[d.N];
+            IntervalI c = i1.Coords[d.N];
+            IntervalI bc = b.Coords[d.N];
 
             if (c[0] >= bc[1])
             {
@@ -426,7 +426,7 @@ namespace Lib.MathMod.Grid.Cut
                 StructuredGrid g = b.Grid;
                 int id = g.MaxIfaceId() + 1;
                 Iface ifc = i1.Clone(id, new_b);
-                ifc.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
+                ifc.Coords[d.N] = new IntervalI(0, c[1] - bc[1]);
                 Iface ifc1 = ifc;
                 c[1] = bc[1];
 
@@ -461,8 +461,8 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(bcond.B == b, "trying to cut wrong border condition");
 
             // Get coordinates of border condition and block.
-            ISegm c = bcond.Coords[d.N];
-            ISegm bc = b.Coords[d.N];
+            IntervalI c = bcond.Coords[d.N];
+            IntervalI bc = b.Coords[d.N];
 
             if (c[0] >= bc[1])
             {
@@ -504,8 +504,8 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(s.B == b, "trying to cut wrong scope");
 
             // Get coordinates of scope and block.
-            ISegm c = s.Coords[d.N];
-            ISegm bc = b.Coords[d.N];
+            IntervalI c = s.Coords[d.N];
+            IntervalI bc = b.Coords[d.N];
 
             if (c[0] >= bc[1])
             {
@@ -518,7 +518,7 @@ namespace Lib.MathMod.Grid.Cut
                 // Have to cut.
                 StructuredGrid g = b.Grid;
                 Scope scope = s.Clone(g.MaxScopeId() + 1, new_b);
-                scope.Coords[d.N] = new ISegm(0, c[1] - bc[1]);
+                scope.Coords[d.N] = new IntervalI(0, c[1] - bc[1]);
                 g.Scopes.Add(scope);
                 c[1] = bc[1];
             }

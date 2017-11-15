@@ -62,7 +62,7 @@ namespace Lib.MathMod.Grid
         /// <param name="jsize">count of cells in J direction</param>
         /// <param name="ksize">count of cells in K direction</param>
         public Block(StructuredGrid g, int id, int isize, int jsize, int ksize)
-            : base(new ISegm(0, isize), new ISegm(0, jsize), new ISegm(0, ksize))
+            : base(new IntervalI(0, isize), new IntervalI(0, jsize), new IntervalI(0, ksize))
         {
             Grid = g;
             Id = id;
