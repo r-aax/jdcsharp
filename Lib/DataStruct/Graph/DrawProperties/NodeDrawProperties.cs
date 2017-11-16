@@ -90,8 +90,8 @@ namespace Lib.DataStruct.Graph.DrawProperties
             {
                 throw new ApplicationException();
             }
-            LabelOffset = new Vector(Double.Parse(s[12]), Double.Parse(s[13]));
-            FontSize = Double.Parse(s[16]);
+            LabelOffset = new Vector(Double.Parse(s[12]), Double.Parse(s[13]), Double.Parse(s[14]));
+            FontSize = Double.Parse(s[17]);
         }
 
         /// <summary>

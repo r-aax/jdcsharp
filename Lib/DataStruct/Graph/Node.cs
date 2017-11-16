@@ -303,6 +303,8 @@ namespace Lib.DataStruct.Graph
             switch (n)
             {
                 case 4:
+                    // Old format.
+                    // In new format position is always 3D vector.
                     P = new Point(Double.Parse(s[1]), Double.Parse(s[2]));
                     break;
 
