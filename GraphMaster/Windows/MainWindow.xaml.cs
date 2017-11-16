@@ -1318,7 +1318,6 @@ namespace GraphMaster.Windows
         private void Triangulation_MI_Click(object sender, RoutedEventArgs e)
         {
             GraphCreator.AddAllEdgesForPlanarGraph(Graph);
-
             Paint();
         }
 
@@ -1436,6 +1435,32 @@ namespace GraphMaster.Windows
                     sw.Close();
                 }
             }
+        }
+
+        /// <summary>
+        /// Edge contraction.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationsEdgeContraction_Click(object sender, RoutedEventArgs e)
+        {
+            if (Graph.SelectedEdges.Count == 0)
+            {
+                System.Windows.Forms.MessageBox.Show("No edges selected");
+
+                return;
+            }
+
+            if (Graph.SelectedEdges.Count > 1)
+            {
+                System.Windows.Forms.MessageBox.Show("Only one edge should be selected");
+
+                return;
+            }
+
+            Node dn = GraphOperator.EdgeContraction(Graph, Graph.SelectedEdges[0]);
+            GUIProcessor.ResetNode(dn);
+            Paint();
         }
     }
 }

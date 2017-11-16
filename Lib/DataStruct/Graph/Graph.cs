@@ -289,6 +289,20 @@ namespace Lib.DataStruct.Graph
         } 
 
         /// <summary>
+        /// Delete node.
+        /// </summary>
+        /// <param name="n">node</param>
+        public void DeleteNode(Node n)
+        {
+            while (n.Degree > 0)
+            {
+                DeleteEdge(n.Edges[0]);
+            }
+
+            Nodes.RemoveAll((fn) => fn == n);
+        }
+
+        /// <summary>
         /// Add new edge.
         /// </summary>
         /// <param name="a">first incident node</param>
@@ -404,6 +418,20 @@ namespace Lib.DataStruct.Graph
         public bool IsEdge(int ai, int bi)
         {
             return IsEdge(Nodes[ai], Nodes[bi]);
+        }
+
+        /// <summary>
+        /// Remove edge from all lists.
+        /// </summary>
+        /// <param name="e">edge</param>
+        public void DeleteEdge(Edge e)
+        {
+            Edges.RemoveAll((fe) => fe == e);
+
+            foreach (Node n in Nodes)
+            {
+                n.Edges.RemoveAll((fe) => fe == e);
+            }
         }
 
         /// <summary>
@@ -830,6 +858,24 @@ namespace Lib.DataStruct.Graph
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Merge two nodes.
+        /// </summary>
+        /// <param name="a">first node</param>
+        /// <param name="b">second node</param>
+        /// <returns>deleted node</returns>
+        public Node MergeNodes(Node a, Node b)
+        {
+            // Target node is "a".
+            a.P = new Point(Point.Mid(a.P, b.P));
+
+            // TODO: replace edges from b to a.
+
+            DeleteNode(b);
+
+            return b;
         }
     }
 }

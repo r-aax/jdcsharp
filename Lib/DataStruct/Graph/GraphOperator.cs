@@ -38,5 +38,23 @@ namespace Lib.DataStruct.Graph
 
             return neighbourhood;
         }
+
+        /// <summary>
+        /// Edge constraction.
+        /// Remove given edge from the graph and merge its ends to single node
+        /// (in the middle of the deleted edge).
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="e">edge</param>
+        /// <returns>deleted node</returns>
+        public static Node EdgeContraction(Graph g, Edge e)
+        {
+            Node a = e.A;
+            Node b = e.B;
+
+            g.DeleteEdge(e);
+
+            return g.MergeNodes(a, b);
+        }
     }
 }

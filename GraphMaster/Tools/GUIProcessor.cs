@@ -61,6 +61,18 @@ namespace GraphMaster.Tools
         }
 
         /// <summary>
+        /// Reset node.
+        /// </summary>
+        /// <param name="n">node</param>
+        public void ResetNode(Node n)
+        {
+            if (Node == n)
+            {
+                Node = null;
+            }
+        }
+
+        /// <summary>
         /// Try to capture node.
         /// </summary>
         /// <param name="g">graph</param>

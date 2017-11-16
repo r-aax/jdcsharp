@@ -31,6 +31,8 @@
                     <MenuItem Name="OperationsSelectIncidentNodesMI" Header="Nodes" Click="OperationsSelectIncidentNodesMI_Click"/>
                     <MenuItem Name="OperationsSelectIncidentEdgesMI"  Header="Edges" Click="OperationsSelectIncidentEdgesMI_Click"/>
                 </MenuItem>
+                <Separator/>
+                <MenuItem Name="OperationsEdgeContraction" Header="Edge contraction" Click="OperationsEdgeContraction_Click"/>
             </MenuItem>
             <MenuItem Header="Transform">
                 <MenuItem Name="AreaRotateX_CW" Header="Rotate clockwise OX" Click="AreaRotateX_CW_Click" />
