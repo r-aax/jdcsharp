@@ -1311,6 +1311,18 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
+        /// Triangulate graph.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void Triangulation_MI_Click(object sender, RoutedEventArgs e)
+        {
+            GraphCreator.AddAllEdgesForPlanarGraph(Graph);
+
+            Paint();
+        }
+
+        /// <summary>
         /// Test random points for graph.
         /// </summary>
         /// <param name="sender">object</param>

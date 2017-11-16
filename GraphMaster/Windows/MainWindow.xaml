@@ -55,6 +55,7 @@
                         </MenuItem>
                     </MenuItem>
                 </MenuItem>
+                <MenuItem Name="Triangulation_MI" Header="Triangulation" Click="Triangulation_MI_Click"/>
             </MenuItem>
             <MenuItem Header="Area">
                 <MenuItem Name="AreaZoomInMI" Header="Zoom in" Click="AreaZoomInMI_Click"/>

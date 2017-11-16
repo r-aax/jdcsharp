@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 using Lib.Maths.Bits;
 using Lib.Maths.Geometry;
@@ -393,6 +394,95 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Add all possible edges for planar graph (triangulation).
+        /// Starts from shortests edges.
+        /// </summary>
+        /// <param name="g">graph</param>
+        public static void AddAllEdgesForPlanarGraph(Graph g)
+        {
+            int n = g.Order;
+
+            // Adding all potential edges to the list of pairs.
+            List<Pair<int>> list = new List<Pair<int>>();
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = i + 1; j < n; j++)
+                {
+                    list.Add(new Pair<int>(i, j));
+                }
+            }
+
+            // Sort list of points pairs with distance function.
+            list.Sort
+            (
+                (pair1, pair2) =>
+                {
+                    double dist1 = g.Nodes[pair1[0]].P.Dist(g.Nodes[pair1[1]].P);
+                    double dist2 = g.Nodes[pair2[0]].P.Dist(g.Nodes[pair2[1]].P);
+
+                    if (dist1 > dist2)
+                    {
+                        return 1;
+                    }
+                    else if (dist1 < dist2)
+                    {
+                        return -1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+            );
+
+            // Try to add all edges (with sorted order).
+            for (int t = 0; t < list.Count; t++)
+            {
+                int i = list[t][0];
+                int j = list[t][1];
+
+                if (g.IsEdge(i, j))
+                {
+                    continue;
+                }
+
+                bool is_intersect = false;
+                Segment s = new Segment(g.Nodes[i].P, g.Nodes[j].P);
+
+                for (int k = 0; k < n; k++)
+                {
+                    for (int m = 0; m < n; m++)
+                    {
+                        if (g.IsEdge(k, m))
+                        {
+                            Segment s2 = new Segment(g.Nodes[k].P, g.Nodes[m].P);
+
+                            if (Segment.IsIntersect(s, s2))
+                            {
+                                if (!Segment.IsCommonPoint(s, s2))
+                                {
+                                    is_intersect = true;
+
+                                    break;
+                                }
+                            }
+                        }
+                    }
+
+                    if (is_intersect)
+                    {
+                        break;
+                    }
+                }
+
+                if (!is_intersect)
+                {
+                    g.AddEdge(i, j);
+                }
+            }
+        }
+
+        /// <summary>
         /// Random graph in rectangle.
         /// </summary>
         /// <param name="n">nodes count</param>
@@ -521,102 +611,14 @@ namespace Lib.DataStruct.Graph
             Graph g = InitialGraph(GraphDimensionality.D2, 0);
 
             // Add points, random in rectangle.
+            AddNodes(g, n);
             for (int i = 0; i < n; i++)
             {
-                Node node = g.AddNode();
-
-                node.P = Point.Random(rect);
+                g.Nodes[i].P = Point.Random(rect);
             }
 
-            // Not optimal! Very slow.
-
-            // Phase I. Add random possible edges.
-            for (int t = 0; t < n * n * n; t++)
-            {
-                int i = Randoms.RandomInInterval(0, n - 1);
-                int j = Randoms.RandomInInterval(i + 1, n - 1);
-
-                if (g.IsEdge(i, j))
-                {
-                    continue;
-                }
-
-                bool is_intersect = false;
-                Segment s = new Segment(g.Nodes[i].P, g.Nodes[j].P);
-
-                for (int k = 0; k < n; k++)
-                {
-                    for (int m = 0; m < n; m++)
-                    {
-                        if (g.IsEdge(k, m))
-                        {
-                            Segment s2 = new Segment(g.Nodes[k].P, g.Nodes[m].P);
-
-                            if (Segment.IsIntersect(s, s2))
-                            {
-                                if (!Segment.IsCommonPoint(s, s2))
-                                {
-                                    is_intersect = true;
-
-                                    break;
-                                }
-                            }
-                        }
-                    }
-
-                    if (is_intersect)
-                    {
-                        break;
-                    }
-                }
-
-                if (!is_intersect)
-                {
-                    g.AddEdge(i, j);
-                }
-            }
-
-            // Phase II. Add all possible edges.
-            for (int i = 0; i < n; i++)
-            {
-                for (int j = i + 1; j < n; j++)
-                {
-                    bool is_intersect = false;
-                    Segment s = new Segment(g.Nodes[i].P, g.Nodes[j].P);
-
-                    for (int k = 0; k < n; k++)
-                    {
-                        for (int m = 0; m < n; m++)
-                        {
-                            if (g.IsEdge(k, m))
-                            {
-                                Segment s2 = new Segment(g.Nodes[k].P, g.Nodes[m].P);
-
-                                if (Segment.IsIntersect(s, s2))
-                                {
-                                    if (!Segment.IsCommonPoint(s, s2))
-                                    {
-                                        is_intersect = true;
-
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-
-                        if (is_intersect)
-                        {
-                            break;
-                        }
-                    }
-
-                    if (!is_intersect)
-                    {
-                        g.AddEdge(i, j);
-                    }
-                }
-            }
-
+            AddAllEdgesForPlanarGraph(g);
+            
             return g;
         }
 
