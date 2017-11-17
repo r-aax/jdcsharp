@@ -640,6 +640,28 @@ namespace Lib.Maths.Geometry
         }
 
         /// <summary>
+        /// Random point in circle.
+        /// </summary>
+        /// <param name="circle">cirkle</param>
+        /// <returns>random point</returns>
+        public static Vector Random(Circle circle)
+        {
+            Vector off = new Vector(circle.Radius, circle.Radius);
+            Rect rect = new Rect(circle.Center - off, circle.Center + off);
+
+            while (true)
+            {
+                Vector v = Random(rect);
+                Point p = new Point(v);
+
+                if (p.IsIn(circle))
+                {
+                    return v;
+                }
+            }
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>copy</returns>

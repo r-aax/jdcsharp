@@ -126,7 +126,7 @@ namespace GraphMaster.Windows
 
             if (w.IsAccepted)
             {
-                Graph = GraphCreator.RandomPlanarGraph(w.Result, Rect);
+                Graph = GraphCreator.RandomPlanarGraph(w.Result, Circle);
             }
 
             Paint();

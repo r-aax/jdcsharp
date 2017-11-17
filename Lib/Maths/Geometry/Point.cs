@@ -197,6 +197,16 @@ namespace Lib.Maths.Geometry
         }
 
         /// <summary>
+        /// Random point in circle.
+        /// </summary>
+        /// <param name="circle">circle</param>
+        /// <returns>random point</returns>
+        public static new Point Random(Circle circle)
+        {
+            return new Point(Vector.Random(circle));
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>clone</returns>
@@ -271,6 +281,16 @@ namespace Lib.Maths.Geometry
         public bool IsIn(Parallelepiped par)
         {
             return par.XInterval.Contains(X) && par.YInterval.Contains(Y) && par.ZInterval.Contains(Z);
+        }
+
+        /// <summary>
+        /// Check if point is in the circle.
+        /// </summary>
+        /// <param name="circle">circle</param>
+        /// <returns><c>true</c> - if point is in circle, <c>false</c> - otherwise</returns>
+        public bool IsIn(Circle circle)
+        {
+            return Dist(circle.Center) <= circle.Radius;
         }
 
         /// <summary>
