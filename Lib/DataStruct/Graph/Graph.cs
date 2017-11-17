@@ -871,7 +871,24 @@ namespace Lib.DataStruct.Graph
             // Target node is "a".
             a.P = new Point(Point.Mid(a.P, b.P));
 
-            // TODO: replace edges from b to a.
+            foreach (Edge e in Edges)
+            {
+                if (e.IsIncident(b))
+                {
+                    if (e.A == b)
+                    {
+                        e.A = a;
+                    }
+
+                    if (e.B == b)
+                    {
+                        e.B = a;
+                    }
+
+                    b.Edges.RemoveAll((fe) => fe == e);
+                    a.Edges.Add(e);
+                }
+            }
 
             DeleteNode(b);
 

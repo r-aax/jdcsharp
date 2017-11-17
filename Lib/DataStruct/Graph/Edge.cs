@@ -43,7 +43,7 @@ namespace Lib.DataStruct.Graph
         public Node A
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Lib.DataStruct.Graph
         public Node B
         {
             get;
-            private set;
+            set;
         }
 
         /// <summary>
