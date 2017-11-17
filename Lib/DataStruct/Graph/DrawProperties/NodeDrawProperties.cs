@@ -1,6 +1,7 @@
 ﻿// Author: Alexey Rybakov
 
 using System;
+using System.Diagnostics;
 
 using Lib.Draw;
 using Lib.Maths.Geometry;
@@ -90,8 +91,24 @@ namespace Lib.DataStruct.Graph.DrawProperties
             {
                 throw new ApplicationException();
             }
-            LabelOffset = new Vector(Double.Parse(s[12]), Double.Parse(s[13]), Double.Parse(s[14]));
-            FontSize = Double.Parse(s[17]);
+
+            // In the old format offset vector has 2 components.
+            // Is the new format offset vector has 3 components.
+            // This code supports both versions (for supporting old graph files).
+            if (s.Length == 17)
+            {
+                LabelOffset = new Vector(Double.Parse(s[12]), Double.Parse(s[13]));
+                FontSize = Double.Parse(s[16]);
+            }
+            else if (s.Length == 18)
+            {
+                LabelOffset = new Vector(Double.Parse(s[12]), Double.Parse(s[13]), Double.Parse(s[14]));
+                FontSize = Double.Parse(s[17]);
+            }
+            else
+            {
+                Debug.Assert(false);
+            }
         }
 
         /// <summary>
