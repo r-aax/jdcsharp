@@ -32,7 +32,10 @@
                     <MenuItem Name="OperationsSelectIncidentEdgesMI"  Header="Edges" Click="OperationsSelectIncidentEdgesMI_Click"/>
                 </MenuItem>
                 <Separator/>
-                <MenuItem Name="OperationsEdgeContraction" Header="Edge contraction" Click="OperationsEdgeContraction_Click"/>
+                <MenuItem Header="Other">
+                    <MenuItem Name="OperationsEdgeContraction" Header="Edge contraction" Click="OperationsEdgeContraction_Click"/>
+                    <MenuItem Name="OperationDeleteParallelEdges" Header="Delete parallel edges" Click="OperationDeleteParallelEdges_Click"/>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Transform">
                 <MenuItem Name="AreaRotateX_CW" Header="Rotate clockwise OX" Click="AreaRotateX_CW_Click" />

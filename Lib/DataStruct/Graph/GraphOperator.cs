@@ -56,5 +56,19 @@ namespace Lib.DataStruct.Graph
 
             return g.MergeNodes(a, b);
         }
+
+        public static void DeleteParallelEdges(Graph g)
+        {
+            for (int i = 0; i < g.Size; i++)
+            {
+                for (int j = i + 1; j < g.Size; j++)
+                {
+                    if (g.Edges[j].IsEq(g.Edges[i]))
+                    {
+                        g.DeleteEdge(g.Edges[j]);
+                    }
+                }
+            }
+        }
     }
 }

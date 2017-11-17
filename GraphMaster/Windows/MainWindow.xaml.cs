@@ -1462,5 +1462,16 @@ namespace GraphMaster.Windows
             GUIProcessor.ResetNode(dn);
             Paint();
         }
+
+        /// <summary>
+        /// Delete parallel edges.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationDeleteParallelEdges_Click(object sender, RoutedEventArgs e)
+        {
+            GraphOperator.DeleteParallelEdges(Graph);
+            Paint();
+        }
     }
 }

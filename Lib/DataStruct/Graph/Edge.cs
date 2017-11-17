@@ -192,5 +192,32 @@ namespace Lib.DataStruct.Graph
 
             return String.Format("[{0} {1} {2}]", A.ToString(), delim, B.ToString());
         }
+
+        /// <summary>
+        /// Check if edge is equal to another edge.
+        /// </summary>
+        /// <param name="e">edge</param>
+        /// <returns><c>true</c> - if edges are equal, <c>false</c> - otherwise</returns>
+        public bool IsEq(Edge e)
+        {
+            // Edges must be same oriented.
+            if (IsOriented != e.IsOriented)
+            {
+                return false;
+            }
+
+            if ((A == e.A) && (B == e.B))
+            {
+                return true;
+            }
+
+            // For not oriented edges AB = BA.
+            if (!IsOriented && (A == e.B) && (B == e.A))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
