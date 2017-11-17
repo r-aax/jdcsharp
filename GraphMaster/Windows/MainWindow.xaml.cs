@@ -1458,8 +1458,8 @@ namespace GraphMaster.Windows
                 return;
             }
 
-            Node dn = GraphOperator.EdgeContraction(Graph, Graph.SelectedEdges[0]);
-            GUIProcessor.ResetNode(dn);
+            GraphOperator.EdgeContraction(Graph, Graph.SelectedEdges[0]);
+            GUIProcessor.ResetGraph(Graph);
             Paint();
         }
 
@@ -1471,6 +1471,19 @@ namespace GraphMaster.Windows
         private void OperationDeleteParallelEdges_Click(object sender, RoutedEventArgs e)
         {
             GraphOperator.DeleteParallelEdges(Graph);
+            Paint();
+        }
+
+        /// <summary>
+        /// Min (shortest) edge contraction.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationMinEdgeContraction_Click(object sender, RoutedEventArgs e)
+        {
+            Edge min_e = Graph.MinEdge();
+            GraphOperator.EdgeContraction(Graph, min_e);
+            GUIProcessor.ResetGraph(Graph);
             Paint();
         }
     }

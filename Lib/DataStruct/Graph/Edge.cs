@@ -65,6 +65,17 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Length (distance between its ends).
+        /// </summary>
+        public double Length
+        {
+            get
+            {
+                return A.P.Dist(B.P);
+            }
+        }
+
+        /// <summary>
         /// Draw properties.
         /// </summary>
         private EdgeDrawProperties _DrawProperties = null;

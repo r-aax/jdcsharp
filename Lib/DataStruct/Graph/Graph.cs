@@ -894,5 +894,63 @@ namespace Lib.DataStruct.Graph
 
             return b;
         }
+
+        /// <summary>
+        /// Get max (longest) edge.
+        /// </summary>
+        /// <returns>max edge</returns>
+        public Edge MaxEdge()
+        {
+            if (Size == 0)
+            {
+                return null;
+            }
+
+            Edge e = Edges[0];
+            double d = e.Length;
+
+            for (int i = 1; i < Size; i++)
+            {
+                Edge ei = Edges[i];
+                double di = ei.Length;
+
+                if (di > d)
+                {
+                    e = ei;
+                    d = di;
+                }
+            }
+
+            return e;
+        }
+
+        /// <summary>
+        /// Get min (shortest) edge.
+        /// </summary>
+        /// <returns>min edge</returns>
+        public Edge MinEdge()
+        {
+            if (Size == 0)
+            {
+                return null;
+            }
+
+            Edge e = Edges[0];
+            double d = e.Length;
+
+            for (int i = 1; i < Size; i++)
+            {
+                Edge ei = Edges[i];
+                double di = ei.Length;
+
+                if (di < d)
+                {
+                    e = ei;
+                    d = di;
+                }
+            }
+
+            return e;
+        }
     }
 }

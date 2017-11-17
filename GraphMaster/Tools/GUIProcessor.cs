@@ -61,14 +61,17 @@ namespace GraphMaster.Tools
         }
 
         /// <summary>
-        /// Reset node.
+        /// Reset graph.
         /// </summary>
-        /// <param name="n">node</param>
-        public void ResetNode(Node n)
+        /// <param name="g">graph</param>
+        public void ResetGraph(Graph g)
         {
-            if (Node == n)
+            if (Node != null)
             {
-                Node = null;
+                if (!g.Nodes.Contains(Node))
+                {
+                    Node = null;
+                }
             }
         }
 

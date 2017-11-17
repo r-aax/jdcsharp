@@ -34,6 +34,7 @@
                 <Separator/>
                 <MenuItem Header="Other">
                     <MenuItem Name="OperationsEdgeContraction" Header="Edge contraction" Click="OperationsEdgeContraction_Click"/>
+                    <MenuItem Name="OperationMinEdgeContraction" Header="Min edge contraction" Click="OperationMinEdgeContraction_Click"/>
                     <MenuItem Name="OperationDeleteParallelEdges" Header="Delete parallel edges" Click="OperationDeleteParallelEdges_Click"/>
                 </MenuItem>
             </MenuItem>
