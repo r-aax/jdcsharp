@@ -869,7 +869,8 @@ namespace Lib.DataStruct.Graph
         public Node MergeNodes(Node a, Node b)
         {
             // Target node is "a".
-            a.P = new Point(Point.Mid(a.P, b.P));
+            // Position of new node point is a mass center is {a, b}.
+            a.P = new Point(Point.Mean(a.P, b.P, b.Weight / (a.Weight + b.Weight)));
 
             foreach (Edge e in Edges)
             {
