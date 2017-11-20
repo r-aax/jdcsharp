@@ -203,6 +203,7 @@
             <MenuItem Header="Test">
                 <MenuItem Name="TestRandomPoints_MI" Header="Random points" Click="TestRandomPoints_MI_Click"/>
                 <MenuItem Name="TestPartitioning_MI" Header="Partitioning" Click="TestPartitioning_MI_Click"/>
+                <MenuItem Name="TestContractionPartitioning_MI" Header="Contraction &amp; partitioning" Click="TestContractionPartitioning_MI_Click" />
                 <Separator/>
                 <MenuItem Name="TextSave_MI" Header="Save" Click="TextSave_MI_Click"/>
             </MenuItem>

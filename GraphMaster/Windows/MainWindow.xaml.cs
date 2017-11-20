@@ -936,10 +936,12 @@ namespace GraphMaster.Windows
                 filename = ofd.FileName;
                 extension = Path.GetExtension(filename);
 
+                PictureName = "";
+
                 if (extension == ".xml")
                 {
                     Graph = Graph.XmlDeserialize(filename);
-                    Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));
+                    Drawer.SetRect(Graph.WraparoundRect(0.1, DrawAreaC.ActualWidth / DrawAreaC.ActualHeight));                
                 }
                 else if ((extension == ".pfg") || (extension == ".PFG"))
                 {
@@ -1410,6 +1412,26 @@ namespace GraphMaster.Windows
                 {
                     LB.Items.Add(list[i]);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Test for edge contraction and partitioning.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestContractionPartitioning_MI_Click(object sender, RoutedEventArgs e)
+        {
+            LB.Items.Clear();
+
+            while (Graph.Size > 4)
+            {
+                RandomVolumePointsPartitioner.PartitionEdgesPropagationEdgesMetric(Graph, 4);
+                LB.Items.Add(String.Format("size {0} - dev {1}",
+                                           Graph.Size,
+                                           PartitioningStatistics.DeviationMaxPartitionWeightFromAvg(Graph)));
+                GraphOperator.MinEdgeContraction(Graph);
+                GraphOperator.DeleteParallelEdges(Graph);
             }
         }
 
