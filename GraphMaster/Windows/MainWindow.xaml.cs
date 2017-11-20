@@ -1481,10 +1481,15 @@ namespace GraphMaster.Windows
         /// <param name="e">parameters</param>
         private void OperationMinEdgeContraction_Click(object sender, RoutedEventArgs e)
         {
-            Edge min_e = Graph.MinEdge();
-            GraphOperator.EdgeContraction(Graph, min_e);
-            GUIProcessor.ResetGraph(Graph);
-            Paint();
+            EditIntWindow w = new EditIntWindow(1, "Enter edges count for contraction");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                GraphOperator.MinEdgesContraction(Graph, w.Result);
+                GUIProcessor.ResetGraph(Graph);
+                Paint();
+            }
         }
     }
 }

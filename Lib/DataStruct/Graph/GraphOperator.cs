@@ -49,6 +49,11 @@ namespace Lib.DataStruct.Graph
         /// <returns>deleted node</returns>
         public static Node EdgeContraction(Graph g, Edge e)
         {
+            if (e == null)
+            {
+                return null;
+            }
+
             Node a = e.A;
             Node b = e.B;
 
@@ -57,8 +62,38 @@ namespace Lib.DataStruct.Graph
             return g.MergeNodes(a, b);
         }
 
-        public static void DeleteParallelEdges(Graph g)
+        /// <summary>
+        /// Min edge contraction.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <returns>deleted node</returns>
+        public static Node MinEdgeContraction(Graph g)
         {
+            return EdgeContraction(g, g.MinEdge());
+        }
+
+        /// <summary>
+        /// Delete <c>c</c> min edges.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="c">count of edges</param>
+        public static void MinEdgesContraction(Graph g, int c)
+        {
+            for (int i = 0; i < c; i++)
+            {
+                MinEdgeContraction(g);
+            }
+        }
+
+        /// <summary>
+        /// Delete all parallel edges.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <returns>count of deleted edges</returns>
+        public static int DeleteParallelEdges(Graph g)
+        {
+            int c = 0;
+
             for (int i = 0; i < g.Size; i++)
             {
                 for (int j = i + 1; j < g.Size; j++)
@@ -66,9 +101,12 @@ namespace Lib.DataStruct.Graph
                     if (g.Edges[j].IsEq(g.Edges[i]))
                     {
                         g.DeleteEdge(g.Edges[j]);
+                        c++;
                     }
                 }
             }
+
+            return c;
         }
     }
 }
