@@ -57,7 +57,12 @@ namespace Lib.DataStruct.Graph
             Node a = e.A;
             Node b = e.B;
 
-            g.DeleteEdge(e);
+            // We have to delete all edges, equal to e.
+            List<Edge> le = g.Edges.FindAll((fe) => fe.IsEq(e));
+            foreach (Edge de in le)
+            {
+                g.DeleteEdge(de);
+            }
 
             return g.MergeNodes(a, b);
         }
