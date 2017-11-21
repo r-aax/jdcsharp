@@ -151,7 +151,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <returns>partitioning quality description string</returns>
         public static string PartitioningQualityDescription(Graph g)
         {
-            return String.Format("partitions = {0}, deviation = {1:#.####}%, cross_edges_f = {2:#.####}%",
+            return String.Format("partitions = {0}, deviation = {1:0.####}%, cross_edges_f = {2:0.####}%",
                                  PartitionWeights(g).Count(),
                                  DeviationMaxPartitionWeightFromAvg(g),
                                  InterpartitionEdgesFactor(g));

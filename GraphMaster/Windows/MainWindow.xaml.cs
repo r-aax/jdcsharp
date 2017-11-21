@@ -1424,14 +1424,14 @@ namespace GraphMaster.Windows
         {
             LB.Items.Clear();
 
-            while (Graph.Size > 4)
+            while (Graph.Order >= 4)
             {
                 RandomVolumePointsPartitioner.PartitionEdgesPropagationEdgesMetric(Graph, 4);
-                LB.Items.Add(String.Format("size {0} - dev {1}",
-                                           Graph.Size,
-                                           PartitioningStatistics.DeviationMaxPartitionWeightFromAvg(Graph)));
+                LB.Items.Add(String.Format("ord [{0,10:####}] - dev [{1,10:0.0000}] - cross [{2,10:0.0000}]",
+                                           Graph.Order,
+                                           PartitioningStatistics.DeviationMaxPartitionWeightFromAvg(Graph),
+                                           PartitioningStatistics.InterpartitionEdgesFactor(Graph)));
                 GraphOperator.MinEdgeContraction(Graph);
-                GraphOperator.DeleteParallelEdges(Graph);
             }
         }
 
