@@ -133,7 +133,7 @@ namespace Lib.DataStruct.Graph
             A = a;
             B = b;
             Label = "";
-            Weight = 0.0;
+            Weight = 1.0;
             IsOriented = is_oriented;
         }
 

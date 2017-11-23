@@ -200,7 +200,7 @@ namespace Lib.DataStruct.Graph
         {
             Id = id;
             Label = Id.ToString();
-            Weight = 0.0;
+            Weight = 1.0;        
             Partition = 0;
             Parent = parent;
             Edges = new List<Edge>();
