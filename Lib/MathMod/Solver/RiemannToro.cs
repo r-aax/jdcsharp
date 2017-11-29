@@ -56,7 +56,7 @@ namespace Lib.MathMod.Solver
         /// <summary>
         /// File for collecting data (for debug).
         /// </summary>
-        //public static StreamWriter F = new StreamWriter("data.txt");
+        // public static StreamWriter F = new StreamWriter("data.txt");
 
         // Exact Riemann solver for the Euler equations in one dimension
         // Translated from the Fortran code er1pex.f and er1pex.ini
@@ -390,8 +390,8 @@ namespace Lib.MathMod.Solver
             sample(dl, ul, vl, wl, pl, cl, dr, ur, vr, wr, pr, cr, pm, um, out d, out u, out v, out w, out p);
 
             // Collect test data.
-            //F.WriteLine(String.Format("{{ {0,10:0.000000}, {1,10:0.000000}, {2,10:0.000000}, {3,10:0.000000}, {4,10:0.000000}, {5,10:0.000000}, {6,10:0.000000}, {7,10:0.000000}, {8,10:0.000000} }},",
-            //                          dl, ul, pl, dr, ur, pr, d, u, p));
+            // F.WriteLine(String.Format("{{ {0,10:0.000000}, {1,10:0.000000}, {2,10:0.000000}, {3,10:0.000000}, {4,10:0.000000}, {5,10:0.000000}, {6,10:0.000000}, {7,10:0.000000}, {8,10:0.000000} }},",
+            //                           dl, ul, pl, dr, ur, pr, d, u, p));
         }
 
         /// <summary>

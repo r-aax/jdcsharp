@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.IO;
 
 using Lib.Maths.Geometry;
 using Lib.MathMod.SolidGrid;
@@ -21,6 +22,7 @@ using Lib.MathMod;
 using Lib.MathMod.Solver;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
+using SWRect = System.Windows.Rect;
 
 namespace Hydro
 {
@@ -781,6 +783,86 @@ namespace Hydro
             {
                 // Run time by default.
                 RunTypeParTB.Text = "0.5";
+            }
+        }
+
+        /// <summary>
+        /// Save 1D picture.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void PictureSave1D_MI_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+            string filename = null;
+
+            sfd.Filter = "Pictures (*.png)|*.png";
+
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                filename = sfd.FileName;
+
+                Transform transform = DrawArea2C.LayoutTransform;
+                DrawArea2C.LayoutTransform = null;
+                Size size = new Size(DrawArea2C.ActualWidth, DrawArea2C.ActualHeight);
+                DrawArea2C.Measure(size);
+                DrawArea2C.Arrange(new SWRect(size));
+                RenderTargetBitmap bitmap = new RenderTargetBitmap((int)size.Width,
+                                                                   (int)size.Height,
+                                                                   96d,
+                                                                   96d,
+                                                                   PixelFormats.Pbgra32);
+                bitmap.Render(DrawArea2C);
+
+                using (FileStream out_stream = new FileStream(filename, FileMode.Create))
+                {
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+
+                    encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                    encoder.Save(out_stream);
+                }
+
+                DrawArea2C.LayoutTransform = transform;
+            }
+        }
+
+        /// <summary>
+        /// Save 2D picture.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void PictureSave2D_MI_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.SaveFileDialog sfd = new System.Windows.Forms.SaveFileDialog();
+            string filename = null;
+
+            sfd.Filter = "Pictures (*.png)|*.png";
+
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                filename = sfd.FileName;
+
+                Transform transform = DrawAreaC.LayoutTransform;
+                DrawAreaC.LayoutTransform = null;
+                Size size = new Size(DrawAreaC.ActualWidth, DrawAreaC.ActualHeight);
+                DrawAreaC.Measure(size);
+                DrawAreaC.Arrange(new SWRect(size));
+                RenderTargetBitmap bitmap = new RenderTargetBitmap((int)size.Width,
+                                                                   (int)size.Height,
+                                                                   96d,
+                                                                   96d,
+                                                                   PixelFormats.Pbgra32);
+                bitmap.Render(DrawAreaC);
+
+                using (FileStream out_stream = new FileStream(filename, FileMode.Create))
+                {
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+
+                    encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                    encoder.Save(out_stream);
+                }
+
+                DrawAreaC.LayoutTransform = transform;
             }
         }
     }

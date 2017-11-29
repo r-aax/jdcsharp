@@ -30,6 +30,10 @@
                     <MenuItem x:Name="Tests2D100x100TwoCirclesMI" Header="100 x 100 two circles" Click="Tests2D100x100TwoCirclesMI_Click"/>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="Picture">
+                <MenuItem Name="PictureSave1D_MI" Header="Save 1D picture" Click="PictureSave1D_MI_Click"/>
+                <MenuItem Name="PictureSave2D_MI" Header="Save 2D picture" Click="PictureSave2D_MI_Click"/>
+            </MenuItem>
             <MenuItem Header="Info"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
