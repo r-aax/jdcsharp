@@ -474,8 +474,10 @@ namespace Hydro
         /// <param name="e"></param>
         private void Tests1DWoodwardCollela_Click(object sender, RoutedEventArgs e)
         {
+            int cells_count = 100;
+
             // Grid.
-            Grid = new SolidGrid(1000, 1, 1, 0.001);
+            Grid = new SolidGrid(cells_count, 1, 1, 0.001);
 
             // Cells.
             for (int i = 0; i < Grid.NX; i++)
@@ -484,11 +486,11 @@ namespace Hydro
                 {
                     for (int k = 0; k < Grid.NZ; k++)
                     {
-                        if (i < 100)
+                        if (i < cells_count / 10)
                         {
                             Grid.Cells[i, j, k].U = new U(1.0, 0.0, 0.0, 1000.0);
                         }
-                        else if (i < 900)
+                        else if (i < (cells_count / 10) * 9)
                         {
                             Grid.Cells[i, j, k].U = new U(1.0, 0.0, 0.0, 0.01);
                         }
