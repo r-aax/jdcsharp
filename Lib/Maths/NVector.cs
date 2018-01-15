@@ -38,6 +38,24 @@ namespace Lib.Maths
         }
 
         /// <summary>
+        /// Index overload.
+        /// </summary>
+        /// <param name="i">index</param>
+        /// <returns>element value</returns>
+        public double this[int i]
+        {
+            get
+            {
+                return E[i];
+            }
+
+            set
+            {
+                E[i] = value;
+            }
+        }
+
+        /// <summary>
         /// Allocate array of elements.
         /// </summary>
         /// <param name="n">size</param>
@@ -293,7 +311,7 @@ namespace Lib.Maths
 
                 for (int i = 0; i < Size; i++)
                 {
-                    E[i] = Math.Abs(E[i]);
+                    v.E[i] = Math.Abs(E[i]);
                 }
 
                 return v;

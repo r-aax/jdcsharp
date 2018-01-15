@@ -10,6 +10,31 @@ namespace Lib.DataStruct.Graph.Partitioning
     public class PartitioningStatistics
     {
         /// <summary>
+        /// String with distribution.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <returns>string</returns>
+        public static string DistributionString(Graph g)
+        {
+            string str = "";
+
+            if (g.Order > 0)
+            {
+                str = g.Nodes[0].Partition.ToString();
+
+                if (g.Order > 1)
+                {
+                    for (int i = 1; i < g.Order; i++)
+                    {
+                        str = String.Format("{0}-{1}", str, g.Nodes[i].Partition);
+                    }
+                }
+            }
+
+            return str;
+        }
+
+        /// <summary>
         /// Get max partition number of graph.
         /// </summary>
         /// <param name="g">graph</param>
@@ -158,12 +183,13 @@ namespace Lib.DataStruct.Graph.Partitioning
         }
 
         /// <summary>
-        /// Get quality description with cluster topology using.
+        /// Get quality values with cluster topology using.
         /// </summary>
         /// <param name="g">task graph</param>
         /// <param name="h">cluster graph</param>
-        /// <returns>quality description</returns>
-        public static string TopoQualityDescription(Graph g, Graph h)
+        /// <param name="t1">first time</param>
+        /// <param name="t2">second time</param>
+        public static void TopoQualityValues(Graph g, Graph h, out double t1, out double t2)
         {
             // Nodes.
             double[] hnw = new double[h.Order];
@@ -179,7 +205,7 @@ namespace Lib.DataStruct.Graph.Partitioning
             {
                 hnw[i] /= h.Nodes[i].Weight;
             }
-            double t1 = hnw.Max();
+            t1 = hnw.Max();
 
             // Edges.
             double[] hew = new double[h.Size];
@@ -189,13 +215,44 @@ namespace Lib.DataStruct.Graph.Partitioning
             }
             foreach (Edge edge in g.Edges)
             {
-               hew[h.FindEdgeIndex(edge.A.Partition, edge.B.Partition)] += edge.Weight;
+                hew[h.FindEdgeIndex(edge.A.Partition, edge.B.Partition)] += edge.Weight;
             }
             for (int i = 0; i < hew.Count(); i++)
             {
                 hew[i] /= h.Edges[i].Weight;
             }
-            double t2 = hew.Max();
+            t2 = hew.Max();
+        }
+
+        /// <summary>
+        /// Get quality value with cluster topology using.
+        /// </summary>
+        /// <param name="g">task graph</param>
+        /// <param name="h">cluster graph</param>
+        /// <returns>quality value</returns>
+        public static double TopoQualityValue(Graph g, Graph h)
+        {
+            double t1;
+            double t2;
+
+            TopoQualityValues(g, h, out t1, out t2);
+
+            // Full time of one iteration of calculations and interprocess exchanges.
+            return t1 + t2;
+        }
+
+        /// <summary>
+        /// Get quality description with cluster topology using.
+        /// </summary>
+        /// <param name="g">task graph</param>
+        /// <param name="h">cluster graph</param>
+        /// <returns>quality description</returns>
+        public static string TopoQualityDescription(Graph g, Graph h)
+        {
+            double t1;
+            double t2;
+
+            TopoQualityValues(g, h, out t1, out t2);
 
             // Full time of one iteration of calculations and interprocess exchanges.
             double t = t1 + t2;
