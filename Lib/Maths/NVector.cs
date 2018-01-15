@@ -28,6 +28,16 @@ namespace Lib.Maths
         }
 
         /// <summary>
+        /// Extended element.
+        /// </summary>
+        /// <param name="i">index</param>
+        /// <returns>value</returns>
+        private double XE(int i)
+        {
+            return ((i >= 0) && (i < Size)) ? E[i] : 0.0;
+        }
+
+        /// <summary>
         /// Allocate array of elements.
         /// </summary>
         /// <param name="n">size</param>
@@ -112,6 +122,144 @@ namespace Lib.Maths
             }
 
             return String.Format("({0})", str);
+        }
+
+        /// <summary>
+        /// Module square.
+        /// </summary>
+        public double Mod2
+        {
+            get
+            {
+                double d = 0.0;
+
+                for (int i = 0; i < Size; i++)
+                {
+                    d += E[i] * E[i];
+                }
+
+                return d;
+            }
+        }
+
+        /// <summary>
+        /// Module.
+        /// </summary>
+        public double Mod
+        {
+            get
+            {
+                return Math.Sqrt(Mod2);
+            }
+        }
+
+        /// <summary>
+        /// Multiplication on given value.
+        /// </summary>
+        /// <param name="k">value</param>
+        public void Mult(double k)
+        {
+            for (int i = 0; i < Size; i++)
+            {
+                E[i] *= k;
+            }
+        }
+
+        /// <summary>
+        /// Invert elements of vector.
+        /// </summary>
+        public void Invert()
+        {
+            Mult(-1.0);
+        }    
+
+        /// <summary>
+        /// Sum of vectors.
+        /// </summary>
+        /// <param name="a">first vector</param>
+        /// <param name="b">second vector</param>
+        /// <returns>vector (sum)</returns>
+        public static NVector operator +(NVector a, NVector b)
+        {
+            int size = Math.Max(a.Size, b.Size);
+            NVector v = new NVector(size);
+            
+            for (int i = 0; i < size; i++)
+            {
+                v.E[i] = a.XE(i) + b.XE(i);
+            }
+
+            return v;           
+        }
+
+        /// <summary>
+        /// Unary minus.
+        /// </summary>
+        /// <param name="a">vector</param>
+        /// <returns>inverted vector</returns>
+        public static NVector operator -(NVector a)
+        {
+            NVector v = new NVector(a);
+
+            v.Invert();
+
+            return v;
+        }
+
+        /// <summary>
+        /// Binary minus.
+        /// </summary>
+        /// <param name="a">first vector</param>
+        /// <param name="b">second vector</param>
+        /// <returns>result</returns>
+        public static NVector operator -(NVector a, NVector b)
+        {
+            int size = Math.Max(a.Size, b.Size);
+            NVector v = new NVector(size);
+
+            for (int i = 0; i < size; i++)
+            {
+                v.E[i] = a.XE(i) - b.XE(i);
+            }
+
+            return v;
+        }
+
+        /// <summary>
+        /// Multiplication on given value.
+        /// </summary>
+        /// <param name="a">vactor</param>
+        /// <param name="k">value</param>
+        /// <returns>result</returns>
+        public static NVector operator *(NVector a, double k)
+        {
+            NVector v = new NVector(a);
+
+            v.Mult(k);
+
+            return v;
+        }
+
+        /// <summary>
+        /// Multiplication on the given value.
+        /// </summary>
+        /// <param name="k">value</param>
+        /// <param name="a">vector</param>
+        /// <returns>result</returns>
+        public static NVector operator *(double k, NVector a)
+        {
+            return a * k;
+        }
+
+        /// <summary>
+        /// Division on value.
+        /// </summary>
+        /// <param name="a">vector</param>
+        /// <param name="k">value</param>
+        /// <returns>result</returns>
+        public static NVector operator /(NVector a, double k)
+        {
+            return a * (1.0 / k);
         }
     }
 }
