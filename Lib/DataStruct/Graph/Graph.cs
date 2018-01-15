@@ -399,6 +399,79 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Find edge index with given nodes.
+        /// </summary>
+        /// <param name="a">first node</param>
+        /// <param name="b">second node</param>
+        /// <returns>index or -1</returns>
+        public int FindEdgeIndex(Node a, Node b)
+        {
+            Debug.Assert((a.Parent == this) && (b.Parent == this));
+
+            for (int i = 0; i < Size; i++)
+            {
+                Edge e = Edges[i];
+
+                if (e.IsIncident(b))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Find edge with given incident nodes indices.
+        /// </summary>
+        /// <param name="ai">first node index</param>
+        /// <param name="bi">second node index</param>
+        /// <returns>edge or null</returns>
+        public Edge FindEdge(int ai, int bi)
+        {
+            foreach (Edge e in Edges)
+            {
+                if ((e.A.Id == ai) && (e.B.Id == bi))
+                {
+                    return e;
+                }
+
+                if ((e.A.Id == bi) && (e.B.Id == ai))
+                {
+                    return e;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Find edge index with given incident nodes indices.
+        /// </summary>
+        /// <param name="ai">first node index</param>
+        /// <param name="bi">second node index</param>
+        /// <returns>index or -1</returns>
+        public int FindEdgeIndex(int ai, int bi)
+        {
+            for (int i = 0; i < Size; i++)
+            {
+                Edge e = Edges[i];
+
+                if ((e.A.Id == ai) && (e.B.Id == bi))
+                {
+                    return i;
+                }
+
+                if ((e.A.Id == bi) && (e.B.Id == ai))
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
         /// Check if edge in graph.
         /// </summary>
         /// <param name="a">first node</param>

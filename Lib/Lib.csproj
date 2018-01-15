@@ -65,6 +65,7 @@
     <Compile Include="DataStruct\Graph\Partitioning\Partitioner.cs" />
     <Compile Include="DataStruct\Graph\Partitioning\PartitioningStatistics.cs" />
     <Compile Include="DataStruct\Graph\Partitioning\RandomVolumePointsPartitioner.cs" />
+    <Compile Include="DataStruct\Graph\Partitioning\TopoPartitioner.cs" />
     <Compile Include="DataStruct\Graph\Partitioning\UniformGreedyPartitioner.cs" />
     <Compile Include="DataStruct\Graph\Serialized\EdgeSerialized.cs" />
     <Compile Include="DataStruct\Graph\Serialized\GraphSerialized.cs" />

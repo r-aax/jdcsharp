@@ -156,5 +156,51 @@ namespace Lib.DataStruct.Graph.Partitioning
                                  DeviationMaxPartitionWeightFromAvg(g),
                                  InterpartitionEdgesFactor(g));
         }
+
+        /// <summary>
+        /// Get quality description with cluster topology using.
+        /// </summary>
+        /// <param name="g">task graph</param>
+        /// <param name="h">cluster graph</param>
+        /// <returns>quality description</returns>
+        public static string TopoQualityDescription(Graph g, Graph h)
+        {
+            // Nodes.
+            double[] hnw = new double[h.Order];
+            for (int i = 0; i < hnw.Count(); i++)
+            {
+                hnw[i] = 0.0;
+            }
+            foreach (Node node in g.Nodes)
+            {
+                hnw[node.Partition] += node.Weight;
+            }
+            for (int i = 0; i < hnw.Count(); i++)
+            {
+                hnw[i] /= h.Nodes[i].Weight;
+            }
+            double t1 = hnw.Max();
+
+            // Edges.
+            double[] hew = new double[h.Size];
+            for (int i = 0; i < hew.Count(); i++)
+            {
+                hew[i] = 0.0;
+            }
+            foreach (Edge edge in g.Edges)
+            {
+               hew[h.FindEdgeIndex(edge.A.Partition, edge.B.Partition)] += edge.Weight;
+            }
+            for (int i = 0; i < hew.Count(); i++)
+            {
+                hew[i] /= h.Edges[i].Weight;
+            }
+            double t2 = hew.Max();
+
+            // Full time of one iteration of calculations and interprocess exchanges.
+            double t = t1 + t2;
+
+            return String.Format("t1 = {0}, t2 = {1}, t = {2}", t1, t2, t);
+        }
     }
 }
