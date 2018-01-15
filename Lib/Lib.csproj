@@ -172,6 +172,7 @@
     <Compile Include="Maths\Numbers\RamseyNumbers\Constants.cs" />
     <Compile Include="Maths\Numbers\RamseyNumbers\PredramseyCircularGraphsAnalizer.cs" />
     <Compile Include="Maths\Numbers\Randoms.cs" />
+    <Compile Include="Maths\NVector.cs" />
     <Compile Include="Maths\WeightsDistribution.cs" />
     <Compile Include="Net\UDP.cs" />
     <Compile Include="Net\UDPListener.cs" />

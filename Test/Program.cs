@@ -7,8 +7,7 @@ using System.Xml.Serialization;
 using System.IO;
 using System.Diagnostics;
 
-using Lib.Maths.Bits;
-using Lib.Maths.Numbers.RamseyNumbers;
+using Lib.Maths;
 
 namespace Test
 {
@@ -23,6 +22,10 @@ namespace Test
         /// <param name="args">arguments</param>
         static void Main(string[] args)
         {
+            NVector v = new NVector(5);
+            Console.WriteLine(v);
+           
+            Console.ReadKey();
         }
     }
 }
