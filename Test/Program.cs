@@ -8,6 +8,9 @@ using System.IO;
 using System.Diagnostics;
 
 using Lib.Maths;
+using Lib.DataStruct.Graph;
+using Lib.DataStruct.Graph.Load;
+using Lib.DataStruct.Graph.Partitioning;
 
 namespace Test
 {
@@ -22,10 +25,6 @@ namespace Test
         /// <param name="args">arguments</param>
         static void Main(string[] args)
         {
-            NVector v = new NVector(5);
-            Console.WriteLine(v);
-           
-            Console.ReadKey();
         }
     }
 }

@@ -128,13 +128,13 @@ namespace Lib.Maths
 
             if (Size > 0)
             {
-                str = E[0].ToString();
+                str = String.Format("{0:0.##}", E[0]);
 
                 if (Size > 1)
                 {
                     for (int i = 1; i < Size; i++)
                     {
-                        str = String.Format("{0},{1}", str, E[i]);
+                        str = String.Format("{0},{1:0.##}", str, E[i]);
                     }
                 }
             }
@@ -399,7 +399,7 @@ namespace Lib.Maths
         /// <summary>
         /// Round vecrtor.
         /// </summary>
-        public NVector Round
+        public NVector Rounded
         {
             get
             {
@@ -411,6 +411,21 @@ namespace Lib.Maths
                 }
 
                 return v;
+            }
+        }
+
+        /// <summary>
+        /// Filter by threshold (zero too small elements).
+        /// </summary>
+        /// <param name="th">threshold</param>
+        public void FilterByThreshold(double th)
+        {
+            for (int i = 0; i < Size; i++)
+            {
+                if (Math.Abs(E[i]) < th)
+                {
+                    E[i] = 0.0;
+                }
             }
         }
     }
