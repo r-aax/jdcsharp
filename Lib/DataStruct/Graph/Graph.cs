@@ -1026,5 +1026,41 @@ namespace Lib.DataStruct.Graph
 
             return e;
         }
+
+        /// <summary>
+        /// Average weight of node.
+        /// </summary>
+        public double AvgNodeWeight
+        {
+            get
+            {
+                double sum = 0.0;
+
+                foreach (Node node in Nodes)
+                {
+                    sum += node.Weight;
+                }
+
+                return sum / Order;
+            }
+        }
+
+        /// <summary>
+        /// Average weight of edge.
+        /// </summary>
+        public double AvgEdgeWeight
+        {
+            get
+            {
+                double sum = 0.0;
+
+                foreach (Edge edge in Edges)
+                {
+                    sum += edge.Weight;
+                }
+
+                return sum / Size;
+            }
+        }
     }
 }

@@ -1313,6 +1313,37 @@ namespace GraphMaster.Windows
         }
 
         /// <summary>
+        /// Click on menu item of partition using topology data.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void AlgorithmsPartitionRVPTopo_MI_Click(object sender, RoutedEventArgs e)
+        {
+            // H - cluster graph.
+            int order = 5;
+            Graph h = new Graph();
+            for (int i = 0; i < order; i++)
+            {
+                Node node = h.AddNode();
+                node.Weight = 10.0;
+            }
+            h.Nodes[0].Weight = 1000.0;
+            for (int i = 0; i < order; i++)
+            {
+                for (int j = i; j < order; j++)
+                {
+                    Edge edge = h.AddEdge(i, j);
+                    edge.Weight = 1e+10;
+                }
+            }
+
+            RandomVolumePointsPartitioner.PartitionWithTopologyData(Graph, h);
+            DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, h.Order);
+            PictureName = "RVPTopo : " + PartitioningStatistics.TopoQualityDescription(Graph, h);
+            Paint();
+        }
+
+        /// <summary>
         /// Triangulate graph.
         /// </summary>
         /// <param name="sender">object</param>

@@ -59,6 +59,7 @@
                             <MenuItem Name="AlgorithmsPartitioningRVPEP_NM_MI" Header="Nodes weights metric (RVPEP/NM)" Click="AlgorithmsPartitioningRVPEP_NM_MI_Click"/>
                             <MenuItem Name="AlgorithmsPartitioningRVPEP_EM_MI" Header="Edges weights metric (RVPEP/EM)" Click="AlgorithmsPartitioningRVPEP_EM_MI_Click"/>
                         </MenuItem>
+                        <MenuItem Name="AlgorithmsPartitionRVPTopo_MI" Header="With topology data" Click="AlgorithmsPartitionRVPTopo_MI_Click"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Name="Triangulation_MI" Header="Triangulation" Click="Triangulation_MI_Click"/>
