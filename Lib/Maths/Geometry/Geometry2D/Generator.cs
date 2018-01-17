@@ -30,18 +30,21 @@ namespace Lib.Maths.Geometry.Geometry2D
         }
 
         /// <summary>
-        /// Generate uniform points in rectangle.
+        /// Generate uniform point in rectangle.
+        /// Points have weights.
         /// </summary>
-        /// <param name="n">count of points</param>
+        /// <param name="ws">points weights</param>
         /// <param name="rect">rectangle</param>
-        /// <returns>uniform points</returns>
-        public static Point[] UniformPointsInRect(int n, Rect rect)
+        /// <returns>points array</returns>
+        public static Point[] UniformPointsInRect(double[] ws, Rect rect)
         {
+            int n = ws.Count();
             int steps = 1000;
             Point[] ps = RandomPointsInRect(n, rect);
             Vector[] fs = new Vector[ps.Count()];
 
-            // Simulate gravity in terms of toroid distances.
+            // Simulate antigravity in terms of toroid distances.
+            // (points push each other).
             for (int h = 0; h < steps; h++)
             {
                 // Zero all forces.
@@ -61,7 +64,7 @@ namespace Lib.Maths.Geometry.Geometry2D
                         d.Scale(1.0 / rect.Width, 1.0 / rect.Height, 1.0);
 
                         // Calculate force.
-                        Vector f = d * (1 / (d.Mod * d.Mod2));
+                        Vector f = (ws[i] * ws[j]) * d * (1 / (d.Mod * d.Mod2));
 
                         // Add to sum forces for i-th and j-th points.
                         fs[j] += f;
@@ -96,6 +99,24 @@ namespace Lib.Maths.Geometry.Geometry2D
             }
 
             return ps;
+        }
+
+        /// <summary>
+        /// Generate uniform points in rectangle.
+        /// </summary>
+        /// <param name="n">count of points</param>
+        /// <param name="rect">rectangle</param>
+        /// <returns>uniform points</returns>
+        public static Point[] UniformPointsInRect(int n, Rect rect)
+        {
+            double[] ws = new double[n];
+
+            for (int i = 0; i < ws.Count(); i++)
+            {
+                ws[i] = 1.0;
+            }
+
+            return UniformPointsInRect(ws, rect);
         }
     }
 }

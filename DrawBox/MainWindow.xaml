@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DrawBox"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowStartupLocation="CenterScreen">
+        Title="MainWindow" Height="550" Width="550" WindowStartupLocation="CenterScreen">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue" Height="21.72">
             <MenuItem Header="Draw">
@@ -24,7 +24,7 @@
                         <MenuItem Name="DrawPlanOMP244thGround" Header="244th ground" Click="DrawPlanOMP244thGround_Click"/>
                     </MenuItem>
                 </MenuItem>
-                <MenuItem Header="UniformPoints" Click="MenuItem_Click"/>
+                <MenuItem Header="UniformPoints" Click="UniformPoints_Click"/>
             </MenuItem>
             <MenuItem Header="Picture">
                 <MenuItem Name="PictureSaveMI" Header="Save" Click="PictureSaveMI_Click"/>

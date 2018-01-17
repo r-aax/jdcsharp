@@ -187,18 +187,6 @@ namespace DrawBox
             Paint();
         }
 
-
-        /// <summary>
-        /// Draw test of uniform points.
-        /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">parameters</param>
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            PEl = DrawElement.UniformPoints;
-            Paint();
-        }
-
         /// <summary>
         /// Click on Picture Save menu item.
         /// </summary>
@@ -256,6 +244,17 @@ namespace DrawBox
         /// <param name="e">parameters</param>
         private void StatusBar_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
         {
+            Paint();
+        }
+
+        /// <summary>
+        /// Draw test of uniform points.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void UniformPoints_Click(object sender, RoutedEventArgs e)
+        {
+            PEl = DrawElement.UniformPoints;
             Paint();
         }
     }

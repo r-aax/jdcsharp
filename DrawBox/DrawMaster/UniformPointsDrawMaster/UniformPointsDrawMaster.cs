@@ -24,10 +24,20 @@ namespace DrawBox.DrawMaster.UniformPointsDrawMaster
 
             Rect2D rect = new Rect2D(10.0, 90.0, 10.0, 90.0);
 
-            d.SetBrush(new Lib.Draw.Color(System.Windows.Media.Colors.Silver));
-            d.FillRect(rect);
+            //d.SetBrush(new Lib.Draw.Color(System.Windows.Media.Colors.Silver));
+            //d.FillRect(rect);
+            d.DrawRect(rect);
 
-            Point[] ps = Generator.UniformPointsInRect(81, rect);
+            int n = 250;
+            double[] ws = new double[n];
+            for (int i = 0; i < n; i++)
+            {
+                ws[i] = 1.0;
+            }
+            ws[0] = 10.0;
+            ws[1] = 20.0;
+            ws[2] = 30.0;
+            Point[] ps = Generator.UniformPointsInRect(ws, rect);
 
             d.SetBrush(new Lib.Draw.Color(System.Windows.Media.Colors.Black));
 
