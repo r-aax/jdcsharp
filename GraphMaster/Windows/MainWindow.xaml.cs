@@ -1319,27 +1319,39 @@ namespace GraphMaster.Windows
         /// <param name="e">parameters</param>
         private void AlgorithmsPartitionRVPTopo_MI_Click(object sender, RoutedEventArgs e)
         {
-            // H - cluster graph.
-            int order = 25;
-            Graph h = new Graph();
-            for (int i = 0; i < order; i++)
-            {
-                Node node = h.AddNode();
-                node.Weight = 10.0;
-            }
-            for (int i = 0; i < order; i++)
-            {
-                for (int j = i; j < order; j++)
-                {
-                    Edge edge = h.AddEdge(i, j);
-                    edge.Weight = 1e+10;
-                }
-            }
+            int partitions_count = 5;
 
-            RandomVolumePointsPartitioner.PartitionWithTopologyData(Graph, h);
-            DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, h.Order);
-            PictureName = "RVPTopo : " + PartitioningStatistics.TopoQualityDescription(Graph, h);
-            Paint();
+            EditIntWindow w = new EditIntWindow(partitions_count, "Enter partitions count");
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                // H - cluster graph.
+                int order = w.Result;
+                Graph h = new Graph();
+                for (int i = 0; i < order; i++)
+                {
+                    Node node = h.AddNode();
+                    node.Weight = 10.0;
+                    if (i < order / 2)
+                    {
+                        node.Weight /= 4.0;
+                    }
+                }
+                for (int i = 0; i < order; i++)
+                {
+                    for (int j = i; j < order; j++)
+                    {
+                        Edge edge = h.AddEdge(i, j);
+                        edge.Weight = 1e+10;
+                    }
+                }
+
+                RandomVolumePointsPartitioner.PartitionWithTopologyData(Graph, h);
+                DrawPropertiesManager.RepaintNodesAccordingToTheirLabels(Graph, h.Order);
+                PictureName = "RVPTopo : " + PartitioningStatistics.TopoQualityDescription(Graph, h);
+                Paint();
+            }
         }
 
         /// <summary>
@@ -1555,11 +1567,11 @@ namespace GraphMaster.Windows
             Graph.DrawProperties.DefaultNodeDrawProperties.LabelVisibility = Lib.DataStruct.Graph.DrawProperties.Visibility.No;
             for (int i = 0; i < Graph.Order; i++)
             {
-                Graph.Nodes[i].Weight = 1.0;
+                Graph.Nodes[i].Weight = 1.0 + Randoms.RandomInInterval(0.0, 0.1);
             }
             for (int i = 0; i < Graph.Size; i++)
             {
-                Graph.Edges[i].Weight = 1e+10;
+                Graph.Edges[i].Weight = 1.0;
             }
 
             Paint();
