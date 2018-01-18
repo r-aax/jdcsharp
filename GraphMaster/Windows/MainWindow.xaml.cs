@@ -1320,7 +1320,7 @@ namespace GraphMaster.Windows
         private void AlgorithmsPartitionRVPTopo_MI_Click(object sender, RoutedEventArgs e)
         {
             // H - cluster graph.
-            int order = 5;
+            int order = 25;
             Graph h = new Graph();
             for (int i = 0; i < order; i++)
             {
@@ -1542,6 +1542,27 @@ namespace GraphMaster.Windows
                 GUIProcessor.ResetGraph(Graph);
                 Paint();
             }
+        }
+
+        /// <summary>
+        /// Example of 3D grid with topology.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ExampleGrid3ForTopo_Click(object sender, RoutedEventArgs e)
+        {
+            Graph = GraphCreator.Grid3D(40, 40, 1, new Parallelepiped(10.0, 90.0, 10.0, 90.0, 0.0, 1.0));
+            Graph.DrawProperties.DefaultNodeDrawProperties.LabelVisibility = Lib.DataStruct.Graph.DrawProperties.Visibility.No;
+            for (int i = 0; i < Graph.Order; i++)
+            {
+                Graph.Nodes[i].Weight = 1.0;
+            }
+            for (int i = 0; i < Graph.Size; i++)
+            {
+                Graph.Edges[i].Weight = 1e+10;
+            }
+
+            Paint();
         }
     }
 }

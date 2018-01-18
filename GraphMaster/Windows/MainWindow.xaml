@@ -107,6 +107,8 @@
                     <MenuItem Name="ExampleGrid1" Header="1D grid" Click="ExampleGrid1_Click" />
                     <MenuItem Name="ExampleGrid2" Header="2D grid" Click="ExampleGrid2_Click" />
                     <MenuItem Name="ExampleGrid3" Header="3D grid" Click="ExampleGrid3_Click" />
+                    <MenuItem Name="ExampleGrid3ForTopo" Header="3D grid with topo" Click="ExampleGrid3ForTopo_Click"/>
+                    <Separator/>
                     <MenuItem Header="Circle">
                         <MenuItem Name="ExampleGridCircleWithCenter" Header="With center point" Click="ExampleGridCircleWithCenter_Click"/>
                         <MenuItem Name="ExampleGridCircleWithoutCenter" Header="Without center point" Click="ExampleGridCircleWithoutCenter_Click"/>

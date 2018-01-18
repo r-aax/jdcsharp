@@ -672,22 +672,24 @@ namespace Lib.DataStruct.Graph
         {
             double min_x = MinX();
             double max_x = MaxX();
-
-            if (min_x == max_x)
-            {
-                // Some margin for too thin graph (in y coordinate).
-                min_x -= 1.0;
-                max_x += 1.0;
-            }
-
             double min_y = MinY();
             double max_y = MaxY();
 
-            if (min_y == max_y)
+            if (margin_k > 0.0)
             {
-                // Some margin for too thin graph (in x coordinate).
-                min_y -= 1.0;
-                max_y += 1.0;
+                if (min_x == max_x)
+                {
+                    // Some margin for too thin graph (in x coordinate).
+                    min_x -= 1.0;
+                    max_x += 1.0;
+                }
+
+                if (min_y == max_y)
+                {
+                    // Some margin for too thin graph (in y coordinate).
+                    min_y -= 1.0;
+                    max_y += 1.0;
+                }
             }
 
             double mx = (max_x - min_x) * margin_k;
@@ -719,14 +721,71 @@ namespace Lib.DataStruct.Graph
         }
 
         /// <summary>
+        /// Wraparound rectangle with no margin.
+        /// </summary>
+        /// <returns>rectangle</returns>
+        public Rect2D WraparoundRect()
+        {
+            return WraparoundRect(0.0);
+        }
+
+        /// <summary>
+        /// Wraparound parallelepiped for graph.
+        /// </summary>
+        /// <param name="margin_k">margin koefficient</param>
+        /// <returns>parallelepiped</returns>
+        public Parallelepiped WraparoundParallelepiped(double margin_k)
+        {
+            Debug.Assert(Is3D, "Need 3D graph for wraparound parallelepiped.");
+
+            double min_x = MinX();
+            double max_x = MaxX();
+            double min_y = MinY();
+            double max_y = MaxY();
+            double min_z = MinZ();
+            double max_z = MaxZ();
+
+            if (margin_k > 0.0)
+            {
+
+                if (min_x == max_x)
+                {
+                    // Some margin for too thin graph (in x coordinate).
+                    min_x -= 1.0;
+                    max_x += 1.0;
+                }
+
+                if (min_y == max_y)
+                {
+                    // Some margin for too thin graph (in y coordinate).
+                    min_y -= 1.0;
+                    max_y += 1.0;
+                }
+
+                if (min_z == max_z)
+                {
+                    // Some margin for too thin graph (in z coordinate).
+                    min_z -= 1.0;
+                    max_z += 1.0;
+                }
+            }
+
+            double mx = (max_x - min_x) * margin_k;
+            double my = (max_y - min_y) * margin_k;
+            double mz = (max_z - min_z) * margin_k;
+
+            return new Parallelepiped(min_x - mx, max_x + mx,
+                                      min_y - my, max_y + my,
+                                      min_z - mz, max_z + mz);
+        }
+
+        /// <summary>
         /// Wraparound parallelepiped for graph.
         /// </summary>
         /// <returns>parallelepiped</returns>
         public Parallelepiped WraparoundParallelepiped()
         {
-            Debug.Assert(Is3D, "Need 3D graph for wraparound parallelepiped.");
-
-            return new Parallelepiped(MinX(), MaxX(), MinY(), MaxY(), MinZ(), MaxZ());
+            return WraparoundParallelepiped(0.0);
         }
 
         /// <summary>

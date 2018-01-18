@@ -327,9 +327,17 @@ namespace Lib.DataStruct.Graph
 
                         n = indices[n];
 
-                        g.Nodes[n].P = new Point(par.Left + par.Width * ((double)x / (xn - 1)),
-                                                 par.Top - par.Height * ((double)y / (yn - 1)),
-                                                 par.Front - par.Depth * ((double)z / (zn - 1)));
+                        double xcoord = (xn > 1)
+                                        ? par.Left + par.Width * ((double)x / (xn - 1))
+                                        : 0.5 * (par.Left + par.Right);
+                        double ycoord = (yn > 1)
+                                        ? par.Top - par.Height * ((double)y / (yn - 1))
+                                        : 0.5 * (par.Top + par.Bottom);
+                        double zcoord = (zn > 1)
+                                        ? par.Front - par.Depth * ((double)z / (zn - 1))
+                                        : 0.5 * (par.Front + par.Back);
+
+                        g.Nodes[n].P = new Point(xcoord, ycoord, zcoord);
                     }
                 }
             }
