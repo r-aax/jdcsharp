@@ -1327,7 +1327,6 @@ namespace GraphMaster.Windows
                 Node node = h.AddNode();
                 node.Weight = 10.0;
             }
-            h.Nodes[0].Weight = 1000.0;
             for (int i = 0; i < order; i++)
             {
                 for (int j = i; j < order; j++)

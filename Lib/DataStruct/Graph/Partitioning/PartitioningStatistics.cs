@@ -187,9 +187,13 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// </summary>
         /// <param name="g">task graph</param>
         /// <param name="h">cluster graph</param>
-        /// <param name="t1">first time</param>
-        /// <param name="t2">second time</param>
-        public static void TopoQualityValues(Graph g, Graph h, out double t1, out double t2)
+        /// <param name="t1_max">maximum first time</param>
+        /// <param name="t1_min">minimum first time</param>
+        /// <param name="t2_max">maximum second time</param>
+        /// <param name="t2_min">minimum second time</param>
+        public static void TopoQualityValues(Graph g, Graph h,
+                                             out double t1_max, out double t1_min,
+                                             out double t2_max, out double t2_min)
         {
             // Nodes.
             double[] hnw = new double[h.Order];
@@ -205,7 +209,8 @@ namespace Lib.DataStruct.Graph.Partitioning
             {
                 hnw[i] /= h.Nodes[i].Weight;
             }
-            t1 = hnw.Max();
+            t1_max = hnw.Max();
+            t1_min = hnw.Min();
 
             // Edges.
             double[] hew = new double[h.Size];
@@ -221,7 +226,8 @@ namespace Lib.DataStruct.Graph.Partitioning
             {
                 hew[i] /= h.Edges[i].Weight;
             }
-            t2 = hew.Max();
+            t2_max = hew.Max();
+            t2_min = hew.Min();
         }
 
         /// <summary>
@@ -232,13 +238,12 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <returns>quality value</returns>
         public static double TopoQualityValue(Graph g, Graph h)
         {
-            double t1;
-            double t2;
+            double t1_max, t1_min, t2_max, t2_min;
 
-            TopoQualityValues(g, h, out t1, out t2);
+            TopoQualityValues(g, h, out t1_max, out t1_min, out t2_max, out t2_min);
 
             // Full time of one iteration of calculations and interprocess exchanges.
-            return t1 + t2;
+            return t1_max + t2_max;
         }
 
         /// <summary>
@@ -249,15 +254,17 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <returns>quality description</returns>
         public static string TopoQualityDescription(Graph g, Graph h)
         {
-            double t1;
-            double t2;
+            double t1_max, t1_min, t2_max, t2_min;
 
-            TopoQualityValues(g, h, out t1, out t2);
+            TopoQualityValues(g, h, out t1_max, out t1_min, out t2_max, out t2_min);
 
             // Full time of one iteration of calculations and interprocess exchanges.
-            double t = t1 + t2;
+            double t_max = t1_max + t2_max;
+            double t_min = t1_min + t2_min;
+            double d = (t_max - t_min) / Math.Abs(t_max) * 100.0;
 
-            return String.Format("t1 = {0}, t2 = {1}, t = {2}", t1, t2, t);
+            return String.Format("{0:0.##}+{1:0.##}={2:0.##}/{3:0.##}+{4:0.##}={5:0.##}, d={6:0.##}%",
+                                 t1_max, t2_max, t_max, t1_min, t2_min, t_min, d);
         }
     }
 }
