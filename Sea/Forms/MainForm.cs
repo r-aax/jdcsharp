@@ -306,7 +306,7 @@ namespace Sea.Forms
         {
             int col_ind = e.ColumnIndex;
             int row_ind = e.RowIndex;
-            string id_string = BooksDGV.Rows[row_ind].Cells[1].Value as string;
+            string id_string = BooksDGV.Rows[row_ind].Cells[2].Value as string;
             int id = Lib.Utils.Convert.GetInt(id_string);
             Book b = Sea.SBooks.FindById(id);
 
