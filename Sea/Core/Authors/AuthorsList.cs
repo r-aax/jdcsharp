@@ -76,7 +76,7 @@ namespace Sea.Core.Authors
         {
             int id = InnerParameters.MinimalObjectId - 1;
 
-            foreach(Author author in Items)
+            foreach (Author author in Items)
             {
                 id = Math.Max(id, author.Id);
             }            
