@@ -215,5 +215,31 @@ namespace Sea.Core.Categories
 
             return false;
         }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            if (IsEmpty)
+            {
+                return "";
+            }
+            else
+            {
+                string ss = Items[0].GetDataString();
+
+                for (int i = 1; i < Count; i++)
+                {
+                    MPTTTree t = Items[i];
+                    string s = t.GetDataString();
+
+                    ss = ss + "; " + s;
+                }
+
+                return ss;
+            }
+        }
     }
 }

@@ -89,6 +89,17 @@ namespace Sea.Core.Books
         public CategoriesList Categories { get; set; }
 
         /// <summary>
+        /// Categories string.
+        /// </summary>
+        public string CategoriesString
+        {
+            get
+            {
+                return Categories.ToString();
+            }            
+        }
+
+        /// <summary>
         /// Categories identifiers for serialization.
         /// </summary>
         public List<int> CategoriesIds;

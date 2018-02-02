@@ -240,11 +240,13 @@ namespace Sea.Forms
         {
             // Set grid.
             g.RowCount = b.Count;
-            g.ColumnCount = 3;
+            g.ColumnCount = 4;
             g.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            g.Columns[0].HeaderText = "Description";
-            g.Columns[1].HeaderText = "Id";
-            g.Columns[2].HeaderText = "Info";
+            g.Columns[0].HeaderText = "Name";
+            g.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            g.Columns[1].HeaderText = "Keywords & Categories";
+            g.Columns[2].HeaderText = "Id";
+            g.Columns[3].HeaderText = "Info";
 
             // Set font.
             Font font = new Font(g.Font.Name, g.Font.Size, FontStyle.Bold);
@@ -257,12 +259,12 @@ namespace Sea.Forms
             for (int i = 0; i < b.Count; i++)
             {
                 DataGridViewRow row = g.Rows[i];
-                string Name = b[i].FullName(BookFullNamePrintStyle.Wide);
-                string Keywords = b[i].Keywords;
-                string cell_0_value = (Keywords == "") ? Name : (Name + " // keywords: " + Keywords);
-                row.Cells[0].Value = cell_0_value;
-                row.Cells[1].Value = b[i].Id.ToString();
-                row.Cells[2].Value = b[i].TypeString;
+      
+                row.Cells[0].Value = b[i].FullName(BookFullNamePrintStyle.Wide);
+                row.Cells[1].Value = String.Format("keywords: {0} // categories: {1}",
+                                                   b[i].Keywords, b[i].CategoriesString);
+                row.Cells[2].Value = b[i].Id.ToString();
+                row.Cells[3].Value = b[i].TypeString;
             }
         }
 
