@@ -36,6 +36,7 @@
                     <MenuItem Name="OperationsEdgeContraction" Header="Edge contraction" Click="OperationsEdgeContraction_Click"/>
                     <MenuItem Name="OperationMinEdgeContraction" Header="Min edge contraction" Click="OperationMinEdgeContraction_Click"/>
                     <MenuItem Name="OperationDeleteParallelEdges" Header="Delete parallel edges" Click="OperationDeleteParallelEdges_Click"/>
+                    <MenuItem Name="OperationUnite3NodesColor" Header="Unite 3 nodes color" Click="OperationUnite3NodesColor_Click" />
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Transform">
@@ -209,6 +210,7 @@
                 <MenuItem Name="TestContractionPartitioning_MI" Header="Contraction &amp; partitioning" Click="TestContractionPartitioning_MI_Click" />
                 <Separator/>
                 <MenuItem Name="TextSave_MI" Header="Save" Click="TextSave_MI_Click"/>
+                <MenuItem Name="TestTopo" Header="Test topology" Click="TestTopo_Click"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">

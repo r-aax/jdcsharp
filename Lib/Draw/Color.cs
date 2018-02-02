@@ -256,5 +256,15 @@ namespace Lib.Draw
 
             return arr;
         }
+
+        /// <summary>
+        /// Check for equal.
+        /// </summary>
+        /// <param name="c">color</param>
+        /// <returns><c>true</c> - if colors are equal, <c>false</c> - otherwise</returns>
+        public bool IsEq(Color c)
+        {
+            return (c.R == R) && (c.G == G) && (c.B == B) && (c.A == A);
+        }
     }
 }

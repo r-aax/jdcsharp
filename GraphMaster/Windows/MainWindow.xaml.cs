@@ -24,6 +24,7 @@ using SWRect = System.Windows.Rect;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
 using LVector = Lib.Maths.Geometry.Vector;
 using LPoint = Lib.Maths.Geometry.Point;
+using LColor = Lib.Draw.Color;
 using RectDrawerWPF = Lib.Draw.WPF.RectDrawer;
 using GraphMaster.Tools;
 using Lib.GUI.WPF;
@@ -1335,7 +1336,7 @@ namespace GraphMaster.Windows
                     node.Weight = 10.0;
                     if (i < order / 2)
                     {
-                        node.Weight /= 4.0;
+                        node.Weight /= 1.0;
                     }
                 }
                 for (int i = 0; i < order; i++)
@@ -1575,6 +1576,79 @@ namespace GraphMaster.Windows
             }
 
             Paint();
+        }
+
+        /// <summary>
+        /// Unite 3 nodes color.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void OperationUnite3NodesColor_Click(object sender, RoutedEventArgs e)
+        {
+            if (Graph.SelectedNodes.Count != 3)
+            {
+                return;
+            }
+
+            LColor c0 = Graph.SelectedNodes[0].DrawProperties.Color;
+            LColor c1 = Graph.SelectedNodes[1].DrawProperties.Color;
+            LColor c2 = Graph.SelectedNodes[2].DrawProperties.Color;
+
+            if (c0.IsEq(c1))
+            {
+                Graph.SelectedNodes[2].DrawProperties.Color = c0.Clone() as LColor;
+            }
+            else if (c0.IsEq(c2))
+            {
+                Graph.SelectedNodes[1].DrawProperties.Color = c0.Clone() as LColor;
+            }
+            else if (c1.IsEq(c2))
+            {
+                Graph.SelectedNodes[0].DrawProperties.Color = c1.Clone() as LColor;
+            }
+
+            Graph.SetSelection(false, true, false);
+        }
+
+        /// <summary>
+        /// Test for topology.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestTopo_Click(object sender, RoutedEventArgs e)
+        {
+            for (int qq = 200; qq < 300; qq++)
+            {
+                for (int rr = 0; rr < 5; rr++)
+                {
+                    // H - cluster graph.
+                    int order = qq;
+                    Graph h = new Graph();
+                    for (int i = 0; i < order; i++)
+                    {
+                        Node node = h.AddNode();
+                        node.Weight = 10.0;
+                        if (i < order / 2)
+                        {
+                            node.Weight /= 4.0;
+                        }
+                    }
+                    for (int i = 0; i < order; i++)
+                    {
+                        for (int j = i; j < order; j++)
+                        {
+                            Edge edge = h.AddEdge(i, j);
+                            edge.Weight = 1e+10;
+                        }
+                    }
+
+                    RandomVolumePointsPartitioner.PartitionWithTopologyData(Graph, h);
+                    PictureName = String.Format("[{0}]:{1}",
+                                                qq,
+                                                PartitioningStatistics.TopoQualityDescription(Graph, h));
+                    LB.Items.Add(PictureName);
+                }
+            }
         }
     }
 }
