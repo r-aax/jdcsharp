@@ -95,6 +95,17 @@ namespace Sea.Core.Authors
         }
 
         /// <summary>
+        /// Check if name is not empty.
+        /// </summary>
+        public bool IsNotEmpty
+        {
+            get
+            {
+                return !IsEmpty;
+            }
+        }
+
+        /// <summary>
         /// Extended first name.
         /// </summary>
         public string XFirst
