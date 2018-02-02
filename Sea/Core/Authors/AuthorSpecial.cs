@@ -17,40 +17,14 @@ namespace Sea.Core.Authors
         public int Id { get; set; }
 
         /// <summary>
-        /// First russian name of author.
+        /// Russian name.
         /// </summary>
-        [XmlAttribute]
-        public string RusFirstName { get; set; }
+        public PersonName RusName;
 
         /// <summary>
-        /// Second russian name of author.
+        /// English name.
         /// </summary>
-        [XmlAttribute]
-        public string RusSecondName { get; set; }
-
-        /// <summary>
-        /// Last russian name of author.
-        /// </summary>
-        [XmlAttribute]
-        public string RusLastName { get; set; }
-
-        /// <summary>
-        /// First english name of author.
-        /// </summary>
-        [XmlAttribute]
-        public string EngFirstName { get; set; }
-
-        /// <summary>
-        /// Second english name of author.
-        /// </summary>
-        [XmlAttribute]
-        public string EngSecondName { get; set; }
-
-        /// <summary>
-        /// Last english name of author.
-        /// </summary>
-        [XmlAttribute]
-        public string EngLastName { get; set; }
+        public PersonName EngName;
 
         /// <summary>
         /// Empty constructor.
@@ -66,12 +40,8 @@ namespace Sea.Core.Authors
         public AuthorSpecial(Author a)
         {
             Id = a.Id;
-            RusFirstName = a.RusFirstName;
-            RusSecondName = a.RusSecondName;
-            RusLastName = a.RusLastName;
-            EngFirstName = a.EngFirstName;
-            EngSecondName = a.EngSecondName;
-            EngLastName = a.EngLastName;
+            RusName = a.RusName.Copy;
+            EngName = a.EngName.Copy;
         }
     }
 }

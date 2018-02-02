@@ -18,40 +18,14 @@ namespace Sea.Core.Authors
         public int Id { get; set; }
 
         /// <summary>
-        /// First russian name of author.
+        /// Russian name.
         /// </summary>
-        [XmlAttribute]
-        public string RusFirstName { get; set; }
+        public PersonName RusName;
 
         /// <summary>
-        /// Second russian name of author.
+        /// English name.
         /// </summary>
-        [XmlAttribute]
-        public string RusSecondName { get; set; }
-
-        /// <summary>
-        /// Last russian name of author.
-        /// </summary>
-        [XmlAttribute]
-        public string RusLastName { get; set; }
-
-        /// <summary>
-        /// First english name of author.
-        /// </summary>
-        [XmlAttribute]
-        public string EngFirstName { get; set; }
-
-        /// <summary>
-        /// Second english name of author.
-        /// </summary>
-        [XmlAttribute]
-        public string EngSecondName { get; set; }
-
-        /// <summary>
-        /// Last english name of author.
-        /// </summary>
-        [XmlAttribute]
-        public string EngLastName { get; set; }
+        public PersonName EngName;
 
         /// <summary>
         /// Constructor.
@@ -66,12 +40,8 @@ namespace Sea.Core.Authors
                       string eng_first_name, string eng_second_name, string eng_last_name)
         {
             Id = -1;
-            RusFirstName = rus_first_name;
-            RusSecondName = rus_second_name;
-            RusLastName = rus_last_name;
-            EngFirstName = eng_first_name;
-            EngSecondName = eng_second_name;
-            EngLastName = eng_last_name;
+            RusName = new PersonName(rus_first_name, rus_second_name, rus_last_name);
+            EngName = new PersonName(eng_first_name, eng_second_name, eng_last_name);
         }
 
         /// <summary>
@@ -80,28 +50,6 @@ namespace Sea.Core.Authors
         public Author()
             : this("", "", "", "", "", "")
         {
-        }
-
-        /// <summary>
-        /// Russian name.
-        /// </summary>
-        public PersonName RusName
-        {
-            get
-            {
-                return new PersonName(RusFirstName, RusSecondName, RusLastName);
-            }
-        }
-
-        /// <summary>
-        /// English name.
-        /// </summary>
-        public PersonName EngName
-        {
-            get
-            {
-                return new PersonName(EngFirstName, EngSecondName, EngLastName);
-            }
         }
 
         /// <summary>
@@ -255,8 +203,8 @@ namespace Sea.Core.Authors
         /// <returns>clone</returns>
         public object Clone()
         {
-            Author author = new Author(RusFirstName, RusSecondName, RusLastName,
-                                       EngFirstName, EngSecondName, EngLastName);
+            Author author = new Author(RusName.First, RusName.Second, RusName.Last,
+                                       EngName.First, EngName.Second, EngName.Last);
 
             author.Id = Id;
 

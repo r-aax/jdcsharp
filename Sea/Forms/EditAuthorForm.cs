@@ -50,12 +50,12 @@ namespace Sea.Forms
             if (Author != null)
             {
                 IdTB.Text = Author.Id.ToString();
-                RusFirstNameTB.Text = Author.RusFirstName;
-                RusSecondNameTB.Text = Author.RusSecondName;
-                RusLastNameTB.Text = Author.RusLastName;
-                EngFirstNameTB.Text = Author.EngFirstName;
-                EngSecondNameTB.Text = Author.EngSecondName;
-                EngLastNameTB.Text = Author.EngLastName;
+                RusFirstNameTB.Text = Author.RusName.First;
+                RusSecondNameTB.Text = Author.RusName.Second;
+                RusLastNameTB.Text = Author.RusName.Last;
+                EngFirstNameTB.Text = Author.EngName.First;
+                EngSecondNameTB.Text = Author.EngName.Second;
+                EngLastNameTB.Text = Author.EngName.Last;
             }
         }
 
