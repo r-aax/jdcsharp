@@ -10,7 +10,7 @@ namespace Lib.IO
     /// <summary>
     /// Object for file manipulations.
     /// </summary>
-    public class File
+    public class File : ICloneable
     {
         /// <summary>
         /// Name.
@@ -88,7 +88,7 @@ namespace Lib.IO
             {
                 return Char.IsUpper(Ext[1]);
             }
-        }      
+        }
 
         /// <summary>
         /// Change extension.
@@ -97,6 +97,43 @@ namespace Lib.IO
         public void ChangeExtensionCaseSensitive(string ext)
         {
             Name = Name.Replace(Ext, IsUpperExt ? ext.ToUpper() : ext.ToLower());
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>clone</returns>
+        public object Clone()
+        {
+            return new File(Name);
+        }
+
+        /// <summary>
+        /// Copy.
+        /// </summary>
+        /// <returns>copy</returns>
+        public File Copy()
+        {
+            return Clone() as File;
+        }
+
+        /// <summary>
+        /// Check is file exists.
+        /// </summary>
+        /// <returns><c>true</c> - if file exists, <c>false</c> - otherwise</returns>
+        public bool ConsoleExistCheck()
+        {
+            bool res = true;
+
+            if (!System.IO.File.Exists(Name))
+            {
+                Console.WriteLine(String.Format("error : file {0} doesn't exist", Name));
+                Console.ReadKey();
+
+                res = false;
+            }
+
+            return res;
         }
     }
 }
