@@ -371,68 +371,20 @@ namespace GridMaster.Windows
             int partitions = Int32.Parse(GUBlocksDistrPartitionsTB.Text);
             int iters = Int32.Parse(GUBlocksDistrItersTB.Text);
             double dev = Double.Parse(GUBlocksDistrDeviationTB.Text) / 100.0;
-            int total_ites = 0;
-            double cur_dev = 0.0;
-            string diag = null;
 
-            double[] weights;
-            double[] partitions_weights;
-            int[] weights_to_partitions;
+            // Partition.
+            GreedyUniformPartitioner partitioner = new GreedyUniformPartitioner(Grid);
+            int blocks_before = Grid.BlocksCount;
+            string diag = partitioner.Partition(partitions, iters, dev);
+            int blocks_after = Grid.BlocksCount;
+            int cuts = blocks_after - blocks_before;
 
-            do
-            {
-                // Distribution parameters.
-                int bc = Grid.BlocksCount;
-                weights = new double[bc];
-                partitions_weights = new double[partitions];
-                weights_to_partitions = new int[bc];
-
-                // Init weights.
-                for (int i = 0; i < bc; i++)
-                {
-                    weights[i] = Grid.Blocks[i].CellsCount;
-                }
-
-                // Distribute.
-                WeightsDistribution.GreedyDistribution(weights, partitions,
-                                                       partitions_weights, weights_to_partitions);
-                cur_dev = Arrays.RelOverDeviationOfPositives(partitions_weights);
-
-                // Check post conditions.
-                if (cur_dev <= dev)
-                {
-                    diag = "deviation is reached";
-
-                    break;
-                }
-                else if (total_ites >= iters)
-                {
-                    diag = "max iters count is reached";
-
-                    break;
-                }
-
-                // Cut next.
-                GridCutter.CutHalfMaxBlock(Grid);
-                if (GridCutter.CutRejectedString == null)
-                {
-                    total_ites++;
-                }
-                else
-                {
-                    diag = GridCutter.CutRejectedString;
-
-                    break;
-                }
-            }
-            while (true);
-
-            Grid.SetBlocksPartitionsNumbers(weights_to_partitions);
+            // Update information.
             UpdateBriefGridStatistic();
-            UpdateLastAction(String.Format("GU distr: {0} iters, {1}% deviation ({2}).",
-                                           total_ites, cur_dev * 100.0, diag));
-            LastCuts = total_ites;
+            LastCuts = cuts;
             InitHistogramExt(partitions);
+            UpdateLastAction(String.Format("GU distr: {0} cuts, {1}% deviation ({2}).",
+                                           cuts, Hist.Dev, diag));
         }
 
         /// <summary>

@@ -81,7 +81,7 @@
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Partitions" Margin="10,2"/>
                         <TextBox Name="GUBlocksDistrPartitionsTB" Grid.Row="0" Grid.Column="1" Text="1" Margin="10,2"/>
                         <TextBlock Grid.Row="1" Grid.Column="0" Text="Max iters" Width="70" Margin="10,2"/>
-                        <TextBox Name="GUBlocksDistrItersTB" Grid.Row="1" Grid.Column="1" Width="110" Text="0" Margin="10,2"/>
+                        <TextBox Name="GUBlocksDistrItersTB" Grid.Row="1" Grid.Column="1" Width="110" Text="10" Margin="10,2"/>
                         <TextBlock Grid.Row="2" Grid.Column="0" Text="Deviation %" Margin="10,2"/>
                         <TextBox Name="GUBlocksDistrDeviationTB" Grid.Row="2" Grid.Column="1" Text="10.0" Margin="10,2"/>
                         <Button Name="GUBlocksDistrB" Grid.Row="3" Grid.Column="1" Content="Go" Margin="10,2" Click="GUBlocksDistrB_Click"/>
