@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Lib.IO;
 using Lib.MathMod.Grid;
+using Lib.MathMod.Grid.Load;
 using Lib.MathMod.Grid.Partitioning;
 
 namespace GridMasterConsole
@@ -177,22 +178,31 @@ namespace GridMasterConsole
 
                 StructuredGrid Grid = null;
 
+                if (GridLoaderSaverPFG.Load(Grid, load_pfg.Name, load_ibc.Name,
+                                            GridLoadSavePFGProperties.EpsForBCondsMatchParallelMove,
+                                            GridLoadSavePFGProperties.EpsForBCondsMatchRotation))
+                {
+                    Console.WriteLine("Process: the grid is loaded");
+                }
+                else
+                {
+                    Console.WriteLine(String.Format("error : grid loading fault"));
+                    Console.ReadKey();
 
+                    return;
+                }
 
                 // Partition.
-                //MinimalCutsPartitioner partitioner = new MinimalCutsPartitioner(Grid);
-                //int blocks_before = Grid.BlocksCount;
-                //partitioner.Partition(partitions, min_cut);
-                //int blocks_after = Grid.BlocksCount;
-                //int cuts = blocks_after - blocks_before;
+                MinimalCutsPartitioner partitioner = new MinimalCutsPartitioner(Grid);
+                int blocks_before = Grid.BlocksCount;
+                partitioner.Partition(partitions, min_cut_perc);
+                int blocks_after = Grid.BlocksCount;
+                int cuts = blocks_after - blocks_before;
 
                 // Upfdate information.
-                //UpdateBriefGridStatistic();
-                //LastCuts = cuts;
                 //InitHistogramExt(partitions);
+                Console.WriteLine("Process: MCC distribution is done");
                 //UpdateLastAction(String.Format("MCC distr: {0} cuts, {1}% deviation", cuts, Hist.Dev));
-
-                Console.WriteLine("Process: finished");
             }
             else if (args[0] == "GU-distr")
             {

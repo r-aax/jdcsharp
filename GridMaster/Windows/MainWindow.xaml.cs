@@ -193,8 +193,8 @@ namespace GridMaster.Windows
                     string last_action = "Grid " + pfg.Name + " (and *" + ibc.Ext + ") ";
 
                     if (GridLoaderSaverPFG.Load(Grid, pfg.Name, ibc.Name,
-                                                AdditionalParameters.EpsForBCondsMatchParallelMove,
-                                                AdditionalParameters.EpsForBCondsMatchRotation))
+                                                GridLoadSavePFGProperties.EpsForBCondsMatchParallelMove,
+                                                GridLoadSavePFGProperties.EpsForBCondsMatchRotation))
                     {
                         UpdateLastAction(last_action + "is loaded.");
 

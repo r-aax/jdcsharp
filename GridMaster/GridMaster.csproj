@@ -79,7 +79,6 @@
     </Compile>
     <Compile Include="Tools\Histogram.cs" />
     <Compile Include="Tools\HistogramExt.cs" />
-    <Compile Include="Tools\AdditionalParameters.cs" />
     <Compile Include="Windows\AdditionalParametersWindow.xaml.cs">
       <DependentUpon>AdditionalParametersWindow.xaml</DependentUpon>
     </Compile>
