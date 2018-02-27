@@ -6,7 +6,7 @@ using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Utils;
 
-namespace GridMaster.Tools
+namespace Lib.Utils
 {
     /// <summary>
     /// Histogramm.

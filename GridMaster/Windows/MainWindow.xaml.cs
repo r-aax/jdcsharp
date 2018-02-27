@@ -85,15 +85,7 @@ namespace GridMaster.Windows
         /// <param name="partitions_count">count of partitions</param>
         private void InitHistogramExt(int partitions_count)
         {
-            Hist = new HistogramExt(partitions_count);
-
-            for (int i = 0; i < Grid.BlocksCount; i++)
-            {
-                Lib.MathMod.Grid.Block b = Grid.Blocks[i];
-                Hist.W[b.PartitionNumber].Add(b.CellsCount);
-            }
-
-            Hist.FormV();
+            Hist = new HistogramExt(partitions_count, Grid);
             Paint();
         }
 

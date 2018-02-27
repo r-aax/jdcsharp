@@ -9,8 +9,9 @@ using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Utils;
 using SWMColor = System.Windows.Media.Color;
+using Lib.MathMod.Grid;
 
-namespace GridMaster.Tools
+namespace Lib.Utils
 {
     /// <summary>
     ///  Extended histogram.
@@ -70,6 +71,23 @@ namespace GridMaster.Tools
             {
                 W[i] = new List<double>();
             }
+        }
+
+        /// <summary>
+        /// Init histogram by partitions count and grid.
+        /// </summary>
+        /// <param name="n">partitions count</param>
+        /// <param name="grid">grid</param>
+        public HistogramExt(int n, StructuredGrid grid)
+            : this(n)
+        {
+            for (int i = 0; i < grid.BlocksCount; i++)
+            {
+                Block b = grid.Blocks[i];
+                W[b.PartitionNumber].Add(b.CellsCount);
+            }
+
+            FormV();
         }
 
         /// <summary>

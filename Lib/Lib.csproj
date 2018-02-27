@@ -189,6 +189,8 @@
     <Compile Include="Utils\Arrays.cs" />
     <Compile Include="Utils\Convert.cs" />
     <Compile Include="Utils\ExeDebug.cs" />
+    <Compile Include="Utils\Histogram.cs" />
+    <Compile Include="Utils\HistogramExt.cs" />
     <Compile Include="Utils\SimplexMethod.cs" />
     <Compile Include="Utils\SqlConnector.cs" />
     <Compile Include="Utils\Strings.cs" />

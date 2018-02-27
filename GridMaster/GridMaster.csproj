@@ -77,8 +77,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tools\Histogram.cs" />
-    <Compile Include="Tools\HistogramExt.cs" />
     <Compile Include="Windows\AdditionalParametersWindow.xaml.cs">
       <DependentUpon>AdditionalParametersWindow.xaml</DependentUpon>
     </Compile>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.IO;
+using Lib.Utils;
 using Lib.MathMod.Grid;
 using Lib.MathMod.Grid.Load;
 using Lib.MathMod.Grid.Partitioning;
@@ -176,9 +177,10 @@ namespace GridMasterConsole
 
                 Console.WriteLine("Process: started.");
 
-                StructuredGrid Grid = null;
+                StructuredGrid grid = null;
 
-                if (GridLoaderSaverPFG.Load(Grid, load_pfg.Name, load_ibc.Name,
+                // Grid load.
+                if (GridLoaderSaverPFG.Load(grid, load_pfg.Name, load_ibc.Name,
                                             GridLoadSavePFGProperties.EpsForBCondsMatchParallelMove,
                                             GridLoadSavePFGProperties.EpsForBCondsMatchRotation))
                 {
@@ -193,16 +195,20 @@ namespace GridMasterConsole
                 }
 
                 // Partition.
-                MinimalCutsPartitioner partitioner = new MinimalCutsPartitioner(Grid);
-                int blocks_before = Grid.BlocksCount;
+                MinimalCutsPartitioner partitioner = new MinimalCutsPartitioner(grid);
+                int blocks_before = grid.BlocksCount;
                 partitioner.Partition(partitions, min_cut_perc);
-                int blocks_after = Grid.BlocksCount;
+                int blocks_after = grid.BlocksCount;
                 int cuts = blocks_after - blocks_before;
 
                 // Upfdate information.
-                //InitHistogramExt(partitions);
-                Console.WriteLine("Process: MCC distribution is done");
-                //UpdateLastAction(String.Format("MCC distr: {0} cuts, {1}% deviation", cuts, Hist.Dev));
+                HistogramExt hist = new HistogramExt(partitions, grid);
+                Console.WriteLine(String.Format("Process: MCC distribution is done : {0} cuts, {1}% deviation", cuts, hist.Dev));
+
+                // Grid save.
+                GridLoaderSaverPFG.Save(grid, save_pfg.Name, save_ibc.Name);
+
+                Console.WriteLine("Process: finished.");
             }
             else if (args[0] == "GU-distr")
             {
