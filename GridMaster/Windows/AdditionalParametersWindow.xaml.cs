@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-using GridMaster.Tools;
+using Lib.MathMod.Grid.Load;
 
 namespace GridMaster.Windows
 {
@@ -46,8 +46,8 @@ namespace GridMaster.Windows
         /// <param name="e">parameters</param>
         private void OK_B_Click(object sender, RoutedEventArgs e)
         {
-            AdditionalParameters.EpsForBCondsMatchParallelMove = Double.Parse(EpsBCondsMatchParallelMove.Text);
-            AdditionalParameters.EpsForBCondsMatchRotation = Double.Parse(EpsBCondsMatchRotation.Text);
+            GridLoadSavePFGProperties.EpsForBCondsMatchParallelMove = Double.Parse(EpsBCondsMatchParallelMove.Text);
+            GridLoadSavePFGProperties.EpsForBCondsMatchRotation = Double.Parse(EpsBCondsMatchRotation.Text);
             Close();
         }
     }

@@ -128,7 +128,6 @@ namespace Lib.IO
             if (!System.IO.File.Exists(Name))
             {
                 Console.WriteLine(String.Format("error : file {0} doesn't exist", Name));
-                Console.ReadKey();
 
                 res = false;
             }
