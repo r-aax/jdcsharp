@@ -19,6 +19,36 @@ namespace GridMasterConsole
     class Program
     {
         /// <summary>
+        /// Load file.
+        /// </summary>
+        private static File Load;
+
+        /// <summary>
+        /// Load PFG file.
+        /// </summary>
+        private static File LoadPFG;
+
+        /// <summary>
+        /// Load IBC File.
+        /// </summary>
+        private static File LoadIBC;
+
+        /// <summary>
+        /// Save file.
+        /// </summary>
+        private static File Save;
+
+        /// <summary>
+        ///  Save PFG file.
+        /// </summary>
+        private static File SavePFG;
+
+        /// <summary>
+        /// Save IBC file.
+        /// </summary>
+        private static File SaveIBC;
+
+        /// <summary>
         /// Print help.
         /// </summary>
         private static void PrintHelp()
@@ -50,25 +80,99 @@ namespace GridMasterConsole
         }
 
         /// <summary>
+        /// Define load files.
+        /// </summary>
+        /// <param name="val">string value from which we try to extract load files names</param>
+        /// <returns><c>true</c> - if load files are defined, <c>false</c> - otherwise</returns>
+        private static bool DefineLoadFiles(string val)
+        {
+            Load = new File(val);
+
+            if (!Load.ConsoleExistCheck())
+            {
+                return false;
+            }
+
+            string load_ext = Load.Ext.ToLower();
+
+            if ((load_ext != ".pfg") && (load_ext != ".ibc"))
+            {
+                Console.WriteLine(String.Format("error : unknown extension in the file {0}", Load.Name));
+
+                return false;
+            }
+
+            LoadPFG = Load.Copy();
+            LoadIBC = Load.Copy();
+
+            if (load_ext == ".pfg")
+            {
+                LoadIBC.ChangeExtensionCaseSensitive(".ibc");
+            }
+            else
+            {
+                LoadPFG.ChangeExtensionCaseSensitive(".pfg");
+            }
+
+            if (!LoadPFG.ConsoleExistCheck() || !LoadIBC.ConsoleExistCheck())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Define save files from string value.
+        /// </summary>
+        /// <param name="val">string value</param>
+        /// <returns><c>true</c> - if save files are defined, <c>false</c> - otherwise</returns>
+        private static bool DefineSaveFiles(string val)
+        {
+            Save = new File(val);
+
+            if (Load == null)
+            {
+                Console.WriteLine("error : load file must be defined before save file");
+
+                return false;
+            }
+
+            if (Load.IsLowerExt)
+            {
+                SavePFG = new File(Save.Name + ".pfg");
+                SaveIBC = new File(Save.Name + ".ibc");
+            }
+            else
+            {
+                SavePFG = new File(Save.Name + ".PFG");
+                SaveIBC = new File(Save.Name + ".IBC");
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Check if load and save files defined.
         /// </summary>
-        /// <param name="lpfg">load PFG file</param>
-        /// <param name="libc">load IBC file</param>
-        /// <param name="spfg">save PFG file</param>
-        /// <param name="sibc">save IBC file</param>
+        /// <param name="load_pfg">load PFG file</param>
+        /// <param name="load_ibc">load IBC file</param>
+        /// <param name="save_pfg">save PFG file</param>
+        /// <param name="save_ibc">save IBC file</param>
         /// <returns><c>true</c> - if load and save files are defines, <c>false</c> - otherwise</returns>
-        private static bool IsLoadSaveFilesDefined(File lpfg, File libc, File spfg, File sibc)
+        private static bool IsLoadSaveFilesDefined(File load_pfg, File load_ibc,
+                                                   File save_pfg, File save_ibc)
         {
             bool res = true;
 
-            if ((lpfg == null) || (libc == null))
+            if ((load_pfg == null) || (load_ibc == null))
             {
                 Console.WriteLine(String.Format("error : no load file defined"));
 
                 res = false;
             }
 
-            if ((spfg == null) || (sibc == null))
+            if ((save_pfg == null) || (save_ibc == null))
             {
                 Console.WriteLine(String.Format("error : no save file defined"));
 
@@ -85,6 +189,9 @@ namespace GridMasterConsole
         /// <returns>0 - in case of successfull execution, 1 - if some error occured</returns>
         static int Main(string[] args)
         {
+            int partitions = 1;
+            int min_margin = 1;
+
             if (args.Count() == 0)
             {
                 PrintHelp();
@@ -103,15 +210,7 @@ namespace GridMasterConsole
             {
                 Console.WriteLine("Min cuts count blocks distribution (MCC-distr):");
 
-                File load = null;
-                File load_pfg = null;
-                File load_ibc = null;
-                int partitions = 1;
                 double min_cut_perc = 10.0;
-                int min_margin = 1;
-                File save = null;
-                File save_pfg = null;
-                File save_ibc = null;
 
                 for (int i = 1; i < args.Count(); i++)
                 {
@@ -119,35 +218,7 @@ namespace GridMasterConsole
 
                     if (ss[0] == "load")
                     {
-                        load = new File(ss[1]);
-
-                        if (!load.ConsoleExistCheck())
-                        {
-                            return 1;
-                        }
-
-                        string load_ext = load.Ext.ToLower();
-
-                        if ((load_ext != ".pfg") && (load_ext != ".ibc"))
-                        {
-                            Console.WriteLine(String.Format("error : unknown extension in the file {0}", load.Name));
-
-                            return 1;
-                        }
-
-                        load_pfg = load.Copy();
-                        load_ibc = load.Copy();
-
-                        if (load_ext == ".pfg")
-                        {
-                            load_ibc.ChangeExtensionCaseSensitive(".ibc");
-                        }
-                        else
-                        {
-                            load_pfg.ChangeExtensionCaseSensitive(".pfg");
-                        }
-
-                        if (!load_pfg.ConsoleExistCheck() || !load_ibc.ConsoleExistCheck())
+                        if (!DefineLoadFiles(ss[1]))
                         {
                             return 1;
                         }
@@ -166,24 +237,9 @@ namespace GridMasterConsole
                     }
                     else if (ss[0] == "save")
                     {
-                        save = new File(ss[1]);
-
-                        if (load == null)
+                        if (!DefineSaveFiles(ss[1]))
                         {
-                            Console.WriteLine("error : load file must be defined before save file");
-
                             return 1;
-                        }
-
-                        if (load.IsLowerExt)
-                        {
-                            save_pfg = new File(save.Name + ".pfg");
-                            save_ibc = new File(save.Name + ".ibc");
-                        }
-                        else
-                        {
-                            save_pfg = new File(save.Name + ".PFG");
-                            save_ibc = new File(save.Name + ".IBC");
                         }
                     }
                     else
@@ -195,7 +251,7 @@ namespace GridMasterConsole
                 }
 
                 // Check load and save files.
-                if (!IsLoadSaveFilesDefined(load_pfg, load_ibc, save_pfg, save_ibc))
+                if (!IsLoadSaveFilesDefined(LoadPFG, LoadIBC, SavePFG, SaveIBC))
                 {
                     return 1;
                 }
@@ -203,13 +259,13 @@ namespace GridMasterConsole
                 // Print parsed string.
                 Console.WriteLine("Parsed string:");
                 Console.WriteLine("GridMasterConsole.exe MCC-distr");
-                Console.WriteLine(String.Format("    load_pfg=\"{0}\"", load_pfg.Name));
-                Console.WriteLine(String.Format("    load_ibc=\"{0}\"", load_ibc.Name));
+                Console.WriteLine(String.Format("    load_pfg=\"{0}\"", LoadPFG.Name));
+                Console.WriteLine(String.Format("    load_ibc=\"{0}\"", LoadIBC.Name));
                 Console.WriteLine(String.Format("    partitions={0}", partitions));
                 Console.WriteLine(String.Format("    min-cut-perc={0}", min_cut_perc));
                 Console.WriteLine(String.Format("    min-margin={0}", min_margin));
-                Console.WriteLine(String.Format("    save_pfg=\"{0}\"", save_pfg.Name));
-                Console.WriteLine(String.Format("    save_ibc=\"{0}\"", save_ibc.Name));
+                Console.WriteLine(String.Format("    save_pfg=\"{0}\"", SavePFG.Name));
+                Console.WriteLine(String.Format("    save_ibc=\"{0}\"", SaveIBC.Name));
                 Console.WriteLine("");
 
                 Console.WriteLine("Process: started.");
@@ -217,7 +273,7 @@ namespace GridMasterConsole
                 StructuredGrid grid = new StructuredGrid();
 
                 // Grid load.
-                if (GridLoaderSaverPFG.Load(grid, load_pfg.Name, load_ibc.Name,
+                if (GridLoaderSaverPFG.Load(grid, LoadPFG.Name, LoadIBC.Name,
                                             GridLoadSavePFGProperties.EpsForBCondsMatchParallelMove,
                                             GridLoadSavePFGProperties.EpsForBCondsMatchRotation))
                 {
@@ -243,7 +299,7 @@ namespace GridMasterConsole
                 Console.WriteLine(String.Format("Process: MCC distribution is done : {0} cuts, {1}% deviation", cuts, hist.Dev));
 
                 // Grid save.
-                GridLoaderSaverPFG.Save(grid, save_pfg.Name, save_ibc.Name);
+                GridLoaderSaverPFG.Save(grid, SavePFG.Name, SaveIBC.Name);
 
                 Console.WriteLine("Process: finished.");
             }
@@ -251,16 +307,8 @@ namespace GridMasterConsole
             {
                 Console.WriteLine("Greedy uniform blocks distribution (GU-distr):");
 
-                File load = null;
-                File load_pfg = null;
-                File load_ibc = null;
-                int partitions = 1;
                 int iters = 10;
                 double dev = 10.0;
-                int min_margin = 1;
-                File save = null;
-                File save_pfg = null;
-                File save_ibc = null;
 
                 for (int i = 1; i < args.Count(); i++)
                 {
@@ -268,35 +316,7 @@ namespace GridMasterConsole
 
                     if (ss[0] == "load")
                     {
-                        load = new File(ss[1]);
-
-                        if (!load.ConsoleExistCheck())
-                        {
-                            return 1;
-                        }
-
-                        string load_ext = load.Ext.ToLower();
-
-                        if ((load_ext != ".pfg") && (load_ext != ".ibc"))
-                        {
-                            Console.WriteLine(String.Format("error : unknown extension in the file {0}", load.Name));
-
-                            return 1;
-                        }
-
-                        load_pfg = load.Copy();
-                        load_ibc = load.Copy();
-
-                        if (load_ext == ".pfg")
-                        {
-                            load_ibc.ChangeExtensionCaseSensitive(".ibc");
-                        }
-                        else
-                        {
-                            load_pfg.ChangeExtensionCaseSensitive(".pfg");
-                        }
-
-                        if (!load_pfg.ConsoleExistCheck() || !load_ibc.ConsoleExistCheck())
+                        if (!DefineLoadFiles(ss[1]))
                         {
                             return 1;
                         }
@@ -319,24 +339,9 @@ namespace GridMasterConsole
                     }
                     else if (ss[0] == "save")
                     {
-                        save = new File(ss[1]);
-
-                        if (load == null)
+                        if (!DefineSaveFiles(ss[1]))
                         {
-                            Console.WriteLine("error : load file must be defined before save file");
-
                             return 1;
-                        }
-
-                        if (load.IsLowerExt)
-                        {
-                            save_pfg = new File(save.Name + ".pfg");
-                            save_ibc = new File(save.Name + ".ibc");
-                        }
-                        else
-                        {
-                            save_pfg = new File(save.Name + ".PFG");
-                            save_ibc = new File(save.Name + ".IBC");
                         }
                     }
                     else
@@ -348,7 +353,7 @@ namespace GridMasterConsole
                 }
 
                 // Check load and save files.
-                if (!IsLoadSaveFilesDefined(load_pfg, load_ibc, save_pfg, save_ibc))
+                if (!IsLoadSaveFilesDefined(LoadPFG, LoadIBC, SavePFG, SaveIBC))
                 {
                     return 1;
                 }
@@ -356,14 +361,14 @@ namespace GridMasterConsole
                 // Print parsed string.
                 Console.WriteLine("Parsed string:");
                 Console.WriteLine("GridMasterConsole.exe GU-distr");
-                Console.WriteLine(String.Format("    load_pfg=\"{0}\"", load_pfg.Name));
-                Console.WriteLine(String.Format("    load_ibc=\"{0}\"", load_ibc.Name));
+                Console.WriteLine(String.Format("    load_pfg=\"{0}\"", LoadPFG.Name));
+                Console.WriteLine(String.Format("    load_ibc=\"{0}\"", LoadIBC.Name));
                 Console.WriteLine(String.Format("    partitions={0}", partitions));
                 Console.WriteLine(String.Format("    iters={0}", iters));
                 Console.WriteLine(String.Format("    dev={0}", dev));
                 Console.WriteLine(String.Format("    min-margin={0}", min_margin));
-                Console.WriteLine(String.Format("    save_pfg=\"{0}\"", save_pfg.Name));
-                Console.WriteLine(String.Format("    save_ibc=\"{0}\"", save_ibc.Name));
+                Console.WriteLine(String.Format("    save_pfg=\"{0}\"", SavePFG.Name));
+                Console.WriteLine(String.Format("    save_ibc=\"{0}\"", SaveIBC.Name));
                 Console.WriteLine("");
 
                 Console.WriteLine("Process: started.");
@@ -371,7 +376,7 @@ namespace GridMasterConsole
                 StructuredGrid grid = new StructuredGrid();
 
                 // Grid load.
-                if (GridLoaderSaverPFG.Load(grid, load_pfg.Name, load_ibc.Name,
+                if (GridLoaderSaverPFG.Load(grid, LoadPFG.Name, LoadIBC.Name,
                                             GridLoadSavePFGProperties.EpsForBCondsMatchParallelMove,
                                             GridLoadSavePFGProperties.EpsForBCondsMatchRotation))
                 {
@@ -397,7 +402,7 @@ namespace GridMasterConsole
                 Console.WriteLine(String.Format("Process: GU distribution is done : {0} cuts, {1}% deviation", cuts, hist.Dev));
 
                 // Grid save.
-                GridLoaderSaverPFG.Save(grid, save_pfg.Name, save_ibc.Name);
+                GridLoaderSaverPFG.Save(grid, SavePFG.Name, SaveIBC.Name);
 
                 Console.WriteLine("Process: finished.");
             }
