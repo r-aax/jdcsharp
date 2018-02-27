@@ -20,7 +20,6 @@ using Lib.MathMod.Grid.Cut;
 using Lib.Maths.Geometry;
 using Lib.Draw.WPF;
 using Rect2D = Lib.Maths.Geometry.Geometry2D.Rect;
-using GridMaster.Tools;
 using Lib.Maths;
 using Lib.Utils;
 using Lib.MathMod.Grid.Partitioning;

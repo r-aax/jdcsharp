@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Lib.IO;
 using Lib.Utils;
 using Lib.MathMod.Grid;
+using Lib.MathMod.Grid.Cut;
 using Lib.MathMod.Grid.Load;
 using Lib.MathMod.Grid.Partitioning;
 
@@ -24,25 +25,27 @@ namespace GridMasterConsole
         {
             // Help.
             Console.WriteLine("Print help:");
-            Console.WriteLine("./GridMasterConsole -h");
+            Console.WriteLine("GridMasterConsole.exe -h");
             Console.WriteLine("");
 
             // MCC grid partitioning.
             Console.WriteLine("Min cuts count blocks distribution (MCC-distr):");
-            Console.WriteLine("./GridMasterConsole MCC-distr");
+            Console.WriteLine("GridMasterConsole.exe MCC-distr");
             Console.WriteLine("    load=<grid PFG or IBC file>");
             Console.WriteLine("    partitions=<partitions count, 1 by default>");
             Console.WriteLine("    min-cut-perc=<threshold for new block size after cutting, 10 by default>");
+            Console.WriteLine("    min-margin=<min margin value for cut, 1 by default>");
             Console.WriteLine("    save=<new grid filename, two files (PFG and IBC) will be created>");
             Console.WriteLine("");
 
             // GU grid partitioning.
             Console.WriteLine("Greedy uniform blocks distribution (GU-distr):");
-            Console.WriteLine("./GridMasterConsole GU-distr");
+            Console.WriteLine("GridMasterConsole.exe GU-distr");
             Console.WriteLine("    load=<grid PFG or IBC file>");
             Console.WriteLine("    partitions=<partitions count, 1 by default>");
             Console.WriteLine("    iters=<max iterations count, 10 by default>");
             Console.WriteLine("    dev=<deviation of partition weigh from mean value, 10 by default>");
+            Console.WriteLine("    min-margin=<min margin value for cut, 1 by default>");
             Console.WriteLine("    save=<new grid filename, two files (PFG and IBC) will be created");
         }
 
@@ -65,6 +68,7 @@ namespace GridMasterConsole
                 File load_ibc = null;
                 int partitions = 1;
                 double min_cut_perc = 10.0;
+                int min_margin = 1;
                 File save = null;
                 File save_pfg = null;
                 File save_ibc = null;
@@ -117,6 +121,10 @@ namespace GridMasterConsole
                     {
                         min_cut_perc = Double.Parse(ss[1]);
                     }
+                    else if (ss[0] == "min-margin")
+                    {
+                        min_margin = Int32.Parse(ss[1]);
+                    }
                     else if (ss[0] == "save")
                     {
                         save = new File(ss[1]);
@@ -166,18 +174,19 @@ namespace GridMasterConsole
                 }
 
                 Console.WriteLine("Parsed string:");
-                Console.WriteLine("./GridMasterConsole MCC-distr");
+                Console.WriteLine("GridMasterConsole.exe MCC-distr");
                 Console.WriteLine(String.Format("    load_pfg=\"{0}\"", load_pfg.Name));
                 Console.WriteLine(String.Format("    load_ibc=\"{0}\"", load_ibc.Name));
                 Console.WriteLine(String.Format("    partitions={0}", partitions));
                 Console.WriteLine(String.Format("    min-cut-perc={0}", min_cut_perc));
+                Console.WriteLine(String.Format("    min-margin={0}", min_margin));
                 Console.WriteLine(String.Format("    save_pfg=\"{0}\"", save_pfg.Name));
                 Console.WriteLine(String.Format("    save_ibc=\"{0}\"", save_ibc.Name));
                 Console.WriteLine("");
 
                 Console.WriteLine("Process: started.");
 
-                StructuredGrid grid = null;
+                StructuredGrid grid = new StructuredGrid();
 
                 // Grid load.
                 if (GridLoaderSaverPFG.Load(grid, load_pfg.Name, load_ibc.Name,
@@ -195,6 +204,7 @@ namespace GridMasterConsole
                 }
 
                 // Partition.
+                GridCutter.MinMargin = min_margin;
                 MinimalCutsPartitioner partitioner = new MinimalCutsPartitioner(grid);
                 int blocks_before = grid.BlocksCount;
                 partitioner.Partition(partitions, min_cut_perc);
