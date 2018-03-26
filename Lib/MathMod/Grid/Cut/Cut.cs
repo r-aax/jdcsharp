@@ -86,26 +86,10 @@ namespace Lib.MathMod.Grid.Cut
         {
             get
             {
-                if (D == null)
-                {
-                    // Special case. D == null means it is no cut.
-                    return B.CellsCount;
-                }
-
-                Debug.Assert(D.IsGen, "wrong direction");
-
-                if (D.IsI)
-                {
-                    return Pos * B.JSize * B.KSize;
-                }
-                else if (D.IsJ)
-                { 
-                    return B.ISize * Pos * B.KSize;
-                }
-                else // if (D.IsK)
-                {
-                    return B.ISize * B.JSize * Pos;
-                }
+                // Special case. D == null means it is no cut.
+                return (D == null)
+                       ? B.CellsCount
+                       : Pos * B.Square(D);
             }
         }
 

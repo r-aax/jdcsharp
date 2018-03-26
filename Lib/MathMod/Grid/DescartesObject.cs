@@ -152,7 +152,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Size in I direction (in cells).
+        /// Size in <c>I</c> direction (in cells).
         /// </summary>
         public int ISize
         {
@@ -163,7 +163,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Size in J direction (in cells).
+        /// Size in <c>J</c> direction (in cells).
         /// </summary>
         public int JSize
         {
@@ -174,7 +174,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Size i K direction (in cells).
+        /// Size in <c>K</c> direction (in cells).
         /// </summary>
         public int KSize
         {
@@ -222,7 +222,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Nodes count in I direction.
+        /// Nodes count in <c>I</c> direction.
         /// </summary>
         public int INodes
         {
@@ -233,7 +233,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Nodes count in J direction.
+        /// Nodes count in <c>J</c> direction.
         /// </summary>
         public int JNodes
         {
@@ -244,7 +244,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Nodes count in K direction.
+        /// Nodes count in <c>K</c> direction.
         /// </summary>
         public int KNodes
         {
@@ -262,6 +262,49 @@ namespace Lib.MathMod.Grid
         public int Nodes(Dir d)
         {
             return Size(d) + 1;
+        }
+
+        /// <summary>
+        /// Square in <c>I</c> direction (in square cells).
+        /// </summary>
+        public int ISquare
+        {
+            get
+            {
+                return JSize * KSize;
+            }
+        }
+
+        /// <summary>
+        /// Square in <c>J</c> direction (in square cells).
+        /// </summary>
+        public int JSquare
+        {
+            get
+            {
+                return ISize * KSize;
+            }
+        }
+
+        /// <summary>
+        /// Square in <c>K</c> direction (in square cells).
+        /// </summary>
+        public int KSquare
+        {
+            get
+            {
+                return ISize * JSize;
+            }
+        }
+
+        /// <summary>
+        /// Square in given direction.
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <returns>square</returns>
+        public int Square(Dir d)
+        {
+            return CellsCount / Size(d);
         }
 
         /// <summary>

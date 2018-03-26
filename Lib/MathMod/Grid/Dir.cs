@@ -349,7 +349,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Check if it genera direction.
+        /// Check if it general direction.
         /// </summary>
         public bool IsGen
         {
