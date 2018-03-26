@@ -43,31 +43,14 @@ namespace Lib.MathMod.Grid.Cut
                 return null;
             }
 
-            if (!((new IntervalI(MinMargin, b.Size(d) - MinMargin)).Contains(pos)))
+            if (!b.Interv(d).Cutted(MinMargin).Contains(pos))
             {
                 CutRejectedString = "margin violation";
 
                 return null;
             }
 
-            Block new_b = null;
-
-            if (d.IsI)
-            {
-                new_b = CutI(b, pos);
-            }
-            else if (d.IsJ)
-            {
-                new_b = CutJ(b, pos);
-            }
-            else if (d.IsK)
-            {
-                new_b = CutK(b, pos);
-            }
-            else
-            {
-                throw new Exception("undefined cut direction");
-            }
+            Block new_b = PureCut(b, d, pos);
 
             CutObjects(b, d, new_b);
             b.Grid.SetIfacesNDirs();
@@ -106,7 +89,34 @@ namespace Lib.MathMod.Grid.Cut
                         dst[dsti + i, dstj + j, dstk + k, 2] = src[srci + i, srcj + j, srck + k, 2];
                     }
                 }
-            }            
+            }
+        }
+
+        /// <summary>
+        /// Pure cut the block without other objects correction.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <param name="d">direction</param>
+        /// <param name="pos">position</param>
+        /// <returns>new bloc</returns>
+        public static Block PureCut(Block b, Dir d, int pos)
+        {
+            if (d.IsI)
+            {
+                return CutI(b, pos);
+            }
+            else if (d.IsJ)
+            {
+                return CutJ(b, pos);
+            }
+            else if (d.IsK)
+            {
+                return CutK(b, pos);
+            }
+            else
+            {
+                throw new Exception("undefined cut direction");
+            }
         }
 
         /// <summary>

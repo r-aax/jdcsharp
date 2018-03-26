@@ -14,11 +14,20 @@ namespace Lib.Maths.Geometry
         /// <summary>
         /// Constructor from low and high ends.
         /// </summary>
-        /// <param name="l"></param>
-        /// <param name="h"></param>
+        /// <param name="l">low end value</param>
+        /// <param name="h">high end value</param>
         public IntervalI(int l, int h)
             : base(l, h)
         {
+        }
+
+        /// <summary>
+        /// Constructor from interval length - high end.
+        /// </summary>
+        /// <param name="h">high end value</param>
+        public IntervalI(int h)
+            : this(0, h)
+        {        
         }
 
         /// <summary>
@@ -76,6 +85,16 @@ namespace Lib.Maths.Geometry
         public new object Clone()
         {
             return new IntervalI(L, H);
+        }
+
+        /// <summary>
+        /// Return cutted interval.
+        /// </summary>
+        /// <param name="margin"></param>
+        /// <returns>cutted interval</returns>
+        public IntervalI Cutted(int margin)
+        {
+            return new IntervalI(L + margin, H - margin);
         }
     }
 }
