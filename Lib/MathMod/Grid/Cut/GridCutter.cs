@@ -43,6 +43,13 @@ namespace Lib.MathMod.Grid.Cut
                 return null;
             }
 
+            if (!((new IntervalI(MinMargin, b.Size(d) - MinMargin)).Contains(pos)))
+            {
+                CutRejectedString = "margin violation";
+
+                return null;
+            }
+
             Block new_b = null;
 
             if (d.IsI)
@@ -62,12 +69,8 @@ namespace Lib.MathMod.Grid.Cut
                 throw new Exception("undefined cut direction");
             }
 
-            if (new_b != null)
-            {
-                CutObjects(b, d, new_b);
-                b.Grid.SetIfacesNDirs();
-                CutRejectedString = null;
-            }
+            CutObjects(b, d, new_b);
+            b.Grid.SetIfacesNDirs();
 
             return new_b;
         }
@@ -114,13 +117,6 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         private static Block CutI(Block b, int pos)
         {
-            if (!((new IntervalI(MinMargin, b.INodes - 1 - MinMargin)).Contains(pos)))
-            {
-                CutRejectedString = "margin violation";
-
-                return null;
-            }
-
             StructuredGrid g = b.Grid;
 
             // We have to create new block for cells with higher coordinates.
@@ -166,13 +162,6 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         private static Block CutJ(Block b, int pos)
         {
-            if (!((new IntervalI(MinMargin, b.JNodes - 1 - MinMargin)).Contains(pos)))
-            {
-                CutRejectedString = "margin violation";
-
-                return null;
-            }
-
             StructuredGrid g = b.Grid;
 
             // We have to create new block for cells with higher coordinates.
@@ -218,13 +207,6 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         private static Block CutK(Block b, int pos)
         {
-            if (!((new IntervalI(MinMargin, b.KNodes - 1 - MinMargin)).Contains(pos)))
-            {
-                CutRejectedString = "margin violation";
-
-                return null;
-            }
-
             StructuredGrid g = b.Grid;
 
             // We have to create new block for cells with higher coordinates.
