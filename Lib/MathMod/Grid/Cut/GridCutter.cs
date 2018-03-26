@@ -356,7 +356,7 @@ namespace Lib.MathMod.Grid.Cut
             int g = d.Gen.N;
 
             // Check iface is big enough.
-            Debug.Assert(ifc.Coords[g].Length > width, "iface is not big enough to trunc");
+            Debug.Assert(ifc.Intervs[g].Length > width, "iface is not big enough to trunc");
 
             Iface ifcc = ifc.Clone() as Iface;
 
@@ -372,9 +372,9 @@ namespace Lib.MathMod.Grid.Cut
                 //  *---------->     *----------------->
                 //  cutted iface     new iface
 
-                int v = ifc.Coords[g][0] + width;
-                ifcc.Coords[g] = new IntervalI(v, ifc.Coords[g][1]);
-                ifc.Coords[g][1] = v;
+                int v = ifc.Intervs[g][0] + width;
+                ifcc.Intervs[g] = new IntervalI(v, ifc.Intervs[g][1]);
+                ifc.Intervs[g][1] = v;
             }
             else
             {
@@ -388,9 +388,9 @@ namespace Lib.MathMod.Grid.Cut
                 //  *----------------->     *---------->
                 //  new iface               cutted iface
 
-                int v = ifc.Coords[g][1] - width;
-                ifcc.Coords[g] = new IntervalI(ifc.Coords[g][0], v);
-                ifc.Coords[g][0] = v;
+                int v = ifc.Intervs[g][1] - width;
+                ifcc.Intervs[g] = new IntervalI(ifc.Intervs[g][0], v);
+                ifc.Intervs[g][0] = v;
             }
 
             return ifcc;
@@ -410,8 +410,8 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(b == i1.B, "trying to cut wrong interface");
             Debug.Assert(b != i1.NB, "trying to cut self-intersected block");
 
-            IntervalI c = i1.Coords[d.N];
-            IntervalI bc = b.Coords[d.N];
+            IntervalI c = i1.Intervs[d.N];
+            IntervalI bc = b.Intervs[d.N];
 
             if (c[0] >= bc[1])
             {
@@ -426,7 +426,7 @@ namespace Lib.MathMod.Grid.Cut
                 StructuredGrid g = b.Grid;
                 int id = g.MaxIfaceId() + 1;
                 Iface ifc = i1.Clone(id, new_b);
-                ifc.Coords[d.N] = new IntervalI(0, c[1] - bc[1]);
+                ifc.Intervs[d.N] = new IntervalI(0, c[1] - bc[1]);
                 Iface ifc1 = ifc;
                 c[1] = bc[1];
 
@@ -461,8 +461,8 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(bcond.B == b, "trying to cut wrong border condition");
 
             // Get coordinates of border condition and block.
-            IntervalI c = bcond.Coords[d.N];
-            IntervalI bc = b.Coords[d.N];
+            IntervalI c = bcond.Intervs[d.N];
+            IntervalI bc = b.Intervs[d.N];
 
             if (c[0] >= bc[1])
             {
@@ -476,7 +476,7 @@ namespace Lib.MathMod.Grid.Cut
                 StructuredGrid g = b.Grid;
                 BCond new_bcond = BCondCutter.Cut(bcond, d, bc[1]);
                 new_bcond.B = new_b;
-                new_bcond.Coords[d.N].DecTo0();
+                new_bcond.Intervs[d.N].DecTo0();
                 g.BConds.Add(new_bcond);
 
                 // Now we have to correct bconds if just cutted border condition
@@ -504,8 +504,8 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(s.B == b, "trying to cut wrong scope");
 
             // Get coordinates of scope and block.
-            IntervalI c = s.Coords[d.N];
-            IntervalI bc = b.Coords[d.N];
+            IntervalI c = s.Intervs[d.N];
+            IntervalI bc = b.Intervs[d.N];
 
             if (c[0] >= bc[1])
             {
@@ -518,7 +518,7 @@ namespace Lib.MathMod.Grid.Cut
                 // Have to cut.
                 StructuredGrid g = b.Grid;
                 Scope scope = s.Clone(g.MaxScopeId() + 1, new_b);
-                scope.Coords[d.N] = new IntervalI(0, c[1] - bc[1]);
+                scope.Intervs[d.N] = new IntervalI(0, c[1] - bc[1]);
                 g.Scopes.Add(scope);
                 c[1] = bc[1];
             }

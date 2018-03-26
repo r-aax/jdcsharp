@@ -17,7 +17,7 @@ namespace Lib.MathMod.Grid
         /// Array of coordinates segments.
         /// Only this array contains real data.
         /// </summary>
-        public IntervalI[] Coords;
+        public IntervalI[] Intervs;
 
         /// <summary>
         /// I coordinates segment.
@@ -26,12 +26,12 @@ namespace Lib.MathMod.Grid
         {
             get
             {
-                return Coords[0];
+                return Intervs[0];
             }
 
             set
             {
-                Coords[0] = value;
+                Intervs[0] = value;
             }
         }
 
@@ -42,12 +42,12 @@ namespace Lib.MathMod.Grid
         {
             get
             {
-                return Coords[1];
+                return Intervs[1];
             }
 
             set
             {
-                Coords[1] = value;
+                Intervs[1] = value;
             }
         }
 
@@ -58,12 +58,29 @@ namespace Lib.MathMod.Grid
         {
             get
             {
-                return Coords[2];
+                return Intervs[2];
             }
 
             set
             {
-                Coords[2] = value;
+                Intervs[2] = value;
+            }
+        }
+
+        /// <summary>
+        /// Interval of size in given general direction.
+        /// </summary>
+        /// <param name="d">general direction</param>
+        /// <returns>interval</returns>
+        public IntervalI Interv(Dir d)
+        {
+            if (d.IsGen)
+            {
+                return Intervs[d.N];
+            }
+            else
+            {
+                throw new Exception("wrong direction for getting descartes object coords interval");
             }
         }
 
@@ -82,7 +99,7 @@ namespace Lib.MathMod.Grid
         /// <param name="k"></param>
         public DescartesObject(IntervalI i, IntervalI j, IntervalI k)
         {
-            Coords = new IntervalI[] { new IntervalI(i), new IntervalI(j), new IntervalI(k) };
+            Intervs = new IntervalI[] { new IntervalI(i), new IntervalI(j), new IntervalI(k) };
         }
 
         /// <summary>
@@ -191,14 +208,7 @@ namespace Lib.MathMod.Grid
         /// <returns>size</returns>
         public int Size(Dir d)
         {
-            if (d.IsGen)
-            {
-                return Coords[d.N].Length;
-            }
-            else
-            {
-                throw new Exception("wrong direction for getting descartes object size");
-            }
+            return Interv(d).Length;
         }
 
         /// <summary>
@@ -207,17 +217,19 @@ namespace Lib.MathMod.Grid
         /// <returns></returns>
         public Dir MaxSizeDir()
         {
-            if ((ISize >= JSize) && (ISize >= KSize))
+            int isize = ISize;
+            int jsize = JSize;
+            int ksize = KSize;
+
+            if (isize >= jsize)
             {
-                return Dir.I;
-            }
-            else if (JSize >= KSize)
-            {
-                return Dir.J;
+                // Max size is <c>I</c> or <c>K</c>.
+                return (isize >= ksize) ? Dir.I : Dir.K;
             }
             else
             {
-                return Dir.K;
+                // Max size is <c>J</c> or <c>K</c>.
+                return (jsize >= ksize) ? Dir.J : Dir.K;
             }
         }
 
@@ -350,7 +362,7 @@ namespace Lib.MathMod.Grid
         {
             get
             {
-                return 2 * (ISize * JSize + ISize * KSize + JSize * KSize);
+                return 2 * (ISquare + JSquare + KSquare);
             }
         }
 

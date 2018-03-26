@@ -23,7 +23,7 @@ namespace Lib.MathMod.Grid.Cut
         {
             Debug.Assert(d.IsCorrect, "not correct direction");
 
-            if (!bcond.Coords[d.Gen.N].Contains(pos))
+            if (!bcond.Intervs[d.Gen.N].Contains(pos))
             {
                 return null;
             }
@@ -44,8 +44,8 @@ namespace Lib.MathMod.Grid.Cut
                 //       d0 *            | bcond
                 //                    d0 *
 
-                bcond.Coords[d.N][1] = pos;
-                new_bcond.Coords[d.N][0] = pos;
+                bcond.Intervs[d.N][1] = pos;
+                new_bcond.Intervs[d.N][0] = pos;
             }
             else
             {
@@ -61,8 +61,8 @@ namespace Lib.MathMod.Grid.Cut
 
                 Dir invd = !d;
 
-                new_bcond.Coords[invd.N][1] = pos;
-                bcond.Coords[invd.N][0] = pos;
+                new_bcond.Intervs[invd.N][1] = pos;
+                bcond.Intervs[invd.N][0] = pos;
             }
 
             return new_bcond;
@@ -93,7 +93,7 @@ namespace Lib.MathMod.Grid.Cut
                 //  *---------->     *----------------->
                 //  cutted bcond     new bcond
 
-                return Cut(bcond, d, bcond.Coords[d.N][0] + width);
+                return Cut(bcond, d, bcond.Intervs[d.N][0] + width);
             }
             else
             {
@@ -107,7 +107,7 @@ namespace Lib.MathMod.Grid.Cut
                 //  *----------------->     *---------->
                 //  new bcond               cutted bcond
 
-                return Cut(bcond, d, bcond.Coords[(!d).N][1] - width);
+                return Cut(bcond, d, bcond.Intervs[(!d).N][1] - width);
             }
         }
     }
