@@ -116,9 +116,8 @@
     <Compile Include="MathMod\Grid\Cut\BCondCutter.cs" />
     <Compile Include="MathMod\Grid\Cut\Cut.cs" />
     <Compile Include="MathMod\Grid\Cut\GridCutter.cs" />
-    <Compile Include="MathMod\Grid\DescartesObject.cs" />
-    <Compile Include="MathMod\Grid\Dir.cs" />
-    <Compile Include="MathMod\Grid\Dirs3.cs" />
+    <Compile Include="MathMod\Grid\DescartesObjects\Dir.cs" />
+    <Compile Include="MathMod\Grid\DescartesObjects\Dirs3.cs" />
     <Compile Include="MathMod\Grid\Grid.cs" />
     <Compile Include="MathMod\Grid\GridProperties.cs" />
     <Compile Include="MathMod\Grid\Iface.cs" />
@@ -132,7 +131,7 @@
     <Compile Include="MathMod\Grid\Partitioning\Partitioner.cs" />
     <Compile Include="MathMod\Grid\Scope.cs" />
     <Compile Include="MathMod\Grid\StructuredGrid.cs" />
-    <Compile Include="MathMod\Grid\ThinDescartesObject.cs" />
+    <Compile Include="MathMod\Grid\DescartesObjects\ThinDescartesObject3D.cs" />
     <Compile Include="MathMod\SolidGrid\Cell.cs" />
     <Compile Include="MathMod\SolidGrid\SolidGrid.cs" />
     <Compile Include="MathMod\Solver\BorderType.cs" />
@@ -145,6 +144,7 @@
     <Compile Include="Maths\Bits\Bits8.cs" />
     <Compile Include="Maths\Bits\Mask.cs" />
     <Compile Include="Maths\Bits\Range.cs" />
+    <Compile Include="MathMod\Grid\DescartesObjects\DescartesObject3D.cs" />
     <Compile Include="Maths\Geometry\AxisType.cs" />
     <Compile Include="Maths\Geometry\Direction.cs" />
     <Compile Include="Maths\Geometry\Geometry2D\Circle.cs" />

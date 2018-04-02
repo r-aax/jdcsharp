@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.Maths.Geometry;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid
 {

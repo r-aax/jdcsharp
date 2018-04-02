@@ -11,6 +11,7 @@ using System.Diagnostics;
 using Lib.DataFormats;
 using Lib.Maths.Geometry;
 using Lib.Utils;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid.Load
 {

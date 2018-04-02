@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.Maths.Geometry;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid
 {
     /// <summary>
     /// Block scope.
     /// </summary>
-    public class Scope : DescartesObject, ICloneable
+    public class Scope : DescartesObject3D, ICloneable
     {
         /// <summary>
         /// Identifier.

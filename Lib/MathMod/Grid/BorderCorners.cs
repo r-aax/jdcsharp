@@ -8,6 +8,7 @@ using System.Diagnostics;
 using Lib.Maths.Numbers;
 using Lib.Maths;
 using Lib.Maths.Geometry;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid
 {

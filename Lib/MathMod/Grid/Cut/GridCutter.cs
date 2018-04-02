@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry3D;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid.Cut
 {

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 
 using Lib.Maths.Geometry.Geometry3D;
 using Lib.Maths.Geometry;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid
 {
     /// <summary>
     /// Block.
     /// </summary>
-    public class Block : DescartesObject
+    public class Block : DescartesObject3D
     {
         /// <summary>
         /// Grid.

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using Lib.Maths.Numbers;
 using Lib.Maths.Geometry;
 
-namespace Lib.MathMod.Grid
+namespace Lib.MathMod.Grid.DescartesObjects
 {
     /// <summary>
     /// Thin descartes object.
     /// </summary>
-    public class ThinDescartesObject : DescartesObject
+    public class ThinDescartesObject3D : DescartesObject3D
     {
         /// <summary>
         /// Direction of object (orthogonal to object).
@@ -29,7 +29,7 @@ namespace Lib.MathMod.Grid
         /// <param name="i">nodes count in I direction</param>
         /// <param name="j">nodes count in J direction</param>
         /// <param name="k">nodes count in K direction</param>
-        public ThinDescartesObject(IntervalI i, IntervalI j, IntervalI k)
+        public ThinDescartesObject3D(IntervalI i, IntervalI j, IntervalI k)
             : base (i, j, k)
         {
             SetD();

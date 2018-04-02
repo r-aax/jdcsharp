@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 using Lib.Maths.Geometry;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid.Cut
 {

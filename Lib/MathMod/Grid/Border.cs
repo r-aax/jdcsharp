@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Lib.Maths.Numbers;
 using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry3D;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid
 {
     /// <summary>
     /// Border of block.
     /// </summary>
-    public abstract class Border : ThinDescartesObject
+    public abstract class Border : ThinDescartesObject3D
     {
         /// <summary>
         /// Identifier.

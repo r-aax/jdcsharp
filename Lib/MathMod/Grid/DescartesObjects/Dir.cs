@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lib.MathMod.Grid
+namespace Lib.MathMod.Grid.DescartesObjects
 {
     /// <summary>
     /// Grid direction.

@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 using Lib.Maths.Numbers;
 using Lib.Utils;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid
 {

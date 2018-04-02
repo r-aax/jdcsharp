@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 using Lib.Maths.Geometry;
 
-namespace Lib.MathMod.Grid
+namespace Lib.MathMod.Grid.DescartesObjects
 {
-    /// <summary>
-    /// Descartes object.
-    /// </summary>
-    abstract public class DescartesObject
+    public class DescartesObject3D
     {
         /// <summary>
         /// Array of coordinates segments.
@@ -20,7 +17,7 @@ namespace Lib.MathMod.Grid
         public IntervalI[] Intervs;
 
         /// <summary>
-        /// I coordinates segment.
+        /// <c>I</c> coordinates segment.
         /// </summary>
         public IntervalI I
         {
@@ -36,7 +33,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// J coordinates segment.
+        /// <c>J</c> coordinates segment.
         /// </summary>
         public IntervalI J
         {
@@ -52,7 +49,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// K coordinates segment
+        /// <c>K</c> coordinates segment
         /// </summary>
         public IntervalI K
         {
@@ -87,7 +84,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Empty constructor.
         /// </summary>
-        public DescartesObject()
+        public DescartesObject3D()
         {
         }
 
@@ -97,7 +94,7 @@ namespace Lib.MathMod.Grid
         /// <param name="i"></param>
         /// <param name="j"></param>
         /// <param name="k"></param>
-        public DescartesObject(IntervalI i, IntervalI j, IntervalI k)
+        public DescartesObject3D(IntervalI i, IntervalI j, IntervalI k)
         {
             Intervs = new IntervalI[] { new IntervalI(i), new IntervalI(j), new IntervalI(k) };
         }
@@ -214,7 +211,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Direction of maximum size.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>direction with max size</returns>
         public Dir MaxSizeDir()
         {
             int isize = ISize;

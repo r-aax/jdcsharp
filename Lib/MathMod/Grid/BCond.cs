@@ -1,6 +1,7 @@
 ﻿using System;
 
 using Lib.Maths.Geometry;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid
 {

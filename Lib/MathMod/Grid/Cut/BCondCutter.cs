@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
+using Lib.MathMod.Grid.DescartesObjects;
+
 namespace Lib.MathMod.Grid.Cut
 {
     /// <summary>
