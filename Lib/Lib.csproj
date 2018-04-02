@@ -123,6 +123,7 @@
     <Compile Include="MathMod\Grid\GridProperties.cs" />
     <Compile Include="MathMod\Grid\Iface.cs" />
     <Compile Include="MathMod\Grid\IfacesPair.cs" />
+    <Compile Include="MathMod\Grid\LinkedBorder.cs" />
     <Compile Include="MathMod\Grid\Load\GridLoaderSaverPFG.cs" />
     <Compile Include="MathMod\Grid\Load\GridLoadSavePFGProperties.cs" />
     <Compile Include="MathMod\Grid\NamedObject.cs" />

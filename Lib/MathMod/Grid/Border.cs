@@ -55,7 +55,7 @@ namespace Lib.MathMod.Grid
         public abstract bool IsIface();
 
         /// <summary>
-        /// Check if border if bcond.
+        /// Check if border is bcond.
         /// </summary>
         /// <returns><c>true</c> - if it is bcond, <c>false</c> - otherwise</returns>
         public abstract bool IsBCond();
@@ -65,7 +65,7 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="d1">first direction</param>
         /// <param name="d2">second direction</param>
-        /// <returns></returns>
+        /// <returns>corner node point</returns>
         public Point CornerNode(Dir d1, Dir d2)
         {
             if (!Dir.IsBasis(D, d1, d2))
