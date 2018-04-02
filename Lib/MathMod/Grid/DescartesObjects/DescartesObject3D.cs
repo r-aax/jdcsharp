@@ -8,7 +8,7 @@ using Lib.Maths.Geometry;
 
 namespace Lib.MathMod.Grid.DescartesObjects
 {
-    public class DescartesObject3D
+    public class DescartesObject3D : ICloneable
     {
         /// <summary>
         /// Array of coordinates segments.
@@ -97,6 +97,15 @@ namespace Lib.MathMod.Grid.DescartesObjects
         public DescartesObject3D(IntervalI i, IntervalI j, IntervalI k)
         {
             Intervs = new IntervalI[] { new IntervalI(i), new IntervalI(j), new IntervalI(k) };
+        }
+
+        /// <summary>
+        /// Constructor from another descartes object.
+        /// </summary>
+        /// <param name="do3"></param>
+        public DescartesObject3D(DescartesObject3D do3)
+            : this(do3.I, do3.J, do3.K)
+        {
         }
 
         /// <summary>
@@ -383,6 +392,52 @@ namespace Lib.MathMod.Grid.DescartesObjects
             {
                 return CellsCount;
             }
+        }
+
+        /// <summary>
+        /// Clone object.
+        /// </summary>
+        /// <returns>clone</returns>
+        public object Clone()
+        {
+            return new DescartesObject3D(this);
+        }
+
+        /// <summary>
+        /// Copy object.
+        /// </summary>
+        /// <returns>copy</returns>
+        public DescartesObject3D Copy()
+        {
+            return Clone() as DescartesObject3D;
+        }
+
+        /// <summary>
+        /// Cut the given descartes objects in the given direction in fixed position.
+        /// </summary>
+        /// <param name="dir">direction</param>
+        /// <param name="pos">position</param>
+        /// <returns>new block or null if cut is impossible</returns>
+        public DescartesObject3D FixedPositionCut(Dir dir, int pos)
+        {
+            if (!Interv(dir).Contains(pos))
+            {
+                return null;
+            }
+
+            //    lo                pos                hi
+            //    *------------------*------------------*
+            //                       |
+            //                       V
+            //  lo               pos   pos               hi
+            //  *------------------*   *------------------*
+
+            DescartesObject3D copy = Copy();
+
+            Interv(dir).H = pos;
+            copy.Interv(dir).L = pos;
+
+            return copy;
         }
     }
 }
