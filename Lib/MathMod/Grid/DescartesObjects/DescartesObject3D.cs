@@ -417,19 +417,20 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// </summary>
         /// <param name="dir">direction</param>
         /// <param name="pos">position</param>
-        /// <param name="is_direct_objs_order">order of result objects</param>
         /// <returns>new block or <c>null</c> if cut is impossible</returns>
-        public DescartesObject3D FixedPositionCut(Dir dir, int pos, bool is_direct_objs_order)
+        public DescartesObject3D Cut(Dir dir, int pos)
         {
-            if (!Interv(dir).Contains(pos))
+            if (!Interv(dir).Cutted(1).Contains(pos))
             {
                 return null;
             }
 
             DescartesObject3D copy = Copy();
 
-            if (is_direct_objs_order)
+            if (dir.IsPos)
             {
+                //                  --> dir -->
+                //
                 //    lo                pos                hi
                 //    *------------------*------------------*
                 //                       |
@@ -443,6 +444,8 @@ namespace Lib.MathMod.Grid.DescartesObjects
             }
             else
             {
+                //                  <-- dir <--
+                //
                 //    lo                pos                hi
                 //    *------------------*------------------*
                 //                       |
@@ -459,23 +462,12 @@ namespace Lib.MathMod.Grid.DescartesObjects
         }
 
         /// <summary>
-        /// Cut the given descartes objects in the given direction in fixed position.
+        /// Cut descartes object in oriented direction (truncate).
         /// </summary>
         /// <param name="dir">direction</param>
-        /// <param name="pos">position</param>
+        /// <param name="w">width (oriented position)</param>
         /// <returns>new block or <c>null</c> if cut is impossible</returns>
-        public DescartesObject3D FixedPositionCut(Dir dir, int pos)
-        {
-            return FixedPositionCut(dir, pos, true);
-        }
-
-        /// <summary>
-        /// Cut descartes object in oriented direction.
-        /// </summary>
-        /// <param name="dir">direction</param>
-        /// <param name="pos">position</param>
-        /// <returns>new block or <c>null</c> if cut is impossible</returns>
-        public DescartesObject3D OrientedCut(Dir dir, int pos)
+        public DescartesObject3D Trunc(Dir dir, int w)
         {
             if (dir.IsPos)
             {
@@ -483,11 +475,11 @@ namespace Lib.MathMod.Grid.DescartesObjects
                 //
                 //               --> dir -->
                 //
-                // lo              hi - pos            hi
+                // lo              lo + w               hi
                 // *------------------*------------------*
                 //     first object      second object
 
-                return FixedPositionCut(dir, pos);
+                return Cut(dir, Interv(dir).L + w);
             }
             else
             {
@@ -495,11 +487,11 @@ namespace Lib.MathMod.Grid.DescartesObjects
                 //
                 //               <-- dir <--
                 //
-                // lo              hi - pos            hi
+                // lo              hi - w               hi
                 // *------------------*------------------*
                 //     second object      first object
 
-                return FixedPositionCut(!dir, Interv(!dir).H - pos, false);
+                return Cut(dir, Interv(!dir).H - w);
             }
         }
     }
