@@ -109,6 +109,24 @@ namespace Lib.MathMod.Grid.DescartesObjects
         }
 
         /// <summary>
+        /// Constructor from string.
+        /// </summary>
+        /// <param name="str">string</param>
+        public DescartesObject3D(string str)
+        {
+            int res;
+            char[] ch = new char[] { '[', ']', '-', 'x' };
+            List<string> ss = str.Split(ch).ToList().FindAll(s => Int32.TryParse(s, out res));
+
+            Coords = new IntervalI[]
+                {
+                    new IntervalI(Int32.Parse(ss[0]), Int32.Parse(ss[1])),
+                    new IntervalI(Int32.Parse(ss[2]), Int32.Parse(ss[3])),
+                    new IntervalI(Int32.Parse(ss[4]), Int32.Parse(ss[5]))
+                };
+        }
+
+        /// <summary>
         /// Low coordinate in I direction.
         /// </summary>
         public int I0
@@ -410,6 +428,15 @@ namespace Lib.MathMod.Grid.DescartesObjects
         public DescartesObject3D Copy()
         {
             return Clone() as DescartesObject3D;
+        }
+
+        /// <summary>
+        /// String representation.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("[{0} - {1}] x [{2} - {3}] x [{4} - {5}]", I0, I1, J0, J1, K0, K1);
         }
 
         /// <summary>

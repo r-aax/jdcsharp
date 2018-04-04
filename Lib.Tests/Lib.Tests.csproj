@@ -45,12 +45,15 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="DataStruct\StringListTest.cs" />
+    <Compile Include="MathMod\Grid\DescartesObjects\DescartesObject3DTest.cs" />
     <Compile Include="Maths\Bits\Bits8Test.cs" />
     <Compile Include="Maths\Bits\BitsTest.cs" />
     <Compile Include="Maths\Numbers\CyclicArithmeticTest.cs" />

@@ -11,6 +11,7 @@ using Lib.Maths;
 using Lib.DataStruct.Graph;
 using Lib.DataStruct.Graph.Load;
 using Lib.DataStruct.Graph.Partitioning;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Test
 {
