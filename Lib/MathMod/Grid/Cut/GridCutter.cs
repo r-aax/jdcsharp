@@ -348,24 +348,24 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(d.IsGen, "wrong direction");
             Debug.Assert(s.B == b, "trying to cut wrong scope");
 
-            // Get coordinates of scope and block.
-            IntervalI c = s.Coords[d.N];
-            IntervalI bc = b.Canvas.Coords[d.N];
+            int bsize = b.Canvas.Size(d);
+            int slo = s.Canvas.Lo(d);
+            int shi = s.Canvas.Hi(d);
 
-            if (c[0] >= bc[1])
+            if (slo >= bsize)
             {
                 // This scope belongs to new block.
                 s.B = new_b;
-                c.Dec(bc[1]);
+                s.Canvas.Dec(d, bsize);
             }
-            else if (c[1] > bc[1])
+            else if (shi > bsize)
             {
                 // Have to cut.
                 StructuredGrid g = b.Grid;
-                Scope scope = s.Clone(g.MaxScopeId() + 1, new_b);
-                scope.Coords[d.N] = new IntervalI(0, c[1] - bc[1]);
+                int tr = bsize - slo;
+                DescartesObject3D canv = s.Canvas.TruncZ(d, tr);
+                Scope scope = new Scope(g.MaxScopeId() + 1, new_b, canv, s.Label.Type, s.Label.Subtype, s.Label.Name);
                 g.Scopes.Add(scope);
-                c[1] = bc[1];
             }
         }
 
