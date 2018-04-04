@@ -189,19 +189,6 @@ namespace GridMaster.Windows
                                                 GridLoadSavePFGProperties.EpsForBCondsMatchRotation))
                     {
                         UpdateLastAction(last_action + "is loaded.");
-
-                        // If grid is loaded we should try to load PERI border conditions.
-
-                        // No PERI file used now.
-                        /*
-                        File peri = new File(pfg);
-                        peri.ChangeExtensionCaseSensitive(".peri");
-                        
-                        if (GridLoaderSaverPFG.LoadPERI(Grid, peri.Name))
-                        {
-                            Log.Add(peri.Name + " is loaded.");
-                        }
-                        */
                     }
                     else
                     {
