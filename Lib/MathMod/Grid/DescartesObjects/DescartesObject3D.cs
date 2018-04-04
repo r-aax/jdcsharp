@@ -83,6 +83,26 @@ namespace Lib.MathMod.Grid.DescartesObjects
         }
 
         /// <summary>
+        /// Get low value of interval in given direction.
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <returns>low value</returns>
+        public int Lo(Dir d)
+        {
+            return Coord(d).L;
+        }
+
+        /// <summary>
+        /// Get high value of interval in given direction.
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <returns>high value</returns>
+        public int Hi(Dir d)
+        {
+            return Coord(d).H;
+        }
+
+        /// <summary>
         /// Empty constructor.
         /// </summary>
         public DescartesObject3D()
@@ -447,7 +467,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// </summary>
         /// <param name="dir">direction</param>
         /// <param name="pos">position</param>
-        /// <returns>new block or <c>null</c> if cut is impossible</returns>
+        /// <returns>new descartes object or <c>null</c> if cut is impossible</returns>
         public DescartesObject3D Cut(Dir dir, int pos)
         {
             if (!Coord(dir).Cutted(1).Contains(pos))
@@ -496,7 +516,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// </summary>
         /// <param name="dir">direction</param>
         /// <param name="w">width (oriented position)</param>
-        /// <returns>new block or <c>null</c> if cut is impossible</returns>
+        /// <returns>new descartes object or <c>null</c> if cut is impossible</returns>
         public DescartesObject3D Trunc(Dir dir, int w)
         {
             if (dir.IsPos)
@@ -526,6 +546,24 @@ namespace Lib.MathMod.Grid.DescartesObjects
         }
 
         /// <summary>
+        /// Truncate and dec to zero returned object.
+        /// </summary>
+        /// <param name="dir"></param>
+        /// <param name="w"></param>
+        /// <returns>new descartes object or <c>null</c> if cut is impossible</returns>
+        public DescartesObject3D TruncZ(Dir dir, int w)
+        {
+            DescartesObject3D tr = Trunc(dir, w);
+
+            if (tr != null)
+            {
+                tr.DecTo0(dir);
+            }
+
+            return tr;
+        }
+
+        /// <summary>
         /// Decrement to zero.
         /// </summary>
         public void DecTo0()
@@ -533,6 +571,25 @@ namespace Lib.MathMod.Grid.DescartesObjects
             I.DecTo0();
             J.DecTo0();
             K.DecTo0();
+        }
+
+        /// <summary>
+        /// Decrement to zero in given direction.
+        /// </summary>
+        /// <param name="d">direction</param>
+        public void DecTo0(Dir d)
+        {
+            Coord(d).DecTo0();
+        }
+
+        /// <summary>
+        /// Decrement in given direction on given value.
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <param name="v">value</param>
+        public void Dec(Dir d, int v)
+        {
+            Coord(d).Dec(v);
         }
 
         /// <summary>

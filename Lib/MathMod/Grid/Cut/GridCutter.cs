@@ -236,23 +236,6 @@ namespace Lib.MathMod.Grid.Cut
         }
 
         /// <summary>
-        /// Trunc interface in given direction.
-        /// </summary>
-        /// <param name="ifc">interface</param>
-        /// <param name="d">direction</param>
-        /// <param name="width">band width</param>
-        /// <returns>new interface</returns>
-        public static Iface Trunc(Iface ifc, Dir d, int width)
-        {
-            Debug.Assert(d.IsCorrect, "unknown direction");
-            Debug.Assert(ifc.Canvas.Coords[d.Gen.N].Length > width, "iface is not big enough to trunc");
-
-            DescartesObject3D new_canvas = ifc.Canvas.Trunc(d, width);
-
-            return new Iface(ifc.Id, ifc.B, new_canvas, ifc.NB);
-        }
-
-        /// <summary>
         /// Cut pair of interfaces.
         /// </summary>
         /// <param name="i1">first interface</param>
@@ -266,46 +249,46 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(b == i1.B, "trying to cut wrong interface");
             Debug.Assert(b != i1.NB, "trying to cut self-intersected block");
 
-            IntervalI c = i1.Canvas.Coords[d.N];
-            IntervalI bc = b.Canvas.Coords[d.N];
+            int bsize = b.Canvas.Size(d);
+            int i1lo = i1.Canvas.Lo(d);
+            int i1hi = i1.Canvas.Hi(d);
 
-            if (c[0] >= bc[1])
+            if (i1lo >= bsize)
             {
                 // Interface touches only new block.
+                //
+                //                    i1lo           i1hi
+                //                     |      i1      |
+                //    *---------------*----------------*
+                //    |       b       |      new_b     |
+                //    0             bsize
+                //
+        
                 i1.B = new_b;
-                c.Dec(bc[1]);
+                i1.Canvas.Dec(d, bsize);
                 i2.NB = new_b;
             }
-            else if (c[1] > bc[1])
+            else if (i1hi > bsize)
             {
-                // Interface splits.
+                // Split interface.
+                //
+                //              i1lo                 i1hi
+                //               |      i1            |
+                //    *---------------*----------------*
+                //    |       b       |      new_b     |
+                //    0             bsize
+                //
+
+                // New interfaces pair id.
                 StructuredGrid g = b.Grid;
                 int id = g.MaxIfaceId() + 1;
 
-                DescartesObject3D canv1 = i1.Canvas.Cut(d, bc[1] - c[0]);
-                canv1.Coords[d.N].DecTo0();
-                Iface ifc = new Iface(id, new_b, canv1, i1.NB);
-
-                //Iface ifc = i1.Clone(id, new_b);
-
-                //ifc.Canvas.Coords[d.N] = new IntervalI(0, c[1] - bc[1]);
-                Iface ifc1 = ifc;
-                //c[1] = bc[1];
-
-                // Adjacent interface truncated on bc[1] - c[0].
-                //
-                //  bc[0] = 0           bc[1]  <- block
-                //     *-----*------------*
-                //           |   trunc    |  <- trunc - trunc size
-                //           *------------*----------------*  <- interface
-                //          c[0]             ^            c[1]
-                //                           |
-                //               mirror      v
-                //           *------------*----------------*
-                ifc = Trunc(i2, i1.NDirs[d.N], bc[1] - c[0]);
-                ifc.NB = new_b;
-                ifc.Id = id;
-                Iface ifc2 = ifc;
+                // Trunc interfaces pair.
+                int tr = bsize - i1lo;
+                DescartesObject3D canv1 = i1.Canvas.TruncZ(d, tr);
+                DescartesObject3D canv2 = i2.Canvas.Trunc(i1.NDirs[d.N], tr);
+                Iface ifc1 = new Iface(id, new_b, canv1, i1.NB);
+                Iface ifc2 = new Iface(id, i2.B, canv2, new_b);                
                 g.IfacesPairs.Add(new IfacesPair(ifc1, ifc2));
             }
         }
