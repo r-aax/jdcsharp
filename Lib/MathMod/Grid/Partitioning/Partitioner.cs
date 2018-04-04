@@ -106,7 +106,7 @@ namespace Lib.MathMod.Grid.Partitioning
                 {
                     cur = b;
                 }
-                else if (b.CellsCount > cur.CellsCount)
+                else if (b.Canvas.CellsCount > cur.Canvas.CellsCount)
                 {
                     cur = b;
                 }
@@ -123,7 +123,7 @@ namespace Lib.MathMod.Grid.Partitioning
         public void SetBlockPartition(Block b, int partition)
         {
             b.PartitionNumber = partition;
-            PartitionsWeights[partition] += b.CellsCount;
+            PartitionsWeights[partition] += b.Canvas.CellsCount;
             MaxWeight = Math.Max(MaxWeight, PartitionsWeights[partition]);
         }
     }

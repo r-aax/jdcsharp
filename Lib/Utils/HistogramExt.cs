@@ -84,7 +84,7 @@ namespace Lib.Utils
             for (int i = 0; i < grid.BlocksCount; i++)
             {
                 Block b = grid.Blocks[i];
-                W[b.PartitionNumber].Add(b.CellsCount);
+                W[b.PartitionNumber].Add(b.Canvas.CellsCount);
             }
 
             FormV();

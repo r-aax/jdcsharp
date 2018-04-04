@@ -52,7 +52,7 @@ namespace Lib.MathMod.Grid.Partitioning
                 // Init weights.
                 for (int i = 0; i < bc; i++)
                 {
-                    weights[i] = Grid.Blocks[i].CellsCount;
+                    weights[i] = Grid.Blocks[i].Canvas.CellsCount;
                 }
 
                 // Distribute.

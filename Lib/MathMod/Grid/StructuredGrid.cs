@@ -168,7 +168,7 @@ namespace Lib.MathMod.Grid
 
             foreach (Block b in Blocks)
             {
-                cc += b.CellsCount;
+                cc += b.Canvas.CellsCount;
             }
 
             return cc;
@@ -251,7 +251,7 @@ namespace Lib.MathMod.Grid
 
             foreach (Block b in Blocks)
             {
-                nc += b.NodesCount;
+                nc += b.Canvas.NodesCount;
             }
                 
             return nc;
@@ -405,14 +405,14 @@ namespace Lib.MathMod.Grid
 
                 if (d == null)
                 {
-                    if (b.CellsCount > max.CellsCount)
+                    if (b.Canvas.CellsCount > max.Canvas.CellsCount)
                     {
                         max = b;
                     }
                 }
                 else
                 {
-                    if (b.Size(d) > max.Size(d))
+                    if (b.Canvas.Size(d) > max.Canvas.Size(d))
                     {
                         max = b;
                     }
@@ -486,7 +486,7 @@ namespace Lib.MathMod.Grid
             for (int i = 0; i < BlocksCount; i++)
             {
                 Block b = Blocks[i];
-                w[b.PartitionNumber] += (double)b.CellsCount;
+                w[b.PartitionNumber] += (double)b.Canvas.CellsCount;
             }
 
             return w;

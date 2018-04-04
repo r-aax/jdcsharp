@@ -107,17 +107,17 @@ namespace Lib.MathMod.Grid.Load
                         cur_i++;
 
                         // Shift cur_*.
-                        if (cur_i == cur_block.INodes)
+                        if (cur_i == cur_block.Canvas.INodes)
                         {
                             cur_i = 0;
                             cur_j++;
 
-                            if (cur_j == cur_block.JNodes)
+                            if (cur_j == cur_block.Canvas.JNodes)
                             {
                                 cur_j = 0;
                                 cur_k++;
 
-                                if (cur_k == cur_block.KNodes)
+                                if (cur_k == cur_block.Canvas.KNodes)
                                 {
                                     cur_k = 0;
                                     cur_coord++;
@@ -136,7 +136,7 @@ namespace Lib.MathMod.Grid.Load
                                         {
                                             if (GridLoadSavePFGProperties.IsIBlank)
                                             {
-                                                iblank_data_left = cur_block.NodesCount;
+                                                iblank_data_left = cur_block.Canvas.NodesCount;
                                             }
                                         }
 
@@ -399,7 +399,9 @@ namespace Lib.MathMod.Grid.Load
             {
                 Block b = g.Blocks[bi];
 
-                sw.WriteLine(b.INodes.ToString() + " " + b.JNodes.ToString() + " " + b.KNodes.ToString());
+                sw.WriteLine(b.Canvas.INodes.ToString()
+                             + " " + b.Canvas.JNodes.ToString()
+                             + " " + b.Canvas.KNodes.ToString());
             }
 
             // Write each block.
@@ -416,11 +418,11 @@ namespace Lib.MathMod.Grid.Load
                     line = "";
                     items_count = 0;
 
-                    for (int k = 0; k < b.KNodes; k++)
+                    for (int k = 0; k < b.Canvas.KNodes; k++)
                     {
-                        for (int j = 0; j < b.JNodes; j++)
+                        for (int j = 0; j < b.Canvas.JNodes; j++)
                         {
-                            for (int i = 0; i < b.INodes; i++)
+                            for (int i = 0; i < b.Canvas.INodes; i++)
                             {
                                 if (items_count > 0)
                                 {
@@ -452,7 +454,7 @@ namespace Lib.MathMod.Grid.Load
                     line = "";
                     items_count = 0;
 
-                    for (int i = 0; i < b.NodesCount; i++)
+                    for (int i = 0; i < b.Canvas.NodesCount; i++)
                     {
                         if (items_count > 0)
                         {

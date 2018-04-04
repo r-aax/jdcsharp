@@ -44,7 +44,7 @@ namespace Lib.MathMod.Grid.Cut
                 return null;
             }
 
-            if (!b.Interv(d).Cutted(MinMargin).Contains(pos))
+            if (!b.Canvas.Interv(d).Cutted(MinMargin).Contains(pos))
             {
                 CutRejectedString = "margin violation";
 
@@ -131,7 +131,7 @@ namespace Lib.MathMod.Grid.Cut
             StructuredGrid g = b.Grid;
 
             // We have to create new block for cells with higher coordinates.
-            Block new_b = new Block(g, g.BlocksCount, b.ISize - pos, b.JSize, b.KSize);
+            Block new_b = new Block(g, g.BlocksCount, b.Canvas.ISize - pos, b.Canvas.JSize, b.Canvas.KSize);
             new_b.Allocate();
 
             // Nodes: 0        ...       pos       ...    INodes - 1
@@ -140,7 +140,7 @@ namespace Lib.MathMod.Grid.Cut
             //
 
             // Copy high part of the block to the new block.
-            CopyPointsBetween3DArrays(b.C, pos, 0, 0, new_b.C, 0, 0, 0, b.INodes - pos, b.JNodes, b.KNodes);
+            CopyPointsBetween3DArrays(b.C, pos, 0, 0, new_b.C, 0, 0, 0, b.Canvas.INodes - pos, b.Canvas.JNodes, b.Canvas.KNodes);
 
             // Insert into blocks list.
             g.Blocks.Add(new_b);
@@ -149,16 +149,16 @@ namespace Lib.MathMod.Grid.Cut
             float[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
-            b.Reshape(pos, b.J.H, b.K.H);
+            b.Reshape(pos, b.Canvas.J.H, b.Canvas.K.H);
             b.Allocate();
 
             // Copy lower part of node to reallocated block nodes.
-            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.INodes, b.JNodes, b.KNodes);
+            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes, b.Canvas.KNodes);
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, new IntervalI(b.I1, b.I1), b.J, b.K, new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, new IntervalI(b.I0, b.I0), b.J, b.K, b);
+            Iface ifc1 = new Iface(max_iface_id + 1, b, new IntervalI(b.Canvas.I1, b.Canvas.I1), b.Canvas.J, b.Canvas.K, new_b);
+            Iface ifc2 = new Iface(max_iface_id + 1, new_b, new IntervalI(b.Canvas.I0, b.Canvas.I0), b.Canvas.J, b.Canvas.K, b);
             IfacesPair pair = new IfacesPair(ifc1, ifc2);
             g.IfacesPairs.Add(pair);
 
@@ -176,7 +176,7 @@ namespace Lib.MathMod.Grid.Cut
             StructuredGrid g = b.Grid;
 
             // We have to create new block for cells with higher coordinates.
-            Block new_b = new Block(g, g.BlocksCount, b.ISize, b.JSize - pos, b.KSize);
+            Block new_b = new Block(g, g.BlocksCount, b.Canvas.ISize, b.Canvas.JSize - pos, b.Canvas.KSize);
             new_b.Allocate();
 
             // Nodes: 0        ...       pos       ...    JNodes - 1
@@ -185,7 +185,7 @@ namespace Lib.MathMod.Grid.Cut
             //
 
             // Copy high part of the block to the new block.
-            CopyPointsBetween3DArrays(b.C, 0, pos, 0, new_b.C, 0, 0, 0, b.INodes, b.JNodes - pos, b.KNodes);
+            CopyPointsBetween3DArrays(b.C, 0, pos, 0, new_b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes - pos, b.Canvas.KNodes);
 
             // Insert into blocks list.
             g.Blocks.Add(new_b);
@@ -194,16 +194,16 @@ namespace Lib.MathMod.Grid.Cut
             float[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
-            b.Reshape(b.I.H, pos, b.K.H);
+            b.Reshape(b.Canvas.I.H, pos, b.Canvas.K.H);
             b.Allocate();
 
             // Copy lower part of node to reallocated block nodes.
-            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.INodes, b.JNodes, b.KNodes);
+            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes, b.Canvas.KNodes);
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, b.I, new IntervalI(b.J1, b.J1), b.K, new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.I, new IntervalI(b.J0, b.J0), b.K, b);
+            Iface ifc1 = new Iface(max_iface_id + 1, b, b.Canvas.I, new IntervalI(b.Canvas.J1, b.Canvas.J1), b.Canvas.K, new_b);
+            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.Canvas.I, new IntervalI(b.Canvas.J0, b.Canvas.J0), b.Canvas.K, b);
             IfacesPair pair = new IfacesPair(ifc1, ifc2);
             g.IfacesPairs.Add(pair);
 
@@ -221,7 +221,7 @@ namespace Lib.MathMod.Grid.Cut
             StructuredGrid g = b.Grid;
 
             // We have to create new block for cells with higher coordinates.
-            Block new_b = new Block(g, g.BlocksCount, b.ISize, b.JSize, b.KSize - pos);
+            Block new_b = new Block(g, g.BlocksCount, b.Canvas.ISize, b.Canvas.JSize, b.Canvas.KSize - pos);
             new_b.Allocate();
 
             // Nodes: 0        ...       pos       ...    KNodes - 1
@@ -230,7 +230,7 @@ namespace Lib.MathMod.Grid.Cut
             //
 
             // Copy high part of the block to the new block.
-            CopyPointsBetween3DArrays(b.C, 0, 0, pos, new_b.C, 0, 0, 0, b.INodes, b.JNodes, b.KNodes - pos);
+            CopyPointsBetween3DArrays(b.C, 0, 0, pos, new_b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes, b.Canvas.KNodes - pos);
 
             // Insert into blocks list.
             g.Blocks.Add(new_b);
@@ -239,16 +239,16 @@ namespace Lib.MathMod.Grid.Cut
             float[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
-            b.Reshape(b.I.H, b.J.H, pos);
+            b.Reshape(b.Canvas.I.H, b.Canvas.J.H, pos);
             b.Allocate();
 
             // Copy lower part of node to reallocated block nodes.
-            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.INodes, b.JNodes, b.KNodes);
+            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes, b.Canvas.KNodes);
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, b.I, b.J, new IntervalI(b.K1, b.K1), new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.I, b.J, new IntervalI(b.K0, b.K0), b);
+            Iface ifc1 = new Iface(max_iface_id + 1, b, b.Canvas.I, b.Canvas.J, new IntervalI(b.Canvas.K1, b.Canvas.K1), new_b);
+            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.Canvas.I, b.Canvas.J, new IntervalI(b.Canvas.K0, b.Canvas.K0), b);
             IfacesPair pair = new IfacesPair(ifc1, ifc2);
             g.IfacesPairs.Add(pair);
 
@@ -404,7 +404,7 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(b != i1.NB, "trying to cut self-intersected block");
 
             IntervalI c = i1.Coords[d.N];
-            IntervalI bc = b.Coords[d.N];
+            IntervalI bc = b.Canvas.Coords[d.N];
 
             if (c[0] >= bc[1])
             {
@@ -455,7 +455,7 @@ namespace Lib.MathMod.Grid.Cut
 
             // Get coordinates of border condition and block.
             IntervalI c = bcond.Coords[d.N];
-            IntervalI bc = b.Coords[d.N];
+            IntervalI bc = b.Canvas.Coords[d.N];
 
             if (c[0] >= bc[1])
             {
@@ -498,7 +498,7 @@ namespace Lib.MathMod.Grid.Cut
 
             // Get coordinates of scope and block.
             IntervalI c = s.Coords[d.N];
-            IntervalI bc = b.Coords[d.N];
+            IntervalI bc = b.Canvas.Coords[d.N];
 
             if (c[0] >= bc[1])
             {
@@ -525,7 +525,7 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new block</returns>
         public static Block CutHalf(Block b, Dir d)
         {
-            int pos = (b == null) ? 0 : (b.Size(d) / 2);
+            int pos = (b == null) ? 0 : (b.Canvas.Size(d) / 2);
 
             return Cut(b, d, pos);
         }
@@ -539,7 +539,7 @@ namespace Lib.MathMod.Grid.Cut
         {
             // If b is null block we call CutHalf,
             // because we want to get full diagnostics.
-            Dir d = (b == null) ? Dir.I : b.MaxSizeDir();
+            Dir d = (b == null) ? Dir.I : b.Canvas.MaxSizeDir();
 
             return CutHalf(b, d);
         }
@@ -613,19 +613,19 @@ namespace Lib.MathMod.Grid.Cut
             Cut c = null;
             dev = 0.0;
 
-            if (is_full && (b.CellsCount >= weight))
+            if (is_full && (b.Canvas.CellsCount >= weight))
             {
                 c = new Cut(b, null, 0);
-                dev = b.CellsCount - weight;
+                dev = b.Canvas.CellsCount - weight;
             }
 
             if (is_cut)
             {
                 // for (int di = 0; di < Dir.GenCount; di++)
                 {
-                    Dir d = b.MaxSizeDir(); //new Dir(di);
+                    Dir d = b.Canvas.MaxSizeDir(); //new Dir(di);
 
-                    for (int i = MinMargin; i < b.Nodes(d) - MinMargin; i++)
+                    for (int i = MinMargin; i < b.Canvas.Nodes(d) - MinMargin; i++)
                     {
                         Cut cur_c = new Cut(b, d, i);
                         int cells_count = cur_c.OldBlockCellsCount;
@@ -672,19 +672,19 @@ namespace Lib.MathMod.Grid.Cut
             Cut c = null;
             dev = 0.0;
 
-            if (is_full && (b.CellsCount <= weight))
+            if (is_full && (b.Canvas.CellsCount <= weight))
             {
                 c = new Cut(b, null, 0);
-                dev = weight - b.CellsCount;
+                dev = weight - b.Canvas.CellsCount;
             }
 
             if (is_cut)
             {
                 // for (int di = 0; di < Dir.GenCount; di++)
                 {
-                    Dir d = b.MaxSizeDir(); // new Dir(di);
+                    Dir d = b.Canvas.MaxSizeDir(); // new Dir(di);
 
-                    for (int i = MinMargin; i < b.Nodes(d) - MinMargin; i++)
+                    for (int i = MinMargin; i < b.Canvas.Nodes(d) - MinMargin; i++)
                     {
                         Cut cur_c = new Cut(b, d, i);
                         int cells_count = cur_c.OldBlockCellsCount;

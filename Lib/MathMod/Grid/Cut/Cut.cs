@@ -75,7 +75,7 @@ namespace Lib.MathMod.Grid.Cut
             B = b;
             D = d;
 
-            Debug.Assert((D == null) || (new IntervalI(1, B.Size(d) - 1)).Contains(pos), "wrong position");
+            Debug.Assert((D == null) || (new IntervalI(1, B.Canvas.Size(d) - 1)).Contains(pos), "wrong position");
 
             Pos = pos;
         }
@@ -89,8 +89,8 @@ namespace Lib.MathMod.Grid.Cut
             {
                 // Special case. D == null means it is no cut.
                 return (D == null)
-                       ? B.CellsCount
-                       : Pos * B.Square(D);
+                       ? B.Canvas.CellsCount
+                       : Pos * B.Canvas.Square(D);
             }
         }
 
@@ -103,8 +103,8 @@ namespace Lib.MathMod.Grid.Cut
             {
                 // Special case. D == null means it is no cut.
                 return (D == null)
-                       ? B.CellsCount
-                       : Math.Min(Pos, B.Size(D) - Pos) * B.Square(D);
+                       ? B.Canvas.CellsCount
+                       : Math.Min(Pos, B.Canvas.Size(D) - Pos) * B.Canvas.Square(D);
             }
         }
 

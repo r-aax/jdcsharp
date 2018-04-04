@@ -13,7 +13,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Block.
     /// </summary>
-    public class Block : DescartesObject3D
+    public class Block
     {
         /// <summary>
         /// Grid.
@@ -24,6 +24,15 @@ namespace Lib.MathMod.Grid
         /// Identifier.
         /// </summary>
         public int Id
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Canvas.
+        /// </summary>
+        public DescartesObject3D Canvas
         {
             get;
             private set;
@@ -55,6 +64,22 @@ namespace Lib.MathMod.Grid
         public float[,,,] C;
 
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="id">identifier</param>
+        /// <param name="do3">descares object</param>
+        public Block(StructuredGrid g, int id, DescartesObject3D do3)
+        {
+            Grid = g;
+            Id = id;
+            Canvas = do3.Copy();
+
+            // No partition for new block.
+            PartitionNumber = -1;
+        }
+
+        /// <summary>
         /// Constructor from identifier and sizes.
         /// </summary>
         /// <param name="g">grid</param>
@@ -63,11 +88,10 @@ namespace Lib.MathMod.Grid
         /// <param name="jsize">count of cells in J direction</param>
         /// <param name="ksize">count of cells in K direction</param>
         public Block(StructuredGrid g, int id, int isize, int jsize, int ksize)
-            : base(new IntervalI(0, isize), new IntervalI(0, jsize), new IntervalI(0, ksize))
+            : this(g, id, new DescartesObject3D(new IntervalI(0, isize),
+                                                new IntervalI(0, jsize),
+                                                new IntervalI(0, ksize)))
         {
-            Grid = g;
-            Id = id;
-            PartitionNumber = -1;
         }
 
         /// <summary>
@@ -78,9 +102,9 @@ namespace Lib.MathMod.Grid
         /// <param name="ksize">new block size in K direction</param>
         public void Reshape(int isize, int jsize, int ksize)
         {
-            I.H = isize;
-            J.H = jsize;
-            K.H = ksize;
+            Canvas.I.H = isize;
+            Canvas.J.H = jsize;
+            Canvas.K.H = ksize;
             C = null;
         }
 
@@ -90,7 +114,7 @@ namespace Lib.MathMod.Grid
         public void Allocate()
         {
             // Allocate nodes.
-            C = new float[INodes, JNodes, KNodes, 3];
+            C = new float[Canvas.INodes, Canvas.JNodes, Canvas.KNodes, 3];
         }
 
         /// <summary>
@@ -116,17 +140,17 @@ namespace Lib.MathMod.Grid
 
             if ((mask & (1 << Dir.I1N)) != 0)
             {
-                i = ISize;
+                i = Canvas.ISize;
             }
 
             if ((mask & (1 << Dir.J1N)) != 0)
             {
-                j = JSize;
+                j = Canvas.JSize;
             }
 
             if ((mask & (1 << Dir.K1N)) != 0)
             {
-                k = KSize;
+                k = Canvas.KSize;
             }
 
             return new Point(C[i, j, k, 0], C[i, j, k, 1], C[i, j, k, 2]);
@@ -139,7 +163,8 @@ namespace Lib.MathMod.Grid
         public override string ToString()
         {
             return String.Format("{0,4} ({1,3}): {2,8} cells ({3,3}, {4,3}, {5,3})",
-                                 Id, PartitionNumber, CellsCount, ISize, JSize, KSize);
+                                 Id, PartitionNumber, Canvas.CellsCount,
+                                 Canvas.ISize, Canvas.JSize, Canvas.KSize);
         }
 
         /// <summary>
@@ -148,7 +173,7 @@ namespace Lib.MathMod.Grid
         /// <returns>count of inner cells</returns>
         public int InnerCellsCount()
         {
-            return InnerCellsCount(GridProperties.ShadowDepth);
+            return Canvas.InnerCellsCount(GridProperties.ShadowDepth);
         }
 
         /// <summary>
@@ -157,7 +182,7 @@ namespace Lib.MathMod.Grid
         /// <returns>count of border cells</returns>
         public int BorderCellsCount()
         {
-            return BorderCellsCount(GridProperties.ShadowDepth);
+            return Canvas.BorderCellsCount(GridProperties.ShadowDepth);
         }
 
         /// <summary>
