@@ -121,36 +121,10 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new bloc</returns>
         public static Block PureCut(Block b, Dir d, int pos)
         {
-            if (d.IsI)
-            {
-                return CutI(b, pos);
-            }
-            else if (d.IsJ)
-            {
-                return CutJ(b, pos);
-            }
-            else if (d.IsK)
-            {
-                return CutK(b, pos);
-            }
-            else
-            {
-                throw new Exception("undefined cut direction");
-            }
-        }
-
-        /// <summary>
-        /// Cut block in I direction.
-        /// </summary>
-        /// <param name="b">block</param>
-        /// <param name="pos">position</param>
-        /// <returns>new block</returns>
-        private static Block CutI(Block b, int pos)
-        {
             StructuredGrid g = b.Grid;
 
             // Cut block's canvas in direction I in position pos.
-            DescartesObject3D new_canvas = b.Canvas.Cut(Dir.I, pos);
+            DescartesObject3D new_canvas = b.Canvas.Cut(d, pos);
             DescartesObject3D new_canvas2 = new_canvas.Copy;
             new_canvas.DecTo0();
 
@@ -175,98 +149,8 @@ namespace Lib.MathMod.Grid.Cut
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, b.Canvas.Facet(Dir.I1), new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.Canvas.Facet(Dir.I0), b);
-            IfacesPair pair = new IfacesPair(ifc1, ifc2);
-            g.IfacesPairs.Add(pair);
-
-            return new_b;
-        }
-
-        /// <summary>
-        /// Cut block in J direction.
-        /// </summary>
-        /// <param name="b">block</param>
-        /// <param name="pos">position</param>
-        /// <returns>new block</returns>
-        private static Block CutJ(Block b, int pos)
-        {
-            StructuredGrid g = b.Grid;
-
-            // We have to create new block for cells with higher coordinates.
-            Block new_b = new Block(g, g.BlocksCount, b.Canvas.ISize, b.Canvas.JSize - pos, b.Canvas.KSize);
-            new_b.Allocate();
-
-            // Nodes: 0        ...       pos       ...    JNodes - 1
-            // Cells: *---------*---------*---------*---------*
-            //             0      pos - 1     pos    JCells - 1
-            //
-
-            // Copy high part of the block to the new block.
-            CopyPointsBetween3DArrays(b.C, 0, pos, 0, new_b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes - pos, b.Canvas.KNodes);
-
-            // Insert into blocks list.
-            g.Blocks.Add(new_b);
-
-            // Define duplicate of block nodes.
-            float[,,,] old_c = b.C;
-
-            // Allocate memory for current block (again).
-            b.Reshape(b.Canvas.I.H, pos, b.Canvas.K.H);
-            b.Allocate();
-
-            // Copy lower part of node to reallocated block nodes.
-            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes, b.Canvas.KNodes);
-
-            // New interface between these two blocks.
-            int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, b.Canvas.I, new IntervalI(b.Canvas.J1, b.Canvas.J1), b.Canvas.K, new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.Canvas.I, new IntervalI(b.Canvas.J0, b.Canvas.J0), b.Canvas.K, b);
-            IfacesPair pair = new IfacesPair(ifc1, ifc2);
-            g.IfacesPairs.Add(pair);
-
-            return new_b;
-        }
-
-        /// <summary>
-        /// Cut block in K direction.
-        /// </summary>
-        /// <param name="b">block</param>
-        /// <param name="pos">position</param>
-        /// <returns>new block</returns>
-        private static Block CutK(Block b, int pos)
-        {
-            StructuredGrid g = b.Grid;
-
-            // We have to create new block for cells with higher coordinates.
-            Block new_b = new Block(g, g.BlocksCount, b.Canvas.ISize, b.Canvas.JSize, b.Canvas.KSize - pos);
-            new_b.Allocate();
-
-            // Nodes: 0        ...       pos       ...    KNodes - 1
-            // Cells: *---------*---------*---------*---------*
-            //             0      pos - 1     pos    KCells - 1
-            //
-
-            // Copy high part of the block to the new block.
-            CopyPointsBetween3DArrays(b.C, 0, 0, pos, new_b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes, b.Canvas.KNodes - pos);
-
-            // Insert into blocks list.
-            g.Blocks.Add(new_b);
-
-            // Define duplicate of block nodes.
-            float[,,,] old_c = b.C;
-
-            // Allocate memory for current block (again).
-            b.Reshape(b.Canvas.I.H, b.Canvas.J.H, pos);
-            b.Allocate();
-
-            // Copy lower part of node to reallocated block nodes.
-            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes, b.Canvas.KNodes);
-
-            // New interface between these two blocks.
-            int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, b.Canvas.I, b.Canvas.J, new IntervalI(b.Canvas.K1, b.Canvas.K1), new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.Canvas.I, b.Canvas.J, new IntervalI(b.Canvas.K0, b.Canvas.K0), b);
+            Iface ifc1 = new Iface(max_iface_id + 1, b, b.Canvas.Facet(d), new_b);
+            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.Canvas.Facet(!d), b);
             IfacesPair pair = new IfacesPair(ifc1, ifc2);
             g.IfacesPairs.Add(pair);
 
