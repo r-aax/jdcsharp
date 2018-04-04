@@ -37,7 +37,7 @@ namespace Lib.MathMod.Grid
         /// <param name="b">block</param>
         /// <param name="canvas">canvas</param>
         /// <param name="nb">neighbour</param>
-        public Iface(int id, Block b, ThinDescartesObject3D canvas, Block nb)
+        public Iface(int id, Block b, DescartesObject3D canvas, Block nb)
             : base(id, b, canvas, nb)
         {
         }

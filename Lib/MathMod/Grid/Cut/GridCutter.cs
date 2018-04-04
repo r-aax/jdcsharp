@@ -247,48 +247,11 @@ namespace Lib.MathMod.Grid.Cut
         public static Iface Trunc(Iface ifc, Dir d, int width)
         {
             Debug.Assert(d.IsCorrect, "unknown direction");
+            Debug.Assert(ifc.Canvas.Coords[d.Gen.N].Length > width, "iface is not big enough to trunc");
 
-            int g = d.Gen.N;
+            DescartesObject3D new_canvas = ifc.Canvas.Trunc(d, width);
 
-            // Check iface is big enough.
-            Debug.Assert(ifc.Canvas.Coords[g].Length > width, "iface is not big enough to trunc");
-
-            Iface ifcc = ifc.Clone() as Iface;
-
-            if (d.IsPos)
-            {
-                // Cut in positive direction.
-                //
-                //     0                           size
-                //     *----------*----------------->
-                //     |  width   |
-                //
-                //  0        width   0            size - width
-                //  *---------->     *----------------->
-                //  cutted iface     new iface
-
-                int v = ifc.Canvas.Coords[g][0] + width;
-                ifcc.Canvas.Coords[g] = new IntervalI(v, ifc.Canvas.Coords[g][1]);
-                ifc.Canvas.Coords[g][1] = v;
-            }
-            else
-            {
-                // Cut in negative direction.
-                //
-                //     0                           size
-                //     *-----------------*---------->
-                //                       |  width   |
-                //
-                //  0        size - width   0        width
-                //  *----------------->     *---------->
-                //  new iface               cutted iface
-
-                int v = ifc.Canvas.Coords[g][1] - width;
-                ifcc.Canvas.Coords[g] = new IntervalI(ifc.Canvas.Coords[g][0], v);
-                ifc.Canvas.Coords[g][0] = v;
-            }
-
-            return ifcc;
+            return new Iface(ifc.Id, ifc.B, new_canvas, ifc.NB);
         }
 
         /// <summary>

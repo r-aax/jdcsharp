@@ -64,7 +64,7 @@ namespace Lib.MathMod.Grid
         /// <param name="id">identifier</param>
         /// <param name="b">block</param>
         /// <param name="canvas">canvas</param>
-        public Border(int id, Block b, ThinDescartesObject3D canvas)
+        public Border(int id, Block b, DescartesObject3D canvas)
             : this(id, b, canvas.I, canvas.J, canvas.K)
         {
         }

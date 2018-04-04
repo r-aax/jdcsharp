@@ -66,7 +66,7 @@ namespace Lib.MathMod.Grid
         /// <param name="b">block</param>
         /// <param name="canvas">canvas</param>
         /// <param name="nb">neighbour</param>
-        public LinkedBorder(int id, Block b, ThinDescartesObject3D canvas, Block nb)
+        public LinkedBorder(int id, Block b, DescartesObject3D canvas, Block nb)
             : this(id, b, canvas.I, canvas.J, canvas.K, nb)
         {
         }

@@ -39,7 +39,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// Copy constructor.
         /// </summary>
         /// <param name="tdo3">thin descartes object</param>
-        public ThinDescartesObject3D(ThinDescartesObject3D tdo3)
+        public ThinDescartesObject3D(DescartesObject3D tdo3)
             : this(tdo3.I, tdo3.J, tdo3.K)
         {
         }
