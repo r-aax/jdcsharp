@@ -96,5 +96,16 @@ namespace Lib.Maths.Geometry
         {
             return new IntervalI(L + margin, H - margin);
         }
+
+        /// <summary>
+        /// Copy.
+        /// </summary>
+        public IntervalI Copy
+        {
+            get
+            {
+                return Clone() as IntervalI;
+            }
+        }
     }
 }

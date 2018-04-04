@@ -60,6 +60,18 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Constructor from canvas.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <param name="b">block</param>
+        /// <param name="canvas">canvas</param>
+        /// <param name="nb">neighbour</param>
+        public LinkedBorder(int id, Block b, ThinDescartesObject3D canvas, Block nb)
+            : this(id, b, canvas.I, canvas.J, canvas.K, nb)
+        {
+        }
+
+        /// <summary>
         /// Reset neighbour directions.
         /// </summary>
         public void ResetNDirs()

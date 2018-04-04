@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using Lib.Maths.Geometry;
 
@@ -522,6 +523,61 @@ namespace Lib.MathMod.Grid.DescartesObjects
 
                 return Cut(dir, Coord(!dir).H - w);
             }
+        }
+
+        /// <summary>
+        /// Decrement to zero.
+        /// </summary>
+        public void DecTo0()
+        {
+            I.DecTo0();
+            J.DecTo0();
+            K.DecTo0();
+        }
+
+        /// <summary>
+        /// Return facet of common 3D descartes object.
+        /// </summary>
+        /// <param name="d">direction</param>
+        /// <returns>facet</returns>
+        public ThinDescartesObject3D Facet(Dir d)
+        {
+            IntervalI i = I.Copy;
+            IntervalI j = J.Copy;
+            IntervalI k = K.Copy;
+
+            switch (d.N)
+            {
+                case Dir.I0N:
+                    i.H = i.L;
+                    break;
+
+                case Dir.I1N:
+                    i.L = i.H;
+                    break;
+
+                case Dir.J0N:
+                    j.H = j.L;
+                    break;
+
+                case Dir.J1N:
+                    j.L = j.H;
+                    break;
+
+                case Dir.K0N:
+                    k.H = k.L;
+                    break;
+
+                case Dir.K1N:
+                    k.L = k.H;
+                    break;
+
+                default:
+                    Debug.Assert(false);
+                    break;
+            }
+
+            return new ThinDescartesObject3D(i, j, k);
         }
     }
 }

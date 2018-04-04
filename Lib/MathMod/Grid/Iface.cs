@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Lib.Maths.Geometry;
 using Lib.Maths.Geometry.Geometry3D;
 using Lib.Maths.Numbers;
+using Lib.MathMod.Grid.DescartesObjects;
 
 namespace Lib.MathMod.Grid
 {
@@ -26,6 +27,18 @@ namespace Lib.MathMod.Grid
         /// <param name="nb">neighbour block</param>
         public Iface(int id, Block b, IntervalI i, IntervalI j, IntervalI k, Block nb)
             : base(id, b, i, j, k, nb)
+        {
+        }
+
+        /// <summary>
+        /// Constructor from canvas.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <param name="b">block</param>
+        /// <param name="canvas">canvas</param>
+        /// <param name="nb">neighbour</param>
+        public Iface(int id, Block b, ThinDescartesObject3D canvas, Block nb)
+            : base(id, b, canvas, nb)
         {
         }
 

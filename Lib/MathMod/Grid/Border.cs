@@ -59,6 +59,17 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Constructor from canvas.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <param name="b">block</param>
+        /// <param name="canvas">canvas</param>
+        public Border(int id, Block b, ThinDescartesObject3D canvas)
+            : this(id, b, canvas.I, canvas.J, canvas.K)
+        {
+        }
+
+        /// <summary>
         /// Check if border is iface.
         /// </summary>
         /// <returns><c>true</c> - if it is iface, <c>false</c> - otherwise</returns>

@@ -14,72 +14,72 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// <summary>
         /// No number.
         /// </summary>
-        public static readonly int NoN = -1;
+        public const int NoN = -1;
 
         /// <summary>
         /// First direction number.
         /// </summary>
-        public static readonly int FirstN = 0;
+        public const int FirstN = 0;
 
         /// <summary>
         /// Positive I direction number.
         /// </summary>
-        public static readonly int I1N = 0;
+        public const int I1N = 0;
 
         /// <summary>
         /// I direction number.
         /// </summary>
-        public static readonly int IN = 0;
+        public const int IN = 0;
 
         /// <summary>
         /// Positive J direction number.
         /// </summary>
-        public static readonly int J1N = 1;
+        public const int J1N = 1;
 
         /// <summary>
         /// J direction number.
         /// </summary>
-        public static readonly int JN = 1;
+        public const int JN = 1;
 
         /// <summary>
         /// Positive K direction number.
         /// </summary>
-        public static readonly int K1N = 2;
+        public const int K1N = 2;
 
         /// <summary>
         /// K direction number.
         /// </summary>
-        public static readonly int KN = 2;
+        public const int KN = 2;
 
         /// <summary>
         /// Count of general directions (I, J, K).
         /// </summary>
-        public static readonly int GenCount = 3;
+        public const int GenCount = 3;
 
         /// <summary>
         /// Negative I direction number.
         /// </summary>
-        public static readonly int I0N = 3;
+        public const int I0N = 3;
 
         /// <summary>
         /// Negative J direction number.
         /// </summary>
-        public static readonly int J0N = 4;
+        public const int J0N = 4;
 
         /// <summary>
         /// Negative K direction number.
         /// </summary>
-        public static readonly int K0N = 5;
+        public const int K0N = 5;
 
         /// <summary>
         /// Last direction number.
         /// </summary>
-        public static readonly int LastN = 5;
+        public const int LastN = 5;
 
         /// <summary>
         /// Directions count (I1, J1, K1, I0, J0, K0).
         /// </summary>
-        public static readonly int Count = 6;
+        public const int Count = 6;
 
         /// <summary>
         /// Direction number.

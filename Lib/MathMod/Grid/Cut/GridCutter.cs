@@ -94,6 +94,25 @@ namespace Lib.MathMod.Grid.Cut
         }
 
         /// <summary>
+        /// Copy points from one array to another usings canvases.
+        /// </summary>
+        /// <param name="src_v">source array</param>
+        /// <param name="src_c">source canvas</param>
+        /// <param name="dst_v">destination array</param>
+        /// <param name="dst_c">destination canvas</param>
+        public static void CopyPointsBetween3DArrays(float[,,,] src_v, DescartesObject3D src_c,
+                                                     float[,,,] dst_v, DescartesObject3D dst_c)
+        {
+            Debug.Assert((src_c.INodes == dst_c.INodes)
+                         && (src_c.JNodes == dst_c.JNodes)
+                         && (src_c.KNodes == dst_c.KNodes));
+
+            CopyPointsBetween3DArrays(src_v, src_c.I0, src_c.J0, src_c.K0,
+                                      dst_v, dst_c.I0, dst_c.J0, dst_c.K0,
+                                      src_c.INodes, src_c.JNodes, src_c.KNodes);
+        }
+
+        /// <summary>
         /// Pure cut the block without other objects correction.
         /// </summary>
         /// <param name="b">block</param>
@@ -130,17 +149,17 @@ namespace Lib.MathMod.Grid.Cut
         {
             StructuredGrid g = b.Grid;
 
+            // Cut block's canvas in direction I in position pos.
+            DescartesObject3D new_canvas = b.Canvas.Cut(Dir.I, pos);
+            DescartesObject3D new_canvas2 = new_canvas.Copy;
+            new_canvas.DecTo0();
+
             // We have to create new block for cells with higher coordinates.
-            Block new_b = new Block(g, g.BlocksCount, b.Canvas.ISize - pos, b.Canvas.JSize, b.Canvas.KSize);
+            Block new_b = new Block(g, g.BlocksCount, new_canvas);
             new_b.Allocate();
 
-            // Nodes: 0        ...       pos       ...    INodes - 1
-            // Cells: *---------*---------*---------*---------*
-            //             0      pos - 1     pos    ICells - 1
-            //
-
             // Copy high part of the block to the new block.
-            CopyPointsBetween3DArrays(b.C, pos, 0, 0, new_b.C, 0, 0, 0, b.Canvas.INodes - pos, b.Canvas.JNodes, b.Canvas.KNodes);
+            CopyPointsBetween3DArrays(b.C, new_canvas2, new_b.C, new_canvas);
 
             // Insert into blocks list.
             g.Blocks.Add(new_b);
@@ -149,16 +168,15 @@ namespace Lib.MathMod.Grid.Cut
             float[,,,] old_c = b.C;
 
             // Allocate memory for current block (again).
-            b.Reshape(pos, b.Canvas.J.H, b.Canvas.K.H);
             b.Allocate();
 
             // Copy lower part of node to reallocated block nodes.
-            CopyPointsBetween3DArrays(old_c, 0, 0, 0, b.C, 0, 0, 0, b.Canvas.INodes, b.Canvas.JNodes, b.Canvas.KNodes);
+            CopyPointsBetween3DArrays(old_c, b.Canvas, b.C, b.Canvas);
 
             // New interface between these two blocks.
             int max_iface_id = g.MaxIfaceId();
-            Iface ifc1 = new Iface(max_iface_id + 1, b, new IntervalI(b.Canvas.I1, b.Canvas.I1), b.Canvas.J, b.Canvas.K, new_b);
-            Iface ifc2 = new Iface(max_iface_id + 1, new_b, new IntervalI(b.Canvas.I0, b.Canvas.I0), b.Canvas.J, b.Canvas.K, b);
+            Iface ifc1 = new Iface(max_iface_id + 1, b, b.Canvas.Facet(Dir.I1), new_b);
+            Iface ifc2 = new Iface(max_iface_id + 1, new_b, b.Canvas.Facet(Dir.I0), b);
             IfacesPair pair = new IfacesPair(ifc1, ifc2);
             g.IfacesPairs.Add(pair);
 
