@@ -525,9 +525,9 @@ namespace Lib.MathMod.Grid.Load
 
                 sw.WriteLine(String.Format("{0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10}",
                                            b.Id, b.B.Id + 1,
-                                           b.I0 + 1, b.I1 + 1,
-                                           b.J0 + 1, b.J1 + 1,
-                                           b.K0 + 1, b.K1 + 1,
+                                           b.Canvas.I0 + 1, b.Canvas.I1 + 1,
+                                           b.Canvas.J0 + 1, b.Canvas.J1 + 1,
+                                           b.Canvas.K0 + 1, b.Canvas.K1 + 1,
                                            b.Label.Type, b.Label.Subtype, b.Label.Name));
             }
         }

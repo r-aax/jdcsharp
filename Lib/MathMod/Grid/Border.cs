@@ -14,7 +14,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Border of block.
     /// </summary>
-    public abstract class Border : ThinDescartesObject3D
+    public abstract class Border
     {
         /// <summary>
         /// Identifier.
@@ -35,6 +35,15 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Canvas.
+        /// </summary>
+        public ThinDescartesObject3D Canvas
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="id">identifier</param>
@@ -43,10 +52,10 @@ namespace Lib.MathMod.Grid
         /// <param name="j">J direction nodes interval</param>
         /// <param name="k">K direction nodes interval </param>
         public Border(int id, Block b, IntervalI i, IntervalI j, IntervalI k)
-            : base(i, j, k)
         {
             Id = id;
             B = b;
+            Canvas = new ThinDescartesObject3D(i, j, k);
         }
 
         /// <summary>
@@ -69,7 +78,7 @@ namespace Lib.MathMod.Grid
         /// <returns>corner node point</returns>
         public Point CornerNode(Dir d1, Dir d2)
         {
-            if (!Dir.IsBasis(D, d1, d2))
+            if (!Dir.IsBasis(Canvas.D, d1, d2))
             {
                 return null;
             }
@@ -83,26 +92,26 @@ namespace Lib.MathMod.Grid
                 s2 = d1.N;
             }
 
-            int i = I0;
-            int j = J0;
-            int k = K0;
+            int i = Canvas.I0;
+            int j = Canvas.J0;
+            int k = Canvas.K0;
 
             if (s1 == Dir.I1N)
             {
-                i = I1;
+                i = Canvas.I1;
             }
             else if (s1 == Dir.J1N)
             {
-                j = J1;
+                j = Canvas.J1;
             }
 
             if (s2 == Dir.J1N)
             {
-                j = J1;
+                j = Canvas.J1;
             }
             else if (s2 == Dir.K1N)
             {
-                k = K1;
+                k = Canvas.K1;
             }
 
             return new Point(B.C[i, j, k, 0], B.C[i, j, k, 1], B.C[i, j, k, 2]);
@@ -140,9 +149,9 @@ namespace Lib.MathMod.Grid
         /// <returns><c>true</c> - if sizes match, <c>false</c> - otherwise</returns>
         public bool IsSizesMatch(Border b, Dirs3 dirs)
         {
-            return (Size(Dir.I) == b.Size(dirs.I.Gen))
-                   && (Size(Dir.J) == b.Size(dirs.J.Gen))
-                   && (Size(Dir.K) == b.Size(dirs.K.Gen));
+            return (Canvas.Size(Dir.I) == b.Canvas.Size(dirs.I.Gen))
+                   && (Canvas.Size(Dir.J) == b.Canvas.Size(dirs.J.Gen))
+                   && (Canvas.Size(Dir.K) == b.Canvas.Size(dirs.K.Gen));
         }
 
         /// <summary>

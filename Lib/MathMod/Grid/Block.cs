@@ -199,7 +199,7 @@ namespace Lib.MathMod.Grid
                 {
                     if (!is_only_cross_partition || pair.IsCross)
                     {
-                        iccm += pair.If.Measure;
+                        iccm += pair.If.Canvas.Measure;
                     }
                 }
             }

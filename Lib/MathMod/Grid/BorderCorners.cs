@@ -139,7 +139,7 @@ namespace Lib.MathMod.Grid
         public BorderCorners(Border b)
             : this()
         {
-            D = b.D;
+            D = b.Canvas.D;
             SetPoints(b);
         }
 

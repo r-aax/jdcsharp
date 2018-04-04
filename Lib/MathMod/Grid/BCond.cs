@@ -55,12 +55,12 @@ namespace Lib.MathMod.Grid
         /// Clone.
         /// </summary>
         /// <returns>copy</returns>
-        new public object Clone()
+        public object Clone()
         {
             return new BCond(Id, B,
-                             I.Clone() as IntervalI,
-                             J.Clone() as IntervalI,
-                             K.Clone() as IntervalI,
+                             Canvas.I.Clone() as IntervalI,
+                             Canvas.J.Clone() as IntervalI,
+                             Canvas.K.Clone() as IntervalI,
                              Label.Type, Label.Subtype, Label.Name);
         }
 
@@ -97,8 +97,8 @@ namespace Lib.MathMod.Grid
         public override string ToString()
         {
             return String.Format("{0,4}: {1,4} [{2,3} - {3,3}, {4,3} - {5,3}, {6,3} - {7,3}] {8,-12} {9,-12} {10,-12} ({11})",
-                                 Id, B.Id, I0, I1, J0, J1, K0, K1,
-                                 Label.Type, Label.Subtype, Label.Name, D.ToString());
+                                 Id, B.Id, Canvas.I0, Canvas.I1, Canvas.J0, Canvas.J1, Canvas.K0, Canvas.K1,
+                                 Label.Type, Label.Subtype, Label.Name, Canvas.D.ToString());
         }
 
         /// <summary>
