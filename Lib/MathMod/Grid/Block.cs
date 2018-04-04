@@ -73,7 +73,7 @@ namespace Lib.MathMod.Grid
         {
             Grid = g;
             Id = id;
-            Canvas = do3.Copy();
+            Canvas = do3.Copy;
 
             // No partition for new block.
             PartitionNumber = -1;

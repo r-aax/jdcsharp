@@ -69,7 +69,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// </summary>
         /// <param name="d">general direction</param>
         /// <returns>interval</returns>
-        public IntervalI Interv(Dir d)
+        public IntervalI Coord(Dir d)
         {
             if (d.IsGen)
             {
@@ -232,7 +232,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// <returns>size</returns>
         public int Size(Dir d)
         {
-            return Interv(d).Length;
+            return Coord(d).Length;
         }
 
         /// <summary>
@@ -424,10 +424,12 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// <summary>
         /// Copy object.
         /// </summary>
-        /// <returns>copy</returns>
-        public DescartesObject3D Copy()
+        public DescartesObject3D Copy
         {
-            return Clone() as DescartesObject3D;
+            get
+            {
+                return Clone() as DescartesObject3D;
+            }
         }
 
         /// <summary>
@@ -447,12 +449,12 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// <returns>new block or <c>null</c> if cut is impossible</returns>
         public DescartesObject3D Cut(Dir dir, int pos)
         {
-            if (!Interv(dir).Cutted(1).Contains(pos))
+            if (!Coord(dir).Cutted(1).Contains(pos))
             {
                 return null;
             }
 
-            DescartesObject3D copy = Copy();
+            DescartesObject3D copy = Copy;
 
             if (dir.IsPos)
             {
@@ -466,8 +468,8 @@ namespace Lib.MathMod.Grid.DescartesObjects
                 //  *------------------*   *------------------*
                 //      first object           second object
 
-                Interv(dir).H = pos;
-                copy.Interv(dir).L = pos;
+                Coord(dir).H = pos;
+                copy.Coord(dir).L = pos;
             }
             else
             {
@@ -481,8 +483,8 @@ namespace Lib.MathMod.Grid.DescartesObjects
                 //  *------------------*   *------------------*
                 //      second object          first object
 
-                Interv(dir).L = pos;
-                copy.Interv(dir).H = pos;
+                Coord(dir).L = pos;
+                copy.Coord(dir).H = pos;
             }
 
             return copy;
@@ -506,7 +508,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
                 // *------------------*------------------*
                 //     first object      second object
 
-                return Cut(dir, Interv(dir).L + w);
+                return Cut(dir, Coord(dir).L + w);
             }
             else
             {
@@ -518,7 +520,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
                 // *------------------*------------------*
                 //     second object      first object
 
-                return Cut(dir, Interv(!dir).H - w);
+                return Cut(dir, Coord(!dir).H - w);
             }
         }
     }

@@ -44,7 +44,7 @@ namespace Lib.MathMod.Grid.Cut
                 return null;
             }
 
-            if (!b.Canvas.Interv(d).Cutted(MinMargin).Contains(pos))
+            if (!b.Canvas.Coord(d).Cutted(MinMargin).Contains(pos))
             {
                 CutRejectedString = "margin violation";
 

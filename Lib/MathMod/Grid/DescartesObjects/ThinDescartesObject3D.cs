@@ -36,6 +36,15 @@ namespace Lib.MathMod.Grid.DescartesObjects
         }
 
         /// <summary>
+        /// Copy constructor.
+        /// </summary>
+        /// <param name="tdo3">thin descartes object</param>
+        public ThinDescartesObject3D(ThinDescartesObject3D tdo3)
+            : this(tdo3.I, tdo3.J, tdo3.K)
+        {
+        }
+
+        /// <summary>
         /// Set direction.
         /// </summary>
         private void SetD()
@@ -99,6 +108,26 @@ namespace Lib.MathMod.Grid.DescartesObjects
             get
             {
                 return SurfaceArea / 2;
+            }
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>clone</returns>
+        new public object Clone()
+        {
+            return new ThinDescartesObject3D(this);
+        }
+
+        /// <summary>
+        /// Copy.
+        /// </summary>
+        new public ThinDescartesObject3D Copy
+        {
+            get
+            {
+                return Clone() as ThinDescartesObject3D;
             }
         }
     }
