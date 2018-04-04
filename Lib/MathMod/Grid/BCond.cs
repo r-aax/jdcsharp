@@ -8,7 +8,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Border condition.
     /// </summary>
-    public class BCond : Border, ICloneable
+    public class BCond : LinkedBorder, ICloneable
     {
         /// <summary>
         /// Label (set of names).
@@ -28,7 +28,7 @@ namespace Lib.MathMod.Grid
         /// <param name="name">name</param>
         public BCond(int id, Block b, IntervalI i, IntervalI j, IntervalI k,
                      string type, string subtype, string name)
-            : base(id, b, i, j, k)
+            : base(id, b, i, j, k, null)
         {
             Label = new NamedObject(type, subtype, name);
         }
@@ -44,7 +44,7 @@ namespace Lib.MathMod.Grid
         /// <param name="name">name</param>
         public BCond(int id, Block b, DescartesObject3D canvas,
                      string type, string subtype, string name)
-            : base(id, b, canvas)
+            : base(id, b, canvas, null)
         {
             Label = new NamedObject(type, subtype, name);
         }
