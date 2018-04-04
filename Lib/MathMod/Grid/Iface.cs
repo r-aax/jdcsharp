@@ -81,7 +81,7 @@ namespace Lib.MathMod.Grid
         /// Clone.
         /// </summary>
         /// <returns>new cloned interface</returns>
-        public object Clone()
+        new public object Clone()
         {
             return new Iface(Id, B,
                              I.Clone() as IntervalI,

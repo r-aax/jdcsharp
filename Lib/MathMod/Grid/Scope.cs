@@ -61,7 +61,7 @@ namespace Lib.MathMod.Grid
         /// Clone.
         /// </summary>
         /// <returns>copy</returns>
-        public object Clone()
+        new public object Clone()
         {
             return new Scope(Id, B,
                              I.Clone() as IntervalI,

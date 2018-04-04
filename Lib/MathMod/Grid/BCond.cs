@@ -55,7 +55,7 @@ namespace Lib.MathMod.Grid
         /// Clone.
         /// </summary>
         /// <returns>copy</returns>
-        public object Clone()
+        new public object Clone()
         {
             return new BCond(Id, B,
                              I.Clone() as IntervalI,

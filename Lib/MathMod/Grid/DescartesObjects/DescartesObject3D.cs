@@ -14,7 +14,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// Array of coordinates segments.
         /// Only this array contains real data.
         /// </summary>
-        public IntervalI[] Intervs;
+        public IntervalI[] Coords;
 
         /// <summary>
         /// <c>I</c> coordinates segment.
@@ -23,12 +23,12 @@ namespace Lib.MathMod.Grid.DescartesObjects
         {
             get
             {
-                return Intervs[0];
+                return Coords[0];
             }
 
             set
             {
-                Intervs[0] = value;
+                Coords[0] = value;
             }
         }
 
@@ -39,12 +39,12 @@ namespace Lib.MathMod.Grid.DescartesObjects
         {
             get
             {
-                return Intervs[1];
+                return Coords[1];
             }
 
             set
             {
-                Intervs[1] = value;
+                Coords[1] = value;
             }
         }
 
@@ -55,12 +55,12 @@ namespace Lib.MathMod.Grid.DescartesObjects
         {
             get
             {
-                return Intervs[2];
+                return Coords[2];
             }
 
             set
             {
-                Intervs[2] = value;
+                Coords[2] = value;
             }
         }
 
@@ -73,7 +73,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
         {
             if (d.IsGen)
             {
-                return Intervs[d.N];
+                return Coords[d.N];
             }
             else
             {
@@ -96,7 +96,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// <param name="k"></param>
         public DescartesObject3D(IntervalI i, IntervalI j, IntervalI k)
         {
-            Intervs = new IntervalI[] { new IntervalI(i), new IntervalI(j), new IntervalI(k) };
+            Coords = new IntervalI[] { new IntervalI(i), new IntervalI(j), new IntervalI(k) };
         }
 
         /// <summary>
