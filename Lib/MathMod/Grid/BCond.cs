@@ -34,6 +34,22 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Constructor from canvas.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <param name="b">block</param>
+        /// <param name="canvas">canvas</param>
+        /// <param name="type">type</param>
+        /// <param name="subtype">subtype</param>
+        /// <param name="name">name</param>
+        public BCond(int id, Block b, DescartesObject3D canvas,
+                     string type, string subtype, string name)
+            : base(id, b, canvas)
+        {
+            Label = new NamedObject(type, subtype, name);
+        }
+
+        /// <summary>
         /// Check if it is interface.
         /// </summary>
         /// <returns><c>false</c></returns>

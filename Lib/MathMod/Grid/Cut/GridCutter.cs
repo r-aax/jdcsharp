@@ -103,9 +103,7 @@ namespace Lib.MathMod.Grid.Cut
         public static void CopyPointsBetween3DArrays(float[,,,] src_v, DescartesObject3D src_c,
                                                      float[,,,] dst_v, DescartesObject3D dst_c)
         {
-            Debug.Assert((src_c.INodes == dst_c.INodes)
-                         && (src_c.JNodes == dst_c.JNodes)
-                         && (src_c.KNodes == dst_c.KNodes));
+            Debug.Assert(DescartesObject3D.IsSameSizes(src_c, dst_c));
 
             CopyPointsBetween3DArrays(src_v, src_c.I0, src_c.J0, src_c.K0,
                                       dst_v, dst_c.I0, dst_c.J0, dst_c.K0,
@@ -283,10 +281,16 @@ namespace Lib.MathMod.Grid.Cut
                 // Interface splits.
                 StructuredGrid g = b.Grid;
                 int id = g.MaxIfaceId() + 1;
-                Iface ifc = i1.Clone(id, new_b);
-                ifc.Canvas.Coords[d.N] = new IntervalI(0, c[1] - bc[1]);
+
+                DescartesObject3D canv1 = i1.Canvas.Cut(d, bc[1] - c[0]);
+                canv1.Coords[d.N].DecTo0();
+                Iface ifc = new Iface(id, new_b, canv1, i1.NB);
+
+                //Iface ifc = i1.Clone(id, new_b);
+
+                //ifc.Canvas.Coords[d.N] = new IntervalI(0, c[1] - bc[1]);
                 Iface ifc1 = ifc;
-                c[1] = bc[1];
+                //c[1] = bc[1];
 
                 // Adjacent interface truncated on bc[1] - c[0].
                 //

@@ -171,7 +171,7 @@ namespace Lib.MathMod.Grid
         /// <param name="b">second object</param>
         /// <param name="is_codirectional">codirectional flag</param>
         /// <param name="eps">epsilon</param>
-        /// <returns>directions - if objects math, null - otherwise</returns>
+        /// <returns>directions - if objects match, null - otherwise</returns>
         public Dirs3 DirectionsMatchFixed(Border b, bool is_codirectional, double eps)
         {
             BorderCorners bc_this = new BorderCorners(this);

@@ -579,5 +579,16 @@ namespace Lib.MathMod.Grid.DescartesObjects
 
             return new ThinDescartesObject3D(i, j, k);
         }
+
+        /// <summary>
+        /// Check if two descartes objects are the same sizes.
+        /// </summary>
+        /// <param name="o1">first descartes object</param>
+        /// <param name="o2">second descartes object</param>
+        /// <returns><c>true</c> - if two objects are the same sizes, <c>false</c> - otherwise</returns>
+        public static bool IsSameSizes(DescartesObject3D o1, DescartesObject3D o2)
+        {
+            return (o1.ISize == o2.ISize) && (o1.JSize == o2.JSize) && (o1.KSize == o2.KSize);
+        }
     }
 }

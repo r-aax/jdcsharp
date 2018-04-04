@@ -23,51 +23,11 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new border condition</returns>
         public static BCond Cut(BCond bcond, Dir d, int pos)
         {
-            Debug.Assert(d.IsCorrect, "not correct direction");
+            DescartesObject3D new_canvas = bcond.Canvas.Cut(d, pos);
+            int new_id = bcond.B.Grid.MaxBCondId() + 1;
 
-            if (!bcond.Canvas.Coords[d.Gen.N].Contains(pos))
-            {
-                return null;
-            }
-
-            StructuredGrid grid = bcond.B.Grid;
-            int new_id = grid.MaxBCondId() + 1;
-            BCond new_bcond = bcond.Clone(new_id);
-
-            if (d.IsPos)
-            {
-                // Positive direction.
-                //
-                //                    d1 *
-                //       d1 *            | new bcond
-                //  ^       |        pos *
-                //  |   pos *  --->   
-                //  |       |        pos *
-                //       d0 *            | bcond
-                //                    d0 *
-
-                bcond.Canvas.Coords[d.N][1] = pos;
-                new_bcond.Canvas.Coords[d.N][0] = pos;
-            }
-            else
-            {
-                // Negative direction.
-                //
-                //                    d1 *
-                //       d1 *            | bcond
-                //  |       |        pos *
-                //  |   pos *  --->   
-                //  V       |        pos *
-                //       d0 *            | new bcond
-                //                    d0 *
-
-                Dir invd = !d;
-
-                new_bcond.Canvas.Coords[invd.N][1] = pos;
-                bcond.Canvas.Coords[invd.N][0] = pos;
-            }
-
-            return new_bcond;
+            return new BCond(new_id, bcond.B, new_canvas,
+                             bcond.Label.Type, bcond.Label.Subtype, bcond.Label.Name);
         }
 
         /// <summary>
