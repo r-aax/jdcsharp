@@ -205,13 +205,35 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="new_b">new block</param>
         public static void CutBConds(Block b, Dir d, Block new_b)
         {
-            for (int i = 0; i < b.Grid.BCondsCount; i++)
-            {
-                BCond bcond = b.Grid.BConds[i];
+            StructuredGrid g = b.Grid;
 
-                if (bcond.B == b)
+            // Cut simple (not linked border conditions).
+            for (int i = 0; i < g.BCondsCount; i++)
+            {
+                BCond bcond = g.BConds[i];
+
+                if (!bcond.IsLinked())
                 {
-                    Cut(bcond, b, d, new_b);
+                    if (bcond.B == b)
+                    {
+                        Cut(bcond, b, d, new_b);
+                    }
+                }
+            }
+
+            // Cut linked border conditions.
+            for (int i = 0; i < b.Grid.BCondsLinksCount; i++)
+            {
+                BCond bc1 = g.BCondsLinks[i].BCond1;
+                BCond bc2 = g.BCondsLinks[i].BCond2;
+
+                if (b == bc1.B)
+                {
+                    Cut(bc1, bc2, b, d, new_b);
+                }
+                else if (b == bc2.B)
+                {
+                    Cut(bc2, bc1, b, d, new_b);
                 }
             }
         }
@@ -323,16 +345,46 @@ namespace Lib.MathMod.Grid.Cut
                 new_bcond.B = new_b;
                 new_bcond.Canvas.Coords[d.N].DecTo0();
                 g.BConds.Add(new_bcond);
+            }
+        }
 
-                // Now we have to correct bconds if just cutted border condition
-                // is in some border condition link.
+        /// <summary>
+        /// Cut pair of border conditions.
+        /// </summary>
+        /// <param name="bc1">first border condition</param>
+        /// <param name="bc2">second (adjacent) border condition</param>
+        /// <param name="b">cutted block</param>
+        /// <param name="d">direction</param>
+        /// <param name="new_b">new block</param>
+        public static void Cut(BCond bc1, BCond bc2, Block b, Dir d, Block new_b)
+        {
+            Debug.Assert(d.IsGen, "wrong direction");
+            Debug.Assert(b == bc1.B, "trying to cut wrong border condition");
 
-                BCondsLink bcl = g.FindBCondLink(bcond);
+            int bsize = b.Canvas.Size(d);
+            int bc1lo = bc1.Canvas.Lo(d);
+            int bc1hi = bc1.Canvas.Hi(d);
 
-                if (bcl != null)
-                {
-                    bcl.TruncLinkedBCond(bcond, d, bcond.Canvas.Size(d));
-                }
+            if (bc1lo >= bsize)
+            {
+                bc1.B = new_b;
+                bc1.Canvas.Dec(d, bsize);
+            }
+            else if (bc1hi > bsize)
+            {
+                // New border conditions pair id.
+                StructuredGrid g = b.Grid;
+                int id = g.MaxBCondId() + 1;
+
+                // Trunc interfaces pair.
+                int tr = bsize - bc1lo;
+                DescartesObject3D canv1 = bc1.Canvas.TruncZ(d, tr);
+                DescartesObject3D canv2 = bc2.Canvas.Trunc(bc1.NDirs[d.N], tr);
+                BCond bcond1 = new BCond(id, new_b, canv1, bc1.Label.Type, bc1.Label.Subtype, bc1.Label.Name);
+                BCond bcond2 = new BCond(id + 1, bc2.B, canv2, bc2.Label.Type, bc2.Label.Subtype, bc2.Label.Name);
+                g.BConds.Add(bcond1);
+                g.BConds.Add(bcond2);
+                g.BCondsLinks.Add(new BCondsLink(bcond1, bcond2));
             }
         }
 
