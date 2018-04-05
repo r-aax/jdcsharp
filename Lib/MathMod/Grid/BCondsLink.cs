@@ -43,16 +43,6 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Matrix between <c>BCond1</c> coordinates and <c>BCond2</c>.
-        /// </summary>
-        public Dir[] LDirs12;
-
-        /// <summary>
-        /// Matrix between <c>BCond2</c> coordinates and <c>BCond1</c>.
-        /// </summary>
-        public Dir[] LDirs21;
-
-        /// <summary>
         /// Name.
         /// </summary>
         public string Name
@@ -77,9 +67,6 @@ namespace Lib.MathMod.Grid
 
             BCond1 = bcond1;
             BCond2 = bcond2;
-
-            LDirs12 = new Dir[Dir.Count];
-            LDirs21 = new Dir[Dir.Count];
         }
 
         /// <summary>
@@ -94,19 +81,7 @@ namespace Lib.MathMod.Grid
                           Dir i1, Dir j1, Dir k1)
             : this(bcond1, bcond2)
         {
-            // LDirs12
-            LDirs12[Dir.I1N] = i1;
-            LDirs12[Dir.J1N] = j1;
-            LDirs12[Dir.K1N] = k1;
-            LDirs12[Dir.I0N] = !i1;
-            LDirs12[Dir.J0N] = !j1;
-            LDirs12[Dir.K0N] = !k1;
-
-            // LDir21
-            for (int n = 0; n < Dir.Count; n++)
-            {
-                LDirs21[LDirs12[n].N] = Dir.Dirs[n];
-            }
+            bcond1.SetNDirs(bcond2, new Dirs3(i1, j1, k1));
         }
 
         /// <summary>
@@ -124,12 +99,12 @@ namespace Lib.MathMod.Grid
             if (bcond == BCond1)
             {
                 link = BCond2;
-                link_d = LDirs12[d.N];
+                link_d = BCond1.NDirs[d.N];
             }
             else if (bcond == BCond2)
             {
                 link = BCond1;
-                link_d = LDirs21[d.N];
+                link_d = BCond2.NDirs[d.N];
             }
             else
             {
@@ -144,7 +119,7 @@ namespace Lib.MathMod.Grid
             {
                 int ind = g.BCondsCount;
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 2], g.BConds[ind - 1],
-                                                LDirs12[0], LDirs12[1], LDirs12[2]);
+                                                BCond1.NDirs[0], BCond1.NDirs[1], BCond1.NDirs[2]);
                 bcl.Kind = Kind;
                 g.BCondsLinks.Add(bcl);
                 bcl.AddNameSuffixIfPERI();
@@ -153,7 +128,7 @@ namespace Lib.MathMod.Grid
             {
                 int ind = g.BCondsCount;
                 BCondsLink bcl = new BCondsLink(g.BConds[ind - 1], g.BConds[ind - 2],
-                                                LDirs12[0], LDirs12[1], LDirs12[2]);
+                                                BCond1.NDirs[0], BCond1.NDirs[1], BCond1.NDirs[2]);
                 bcl.Kind = Kind;
                 g.BCondsLinks.Add(bcl);
                 bcl.AddNameSuffixIfPERI();
@@ -174,7 +149,8 @@ namespace Lib.MathMod.Grid
         {
             return String.Format("    : {0, 4} -- {1, 4} [{2}, {3}, {4}] {5, -12} {6, -12}",
                                  BCond1.Id, BCond2.Id,
-                                 LDirs12[0], LDirs12[1], LDirs12[2], Kind, BCond1.Label.Name);
+                                 BCond1.NDirs[0], BCond1.NDirs[1], BCond1.NDirs[2],
+                                 Kind, BCond1.Label.Name);
         }
 
         /// <summary>
@@ -206,19 +182,6 @@ namespace Lib.MathMod.Grid
                     BCond2.Label.Name = nm;
                 }
             }
-        }
-
-        /// <summary>
-        /// Set pair of directions.
-        /// </summary>
-        /// <param name="d">first border condition direction</param>
-        /// <param name="nd">second border condition direction</param>
-        public void SetNDir(Dir d, Dir nd)
-        {
-            LDirs12[d.N] = nd;
-            LDirs12[(!d).N] = !nd;
-            LDirs21[nd.N] = d;
-            LDirs21[(!nd).N] = !d;
         }
     }
 }

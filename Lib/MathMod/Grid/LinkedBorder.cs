@@ -94,12 +94,12 @@ namespace Lib.MathMod.Grid
         /// Set neighbour direction.
         /// </summary>
         /// <param name="d">direction</param>
-        /// <param name="i">interface</param>
+        /// <param name="lb">adjacent linked border</param>
         /// <param name="nd">neighbour direction</param>
-        public void SetNDirs(Dir d, Iface i, Dir nd)
+        public void SetNDirs(Dir d, LinkedBorder lb, Dir nd)
         {
             SetNDir(d, nd);
-            i.SetNDir(nd, d);
+            lb.SetNDir(nd, d);
         }
 
         /// <summary>
@@ -107,13 +107,13 @@ namespace Lib.MathMod.Grid
         /// </summary>
         /// <param name="d1">first direction</param>
         /// <param name="d2">second direction</param>
-        /// <param name="i">interface</param>
+        /// <param name="lb">adjacent linked border</param>
         /// <param name="nd1">first neighbour interface direction</param>
         /// <param name="nd2">second neighbour interface direction</param>
-        public void SetNDirs(Dir d1, Dir d2, Iface i, Dir nd1, Dir nd2)
+        public void SetNDirs(Dir d1, Dir d2, LinkedBorder lb, Dir nd1, Dir nd2)
         {
-            SetNDirs(d1, i, nd1);
-            SetNDirs(d2, i, nd2);
+            SetNDirs(d1, lb, nd1);
+            SetNDirs(d2, lb, nd2);
         }
 
         /// <summary>
@@ -122,25 +122,25 @@ namespace Lib.MathMod.Grid
         /// <param name="d1">first direction</param>
         /// <param name="d2">second direction</param>
         /// <param name="d3">third direction</param>
-        /// <param name="i">interface</param>
+        /// <param name="lb">adjacent linked border</param>
         /// <param name="nd1">first neighbour interface direction</param>
         /// <param name="nd2">second neighbour interface direction</param>
         /// <param name="nd3">third neightbour interface direction</param>
-        public void SetNDirs(Dir d1, Dir d2, Dir d3, Iface i, Dir nd1, Dir nd2, Dir nd3)
+        public void SetNDirs(Dir d1, Dir d2, Dir d3, LinkedBorder lb, Dir nd1, Dir nd2, Dir nd3)
         {
-            SetNDirs(d1, i, nd1);
-            SetNDirs(d2, i, nd2);
-            SetNDirs(d3, i, nd3);
+            SetNDirs(d1, lb, nd1);
+            SetNDirs(d2, lb, nd2);
+            SetNDirs(d3, lb, nd3);
         }
 
         /// <summary>
         /// Set neighbour directions.
         /// </summary>
-        /// <param name="i">interface</param>
+        /// <param name="lb">adjacent linked border</param>
         /// <param name="dirs">directions</param>
-        public void SetNDirs(Iface i, Dirs3 dirs)
+        public void SetNDirs(LinkedBorder lb, Dirs3 dirs)
         {
-            SetNDirs(Dir.I, Dir.J, Dir.K, i, dirs.I, dirs.J, dirs.K);
+            SetNDirs(Dir.I, Dir.J, Dir.K, lb, dirs.I, dirs.J, dirs.K);
         }
 
         /// <summary>
