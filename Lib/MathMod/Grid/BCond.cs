@@ -13,7 +13,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Label (set of names).
         /// </summary>
-        public NamedObject Label;
+        public Label Label;
 
         /// <summary>
         /// Constructor.
@@ -30,7 +30,7 @@ namespace Lib.MathMod.Grid
                      string type, string subtype, string name)
             : base(id, b, i, j, k, null)
         {
-            Label = new NamedObject(type, subtype, name);
+            Label = new Label(type, subtype, name);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Lib.MathMod.Grid
                      string type, string subtype, string name)
             : base(id, b, canvas, null)
         {
-            Label = new NamedObject(type, subtype, name);
+            Label = new Label(type, subtype, name);
         }
 
         /// <summary>

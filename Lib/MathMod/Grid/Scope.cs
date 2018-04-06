@@ -44,7 +44,7 @@ namespace Lib.MathMod.Grid
         /// <summary>
         /// Label of object.
         /// </summary>
-        public NamedObject Label;
+        public Label Label;
 
         /// <summary>
         /// Constructor.
@@ -63,7 +63,7 @@ namespace Lib.MathMod.Grid
             Id = id;
             B = b;
             Canvas = new DescartesObject3D(i, j, k);
-            Label = new NamedObject(type, subtype, name);
+            Label = new Label(type, subtype, name);
         }
 
         /// <summary>

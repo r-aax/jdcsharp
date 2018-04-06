@@ -9,7 +9,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Named grid object (border condition, scope).
     /// </summary>
-    public class NamedObject
+    public class Label
     {
         /// <summary>
         /// Constructor.
@@ -17,7 +17,7 @@ namespace Lib.MathMod.Grid
         /// <param name="type">type</param>
         /// <param name="subtype">subtype</param>
         /// <param name="name">name</param>
-        public NamedObject(string type, string subtype, string name)
+        public Label(string type, string subtype, string name)
         {
             Type = type;
             Subtype = subtype;

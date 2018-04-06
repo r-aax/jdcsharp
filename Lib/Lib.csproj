@@ -124,7 +124,7 @@
     <Compile Include="MathMod\Grid\LinkedBorder.cs" />
     <Compile Include="MathMod\Grid\Load\GridLoaderSaverPFG.cs" />
     <Compile Include="MathMod\Grid\Load\GridLoadSavePFGProperties.cs" />
-    <Compile Include="MathMod\Grid\NamedObject.cs" />
+    <Compile Include="MathMod\Grid\Label.cs" />
     <Compile Include="MathMod\Grid\Partitioning\GreedyUniformPartitioner.cs" />
     <Compile Include="MathMod\Grid\Partitioning\MinimalCutsPartitioner.cs" />
     <Compile Include="MathMod\Grid\Partitioning\Partitioner.cs" />
