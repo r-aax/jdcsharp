@@ -70,7 +70,7 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Border condition links.
+        /// Border conditions link.
         /// </summary>
         /// <param name="bcond1">first border condition</param>
         /// <param name="bcond2">second border condition</param>
@@ -82,6 +82,28 @@ namespace Lib.MathMod.Grid
             : this(bcond1, bcond2)
         {
             bcond1.SetNDirs(bcond2, new Dirs3(i1, j1, k1));
+        }
+
+        /// <summary>
+        /// Border conditions link.
+        /// </summary>
+        /// <param name="bcond1">first border condition</param>
+        /// <param name="bcond2">second border condition</param>
+        /// <param name="dirs">directions</param>
+        public BCondsLink(BCond bcond1, BCond bcond2, Dirs3 dirs)
+            : this(bcond1, bcond2, dirs.I, dirs.J, dirs.K)
+        {
+        }
+
+        /// <summary>
+        /// Corder conditions link.
+        /// </summary>
+        /// <param name="bcond1">first border condition</param>
+        /// <param name="bcond2">second border condition</param>
+        /// <param name="dirs">directions</param>
+        public BCondsLink(BCond bcond1, BCond bcond2, Dir[] dirs)
+            : this(bcond1, bcond2, dirs[0], dirs[1], dirs[2])
+        {
         }
 
         /// <summary>

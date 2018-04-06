@@ -82,13 +82,24 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Constructor from canvas and label.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <param name="b">block</param>
+        /// <param name="canvas">canvas</param>
+        /// <param name="label">label</param>
+        public Scope(int id, Block b, DescartesObject3D canvas, Label label)
+            : this(id, b, canvas, label.Type, label.Subtype, label.Name)
+        {
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>copy</returns>
         public object Clone()
         {
-            return new Scope(Id, B, Canvas,             
-                             Label.Type, Label.Subtype, Label.Name);
+            return new Scope(Id, B, Canvas, Label);
         }
 
         /// <summary>

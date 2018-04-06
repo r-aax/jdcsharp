@@ -25,6 +25,18 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Constructor from full name.
+        /// </summary>
+        /// <param name="full_name">full name</param>
+        public Label(string full_name)
+        {
+            string[] ss = full_name.Split('|');
+            Type = ss[0];
+            Subtype = ss[1];
+            Name = ss[2];
+        }
+
+        /// <summary>
         /// Type.
         /// </summary>
         public string Type
@@ -49,6 +61,15 @@ namespace Lib.MathMod.Grid
         {
             get;
             set;
+        }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("{0}|{1}|{2}", Type, Subtype, Name);
         }
     }
 }

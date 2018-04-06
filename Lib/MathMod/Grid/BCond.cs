@@ -50,6 +50,31 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Constructor from canvas and full name.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <param name="b">block</param>
+        /// <param name="canvas">canvas</param>
+        /// <param name="full_name">full name</param>
+        public BCond(int id, Block b, DescartesObject3D canvas, string full_name)
+            : base(id, b, canvas, null)
+        {
+            Label = new Label(full_name);
+        }
+
+        /// <summary>
+        /// Constructor from canvas and label.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <param name="b">block</param>
+        /// <param name="canvas">canvas</param>
+        /// <param name="label">label</param>
+        public BCond(int id, Block b, DescartesObject3D canvas, Label label)
+            : this(id, b, canvas, label.ToString())
+        {
+        }
+
+        /// <summary>
         /// Check if it is interface.
         /// </summary>
         /// <returns><c>false</c></returns>
@@ -73,11 +98,7 @@ namespace Lib.MathMod.Grid
         /// <returns>copy</returns>
         public object Clone()
         {
-            return new BCond(Id, B,
-                             Canvas.I.Clone() as IntervalI,
-                             Canvas.J.Clone() as IntervalI,
-                             Canvas.K.Clone() as IntervalI,
-                             Label.Type, Label.Subtype, Label.Name);
+            return new BCond(Id, B, Canvas.Copy, Label);
         }
 
         /// <summary>
@@ -113,8 +134,12 @@ namespace Lib.MathMod.Grid
         public override string ToString()
         {
             return String.Format("{0,4}: {1,4} [{2,3} - {3,3}, {4,3} - {5,3}, {6,3} - {7,3}] {8,-12} {9,-12} {10,-12} ({11})",
-                                 Id, B.Id, Canvas.I0, Canvas.I1, Canvas.J0, Canvas.J1, Canvas.K0, Canvas.K1,
-                                 Label.Type, Label.Subtype, Label.Name, Canvas.D.ToString());
+                                 Id, B.Id,
+                                 Canvas.I0, Canvas.I1,
+                                 Canvas.J0, Canvas.J1,
+                                 Canvas.K0, Canvas.K1,
+                                 Label.Type, Label.Subtype, Label.Name,
+                                 Canvas.D.ToString());
         }
 
         /// <summary>

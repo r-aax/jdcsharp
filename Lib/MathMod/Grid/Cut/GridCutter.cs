@@ -343,8 +343,7 @@ namespace Lib.MathMod.Grid.Cut
                 StructuredGrid g = b.Grid;
                 int tr = bsize - bcondlo;
                 DescartesObject3D canv = bcond.Canvas.TruncZ(d, tr);
-                BCond new_bcond = new BCond(g.MaxBCondId() + 1, new_b, canv,
-                                            bcond.Label.Type, bcond.Label.Subtype, bcond.Label.Name);
+                BCond new_bcond = new BCond(g.MaxBCondId() + 1, new_b, canv, bcond.Label);
                 g.BConds.Add(new_bcond);
             }
         }
@@ -382,11 +381,11 @@ namespace Lib.MathMod.Grid.Cut
                 int tr = bsize - bc1lo;
                 DescartesObject3D canv1 = bc1.Canvas.TruncZ(d, tr);
                 DescartesObject3D canv2 = bc2.Canvas.Trunc(bc1.NDirs[d.N], tr);
-                BCond bcond1 = new BCond(id, new_b, canv1, bc1.Label.Type, bc1.Label.Subtype, bc1.Label.Name);
-                BCond bcond2 = new BCond(id + 1, bc2.B, canv2, bc2.Label.Type, bc2.Label.Subtype, bc2.Label.Name);
+                BCond bcond1 = new BCond(id, new_b, canv1, bc1.Label);
+                BCond bcond2 = new BCond(id + 1, bc2.B, canv2, bc2.Label);
                 g.BConds.Add(bcond1);
                 g.BConds.Add(bcond2);
-                BCondsLink bcl = new BCondsLink(bcond1, bcond2, bc1.NDirs[0], bc1.NDirs[1], bc1.NDirs[2]);
+                BCondsLink bcl = new BCondsLink(bcond1, bcond2, bc1.NDirs);
                 bcl.Kind = kind;
                 g.BCondsLinks.Add(bcl);
                 bcl.AddNameSuffixIfPERI();
