@@ -148,5 +148,47 @@ namespace Lib.MathMod.Grid
                 }
             }
         }
+
+        /// <summary>
+        /// Get border condition belongs to given block.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <returns>border condition</returns>
+        public BCond Get(Block b)
+        {
+            if (BCond1.B == b)
+            {
+                return BCond1;
+            }
+            else if (BCond2.B == b)
+            {
+                return BCond2;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get adjacent border condition.
+        /// </summary>
+        /// <param name="bcond">border condition</param>
+        /// <returns>adjacent border condition</returns>
+        public BCond Adjacent(BCond bcond)
+        {
+            if (bcond == BCond1)
+            {
+                return BCond2;
+            }
+            else if (bcond == BCond2)
+            {
+                return BCond1;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

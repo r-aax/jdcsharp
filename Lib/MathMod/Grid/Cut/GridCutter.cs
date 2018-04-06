@@ -220,16 +220,12 @@ namespace Lib.MathMod.Grid.Cut
             // Cut linked border conditions.
             for (int i = 0; i < b.Grid.BCondsLinksCount; i++)
             {
-                BCond bc1 = g.BCondsLinks[i].BCond1;
-                BCond bc2 = g.BCondsLinks[i].BCond2;
+                BCondsLink bcl = g.BCondsLinks[i];
+                BCond bcond = bcl.Get(b);
 
-                if (b == bc1.B)
+                if (bcond != null)
                 {
-                    Cut(bc1, bc2, b, d, new_b, g.BCondsLinks[i].Kind);
-                }
-                else if (b == bc2.B)
-                {
-                    Cut(bc2, bc1, b, d, new_b, g.BCondsLinks[i].Kind);
+                    Cut(bcond, bcl.Adjacent(bcond), b, d, new_b, bcl.Kind);
                 }
             }
         }
