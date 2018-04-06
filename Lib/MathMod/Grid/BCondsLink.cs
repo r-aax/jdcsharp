@@ -111,8 +111,8 @@ namespace Lib.MathMod.Grid
                 throw new Exception("border condition is not found in BCondsLink");
             }
 
-            BCond new_bcond = BCondCutter.Trunc(link, link_d, width);
-            g.BConds.Add(new_bcond);
+            //BCond new_bcond = BCondCutter.Trunc(link, link_d, width);
+            //g.BConds.Add(new_bcond);
 
             // Add two last border conditions to BCondsLinks list.
             if (bcond == BCond1)

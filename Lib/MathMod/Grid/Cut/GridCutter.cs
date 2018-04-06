@@ -327,23 +327,24 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(d.IsGen, "wrong direction");
             Debug.Assert(bcond.B == b, "trying to cut wrong border condition");
 
-            // Get coordinates of border condition and block.
-            IntervalI c = bcond.Canvas.Coords[d.N];
-            IntervalI bc = b.Canvas.Coords[d.N];
+            int bsize = b.Canvas.Size(d);
+            int bcondlo = bcond.Canvas.Lo(d);
+            int bcondhi = bcond.Canvas.Hi(d);
 
-            if (c[0] >= bc[1])
+            if (bcondlo >= bsize)
             {
                 // Border condition touches only new block.
                 bcond.B = new_b;
-                c.Dec(bc[1]);
+                bcond.Canvas.Dec(d, bsize);
             }
-            else if (c[1] > bc[1])
+            else if (bcondhi > bsize)
             {
                 // Have to cut.
                 StructuredGrid g = b.Grid;
-                BCond new_bcond = BCondCutter.Cut(bcond, d, bc[1]);
-                new_bcond.B = new_b;
-                new_bcond.Canvas.Coords[d.N].DecTo0();
+                int tr = bsize - bcondlo;
+                DescartesObject3D canv = bcond.Canvas.TruncZ(d, tr);
+                BCond new_bcond = new BCond(g.MaxBCondId() + 1, new_b, canv,
+                                            bcond.Label.Type, bcond.Label.Subtype, bcond.Label.Name);
                 g.BConds.Add(new_bcond);
             }
         }

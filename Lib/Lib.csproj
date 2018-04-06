@@ -113,7 +113,6 @@
     <Compile Include="MathMod\Grid\Block.cs" />
     <Compile Include="MathMod\Grid\Border.cs" />
     <Compile Include="MathMod\Grid\BorderCorners.cs" />
-    <Compile Include="MathMod\Grid\Cut\BCondCutter.cs" />
     <Compile Include="MathMod\Grid\Cut\Cut.cs" />
     <Compile Include="MathMod\Grid\Cut\GridCutter.cs" />
     <Compile Include="MathMod\Grid\DescartesObjects\Dir.cs" />
