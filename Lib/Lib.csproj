@@ -117,6 +117,7 @@
     <Compile Include="MathMod\Grid\Cut\GridCutter.cs" />
     <Compile Include="MathMod\Grid\DescartesObjects\Dir.cs" />
     <Compile Include="MathMod\Grid\DescartesObjects\Dirs3.cs" />
+    <Compile Include="MathMod\Grid\GObject.cs" />
     <Compile Include="MathMod\Grid\Grid.cs" />
     <Compile Include="MathMod\Grid\GridProperties.cs" />
     <Compile Include="MathMod\Grid\Iface.cs" />

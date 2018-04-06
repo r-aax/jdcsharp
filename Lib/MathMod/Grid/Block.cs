@@ -13,22 +13,8 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Block.
     /// </summary>
-    public class Block
+    public class Block : GObject
     {
-        /// <summary>
-        /// Grid.
-        /// </summary>
-        public StructuredGrid Grid;
-
-        /// <summary>
-        /// Identifier.
-        /// </summary>
-        public int Id
-        {
-            get;
-            private set;
-        }
-
         /// <summary>
         /// Canvas.
         /// </summary>
@@ -70,9 +56,8 @@ namespace Lib.MathMod.Grid
         /// <param name="id">identifier</param>
         /// <param name="do3">descares object</param>
         public Block(StructuredGrid g, int id, DescartesObject3D do3)
+            : base(g, id)
         {
-            Grid = g;
-            Id = id;
             Canvas = do3.Copy;
 
             // No partition for new block.

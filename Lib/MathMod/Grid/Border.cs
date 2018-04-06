@@ -14,17 +14,8 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Border of block.
     /// </summary>
-    public abstract class Border
+    public abstract class Border : GObject
     {
-        /// <summary>
-        /// Identifier.
-        /// </summary>
-        public int Id
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Block.
         /// </summary>
@@ -52,8 +43,8 @@ namespace Lib.MathMod.Grid
         /// <param name="j">J direction nodes interval</param>
         /// <param name="k">K direction nodes interval </param>
         public Border(int id, Block b, IntervalI i, IntervalI j, IntervalI k)
+            : base(b.Grid, id)
         {
-            Id = id;
             B = b;
             Canvas = new ThinDescartesObject3D(i, j, k);
         }

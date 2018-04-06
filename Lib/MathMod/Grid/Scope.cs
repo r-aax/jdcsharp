@@ -12,17 +12,8 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Block scope.
     /// </summary>
-    public class Scope : ICloneable
+    public class Scope : GObject, ICloneable
     {
-        /// <summary>
-        /// Identifier.
-        /// </summary>
-        public int Id
-        {
-            get;
-            set;
-        }
-
         /// <summary>
         /// Block.
         /// </summary>
@@ -59,8 +50,8 @@ namespace Lib.MathMod.Grid
         /// <param name="name">name</param>
         public Scope(int id, Block b, IntervalI i, IntervalI j, IntervalI k,
                      string type, string subtype, string name)
+            : base(b.Grid, id)
         {
-            Id = id;
             B = b;
             Canvas = new DescartesObject3D(i, j, k);
             Label = new Label(type, subtype, name);
