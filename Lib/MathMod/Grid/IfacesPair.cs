@@ -84,5 +84,47 @@ namespace Lib.MathMod.Grid
                 return If.IsCross;
             }
         }
+
+        /// <summary>
+        /// Get interface belongs to given block.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <returns>interface</returns>
+        public Iface Get(Block b)
+        {
+            if (If.B == b)
+            {
+                return If;
+            }
+            else if (Mirror.B == b)
+            {
+                return Mirror;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get adjacent interface.
+        /// </summary>
+        /// <param name="iface">interface</param>
+        /// <returns>adjacent interface</returns>
+        public Iface Adjacent(Iface iface)
+        {
+            if (iface == If)
+            {
+                return Mirror;
+            }
+            else if (iface == Mirror)
+            {
+                return If;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

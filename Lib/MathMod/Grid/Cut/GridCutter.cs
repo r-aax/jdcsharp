@@ -183,16 +183,12 @@ namespace Lib.MathMod.Grid.Cut
 
             for (int i = 0; i < ic; i++)
             {
-                Iface i1 = g.IfacesPairs[i].If;
-                Iface i2 = g.IfacesPairs[i].Mirror;
+                IfacesPair pair = g.IfacesPairs[i];
+                Iface iface = pair.Get(b);
 
-                if (b == i1.B)
+                if (iface != null)
                 {
-                    Cut(i1, i2, b, d, new_b);
-                }
-                else if (b == i2.B)
-                {
-                    Cut(i2, i1, b, d, new_b);
+                    Cut(iface, pair.Adjacent(iface), b, d, new_b);
                 }
             }
         }
