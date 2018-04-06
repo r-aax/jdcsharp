@@ -229,11 +229,11 @@ namespace Lib.MathMod.Grid.Cut
 
                 if (b == bc1.B)
                 {
-                    Cut(bc1, bc2, b, d, new_b);
+                    Cut(bc1, bc2, b, d, new_b, g.BCondsLinks[i].Kind);
                 }
                 else if (b == bc2.B)
                 {
-                    Cut(bc2, bc1, b, d, new_b);
+                    Cut(bc2, bc1, b, d, new_b, g.BCondsLinks[i].Kind);
                 }
             }
         }
@@ -357,7 +357,8 @@ namespace Lib.MathMod.Grid.Cut
         /// <param name="b">cutted block</param>
         /// <param name="d">direction</param>
         /// <param name="new_b">new block</param>
-        public static void Cut(BCond bc1, BCond bc2, Block b, Dir d, Block new_b)
+        /// <param name="kind">link kind</param>
+        public static void Cut(BCond bc1, BCond bc2, Block b, Dir d, Block new_b, string kind)
         {
             Debug.Assert(d.IsGen, "wrong direction");
             Debug.Assert(b == bc1.B, "trying to cut wrong border condition");
@@ -385,7 +386,10 @@ namespace Lib.MathMod.Grid.Cut
                 BCond bcond2 = new BCond(id + 1, bc2.B, canv2, bc2.Label.Type, bc2.Label.Subtype, bc2.Label.Name);
                 g.BConds.Add(bcond1);
                 g.BConds.Add(bcond2);
-                g.BCondsLinks.Add(new BCondsLink(bcond1, bcond2));
+                BCondsLink bcl = new BCondsLink(bcond1, bcond2, bc1.NDirs[0], bc1.NDirs[1], bc1.NDirs[2]);
+                bcl.Kind = kind;
+                g.BCondsLinks.Add(bcl);
+                bcl.AddNameSuffixIfPERI();
             }
         }
 

@@ -85,63 +85,6 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Cut linked border condition.
-        /// </summary>
-        /// <param name="bcond">border condition</param>
-        /// <param name="d">direction</param>
-        /// <param name="width">position</param>
-        public void TruncLinkedBCond(BCond bcond, Dir d, int width)
-        {
-            StructuredGrid g = bcond.B.Grid;
-            BCond link;
-            Dir link_d;
-
-            if (bcond == BCond1)
-            {
-                link = BCond2;
-                link_d = BCond1.NDirs[d.N];
-            }
-            else if (bcond == BCond2)
-            {
-                link = BCond1;
-                link_d = BCond2.NDirs[d.N];
-            }
-            else
-            {
-                throw new Exception("border condition is not found in BCondsLink");
-            }
-
-            //BCond new_bcond = BCondCutter.Trunc(link, link_d, width);
-            //g.BConds.Add(new_bcond);
-
-            // Add two last border conditions to BCondsLinks list.
-            if (bcond == BCond1)
-            {
-                int ind = g.BCondsCount;
-                BCondsLink bcl = new BCondsLink(g.BConds[ind - 2], g.BConds[ind - 1],
-                                                BCond1.NDirs[0], BCond1.NDirs[1], BCond1.NDirs[2]);
-                bcl.Kind = Kind;
-                g.BCondsLinks.Add(bcl);
-                bcl.AddNameSuffixIfPERI();
-            }
-            else if (bcond == BCond2)
-            {
-                int ind = g.BCondsCount;
-                BCondsLink bcl = new BCondsLink(g.BConds[ind - 1], g.BConds[ind - 2],
-                                                BCond1.NDirs[0], BCond1.NDirs[1], BCond1.NDirs[2]);
-                bcl.Kind = Kind;
-                g.BCondsLinks.Add(bcl);
-                bcl.AddNameSuffixIfPERI();
-            }
-            else
-            {
-                throw new Exception("border condition is not found in BCondsLink");
-            }
-
-            AddNameSuffixIfPERI();
-        }
-
-        /// <summary>
         /// Cast to string.
         /// </summary>
         /// <returns>string</returns>
