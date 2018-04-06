@@ -13,17 +13,8 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Block.
     /// </summary>
-    public class Block : GObject
+    public class Block : FatGObject
     {
-        /// <summary>
-        /// Canvas.
-        /// </summary>
-        public DescartesObject3D Canvas
-        {
-            get;
-            private set;
-        }
-
         /// <summary>
         /// Partition number.
         /// </summary>
@@ -56,10 +47,8 @@ namespace Lib.MathMod.Grid
         /// <param name="id">identifier</param>
         /// <param name="do3">descares object</param>
         public Block(StructuredGrid g, int id, DescartesObject3D do3)
-            : base(g, id)
+            : base(g, id, null, do3)
         {
-            Canvas = do3.Copy;
-
             // No partition for new block.
             PartitionNumber = -1;
 
