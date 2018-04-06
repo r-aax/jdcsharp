@@ -12,7 +12,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Block scope.
     /// </summary>
-    public class Scope : BObject, ICloneable
+    public class Scope : GObject, ICloneable
     {
         /// <summary>
         /// Canvas.

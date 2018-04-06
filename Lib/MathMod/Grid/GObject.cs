@@ -26,14 +26,45 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Block.
+        /// </summary>
+        public Block B
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="g">grid reference</param>
+        /// <param name="g">grid</param>
         /// <param name="id">identifier</param>
-        public GObject(StructuredGrid g, int id)
+        /// <param name="b">block</param>
+        public GObject(StructuredGrid g, int id, Block b)
         {
             Grid = g;
             Id = id;
+            B = b;
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="g">grid</param>
+        /// <param name="id">identifier</param>
+        public GObject(StructuredGrid g, int id)
+            : this(g, id, null)
+        {
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <param name="b">block</param>
+        public GObject(int id, Block b)
+            : this(b.Grid, id, b)
+        {
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Lib.MathMod.Grid
     /// <summary>
     /// Border of block.
     /// </summary>
-    public abstract class Border : BObject
+    public abstract class Border : GObject
     {
         /// <summary>
         /// Canvas.

@@ -62,6 +62,9 @@ namespace Lib.MathMod.Grid
 
             // No partition for new block.
             PartitionNumber = -1;
+
+            // Block is GObject itself, so it must have reference to base block.
+            B = this;
         }
 
         /// <summary>
