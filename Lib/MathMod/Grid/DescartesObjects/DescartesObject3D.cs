@@ -72,9 +72,13 @@ namespace Lib.MathMod.Grid.DescartesObjects
         /// <returns>interval</returns>
         public IntervalI Coord(Dir d)
         {
-            if (d.IsGen)
+            // Bug: Coords can be taken from negative direction.
+            //
+            // When we want to take coords from direction we must generalize this direction.
+
+            if (d.IsCorrect)
             {
-                return Coords[d.N];
+                return Coords[d.Gen.N];
             }
             else
             {
@@ -463,7 +467,7 @@ namespace Lib.MathMod.Grid.DescartesObjects
         }
 
         /// <summary>
-        /// Cut the given descartes objects in the given direction in fixed position.
+        /// Cut the given descartes object in the given direction in fixed position.
         /// </summary>
         /// <param name="dir">direction</param>
         /// <param name="pos">position</param>
