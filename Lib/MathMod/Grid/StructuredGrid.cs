@@ -562,6 +562,13 @@ namespace Lib.MathMod.Grid
                     else if ((bci.Label.Name == "PERI_C")
                              && (bcj.Label.Name == "PERI_C"))
                     {
+                        // PERI_C conditions must belong to one block
+                        // and placed opposite to each other on this block.
+                        if (!bci.IsOppositeOnOneBlock(bcj))
+                        {
+                            continue;
+                        }
+
                         // Main pair of parallel move PERI conditions.
                         dirs = bci.DirectionsMatchParallelMove(bcj, true, eps_par_move);
                         kind = "Parallel mv";

@@ -370,6 +370,16 @@ namespace Lib.MathMod.Grid.DescartesObjects
         }
 
         /// <summary>
+        /// Check if direction is opposite to another direction.
+        /// </summary>
+        /// <param name="d">another direction</param>
+        /// <returns><c>true</c> - if opposite, <c>false</c> - otherwise.</returns>
+        public bool IsOpposite(Dir d)
+        {
+            return this == !d;
+        }
+
+        /// <summary>
         /// Check if three directions produce the basis.
         /// </summary>
         /// <param name="d1">first direction</param>

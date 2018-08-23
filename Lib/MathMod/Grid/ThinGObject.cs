@@ -24,6 +24,17 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Thin object direction.
+        /// </summary>
+        public Dir D
+        {
+            get
+            {
+                return Canvas.D;
+            }
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="id">identifier</param>
@@ -46,6 +57,33 @@ namespace Lib.MathMod.Grid
         public ThinGObject(int id, Block b, DescartesObject3D canvas)
             : this(id, b, canvas.I, canvas.J, canvas.K)
         {
+        }
+
+        /// <summary>
+        /// Check if thin object is opposite to another thin object.
+        /// </summary>
+        /// <param name="obj">another object</param>
+        /// <returns><c>true</c> - if opposite, <c>false</c> - otherwise</returns>
+        public bool IsOppositeOnOneBlock(ThinGObject obj)
+        {
+            // Check for one block.
+            if (B.Id != obj.B.Id)
+            {
+                return false;
+            }
+
+            // Check for opposite.
+            if (!D.IsOpposite(obj.D))
+            {
+                return false;
+            }
+
+            // Check for coordinates.
+            Dir d1, d2;
+            D.GetPairOfOrthogonalDirs(out d1, out d2);
+
+            return (Canvas.Coord(d1) == obj.Canvas.Coord(d1))
+                   && (Canvas.Coord(d2) == obj.Canvas.Coord(d2));
         }
     }
 }

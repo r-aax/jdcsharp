@@ -107,5 +107,34 @@ namespace Lib.Maths.Geometry
                 return Clone() as IntervalI;
             }
         }
+
+        /// <summary>
+        /// Comparison.
+        /// </summary>
+        /// <param name="i1">first interval</param>
+        /// <param name="i2">second interval</param>
+        /// <returns>true - if equal, false - if not equal</returns>
+        public static bool operator ==(IntervalI i1, IntervalI i2)
+        {
+            if (ReferenceEquals(i1, null) || ReferenceEquals(i2, null))
+            {
+                return ReferenceEquals(i1, i2);
+            }
+            else
+            {
+                return (i1.L == i2.L) && (i1.H == i2.H);
+            }
+        }
+
+        /// <summary>
+        /// Comparison for not equal.
+        /// </summary>
+        /// <param name="i1">first interval</param>
+        /// <param name="i2">second interval</param>
+        /// <returns>true - if not equal, false - if equal</returns>
+        public static bool operator !=(IntervalI i1, IntervalI i2)
+        {
+            return !(i1 == i2);
+        }
     }
 }
