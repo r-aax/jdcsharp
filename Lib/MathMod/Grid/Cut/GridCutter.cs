@@ -362,6 +362,16 @@ namespace Lib.MathMod.Grid.Cut
             {
                 bc1.B = new_b;
                 bc1.Canvas.Dec(d, bsize);
+
+                // bug.
+                // Processing the case with PERI_C on one block
+                // in opposite positions.
+                if ((bc1.Label.Name == "PERI_C")
+                    && (bc2.Label.Name == "PERI_C"))
+                {
+                    bc2.B = new_b;
+                    bc2.Canvas.Dec(d, bsize);
+                }
             }
             else if (bc1hi > bsize)
             {
@@ -381,6 +391,17 @@ namespace Lib.MathMod.Grid.Cut
                 bcl.Kind = kind;
                 g.BCondsLinks.Add(bcl);
                 bcl.AddNameSuffixIfPERI();
+            }
+            else
+            {
+                // bug.
+                // Processing the case with PERI_C on one block
+                // in opposite positions.
+                if ((bc1.Label.Name == "PERI_C")
+                    && (bc2.Label.Name == "PERI_C"))
+                {
+                    bc2.B = new_b;
+                }
             }
         }
 
