@@ -651,5 +651,15 @@ namespace Lib.MathMod.Grid.DescartesObjects
         {
             return (o1.ISize == o2.ISize) && (o1.JSize == o2.JSize) && (o1.KSize == o2.KSize);
         }
+
+        /// <summary>
+        /// Check if one descartes object is GE than another.
+        /// </summary>
+        /// <param name="d">another descartes object</param>
+        /// <returns><c>true</c> - if GE, <c>false</c> - otherwise</returns>
+        public bool IsGE(DescartesObject3D d)
+        {
+            return I.Contains(d.I) && J.Contains(d.J) && K.Contains(d.K);
+        }
     }
 }

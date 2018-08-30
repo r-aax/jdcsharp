@@ -61,6 +61,16 @@ namespace Lib.Maths.Geometry
         }
 
         /// <summary>
+        /// Check if segment contains another segment.
+        /// </summary>
+        /// <param name="itv">interval</param>
+        /// <returns><c>true</c> - if contains, <c>false</c> - otherwise</returns>
+        public bool Contains(IntervalI itv)
+        {
+            return Contains(itv.L) && Contains(itv.H);
+        }
+
+        /// <summary>
         /// Segment decrement.
         /// </summary>
         /// <param name="v">value</param>
@@ -113,7 +123,7 @@ namespace Lib.Maths.Geometry
         /// </summary>
         /// <param name="i1">first interval</param>
         /// <param name="i2">second interval</param>
-        /// <returns>true - if equal, false - if not equal</returns>
+        /// <returns><c>true</c> - if equal, <c>false</c> - if not equal</returns>
         public static bool operator ==(IntervalI i1, IntervalI i2)
         {
             if (ReferenceEquals(i1, null) || ReferenceEquals(i2, null))
@@ -131,10 +141,29 @@ namespace Lib.Maths.Geometry
         /// </summary>
         /// <param name="i1">first interval</param>
         /// <param name="i2">second interval</param>
-        /// <returns>true - if not equal, false - if equal</returns>
+        /// <returns><c>true</c> - if not equal, <c>false</c> - if equal</returns>
         public static bool operator !=(IntervalI i1, IntervalI i2)
         {
             return !(i1 == i2);
+        }
+
+        /// <summary>
+        /// Equals.
+        /// </summary>
+        /// <param name="obj">object</param>
+        /// <returns><c>true</c> - if interval is equal to object, <c>false</c> - otherwise</returns>
+        public override bool Equals(object obj)
+        {
+            return (obj is IntervalI) && ((obj as IntervalI) == this);
+        }
+
+        /// <summary>
+        /// Get hash code.
+        /// </summary>
+        /// <returns>hash code</returns>
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

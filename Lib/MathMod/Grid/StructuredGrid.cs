@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 using Lib.Maths.Numbers;
 using Lib.Utils;
@@ -594,6 +595,10 @@ namespace Lib.MathMod.Grid
                         BCondsLinks.Add(bcl);
                     }
                 }
+
+                // Check border condition link.
+                Debug.Assert(bci.IsLinked(),
+                             ExeDebug.ReportError("no mirror for PERI border condition is found : " + bci.ToString()));
             }
         }
     }

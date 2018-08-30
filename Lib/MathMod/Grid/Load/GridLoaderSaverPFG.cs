@@ -339,9 +339,9 @@ namespace Lib.MathMod.Grid.Load
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //MessageBox.Show(ExeDebug.ReportError(e.Message));
+                MessageBox.Show(ExeDebug.ReportError(e.Message));
                 is_succ = false;
             }
 
