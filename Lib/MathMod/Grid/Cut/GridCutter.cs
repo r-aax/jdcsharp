@@ -476,6 +476,7 @@ namespace Lib.MathMod.Grid.Cut
                     // bc2 moves to new block.
                     bc2.B = new_b;
                     bc2.Canvas.Dec(d, bsize);
+                    link.AddNameSuffixIfPERI();
                 }
             }
 
