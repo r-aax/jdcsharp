@@ -74,7 +74,7 @@ namespace GridMasterConsole
             Console.WriteLine("    load=<grid PFG or IBC file>");
             Console.WriteLine("    partitions=<partitions count, 1 by default>");
             Console.WriteLine("    iters=<max iterations count, 10 by default>");
-            Console.WriteLine("    dev=<deviation of partition weigh from mean value, 10 by default>");
+            Console.WriteLine("    dev=<deviation of partition weight from mean value, 10 by default>");
             Console.WriteLine("    min-margin=<min margin value for cut, 1 by default>");
             Console.WriteLine("    save=<new grid filename, two files (PFG and IBC) will be created");
         }
@@ -299,7 +299,10 @@ namespace GridMasterConsole
                 Console.WriteLine(String.Format("Process: MCC distribution is done : {0} cuts, {1}% deviation", cuts, hist.Dev));
 
                 // Grid save.
-                GridLoaderSaverPFG.Save(grid, SavePFG.Name, SaveIBC.Name);
+                if (GridLoaderSaverPFG.Save(grid, SavePFG.Name, SaveIBC.Name))
+                {
+                    Console.WriteLine(String.Format("Process: the grid is saved to {0}/{1}", SavePFG.Name, SaveIBC.Name));
+                }
 
                 Console.WriteLine("Process: finished.");
             }
