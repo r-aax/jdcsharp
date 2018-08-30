@@ -43,6 +43,9 @@ namespace GridMaster.Windows
             Ch("Changes:");
             Ch("2017-05-03: min: Information about functionality changes has been added.");
             Ch("            maj: The indentifiers of adjacent interfaces don't need to be the same.");
+            Ch("2018-08-30: maj: New poolicy for PERI_C linked border conditions.");
+            Ch("                 PERI_C linked border conditions is a pair of border conditions that are");
+            Ch("                 of the same size and that are placed on the same block, opposite to each other.");
         }
     }
 }

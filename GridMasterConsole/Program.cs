@@ -51,6 +51,14 @@ namespace GridMasterConsole
         /// <summary>
         /// Print help.
         /// </summary>
+        private static void PrintVersion()
+        {
+            Console.WriteLine("GridMasterConsole.exe : 30 aug 2018");
+        }
+
+        /// <summary>
+        /// Print help.
+        /// </summary>
         private static void PrintHelp()
         {
             // Help.
@@ -195,6 +203,13 @@ namespace GridMasterConsole
             if (args.Count() == 0)
             {
                 PrintHelp();
+
+                return 0;
+            }
+
+            if (args[0] == "-v")
+            {
+                PrintVersion();
 
                 return 0;
             }

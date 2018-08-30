@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GridMaster"
         mc:Ignorable="d"
-        Title="GridMaster (04 april 2018)" Height="450" Width="840" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
+        Title="GridMaster (30 august 2018)" Height="450" Width="840" Loaded="Window_Loaded" SizeChanged="Window_SizeChanged">
     <DockPanel>
         <Menu DockPanel.Dock="Top" Background="LightSteelBlue">
             <MenuItem Header="Grid">
