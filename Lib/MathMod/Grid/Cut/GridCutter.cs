@@ -354,37 +354,28 @@ namespace Lib.MathMod.Grid.Cut
             Debug.Assert(d.IsGen, "wrong direction");
             Debug.Assert(b == bc1.B, "trying to cut wrong border condition");
 
+            // Linked border condition.
+            BCond bc2 = link.Adjacent(bc1);
+
+            // Check linked border conditions on one block.
+            if (bc1.IsOppositeOnOneBlock(bc2))
+            {
+                CutOneBlockBCondsLink(link, b, d, new_b);
+
+                return;
+            }
+
+            // Common case.
+            // This is different blocks border conditions.
+
             int bsize = b.Canvas.Size(d);
             int bc1lo = bc1.Canvas.Lo(d);
             int bc1hi = bc1.Canvas.Hi(d);
-
-            // Linked border condition.
-            BCond bc2 = link.Adjacent(bc1);
 
             if (bc1lo >= bsize)
             {
                 bc1.B = new_b;
                 bc1.Canvas.Dec(d, bsize);
-
-                // bug.
-                // Processing the case with PERI_C on one block in opposite positions.
-                // Border condition 1 goes to the new block.
-                // Border condition 2 can stay in old block if border conditions direction
-                // and cut direction are collinear.
-                // Border condition 2 goes to the new block otherwise.
-                if ((bc1.Label.Name == "PERI_C")
-                    && (bc2.Label.Name == "PERI_C"))
-                {
-                    if (!bc2.D.IsCollinear(d))
-                    {
-                        bc2.B = new_b;
-                        bc2.Canvas.Dec(d, bsize);
-                    }
-                    else
-                    {
-                        link.AddNameSuffixIfPERI();
-                    }
-                }
             }
             else if (bc1hi > bsize)
             {
@@ -405,23 +396,86 @@ namespace Lib.MathMod.Grid.Cut
                 g.BCondsLinks.Add(new_link);
                 new_link.AddNameSuffixIfPERI();
             }
+
+            // Check coordinates of bc1 and bc2.
+            Debug.Assert(bc1.B.Canvas.IsGE(bc1.Canvas),
+                         ExeDebug.ReportError("border condition canvas must be contained in its block canvas : " + bc1.ToString()));
+            Debug.Assert(bc2.B.Canvas.IsGE(bc2.Canvas),
+                         ExeDebug.ReportError("border condition canvas must be contained in its block canvas : " + bc2.ToString()));
+        }
+
+        /// <summary>
+        /// Cut pair of border conditions.
+        /// </summary>
+        /// <param name="link">border conditions link</param>
+        /// <param name="b">cutted block</param>
+        /// <param name="d">direction</param>
+        /// <param name="new_b">new block</param>
+        public static void CutOneBlockBCondsLink(BCondsLink link, Block b, Dir d, Block new_b)
+        {
+            Debug.Assert(d.IsGen, "wrong direction");
+
+            BCond bc1 = link.BCond1;
+            BCond bc2 = link.BCond2;
+
+            Debug.Assert(bc1.B == b, "wrong border condition to cut");
+            Debug.Assert(bc2.B == b, "wrong border condition to cut");
+
+            int bsize = b.Canvas.Size(d);
+            int bc1lo = bc1.Canvas.Lo(d);
+            int bc1hi = bc1.Canvas.Hi(d);
+
+            if (bc1lo >= bsize)
+            {
+                // bc1 moves to new block.
+                // bc2 may move to new block too or stay in old block.
+
+                bc1.B = new_b;
+                bc1.Canvas.Dec(d, bsize);
+
+                if (bc1lo == bc1hi)
+                {
+                    // bc2 stays in old block.
+                    // Now this link is on different blocks.
+                    link.AddNameSuffixIfPERI();
+                }
+                else
+                {
+                    // bc2 moves to new block too.
+                    bc2.B = new_b;
+                    bc2.Canvas.Dec(d, bsize);
+                }
+            }
+            else if (bc1hi > bsize)
+            {
+                // New border conditions pair id.
+                StructuredGrid g = b.Grid;
+                int id = g.MaxBCondId() + 1;
+
+                // Trunc border conditions.
+                // Single block, so coordinates systems for these two
+                // border conditions are the same too.
+                int tr = bsize - bc1lo;
+                DescartesObject3D canv1 = bc1.Canvas.TruncZ(d, tr);
+                DescartesObject3D canv2 = bc2.Canvas.TruncZ(d, tr);
+                BCond bcond1 = new BCond(id, new_b, canv1, bc1.Label);
+                BCond bcond2 = new BCond(id + 1, new_b, canv2, bc2.Label);
+                g.BConds.Add(bcond1);
+                g.BConds.Add(bcond2);
+                BCondsLink new_link = new BCondsLink(bcond1, bcond2, bc1.NDirs);
+                new_link.Kind = link.Kind;
+                g.BCondsLinks.Add(new_link);
+            }
             else
             {
-                // bug.
-                // Processing the case with PERI_C on one block in opposite positions.
-                // Border condition 1 stays in old block.
-                // Border condition 2 can stay in old block if border conditions direction
-                // and cut direction are not collinear.
-                // Border condition 2 goes to the new block otherwise.
-                if ((bc1.Label.Name == "PERI_C")
-                    && (bc2.Label.Name == "PERI_C"))
+                // bc1 stays in old block.
+                // bc2 may stay in old block or move to new block.
+
+                if (bc1lo == bc1hi)
                 {
-                    if (bc2.D.IsCollinear(d))
-                    {
-                        bc2.B = new_b;
-                        bc2.Canvas.Dec(d, bsize);
-                        link.AddNameSuffixIfPERI();
-                    }
+                    // bc2 moves to new block.
+                    bc2.B = new_b;
+                    bc2.Canvas.Dec(d, bsize);
                 }
             }
 
