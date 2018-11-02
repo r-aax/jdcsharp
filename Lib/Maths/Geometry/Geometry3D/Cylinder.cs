@@ -10,14 +10,13 @@ namespace Lib.Maths.Geometry.Geometry3D
 {
     /// <summary>
     /// Cylinder.
-    /// The cylinder is based on segment [(0, 0, 0), (0, 0, h)].
     /// </summary>
     public class Cylinder
     {
         /// <summary>
-        /// Height.
+        /// Center point (in plane <c>XY</c>).
         /// </summary>
-        public double Height;
+        public Point Center;
 
         /// <summary>
         /// Radius.
@@ -25,21 +24,38 @@ namespace Lib.Maths.Geometry.Geometry3D
         public double Radius;
 
         /// <summary>
+        /// Height.
+        /// </summary>
+        public double Height;
+
+        /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="height">height</param>
+        /// <param name="center">center</param>
         /// <param name="radius">radius</param>
-        public Cylinder(double height, double radius)
+        /// <param name="height">height</param>
+        public Cylinder(Point center, double radius, double height)
         {
-            Height = height;
+            Center = center.Copy;
             Radius = radius;
+            Height = height;
+        }
+
+        /// <summary>
+        /// Constructor from circle.
+        /// </summary>
+        /// <param name="circle">circle</param>
+        /// <param name="height">height</param>
+        public Cylinder(Circle circle, double height)
+            : this(circle.Center, circle.Radius, height)
+        {
         }
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         public Cylinder()
-            : this(0.0, 0.0)
+            : this(new Point(), 0.0, 0.0)
         {
         }
 
@@ -50,7 +66,7 @@ namespace Lib.Maths.Geometry.Geometry3D
         {
             get
             {
-                return new Circle(new Point(0.0, 0.0), Radius);
+                return new Circle(Center.Copy, Radius);
             }
         }
     }

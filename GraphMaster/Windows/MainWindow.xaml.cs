@@ -97,7 +97,10 @@ namespace GraphMaster.Windows
         /// </summary>
         private static readonly Rect2D Rect = RelDrawRect.CenterScaled(ScaleK);
 
-        private static readonly Cylinder Cylinder = new Cylinder(100.0, 100.0);
+        /// <summary>
+        /// Outer cylinder.
+        /// </summary>
+        private static readonly Cylinder Cylinder = new Cylinder(Circle, 100.0);
 
         /// <summary>
         /// <c>GUI</c> manager.

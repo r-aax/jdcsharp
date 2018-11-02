@@ -70,6 +70,36 @@ namespace Lib.Maths.Geometry
         }
 
         /// <summary>
+        /// <c>DX</c> increment.
+        /// </summary>
+        /// <param name="dx">value</param>
+        /// <returns>increment vector</returns>
+        public static Vector DX(double dx)
+        {
+            return new Vector(dx, 0.0, 0.0);
+        }
+
+        /// <summary>
+        /// <c>DY</c> increment.
+        /// </summary>
+        /// <param name="dy">value</param>
+        /// <returns>increment vector</returns>
+        public static Vector DY(double dy)
+        {
+            return new Vector(0.0, dy, 0.0);
+        }
+
+        /// <summary>
+        /// <c>DZ</c> increment.
+        /// </summary>
+        /// <param name="dz">value</param>
+        /// <returns>increment vector</returns>
+        public static Vector DZ(double dz)
+        {
+            return new Vector(0.0, 0.0, dz);
+        }
+
+        /// <summary>
         /// Cast to string.
         /// </summary>
         /// <returns>string</returns>

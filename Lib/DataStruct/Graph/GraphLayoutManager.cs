@@ -403,7 +403,7 @@ namespace Lib.DataStruct.Graph
             {
                 for (int ic = 0; ic < ps.Length; ic++)
                 {
-                    g.Nodes[ih * cn + ic].P = ps[ic] + new Vector(0.0, 0.0, ih * dh);
+                    g.Nodes[ih * cn + ic].P = ps[ic] + Vector.DZ(ih * dh);
                 }
             }
 
