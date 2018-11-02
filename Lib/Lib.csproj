@@ -158,7 +158,7 @@
     <Compile Include="Maths\Geometry\Geometry2D\Segment.cs" />
     <Compile Include="Maths\Geometry\Geometry2D\Triangle.cs" />
     <Compile Include="Maths\Geometry\Geometry3D\Cylinder.cs" />
-    <Compile Include="Maths\Geometry\Generator.cs" />
+    <Compile Include="Maths\Geometry\PointsGenerator.cs" />
     <Compile Include="Maths\Geometry\Geometry3D\Line.cs" />
     <Compile Include="Maths\Geometry\Geometry3D\Parallelepiped.cs" />
     <Compile Include="Maths\Geometry\Geometry3D\Sphere.cs" />
