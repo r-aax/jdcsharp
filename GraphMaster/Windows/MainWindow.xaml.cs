@@ -1384,7 +1384,7 @@ namespace GraphMaster.Windows
             {
                 Parallelepiped par = Graph.WraparoundParallelepiped();
 
-                LPoint[] ps = Lib.Maths.Geometry.Geometry3D.Generator.UniformPointsInParallelepiped(w.Result, par); 
+                LPoint[] ps = Lib.Maths.Geometry.PointsGenerator.UniformPointsInParallelepiped(w.Result, par); 
 
                 for (int i = 0; i < w.Result; i++)
                 {

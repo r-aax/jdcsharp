@@ -27,7 +27,7 @@ namespace Lib.DataStruct.Graph.Partitioning
         /// <returns>random points</returns>
         public static Point[] RandomPoints(Graph g, int pc)
         {
-            return Generator.UniformPointsInParallelepiped(pc, g.WraparoundParallelepiped(0.01));
+            return PointsGenerator.UniformPointsInParallelepiped(pc, g.WraparoundParallelepiped(0.01));
         }
 
         /// <summary>

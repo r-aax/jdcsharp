@@ -4,12 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lib.Maths.Geometry.Geometry3D
+using Lib.Maths.Geometry.Geometry2D;
+using Lib.Maths.Geometry.Geometry3D;
+
+namespace Lib.Maths.Geometry
 {
     /// <summary>
     /// Generator of 3D objects.
     /// </summary>
-    public class Generator
+    public class PointsGenerator
     {
         /// <summary>
         /// Generate random points in parallelepiped.
