@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using Lib.Maths.Geometry.Geometry2D;
 using Lib.Maths.Geometry.Geometry3D;
@@ -14,6 +15,24 @@ namespace Lib.Maths.Geometry
     /// </summary>
     public class PointsGenerator
     {
+        /// <summary>
+        /// Random points in rectangle.
+        /// </summary>
+        /// <param name="n">points count</param>
+        /// <param name="rect">rectangle</param>
+        /// <returns></returns>
+        public static Point[] RandomPointsInRect(int n, Rect rect)
+        {
+            Point[] ps = new Point[n];
+
+            for (int i = 0; i < ps.Count(); i++)
+            {
+                ps[i] = Point.Random(rect);
+            }
+
+            return ps;
+        }
+
         /// <summary>
         /// Generate random points in parallelepiped.
         /// </summary>
@@ -117,6 +136,51 @@ namespace Lib.Maths.Geometry
             }
 
             return ps;
+        }
+
+        /// <summary>
+        /// Generate points on circle.
+        /// </summary>
+        /// <param name="c">circle</param>
+        /// <param name="dir">direction</param>
+        /// <param name="sa">start angle</param>
+        /// <param name="da">direction</param>
+        /// <param name="n">number of points</param>
+        /// <returns>points</returns>
+        public static Point[] PointsOnCircle(Circle c, Direction dir,
+                                             double sa, double da,
+                                             int n)
+        {
+            Debug.Assert((dir == Direction.Clockwise) || (dir == Direction.ContraClockwise));
+
+            Point[] ps = new Point[n];
+
+            for (int i = 0; i < ps.Count(); i++)
+            {
+                double a = sa + i * da;
+
+                if (dir == Direction.Clockwise)
+                {
+                    a = -a;
+                }
+
+                ps[i] = c.Center + new Vector(c.Radius, 0.0);
+                ps[i].Rot(c.Center, a);
+            }
+
+            return ps;
+        }
+
+        /// <summary>
+        /// Generate points on circle.
+        /// </summary>
+        /// <param name="c">circle</param>
+        /// <param name="sa">start angle</param>
+        /// <param name="n">number of points</param>
+        /// <returns>points</returns>
+        public static Point[] PointsOnCircle(Circle c, int n)
+        {
+            return PointsOnCircle(c, Direction.ContraClockwise, 0.0, 2 * Math.PI / n, n);
         }
     }
 }

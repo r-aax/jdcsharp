@@ -18,22 +18,29 @@ namespace Lib.DataStruct.Graph
     /// </summary>
     public class GraphLayoutManager
     {
+        //------------------------------------------------------------------------------------------
+        // General functions.
+        //------------------------------------------------------------------------------------------
+
         /// <summary>
-        /// Set random graph nodes coordinates.
+        /// Set points for nodes with given indices.
         /// </summary>
         /// <param name="g">graph</param>
-        /// <param name="index_from">from index</param>
-        /// <param name="index_to">to index</param>
-        /// <param name="rect">rectangle</param>
-        public static void SetLayoutRandom(Graph g, int index_from, int index_to, Rect rect)
+        /// <param name="indices">indices</param>
+        /// <param name="points">points</param>
+        public static void SetPointsForNodes(Graph g, int[] indices, Point[] points)
         {
-            Debug.Assert(g.Is2D);
+            Debug.Assert(indices.Length == points.Length);
 
-            for (int i = index_from; i <= index_to; i++)
+            for (int i = 0; i < indices.Length; i++)
             {
-                g.Nodes[i].P = Point.Random(rect);
+                g.Nodes[indices[i]].P = points[i];
             }
         }
+
+        //------------------------------------------------------------------------------------------
+        // Layouts.
+        //------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Set random graph nodes coordinates.
@@ -45,10 +52,19 @@ namespace Lib.DataStruct.Graph
         {
             Debug.Assert(g.Is2D);
 
-            foreach (int i in indices)
-            {
-                g.Nodes[indices[i]].P = Point.Random(rect);
-            }
+            SetPointsForNodes(g, indices, PointsGenerator.RandomPointsInRect(indices.Length, rect));
+        }
+
+        /// <summary>
+        /// Set random graph nodes coordinates.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="index_from">from index</param>
+        /// <param name="index_to">to index</param>
+        /// <param name="rect">rectangle</param>
+        public static void SetLayoutRandom(Graph g, int index_from, int index_to, Rect rect)
+        {
+            SetLayoutRandom(g, Arrays.Range(index_from, index_to), rect);
         }
 
         /// <summary>
@@ -65,33 +81,25 @@ namespace Lib.DataStruct.Graph
         /// Set random graph nodes coordinates.
         /// </summary>
         /// <param name="g">graph</param>
-        /// <param name="index_from">from index</param>
-        /// <param name="index_to">to index</param>
-        /// <param name="par">parallelepiped</param>
-        public static void SetLayoutRandom(Graph g, int index_from, int index_to, Parallelepiped par)
-        {
-            Debug.Assert(g.Is3D);
-
-            for (int i = index_from; i <= index_to; i++)
-            {
-                g.Nodes[i].P = Point.Random(par);
-            }
-        }
-
-        /// <summary>
-        /// Set random graph nodes coordinates.
-        /// </summary>
-        /// <param name="g">graph</param>
         /// <param name="indices">indices array</param>
         /// <param name="par">parallelepiped</param>
         public static void SetLayoutRandom(Graph g, int[] indices, Parallelepiped par)
         {
             Debug.Assert(g.Is3D);
 
-            foreach (int i in indices)
-            {
-                g.Nodes[indices[i]].P = Point.Random(par);
-            }
+            SetPointsForNodes(g, indices, PointsGenerator.RandomPointsInParallelepiped(indices.Length, par));
+        }
+
+        /// <summary>
+        /// Set random graph nodes coordinates.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="index_from">from index</param>
+        /// <param name="index_to">to index</param>
+        /// <param name="par">parallelepiped</param>
+        public static void SetLayoutRandom(Graph g, int index_from, int index_to, Parallelepiped par)
+        {
+            SetLayoutRandom(g, Arrays.Range(index_from, index_to), par);
         }
 
         /// <summary>
@@ -388,7 +396,16 @@ namespace Lib.DataStruct.Graph
         {
             Debug.Assert(indices.Length <= yn * cn);
 
-            throw new Exception("not implemented");
+            Point[] ps = PointsGenerator.PointsOnCircle(cylinder.Circle, cn);
+            double dh = cylinder.Height / (yn - 1);
+
+            for (int ih = 0; ih < yn; ih++)
+            {
+                for (int ic = 0; ic < ps.Length; ic++)
+                {
+                    g.Nodes[ih * cn + ic].P = ps[ic] + new Vector(0.0, 0.0, ih * dh);
+                }
+            }
 
             return;
         }

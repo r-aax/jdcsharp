@@ -10,7 +10,7 @@ namespace Lib.Maths.Geometry.Geometry3D
 {
     /// <summary>
     /// Cylinder.
-    /// The cylinder is based on segment [(0, 0, 0), (0, h, 0)].
+    /// The cylinder is based on segment [(0, 0, 0), (0, 0, h)].
     /// </summary>
     public class Cylinder
     {
