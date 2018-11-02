@@ -114,6 +114,7 @@
                         <MenuItem Name="ExampleGridCircleWithCenter" Header="With center point" Click="ExampleGridCircleWithCenter_Click"/>
                         <MenuItem Name="ExampleGridCircleWithoutCenter" Header="Without center point" Click="ExampleGridCircleWithoutCenter_Click"/>
                     </MenuItem>
+                    <MenuItem Name="ExampleGridCylinder" Header="Cylinder" Click="ExampleGridCylinder_Click"/>
                 </MenuItem>
                 <MenuItem Header="3D shapes">
                     <MenuItem Name="Example3DTetrahedron" Header="Tetrahedron" Click="Example3DTetrahedron_Click"/>

@@ -22,6 +22,10 @@ namespace Lib.DataStruct.Graph
     /// </summary>
     public static class GraphCreator
     {
+        //------------------------------------------------------------------------------------------
+        // Create graph with nodes.
+        //------------------------------------------------------------------------------------------
+
         /// <summary>
         /// Add nodes.
         /// </summary>
@@ -59,6 +63,10 @@ namespace Lib.DataStruct.Graph
         {
             return InitialGraph(dim, 0);
         }
+
+        //------------------------------------------------------------------------------------------
+        // Add edges to graph.
+        //------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Set edges for random graph in Erdos - Renyi model (binomial case).
@@ -481,6 +489,10 @@ namespace Lib.DataStruct.Graph
                 }
             }
         }
+
+        //------------------------------------------------------------------------------------------
+        // Graphs construction.
+        //------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Random graph in rectangle.
@@ -1553,6 +1565,22 @@ namespace Lib.DataStruct.Graph
 
                 return g;
             }
+        }
+
+        /// <summary>
+        /// Create grid on cylinder.
+        /// </summary>
+        /// <param name="points_oy">points count in direction <c>OY</c></param>
+        /// <param name="point_on_circle">points count on one circle</param>
+        /// <param name="cylinder">cylinder</param>
+        /// <returns>graph</returns>
+        public static Graph GridCylinder(int points_oy, int point_on_circle, Cylinder cylinder)
+        {
+            Graph g = InitialGraph(GraphDimensionality.D3, points_oy * point_on_circle);
+
+            GraphLayoutManager.SetLayoutCylinderLateralSurfaceGrid(g, points_oy, point_on_circle, cylinder);
+
+            return g;
         }
 
         /// <summary>

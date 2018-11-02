@@ -373,5 +373,54 @@ namespace Lib.DataStruct.Graph
         {
             SetLayoutParallelepipedGrid(g, 0, g.Order - 1, xn, yn, zn, par);
         }
+
+        /// <summary>
+        /// Set layout for lateral surface of the cylinder.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="indices">nodes indices</param>
+        /// <param name="yn">points count in <c>OY</c> direction</param>
+        /// <param name="cn">points count on single circle</param>
+        /// <param name="cylinder">cylinder</param>
+        public static void SetLayoutCylinderLateralSurfaceGrid(Graph g, int[] indices,
+                                                               int yn, int cn, 
+                                                               Cylinder cylinder)
+        {
+            Debug.Assert(indices.Length <= yn * cn);
+
+            throw new Exception("not implemented");
+
+            return;
+        }
+
+        /// <summary>
+        /// Set layout for lateral surface of the cylinder.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="index_from">start index</param>
+        /// <param name="index_to">stop index</param>
+        /// <param name="yn">points count in <c>OY</c> direction</param>
+        /// <param name="cn">points count on single circle</param>
+        /// <param name="cylinder">cylinder</param>
+        public static void SetLayoutCylinderLateralSurfaceGrid(Graph g, int index_from, int index_to,
+                                                               int yn, int cn,
+                                                               Cylinder cylinder)
+        {
+            SetLayoutCylinderLateralSurfaceGrid(g, Arrays.Range(index_from, index_to), yn, cn, cylinder);
+        }
+
+        /// <summary>
+        /// Set layout for lateral surface of the cylinder.
+        /// </summary>
+        /// <param name="g">graph</param>
+        /// <param name="yn">points count in <c>OY</c> direction</param>
+        /// <param name="cn">points count on single circle</param>
+        /// <param name="cylinder">cylinder</param>
+        public static void SetLayoutCylinderLateralSurfaceGrid(Graph g,
+                                                               int yn, int cn,
+                                                               Cylinder cylinder)
+        {
+            SetLayoutCylinderLateralSurfaceGrid(g, 0, g.Order - 1, yn, cn, cylinder);
+        }
     }
 }

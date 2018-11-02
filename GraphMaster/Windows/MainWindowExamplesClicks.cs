@@ -355,7 +355,29 @@ namespace GraphMaster.Windows
 
             if (w.IsAccepted)
             {
-                Graph = GraphCreator.GridCicle(w.Int1V, w.Int2V, false, Circle);
+                Graph = GraphCreator.GridCylinder(w.Int1V, w.Int2V, Cylinder);
+            }
+
+            Paint();
+        }
+
+        /// <summary>
+        /// Grid on the lateral surface of the cylinder.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void ExampleGridCylinder_Click(object sender, RoutedEventArgs e)
+        {
+            EditIntIntWindow w = new EditIntIntWindow(RandomOrder, RandomOrder,
+                                                      "Grid on the lateral surface of the cylinder",
+                                                      "Points in the direction parallel to the axis",
+                                                      "Points in the direction orthogonal to the axis");
+
+            w.ShowDialog();
+
+            if (w.IsAccepted)
+            {
+                Graph = GraphCreator.GridCylinder(w.Int1V, w.Int2V, Cylinder);
             }
 
             Paint();
