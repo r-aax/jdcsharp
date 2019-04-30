@@ -212,6 +212,8 @@
                 <Separator/>
                 <MenuItem Name="TextSave_MI" Header="Save" Click="TextSave_MI_Click"/>
                 <MenuItem Name="TestTopo" Header="Test topology" Click="TestTopo_Click"/>
+                <Separator/>
+                <MenuItem Name="TestVolumeMoveABC_MI" Header="Volume move ABC" Click="TestVolumeMoveABC_MI_Click"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">

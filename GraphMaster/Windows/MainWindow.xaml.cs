@@ -1655,5 +1655,62 @@ namespace GraphMaster.Windows
                 }
             }
         }
+
+        /// <summary>
+        /// Test for volume.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestVolumeMoveABC_MI_Click(object sender, RoutedEventArgs e)
+        {
+            Graph = GraphCreator.NullGraph(GraphDimensionality.D3);
+            Node A, B, C, A1, B1, C1, A2, B2, C2;
+
+            // A, B, C
+            A = Graph.AddNode();
+            A.P = new LPoint(35.0, 35.0, 0.0);
+            B = Graph.AddNode();
+            B.P = new LPoint(65.0, 40.0, 0.0);
+            C = Graph.AddNode();
+            C.P = new LPoint(40.0, 65.0, 0.0);
+
+            // A1, B1, C1
+            A1 = Graph.AddNode();
+            A1.P = new LPoint(20.0, 20.0, 50.0);
+            B1 = Graph.AddNode();
+            B1.P = new LPoint(85.0, 35.0, 60.0);
+            C1 = Graph.AddNode();
+            C1.P = new LPoint(40.0, 90.0, 70.0);
+
+            // A2, B2, C2 - projections of A1, B1, C1 on ABC plane
+            A2 = Graph.AddNode();
+            A2.P = new LPoint(A1.P.X, A1.P.Y, 0.0);
+            B2 = Graph.AddNode();
+            B2.P = new LPoint(B1.P.X, B1.P.Y, 0.0);
+            C2 = Graph.AddNode();
+            C2.P = new LPoint(C1.P.X, C1.P.Y, 0.0);
+
+            // Main edges.
+            GraphCreator.AddCycle(Graph, 0, 2);
+            GraphCreator.AddCycle(Graph, 3, 5);
+            Graph.AddEdge(A, A1);
+            Graph.AddEdge(B, B1);
+            Graph.AddEdge(C, C1);
+
+            // Edges for projections.
+            GraphCreator.AddCycle(Graph, 6, 8);
+            Graph.AddEdge(A1, A2);
+            Graph.AddEdge(B1, B2);
+            Graph.AddEdge(C1, C2);
+            Graph.AddEdge(A, A2);
+            Graph.AddEdge(B, B2);
+            Graph.AddEdge(C, C2);
+
+            // Rotate.
+            Graph.RotX(-1.3);
+            Graph.RotY(0.5);
+
+            Paint();
+        }
     }
 }
