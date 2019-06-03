@@ -50,6 +50,12 @@ namespace Lib.MathMod.Grid.Delete
                 DeleteLinkedToBlockObjects(b);
                 Grid.Blocks.Remove(b);
             }
+
+            // Condense identifiers of blocks.
+            for (int i = 0; i < Grid.BlocksCount; i++)
+            {
+                Grid.Blocks[i].Id = i;
+            }
         }
     }
 }
