@@ -26,6 +26,7 @@ using Lib.MathMod.Grid.Partitioning;
 using Lib.DataStruct;
 using Lib.IO;
 using Lib.MathMod.Grid.DescartesObjects;
+using Lib.MathMod.Grid.Delete;
 
 namespace GridMaster.Windows
 {
@@ -517,6 +518,20 @@ namespace GridMaster.Windows
         private void ChangesMI_Click(object sender, RoutedEventArgs e)
         {
             (new ChangesWindow()).ShowDialog();
+        }
+
+        /// <summary>
+        /// Test delete block with 0 id.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestsDeleteMinIdBlockMI_Click(object sender, RoutedEventArgs e)
+        {
+            GridCleaner gc = new GridCleaner(Grid);
+
+            gc.DeleteBlock(Grid.MinBlockId());
+
+            UpdateBriefGridStatistic();
         }
     }
 }

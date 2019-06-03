@@ -339,6 +339,29 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Minimum block identifier.
+        /// </summary>
+        /// <returns>min id</returns>
+        public int MinBlockId()
+        {
+            int min_id = -1;
+
+            foreach (Block b in Blocks)
+            {
+                if (min_id == -1)
+                {
+                    min_id = b.Id;
+                }
+                else
+                {
+                    min_id = Math.Min(min_id, b.Id);
+                }
+            }
+
+            return min_id;
+        }
+
+        /// <summary>
         /// Get maximum interface identifier.
         /// </summary>
         /// <returns>maximum interface identifier or -1 if there is no interfaces at all</returns>
@@ -491,6 +514,16 @@ namespace Lib.MathMod.Grid
             }
 
             return w;
+        }
+
+        /// <summary>
+        /// Find block by identifier.
+        /// </summary>
+        /// <param name="id">identifier</param>
+        /// <returns>block</returns>
+        public Block FindBlock(int id)
+        {
+            return Blocks.Find(b => (b.Id == id));
         }
 
         /// <summary>

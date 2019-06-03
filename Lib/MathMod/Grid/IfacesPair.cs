@@ -71,7 +71,7 @@ namespace Lib.MathMod.Grid
         /// <returns><c>true</c> - if incident, <c>false</c> - otherwise</returns>
         public bool IsIncident(Block b)
         {
-            return (b == If.B) || (b == Mirror.B);
+            return If.IsIncident(b) || Mirror.IsIncident(b);
         }
 
         /// <summary>

@@ -35,6 +35,16 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Check if grid object incident to block.
+        /// </summary>
+        /// <param name="b">block</param>
+        /// <returns><c>true</c> - if incident, <c>false</c> - otherwise</returns>
+        public bool IsIncident(Block b)
+        {
+            return B == b;
+        }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="g">grid</param>

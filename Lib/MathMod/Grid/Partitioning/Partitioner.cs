@@ -48,7 +48,7 @@ namespace Lib.MathMod.Grid.Partitioning
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="g"></param>
+        /// <param name="g">grid</param>
         public Partitioner(StructuredGrid g)
         {
             Grid = g;

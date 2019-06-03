@@ -26,6 +26,9 @@
                 <MenuItem Name="ToolsSavePictireMI" Header="Save picture" Click="ToolsSavePictireMI_Click"/>
                 <MenuItem Name="AddittionalParametersMI" Header="Additional parameters" Click="AddittionalParametersMI_Click"/>
             </MenuItem>
+            <MenuItem Header="Tests">
+                <MenuItem Name="TestsDeleteMinIdBlockMI" Header="Delete min id block" Click="TestsDeleteMinIdBlockMI_Click" />
+            </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
             <TextBlock Name="BriefGridStatisticTB" Width="250" Foreground="IndianRed" Text="No grid"/>

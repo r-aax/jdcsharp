@@ -116,6 +116,7 @@
     <Compile Include="MathMod\Grid\BorderCorners.cs" />
     <Compile Include="MathMod\Grid\Cut\Cut.cs" />
     <Compile Include="MathMod\Grid\Cut\GridCutter.cs" />
+    <Compile Include="MathMod\Grid\Delete\GridCleaner.cs" />
     <Compile Include="MathMod\Grid\DescartesObjects\Dir.cs" />
     <Compile Include="MathMod\Grid\DescartesObjects\Dirs3.cs" />
     <Compile Include="MathMod\Grid\FatGObject.cs" />

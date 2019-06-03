@@ -190,5 +190,15 @@ namespace Lib.MathMod.Grid
                 return null;
             }
         }
+
+        /// <summary>
+        /// Check if linked condition is inci
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns><c>true</c> - if incident, <c>false</c> - otherwise</returns>
+        public bool IsIncident(Block b)
+        {
+            return BCond1.IsIncident(b) || BCond2.IsIncident(b);
+        }
     }
 }
