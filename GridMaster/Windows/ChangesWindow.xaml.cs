@@ -46,6 +46,7 @@ namespace GridMaster.Windows
             Ch("2018-08-30: maj: New poolicy for PERI_C linked border conditions.");
             Ch("                 PERI_C linked border conditions is a pair of border conditions that are");
             Ch("                 of the same size and that are placed on the same block, opposite to each other.");
+            Ch("2019-06-03: maj: Blocks deleting functionality is added.");
         }
     }
 }
