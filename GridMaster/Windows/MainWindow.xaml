@@ -27,7 +27,8 @@
                 <MenuItem Name="AddittionalParametersMI" Header="Additional parameters" Click="AddittionalParametersMI_Click"/>
             </MenuItem>
             <MenuItem Header="Tests">
-                <MenuItem Name="TestsDeleteMinIdBlockMI" Header="Delete min id block" Click="TestsDeleteMinIdBlockMI_Click" />
+                <MenuItem Name="TestsDelete0BlockMI" Header="Delete 0 block" Click="TestsDelete0BlockMI_Click"/>
+                <MenuItem Name="TestsLeaveOnlyNoNameBCondBlocksMI" Header="Leave only NoName bcond blocks" Click="TestsLeaveOnlyNoNameBCondBlocksMI_Click" />
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">

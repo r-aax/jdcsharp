@@ -525,11 +525,51 @@ namespace GridMaster.Windows
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">parameters</param>
-        private void TestsDeleteMinIdBlockMI_Click(object sender, RoutedEventArgs e)
+        private void TestsDelete0BlockMI_Click(object sender, RoutedEventArgs e)
         {
             GridCleaner gc = new GridCleaner(Grid);
 
-            gc.DeleteBlock(Grid.MinBlockId());
+            gc.DeleteBlock(Grid.Blocks[0]);
+
+            UpdateBriefGridStatistic();
+        }
+
+        /// <summary>
+        /// Test leave only blocks incident to NoName border conditions.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestsLeaveOnlyNoNameBCondBlocksMI_Click(object sender, RoutedEventArgs e)
+        {
+            GridCleaner gc = new GridCleaner(Grid);
+
+            // Use Partition field for help.
+            foreach (Lib.MathMod.Grid.Block b in Grid.Blocks)
+            {
+                b.PartitionNumber = -1;
+            }
+
+            // Mark blocks to be deleted.
+            foreach (BCond bc in Grid.BConds)
+            {
+                if (bc.Label.Name == "NoName")
+                {
+                    bc.B.PartitionNumber = 0;
+                }
+            }
+
+            // Delete bad blocks.
+            List<Lib.MathMod.Grid.Block> bs = Grid.Blocks.FindAll(b => (b.PartitionNumber != 0));
+            foreach (Lib.MathMod.Grid.Block b in bs)
+            {
+                gc.DeleteBlock(b);
+            }
+
+            // Clean partition number.
+            foreach (Lib.MathMod.Grid.Block b in Grid.Blocks)
+            {
+                b.PartitionNumber = -1;
+            }
 
             UpdateBriefGridStatistic();
         }

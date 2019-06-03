@@ -42,11 +42,9 @@ namespace Lib.MathMod.Grid.Delete
         /// <summary>
         /// Delete block.
         /// </summary>
-        /// <param name="id">identifier</param>
-        public void DeleteBlock(int id)
+        /// <param name="b">block</param>
+        public void DeleteBlock(Block b)
         {
-            Block b = Grid.FindBlock(id);
-
             if (b != null)
             {
                 DeleteLinkedToBlockObjects(b);
