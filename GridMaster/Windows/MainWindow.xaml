@@ -28,7 +28,10 @@
             </MenuItem>
             <MenuItem Header="Tests">
                 <MenuItem Name="TestsDelete0BlockMI" Header="Delete 0 block" Click="TestsDelete0BlockMI_Click"/>
-                <MenuItem Name="TestsLeaveOnlyNoNameBCondBlocksMI" Header="Leave only NoName bcond blocks" Click="TestsLeaveOnlyNoNameBCondBlocksMI_Click" />
+                <MenuItem Name="TestsLeaveOnlyNeededBCondBlocksMI" Header="Leave only needed bcond blocks" Click="TestsLeaveOnlyNeededBCondBlocksMI_Click" />
+                <MenuItem Name="TestsDeleteAllButBlocksMI" Header="Delete all but blocks" Click="TestsDeleteAllButBlocksMI_Click"/>
+                <MenuItem Name="TestsCutNearFacesMI" Header="Cut blocks near faces" Click="TestsCutNearFacesMI_Click"/>
+                <MenuItem Name="TestsExportPoints" Header="Export points" Click="TestsExportPoints_Click"/>
             </MenuItem>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
@@ -43,6 +46,7 @@
             <Canvas Grid.Column="0"
                     Name="DrawAreaC"
                     Background="White"/>
+            <ListBox Grid.Column="0" Name="TestLB"/>
             <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>

@@ -120,6 +120,8 @@ namespace Lib.MathMod.Grid.Cut
         /// <returns>new bloc</returns>
         public static Block PureCut(Block b, Dir d, int pos)
         {
+            Debug.Assert(d.IsPos);
+
             StructuredGrid g = b.Grid;
 
             // Cut block's canvas in direction I in position pos.

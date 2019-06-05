@@ -27,6 +27,7 @@ using Lib.DataStruct;
 using Lib.IO;
 using Lib.MathMod.Grid.DescartesObjects;
 using Lib.MathMod.Grid.Delete;
+using System.Diagnostics;
 
 namespace GridMaster.Windows
 {
@@ -535,11 +536,11 @@ namespace GridMaster.Windows
         }
 
         /// <summary>
-        /// Test leave only blocks incident to NoName border conditions.
+        /// Test leave only blocks with given border conditions names.
         /// </summary>
         /// <param name="sender">object</param>
         /// <param name="e">parameters</param>
-        private void TestsLeaveOnlyNoNameBCondBlocksMI_Click(object sender, RoutedEventArgs e)
+        private void TestsLeaveOnlyNeededBCondBlocksMI_Click(object sender, RoutedEventArgs e)
         {
             GridCleaner gc = new GridCleaner(Grid);
 
@@ -552,7 +553,7 @@ namespace GridMaster.Windows
             // Mark blocks to be deleted.
             foreach (BCond bc in Grid.BConds)
             {
-                if (bc.Label.Name == "NoName")
+                if ((bc.Label.Name == "W") || (bc.Label.Name == "C1"))
                 {
                     bc.B.PartitionNumber = 0;
                 }
@@ -572,6 +573,168 @@ namespace GridMaster.Windows
             }
 
             UpdateBriefGridStatistic();
+        }
+
+        /// <summary>
+        /// Delete all objects but leave blocks.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestsDeleteAllButBlocksMI_Click(object sender, RoutedEventArgs e)
+        {
+            Grid.IfacesPairs.Clear();
+
+            // Delete extra border conditions.
+            Grid.BConds.RemoveAll(bc => (bc.Label.Name != "W") && (bc.Label.Name != "C1"));
+
+            Grid.BCondsLinks.Clear();
+            Grid.Scopes.Clear();
+            UpdateBriefGridStatistic();
+        }
+
+        /// <summary>
+        /// Cut blocks near faces.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestsCutNearFacesMI_Click(object sender, RoutedEventArgs e)
+        {
+            TestLB.Items.Clear();
+            TestLB.Items.Add("TestsCutNearFacesMI_Click:");
+
+            foreach (Lib.MathMod.Grid.Block b in Grid.Blocks)
+            {
+                b.PartitionNumber = 0;
+            }
+
+            foreach (BCond bc in Grid.BConds)
+            {
+                bc.B.PartitionNumber++;
+            }
+
+            foreach (Lib.MathMod.Grid.Block b in Grid.Blocks)
+            {
+                Debug.Assert(b.PartitionNumber == 1);
+            }
+
+            foreach (BCond bc in Grid.BConds)
+            {
+                if (bc.D.IsNeg)
+                {
+                    GridCutter.Cut(bc.B, !bc.D, 1);
+                }
+                else
+                {
+                    GridCutter.Cut(bc.B, bc.D, bc.B.Canvas.Size(bc.D) - 1);
+                }
+            }
+
+            UpdateBriefGridStatistic();
+        }
+
+        /// <summary>
+        /// Export poitns.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void TestsExportPoints_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+
+            if (sfd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string filename = sfd.FileName;
+
+                try
+                {
+                    using (System.IO.StreamWriter sw = new System.IO.StreamWriter(filename))
+                    {
+                        foreach (BCond bc in Grid.BConds)
+                        {
+                            Lib.MathMod.Grid.Block b = bc.B;
+                            Dir d = bc.D;
+
+                            switch (d.N)
+                            {
+                                case Dir.I0N:
+                                    sw.WriteLine(String.Format("PEACE_OF_SURFACE: {0}, {1}", b.Canvas.JNodes, b.Canvas.KNodes));
+                                    for (int j = 0; j < b.Canvas.JNodes; j++)
+                                    {
+                                        for (int k = 0; k < b.Canvas.KNodes; k++)
+                                        {
+                                            sw.WriteLine(String.Format("({0}, {1}, {2}),", b.C[0, j, k, 0], b.C[0, j, k, 1], b.C[0, j, k, 2]));
+                                        }
+                                    }
+                                    break;
+
+                                case Dir.I1N:
+                                    sw.WriteLine(String.Format("PEACE_OF_SURFACE: {0}, {1}", b.Canvas.JNodes, b.Canvas.KNodes));
+                                    for (int j = 0; j < b.Canvas.JNodes; j++)
+                                    {
+                                        for (int k = 0; k < b.Canvas.KNodes; k++)
+                                        {
+                                            sw.WriteLine(String.Format("({0}, {1}, {2}),", b.C[1, j, k, 0], b.C[1, j, k, 1], b.C[1, j, k, 2]));
+                                        }
+                                    }
+                                    break;
+
+                                case Dir.J0N:
+                                    sw.WriteLine(String.Format("PEACE_OF_SURFACE: {0}, {1}", b.Canvas.INodes, b.Canvas.KNodes));
+                                    for (int i = 0; i < b.Canvas.INodes; i++)
+                                    {
+                                        for (int k = 0; k < b.Canvas.KNodes; k++)
+                                        {
+                                            sw.WriteLine(String.Format("({0}, {1}, {2}),", b.C[i, 0, k, 0], b.C[i, 0, k, 1], b.C[i, 0, k, 2]));
+                                        }
+                                    }
+                                    break;
+
+                                case Dir.J1N:
+                                    sw.WriteLine(String.Format("PEACE_OF_SURFACE: {0}, {1}", b.Canvas.INodes, b.Canvas.KNodes));
+                                    for (int i = 0; i < b.Canvas.INodes; i++)
+                                    {
+                                        for (int k = 0; k < b.Canvas.KNodes; k++)
+                                        {
+                                            sw.WriteLine(String.Format("({0}, {1}, {2}),", b.C[i, 1, k, 0], b.C[i, 1, k, 1], b.C[i, 1, k, 2]));
+                                        }
+                                    }
+                                    break;
+
+                                case Dir.K0N:
+                                    sw.WriteLine(String.Format("PEACE_OF_SURFACE: {0}, {1}", b.Canvas.INodes, b.Canvas.JNodes));
+                                    for (int i = 0; i < b.Canvas.INodes; i++)
+                                    {
+                                        for (int j = 0; j < b.Canvas.JNodes; j++)
+                                        {
+                                            sw.WriteLine(String.Format("({0}, {1}, {2}),", b.C[i, j, 0, 0], b.C[i, j, 0, 1], b.C[i, j, 0, 2]));
+                                        }
+                                    }
+                                    break;
+
+                                case Dir.K1N:
+                                    sw.WriteLine(String.Format("PEACE_OF_SURFACE: {0}, {1}", b.Canvas.INodes, b.Canvas.JNodes));
+                                    for (int i = 0; i < b.Canvas.INodes; i++)
+                                    {
+                                        for (int j = 0; j < b.Canvas.JNodes; j++)
+                                        {
+                                            sw.WriteLine(String.Format("({0}, {1}, {2}),", b.C[i, j, 1, 0], b.C[i, j, 1, 1], b.C[i, j, 1, 2]));
+                                        }
+                                    }
+                                    break;
+
+                                default:
+                                    throw new Exception("wrong direction");
+                            }
+
+                            sw.WriteLine("");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ExeDebug.ReportError(ex.Message));
+                }
+            }
         }
     }
 }
