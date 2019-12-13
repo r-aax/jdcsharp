@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hydro", "Hydro\Hydro.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridMasterConsole", "GridMasterConsole\GridMasterConsole.csproj", "{F6C5731F-F3AA-4F7E-8118-7DEF27474843}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NNBroth", "NNBroth\NNBroth.csproj", "{21DD4F26-8DD5-41E6-A4D7-A61722D03299}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -178,6 +180,22 @@ Global
 		{F6C5731F-F3AA-4F7E-8118-7DEF27474843}.Release|x64.Build.0 = Release|Any CPU
 		{F6C5731F-F3AA-4F7E-8118-7DEF27474843}.Release|x86.ActiveCfg = Release|Any CPU
 		{F6C5731F-F3AA-4F7E-8118-7DEF27474843}.Release|x86.Build.0 = Release|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Debug|x64.Build.0 = Debug|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Debug|x86.Build.0 = Debug|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Release|x64.ActiveCfg = Release|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Release|x64.Build.0 = Release|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Release|x86.ActiveCfg = Release|Any CPU
+		{21DD4F26-8DD5-41E6-A4D7-A61722D03299}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
