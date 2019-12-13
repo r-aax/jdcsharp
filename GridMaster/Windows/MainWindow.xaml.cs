@@ -666,10 +666,10 @@ namespace GridMaster.Windows
                                         }
                                     }
                                     break;
-
+                                
                                 case Dir.I1N:
                                     sw.WriteLine(String.Format("PEACE_OF_SURFACE: {0}, {1}", b.Canvas.JNodes, b.Canvas.KNodes));
-                                    for (int j = 0; j < b.Canvas.JNodes; j++)
+                                    for (int j = b.Canvas.JNodes - 1; j >= 0; j--)
                                     {
                                         for (int k = 0; k < b.Canvas.KNodes; k++)
                                         {
@@ -680,7 +680,7 @@ namespace GridMaster.Windows
 
                                 case Dir.J0N:
                                     sw.WriteLine(String.Format("PEACE_OF_SURFACE: {0}, {1}", b.Canvas.INodes, b.Canvas.KNodes));
-                                    for (int i = 0; i < b.Canvas.INodes; i++)
+                                    for (int i = b.Canvas.INodes - 1; i >= 0; i--)
                                     {
                                         for (int k = 0; k < b.Canvas.KNodes; k++)
                                         {
@@ -710,10 +710,10 @@ namespace GridMaster.Windows
                                         }
                                     }
                                     break;
-
+                                
                                 case Dir.K1N:
                                     sw.WriteLine(String.Format("PEACE_OF_SURFACE: {0}, {1}", b.Canvas.INodes, b.Canvas.JNodes));
-                                    for (int i = 0; i < b.Canvas.INodes; i++)
+                                    for (int i = b.Canvas.INodes - 1; i >= 0; i--)
                                     {
                                         for (int j = 0; j < b.Canvas.JNodes; j++)
                                         {
@@ -721,9 +721,11 @@ namespace GridMaster.Windows
                                         }
                                     }
                                     break;
+                                
 
                                 default:
-                                    throw new Exception("wrong direction");
+                                    //throw new Exception("wrong direction");
+                                    break;
                             }
 
                             sw.WriteLine("");
