@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using NNBroth.Evolution;
+
 namespace NNBroth
 {
     /// <summary>
@@ -20,9 +22,25 @@ namespace NNBroth
     /// </summary>
     public partial class MainWindow : Window
     {
+        /// <summary>
+        /// Create form.
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Click Go button event.
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">parameters</param>
+        private void GoB_Click(object sender, RoutedEventArgs e)
+        {
+            Creature creature = new Creature(5, 5);
+            double[] in_data = new double[] { 1.0, 1.0, 1.0, 1.0, 1.0 };
+
+            OutputLB.Items.Add("HI");
         }
     }
 }

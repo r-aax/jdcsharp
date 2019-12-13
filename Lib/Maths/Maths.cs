@@ -37,5 +37,25 @@ namespace Lib.Maths
         {
             return Math.Sqrt(Hypot2(a, b));
         }
+
+        /// <summary>
+        /// Sigmoid function.
+        /// </summary>
+        /// <param name="x">argument</param>
+        /// <returns>value</returns>
+        public static double Sigmoid(double x)
+        {
+            return 1.0 / (1.0 + Math.Exp(-x));
+        }
+
+        /// <summary>
+        /// Sigmoid derivative.
+        /// </summary>
+        /// <param name="sigmoid_x">sigmoid function value</param>
+        /// <returns>sigmoid derivative value</returns>
+        public static double SigmoidDer(double sigmoid_x)
+        {
+            return sigmoid_x / (1.0 - sigmoid_x);
+        }
     }
 }
