@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+using Lib.IO;
+
 using NNBroth.Evolution;
 
 namespace NNBroth
@@ -39,8 +41,11 @@ namespace NNBroth
         {
             Creature creature = new Creature(5, 5);
             double[] in_data = new double[] { 1.0, 1.0, 1.0, 1.0, 1.0 };
+            double[] out_data = creature.Sense(in_data);
 
             OutputLB.Items.Add("HI");
+            OutputLB.Items.Add(String.Format("in_data : {0}", ToStringConverter.Convert(in_data)));
+            OutputLB.Items.Add(String.Format("in_data : {0}", ToStringConverter.Convert(out_data)));
         }
     }
 }

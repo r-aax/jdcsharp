@@ -14,5 +14,22 @@ namespace NNBroth.Evolution
         public Actuator() : base()
         {
         }
+
+        /// <summary>
+        /// Get answer from network.
+        /// </summary>
+        /// <returns>answer</returns>
+        public double[] GetAnswer()
+        {
+            double[] res = new double[InLinks.Count];
+
+            // Fill answer array.
+            for (int i = 0; i < InLinks.Count; i++)
+            {
+                res[i] = InLinks[i].WeightedSignal;
+            }
+
+            return res;
+        }
     }
 }

@@ -107,6 +107,7 @@
       <DependentUpon>EditIntIntWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="IO\File.cs" />
+    <Compile Include="IO\ToStringConverter.cs" />
     <Compile Include="MathMod\D.cs" />
     <Compile Include="MathMod\DataItem.cs" />
     <Compile Include="MathMod\Grid\BCond.cs" />

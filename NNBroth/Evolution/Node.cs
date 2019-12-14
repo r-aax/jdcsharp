@@ -15,12 +15,12 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Input links.
         /// </summary>
-        private List<Link> InLinks;
+        protected List<Link> InLinks;
 
         /// <summary>
         /// Output links.
         /// </summary>
-        private List<Link> OutLinks;
+        protected List<Link> OutLinks;
 
         /// <summary>
         /// Constructor.
@@ -67,7 +67,7 @@ namespace NNBroth.Evolution
         /// Broadcast signal in forward direction.
         /// </summary>
         /// <param name="signal">signal</param>
-        private void BroadcastSignalForward(double signal)
+        protected void BroadcastSignalForward(double signal)
         {
             BroadcastSignal(signal, OutLinks);
         }

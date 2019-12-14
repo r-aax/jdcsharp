@@ -29,5 +29,15 @@ namespace NNBroth.Evolution
         {
             Cortex = new Cortex(sensor_dimension, actuator_dimension);
         }
+
+        /// <summary>
+        /// Sense signals.
+        /// </summary>
+        /// <param name="in_signals">signals</param>
+        /// <returns>out signals</returns>
+        public double[] Sense(double[] in_signals)
+        {
+            return Cortex.Sense(in_signals);
+        }
     }
 }

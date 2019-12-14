@@ -17,5 +17,17 @@ namespace NNBroth.Evolution
         public Sensor() : base()
         {
         }
+
+        /// <summary>
+        /// Sense signals.
+        /// </summary>
+        /// <param name="in_signals">signals</param>
+        public void Sense(double[] in_signals)
+        {
+            for (int i = 0; i < OutLinks.Count; i++)
+            {
+                OutLinks[i].Signal = in_signals[i];
+            }
+        }
     }
 }

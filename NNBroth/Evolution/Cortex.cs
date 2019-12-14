@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Diagnostics;
+
 namespace NNBroth.Evolution
 {
     /// <summary>
@@ -27,6 +29,11 @@ namespace NNBroth.Evolution
         private List<Neuron> Neurons;
 
         /// <summary>
+        /// Links.
+        /// </summary>
+        private List<Link> Links;
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public Cortex()
@@ -34,6 +41,7 @@ namespace NNBroth.Evolution
             Sensor = new Sensor();
             Actuator = new Actuator();
             Neurons = new List<Neuron>();
+            Links = new List<Link>();
         }
 
         /// <summary>
@@ -49,6 +57,9 @@ namespace NNBroth.Evolution
             LinkSensorToLayer(first_layer);
             LinkLayers(first_layer, last_layer);
             LinkLayerToActuator(last_layer);
+
+            // Set right order of nodes.
+            OrderNodes();
         }
 
         /// <summary>
@@ -74,6 +85,9 @@ namespace NNBroth.Evolution
         private void Link(Node src, Node dst, double weight = 1.0)
         {
             Link link = new Link(src, dst, weight);
+
+            // Insert it into links list.
+            Links.Add(link);
 
             src.AddOutLink(link);
             dst.AddInLink(link);
@@ -135,6 +149,46 @@ namespace NNBroth.Evolution
             {
                 Link(src, Actuator);
             }
+        }
+
+        /// <summary>
+        /// Invalidate all signals.
+        /// </summary>
+        public void InvalidateSignals()
+        {
+            foreach (Link link in Links)
+            {
+                link.Signal = double.NaN;
+            }
+        }
+
+        /// <summary>
+        /// Order nodes.
+        /// </summary>
+        public void OrderNodes()
+        {
+            // TODO: set right order of nodes.
+        }
+
+        /// <summary>
+        /// Sense signals.
+        /// </summary>
+        /// <param name="in_signals">signals</param>
+        /// <returns>out signals</returns>
+        public double[] Sense(double[] in_signals)
+        {
+            // Invalidate signals for debug.
+            InvalidateSignals();
+
+            Sensor.Sense(in_signals);
+
+            // Process neurons in right order.
+            for (int i = 0; i < Neurons.Count; i++)
+            {
+                Neurons[i].PropagateSignalForward();
+            }
+
+            return Actuator.GetAnswer();
         }
     }
 }

@@ -52,7 +52,7 @@ namespace NNBroth.Evolution
         /// <param name="src">source</param>
         /// <param name="dst">destination</param>
         /// <param name="weight">weight</param>
-        public Link(Node src, Node dst, double weight)
+        public Link(Node src, Node dst, double weight = 1.0)
         {
             Src = src;
             Dst = dst;
