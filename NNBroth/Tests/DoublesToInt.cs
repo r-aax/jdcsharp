@@ -87,6 +87,17 @@ namespace NNBroth.Tests
         }
 
         /// <summary>
+        /// Add test case.
+        /// </summary>
+        /// <param name="input">input</param>
+        /// <param name="output">output</param>
+        protected void AddTestCase(double[] input, int output)
+        {
+            Inputs.Add(input);
+            Outputs.Add(output);
+        }
+
+        /// <summary>
         /// Test cortex for test case.
         /// </summary>
         /// <param name="cortex">cortex</param>

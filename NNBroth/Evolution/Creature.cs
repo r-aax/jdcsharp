@@ -12,6 +12,15 @@ namespace NNBroth.Evolution
     class Creature
     {
         /// <summary>
+        /// Score.
+        /// </summary>
+        public double Score
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
         /// Cortex;
         /// </summary>
         public Cortex Cortex
@@ -27,6 +36,7 @@ namespace NNBroth.Evolution
         /// <param name="actuator_dimension">actuator dimension</param>
         public Creature(int sensor_dimension, int actuator_dimension)
         {
+            Score = 0.0;
             Cortex = new Cortex(sensor_dimension, actuator_dimension);
         }
 
@@ -38,6 +48,25 @@ namespace NNBroth.Evolution
         public int Sense(double[] in_signals)
         {
             return Cortex.Sense(in_signals);
+        }
+
+        /// <summary>
+        /// Process scoring.
+        /// </summary>
+        /// <param name="test">test</param>
+        public void ProcessScoring(Tests.DoublesToInt test)
+        {
+            int right = 0;
+
+            for (int i = 0; i < test.TestCasesCount; i++)
+            {
+                if (test.Test(Cortex, i))
+                {
+                    right++;
+                }
+            }
+
+            Score = (double)right / (double)test.TestCasesCount;
         }
     }
 }

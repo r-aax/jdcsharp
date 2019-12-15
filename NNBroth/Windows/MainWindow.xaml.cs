@@ -41,19 +41,11 @@ namespace NNBroth
         /// <param name="e">parameters</param>
         private void GoB_Click(object sender, RoutedEventArgs e)
         {
-            MNIST mnist = new MNIST("../../Tests/mnist/train-images.idx3-ubyte",
-                                    "../../Tests/mnist/train-labels.idx1-ubyte");
-            Creature creature = new Creature(mnist.InputDimension, mnist.OutputDimension);
+            Xor xor = new Xor();
+            Creature creature = new Creature(xor.InputDimension, xor.OutputDimension);
 
             DateTime beg = DateTime.Now;
-
-            for (int i = 0; i < mnist.TestCasesCount; i++)
-            {
-                OutputLB.Items.Add(String.Format("case : {0} -> {1}",
-                                                 i,
-                                                 mnist.Test(creature.Cortex, i)));
-            }
-
+            creature.ProcessScoring(xor);
             DateTime end = DateTime.Now;
             TimeSpan cur = end.Subtract(beg);
 
