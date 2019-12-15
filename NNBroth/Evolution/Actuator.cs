@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Lib.Utils;
+
 namespace NNBroth.Evolution
 {
     class Actuator : Node
@@ -19,7 +21,7 @@ namespace NNBroth.Evolution
         /// Get answer from network.
         /// </summary>
         /// <returns>answer</returns>
-        public double[] GetAnswer()
+        public double[] GetOutputs()
         {
             double[] res = new double[InLinks.Count];
 
@@ -30,6 +32,15 @@ namespace NNBroth.Evolution
             }
 
             return res;
+        }
+
+        /// <summary>
+        /// Get answer.
+        /// </summary>
+        /// <returns>answer</returns>
+        public int GetAnswer()
+        {
+            return Arrays.MaxIndex(GetOutputs());
         }
     }
 }

@@ -11,7 +11,7 @@ namespace NNBroth.Evolution
     /// <summary>
     /// Cortex.
     /// </summary>
-    class Cortex
+    public class Cortex
     {
         /// <summary>
         /// Sensor.
@@ -174,8 +174,8 @@ namespace NNBroth.Evolution
         /// Sense signals.
         /// </summary>
         /// <param name="in_signals">signals</param>
-        /// <returns>out signals</returns>
-        public double[] Sense(double[] in_signals)
+        /// <returns>answer</returns>
+        public int Sense(double[] in_signals)
         {
             // Invalidate signals for debug.
             InvalidateSignals();

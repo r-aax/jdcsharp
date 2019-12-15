@@ -34,8 +34,8 @@ namespace NNBroth.Evolution
         /// Sense signals.
         /// </summary>
         /// <param name="in_signals">signals</param>
-        /// <returns>out signals</returns>
-        public double[] Sense(double[] in_signals)
+        /// <returns>answer</returns>
+        public int Sense(double[] in_signals)
         {
             return Cortex.Sense(in_signals);
         }
