@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Lib.IO;
+using Lib.Utils.Time;
 
 using NNBroth.Evolution;
 using NNBroth.Tests;
@@ -44,13 +45,22 @@ namespace NNBroth
                                     "../../Tests/mnist/train-labels.idx1-ubyte");
             
             Creature creature = new Creature(mnist.InDimension, mnist.OutDimension);
-            double[] in_data = mnist.GetTestCase(10);
-            double[] out_data = creature.Sense(in_data);
-            double[] right_out_data = mnist.GetTestCaseAnswer(10);
 
-            OutputLB.Items.Add("HI");
-            OutputLB.Items.Add(String.Format("      out_data : {0}", ToStringConverter.Convert(out_data)));
-            OutputLB.Items.Add(String.Format("right_out_data : {0}", ToStringConverter.Convert(right_out_data)));
+            DateTime beg = DateTime.Now;
+
+            for (int i = 0; i < mnist.TestCasesCount; i++)
+            {
+                double[] in_data = mnist.GetTestCase(i);
+                double[] out_data = creature.Sense(in_data);
+                double[] right_out_data = mnist.GetTestCaseAnswer(i);
+
+                OutputLB.Items.Add(String.Format("case : {0}", i));
+            }
+
+            DateTime end = DateTime.Now;
+            TimeSpan cur = end.Subtract(beg);
+
+            OutputLB.Items.Add(String.Format("time : {0}", cur));
         }
     }
 }
