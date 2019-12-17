@@ -67,6 +67,7 @@
     <Compile Include="Evolution\Actuator.cs" />
     <Compile Include="Evolution\Cortex.cs" />
     <Compile Include="Evolution\Creature.cs" />
+    <Compile Include="Evolution\Generation.cs" />
     <Compile Include="Evolution\Link.cs" />
     <Compile Include="Evolution\Neuron.cs" />
     <Compile Include="Evolution\Node.cs" />

@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using Lib.IO;
+using Lib.GUI;
 using Lib.Utils.Time;
 
 using NNBroth.Evolution;
@@ -27,11 +28,23 @@ namespace NNBroth
     public partial class MainWindow : Window
     {
         /// <summary>
+        /// Test.
+        /// </summary>
+        DoublesToInt Test;
+
+        /// <summary>
+        /// Generation.
+        /// </summary>
+        Generation Generation;
+
+        /// <summary>
         /// Create form.
         /// </summary>
         public MainWindow()
         {
             InitializeComponent();
+            Test = null;
+            Generation = null;
         }
 
         /// <summary>
@@ -41,15 +54,26 @@ namespace NNBroth
         /// <param name="e">parameters</param>
         private void GoB_Click(object sender, RoutedEventArgs e)
         {
-            Xor xor = new Xor();
-            Creature creature = new Creature(xor.InputDimension, xor.OutputDimension);
+            if (Test == null)
+            {
+                Test = new Xor();
+            }
+
+            if (Generation == null)
+            {
+                Generation = new Generation();
+                Generation.AddDefaultCreatures(10, Test.InputDimension, Test.OutputDimension);
+            }
 
             DateTime beg = DateTime.Now;
-            creature.ProcessScoring(xor);
+            for (int i = 0; i < Lib.GUI.WPF.IO.GetInt(ItersCountTB); i++)
+            {
+                Generation.Selection(Test);
+            }
             DateTime end = DateTime.Now;
             TimeSpan cur = end.Subtract(beg);
 
-            OutputLB.Items.Add(String.Format("time : {0}", cur));
+            OutputLB.Items.Add(Generation.ToString() + String.Format(" : time = {0}", cur));
         }
     }
 }

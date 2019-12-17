@@ -5,9 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NNBroth"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="360" Width="525">
     <Grid>
         <ListBox x:Name="OutputLB" HorizontalAlignment="Left" Height="274" Margin="10,10,0,0" VerticalAlignment="Top" Width="497"/>
-        <Button x:Name="GoB" Content="Go" HorizontalAlignment="Left" Margin="214,289,0,0" VerticalAlignment="Top" Width="75" Click="GoB_Click"/>
+        <Button x:Name="GoB" Content="Go" HorizontalAlignment="Left" Margin="267,290,0,0" VerticalAlignment="Top" Width="75" Click="GoB_Click" Height="23"/>
+        <TextBox x:Name="ItersCountTB" HorizontalAlignment="Left" Height="23" Margin="142,290,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
