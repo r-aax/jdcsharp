@@ -9,7 +9,7 @@ namespace NNBroth.Evolution
     /// <summary>
     /// Sensor.
     /// </summary>
-    class Sensor : Node
+    class Sensor : Node, ICloneable
     {
         /// <summary>
         /// Constructor.
@@ -28,6 +28,15 @@ namespace NNBroth.Evolution
             {
                 OutLinks[i].Signal = in_signals[i];
             }
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>clone</returns>
+        public object Clone()
+        {
+            return new Sensor();
         }
     }
 }

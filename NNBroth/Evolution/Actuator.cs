@@ -8,7 +8,7 @@ using Lib.Utils;
 
 namespace NNBroth.Evolution
 {
-    class Actuator : Node
+    class Actuator : Node, ICloneable
     {
         /// <summary>
         /// Actuator.
@@ -41,6 +41,15 @@ namespace NNBroth.Evolution
         public int GetAnswer()
         {
             return Arrays.MaxIndex(GetOutputs());
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>clone</returns>
+        public object Clone()
+        {
+            return new Actuator();
         }
     }
 }

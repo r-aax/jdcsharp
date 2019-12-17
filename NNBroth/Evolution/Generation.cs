@@ -102,12 +102,50 @@ namespace NNBroth.Evolution
         }
 
         /// <summary>
+        /// Kill the weak.
+        /// </summary>
+        /// <param name="k"></param>
+        private void KillTheWeak(double k)
+        {
+            Creatures.Sort((cr1, cr2) => cr1.CompareTo(cr2));
+
+            int count_to_kill = (int)(Creatures.Count * k);
+
+            Creatures.RemoveRange(Creatures.Count - count_to_kill, count_to_kill);
+        }
+
+        /// <summary>
+        /// Restore population.
+        /// </summary>
+        /// <param name="origin_count"></param>
+        private void RestorePopulation(int origin_count)
+        {
+            int creatures_to_create = origin_count - Creatures.Count;
+            List<Creature> new_creatures = new List<Creature>();
+
+            for (int i = 0; i < creatures_to_create; i++)
+            {
+                new_creatures.Add(Creatures[0].Clone() as Creature);
+            }
+
+            foreach (Creature creature in new_creatures)
+            {
+                creature.Mutate();
+            }
+
+            Creatures.AddRange(new_creatures);
+        }
+
+        /// <summary>
         /// Selection.
         /// </summary>
         /// <param name="test">test</param>
         public void Selection(Tests.DoublesToInt test)
         {
+            int origin_count = Creatures.Count;
             ProcessScoring(test);
+            KillTheWeak(0.5);
+            RestorePopulation(origin_count);
             IncN();
         }
     }

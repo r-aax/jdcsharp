@@ -11,7 +11,7 @@ namespace NNBroth.Evolution
     /// <summary>
     /// Cortex.
     /// </summary>
-    public class Cortex
+    public class Cortex : ICloneable
     {
         /// <summary>
         /// Sensor.
@@ -189,6 +189,62 @@ namespace NNBroth.Evolution
             }
 
             return Actuator.GetAnswer();
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>clone</returns>
+        public object Clone()
+        {
+            Cortex cortex = new Cortex();
+
+            // Clone neurons.
+            for (int i = 0; i < Neurons.Count; i++)
+            {
+                cortex.Neurons.Add(Neurons[i].Clone() as Neuron);
+            }
+
+            // Clone links.
+            for (int i = 0; i < Links.Count; i++)
+            {
+                cortex.Links.Add(Links[i].Clone() as Link);
+            }
+
+            // Restore links.
+            foreach (Link link in Links)
+            {
+                int link_index = Links.IndexOf(link);
+                Link cortex_link = cortex.Links[link_index];
+
+                if (link.Src is Sensor)
+                {
+                    cortex.Sensor.OutLinks.Add(cortex_link);
+                    cortex_link.Src = cortex.Sensor;
+                }
+                else
+                {
+                    int src_index = Neurons.IndexOf(link.Src as Neuron);
+
+                    cortex.Neurons[src_index].OutLinks.Add(cortex_link);
+                    cortex_link.Src = cortex.Neurons[src_index];
+                }
+
+                if (link.Dst is Actuator)
+                {
+                    cortex.Actuator.InLinks.Add(cortex_link);
+                    cortex_link.Dst = cortex.Actuator;
+                }
+                else
+                {
+                    int dst_index = Neurons.IndexOf(link.Dst as Neuron);
+
+                    cortex.Neurons[dst_index].InLinks.Add(cortex_link);
+                    cortex_link.Dst = cortex.Neurons[dst_index];
+                }
+            }
+
+            return cortex;
         }
     }
 }

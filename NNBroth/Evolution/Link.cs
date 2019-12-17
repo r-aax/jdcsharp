@@ -9,17 +9,17 @@ namespace NNBroth.Evolution
     /// <summary>
     /// Link between two nodes.
     /// </summary>
-    class Link
+    class Link : ICloneable
     {
         /// <summary>
         /// Source node.
         /// </summary>
-        private Node Src;
+        public Node Src;
 
         /// <summary>
         /// Destination node.
         /// </summary>
-        private Node Dst;
+        public Node Dst;
 
         /// <summary>
         /// Weight.
@@ -58,6 +58,15 @@ namespace NNBroth.Evolution
             Dst = dst;
             Weight = weight;
             Signal = 0.0;
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>clone</returns>
+        public object Clone()
+        {
+            return new Link(null, null, Weight);
         }
     }
 }

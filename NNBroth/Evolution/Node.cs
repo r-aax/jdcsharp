@@ -15,12 +15,12 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Input links.
         /// </summary>
-        protected List<Link> InLinks;
+        public List<Link> InLinks;
 
         /// <summary>
         /// Output links.
         /// </summary>
-        protected List<Link> OutLinks;
+        public List<Link> OutLinks;
 
         /// <summary>
         /// Constructor.

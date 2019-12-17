@@ -11,7 +11,7 @@ namespace NNBroth.Evolution
     /// <summary>
     /// Neuron.
     /// </summary>
-    class Neuron : Node
+    class Neuron : Node, ICloneable
     {
         /// <summary>
         /// Bias.
@@ -35,6 +35,15 @@ namespace NNBroth.Evolution
             double signal_to_propagate = Maths.Sigmoid(sum_of_signals + Bias);
 
             BroadcastSignalForward(signal_to_propagate);
+        }
+
+        /// <summary>
+        /// Clone.
+        /// </summary>
+        /// <returns>clone</returns>
+        public object Clone()
+        {
+            return new Neuron(Bias);
         }
     }
 }
