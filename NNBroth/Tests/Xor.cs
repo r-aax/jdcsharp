@@ -16,10 +16,10 @@ namespace NNBroth.Tests
         /// </summary>
         public Xor() : base()
         {
-            AddTestCase(new double[] { 0.0, 0.0 }, 1);
-            AddTestCase(new double[] { 0.0, 1.0 }, 0);
-            AddTestCase(new double[] { 1.0, 0.0 }, 0);
-            AddTestCase(new double[] { 1.0, 1.0 }, 1);
+            AddTestCase(new double[] { 0.0, 0.0 }, 0);
+            AddTestCase(new double[] { 0.0, 1.0 }, 1);
+            AddTestCase(new double[] { 1.0, 0.0 }, 1);
+            AddTestCase(new double[] { 1.0, 1.0 }, 0);
         }
     }
 }
