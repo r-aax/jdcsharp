@@ -27,7 +27,12 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Signal to propagate.
         /// </summary>
-        public double A;
+        public double Accumulator;
+
+        /// <summary>
+        /// Error.
+        /// </summary>
+        public double Error;
 
         /// <summary>
         /// Constructor.
@@ -36,7 +41,8 @@ namespace NNBroth.Evolution
         {
             Id = 0;
             Bias = bias;
-            A = 0.0;
+            Accumulator = 0.0;
+            Error = 0.0;
         }
 
         /// <summary>
@@ -46,9 +52,26 @@ namespace NNBroth.Evolution
         {
             double[] gathered_signals_vector = GatherWeightedSignalsVectorForward();
 
-            A = Maths.Sigmoid(gathered_signals_vector.Sum() + Bias);
+            Accumulator = Maths.Sigmoid(gathered_signals_vector.Sum() + Bias);
 
-            BroadcastSignalForward(A);
+            BroadcastSignalForward(Accumulator);
+        }
+
+        /// <summary>
+        /// Propagate error back.
+        /// </summary>
+        public void PropagateErrorBack()
+        {
+            double[] gathered_errors_vector = GatherErrorsVectorBack();
+
+            // Here is derivative of sigmoid.
+            Error = gathered_errors_vector.Sum() * Accumulator * (1.0 - Accumulator);
+
+            // Broadcast error back with weight.
+            foreach (Link link in InLinks)
+            {
+                link.Error = Error * link.Weight;
+            }
         }
 
         /// <summary>
@@ -60,7 +83,8 @@ namespace NNBroth.Evolution
             Neuron neuron = new Neuron(Bias);
 
             neuron.Id = Id;
-            neuron.A = A;
+            neuron.Accumulator = Accumulator;
+            neuron.Error = Error;
 
             return neuron;
         }
@@ -71,7 +95,7 @@ namespace NNBroth.Evolution
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("N {0} : B {1:F3}, A {2:F3}", Id, Bias, A);
+            return String.Format("N {0} : B {1:F3}, A {2:F3}", Id, Bias, Accumulator);
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 
 using Lib.Maths.Numbers;
+using Lib.Utils;
 
 namespace NNBroth.Evolution
 {
@@ -219,6 +220,18 @@ namespace NNBroth.Evolution
             }
 
             return Actuator.GetOutputs();
+        }
+
+        /// <summary>
+        /// Get cost after cortex sense.
+        /// </summary>
+        /// <param name="y">right answer</param>
+        /// <returns>cost</returns>
+        public double Cost(double[] y)
+        {
+            double[] a = Actuator.GetOutputs();
+
+            return 0.5 * Arrays.SquareDifference(a, y);
         }
 
         /// <summary>
