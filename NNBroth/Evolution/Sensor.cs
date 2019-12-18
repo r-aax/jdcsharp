@@ -26,5 +26,14 @@ namespace NNBroth.Evolution
         {
             ScatterSignalsVectorForward(in_signals);
         }
+
+        /// <summary>
+        /// To string conversion.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return "Sensor";
+        }
     }
 }

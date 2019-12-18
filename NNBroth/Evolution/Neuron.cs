@@ -15,6 +15,11 @@ namespace NNBroth.Evolution
     public class Neuron : Node, ICloneable
     {
         /// <summary>
+        /// Identifier.
+        /// </summary>
+        public int Id;
+
+        /// <summary>
         /// Bias.
         /// </summary>
         private double Bias;
@@ -24,6 +29,7 @@ namespace NNBroth.Evolution
         /// </summary>
         public Neuron(double bias = 0.0) : base()
         {
+            Id = 0;
             Bias = bias;
         }
 
@@ -44,7 +50,20 @@ namespace NNBroth.Evolution
         /// <returns>clone</returns>
         public object Clone()
         {
-            return new Neuron(Bias);
+            Neuron neuron = new Neuron(Bias);
+
+            neuron.Id = Id;
+
+            return neuron;
+        }
+
+        /// <summary>
+        /// To string conversion.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            return String.Format("N {0} : B {1:F3}", Id, Bias);
         }
     }
 }

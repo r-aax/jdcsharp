@@ -75,7 +75,7 @@ namespace NNBroth.Evolution
             src_layer = dst_layer;
             cortex.LinkLayerToActuator(src_layer);
 
-            cortex.OrderNodes();
+            cortex.OrderElements();
 
             return cortex;
         }
@@ -181,11 +181,23 @@ namespace NNBroth.Evolution
         }
 
         /// <summary>
-        /// Order nodes.
+        /// Order elements.
         /// </summary>
-        public void OrderNodes()
+        public void OrderElements()
         {
             // TODO: set right order of nodes.
+
+            // Set neurons ids.
+            for (int i = 0; i < Neurons.Count; i++)
+            {
+                Neurons[i].Id = i;
+            }
+
+            // Set links ids.
+            for (int i = 0; i < Links.Count; i++)
+            {
+                Links[i].Id = i;
+            }
         }
 
         /// <summary>

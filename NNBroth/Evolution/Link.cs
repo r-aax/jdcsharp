@@ -14,6 +14,11 @@ namespace NNBroth.Evolution
     public class Link : ICloneable
     {
         /// <summary>
+        /// Identifier.
+        /// </summary>
+        public int Id;
+
+        /// <summary>
         /// Source node.
         /// </summary>
         public Node Src;
@@ -52,6 +57,7 @@ namespace NNBroth.Evolution
         /// <param name="weight">weight</param>
         public Link(Node src, Node dst, double weight = 1.0)
         {
+            Id = 0;
             Src = src;
             Dst = dst;
             Weight = weight;
@@ -72,7 +78,42 @@ namespace NNBroth.Evolution
         /// <returns>clone</returns>
         public object Clone()
         {
-            return new Link(Weight);
+            Link link = new Link(Weight);
+
+            link.Id = Id;
+
+            return link;
+        }
+
+        /// <summary>
+        /// To string conversion.
+        /// </summary>
+        /// <returns>string</returns>
+        public override string ToString()
+        {
+            string label = "";
+
+            if (Src is Sensor)
+            {
+                Neuron DstN = Dst as Neuron;
+
+                label = String.Format("S - {0}", DstN.Id);
+            }
+            else if (Dst is Actuator)
+            {
+                Neuron SrcN = Src as Neuron;
+
+                label = String.Format("{0} - A", SrcN.Id);
+            }
+            else
+            {
+                Neuron SrcN = Src as Neuron;
+                Neuron DstN = Dst as Neuron;
+
+                label = String.Format("{0} - {1}", SrcN.Id, DstN.Id);
+            }
+
+            return label + String.Format(" : W {0:F3}, S {1:F3}", Weight, Signal);
         }
     }
 }

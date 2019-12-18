@@ -73,7 +73,7 @@ namespace NNBroth.Tests
         /// </summary>
         /// <param name="n">number</param>
         /// <returns>input</returns>
-        private double[] GetInput(int n)
+        public double[] GetInput(int n)
         {
             return Inputs[n];
         }
@@ -83,7 +83,7 @@ namespace NNBroth.Tests
         /// </summary>
         /// <param name="n">number</param>
         /// <returns>output</returns>
-        private double[] GetOutput(int n)
+        public double[] GetOutput(int n)
         {
             return Outputs[n];
         }

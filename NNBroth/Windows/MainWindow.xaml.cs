@@ -64,6 +64,8 @@ namespace NNBroth
                 Cortex = Cortex.CreateMultilayerCortex(new int[] { 2, 3, 2 });
             }
 
+            Cortex.Sense(Test.GetInput(2));
+
             DateTime beg = DateTime.Now;
             DateTime end = DateTime.Now;
             TimeSpan cur = end.Subtract(beg);
