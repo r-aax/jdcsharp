@@ -46,7 +46,7 @@ namespace NNBroth.Evolution
         /// Scoring for all creatures in generation.
         /// </summary>
         /// <param name="test">test</param>
-        public void ProcessScoring(Tests.DoublesToInt test)
+        public void ProcessScoring(Tests.Test test)
         {
             foreach (Creature creature in Creatures)
             {
@@ -90,12 +90,12 @@ namespace NNBroth.Evolution
 
             if (Creatures.Count > 0)
             {
-                n_string += String.Format("{0}", Creatures[0].Score);
+                n_string += String.Format("{0:F3}", Creatures[0].FineScore);
             }
 
             for (int i = 1; i < Creatures.Count; i++)
             {
-                n_string += String.Format(", {0}", Creatures[i].Score);
+                n_string += String.Format(", {0:F3}", Creatures[i].FineScore);
             }
 
             return n_string;
@@ -107,7 +107,7 @@ namespace NNBroth.Evolution
         /// <param name="k"></param>
         private void KillTheWeak(double k)
         {
-            Creatures.Sort((cr1, cr2) => cr1.CompareTo(cr2));
+            Creatures.Sort((cr1, cr2) => cr1.CompareToByFineScore(cr2));
 
             int count_to_kill = (int)(Creatures.Count * k);
 
@@ -128,11 +128,6 @@ namespace NNBroth.Evolution
                 new_creatures.Add(Creatures[0].Clone() as Creature);
             }
 
-            foreach (Creature creature in new_creatures)
-            {
-                creature.Mutate();
-            }
-
             Creatures.AddRange(new_creatures);
         }
 
@@ -140,11 +135,11 @@ namespace NNBroth.Evolution
         /// Selection.
         /// </summary>
         /// <param name="test">test</param>
-        public void Selection(Tests.DoublesToInt test)
+        public void Selection(Tests.Test test)
         {
             int origin_count = Creatures.Count;
             ProcessScoring(test);
-            KillTheWeak(0.5);
+            KillTheWeak(0.0);
             RestorePopulation(origin_count);
             IncN();
         }

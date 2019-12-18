@@ -9,33 +9,25 @@ namespace NNBroth.Evolution
     /// <summary>
     /// Creature.
     /// </summary>
-    class Creature : ICloneable
+    public class Creature : ICloneable
     {
-        /// <summary>
-        /// Score.
-        /// </summary>
-        public double Score
-        {
-            get;
-            private set;
-        }
-
         /// <summary>
         /// Cortex;
         /// </summary>
-        public Cortex Cortex
-        {
-            get;
-            private set;
-        }
+        public Cortex Cortex;
+
+        /// <summary>
+        /// Score.
+        /// </summary>
+        public double FineScore;
 
         /// <summary>
         /// Private constructor.
         /// </summary>
         private Creature()
         {
-            Score = 0.0;
             Cortex = null;
+            FineScore = 0.0;
         }
 
         /// <summary>
@@ -53,7 +45,7 @@ namespace NNBroth.Evolution
         /// </summary>
         /// <param name="in_signals">signals</param>
         /// <returns>answer</returns>
-        public int Sense(double[] in_signals)
+        public double[] Sense(double[] in_signals)
         {
             return Cortex.Sense(in_signals);
         }
@@ -62,19 +54,14 @@ namespace NNBroth.Evolution
         /// Process scoring.
         /// </summary>
         /// <param name="test">test</param>
-        public void ProcessScoring(Tests.DoublesToInt test)
+        public void ProcessScoring(Tests.Test test)
         {
-            int right = 0;
+            FineScore = 0;
 
             for (int i = 0; i < test.TestCasesCount; i++)
             {
-                if (test.Test(Cortex, i))
-                {
-                    right++;
-                }
+                FineScore += test.Diff(Cortex, i);
             }
-
-            Score = (double)right / (double)test.TestCasesCount;
         }
 
         /// <summary>
@@ -82,13 +69,13 @@ namespace NNBroth.Evolution
         /// </summary>
         /// <param name="creature">creature</param>
         /// <returns>compare result</returns>
-        public int CompareTo(Creature creature)
+        public int CompareToByFineScore(Creature creature)
         {
-            if (Score > creature.Score)
+            if (FineScore > creature.FineScore)
             {
                 return 1;            
             }
-            else if (Score < creature.Score)
+            else if (FineScore < creature.FineScore)
             {
                 return -1;
             }
@@ -109,14 +96,6 @@ namespace NNBroth.Evolution
             creature.Cortex = Cortex.Clone() as Cortex;
 
             return creature;
-        }
-
-        /// <summary>
-        /// Mutation.
-        /// </summary>
-        public void Mutate()
-        {
-            // Mutate.
         }
     }
 }

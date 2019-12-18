@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.Maths;
+using Lib.Maths.Numbers;
 
 namespace NNBroth.Evolution
 {
     /// <summary>
     /// Neuron.
     /// </summary>
-    class Neuron : Node, ICloneable
+    public class Neuron : Node, ICloneable
     {
         /// <summary>
         /// Bias.
@@ -31,8 +32,8 @@ namespace NNBroth.Evolution
         /// </summary>
         public void PropagateSignalForward()
         {
-            double sum_of_signals = InLinks.Aggregate(0.0, (acc, link) => acc + link.WeightedSignal);
-            double signal_to_propagate = Maths.Sigmoid(sum_of_signals + Bias);
+            double[] gathered_signals_vector = GatherWeightedSignalsVectorForward();
+            double signal_to_propagate = Maths.Sigmoid(gathered_signals_vector.Sum() + Bias);
 
             BroadcastSignalForward(signal_to_propagate);
         }

@@ -10,7 +10,7 @@ namespace NNBroth.Evolution
     /// <summary>
     /// Neural network node.
     /// </summary>
-    class Node
+    public class Node
     {
         /// <summary>
         /// Input links.
@@ -76,18 +76,18 @@ namespace NNBroth.Evolution
         /// Broadcast signal in back direction.
         /// </summary>
         /// <param name="signal">signal</param>
-        private void BroadcastSignalBack(double signal)
+        protected void BroadcastSignalBack(double signal)
         {
             BroadcastSignal(signal, InLinks);
         }
 
         /// <summary>
-        /// Distribute vector of signals to links list.
+        /// Scatter vector of signals to links list.
         /// Each vector element to each link.
         /// </summary>
         /// <param name="signals">signals vector</param>
         /// <param name="links">links list</param>
-        private void DistributeSignalsVector(double[] signals, List<Link> links)
+        private void ScatterSignalsVector(double[] signals, List<Link> links)
         {
             Debug.Assert(signals.Length == links.Count);
 
@@ -98,21 +98,57 @@ namespace NNBroth.Evolution
         }
 
         /// <summary>
-        /// Distribute vector of signals in forward direction.
+        /// Scatter vector of signals in forward direction.
         /// </summary>
         /// <param name="signals">signals vector</param>
-        private void DistributeSignalsVectorForward(double[] signals)
+        protected void ScatterSignalsVectorForward(double[] signals)
         {
-            DistributeSignalsVector(signals, OutLinks);
+            ScatterSignalsVector(signals, OutLinks);
         }
 
         /// <summary>
-        /// Distribute vector of signals in back direction.
+        /// Scatter vector of signals in back direction.
         /// </summary>
         /// <param name="signals">signals vector</param>
-        private void DistributeSignalsVectorBack(double[] signals)
+        protected void ScatterSignalsVectorBack(double[] signals)
         {
-            DistributeSignalsVector(signals, InLinks);
+            ScatterSignalsVector(signals, InLinks);
+        }
+
+
+        /// <summary>
+        /// Gather vector of signals from links.
+        /// </summary>
+        /// <param name="links">links</param>
+        /// <returns>gathered signals vector</returns>
+        private double[] GatherWeightedSignalsVector(List<Link> links)
+        {
+            double[] weighted_signals = new double[links.Count];
+
+            for (int i = 0; i < links.Count; i++)
+            {
+                weighted_signals[i] = links[i].WeightedSignal;
+            }
+
+            return weighted_signals;
+        }
+
+        /// <summary>
+        /// Gather vector of signals in forward direction.
+        /// </summary>
+        /// <returns>gathered signals vector</returns>
+        protected double[] GatherWeightedSignalsVectorForward()
+        {
+            return GatherWeightedSignalsVector(InLinks);
+        }
+
+        /// <summary>
+        /// Gather vector of signals in back direction.
+        /// </summary>
+        /// <returns>gathered signals vector</returns>
+        protected double[] GatherWeightedSignalsVectorBack()
+        {
+            return GatherWeightedSignalsVector(OutLinks);
         }
     }
 }

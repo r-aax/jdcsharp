@@ -30,7 +30,7 @@ namespace NNBroth
         /// <summary>
         /// Test.
         /// </summary>
-        DoublesToInt Test;
+        Test Test;
 
         /// <summary>
         /// Generation.

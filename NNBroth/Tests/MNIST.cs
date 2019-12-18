@@ -12,7 +12,7 @@ namespace NNBroth.Tests
     /// <summary>
     /// MNIST tests.
     /// </summary>
-    public class MNIST : DoublesToInt
+    public class MNIST : Test
     {
         /// <summary>
         /// In dimension.
@@ -64,7 +64,7 @@ namespace NNBroth.Tests
                 {
                     int label = (int)reader.ReadByte();
 
-                    Outputs.Add(label);
+                    Outputs.Add(WrapInt(label, 10));
                 }
             }
 

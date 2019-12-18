@@ -9,7 +9,7 @@ namespace NNBroth.Evolution
     /// <summary>
     /// Sensor.
     /// </summary>
-    class Sensor : Node, ICloneable
+    class Sensor : Node
     {
         /// <summary>
         /// Constructor.
@@ -24,19 +24,7 @@ namespace NNBroth.Evolution
         /// <param name="in_signals">signals</param>
         public void Sense(double[] in_signals)
         {
-            for (int i = 0; i < OutLinks.Count; i++)
-            {
-                OutLinks[i].Signal = in_signals[i];
-            }
-        }
-
-        /// <summary>
-        /// Clone.
-        /// </summary>
-        /// <returns>clone</returns>
-        public object Clone()
-        {
-            return new Sensor();
+            ScatterSignalsVectorForward(in_signals);
         }
     }
 }

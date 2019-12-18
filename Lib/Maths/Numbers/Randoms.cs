@@ -31,6 +31,16 @@ namespace Lib.Maths.Numbers
         }
 
         /// <summary>
+        /// Random double.
+        /// </summary>
+        /// <param name="d">maximum value</param>
+        /// <returns>random number</returns>
+        public static double RandomDouble(double d)
+        {
+            return RandomInInterval(0.0, d);
+        }
+
+        /// <summary>
         /// Random value from 0 to 1.
         /// </summary>
         /// <returns>random floating value in [0, 1]</returns>
@@ -65,6 +75,16 @@ namespace Lib.Maths.Numbers
             }
 
             return r;
+        }
+
+        /// <summary>
+        /// Random integer.
+        /// </summary>
+        /// <param name="i">integer</param>
+        /// <returns>random integer</returns>
+        public static int RandomInt(int i)
+        {
+            return RandomInInterval(0, i);
         }
 
         /// <summary>

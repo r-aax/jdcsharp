@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Lib.Utils;
+
 using NNBroth.Evolution;
 
 namespace NNBroth.Tests
@@ -12,7 +14,7 @@ namespace NNBroth.Tests
     /// Base test case.
     /// From doubles to integer.
     /// </summary>
-    public abstract class DoublesToInt
+    public abstract class Test
     {
         /// <summary>
         /// List of inputs.
@@ -22,15 +24,15 @@ namespace NNBroth.Tests
         /// <summary>
         /// List of outputs.
         /// </summary>
-        protected List<int> Outputs;
+        protected List<double[]> Outputs;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        protected DoublesToInt()
+        protected Test()
         {
             Inputs = new List<double[]>();
-            Outputs = new List<int>();
+            Outputs = new List<double[]>();
         }
 
         /// <summary>
@@ -62,7 +64,7 @@ namespace NNBroth.Tests
         {
             get
             {
-                return Outputs.Max() + 1;
+                return Outputs[0].Length;
             }
         }
 
@@ -81,20 +83,41 @@ namespace NNBroth.Tests
         /// </summary>
         /// <param name="n">number</param>
         /// <returns>output</returns>
-        private int GetOutput(int n)
+        private double[] GetOutput(int n)
         {
             return Outputs[n];
+        }
+
+        /// <summary>
+        /// Wrap int value with doubles array.
+        /// </summary>
+        /// <param name="value">value</param>
+        /// <param name="count">count of array elements</param>
+        /// <returns>array</returns>
+        protected double[] WrapInt(int value, int count)
+        {
+            double[] output = new double[count];
+
+            for (int i = 0; i < output.Length; i++)
+            {
+                output[i] = 0.0;
+            }
+
+            output[value] = 1.0;
+
+            return output;
         }
 
         /// <summary>
         /// Add test case.
         /// </summary>
         /// <param name="input">input</param>
-        /// <param name="output">output</param>
-        protected void AddTestCase(double[] input, int output)
+        /// <param name="int_output">integer output</param>
+        /// <param name="outputs_count">outputs count</param>
+        protected void AddTestCase(double[] input, int int_output, int outputs_count)
         {
             Inputs.Add(input);
-            Outputs.Add(output);
+            Outputs.Add(WrapInt(int_output, outputs_count));
         }
 
         /// <summary>
@@ -102,10 +125,27 @@ namespace NNBroth.Tests
         /// </summary>
         /// <param name="cortex">cortex</param>
         /// <param name="n">test case number</param>
-        /// <returns></returns>
-        public bool Test(Cortex cortex, int n)
+        /// <returns>check result</returns>
+        public bool Check(Cortex cortex, int n)
         {
-            return cortex.Sense(GetInput(n)) == GetOutput(n);
+            double[] cortex_output = cortex.Sense(GetInput(n));
+            double[] right_output = GetOutput(n);
+
+            return Arrays.MaxIndex(cortex_output) == Arrays.MaxIndex(right_output);
+        }
+
+        /// <summary>
+        /// Difference between cortex answer and right answer.
+        /// </summary>
+        /// <param name="cortex">cortex</param>
+        /// <param name="n">test number</param>
+        /// <returns>difference</returns>
+        public double Diff(Cortex cortex, int n)
+        {
+            double[] cortex_output = cortex.Sense(GetInput(n));
+            double[] right_output = GetOutput(n);
+
+            return Arrays.MeanSquareDifference(cortex_output, right_output);
         }
     }
 }

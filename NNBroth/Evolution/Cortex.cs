@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 using System.Diagnostics;
 
+using Lib.Maths.Numbers;
+
 namespace NNBroth.Evolution
 {
     /// <summary>
@@ -175,7 +177,7 @@ namespace NNBroth.Evolution
         /// </summary>
         /// <param name="in_signals">signals</param>
         /// <returns>answer</returns>
-        public int Sense(double[] in_signals)
+        public double[] Sense(double[] in_signals)
         {
             // Invalidate signals for debug.
             InvalidateSignals();
@@ -188,7 +190,7 @@ namespace NNBroth.Evolution
                 Neurons[i].PropagateSignalForward();
             }
 
-            return Actuator.GetAnswer();
+            return Actuator.GetOutputs();
         }
 
         /// <summary>

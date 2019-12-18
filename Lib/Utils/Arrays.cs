@@ -1,6 +1,7 @@
 ﻿// Author: Alexey Rybakov
 
 using System;
+using System.Diagnostics;
 
 namespace Lib.Utils
 {
@@ -194,6 +195,39 @@ namespace Lib.Utils
             double abs_mid = Sum(d) / d.Length;
 
             return abs_dev / abs_mid;
+        }
+
+        /// <summary>
+        /// Square difference between two arrays.
+        /// </summary>
+        /// <param name="a">first array</param>
+        /// <param name="b">second array</param>
+        /// <returns>square difference</returns>
+        public static double SquareDifference(double[] a, double[] b)
+        {
+            Debug.Assert(a.Length == b.Length);
+
+            double sq = 0.0;
+            
+            for (int i = 0; i < a.Length; i++)
+            {
+                double d = a[i] - b[i];
+
+                sq += d * d;
+            }
+
+            return sq;
+        }
+
+        /// <summary>
+        /// Mean square dirrerence.
+        /// </summary>
+        /// <param name="a">first array</param>
+        /// <param name="b">seconds array</param>
+        /// <returns>mean square difference</returns>
+        public static double MeanSquareDifference(double[] a, double[] b)
+        {
+            return SquareDifference(a, b) / a.Length;
         }
     }
 }

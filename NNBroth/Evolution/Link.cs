@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Lib.Maths.Numbers;
+
 namespace NNBroth.Evolution
 {
     /// <summary>
     /// Link between two nodes.
     /// </summary>
-    class Link : ICloneable
+    public class Link : ICloneable
     {
         /// <summary>
         /// Source node.
@@ -24,16 +26,12 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Weight.
         /// </summary>
-        private double Weight;
+        public double Weight;
 
         /// <summary>
         /// Signal.
         /// </summary>
-        public double Signal
-        {
-            private get;
-            set;
-        }
+        public double Signal;
 
         /// <summary>
         /// Weighted signal.
@@ -61,12 +59,20 @@ namespace NNBroth.Evolution
         }
 
         /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="weight">weight</param>
+        public Link(double weight = 1.0) : this(null, null, weight)
+        {
+        }
+
+        /// <summary>
         /// Clone.
         /// </summary>
         /// <returns>clone</returns>
         public object Clone()
         {
-            return new Link(null, null, Weight);
+            return new Link(Weight);
         }
     }
 }

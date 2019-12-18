@@ -9,17 +9,17 @@ namespace NNBroth.Tests
     /// <summary>
     /// Xor test.
     /// </summary>
-    public class Xor : DoublesToInt
+    public class Xor : Test
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         public Xor() : base()
         {
-            AddTestCase(new double[] { 0.0, 0.0 }, 0);
-            AddTestCase(new double[] { 0.0, 1.0 }, 1);
-            AddTestCase(new double[] { 1.0, 0.0 }, 1);
-            AddTestCase(new double[] { 1.0, 1.0 }, 0);
+            AddTestCase(new double[] { 0.0, 0.0 }, 0, 2);
+            AddTestCase(new double[] { 0.0, 1.0 }, 1, 2);
+            AddTestCase(new double[] { 1.0, 0.0 }, 1, 2);
+            AddTestCase(new double[] { 1.0, 1.0 }, 0, 2);
         }
     }
 }
