@@ -115,40 +115,36 @@ namespace NNBroth.Evolution
             ScatterSignalsVector(signals, InLinks);
         }
 
-
-        /// <summary>
-        /// Gather vector of signals from links.
-        /// </summary>
-        /// <param name="links">links</param>
-        /// <returns>gathered signals vector</returns>
-        private double[] GatherWeightedSignalsVector(List<Link> links)
-        {
-            double[] weighted_signals = new double[links.Count];
-
-            for (int i = 0; i < links.Count; i++)
-            {
-                weighted_signals[i] = links[i].WeightedSignal;
-            }
-
-            return weighted_signals;
-        }
-
         /// <summary>
         /// Gather vector of signals in forward direction.
         /// </summary>
         /// <returns>gathered signals vector</returns>
         protected double[] GatherWeightedSignalsVectorForward()
         {
-            return GatherWeightedSignalsVector(InLinks);
+            double[] weighted_signals = new double[InLinks.Count];
+
+            for (int i = 0; i < InLinks.Count; i++)
+            {
+                weighted_signals[i] = InLinks[i].WeightedSignal;
+            }
+
+            return weighted_signals;
         }
 
         /// <summary>
-        /// Gather vector of signals in back direction.
+        /// Gather vector of errors in back direction.
         /// </summary>
-        /// <returns>gathered signals vector</returns>
-        protected double[] GatherWeightedSignalsVectorBack()
+        /// <returns>gathered vector of errors</returns>
+        protected double[] GatherErrorsVectorBack()
         {
-            return GatherWeightedSignalsVector(OutLinks);
+            double[] errors = new double[OutLinks.Count];
+
+            for (int i = 0; i < OutLinks.Count; i++)
+            {
+                errors[i] = OutLinks[i].Error;
+            }
+
+            return errors;
         }
     }
 }

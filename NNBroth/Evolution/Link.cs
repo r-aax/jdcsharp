@@ -39,6 +39,11 @@ namespace NNBroth.Evolution
         public double Signal;
 
         /// <summary>
+        /// Error.
+        /// </summary>
+        public double Error;
+
+        /// <summary>
         /// Weighted signal.
         /// </summary>
         public double WeightedSignal
@@ -62,6 +67,7 @@ namespace NNBroth.Evolution
             Dst = dst;
             Weight = weight;
             Signal = 0.0;
+            Error = 0.0;
         }
 
         /// <summary>
@@ -113,7 +119,8 @@ namespace NNBroth.Evolution
                 label = String.Format("{0} - {1}", SrcN.Id, DstN.Id);
             }
 
-            return label + String.Format(" : W {0:F3}, S {1:F3}", Weight, Signal);
+            return label + String.Format(" : W {0:F3}, S {1:F3}, E {2:F3}",
+                                         Weight, Signal, Error);
         }
     }
 }

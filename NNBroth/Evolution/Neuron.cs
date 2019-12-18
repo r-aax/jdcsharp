@@ -25,12 +25,18 @@ namespace NNBroth.Evolution
         private double Bias;
 
         /// <summary>
+        /// Signal to propagate.
+        /// </summary>
+        public double A;
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public Neuron(double bias = 0.0) : base()
         {
             Id = 0;
             Bias = bias;
+            A = 0.0;
         }
 
         /// <summary>
@@ -39,9 +45,10 @@ namespace NNBroth.Evolution
         public void PropagateSignalForward()
         {
             double[] gathered_signals_vector = GatherWeightedSignalsVectorForward();
-            double signal_to_propagate = Maths.Sigmoid(gathered_signals_vector.Sum() + Bias);
 
-            BroadcastSignalForward(signal_to_propagate);
+            A = Maths.Sigmoid(gathered_signals_vector.Sum() + Bias);
+
+            BroadcastSignalForward(A);
         }
 
         /// <summary>
@@ -53,6 +60,7 @@ namespace NNBroth.Evolution
             Neuron neuron = new Neuron(Bias);
 
             neuron.Id = Id;
+            neuron.A = A;
 
             return neuron;
         }
@@ -63,7 +71,7 @@ namespace NNBroth.Evolution
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("N {0} : B {1:F3}", Id, Bias);
+            return String.Format("N {0} : B {1:F3}, A {2:F3}", Id, Bias, A);
         }
     }
 }
