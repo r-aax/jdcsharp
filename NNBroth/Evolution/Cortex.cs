@@ -47,21 +47,37 @@ namespace NNBroth.Evolution
         }
 
         /// <summary>
-        /// Constructor.
+        /// Create multilayer cortex.
         /// </summary>
-        /// <param name="sensor_dimension">sensor dimension</param>
-        /// <param name="actuator_dimension">actuator dimension</param>
-        public Cortex(int sensor_dimension, int actuator_dimension) : this()
+        /// <param name="layers">layers sizes</param>
+        /// <returns>cortex</returns>
+        public static Cortex CreateMultilayerCortex(int[] layers)
         {
-            List<Neuron> first_layer = CreateNeuronsLayer(sensor_dimension);
-            List<Neuron> last_layer = CreateNeuronsLayer(actuator_dimension);
+            Debug.Assert(layers.Length >= 2);
 
-            LinkSensorToLayer(first_layer);
-            LinkLayers(first_layer, last_layer);
-            LinkLayerToActuator(last_layer);
+            Cortex cortex = new Cortex();
+            List<Neuron> dst_layer = null;
+            List<Neuron> src_layer = null;
 
-            // Set right order of nodes.
-            OrderNodes();
+            // Sensor.
+            dst_layer = cortex.CreateNeuronsLayer(layers[0]);
+            cortex.LinkSensorToLayer(dst_layer);
+
+            // Inner links.
+            for (int i = 1; i < layers.Length; i++)
+            {
+                src_layer = dst_layer;
+                dst_layer = cortex.CreateNeuronsLayer(layers[i]);
+                cortex.LinkLayers(src_layer, dst_layer);
+            }
+
+            // Actuator.
+            src_layer = dst_layer;
+            cortex.LinkLayerToActuator(src_layer);
+
+            cortex.OrderNodes();
+
+            return cortex;
         }
 
         /// <summary>

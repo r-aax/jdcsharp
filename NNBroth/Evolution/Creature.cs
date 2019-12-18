@@ -37,7 +37,7 @@ namespace NNBroth.Evolution
         /// <param name="actuator_dimension">actuator dimension</param>
         public Creature(int sensor_dimension, int actuator_dimension) : this()
         {
-            Cortex = new Cortex(sensor_dimension, actuator_dimension);
+            Cortex = Cortex.CreateMultilayerCortex(new int[] { sensor_dimension, actuator_dimension });
         }
 
         /// <summary>

@@ -33,9 +33,9 @@ namespace NNBroth
         Test Test;
 
         /// <summary>
-        /// Generation.
+        /// Cortex.
         /// </summary>
-        Generation Generation;
+        Cortex Cortex;
 
         /// <summary>
         /// Create form.
@@ -44,7 +44,7 @@ namespace NNBroth
         {
             InitializeComponent();
             Test = null;
-            Generation = null;
+            Cortex = null;
         }
 
         /// <summary>
@@ -59,21 +59,15 @@ namespace NNBroth
                 Test = new Xor();
             }
 
-            if (Generation == null)
+            if (Cortex == null)
             {
-                Generation = new Generation();
-                Generation.AddDefaultCreatures(10, Test.InputDimension, Test.OutputDimension);
+                Cortex = Cortex.CreateMultilayerCortex(new int[] { 2, 3, 2 });
             }
 
             DateTime beg = DateTime.Now;
-            for (int i = 0; i < Lib.GUI.WPF.IO.GetInt(ItersCountTB); i++)
-            {
-                Generation.Selection(Test);
-            }
             DateTime end = DateTime.Now;
             TimeSpan cur = end.Subtract(beg);
 
-            OutputLB.Items.Add(Generation.ToString() + String.Format(" : time = {0}", cur));
         }
     }
 }
