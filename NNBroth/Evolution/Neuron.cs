@@ -15,6 +15,11 @@ namespace NNBroth.Evolution
     public class Neuron : ICloneable
     {
         /// <summary>
+        /// Identifier.
+        /// </summary>
+        public int Id;
+
+        /// <summary>
         /// Input links.
         /// </summary>
         public List<Link> InLinks;
@@ -25,14 +30,14 @@ namespace NNBroth.Evolution
         public List<Link> OutLinks;
 
         /// <summary>
-        /// Identifier.
-        /// </summary>
-        public int Id;
-
-        /// <summary>
         /// Bias.
         /// </summary>
         public double Bias;
+
+        /// <summary>
+        /// Delta Bias.
+        /// </summary>
+        public double dBias;
 
         /// <summary>
         /// Signal to propagate.
@@ -53,6 +58,7 @@ namespace NNBroth.Evolution
             OutLinks = new List<Link>();
             Id = 0;
             Bias = bias;
+            dBias = 0.0;
             Accumulator = 0.0;
             Error = 0.0;
         }
@@ -181,10 +187,13 @@ namespace NNBroth.Evolution
         /// </summary>
         public void PropagateErrorBack()
         {
-            double[] gathered_errors_vector = GatherErrorsVectorBack();
+            if (!IsLastLayer)
+            {
+                double[] gathered_errors_vector = GatherErrorsVectorBack();
 
-            // Here is derivative of sigmoid.
-            Error = gathered_errors_vector.Sum() * Accumulator * (1.0 - Accumulator);
+                // Here is derivative of sigmoid.
+                Error = gathered_errors_vector.Sum() * Accumulator * (1.0 - Accumulator);
+            }
 
             // Broadcast error back with weight.
             foreach (Link link in InLinks)
@@ -202,8 +211,6 @@ namespace NNBroth.Evolution
             Neuron neuron = new Neuron(Bias);
 
             neuron.Id = Id;
-            neuron.Accumulator = Accumulator;
-            neuron.Error = Error;
 
             return neuron;
         }
@@ -214,7 +221,8 @@ namespace NNBroth.Evolution
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("N {0} : B {1:F3}, A {2:F3}", Id, Bias, Accumulator);
+            return String.Format("N {0} : B {1:F3}, A {2:F3}, E {3:F3}",
+                                 Id, Bias, Accumulator, Error);
         }
     }
 }

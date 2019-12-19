@@ -54,13 +54,13 @@ namespace NNBroth.Evolution
         /// Process scoring.
         /// </summary>
         /// <param name="test">test</param>
-        public void ProcessScoring(Tests.Test test)
+        public void ProcessScoring(Tests.Batch test)
         {
             FineScore = 0;
 
             for (int i = 0; i < test.TestCasesCount; i++)
             {
-                FineScore += test.Diff(Cortex, i);
+                FineScore += test.Cost(Cortex, i);
             }
         }
 

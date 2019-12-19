@@ -173,11 +173,20 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Invalidate all signals.
         /// </summary>
-        public void InvalidateSignals()
+        public void InvalidateData()
         {
+            // Neurons data.
+            foreach (Neuron neuron in Neurons)
+            {
+                neuron.Accumulator = double.NaN;
+                neuron.Error = double.NaN;
+            }
+
+            // Links data.
             foreach (Link link in Links)
             {
                 link.Signal = double.NaN;
+                link.Error = double.NaN;
             }
         }
 
@@ -204,20 +213,38 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Sense signals.
         /// </summary>
-        /// <param name="in_signals">signals</param>
-        /// <returns>answer</returns>
-        public double[] Sense(double[] in_signals)
+        /// <param name="inputs">inputs</param>
+        public void SenseForward(double[] inputs)
         {
             // Invalidate signals for debug.
-            InvalidateSignals();
+            InvalidateData();
 
-            Sensor.Sense(in_signals);
+            Sensor.Sense(inputs);
 
             // Process neurons in right order.
             for (int i = 0; i < Neurons.Count; i++)
             {
                 Neurons[i].PropagateSignalForward();
             }
+        }
+
+        /// <summary>
+        /// Sense back.
+        /// </summary>
+        /// <param name="outputs">outputs</param>
+        public void SenseBack(double[] outputs)
+        {
+            throw new Exception("TODO");
+        }
+
+        /// <summary>
+        /// Sense with outputs return.
+        /// </summary>
+        /// <param name="inputs">inputs</param>
+        /// <returns>outputs</returns>
+        public double[] Sense(double[] inputs)
+        {
+            SenseForward(inputs);
 
             return Actuator.GetOutputs();
         }
@@ -280,6 +307,55 @@ namespace NNBroth.Evolution
             }
 
             return cortex;
+        }
+
+        /// <summary>
+        /// Zero delta biases for neurons and delta weights for links.
+        /// </summary>
+        public void ZeroDWeightsAndDBiases()
+        {
+            foreach (Neuron neuron in Neurons)
+            {
+                neuron.dBias = 0.0;
+            }
+
+            foreach (Link link in Links)
+            {
+                link.dWeight = 0.0;
+            }
+        }
+
+        /// <summary>
+        /// Store delta biases for neurons and delta weights for links.
+        /// </summary>
+        public void StoreDWeightsAndDBiases()
+        {
+            foreach (Neuron neuron in Neurons)
+            {
+                neuron.dBias += neuron.Error;
+
+                foreach (Link link in neuron.InLinks)
+                {
+                    link.dWeight += link.Signal * neuron.Error;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Correct neurons biases and links weight.
+        /// </summary>
+        /// <param name="eta">learning rate</param>
+        public void CorrectWeightsAndBiases(double eta)
+        {
+            foreach (Neuron neuron in Neurons)
+            {
+                neuron.Bias -= eta * neuron.dBias;
+            }
+
+            foreach (Link link in Links)
+            {
+                link.Weight -= eta * link.dWeight;
+            }
         }
     }
 }

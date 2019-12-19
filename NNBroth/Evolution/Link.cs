@@ -34,6 +34,11 @@ namespace NNBroth.Evolution
         public double Weight;
 
         /// <summary>
+        /// Delta weight.
+        /// </summary>
+        public double dWeight;
+
+        /// <summary>
         /// Signal.
         /// </summary>
         public double Signal;
@@ -66,6 +71,7 @@ namespace NNBroth.Evolution
             Src = src;
             Dst = dst;
             Weight = weight;
+            dWeight = 0.0;
             Signal = 0.0;
             Error = 0.0;
         }

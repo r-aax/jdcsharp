@@ -72,7 +72,8 @@
     <Compile Include="Evolution\Neuron.cs" />
     <Compile Include="Evolution\Pole.cs" />
     <Compile Include="Evolution\Sensor.cs" />
-    <Compile Include="Tests\Test.cs" />
+    <Compile Include="Evolution\Trainer.cs" />
+    <Compile Include="Tests\Batch.cs" />
     <Compile Include="Tests\MNIST.cs" />
     <Compile Include="Tests\Xor.cs" />
     <Compile Include="Windows\MainWindow.xaml.cs">

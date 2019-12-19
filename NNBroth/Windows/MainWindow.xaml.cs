@@ -30,7 +30,7 @@ namespace NNBroth
         /// <summary>
         /// Test.
         /// </summary>
-        Test Test;
+        Batch Test;
 
         /// <summary>
         /// Cortex.
@@ -56,19 +56,13 @@ namespace NNBroth
         {
             if (Test == null)
             {
-                Test = new Xor();
+                Test = (new Xor()).RandomMiniBatch(10);
             }
 
             if (Cortex == null)
             {
                 Cortex = Cortex.CreateMultilayerCortex(new int[] { 2, 3, 2 });
             }
-
-            Cortex.Sense(Test.GetInput(2));
-
-            DateTime beg = DateTime.Now;
-            DateTime end = DateTime.Now;
-            TimeSpan cur = end.Subtract(beg);
 
         }
     }

@@ -9,7 +9,7 @@ namespace NNBroth.Tests
     /// <summary>
     /// Xor test.
     /// </summary>
-    public class Xor : Test
+    public class Xor : Batch
     {
         /// <summary>
         /// Constructor.

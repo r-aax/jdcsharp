@@ -12,7 +12,7 @@ namespace NNBroth.Tests
     /// <summary>
     /// MNIST tests.
     /// </summary>
-    public class MNIST : Test
+    public class MNIST : Batch
     {
         /// <summary>
         /// In dimension.

@@ -46,7 +46,7 @@ namespace NNBroth.Evolution
         /// Scoring for all creatures in generation.
         /// </summary>
         /// <param name="test">test</param>
-        public void ProcessScoring(Tests.Test test)
+        public void ProcessScoring(Tests.Batch test)
         {
             foreach (Creature creature in Creatures)
             {
@@ -135,7 +135,7 @@ namespace NNBroth.Evolution
         /// Selection.
         /// </summary>
         /// <param name="test">test</param>
-        public void Selection(Tests.Test test)
+        public void Selection(Tests.Batch test)
         {
             int origin_count = Creatures.Count;
             ProcessScoring(test);

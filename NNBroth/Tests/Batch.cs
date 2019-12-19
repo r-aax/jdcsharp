@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Lib.Utils;
+using Lib.Maths.Numbers;
 
 using NNBroth.Evolution;
 
@@ -14,7 +15,7 @@ namespace NNBroth.Tests
     /// Base test case.
     /// From doubles to integer.
     /// </summary>
-    public abstract class Test
+    public class Batch
     {
         /// <summary>
         /// List of inputs.
@@ -29,7 +30,7 @@ namespace NNBroth.Tests
         /// <summary>
         /// Constructor.
         /// </summary>
-        protected Test()
+        protected Batch()
         {
             Inputs = new List<double[]>();
             Outputs = new List<double[]>();
@@ -112,12 +113,22 @@ namespace NNBroth.Tests
         /// Add test case.
         /// </summary>
         /// <param name="input">input</param>
+        /// <param name="output">output</param>
+        private void AddTestCase(double[] input, double[] output)
+        {
+            Inputs.Add(input);
+            Outputs.Add(output);
+        }
+
+        /// <summary>
+        /// Add test case.
+        /// </summary>
+        /// <param name="input">input</param>
         /// <param name="int_output">integer output</param>
         /// <param name="outputs_count">outputs count</param>
         protected void AddTestCase(double[] input, int int_output, int outputs_count)
         {
-            Inputs.Add(input);
-            Outputs.Add(WrapInt(int_output, outputs_count));
+            AddTestCase(input, WrapInt(int_output, outputs_count));
         }
 
         /// <summary>
@@ -140,12 +151,30 @@ namespace NNBroth.Tests
         /// <param name="cortex">cortex</param>
         /// <param name="n">test number</param>
         /// <returns>difference</returns>
-        public double Diff(Cortex cortex, int n)
+        public double Cost(Cortex cortex, int n)
         {
-            double[] cortex_output = cortex.Sense(GetInput(n));
-            double[] right_output = GetOutput(n);
+            cortex.Sense(GetInput(n));
 
-            return Arrays.MeanSquareDifference(cortex_output, right_output);
+            return cortex.Cost(GetOutput(n));
+        }
+
+        /// <summary>
+        /// Create mini batch.
+        /// </summary>
+        /// <param name="n">test cases count</param>
+        /// <returns>mini batch</returns>
+        public Batch RandomMiniBatch(int n)
+        {
+            Batch test = new Batch();
+
+            for (int i = 0; i < n; i++)
+            {
+                int index = Randoms.RandomInt(TestCasesCount - 1);
+
+                test.AddTestCase(GetInput(index), GetOutput(index));
+            }
+
+            return test;
         }
     }
 }
