@@ -95,7 +95,7 @@ namespace NNBroth.Tests
         /// <param name="value">value</param>
         /// <param name="count">count of array elements</param>
         /// <returns>array</returns>
-        protected double[] WrapInt(int value, int count)
+        protected static double[] WrapInt(int value, int count)
         {
             double[] output = new double[count];
 
@@ -132,6 +132,17 @@ namespace NNBroth.Tests
         }
 
         /// <summary>
+        /// Check if answers are same.
+        /// </summary>
+        /// <param name="answer1">first answer</param>
+        /// <param name="answer2">second answer</param>
+        /// <returns>check result</returns>
+        public static bool IsAnswersEq(double[] answer1, double[] answer2)
+        {
+            return Arrays.MaxIndex(answer1) == Arrays.MaxIndex(answer2);
+        }
+
+        /// <summary>
         /// Test cortex for test case.
         /// </summary>
         /// <param name="cortex">cortex</param>
@@ -139,10 +150,10 @@ namespace NNBroth.Tests
         /// <returns>check result</returns>
         public bool Check(Cortex cortex, int n)
         {
-            double[] cortex_output = cortex.Sense(GetInput(n));
+            double[] cortex_output = cortex.SenseForward(GetInput(n));
             double[] right_output = GetOutput(n);
 
-            return Arrays.MaxIndex(cortex_output) == Arrays.MaxIndex(right_output);
+            return IsAnswersEq(cortex_output, right_output);
         }
 
         /// <summary>
@@ -173,7 +184,7 @@ namespace NNBroth.Tests
         /// <returns>difference</returns>
         public double Cost(Cortex cortex, int n)
         {
-            cortex.Sense(GetInput(n));
+            cortex.SenseForward(GetInput(n));
 
             return cortex.Cost(GetOutput(n));
         }

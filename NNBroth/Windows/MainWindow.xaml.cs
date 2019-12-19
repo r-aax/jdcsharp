@@ -61,7 +61,7 @@ namespace NNBroth
 
             if (Cortex == null)
             {
-                Cortex = Cortex.CreateMultilayerCortex(new int[] { 2, 3, 2 });
+                Cortex = Cortex.CreateMultilayerCortex(new int[] { 2, 3, 4, 5, 4, 2 });
             }
 
             int iters = Lib.GUI.WPF.IO.GetInt(ItersCountTB);

@@ -101,7 +101,7 @@ namespace NNBroth.Evolution
         /// <param name="src">source</param>
         /// <param name="dst">destination</param>
         /// <param name="weight">weight</param>
-        private void Link(Neuron src, Neuron dst, double weight = 1.0)
+        private void Link(Neuron src, Neuron dst, double weight = 0.1)
         {
             Link link = new Link(src, dst, weight);
 
@@ -214,7 +214,8 @@ namespace NNBroth.Evolution
         /// Sense signals.
         /// </summary>
         /// <param name="inputs">inputs</param>
-        public void SenseForward(double[] inputs)
+        /// <returns>answer</returns>
+        public double[] SenseForward(double[] inputs)
         {
             // Invalidate signals for debug.
             InvalidateData();
@@ -226,6 +227,8 @@ namespace NNBroth.Evolution
             {
                 Neurons[i].PropagateSignalForward();
             }
+
+            return Actuator.GetOutputs();
         }
 
         /// <summary>
@@ -241,18 +244,6 @@ namespace NNBroth.Evolution
             {
                 Neurons[i].PropagateErrorBack();
             }
-        }
-
-        /// <summary>
-        /// Sense with outputs return.
-        /// </summary>
-        /// <param name="inputs">inputs</param>
-        /// <returns>outputs</returns>
-        public double[] Sense(double[] inputs)
-        {
-            SenseForward(inputs);
-
-            return Actuator.GetOutputs();
         }
 
         /// <summary>

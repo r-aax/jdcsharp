@@ -25,6 +25,8 @@ namespace NNBroth.Evolution
         /// <param name="batch">batch</param>
         public static void Train(Cortex cortex, Batch batch)
         {
+            int c = 0;
+
             cortex.ZeroDWeightsAndDBiases();
 
             for (int i = 0; i < batch.TestCasesCount; i++)
@@ -32,12 +34,17 @@ namespace NNBroth.Evolution
                 double[] x = batch.GetInput(i);
                 double[] y = batch.GetOutput(i);
 
-                cortex.SenseForward(x);
-                cortex.SenseBack(y);
-                cortex.StoreDWeightsAndDBiases();
+                double[] a = cortex.SenseForward(x);
+
+                if (!Batch.IsAnswersEq(a, y))
+                {
+                    cortex.SenseBack(y);
+                    cortex.StoreDWeightsAndDBiases();
+                    c++;
+                }
             }
 
-            cortex.CorrectWeightsAndBiases(DefaultLearningRate / batch.TestCasesCount);
+            cortex.CorrectWeightsAndBiases(DefaultLearningRate / c);
         }
 
         /// <summary>

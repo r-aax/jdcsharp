@@ -47,7 +47,7 @@ namespace NNBroth.Evolution
         /// <returns>answer</returns>
         public double[] Sense(double[] in_signals)
         {
-            return Cortex.Sense(in_signals);
+            return Cortex.SenseForward(in_signals);
         }
 
         /// <summary>
