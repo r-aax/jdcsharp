@@ -21,12 +21,12 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Source node.
         /// </summary>
-        public Node Src;
+        public Neuron Src;
 
         /// <summary>
         /// Destination node.
         /// </summary>
-        public Node Dst;
+        public Neuron Dst;
 
         /// <summary>
         /// Weight.
@@ -60,7 +60,7 @@ namespace NNBroth.Evolution
         /// <param name="src">source</param>
         /// <param name="dst">destination</param>
         /// <param name="weight">weight</param>
-        public Link(Node src, Node dst, double weight = 1.0)
+        public Link(Neuron src, Neuron dst, double weight = 1.0)
         {
             Id = 0;
             Src = src;
@@ -97,30 +97,8 @@ namespace NNBroth.Evolution
         /// <returns>string</returns>
         public override string ToString()
         {
-            string label = "";
-
-            if (Src is Sensor)
-            {
-                Neuron DstN = Dst as Neuron;
-
-                label = String.Format("S - {0}", DstN.Id);
-            }
-            else if (Dst is Actuator)
-            {
-                Neuron SrcN = Src as Neuron;
-
-                label = String.Format("{0} - A", SrcN.Id);
-            }
-            else
-            {
-                Neuron SrcN = Src as Neuron;
-                Neuron DstN = Dst as Neuron;
-
-                label = String.Format("{0} - {1}", SrcN.Id, DstN.Id);
-            }
-
-            return label + String.Format(" : W {0:F3}, S {1:F3}, E {2:F3}",
-                                         Weight, Signal, Error);
+            return String.Format("{0} - {1} : W {2:F3}, S {3:F3}, E {4:F3}",
+                                 Src.Id, Dst.Id, Weight, Signal, Error);
         }
     }
 }

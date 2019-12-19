@@ -70,7 +70,7 @@
     <Compile Include="Evolution\Generation.cs" />
     <Compile Include="Evolution\Link.cs" />
     <Compile Include="Evolution\Neuron.cs" />
-    <Compile Include="Evolution\Node.cs" />
+    <Compile Include="Evolution\Pole.cs" />
     <Compile Include="Evolution\Sensor.cs" />
     <Compile Include="Tests\Test.cs" />
     <Compile Include="Tests\MNIST.cs" />

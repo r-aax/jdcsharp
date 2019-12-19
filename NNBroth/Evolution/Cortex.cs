@@ -96,12 +96,12 @@ namespace NNBroth.Evolution
         }
 
         /// <summary>
-        /// Link to nnodes.
+        /// Link two neurons.
         /// </summary>
-        /// <param name="src">source node</param>
-        /// <param name="dst">destination node</param>
+        /// <param name="src">source</param>
+        /// <param name="dst">destination</param>
         /// <param name="weight">weight</param>
-        private void Link(Node src, Node dst, double weight = 1.0)
+        private void Link(Neuron src, Neuron dst, double weight = 1.0)
         {
             Link link = new Link(src, dst, weight);
 
@@ -154,7 +154,7 @@ namespace NNBroth.Evolution
         {
             foreach (Neuron dst in layer)
             {
-                Link(Sensor, dst);
+                Sensor.Neurons.Add(dst);
             }
         }
 
@@ -166,7 +166,7 @@ namespace NNBroth.Evolution
         {
             foreach (Neuron src in layer)
             {
-                Link(src, Actuator);
+                Actuator.Neurons.Add(src);
             }
         }
 
@@ -260,31 +260,23 @@ namespace NNBroth.Evolution
                 int link_index = Links.IndexOf(link);
                 Link cortex_link = cortex.Links[link_index];
 
-                if (link.Src is Sensor)
-                {
-                    cortex.Sensor.OutLinks.Add(cortex_link);
-                    cortex_link.Src = cortex.Sensor;
-                }
-                else
-                {
-                    int src_index = Neurons.IndexOf(link.Src as Neuron);
+                int src_index = Neurons.IndexOf(link.Src as Neuron);
+                cortex.Neurons[src_index].OutLinks.Add(cortex_link);
+                cortex_link.Src = cortex.Neurons[src_index];
 
-                    cortex.Neurons[src_index].OutLinks.Add(cortex_link);
-                    cortex_link.Src = cortex.Neurons[src_index];
-                }
+                int dst_index = Neurons.IndexOf(link.Dst as Neuron);
+                cortex.Neurons[dst_index].InLinks.Add(cortex_link);
+                cortex_link.Dst = cortex.Neurons[dst_index];
+            }
 
-                if (link.Dst is Actuator)
-                {
-                    cortex.Actuator.InLinks.Add(cortex_link);
-                    cortex_link.Dst = cortex.Actuator;
-                }
-                else
-                {
-                    int dst_index = Neurons.IndexOf(link.Dst as Neuron);
-
-                    cortex.Neurons[dst_index].InLinks.Add(cortex_link);
-                    cortex_link.Dst = cortex.Neurons[dst_index];
-                }
+            // Restore sensor and actuator data.
+            foreach (Neuron neuron in Sensor.Neurons)
+            {
+                cortex.Sensor.Neurons.Add(cortex.Neurons[neuron.Id]);
+            }
+            foreach (Neuron neuron in Actuator.Neurons)
+            {
+                cortex.Actuator.Neurons.Add(cortex.Neurons[neuron.Id]);
             }
 
             return cortex;

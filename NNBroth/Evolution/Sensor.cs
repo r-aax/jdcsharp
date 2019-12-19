@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace NNBroth.Evolution
 {
     /// <summary>
     /// Sensor.
     /// </summary>
-    class Sensor : Node
+    class Sensor : Pole
     {
         /// <summary>
         /// Constructor.
@@ -24,7 +25,7 @@ namespace NNBroth.Evolution
         /// <param name="in_signals">signals</param>
         public void Sense(double[] in_signals)
         {
-            ScatterSignalsVectorForward(in_signals);
+            ScatterAccumulators(in_signals);
         }
 
         /// <summary>

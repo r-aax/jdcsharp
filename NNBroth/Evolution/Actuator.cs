@@ -8,7 +8,7 @@ using Lib.Utils;
 
 namespace NNBroth.Evolution
 {
-    class Actuator : Node
+    class Actuator : Pole
     {
         /// <summary>
         /// Actuator.
@@ -23,7 +23,7 @@ namespace NNBroth.Evolution
         /// <returns>answer</returns>
         public double[] GetOutputs()
         {
-            return GatherWeightedSignalsVectorForward();
+            return GatherAccumulators();
         }
 
         /// <summary>
