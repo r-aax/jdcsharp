@@ -30,7 +30,7 @@ namespace NNBroth
         /// <summary>
         /// Test.
         /// </summary>
-        Batch Test;
+        Batch Batch;
 
         /// <summary>
         /// Cortex.
@@ -43,7 +43,7 @@ namespace NNBroth
         public MainWindow()
         {
             InitializeComponent();
-            Test = null;
+            Batch = null;
             Cortex = null;
         }
 
@@ -54,9 +54,9 @@ namespace NNBroth
         /// <param name="e">parameters</param>
         private void GoB_Click(object sender, RoutedEventArgs e)
         {
-            if (Test == null)
+            if (Batch == null)
             {
-                Test = (new Xor()).RandomMiniBatch(10);
+                Batch = new Xor();
             }
 
             if (Cortex == null)
@@ -64,6 +64,18 @@ namespace NNBroth
                 Cortex = Cortex.CreateMultilayerCortex(new int[] { 2, 3, 2 });
             }
 
+            int iters = Lib.GUI.WPF.IO.GetInt(ItersCountTB);
+
+            for (int i = 0; i < iters; i++)
+            {
+                Trainer.Train(Cortex, Batch);
+            }
+
+            OutputLB.Items.Add(String.Format("Iter : cost = {0}, right = {1}",
+                                             Batch.TotalCost(Cortex),
+                                             Batch.RightAnswersPart(Cortex)));
+            OutputLB.SelectedIndex = OutputLB.Items.Count - 1;
+            OutputLB.ScrollIntoView(OutputLB.SelectedItem);
         }
     }
 }

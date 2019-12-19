@@ -146,6 +146,26 @@ namespace NNBroth.Tests
         }
 
         /// <summary>
+        /// Calculate percent of right answers.
+        /// </summary>
+        /// <param name="cortex">cortex</param>
+        /// <returns>right answers percent</returns>
+        public double RightAnswersPart(Cortex cortex)
+        {
+            int c = 0;
+
+            for (int i = 0; i < TestCasesCount; i++)
+            {
+                if (Check(cortex, i))
+                {
+                    c++;
+                }
+            }
+
+            return (double)c / (double)TestCasesCount;
+        }
+
+        /// <summary>
         /// Difference between cortex answer and right answer.
         /// </summary>
         /// <param name="cortex">cortex</param>
@@ -156,6 +176,23 @@ namespace NNBroth.Tests
             cortex.Sense(GetInput(n));
 
             return cortex.Cost(GetOutput(n));
+        }
+
+        /// <summary>
+        /// Total cost for batch.
+        /// </summary>
+        /// <param name="cortex">cortex</param>
+        /// <returns>total cost</returns>
+        public double TotalCost(Cortex cortex)
+        {
+            double tc = 0.0;
+
+            for (int i = 0; i < TestCasesCount; i++)
+            {
+                tc += Cost(cortex, i);
+            }
+
+            return tc / TestCasesCount;
         }
 
         /// <summary>

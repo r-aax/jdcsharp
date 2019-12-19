@@ -17,7 +17,7 @@ namespace Lib.GUI.WPF
         /// </summary>
         /// <param name="text_box">text box</param>
         /// <returns>value</returns>
-        public static double GetInt(TextBox text_box)
+        public static int GetInt(TextBox text_box)
         {
             return Lib.Utils.Convert.GetInt(text_box.Text);
         }

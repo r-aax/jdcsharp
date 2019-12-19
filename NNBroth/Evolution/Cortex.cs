@@ -231,10 +231,16 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Sense back.
         /// </summary>
-        /// <param name="outputs">outputs</param>
-        public void SenseBack(double[] outputs)
+        /// <param name="ys">right answer vector</param>
+        public void SenseBack(double[] ys)
         {
-            throw new Exception("TODO");
+            Actuator.SenseBackInitLastLayer(ys);
+
+            // Process neurons in reversed order.
+            for (int i = Neurons.Count - 1; i >= 0; i--)
+            {
+                Neurons[i].PropagateErrorBack();
+            }
         }
 
         /// <summary>
