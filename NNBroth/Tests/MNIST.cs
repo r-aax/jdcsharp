@@ -26,6 +26,9 @@ namespace NNBroth.Tests
         /// <param name="labels_file">labels file</param>
         public MNIST(string images_file, string labels_file) : base()
         {
+            BaseName = "MNIST";
+            SuffName = "full";
+
             Debug.Assert(File.Exists(images_file));
             Debug.Assert(File.Exists(labels_file));
 

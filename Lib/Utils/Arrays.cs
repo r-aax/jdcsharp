@@ -229,5 +229,31 @@ namespace Lib.Utils
         {
             return SquareDifference(a, b) / a.Length;
         }
+
+        /// <summary>
+        /// Convert to string.
+        /// </summary>
+        /// <param name="a">array</param>
+        /// <returns>string</returns>
+        public static string ConvertToString(int[] a)
+        {
+            string res = "[ ";
+
+            for (int i = 0; i < a.Length; i++)
+            {
+                res = res + a[i].ToString();
+
+                if (i < a.Length - 1)
+                {
+                    res = res + ", ";
+                }
+                else
+                {
+                    res = res + " ";
+                }
+            }
+
+            return res + "]";
+        }
     }
 }

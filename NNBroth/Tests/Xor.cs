@@ -16,6 +16,8 @@ namespace NNBroth.Tests
         /// </summary>
         public Xor() : base()
         {
+            BaseName = "Xor";
+            SuffName = "full";
             AddTestCase(new double[] { 0.0, 0.0 }, 0, 2);
             AddTestCase(new double[] { 0.0, 1.0 }, 1, 2);
             AddTestCase(new double[] { 1.0, 0.0 }, 1, 2);

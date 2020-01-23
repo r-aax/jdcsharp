@@ -18,6 +18,27 @@ namespace NNBroth.Tests
     public class Batch
     {
         /// <summary>
+        /// Base name.
+        /// </summary>
+        public string BaseName = null;
+
+        /// <summary>
+        /// Sufffix.
+        /// </summary>
+        public string SuffName = null;
+
+        /// <summary>
+        /// Get name of batch.
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return BaseName + "/" + SuffName;
+            }
+        }
+
+        /// <summary>
         /// List of inputs.
         /// </summary>
         protected List<double[]> Inputs;
@@ -221,6 +242,9 @@ namespace NNBroth.Tests
 
                 test.AddTestCase(GetInput(index), GetOutput(index));
             }
+
+            test.BaseName = BaseName;
+            test.SuffName = n.ToString();
 
             return test;
         }

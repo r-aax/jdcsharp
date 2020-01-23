@@ -52,7 +52,7 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Constructor.
         /// </summary>
-        public Neuron(double bias = 0.0)
+        public Neuron(double bias)
         {
             InLinks = new List<Link>();
             OutLinks = new List<Link>();

@@ -5,10 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NNBroth"
         mc:Ignorable="d"
-        Title="MainWindow" Height="360" Width="525">
-    <Grid>
-        <ListBox x:Name="OutputLB" HorizontalAlignment="Left" Height="274" Margin="10,10,0,0" VerticalAlignment="Top" Width="497"/>
-        <Button x:Name="GoB" Content="Go" HorizontalAlignment="Left" Margin="267,290,0,0" VerticalAlignment="Top" Width="75" Click="GoB_Click" Height="23"/>
-        <TextBox x:Name="ItersCountTB" HorizontalAlignment="Left" Height="23" Margin="142,290,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120"/>
-    </Grid>
+        Title="NNBroth" Height="600" Width="1000">
+    <TabControl Background="AliceBlue">
+        <TabItem Header="Simple Learning">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="550"/>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!-- -->
+                        <Label Grid.Column="0" Grid.Row="0">Массив размеров слоев нейросети</Label>
+                        <TextBox Grid.Column="1" Grid.Row="0" Height="20" Margin="3,0" Name="LayersSizesLB">[2, 3, 2]</TextBox>
+                        <!-- -->
+                        <Label Grid.Column="0" Grid.Row="1">Название тестового набора</Label>
+                        <TextBox Grid.Column="1" Grid.Row="1" Height="20" Margin="3,0" Name="BatchNameLB">Xor</TextBox>
+                        <!-- -->
+                        <Label Grid.Column="0" Grid.Row="2">Размер тестового поднабора</Label>
+                        <TextBox Grid.Column="1" Grid.Row="2" Height="20" Margin="3,0" Name="BatchSizeLB">full</TextBox>
+                        <!-- -->
+                        <Label Grid.Column="0" Grid.Row="3">Количество итераций обучения</Label>
+                        <TextBox Grid.Column="1" Grid.Row="3" Height="20" Margin="3,0" Name="LearningIterstionsLB">10</TextBox>
+                        <!-- -->
+                        <Label Grid.Column="0" Grid.Row="4">Вес связи по умолчанию</Label>
+                        <TextBox Grid.Column="1" Grid.Row="4" Height="20" Margin="3,0" Name="DefaultLinkWeightLB">1.0</TextBox>
+                        <!-- -->
+                        <Label Grid.Column="0" Grid.Row="5">Смещение нейрона по умолчанию</Label>
+                        <TextBox Grid.Column="1" Grid.Row="5" Height="20" Margin="3,0" Name="DefaultNeuronBiasLB">0.0</TextBox>
+                        <!-- -->
+                        <Label Grid.Column="0" Grid.Row="6">Скорость обучения</Label>
+                        <TextBox Grid.Column="1" Grid.Row="6" Height="20" Margin="3,0" Name="LearningRateLB">1.0</TextBox>
+                        <!-- -->
+                        <Label Grid.Column="0" Grid.Row="7">Кнопки запуска</Label>
+                        <Grid Grid.Column="1" Grid.Row="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Grid.Row="0" Width="60" Height="20" Name="RunB" Content="Run" Click="RunB_Click"/>
+                            <Button Grid.Column="1" Grid.Row="0" Width="60" Height="20" Name="DelB" Content="Del" Click="DelB_Click"/>
+                        </Grid>
+                        <!-- -->
+                    </Grid>
+                </Grid>
+                <GridSplitter Grid.Column="1" Width="2" HorizontalAlignment="Left"/>
+                <ListBox x:Name="LogLB" Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
 </Window>

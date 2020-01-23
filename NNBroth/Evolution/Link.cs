@@ -65,7 +65,7 @@ namespace NNBroth.Evolution
         /// <param name="src">source</param>
         /// <param name="dst">destination</param>
         /// <param name="weight">weight</param>
-        public Link(Neuron src, Neuron dst, double weight = 0.0)
+        public Link(Neuron src, Neuron dst, double weight)
         {
             Id = 0;
             Src = src;
@@ -80,7 +80,7 @@ namespace NNBroth.Evolution
         /// Constructor.
         /// </summary>
         /// <param name="weight">weight</param>
-        public Link(double weight = 0.0) : this(null, null, weight)
+        public Link(double weight) : this(null, null, weight)
         {
         }
 

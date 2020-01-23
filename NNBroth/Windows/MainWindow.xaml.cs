@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 
 using Lib.IO;
 using Lib.GUI;
+using Lib.Utils;
 using Lib.Utils.Time;
 
 using NNBroth.Evolution;
@@ -28,14 +29,14 @@ namespace NNBroth
     public partial class MainWindow : Window
     {
         /// <summary>
-        /// Test.
-        /// </summary>
-        Batch Batch;
-
-        /// <summary>
         /// Cortex.
         /// </summary>
-        Cortex Cortex;
+        Cortex Cortex = null;
+
+        /// <summary>
+        /// Batch.
+        /// </summary>
+        Batch Batch = null;
 
         /// <summary>
         /// Create form.
@@ -43,39 +44,118 @@ namespace NNBroth
         public MainWindow()
         {
             InitializeComponent();
-            Batch = null;
-            Cortex = null;
         }
 
         /// <summary>
-        /// Click Go button event.
+        /// Log.
         /// </summary>
-        /// <param name="sender">sender</param>
-        /// <param name="e">parameters</param>
-        private void GoB_Click(object sender, RoutedEventArgs e)
+        /// <param name="str">string</param>
+        private void Log(string str)
         {
-            if (Batch == null)
+            LogLB.Items.Add(str);
+
+            // Scroll down.
+            LogLB.SelectedIndex = LogLB.Items.Count - 1;
+            LogLB.ScrollIntoView(LogLB.SelectedItem);
+        }
+
+        /// <summary>
+        /// Create cortex.
+        /// </summary>
+        private void CreateCortex()
+        {
+            string layers_sizes_str = LayersSizesLB.Text;
+            string[] layers_sizes_strs = layers_sizes_str.Split(new Char[] { '[', ']', ' ', ',' });
+            List<int> layers_sizes = new List<int>();
+
+            for (int i = 0; i < layers_sizes_strs.Length; i++)
             {
-                Batch = new Xor();
+                if (layers_sizes_strs[i].Trim() != "")
+                {
+                    layers_sizes.Add(Lib.Utils.Convert.GetInt(layers_sizes_strs[i]));
+                }
             }
 
+            int[] layers_sizes_array = layers_sizes.ToArray();
+
+            Log("Создание нейросети : " + Arrays.ConvertToString(layers_sizes_array));
+            Cortex.DefaultLinkWeight = Lib.Utils.Convert.GetDouble(DefaultLinkWeightLB.Text);
+            Cortex.DefaultNeuronBias = Lib.Utils.Convert.GetDouble(DefaultNeuronBiasLB.Text);
+            Cortex = Cortex.CreateMultilayerCortex(layers_sizes_array);
+        }
+
+        /// <summary>
+        /// Create batch.
+        /// </summary>
+        private void CreateBatch()
+        {
+            Batch raw_batch = null;
+
+            if (BatchNameLB.Text == "Xor")
+            {
+                raw_batch = new Xor();                
+            }
+            else
+            {
+                throw new Exception("unknown batch name");
+            }
+
+            if (BatchSizeLB.Text == "full")
+            {
+                Batch = raw_batch;
+            }
+            else
+            {
+                Batch = raw_batch.RandomMiniBatch(Lib.Utils.Convert.GetInt(BatchSizeLB.Text));
+            }
+
+            Log("Тестовый набор : " + Batch.Name);
+        }
+
+        /// <summary>
+        /// Click on run bitton.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void RunB_Click(object sender, RoutedEventArgs e)
+        {
             if (Cortex == null)
             {
-                Cortex = Cortex.CreateMultilayerCortex(new int[] { 2, 3, 4, 5, 4, 2 });
+                CreateCortex();
             }
 
-            int iters = Lib.GUI.WPF.IO.GetInt(ItersCountTB);
+            if (Batch == null)
+            {
+                CreateBatch();
+            }
 
+            int iters = Lib.Utils.Convert.GetInt(LearningIterstionsLB.Text);
+
+            // Learning rate.
+            Trainer.DefaultLearningRate = Lib.Utils.Convert.GetDouble(LearningRateLB.Text);
+
+            // Learning cycle.
             for (int i = 0; i < iters; i++)
             {
                 Trainer.Train(Cortex, Batch);
             }
 
-            OutputLB.Items.Add(String.Format("Iter : cost = {0}, right = {1}",
-                                             Batch.TotalCost(Cortex),
-                                             Batch.RightAnswersPart(Cortex)));
-            OutputLB.SelectedIndex = OutputLB.Items.Count - 1;
-            OutputLB.ScrollIntoView(OutputLB.SelectedItem);
+            string report = String.Format("iters {0}, cost = {1}, right = {2}",
+                                          iters,
+                                          Batch.TotalCost(Cortex),
+                                          Batch.RightAnswersPart(Cortex));
+            Log("Прогон : " + report);
+        }
+
+        /// <summary>
+        /// Click on delete cortex button.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void DelB_Click(object sender, RoutedEventArgs e)
+        {
+            Cortex = null;
+            Batch = null;
         }
     }
 }

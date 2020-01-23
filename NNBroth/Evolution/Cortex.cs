@@ -17,6 +17,16 @@ namespace NNBroth.Evolution
     public class Cortex : ICloneable
     {
         /// <summary>
+        /// Default bias.
+        /// </summary>
+        public static double DefaultNeuronBias = 0.0;
+
+        /// <summary>
+        /// Default link weight.
+        /// </summary>
+        public static double DefaultLinkWeight = 0.1;
+
+        /// <summary>
         /// Sensor.
         /// </summary>
         private Sensor Sensor;
@@ -87,7 +97,7 @@ namespace NNBroth.Evolution
         /// <returns>neuron</returns>
         private Neuron NewNeuron()
         {
-            Neuron neuron = new Neuron();
+            Neuron neuron = new Neuron(DefaultNeuronBias);
 
             // Insert it into neurons list.
             Neurons.Add(neuron);
@@ -101,7 +111,7 @@ namespace NNBroth.Evolution
         /// <param name="src">source</param>
         /// <param name="dst">destination</param>
         /// <param name="weight">weight</param>
-        private void Link(Neuron src, Neuron dst, double weight = 0.1)
+        private void Link(Neuron src, Neuron dst, double weight)
         {
             Link link = new Link(src, dst, weight);
 
@@ -141,7 +151,7 @@ namespace NNBroth.Evolution
             {
                 foreach (Neuron dst in dst_layer)
                 {
-                    Link(src, dst);
+                    Link(src, dst, DefaultLinkWeight);
                 }
             }
         }

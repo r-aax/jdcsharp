@@ -16,7 +16,7 @@ namespace NNBroth.Evolution
         /// <summary>
         /// Learning rate.
         /// </summary>
-        private static readonly double DefaultLearningRate = 3.0;
+        public static double DefaultLearningRate = 3.0;
     
         /// <summary>
         /// Train cortex with single batch.
@@ -36,12 +36,17 @@ namespace NNBroth.Evolution
 
                 double[] a = cortex.SenseForward(x);
 
-                if (!Batch.IsAnswersEq(a, y))
+                //if (!Batch.IsAnswersEq(a, y))
                 {
                     cortex.SenseBack(y);
                     cortex.StoreDWeightsAndDBiases();
                     c++;
                 }
+            }
+
+            if (c == 0.0)
+            {
+                throw new Exception("Trainer.Train : division by zero while training.");
             }
 
             cortex.CorrectWeightsAndBiases(DefaultLearningRate / c);
