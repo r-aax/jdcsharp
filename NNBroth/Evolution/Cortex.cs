@@ -17,6 +17,16 @@ namespace NNBroth.Evolution
     public class Cortex : ICloneable
     {
         /// <summary>
+        /// Default neural bias is random.
+        /// </summary>
+        public static bool IsRandomNeuronBias = true;
+
+        /// <summary>
+        /// Default link weight is random.
+        /// </summary>
+        public static bool IsRandomLinkWeight = true;
+
+        /// <summary>
         /// Default bias.
         /// </summary>
         public static double DefaultNeuronBias = 0.0;
@@ -97,7 +107,11 @@ namespace NNBroth.Evolution
         /// <returns>neuron</returns>
         private Neuron NewNeuron()
         {
-            Neuron neuron = new Neuron(DefaultNeuronBias);
+            double bias = IsRandomNeuronBias
+                          ? Randoms.RandomInInterval(-0.1, 0.1)
+                          : DefaultNeuronBias;
+
+            Neuron neuron = new Neuron(bias);
 
             // Insert it into neurons list.
             Neurons.Add(neuron);
@@ -151,7 +165,11 @@ namespace NNBroth.Evolution
             {
                 foreach (Neuron dst in dst_layer)
                 {
-                    Link(src, dst, DefaultLinkWeight);
+                    double weight = IsRandomLinkWeight
+                                    ? Randoms.RandomInInterval(-0.1, 0.1)
+                                    : DefaultLinkWeight;
+
+                    Link(src, dst, weight);
                 }
             }
         }

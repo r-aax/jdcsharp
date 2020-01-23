@@ -79,8 +79,26 @@ namespace NNBroth
             int[] layers_sizes_array = layers_sizes.ToArray();
 
             Log("Создание нейросети : " + Arrays.ConvertToString(layers_sizes_array));
-            Cortex.DefaultLinkWeight = Lib.Utils.Convert.GetDouble(DefaultLinkWeightLB.Text);
-            Cortex.DefaultNeuronBias = Lib.Utils.Convert.GetDouble(DefaultNeuronBiasLB.Text);
+
+            if (DefaultLinkWeightLB.Text == "r")
+            {
+                Cortex.IsRandomLinkWeight = true;
+            }
+            else
+            {
+                Cortex.IsRandomLinkWeight = false;
+                Cortex.DefaultLinkWeight = Lib.Utils.Convert.GetDouble(DefaultLinkWeightLB.Text);
+            }
+            if (DefaultNeuronBiasLB.Text == "r")
+            {
+                Cortex.IsRandomNeuronBias = true;
+            }
+            else
+            {
+                Cortex.IsRandomNeuronBias = false;
+                Cortex.DefaultNeuronBias = Lib.Utils.Convert.GetDouble(DefaultNeuronBiasLB.Text);
+            }
+
             Cortex = Cortex.CreateMultilayerCortex(layers_sizes_array);
         }
 
@@ -150,7 +168,7 @@ namespace NNBroth
                                           Batch.TotalCost(Cortex),
                                           Batch.RightAnswersPart(Cortex));
             Log("Прогон : " + report);
-            Log("Коэфф  : " + Cortex.WeightsBiasesIntervalsStr());
+            Log("Коэфф : " + Cortex.WeightsBiasesIntervalsStr());
         }
 
         /// <summary>
