@@ -95,6 +95,11 @@ namespace NNBroth
             {
                 raw_batch = new Xor();                
             }
+            else if (BatchNameLB.Text == "MNIST")
+            {
+                raw_batch = new MNIST("../../Tests/mnist/train-images.idx3-ubyte",
+                                      "../../Tests/mnist/train-labels.idx1-ubyte");
+            }
             else
             {
                 throw new Exception("unknown batch name");
@@ -145,6 +150,7 @@ namespace NNBroth
                                           Batch.TotalCost(Cortex),
                                           Batch.RightAnswersPart(Cortex));
             Log("Прогон : " + report);
+            Log("Коэфф  : " + Cortex.WeightsBiasesIntervalsStr());
         }
 
         /// <summary>

@@ -364,5 +364,19 @@ namespace NNBroth.Evolution
                 link.Weight -= eta * link.dWeight;
             }
         }
+
+        /// <summary>
+        /// Get string with intervals of weights and biases.
+        /// </summary>
+        /// <returns>string</returns>
+        public string WeightsBiasesIntervalsStr()
+        {
+            double min_weight = Links.Min(link => link.Weight);
+            double max_weight = Links.Max(link => link.Weight);
+            double min_bias = Neurons.Min(neuron => neuron.Bias);
+            double max_bias = Neurons.Max(neuron => neuron.Bias);
+
+            return String.Format("W [{0:f10}, {1:f10}], B [{2:f10}, - {3:f10}]", min_weight, max_weight, min_bias, max_bias);
+        }
     }
 }
