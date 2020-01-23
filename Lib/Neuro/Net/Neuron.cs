@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Lib.Maths;
 using Lib.Maths.Numbers;
 
-namespace NNBroth.Evolution
+namespace Lib.Neuro.Net
 {
     /// <summary>
     /// Neuron.
@@ -176,7 +176,7 @@ namespace NNBroth.Evolution
             {
                 double[] gathered_signals_vector = GatherWeightedSignalsVectorForward();
 
-                Accumulator = Maths.Sigmoid(gathered_signals_vector.Sum() + Bias);
+                Accumulator = Maths.Maths.Sigmoid(gathered_signals_vector.Sum() + Bias);
             }
 
             BroadcastSignalForward(Accumulator);

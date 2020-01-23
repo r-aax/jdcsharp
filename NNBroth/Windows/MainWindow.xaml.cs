@@ -17,9 +17,8 @@ using Lib.IO;
 using Lib.GUI;
 using Lib.Utils;
 using Lib.Utils.Time;
-
-using NNBroth.Evolution;
-using NNBroth.Tests;
+using Lib.Neuro.Net;
+using Lib.Neuro.Tests;
 
 namespace NNBroth
 {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using Lib.Maths.Numbers;
 
-namespace NNBroth.Evolution
+namespace Lib.Neuro.Net
 {
     /// <summary>
     /// Link between two nodes.

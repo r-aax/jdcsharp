@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 using Lib.Utils;
 using Lib.Maths.Numbers;
+using Lib.Neuro.Net;
 
-using NNBroth.Evolution;
-
-namespace NNBroth.Tests
+namespace Lib.Neuro.Tests
 {
     /// <summary>
     /// Base test case.

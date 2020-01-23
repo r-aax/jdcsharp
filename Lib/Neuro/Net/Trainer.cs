@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-using NNBroth.Tests;
+using Lib.Neuro.Tests;
 
-namespace NNBroth.Evolution
+namespace Lib.Neuro.Net
 {
     /// <summary>
     /// Trainer.

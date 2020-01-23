@@ -184,6 +184,18 @@
     <Compile Include="Maths\WeightsDistribution.cs" />
     <Compile Include="Net\UDP.cs" />
     <Compile Include="Net\UDPListener.cs" />
+    <Compile Include="Neuro\Evolution\Creature.cs" />
+    <Compile Include="Neuro\Evolution\Generation.cs" />
+    <Compile Include="Neuro\Net\Actuator.cs" />
+    <Compile Include="Neuro\Net\Cortex.cs" />
+    <Compile Include="Neuro\Net\Link.cs" />
+    <Compile Include="Neuro\Net\Neuron.cs" />
+    <Compile Include="Neuro\Net\Pole.cs" />
+    <Compile Include="Neuro\Net\Sensor.cs" />
+    <Compile Include="Neuro\Net\Trainer.cs" />
+    <Compile Include="Neuro\Tests\Batch.cs" />
+    <Compile Include="Neuro\Tests\MNIST.cs" />
+    <Compile Include="Neuro\Tests\Xor.cs" />
     <Compile Include="Physics\MeasUnits\Angle.cs" />
     <Compile Include="Physics\MeasUnits\AngleMeasUnit.cs" />
     <Compile Include="Physics\MeasUnits\Constants.cs" />
@@ -229,6 +241,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

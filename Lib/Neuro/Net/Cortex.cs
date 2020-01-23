@@ -9,7 +9,7 @@ using System.Diagnostics;
 using Lib.Maths.Numbers;
 using Lib.Utils;
 
-namespace NNBroth.Evolution
+namespace Lib.Neuro.Net
 {
     /// <summary>
     /// Cortex.

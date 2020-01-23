@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 
-namespace NNBroth.Tests
+namespace Lib.Neuro.Tests
 {
     /// <summary>
     /// MNIST tests.

@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NNBroth.Evolution
+using Lib.Neuro.Net;
+
+namespace Lib.Neuro.Evolution
 {
     /// <summary>
     /// Creature.

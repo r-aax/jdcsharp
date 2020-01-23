@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 using Lib.Utils;
 
-namespace NNBroth.Evolution
+namespace Lib.Neuro.Net
 {
     class Actuator : Pole
     {

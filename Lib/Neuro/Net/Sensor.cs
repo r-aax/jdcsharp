@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 
-namespace NNBroth.Evolution
+namespace Lib.Neuro.Net
 {
     /// <summary>
     /// Sensor.
