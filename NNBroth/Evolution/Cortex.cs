@@ -376,7 +376,7 @@ namespace NNBroth.Evolution
             double min_bias = Neurons.Min(neuron => neuron.Bias);
             double max_bias = Neurons.Max(neuron => neuron.Bias);
 
-            return String.Format("W [{0:f10}, {1:f10}], B [{2:f10}, - {3:f10}]", min_weight, max_weight, min_bias, max_bias);
+            return String.Format("W [{0:F10}, {1:F10}], B [{2:F10}, - {3:F10}]", min_weight, max_weight, min_bias, max_bias);
         }
     }
 }

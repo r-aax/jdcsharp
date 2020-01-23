@@ -221,8 +221,8 @@ namespace NNBroth.Evolution
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("N {0} : B {1:F3}, A {2:F3}, E {3:F3}",
-                                 Id, Bias, Accumulator, Error);
+            return String.Format("N {0} : B {1:F6}, A {2:F6}, E {3:F6}, dB {4:F6}",
+                                 Id, Bias, Accumulator, Error, dBias);
         }
     }
 }

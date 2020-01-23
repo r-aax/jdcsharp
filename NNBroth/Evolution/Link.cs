@@ -103,8 +103,8 @@ namespace NNBroth.Evolution
         /// <returns>string</returns>
         public override string ToString()
         {
-            return String.Format("{0} - {1} : W {2:F3}, S {3:F3}, E {4:F3}",
-                                 Src.Id, Dst.Id, Weight, Signal, Error);
+            return String.Format("{0} - {1} : W {2:F6}, S {3:F6}, E {4:F6}, dW {5:F6}",
+                                 Src.Id, Dst.Id, Weight, Signal, Error, dWeight);
         }
     }
 }
