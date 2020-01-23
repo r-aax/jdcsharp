@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 using NNBroth.Tests;
 
@@ -25,7 +26,7 @@ namespace NNBroth.Evolution
         /// <param name="batch">batch</param>
         public static void Train(Cortex cortex, Batch batch)
         {
-            int c = 0;
+            Debug.Assert(batch.TestCasesCount > 0);        
 
             cortex.ZeroDWeightsAndDBiases();
 
@@ -33,23 +34,13 @@ namespace NNBroth.Evolution
             {
                 double[] x = batch.GetInput(i);
                 double[] y = batch.GetOutput(i);
-
                 double[] a = cortex.SenseForward(x);
 
-                //if (!Batch.IsAnswersEq(a, y))
-                {
-                    cortex.SenseBack(y);
-                    cortex.StoreDWeightsAndDBiases();
-                    c++;
-                }
+                cortex.SenseBack(y);
+                cortex.StoreDWeightsAndDBiases();
             }
 
-            if (c == 0.0)
-            {
-                throw new Exception("Trainer.Train : division by zero while training.");
-            }
-
-            cortex.CorrectWeightsAndBiases(DefaultLearningRate / c);
+            cortex.CorrectWeightsAndBiases(DefaultLearningRate / batch.TestCasesCount);
         }
 
         /// <summary>

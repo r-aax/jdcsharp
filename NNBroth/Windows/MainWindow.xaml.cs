@@ -80,25 +80,8 @@ namespace NNBroth
 
             Log("Создание нейросети : " + Arrays.ConvertToString(layers_sizes_array));
 
-            if (DefaultLinkWeightLB.Text == "r")
-            {
-                Cortex.IsRandomLinkWeight = true;
-            }
-            else
-            {
-                Cortex.IsRandomLinkWeight = false;
-                Cortex.DefaultLinkWeight = Lib.Utils.Convert.GetDouble(DefaultLinkWeightLB.Text);
-            }
-            if (DefaultNeuronBiasLB.Text == "r")
-            {
-                Cortex.IsRandomNeuronBias = true;
-            }
-            else
-            {
-                Cortex.IsRandomNeuronBias = false;
-                Cortex.DefaultNeuronBias = Lib.Utils.Convert.GetDouble(DefaultNeuronBiasLB.Text);
-            }
-
+            Cortex.SetDefaultNeuronBias(DefaultNeuronBiasLB.Text);
+            Cortex.SetDefaultLinkWeight(DefaultLinkWeightLB.Text);
             Cortex = Cortex.CreateMultilayerCortex(layers_sizes_array);
         }
 

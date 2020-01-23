@@ -68,6 +68,40 @@ namespace NNBroth.Evolution
         }
 
         /// <summary>
+        /// Set default neuron bias.
+        /// </summary>
+        /// <param name="default_neuron_bias">default bias string</param>
+        public static void SetDefaultNeuronBias(string default_neuron_bias)
+        {
+            if (default_neuron_bias == "r")
+            {
+                IsRandomNeuronBias = true;
+            }
+            else
+            {
+                IsRandomNeuronBias = false;
+                DefaultNeuronBias = Lib.Utils.Convert.GetDouble(default_neuron_bias);
+            }
+        }
+
+        /// <summary>
+        /// Set default link weight.
+        /// </summary>
+        /// <param name="default_link_weight">default weight string</param>
+        public static void SetDefaultLinkWeight(string default_link_weight)
+        {
+            if (default_link_weight == "r")
+            {
+                IsRandomLinkWeight = true;
+            }
+            else
+            {
+                IsRandomLinkWeight = false;
+                DefaultLinkWeight = Lib.Utils.Convert.GetDouble(default_link_weight);
+            }
+        }
+
+        /// <summary>
         /// Create multilayer cortex.
         /// </summary>
         /// <param name="layers">layers sizes</param>
