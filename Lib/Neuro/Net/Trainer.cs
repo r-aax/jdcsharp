@@ -17,14 +17,23 @@ namespace Lib.Neuro.Net
         /// <summary>
         /// Learning rate.
         /// </summary>
-        public static double DefaultLearningRate = 3.0;
+        public double DefaultLearningRate = 3.0;
     
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="default_learning_rate">default rate of learning</param>
+        public Trainer(double default_learning_rate = 3.0)
+        {
+            DefaultLearningRate = default_learning_rate;
+        }
+
         /// <summary>
         /// Train cortex with single batch.
         /// </summary>
         /// <param name="cortex">cortex</param>
         /// <param name="batch">batch</param>
-        public static void Train(Cortex cortex, Batch batch)
+        public void Train(Cortex cortex, Batch batch)
         {
             Debug.Assert(batch.TestCasesCount > 0);        
 
@@ -44,16 +53,69 @@ namespace Lib.Neuro.Net
         }
 
         /// <summary>
+        /// Train net several times.
+        /// </summary>
+        /// <param name="cortex">cortex</param>
+        /// <param name="batch">batch</param>
+        /// <param name="count">count</param>
+        public void Train(Cortex cortex, Batch batch, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Train(cortex, batch);
+            }
+        }
+
+        /// <summary>
         /// Train cortex.
         /// </summary>
         /// <param name="cortex">cortex</param>
         /// <param name="batches">batches</param>
-        public static void Train(Cortex cortex, List<Batch> batches)
+        public void Train(Cortex cortex, List<Batch> batches)
         {
             foreach (Batch batch in batches)
             {
                 Train(cortex, batch);
             }
+        }
+
+        /// <summary>
+        /// Train cortex several times.
+        /// </summary>
+        /// <param name="cortex">cortex</param>
+        /// <param name="batches">batches</param>
+        /// <param name="count">count</param>
+        public void Train(Cortex cortex, List<Batch> batches, int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Train(cortex, batches);
+            }
+        }
+
+        /// <summary>
+        /// Train while given rate of right answers is not acheved.
+        /// </summary>
+        /// <param name="cortex">cortex</param>
+        /// <param name="batch">batch</param>
+        /// <param name="rate">right answers rate</param>
+        /// <param name="max_iters_count">max iters count</param>
+        /// <returns></returns>
+        public int TrainWhileRightAnswers(Cortex cortex, Batch batch,
+                                           double rate, int max_iters_count)
+        {
+            double right_answers_part;
+            int iters = 0;
+
+            do
+            {
+                Train(cortex, batch);
+                right_answers_part = batch.RightAnswersPart(cortex);
+                iters++;
+            }
+            while ((right_answers_part < rate) && (iters < max_iters_count));
+
+            return iters;
         }
     }
 }

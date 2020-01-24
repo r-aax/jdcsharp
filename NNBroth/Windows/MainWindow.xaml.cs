@@ -38,6 +38,11 @@ namespace NNBroth
         Batch Batch = null;
 
         /// <summary>
+        /// Trainer.
+        /// </summary>
+        Trainer Trainer = null;
+
+        /// <summary>
         /// Create form.
         /// </summary>
         public MainWindow()
@@ -116,11 +121,9 @@ namespace NNBroth
         }
 
         /// <summary>
-        /// Click on run bitton.
+        /// Prepare.
         /// </summary>
-        /// <param name="sender">object</param>
-        /// <param name="e">parameters</param>
-        private void RunB_Click(object sender, RoutedEventArgs e)
+        private void Prepare()
         {
             if (Cortex == null)
             {
@@ -132,16 +135,25 @@ namespace NNBroth
                 CreateBatch();
             }
 
+            if (Trainer == null)
+            {
+                Trainer = new Trainer(Lib.Utils.Convert.GetDouble(LearningRateLB.Text));
+            }
+            Trainer.DefaultLearningRate = Lib.Utils.Convert.GetDouble(LearningRateLB.Text);
+        }
+
+        /// <summary>
+        /// Click on run bitton.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void RunB_Click(object sender, RoutedEventArgs e)
+        {
+            Prepare();
+
             int iters = Lib.Utils.Convert.GetInt(LearningIterstionsLB.Text);
 
-            // Learning rate.
-            Trainer.DefaultLearningRate = Lib.Utils.Convert.GetDouble(LearningRateLB.Text);
-
-            // Learning cycle.
-            for (int i = 0; i < iters; i++)
-            {
-                Trainer.Train(Cortex, Batch);
-            }
+            Trainer.Train(Cortex, Batch, iters);
 
             string report = String.Format("iters {0}, cost = {1}, right = {2}",
                                           iters,
@@ -160,6 +172,22 @@ namespace NNBroth
         {
             Cortex = null;
             Batch = null;
+        }
+
+        /// <summary>
+        /// Run while good right answers rate is not achieved.
+        /// </summary>
+        /// <param name="sender">object</param>
+        /// <param name="e">parameters</param>
+        private void RunWhileB_Click(object sender, RoutedEventArgs e)
+        {
+            Prepare();
+
+            int iters = Trainer.TrainWhileRightAnswers(Cortex, Batch,
+                                                       Lib.Utils.Convert.GetDouble(RightAnswersGoodRateLB.Text),
+                                                       Lib.Utils.Convert.GetInt(MaxItersLB.Text));
+
+            Log(String.Format("RunWhile : iters {0}", iters));
         }
     }
 }

@@ -42,23 +42,25 @@
                         <Label Grid.Column="0" Grid.Row="3">Количество итераций обучения</Label>
                         <TextBox Grid.Column="1" Grid.Row="3" Height="20" Margin="3,0" Name="LearningIterstionsLB">1</TextBox>
                         <!-- -->
-                        <Label Grid.Column="0" Grid.Row="4">TODO</Label>
-                        <TextBox Grid.Column="1" Grid.Row="4" Height="20" Margin="3,0" Name="DefaultLinkWeightLB"></TextBox>
+                        <Label Grid.Column="0" Grid.Row="4">Скорость обучения</Label>
+                        <TextBox Grid.Column="1" Grid.Row="4" Height="20" Margin="3,0" Name="LearningRateLB">1.0</TextBox>
                         <!-- -->
-                        <Label Grid.Column="0" Grid.Row="5">TODO</Label>
-                        <TextBox Grid.Column="1" Grid.Row="5" Height="20" Margin="3,0" Name="DefaultNeuronBiasLB"></TextBox>
+                        <Label Grid.Column="0" Grid.Row="5">Допустимая доля верных ответов</Label>
+                        <TextBox Grid.Column="1" Grid.Row="5" Height="20" Margin="3,0" Name="RightAnswersGoodRateLB">0.95</TextBox>
                         <!-- -->
-                        <Label Grid.Column="0" Grid.Row="6">Скорость обучения</Label>
-                        <TextBox Grid.Column="1" Grid.Row="6" Height="20" Margin="3,0" Name="LearningRateLB">1.0</TextBox>
+                        <Label Grid.Column="0" Grid.Row="6">Максимальное количество итераций</Label>
+                        <TextBox Grid.Column="1" Grid.Row="6" Height="20" Margin="3,0" Name="MaxItersLB">1000</TextBox>
                         <!-- -->
                         <Label Grid.Column="0" Grid.Row="7">Кнопки запуска</Label>
                         <Grid Grid.Column="1" Grid.Row="8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Button Grid.Column="0" Grid.Row="0" Width="60" Height="20" Name="RunB" Content="Run" Click="RunB_Click"/>
-                            <Button Grid.Column="1" Grid.Row="0" Width="60" Height="20" Name="DelB" Content="Del" Click="DelB_Click"/>
+                            <Button Grid.Column="1" Grid.Row="0" Width="60" Height="20" Name="RunWhileB" Content="RunWhile" Click="RunWhileB_Click"/>
+                            <Button Grid.Column="2" Grid.Row="0" Width="60" Height="20" Name="DelB" Content="Del" Click="DelB_Click"/>
                         </Grid>
                         <!-- -->
                     </Grid>
