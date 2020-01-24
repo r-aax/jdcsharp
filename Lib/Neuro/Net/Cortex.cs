@@ -17,24 +17,46 @@ namespace Lib.Neuro.Net
     public class Cortex : ICloneable
     {
         /// <summary>
-        /// Default neural bias is random.
+        /// Min border of random neuron bias.
         /// </summary>
-        public static bool IsRandomNeuronBias = true;
+        public static readonly double RandomNeuronBiasMin = -0.1;
 
         /// <summary>
-        /// Default link weight is random.
+        /// Max border of random neuron bias.
         /// </summary>
-        public static bool IsRandomLinkWeight = true;
+        public static readonly double RandomNeuronBiasMax = 0.1;
 
         /// <summary>
-        /// Default bias.
+        /// Min border of random link weight.
         /// </summary>
-        public static double DefaultNeuronBias = 0.0;
+        public static readonly double RandomLinkWeightMin = -0.1;
 
         /// <summary>
-        /// Default link weight.
+        /// Max border of random link weight.
         /// </summary>
-        public static double DefaultLinkWeight = 0.1;
+        public static readonly double RandomLinkWeightMax = 0.1;
+
+        /// <summary>
+        /// Random neuron bias.
+        /// </summary>
+        public static double RandomNeuronBias
+        {
+            get
+            {
+                return Randoms.RandomInInterval(RandomNeuronBiasMin, RandomNeuronBiasMax);
+            }
+        }
+
+        /// <summary>
+        /// Random link weight.
+        /// </summary>
+        public static double RandomLinkWeight
+        {
+            get
+            {
+                return Randoms.RandomInInterval(RandomLinkWeightMin, RandomLinkWeightMax);
+            }
+        }
 
         /// <summary>
         /// Sensor.
@@ -65,40 +87,6 @@ namespace Lib.Neuro.Net
             Actuator = new Actuator();
             Neurons = new List<Neuron>();
             Links = new List<Link>();
-        }
-
-        /// <summary>
-        /// Set default neuron bias.
-        /// </summary>
-        /// <param name="default_neuron_bias">default bias string</param>
-        public static void SetDefaultNeuronBias(string default_neuron_bias)
-        {
-            if (default_neuron_bias == "r")
-            {
-                IsRandomNeuronBias = true;
-            }
-            else
-            {
-                IsRandomNeuronBias = false;
-                DefaultNeuronBias = Lib.Utils.Convert.GetDouble(default_neuron_bias);
-            }
-        }
-
-        /// <summary>
-        /// Set default link weight.
-        /// </summary>
-        /// <param name="default_link_weight">default weight string</param>
-        public static void SetDefaultLinkWeight(string default_link_weight)
-        {
-            if (default_link_weight == "r")
-            {
-                IsRandomLinkWeight = true;
-            }
-            else
-            {
-                IsRandomLinkWeight = false;
-                DefaultLinkWeight = Lib.Utils.Convert.GetDouble(default_link_weight);
-            }
         }
 
         /// <summary>
@@ -141,11 +129,7 @@ namespace Lib.Neuro.Net
         /// <returns>neuron</returns>
         private Neuron NewNeuron()
         {
-            double bias = IsRandomNeuronBias
-                          ? Randoms.RandomInInterval(-0.1, 0.1)
-                          : DefaultNeuronBias;
-
-            Neuron neuron = new Neuron(bias);
+            Neuron neuron = new Neuron(RandomNeuronBias);
 
             // Insert it into neurons list.
             Neurons.Add(neuron);
@@ -199,11 +183,7 @@ namespace Lib.Neuro.Net
             {
                 foreach (Neuron dst in dst_layer)
                 {
-                    double weight = IsRandomLinkWeight
-                                    ? Randoms.RandomInInterval(-0.1, 0.1)
-                                    : DefaultLinkWeight;
-
-                    Link(src, dst, weight);
+                    Link(src, dst, RandomLinkWeight);
                 }
             }
         }

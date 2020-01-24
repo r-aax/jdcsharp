@@ -79,8 +79,6 @@ namespace NNBroth
 
             Log("Создание нейросети : " + Arrays.ConvertToString(layers_sizes_array));
 
-            Cortex.SetDefaultNeuronBias(DefaultNeuronBiasLB.Text);
-            Cortex.SetDefaultLinkWeight(DefaultLinkWeightLB.Text);
             Cortex = Cortex.CreateMultilayerCortex(layers_sizes_array);
         }
 
@@ -97,8 +95,8 @@ namespace NNBroth
             }
             else if (BatchNameLB.Text == "MNIST")
             {
-                raw_batch = new MNIST("../../Tests/mnist/train-images.idx3-ubyte",
-                                      "../../Tests/mnist/train-labels.idx1-ubyte");
+                raw_batch = new MNIST("../../../Lib/Neuro/Tests/mnist/train-images.idx3-ubyte",
+                                      "../../../Lib/Neuro/Tests/mnist/train-labels.idx1-ubyte");
             }
             else
             {
