@@ -17,6 +17,16 @@ namespace Lib.Neuro.Net
     public class Cortex : ICloneable
     {
         /// <summary>
+        /// Current id.
+        /// </summary>
+        public static int CurId = 0;
+
+        /// <summary>
+        /// Own id.
+        /// </summary>
+        public int Id;
+
+        /// <summary>
         /// Min border of random neuron bias.
         /// </summary>
         public static readonly double RandomNeuronBiasMin = -0.1;
@@ -83,6 +93,9 @@ namespace Lib.Neuro.Net
         /// </summary>
         public Cortex()
         {
+            Id = CurId;
+            CurId++;
+
             Sensor = new Sensor();
             Actuator = new Actuator();
             Neurons = new List<Neuron>();
@@ -409,6 +422,30 @@ namespace Lib.Neuro.Net
             double max_bias = Neurons.Max(neuron => neuron.Bias);
 
             return String.Format("W [{0:F10}, {1:F10}], B [{2:F10}, - {3:F10}]", min_weight, max_weight, min_bias, max_bias);
+        }
+
+        /// <summary>
+        /// Reset neuronet parameters : neurons biases and links weights.
+        /// </summary>
+        public void ResetNeuronsBiasesAndLinksWeights()
+        {
+            foreach (Neuron neuron in Neurons)
+            {
+                neuron.Bias = RandomNeuronBias;
+            }
+
+            foreach (Link link in Links)
+            {
+                link.Weight = RandomLinkWeight;
+            }
+        }
+
+        /// <summary>
+        /// Mutate.
+        /// </summary>
+        public void Mutate()
+        {
+            ;
         }
     }
 }

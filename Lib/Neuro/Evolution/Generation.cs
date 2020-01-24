@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Lib.Neuro.Tests;
+using Lib.Neuro.Net;
+
 namespace Lib.Neuro.Evolution
 {
     /// <summary>
@@ -45,6 +48,107 @@ namespace Lib.Neuro.Evolution
             while (Size < count)
             {
                 Creatures.Add(creature.Clone() as Creature);
+            }
+        }
+
+        /// <summary>
+        /// Scoring.
+        /// </summary>
+        /// <param name="batch">batch</param>
+        public void Scoring(Batch batch)
+        {
+            Console.Write("Scoring [");
+
+            foreach (Creature creature in Creatures)
+            {
+                creature.Scoring(batch);
+                Console.Write("#");
+            }
+
+            Console.WriteLine("]");
+        }
+
+        /// <summary>
+        /// Increment age.
+        /// </summary>
+        public void IncAge()
+        {
+            foreach (Creature creature in Creatures)
+            {
+                creature.Age++;
+            }
+        }
+
+        /// <summary>
+        /// Reset all cortexes characteristics : neuron biases and links weights.
+        /// </summary>
+        public void ResetNeuronsBiasesAndLinksWeights()
+        {
+            foreach (Creature creature in Creatures)
+            {
+                creature.Cortex.ResetNeuronsBiasesAndLinksWeights();
+                creature.Score = 0.0;
+            }
+        }
+
+        /// <summary>
+        /// Sort by scores.
+        /// </summary>
+        public void SortByScores()
+        {
+            Creatures.Sort((cr1, cr2) => cr1.CompareByScore(cr2));
+        }
+
+        /// <summary>
+        /// Print info.
+        /// </summary>
+        public void PrintInfo()
+        {
+            Console.Write("Info [");
+
+            for (int i = 0; i < Creatures.Count; i++)
+            {
+                Console.Write("(i{0:D4}, a{1:D2}, s{2})",
+                              Creatures[i].Cortex.Id, Creatures[i].Age, Creatures[i].Score);
+
+                if (i < Creatures.Count - 1)
+                {
+                    Console.Write("; ");
+                }
+            }
+
+            Console.WriteLine("]");
+        }
+
+        /// <summary>
+        /// Delete elements from tail.
+        /// </summary>
+        /// <param name="count">count to delete</param>
+        public void DeleteTail(int count)
+        {
+            Creatures.RemoveRange(Size - count, count);
+        }
+
+        /// <summary>
+        /// Rebirth the best creatures.
+        /// </summary>
+        /// <param name="count">count to rebirth</param>
+        public void Rebirth(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                Creatures.Add(Creatures[i].Clone() as Creature);
+            }
+        }
+
+        /// <summary>
+        /// Mutate.
+        /// </summary>
+        public void Mutate()
+        {
+            foreach (Creature creature in Creatures)
+            {
+                creature.Cortex.Mutate();
             }
         }
     }

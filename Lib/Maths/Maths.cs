@@ -57,5 +57,17 @@ namespace Lib.Maths
         {
             return sigmoid_x / (1.0 - sigmoid_x);
         }
+
+        /// <summary>
+        /// Middle value (not min, not max).
+        /// </summary>
+        /// <param name="a">first value</param>
+        /// <param name="b">second value</param>
+        /// <param name="c">third value</param>
+        /// <returns>middle value</returns>
+        public static double DropMinAndMax(double a, double b, double c)
+        {
+            return (a + b + c) - Math.Max(a, Math.Max(b, c)) - Math.Min(a, Math.Min(b, c));
+        }
     }
 }
