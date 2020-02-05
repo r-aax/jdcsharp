@@ -16,19 +16,14 @@ namespace NNBrothConsole
     class Program
     {
         /// <summary>
-        /// Size of batch.
-        /// </summary>
-        static readonly int BatchSize = 1;
-
-        /// <summary>
         /// Generation size.
         /// </summary>
-        static readonly int GenerationSize = 5;
+        static readonly int GenerationSize = 10;
 
         /// <summary>
         /// Count of generations.
         /// </summary>
-        static readonly int GenerationsCount = 10;
+        static readonly int GenerationsCount = 1000;
 
         /// <summary>
         /// Count of creatures to rebirth.
@@ -45,9 +40,8 @@ namespace NNBrothConsole
 
             // Prepare batch and generation.
             // We test on batch with fixed size.
-            Batch batch = (new MNIST("../../../Lib/Neuro/Tests/mnist/train-images.idx3-ubyte",
-                                     "../../../Lib/Neuro/Tests/mnist/train-labels.idx1-ubyte")).RandomMiniBatch(BatchSize);
-            Cortex base_cortex = Cortex.CreateMultilayerCortex(new int[] { 784, 15, 10 });
+            Batch batch = new Prime5();
+            Cortex base_cortex = Cortex.CreateMultilayerCortex(new int[] { 5, 2 });
             Generation gen = new Generation();
             Creature base_creature = new Creature(null);
             base_creature.Cortex = base_cortex;
@@ -66,7 +60,7 @@ namespace NNBrothConsole
                 {
                     gen.DeleteTail(RebirthCreaturesCount);
                     gen.Rebirth(RebirthCreaturesCount);
-                    gen.Mutate();
+                    gen.MutateLast(RebirthCreaturesCount);
                 }
             }
 

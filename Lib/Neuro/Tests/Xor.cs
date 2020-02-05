@@ -18,6 +18,8 @@ namespace Lib.Neuro.Tests
         {
             BaseName = "Xor";
             SuffName = "full";
+
+            // Cases.
             AddTestCase(new double[] { 0.0, 0.0 }, 0, 2);
             AddTestCase(new double[] { 0.0, 1.0 }, 1, 2);
             AddTestCase(new double[] { 1.0, 0.0 }, 1, 2);

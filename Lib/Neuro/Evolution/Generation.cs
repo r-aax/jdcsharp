@@ -108,8 +108,9 @@ namespace Lib.Neuro.Evolution
 
             for (int i = 0; i < Creatures.Count; i++)
             {
-                Console.Write("(i{0:D4}, a{1:D2}, s{2})",
-                              Creatures[i].Cortex.Id, Creatures[i].Age, Creatures[i].Score);
+                Console.Write("(I_{0:D4}, A_{1:D2}, S_{2}, N_{3:D2}, L_{4:D3})",
+                              Creatures[i].Cortex.Id, Creatures[i].Age, Creatures[i].Score, 
+                              Creatures[i].Cortex.Neurons.Count, Creatures[i].Cortex.Links.Count);
 
                 if (i < Creatures.Count - 1)
                 {
@@ -144,11 +145,12 @@ namespace Lib.Neuro.Evolution
         /// <summary>
         /// Mutate.
         /// </summary>
-        public void Mutate()
+        /// <param name="count">count of tail creatures</param>
+        public void MutateLast(int count)
         {
-            foreach (Creature creature in Creatures)
+            for (int i = Creatures.Count - count; i <= Creatures.Count - 1; i++)
             {
-                creature.Cortex.Mutate();
+                Creatures[i].Cortex.Mutate();
             }
         }
     }

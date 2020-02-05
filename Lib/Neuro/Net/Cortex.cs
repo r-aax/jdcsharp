@@ -81,12 +81,12 @@ namespace Lib.Neuro.Net
         /// <summary>
         /// List of neurons.
         /// </summary>
-        private List<Neuron> Neurons;
+        public List<Neuron> Neurons;
 
         /// <summary>
         /// Links.
         /// </summary>
-        private List<Link> Links;
+        public List<Link> Links;
 
         /// <summary>
         /// Constructor.
@@ -168,6 +168,36 @@ namespace Lib.Neuro.Net
         }
 
         /// <summary>
+        /// Check if two neurons are linked.
+        /// </summary>
+        /// <param name="src">source</param>
+        /// <param name="dst">destination</param>
+        /// <returns>link</returns>
+        private Link FindLink(Neuron src, Neuron dst)
+        {
+            foreach (Link link in Links)
+            {
+                if ((link.Src == src) && (link.Dst == dst))
+                {
+                    return link;
+                }
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Delete link.
+        /// </summary>
+        /// <param name="link">link</param>
+        private void Unlink(Link link)
+        {
+            link.Src.OutLinks.Remove(link);
+            link.Dst.InLinks.Remove(link);
+            Links.Remove(link);
+        }
+
+        /// <summary>
         /// Create layer of neurons.
         /// </summary>
         /// <param name="count">count of neurons in the layer</param>
@@ -246,11 +276,67 @@ namespace Lib.Neuro.Net
         }
 
         /// <summary>
+        /// Reorder neurons.
+        /// </summary>
+        private void ReorderNeurons()
+        {
+            foreach (Neuron neuron in Neurons)
+            {
+                neuron.PredAdded = 0;
+            }
+
+            List<Neuron> new_neurons = new List<Neuron>();
+            Queue<Neuron> queue = new Queue<Neuron>();
+
+            foreach (Neuron neuron in Sensor.Neurons)
+            {
+                queue.Enqueue(neuron);
+            }
+
+            while (queue.Count > 0)
+            {
+                Neuron qh = queue.Dequeue();
+
+                new_neurons.Add(qh);
+
+                foreach (Link link in qh.OutLinks)
+                {
+                    Neuron dst = link.Dst;
+
+                    dst.PredAdded++;
+
+                    if (dst.PredAdded == dst.InLinks.Count)
+                    {
+                        queue.Enqueue(dst);
+                    }
+                }
+            }
+
+            foreach (Neuron neuron in Neurons)
+            {
+                if (new_neurons.IndexOf(neuron) < 0)
+                {
+                    while (neuron.InLinks.Count > 0)
+                    {
+                        Unlink(neuron.InLinks[0]);
+                    }
+
+                    while (neuron.OutLinks.Count > 0)
+                    {
+                        Unlink(neuron.OutLinks[0]);
+                    }
+                }
+            }
+
+            Neurons = new_neurons;
+        }
+
+        /// <summary>
         /// Order elements.
         /// </summary>
         public void OrderElements()
         {
-            // TODO: set right order of nodes.
+            ReorderNeurons();
 
             // Set neurons ids.
             for (int i = 0; i < Neurons.Count; i++)
@@ -441,11 +527,135 @@ namespace Lib.Neuro.Net
         }
 
         /// <summary>
+        /// Add new neuron mutate.
+        /// </summary>
+        public void MutateAddNeuronOnLink()
+        {
+            // Select link.
+            int link_num = Randoms.RandomInt(Links.Count - 1);
+            Link link = Links[link_num];
+
+            // Get link src/dst.
+            Neuron src = link.Src;
+            Neuron dst = link.Dst;
+
+            // New neuron.
+            Neuron new_neuron = NewNeuron();
+
+            // Relink.
+            Unlink(link);
+            Link(src, new_neuron, 1.0);
+            Link(new_neuron, dst, 1.0);            
+        }
+
+        /// <summary>
+        /// Add one neuron and two links.
+        /// </summary>
+        public void MutateAddNeuronAndTwoLinks()
+        {
+            // Select pair of neurons.
+            int n1 = Randoms.RandomInt(Neurons.Count - 1);
+            int n2 = Randoms.RandomInt(Neurons.Count - 1);
+            int src, dst;
+
+            if (n1 != n2)
+            {
+                src = Math.Min(n1, n2);
+                dst = Math.Max(n1, n2);
+                Neuron neuron_src = Neurons[src];
+                Neuron neuron_dst = Neurons[dst];
+
+                if (!(neuron_src.IsFirstLayer && neuron_dst.IsFirstLayer)
+                    && !(neuron_src.IsLastLayer && neuron_dst.IsLastLayer))
+                {
+                    Neuron new_neuron = NewNeuron();
+
+                    Link(neuron_src, new_neuron, 1.0);
+                    Link(new_neuron, neuron_dst, 1.0);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add new link mutate.
+        /// </summary>
+        public void MutateAddLink()
+        {
+            // Select pair of neurons.
+            int n1 = Randoms.RandomInt(Neurons.Count - 1);
+            int n2 = Randoms.RandomInt(Neurons.Count - 1);
+            int src, dst;
+
+            if (n1 != n2)
+            {
+                src = Math.Min(n1, n2);
+                dst = Math.Max(n1, n2);
+                Neuron neuron_src = Neurons[src];
+                Neuron neuron_dst = Neurons[dst];
+
+                if ((!neuron_src.IsFirstLayer && !neuron_src.IsLastLayer)
+                    || (!neuron_dst.IsFirstLayer && !neuron_dst.IsLastLayer))
+                {
+                    Link link = FindLink(neuron_src, neuron_dst);
+
+                    if (link == null)
+                    {
+                        Link(neuron_src, neuron_dst, 1.0);
+                    }
+                }
+            }
+        }
+ 
+        /// <summary>
+        /// Delete link mutate.
+        /// </summary>
+        public void MutateDeleteLink()
+        {
+            // Select pair of neurons.
+            int n1 = Randoms.RandomInt(Neurons.Count - 1);
+            int n2 = Randoms.RandomInt(Neurons.Count - 1);
+            int src, dst;
+
+            if (n1 != n2)
+            {
+                src = Math.Min(n1, n2);
+                dst = Math.Max(n1, n2);
+                Neuron neuron_src = Neurons[src];
+                Neuron neuron_dst = Neurons[dst];
+                Link link = FindLink(neuron_src, neuron_dst);
+
+                if (link != null)
+                {
+                    Unlink(link);
+                }
+            }
+        }
+
+        /// <summary>
         /// Mutate.
         /// </summary>
         public void Mutate()
         {
-            ;
+            double r = Randoms.RandomDouble(4.0);
+
+            if (r < 1.0)
+            {
+                MutateAddNeuronOnLink();
+            }
+            else if (r < 2.0)
+            {
+                MutateAddNeuronAndTwoLinks();
+            }
+            else if (r < 3.0)
+            {
+                MutateAddLink();
+            }
+            else
+            {
+                MutateDeleteLink();
+            }
+
+            OrderElements();
         }
     }
 }

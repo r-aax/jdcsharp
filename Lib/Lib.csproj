@@ -196,6 +196,7 @@
     <Compile Include="Neuro\Tests\Batch.cs" />
     <Compile Include="Neuro\Tests\MNIST.cs" />
     <Compile Include="Neuro\Tests\Xor.cs" />
+    <Compile Include="Neuro\Tests\Prime5.cs" />
     <Compile Include="Physics\MeasUnits\Angle.cs" />
     <Compile Include="Physics\MeasUnits\AngleMeasUnit.cs" />
     <Compile Include="Physics\MeasUnits\Constants.cs" />

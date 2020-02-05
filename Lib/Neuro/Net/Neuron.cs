@@ -50,6 +50,11 @@ namespace Lib.Neuro.Net
         public double Error;
 
         /// <summary>
+        /// Count of predecessors added to new neurons list.
+        /// </summary>
+        public int PredAdded;
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         public Neuron(double bias)

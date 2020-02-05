@@ -98,6 +98,10 @@ namespace NNBroth
             {
                 raw_batch = new Xor();                
             }
+            else if (BatchNameLB.Text == "Prime5")
+            {
+                raw_batch = new Prime5();
+            }
             else if (BatchNameLB.Text == "MNIST")
             {
                 raw_batch = new MNIST("../../../Lib/Neuro/Tests/mnist/train-images.idx3-ubyte",

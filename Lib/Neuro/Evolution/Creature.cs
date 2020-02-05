@@ -56,21 +56,25 @@ namespace Lib.Neuro.Evolution
         /// Compare by score.
         /// </summary>
         /// <param name="creature"></param>
-        /// <returns></returns>
+        /// <returns>compare result : 1, 0, -1</returns>
         public int CompareByScore(Creature creature)
         {
+            int res = 0;
+
             if (Score > creature.Score)
             {
-                return 1;
+                res = 1;
             }
             else if (Score < creature.Score)
             {
-                return -1;
+                res = -1;
             }
             else
             {
-                return 0;
+                res = 0;
             }
+            
+            return -res;
         }
 
         /// <summary>
@@ -81,16 +85,22 @@ namespace Lib.Neuro.Evolution
         {
             Trainer trainer = new Trainer(1.0);
 
-            Cortex.ResetNeuronsBiasesAndLinksWeights();
-            double a = (double)trainer.TrainWhileRightAnswers(Cortex, batch, 0.95, 1000);
+            //Cortex.ResetNeuronsBiasesAndLinksWeights();
+            //double a = (double)trainer.TrainWhileRightAnswers(Cortex, batch, 0.95, 10000);
+
+            //Cortex.ResetNeuronsBiasesAndLinksWeights();
+            //double b = (double)trainer.TrainWhileRightAnswers(Cortex, batch, 0.95, 10000);
+
+            //Cortex.ResetNeuronsBiasesAndLinksWeights();
+            //double c = (double)trainer.TrainWhileRightAnswers(Cortex, batch, 0.95, 10000);
+
+            //Score = Lib.Maths.Maths.DropMinAndMax(a, b, c);
+            //Score = a;
 
             Cortex.ResetNeuronsBiasesAndLinksWeights();
-            double b = (double)trainer.TrainWhileRightAnswers(Cortex, batch, 0.95, 1000);
-
-            Cortex.ResetNeuronsBiasesAndLinksWeights();
-            double c = (double)trainer.TrainWhileRightAnswers(Cortex, batch, 0.95, 1000);
-
-            Score = Lib.Maths.Maths.DropMinAndMax(a, b, c);
+            trainer.Train(Cortex, batch, 5000);
+            //Score = batch.TotalCost(Cortex);
+            Score = batch.RightAnswersPart(Cortex);// - batch.TotalCost(Cortex);
         }
     }
 }
