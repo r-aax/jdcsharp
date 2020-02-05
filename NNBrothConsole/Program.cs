@@ -18,12 +18,12 @@ namespace NNBrothConsole
         /// <summary>
         /// Generation size.
         /// </summary>
-        static readonly int GenerationSize = 10;
+        static readonly int GenerationSize = 50;
 
         /// <summary>
         /// Count of generations.
         /// </summary>
-        static readonly int GenerationsCount = 1000;
+        static readonly int GenerationsCount = 100000;
 
         /// <summary>
         /// Count of creatures to rebirth.
@@ -58,9 +58,9 @@ namespace NNBrothConsole
 
                 if (generation_number < GenerationsCount - 1)
                 {
-                    gen.DeleteTail(RebirthCreaturesCount);
-                    gen.Rebirth(RebirthCreaturesCount);
-                    gen.MutateLast(RebirthCreaturesCount);
+                    int to_rebirth = gen.DeleteTail(RebirthCreaturesCount);
+                    gen.Rebirth(to_rebirth);
+                    gen.MutateLast(to_rebirth);
                 }
             }
 

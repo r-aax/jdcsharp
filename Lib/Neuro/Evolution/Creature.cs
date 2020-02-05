@@ -25,9 +25,24 @@ namespace Lib.Neuro.Evolution
         public int Age = 0;
 
         /// <summary>
-        /// Score.
+        /// Part of right answers.
         /// </summary>
-        public double Score = 0.0;
+        public double RightAnswersPart = 0.0;
+
+        /// <summary>
+        /// Total cost.
+        /// </summary>
+        public double TotalCost;
+
+        /// <summary>
+        /// Minimum total cost.
+        /// </summary>
+        public double MinTotalCost = -1.0;
+
+        /// <summary>
+        /// Learn iterations.
+        /// </summary>
+        public int LearnIterations = 0;
 
         /// <summary>
         /// Constructor.
@@ -55,25 +70,57 @@ namespace Lib.Neuro.Evolution
         /// <summary>
         /// Compare by score.
         /// </summary>
-        /// <param name="creature"></param>
+        /// <param name="c">creature</param>
         /// <returns>compare result : 1, 0, -1</returns>
-        public int CompareByScore(Creature creature)
+        public int CompareByScore(Creature c)
         {
+            // 1 - this is greater than creature,
+            // -1 - this is less than creature,
+            // 0 - they are equal.
+
             int res = 0;
 
-            if (Score > creature.Score)
+            if (RightAnswersPart > c.RightAnswersPart)
             {
                 res = 1;
             }
-            else if (Score < creature.Score)
+            else if (RightAnswersPart < c.RightAnswersPart)
             {
                 res = -1;
             }
-            else
+            else if (MinTotalCost < c.MinTotalCost - 0.0001)
             {
-                res = 0;
+                res = 1;
             }
-            
+            else if (MinTotalCost > c.MinTotalCost + 0.0001)
+            {
+                res = -1;
+            }
+            else if (Age < c.Age)
+            {
+                res = 1;
+            }
+            else if (Age > c.Age)
+            {
+                res = -1;
+            }
+            else if (Cortex.Links.Count < c.Cortex.Links.Count)
+            {
+                res = 1;
+            }
+            else if (Cortex.Links.Count > c.Cortex.Links.Count)
+            {
+                res = -1;
+            }
+            else if (Cortex.Neurons.Count < c.Cortex.Neurons.Count)
+            {
+                res = 1;
+            }
+            else if (Cortex.Neurons.Count > c.Cortex.Neurons.Count)
+            {
+                res = -1;
+            }
+
             return -res;
         }
 
@@ -85,22 +132,43 @@ namespace Lib.Neuro.Evolution
         {
             Trainer trainer = new Trainer(1.0);
 
-            //Cortex.ResetNeuronsBiasesAndLinksWeights();
-            //double a = (double)trainer.TrainWhileRightAnswers(Cortex, batch, 0.95, 10000);
+            int iters_for_old = 50;
+            int iters_for_new = 1000;
 
-            //Cortex.ResetNeuronsBiasesAndLinksWeights();
-            //double b = (double)trainer.TrainWhileRightAnswers(Cortex, batch, 0.95, 10000);
+            int iters = 0;
 
-            //Cortex.ResetNeuronsBiasesAndLinksWeights();
-            //double c = (double)trainer.TrainWhileRightAnswers(Cortex, batch, 0.95, 10000);
+            if (LearnIterations == 0)
+            {
+                Cortex.ResetNeuronsBiasesAndLinksWeights();
+                iters = iters_for_new;
+            }
+            else
+            {
+                iters = iters_for_old;
+            }
 
-            //Score = Lib.Maths.Maths.DropMinAndMax(a, b, c);
-            //Score = a;
+            trainer.Train(Cortex, batch, iters);
+            LearnIterations += iters;
 
-            Cortex.ResetNeuronsBiasesAndLinksWeights();
-            trainer.Train(Cortex, batch, 5000);
-            //Score = batch.TotalCost(Cortex);
-            Score = batch.RightAnswersPart(Cortex);// - batch.TotalCost(Cortex);
+            TotalCost = batch.TotalCost(Cortex);
+
+            if (MinTotalCost < 0.0)
+            {
+                MinTotalCost = TotalCost;
+            }
+            else
+            {
+                while (TotalCost > MinTotalCost)
+                {
+                    trainer.Train(Cortex, batch, iters_for_old);
+                    LearnIterations += iters_for_old;
+                    TotalCost = batch.TotalCost(Cortex);
+                }
+
+                MinTotalCost = TotalCost;
+            }
+
+            RightAnswersPart = batch.RightAnswersPart(Cortex);
         }
     }
 }

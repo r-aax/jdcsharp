@@ -577,6 +577,28 @@ namespace Lib.Neuro.Net
         }
 
         /// <summary>
+        /// Add superneuron linked with all sensors and all actuators.
+        /// </summary>
+        public void MutateAddSuperNeuron()
+        {
+            Console.WriteLine("!!!!! ##### MUTATE ADD SUPER NEURON ##### !!!!!");
+
+            Neuron new_n = NewNeuron();
+
+            foreach (Neuron n in Neurons)
+            {
+                if (n.IsFirstLayer)
+                {
+                    Link(n, new_n, 1.0);
+                }
+                else if (n.IsLastLayer)
+                {
+                    Link(new_n, n, 1.0);
+                }
+            }
+        }
+
+        /// <summary>
         /// Add new link mutate.
         /// </summary>
         public void MutateAddLink()
@@ -593,8 +615,8 @@ namespace Lib.Neuro.Net
                 Neuron neuron_src = Neurons[src];
                 Neuron neuron_dst = Neurons[dst];
 
-                if ((!neuron_src.IsFirstLayer && !neuron_src.IsLastLayer)
-                    || (!neuron_dst.IsFirstLayer && !neuron_dst.IsLastLayer))
+                if (!(neuron_src.IsFirstLayer && neuron_dst.IsFirstLayer)
+                    && !(neuron_src.IsLastLayer && neuron_dst.IsLastLayer))
                 {
                     Link link = FindLink(neuron_src, neuron_dst);
 
@@ -624,6 +646,16 @@ namespace Lib.Neuro.Net
                 Neuron neuron_dst = Neurons[dst];
                 Link link = FindLink(neuron_src, neuron_dst);
 
+                // Do not isolate cortex inputs and outputs.
+                if (neuron_src.IsFirstLayer && (neuron_src.OutLinks.Count == 1))
+                {
+                    return;
+                }
+                if (neuron_dst.IsLastLayer && (neuron_dst.InLinks.Count == 1))
+                {
+                    return;
+                }
+
                 if (link != null)
                 {
                     Unlink(link);
@@ -636,19 +668,28 @@ namespace Lib.Neuro.Net
         /// </summary>
         public void Mutate()
         {
-            double r = Randoms.RandomDouble(4.0);
+            double r = Randoms.RandomDouble(10.0);
 
-            if (r < 1.0)
+            if (r < 0.45)
             {
                 MutateAddNeuronOnLink();
             }
-            else if (r < 2.0)
+            else if (r < 0.9)
             {
                 MutateAddNeuronAndTwoLinks();
             }
-            else if (r < 3.0)
+            else if (r < 1.0)
+            {
+                MutateAddSuperNeuron();
+            }
+            else if (r < 2.0)
             {
                 MutateAddLink();
+            }
+            else if (r < 3.0)
+            {
+                // Do nothing (chance to learn again from zero point).
+                ResetNeuronsBiasesAndLinksWeights();
             }
             else
             {

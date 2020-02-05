@@ -59,9 +59,17 @@ namespace Lib.Neuro.Evolution
         {
             Console.Write("Scoring [");
 
-            foreach (Creature creature in Creatures)
+            for (int i = 0; i < Creatures.Count; i++)
             {
-                creature.Scoring(batch);
+                if ((i == 0) && (Creatures[i].Age == 0))
+                {
+                    Creatures[i].Scoring(batch);
+                }
+                else if (i > 0)
+                {
+                    Creatures[i].Scoring(batch);
+                }
+
                 Console.Write("#");
             }
 
@@ -76,18 +84,6 @@ namespace Lib.Neuro.Evolution
             foreach (Creature creature in Creatures)
             {
                 creature.Age++;
-            }
-        }
-
-        /// <summary>
-        /// Reset all cortexes characteristics : neuron biases and links weights.
-        /// </summary>
-        public void ResetNeuronsBiasesAndLinksWeights()
-        {
-            foreach (Creature creature in Creatures)
-            {
-                creature.Cortex.ResetNeuronsBiasesAndLinksWeights();
-                creature.Score = 0.0;
             }
         }
 
@@ -108,9 +104,15 @@ namespace Lib.Neuro.Evolution
 
             for (int i = 0; i < Creatures.Count; i++)
             {
-                Console.Write("(I_{0:D4}, A_{1:D2}, S_{2}, N_{3:D2}, L_{4:D3})",
-                              Creatures[i].Cortex.Id, Creatures[i].Age, Creatures[i].Score, 
-                              Creatures[i].Cortex.Neurons.Count, Creatures[i].Cortex.Links.Count);
+                Creature c = Creatures[i];
+                Console.Write("(Id_{0:D4}, Ag_{1:D2}, Lr_{2:D5}, Rh_{3:F5}, Tc_{4:F5}, Sz_{5:D2}/{6:D3})",
+                              c.Cortex.Id,
+                              c.Age,
+                              c.LearnIterations, 
+                              c.RightAnswersPart,
+                              c.MinTotalCost,
+                              c.Cortex.Neurons.Count,
+                              c.Cortex.Links.Count);
 
                 if (i < Creatures.Count - 1)
                 {
@@ -125,9 +127,33 @@ namespace Lib.Neuro.Evolution
         /// Delete elements from tail.
         /// </summary>
         /// <param name="count">count to delete</param>
-        public void DeleteTail(int count)
+        /// <returns>Deleted.</returns>
+        public int DeleteTail(int count)
         {
-            Creatures.RemoveRange(Size - count, count);
+            int del = 0;
+            double mid_age = MidAge();
+            double cri_age = 0.9 * mid_age;
+            int origin_size = Size;
+
+            // We must not touch first "count" creatures.
+            for (int i = origin_size - 1; i > count; i--)
+            {
+                Creature c = Creatures[i];
+
+                if (c.Age > cri_age)
+                {
+                    Creatures.Remove(c);
+                    Console.WriteLine("Kill creature : id = {0}, age = {1}", c.Cortex.Id, c.Age);
+                    del++;
+
+                    if (del == count)
+                    {
+                        return del;
+                    }
+                }
+            }
+
+            return del;
         }
 
         /// <summary>
@@ -152,6 +178,22 @@ namespace Lib.Neuro.Evolution
             {
                 Creatures[i].Cortex.Mutate();
             }
+        }
+
+        /// <summary>
+        /// Mid age of creatures.
+        /// </summary>
+        /// <returns>mid age</returns>
+        public double MidAge()
+        {
+            int sum_age = 0;
+
+            foreach (Creature c in Creatures)
+            {
+                sum_age += c.Age;
+            }
+
+            return (double)sum_age / (double)Creatures.Count;
         }
     }
 }
