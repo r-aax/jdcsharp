@@ -56,16 +56,31 @@ namespace NNBrothConsole
                 gen.SortByScores();
                 gen.PrintInfo();
 
+                if (gen.Creatures[0].RightAnswersPart == 1.0)
+                {
+
+                    for (int i = 0; i < gen.Creatures.Count; i++)
+                    {
+                        Console.WriteLine("Kill creature : id = {0}, age = {1}, life years : [{2} - {3}]",
+                                          gen.Creatures[i].Cortex.Id,
+                                          gen.Creatures[i].Age,
+                                          gen.Creatures[i].BirthYear,
+                                          generation_number);
+                    }
+
+                    break;
+                }
+
                 if (generation_number < GenerationsCount - 1)
                 {
-                    int to_rebirth = gen.DeleteTail(RebirthCreaturesCount);
-                    gen.Rebirth(to_rebirth);
+                    int to_rebirth = gen.DeleteTail(RebirthCreaturesCount, generation_number);
+                    gen.Rebirth(to_rebirth, generation_number + 1);
                     gen.MutateLast(to_rebirth);
                 }
             }
 
             Console.WriteLine("NNBrothConsole end.");
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }

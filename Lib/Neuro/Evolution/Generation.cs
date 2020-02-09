@@ -17,7 +17,7 @@ namespace Lib.Neuro.Evolution
         /// <summary>
         /// List of creatures
         /// </summary>
-        private List<Creature> Creatures = null;
+        public List<Creature> Creatures = null;
 
         /// <summary>
         /// Generation size.
@@ -47,7 +47,10 @@ namespace Lib.Neuro.Evolution
         {
             while (Size < count)
             {
-                Creatures.Add(creature.Clone() as Creature);
+                Creature c = creature.Clone() as Creature;
+
+                c.BirthYear = 0;
+                Creatures.Add(c);
             }
         }
 
@@ -127,8 +130,9 @@ namespace Lib.Neuro.Evolution
         /// Delete elements from tail.
         /// </summary>
         /// <param name="count">count to delete</param>
+        /// <param name="gen_num">generation number</param>
         /// <returns>Deleted.</returns>
-        public int DeleteTail(int count)
+        public int DeleteTail(int count, int gen_num)
         {
             int del = 0;
             double mid_age = MidAge();
@@ -143,7 +147,9 @@ namespace Lib.Neuro.Evolution
                 if (c.Age > cri_age)
                 {
                     Creatures.Remove(c);
-                    Console.WriteLine("Kill creature : id = {0}, age = {1}", c.Cortex.Id, c.Age);
+                    Console.WriteLine("Kill creature : id = {0}, age = {1}, life years : [{2} - {3}]",
+                                      c.Cortex.Id, c.Age,
+                                      c.BirthYear, gen_num);
                     del++;
 
                     if (del == count)
@@ -160,11 +166,15 @@ namespace Lib.Neuro.Evolution
         /// Rebirth the best creatures.
         /// </summary>
         /// <param name="count">count to rebirth</param>
-        public void Rebirth(int count)
+        /// <param name="gen_num">generation number</param>
+        public void Rebirth(int count, int gen_num)
         {
             for (int i = 0; i < count; i++)
             {
-                Creatures.Add(Creatures[i].Clone() as Creature);
+                Creature c = Creatures[i].Clone() as Creature;
+
+                c.BirthYear = gen_num;
+                Creatures.Add(c);
             }
         }
 

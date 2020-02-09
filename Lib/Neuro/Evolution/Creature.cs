@@ -25,6 +25,11 @@ namespace Lib.Neuro.Evolution
         public int Age = 0;
 
         /// <summary>
+        /// Year of birth.
+        /// </summary>
+        public int BirthYear = 0;
+
+        /// <summary>
         /// Part of right answers.
         /// </summary>
         public double RightAnswersPart = 0.0;
