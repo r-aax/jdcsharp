@@ -101,8 +101,8 @@ namespace Lib.Neuro.Net
         /// <param name="rate">right answers rate</param>
         /// <param name="max_iters_count">max iters count</param>
         /// <returns></returns>
-        public int TrainWhileRightAnswers(Cortex cortex, Batch batch,
-                                           double rate, int max_iters_count)
+        public string TrainWhileRightAnswers(Cortex cortex, Batch batch,
+                                             double rate, int max_iters_count)
         {
             double right_answers_part;
             int iters = 0;
@@ -115,7 +115,7 @@ namespace Lib.Neuro.Net
             }
             while ((right_answers_part < rate) && (iters < max_iters_count));
 
-            return iters;
+            return String.Format("iters = {0}, right = {1}", iters, right_answers_part);
         }
     }
 }

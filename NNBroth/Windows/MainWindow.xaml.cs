@@ -187,11 +187,11 @@ namespace NNBroth
         {
             Prepare();
 
-            int iters = Trainer.TrainWhileRightAnswers(Cortex, Batch,
-                                                       Lib.Utils.Convert.GetDouble(RightAnswersGoodRateLB.Text),
-                                                       Lib.Utils.Convert.GetInt(MaxItersLB.Text));
+            string say = Trainer.TrainWhileRightAnswers(Cortex, Batch,
+                                                        Lib.Utils.Convert.GetDouble(RightAnswersGoodRateLB.Text),
+                                                        Lib.Utils.Convert.GetInt(MaxItersLB.Text));
 
-            Log(String.Format("RunWhile : iters {0}", iters));
+            Log(String.Format("RunWhile : {0}", say));
         }
     }
 }
