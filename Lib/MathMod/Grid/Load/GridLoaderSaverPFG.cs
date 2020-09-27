@@ -204,7 +204,7 @@ namespace Lib.MathMod.Grid.Load
                         IfacesPair pair = g.IfacesPairs[j];
                         Iface cur_iface = pair.If;
 
-                        if (iface.DirectionsMatchFixed(cur_iface, true, 1e-6) != null)
+                        if (iface.DirectionsMatchFixed(cur_iface, true, g.EpsPointsEqCheck) != null)
                         {
                             Debug.Assert(pair.Mirror == null, "interfaces pair mirror double initialization");
 

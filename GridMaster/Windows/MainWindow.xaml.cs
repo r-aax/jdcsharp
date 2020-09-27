@@ -593,6 +593,7 @@ namespace GridMaster.Windows
             UpdateBriefGridStatistic();
         }
 
+        /*
         /// <summary>
         /// Cut blocks near faces.
         /// </summary>
@@ -632,6 +633,7 @@ namespace GridMaster.Windows
 
             UpdateBriefGridStatistic();
         }
+        */
 
         /// <summary>
         /// Export poitns.

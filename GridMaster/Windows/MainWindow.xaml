@@ -26,6 +26,7 @@
                 <MenuItem Name="ToolsSavePictireMI" Header="Save picture" Click="ToolsSavePictireMI_Click"/>
                 <MenuItem Name="AddittionalParametersMI" Header="Additional parameters" Click="AddittionalParametersMI_Click"/>
             </MenuItem>
+            <!--
             <MenuItem Header="Tests">
                 <MenuItem Name="TestsDelete0BlockMI" Header="Delete 0 block" Click="TestsDelete0BlockMI_Click"/>
                 <MenuItem Name="TestsLeaveOnlyNeededBCondBlocksMI" Header="Leave only needed bcond blocks" Click="TestsLeaveOnlyNeededBCondBlocksMI_Click" />
@@ -33,6 +34,7 @@
                 <MenuItem Name="TestsCutNearFacesMI" Header="Cut blocks near faces" Click="TestsCutNearFacesMI_Click"/>
                 <MenuItem Name="TestsExportPoints" Header="Export points" Click="TestsExportPoints_Click"/>
             </MenuItem>
+            -->
         </Menu>
         <StatusBar DockPanel.Dock="Bottom" Background="LightSteelBlue">
             <TextBlock Name="BriefGridStatisticTB" Width="250" Foreground="IndianRed" Text="No grid"/>
@@ -46,7 +48,7 @@
             <Canvas Grid.Column="0"
                     Name="DrawAreaC"
                     Background="White"/>
-            <ListBox Grid.Column="0" Name="TestLB"/>
+            <!--<ListBox Grid.Column="0" Name="TestLB"/>-->
             <GridSplitter Grid.Column="1" Width="5" Background="LightSteelBlue" HorizontalAlignment="Left"/>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
