@@ -187,6 +187,7 @@ namespace GridMaster.Windows
                     string last_action = "Grid " + pfg.Name + " (and *" + ibc.Ext + ") ";
 
                     if (GridLoaderSaverPFG.Load(Grid, pfg.Name, ibc.Name,
+                                                GridLoadSavePFGProperties.EpsPointsEqCheck,
                                                 GridLoadSavePFGProperties.EpsForBCondsMatchParallelMove,
                                                 GridLoadSavePFGProperties.EpsForBCondsMatchRotation))
                     {

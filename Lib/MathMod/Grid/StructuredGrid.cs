@@ -140,6 +140,15 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
+        /// Epsilon for points equal check.
+        /// </summary>
+        public double EpsPointsEqCheck
+        {
+            get;
+            set;
+        }
+
+        /// <summary>
         /// Clear all objects.
         /// </summary>
         public void Clear()
@@ -317,11 +326,13 @@ namespace Lib.MathMod.Grid
                     i1.ResetNDirs();
                     i2.ResetNDirs();
 
-                    Dirs3 dirs = i1.DirectionsMatchFixed(i2, false, 1e-6);
+                    Dirs3 dirs = i1.DirectionsMatchFixed(i2, false, EpsPointsEqCheck);
 
                     if (dirs == null)
                     {
-                        throw new Exception("error while detecting interfaces pair orientation");
+                        throw new Exception("error while detecting interfaces pair orientation:\n"
+                                            + i1.ToString() + "\n"
+                                            + i2.ToString() + "\n");
                     }
                     else
                     {

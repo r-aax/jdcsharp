@@ -100,30 +100,6 @@ namespace Lib.MathMod.Grid
         }
 
         /// <summary>
-        /// Check match of two borders with directions.
-        /// </summary>
-        /// <param name="b1">first border</param>
-        /// <param name="od11">first direction of first border</param>
-        /// <param name="od12">second direction of first border</param>
-        /// <param name="b2">second border</param>
-        /// <param name="od21">first direction of second border</param>
-        /// <param name="od22">second direction of second border</param>
-        /// <returns><c>true</c> - if objects match, <c>false</c> - otherwise</returns>
-        public static bool IsMatch(Border b1, Dir od11, Dir od12,
-                                   Border b2, Dir od21, Dir od22)
-        {
-            Point p1 = b1.CornerNode(od11, od12);
-            Point p2 = b2.CornerNode(od21, od22);
-
-            if ((p1 == null) || (p2 == null))
-            {
-                return false;
-            }
-
-            return (p1 - p2).Mod2 < Constants.Eps;
-        }
-
-        /// <summary>
         /// Check sizes match of two borders.
         /// </summary>
         /// <param name="b">border to check with</param>

@@ -15,11 +15,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Eps for bconds match parallel move" Margin="10"/>
-            <TextBox x:Name="EpsBCondsMatchParallelMove" Grid.Row="0" Grid.Column="1" Text="0.000001" Margin="10"/>
-            <TextBlock Grid.Row="1" Grid.Column="0" Text="Eps for bconds match rotation" Margin="10"/>
-            <TextBox x:Name="EpsBCondsMatchRotation" Grid.Row="1" Grid.Column="1" Text="0.01" Margin="10"/>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Eps for points equal check" Margin="10"/>
+            <TextBox x:Name="EpsPointsEqCheck" Grid.Row="0" Grid.Column="1" Text="1e-10" Width="100" TextAlignment="Right" Margin="10"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Eps for bconds match parallel move" Margin="10"/>
+            <TextBox x:Name="EpsBCondsMatchParallelMove" Grid.Row="1" Grid.Column="1" Text="1e-6" Width="100" TextAlignment="Right" Margin="10"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Eps for bconds match rotation" Margin="10"/>
+            <TextBox x:Name="EpsBCondsMatchRotation" Grid.Row="2" Grid.Column="1" Text="1e-2" Width="100" TextAlignment="Right" Margin="10"/>
         </Grid>
         <Grid>
             <Grid.ColumnDefinitions>

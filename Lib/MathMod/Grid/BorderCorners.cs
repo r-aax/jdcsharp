@@ -259,7 +259,9 @@ namespace Lib.MathMod.Grid
                 return false;
             }
 
-            return (p1 - p2).Mod2 < eps;
+            double m = (p1 - p2).Mod2;
+
+            return m < eps;
         }
 
         /// <summary>

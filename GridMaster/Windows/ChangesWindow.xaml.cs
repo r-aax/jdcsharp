@@ -47,6 +47,7 @@ namespace GridMaster.Windows
             Ch("                 PERI_C linked border conditions is a pair of border conditions that are");
             Ch("                 of the same size and that are placed on the same block, opposite to each other.");
             Ch("2019-06-03: maj: Blocks deleting functionality is added.");
+            Ch("2020-09-28: min: Epsilon for points equality detection is added (1e-10 of Mod2 by default).");
         }
     }
 }

@@ -27,6 +27,10 @@ namespace GridMaster.Windows
         public AdditionalParametersWindow()
         {
             InitializeComponent();
+
+            EpsPointsEqCheck.Text = GridLoadSavePFGProperties.EpsPointsEqCheck.ToString();
+            EpsBCondsMatchParallelMove.Text = GridLoadSavePFGProperties.EpsForBCondsMatchParallelMove.ToString();
+            EpsBCondsMatchRotation.Text = GridLoadSavePFGProperties.EpsForBCondsMatchRotation.ToString();
         }
 
         /// <summary>
@@ -46,6 +50,7 @@ namespace GridMaster.Windows
         /// <param name="e">parameters</param>
         private void OK_B_Click(object sender, RoutedEventArgs e)
         {
+            GridLoadSavePFGProperties.EpsPointsEqCheck = Double.Parse(EpsPointsEqCheck.Text);
             GridLoadSavePFGProperties.EpsForBCondsMatchParallelMove = Double.Parse(EpsBCondsMatchParallelMove.Text);
             GridLoadSavePFGProperties.EpsForBCondsMatchRotation = Double.Parse(EpsBCondsMatchRotation.Text);
             Close();

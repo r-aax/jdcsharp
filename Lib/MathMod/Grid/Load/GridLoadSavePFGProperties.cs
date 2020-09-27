@@ -22,9 +22,14 @@ namespace Lib.MathMod.Grid.Load
         public static bool IsIBlank = false;
 
         /// <summary>
+        /// Epsilon for check equality of two points.
+        /// </summary>
+        public static double EpsPointsEqCheck = 1e-10;
+
+        /// <summary>
         /// Epsilon for check match of two border conditions (for parallel move).
         /// </summary>
-        public static double EpsForBCondsMatchParallelMove = 1e-2;
+        public static double EpsForBCondsMatchParallelMove = 1e-6;
 
         /// <summary>
         /// Epsilon for check match of two border conditions (for rotation).
